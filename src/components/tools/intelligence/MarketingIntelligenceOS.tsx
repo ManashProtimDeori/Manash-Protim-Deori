@@ -452,10 +452,10 @@ export const MarketingIntelligenceOS:React.FC = () => {
   };
 
   return <div className="intel-shell">
-    <header className="intel-hero">
+    <section className="intel-hero" aria-labelledby="marketing-intelligence-title">
       <div>
         <span className="intel-overline">MARKETING INTELLIGENCE · SIGNAL DETECTION · DECISION BRIEFING</span>
-        <h2>Marketing Intelligence<br/><em>Command Center</em></h2>
+        <h2 id="marketing-intelligence-title">Marketing Intelligence<br/><em>Command Center</em></h2>
         <p>Detect what is changing across marketing, separate signal from noise, connect events into trends, understand strategic implications, and turn external information into better decisions.</p>
         <div className="intel-demo-banner"><ShieldCheck className="w-4 h-4"/><strong>DEMO MODE</strong><span>All intelligence records and sources in this implementation are synthetic. No demo scenario is presented as a current real-world fact.</span></div>
       </div>
@@ -465,7 +465,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
         <div><span>Trends</span><strong>{trends.length}</strong><em>tracked theses</em></div>
         <div><span>Evidence</span><strong>{evidence.length}</strong><em>references</em></div>
       </div>
-    </header>
+    </section>
 
     <div className="intel-nav-wrap"><nav className="intel-nav" aria-label="Intelligence modules">{views.map((v,i)=><button key={v} className={activeView===v?'active':''} onClick={()=>setActiveView(v)}><span>{String(i+1).padStart(2,'0')}</span>{v}</button>)}</nav></div>
     {renderFilters()}
