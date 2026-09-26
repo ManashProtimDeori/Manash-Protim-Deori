@@ -19,7 +19,7 @@ export const NowPage: React.FC = () => {
         </div>
 
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-          What I'm Doing Now.
+          What I'm Doing Now
         </h1>
         <p className="text-xs font-mono text-neutral-400">
           Last updated: {nowData.lastUpdated} · Location: {nowData.location}
