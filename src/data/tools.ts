@@ -70,20 +70,26 @@ export const toolsData: ToolItem[] = [
   {
     id: 'tool-4',
     slug: 'marketing-brief-generator',
-    name: 'Marketing Intelligence Brief Generator',
-    category: 'Strategy & Execution',
+    name: 'Marketing Intelligence Command Center',
+    category: 'Marketing Intelligence & Strategy',
     status: 'Live',
-    version: 'v1.0',
-    description: 'Structure comprehensive strategic marketing briefs covering problem definition, core insight, target audience tensions, messaging pillars, and success KPIs.',
-    instructions: 'Fill in your campaign parameters or click "Load Sample Brief" to structure an executive-ready brief formatted in clean Markdown.',
+    version: 'v4.0',
+    description: 'An evidence-first marketing intelligence operating system that turns fragmented information into events, signals, trends, implications, decisions and actions while preserving provenance and uncertainty.',
+    instructions: 'Use global filters and role context to explore the synthetic intelligence environment. Inspect developments, trace signals into trends, compare company and platform activity, examine counter-evidence, run scenarios, build decision priorities and drill every conclusion back to its evidence trail.',
     features: [
-      'Enforces insight-driven structure: Problem → Tension → Solution → Proof → KPIs',
-      'One-click sample presets for Product Launch, Rebrand, and Performance Scale',
-      'Direct Markdown and plain-text export for team distribution'
+      '20 interconnected intelligence modules spanning command center, daily brief, signals, trends, companies, platforms, competitors, technology, consumers, categories, regulation, research, geography, scenarios, decisions and sources',
+      'Deterministic demo corpus with 360 intelligence records, 120 signals, 28 trends, 30 companies, 12 platforms, 15 industries and 720 evidence references',
+      'Evidence-first story records with What Happened, What Actually Changed, Why It Matters, Signal vs Noise, counter-evidence, unknowns, monitoring points and decision implications',
+      'Trend radar, signal knowledge graph, heatmaps, uncertainty map, trend evolution timeline, strategic ripple map and attention-versus-importance diagnostics',
+      'Explainable priority, novelty, confidence, signal-strength, evidence-quality and decision-priority scoring with visible assumptions',
+      'Decision Intelligence buckets for Act Now, Test, Watch, Prepare and Ignore for Now with configurable impact and confidence thresholds',
+      'Role-aware relevance, global search/filtering, watchlist behavior, intelligence compression and evidence/source inspection',
+      'Strict demo labeling so synthetic records are never represented as current real-world claims'
     ],
-    technologies: ['React', 'Markdown Formatter', 'Clipboard API'],
+    technologies: ['React 19', 'TypeScript', 'Native SVG', 'Deterministic Intelligence Graph', 'Explainable Scoring Engine'],
     interactiveComponent: 'BriefGenerator',
     changelog: [
+      { version: 'v4.0', date: '2026-09', notes: 'Re-architected brief generator into enterprise marketing intelligence, signal detection and decision briefing operating system' },
       { version: 'v1.0', date: '2026-03', notes: 'Initial public release' }
     ]
   }
