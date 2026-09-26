@@ -1,3 +1,4 @@
+import { normalizeHeadline } from '../utils/headline';
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
