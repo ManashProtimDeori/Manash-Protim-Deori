@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../../utils/headline';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useData } from '../../context/DataContext';
@@ -44,7 +45,7 @@ export const CurrentSignal: React.FC = () => {
                 </div>
                 <h3 className="text-sm font-semibold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors mb-2 leading-snug">
                   <Link to={sig.link} className="hover:underline">
-                    {sig.title}
+                    {normalizeHeadline(sig.title)}
                   </Link>
                 </h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-sans">
