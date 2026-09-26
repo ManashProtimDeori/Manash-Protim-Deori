@@ -7,14 +7,14 @@
   "email": "manashdeori09@gmail.com",
   "education": [
     {
+      "institution": "Rajiv Gandhi Institute of Petroleum Technology (RGIPT)",
+      "degree": "Bachelor of Technology (B.Tech)",
+      "focus": "Chemical Engineering"
+    },
+    {
       "institution": "Indian Institute of Management Shillong (IIM Shillong)",
       "degree": "Master of Business Administration (MBA)",
       "focus": "Marketing, Strategy, Analytics"
-    },
-    {
-      "institution": "University Institute of Chemical Engineering",
-      "degree": "Bachelor of Technology (B.Tech)",
-      "focus": "Chemical Engineering"
     }
   ],
   "competencies": [
