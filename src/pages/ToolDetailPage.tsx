@@ -33,7 +33,7 @@ export const ToolDetailPage: React.FC = () => {
   };
 
   return (
-    <div className={`py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'utm-builder' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
+    <div className={`py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'utm-builder' || toolItem.slug === 'marketing-brief-generator' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
       {/* Back Link & Edit */}
       <div className="mb-8 flex items-center justify-between">
         <Link
