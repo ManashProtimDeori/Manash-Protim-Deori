@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from './context/ThemeContext';
 import { DataProvider, useData } from './context/DataContext';
 import { Header } from './components/layout/Header';
@@ -126,6 +127,7 @@ export default function App() {
       <DataProvider>
         <BrowserRouter>
           <AppContent />
+          <Analytics />
         </BrowserRouter>
       </DataProvider>
     </ThemeProvider>
