@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
         {/* Zone 1: Single Brand Zone */}
         <Link 
           to="/" 
-          className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-md py-1"
+          className="order-3 flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-md py-1"
           aria-label={`${siteConfig.name} Home`}
         >
           <Monogram size="sm" />
@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
         </Link>
 
         {/* Zone 2: 4-6 Clean Navigation Links */}
-        <nav className="hidden md:flex items-center gap-7" aria-label="Main Navigation">
+        <nav className="order-2 hidden md:flex items-center gap-7" aria-label="Main Navigation">
           {mainNavLinks.map(link => {
             const active = isActive(link.href);
             return (
@@ -69,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
         </nav>
 
         {/* Zone 3: Clean Actions */}
-        <div className="flex items-center gap-2.5">
+        <div className="order-1 flex items-center gap-2.5">
           {/* Discreet Edit Mode Toggle */}
           {isOwner && (
           <button
