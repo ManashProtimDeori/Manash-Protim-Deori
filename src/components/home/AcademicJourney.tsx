@@ -3,6 +3,8 @@ import React from 'react';
 export function AcademicJourney() {
   return (
     <section className="academic-section wide" data-signal="strategy">
+      <h2 className="education-title">Education</h2>
+
       <div className="academic-list">
         <article>
           <div>
