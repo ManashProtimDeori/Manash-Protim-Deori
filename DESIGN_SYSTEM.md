@@ -1,15 +1,40 @@
-# MPD editorial visual system
+# Premium Design System
 
-Warm architectural white (#F5F4F0), near black (#111111), secondary ink (#62625E), restrained cobalt (#335CFF). Preserve saved dark-mode preference; new visits start light. Legacy neutral utilities map to semantic tokens so existing tools inherit the palette. Functional diagnostic red/green colors retain their semantics.
+## North star
+A restrained editorial portfolio that combines strategy, technology and personal proof. The visual system favors hierarchy, typography, whitespace and one continuously transforming graphic over decorative UI.
 
-Geist 400/500/600 is the interface and reading face. Instrument Serif 400 and italic is reserved for editorial statements. Both are open fonts delivered with display=swap. These replace Plus Jakarta Sans, Newsreader and JetBrains Mono. Metadata uses the same sans with measured tracking, reducing competing font families.
+## Typography
+- Display / editorial: Instrument Serif
+- Interface / body: Geist
+- Use serif selectively for emphasis, quotations and high-level ideas.
+- Keep long-form text between roughly 58–72 characters per line.
 
-Use --font-body, --font-display, --bg-primary, --bg-secondary, --text-primary, --text-secondary, --border-soft and --accent. Spacing tokens range from 4 to 200px. Wide content is capped at 1500px with fluid gutters; reading content targets 720px. Display type is fluid. Keep body copy readable and avoid treating metadata as main content.
+## Palette
+- Warm light background: `#f5f4f0`
+- Near black: `#111111`
+- Dark contrast surface: `#0b0b0b`
+- Accent: `#335cff` in light mode; softened in dark mode.
+- Prefer hairline borders and whitespace to shadows/cards.
 
-The hero uses two aligned columns, generous space and one moving visual. Capabilities are editorial rows. Projects use large system diagrams derived from actual project architecture/technology data, explicitly labeled as system overviews rather than screenshots. Education is an unboxed list. One homepage lab section supplies dark contrast.
+## Layout
+- Wide canvas: up to 1500px
+- Responsive gutters: `clamp(24px, 5vw, 88px)`
+- Large editorial sections use 100–180px vertical breathing room.
+- Avoid universal cards, pills, rounded surfaces and repeated grids.
 
-Photography: no portraits or event photographs were supplied in this repository. Do not invent them. When provided, use 3:4 or 4:5 portraits and asymmetric event images, explicit dimensions, lazy loading below the fold, accurate captions and no inferred endorsements.
+## Motion
+- Premium easing: `cubic-bezier(.22,1,.36,1)`
+- Motion explains hierarchy or transformation; it is never decorative by default.
+- Reduced-motion preference disables transforms and continuous morphing.
 
-Native scroll; visible focus; skip link; native cursor; no audio or splash. Motion must explain a state and stop under reduced motion. Mobile stacks hero, compact sticky signal and capabilities; the signal pauses when its story exits view. Keep tools and print views functional.
+## Photography
+- Primary portrait: 4:5 editorial crop.
+- Professional-event photography: asymmetric editorial layout.
+- Never use stock people or generated images as factual proof of attendance.
 
-Visual QA at 360, 375, 390, 430, 768, 1024, 1280, 1440, 1728 and 1920px remains required before production: the available browser could not open the local server and GitHub refused the preview branch creation.
+## Future edits
+Before adding any new visual device ask:
+1. Does it clarify hierarchy?
+2. Does it strengthen the personal brand?
+3. Does it preserve performance?
+4. Could the same result be achieved with typography, spacing or photography?
