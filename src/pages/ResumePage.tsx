@@ -1,3 +1,4 @@
+import { normalizeHeadline } from '../utils/headline';
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { Printer, Copy } from 'lucide-react';
