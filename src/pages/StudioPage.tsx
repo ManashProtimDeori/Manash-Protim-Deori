@@ -220,7 +220,7 @@ export const StudioPage: React.FC = () => {
                     {project.featured && <span className="text-amber-400">★ Featured</span>}
                   </div>
                   <h3 className="text-base font-bold text-neutral-100 truncate">
-                    {project.title}
+                    {normalizeHeadline(project.title)}
                   </h3>
                   <p className="text-xs text-neutral-400 line-clamp-1 font-serif italic">
                     "{project.subtitle}"
@@ -237,7 +237,7 @@ export const StudioPage: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm(`Delete "${project.title}"?`)) {
+                      if (confirm(`Delete "${normalizeHeadline(project.title)}"?`)) {
                         deleteProject(project.id);
                       }
                     }}
@@ -289,7 +289,7 @@ export const StudioPage: React.FC = () => {
                     <span>{art.categories?.join(' / ')}</span>
                   </div>
                   <h3 className="text-base font-bold text-neutral-100 truncate">
-                    {art.title}
+                    {normalizeHeadline(art.title)}
                   </h3>
                   <p className="text-xs text-neutral-400 line-clamp-1 font-serif italic">
                     "{art.subtitle}"
@@ -306,7 +306,7 @@ export const StudioPage: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm(`Delete "${art.title}"?`)) {
+                      if (confirm(`Delete "${normalizeHeadline(art.title)}"?`)) {
                         deleteArticle(art.id);
                       }
                     }}
@@ -358,7 +358,7 @@ export const StudioPage: React.FC = () => {
                     <span className="text-emerald-400">{tool.status}</span>
                   </div>
                   <h3 className="text-base font-bold text-neutral-100 truncate">
-                    {tool.name}
+                    {normalizeHeadline(tool.name)}
                   </h3>
                   <p className="text-xs text-neutral-400 line-clamp-1">
                     {tool.description}
@@ -375,7 +375,7 @@ export const StudioPage: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm(`Delete "${tool.name}"?`)) {
+                      if (confirm(`Delete "${normalizeHeadline(tool.name)}"?`)) {
                         deleteTool(tool.id);
                       }
                     }}
@@ -425,7 +425,7 @@ export const StudioPage: React.FC = () => {
                     <span className="text-emerald-400">{exp.status}</span>
                   </div>
                   <h3 className="text-base font-bold text-neutral-100 truncate">
-                    {exp.title}
+                    {normalizeHeadline(exp.title)}
                   </h3>
                   <p className="text-xs text-neutral-400 line-clamp-1 italic">
                     "{exp.hypothesis}"
@@ -442,7 +442,7 @@ export const StudioPage: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm(`Delete "${exp.title}"?`)) {
+                      if (confirm(`Delete "${normalizeHeadline(exp.title)}"?`)) {
                         deleteExperiment(exp.id);
                       }
                     }}
@@ -492,7 +492,7 @@ export const StudioPage: React.FC = () => {
                     <span>{paper.category}</span>
                   </div>
                   <h3 className="text-base font-bold text-neutral-100 truncate">
-                    {paper.title}
+                    {normalizeHeadline(paper.title)}
                   </h3>
                   <p className="text-xs text-neutral-400 line-clamp-1">
                     {paper.summary}
@@ -509,7 +509,7 @@ export const StudioPage: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      if (confirm(`Delete "${paper.title}"?`)) {
+                      if (confirm(`Delete "${normalizeHeadline(paper.title)}"?`)) {
                         deleteResearch(paper.id);
                       }
                     }}
@@ -563,7 +563,7 @@ export const StudioPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => {
-                        if (confirm(`Delete "${sig.title}"?`)) {
+                        if (confirm(`Delete "${normalizeHeadline(sig.title)}"?`)) {
                           deleteSignal(sig.id);
                         }
                       }}
@@ -574,7 +574,7 @@ export const StudioPage: React.FC = () => {
                   </div>
                 </div>
                 <h3 className="text-sm font-bold text-neutral-100">
-                  {sig.title}
+                  {normalizeHeadline(sig.title)}
                 </h3>
                 <p className="text-xs text-neutral-400 leading-relaxed font-sans">
                   {sig.desc}
@@ -613,7 +613,7 @@ export const StudioPage: React.FC = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <span className="text-xs font-mono text-amber-400 block">{edu.degree}</span>
-                      <h3 className="text-sm font-bold text-neutral-100">{edu.institution}</h3>
+                      <h3 className="text-sm font-bold text-neutral-100">{normalizeHeadline(edu.institution)}</h3>
                     </div>
                     <button
                       onClick={() => openEditor('education', { ...edu, index: idx })}
@@ -651,7 +651,7 @@ export const StudioPage: React.FC = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <span className="text-xs font-mono text-amber-400">{exp.period}</span>
-                      <h3 className="text-base font-bold text-neutral-100">{exp.role}</h3>
+                      <h3 className="text-base font-bold text-neutral-100">{normalizeHeadline(exp.role)}</h3>
                       <div className="text-xs text-neutral-400">{exp.organization} · {exp.location}</div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -664,7 +664,7 @@ export const StudioPage: React.FC = () => {
                       </button>
                       <button
                         onClick={() => {
-                          if (confirm(`Delete role "${exp.role}"?`)) {
+                          if (confirm(`Delete role "${normalizeHeadline(exp.role)}"?`)) {
                             deleteExperience(exp.id);
                           }
                         }}
@@ -709,7 +709,7 @@ export const StudioPage: React.FC = () => {
               <div key={catIdx} className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 space-y-4">
                 <div className="flex items-center justify-between border-b border-neutral-800 pb-2">
                   <div>
-                    <h3 className="text-base font-bold text-neutral-100">{cat.category}</h3>
+                    <h3 className="text-base font-bold text-neutral-100">{normalizeHeadline(cat.category)}</h3>
                     <p className="text-xs text-neutral-400">{cat.description}</p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -778,7 +778,7 @@ export const StudioPage: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-mono font-bold text-amber-400">{log.version}</span>
-                    <h3 className="text-sm font-bold text-neutral-100">{log.title}</h3>
+                    <h3 className="text-sm font-bold text-neutral-100">{normalizeHeadline(log.title)}</h3>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
