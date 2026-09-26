@@ -1,3 +1,4 @@
+import { normalizeHeadline } from '../utils/headline';
 import React, { useState, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useData } from '../context/DataContext';
@@ -62,7 +63,7 @@ export const WorkPage: React.FC = () => {
             Work / Selected projects
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Ideas in practice.
+            Ideas in practice
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
             The questions, decisions and builds behind my work in marketing, analytics and AI.
@@ -167,7 +168,7 @@ export const WorkPage: React.FC = () => {
 
                 <h2 className="text-2xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors">
                   <Link to={`/work/${project.slug}`}>
-                    {project.title}
+                    {normalizeHeadline(project.title)}
                   </Link>
                 </h2>
 

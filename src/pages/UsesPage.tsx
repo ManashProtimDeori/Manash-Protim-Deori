@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../utils/headline';
 import { useData } from '../context/DataContext';
 import { Plus } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
@@ -16,7 +17,7 @@ export const UsesPage: React.FC = () => {
             Workstation, Hardware & Software Suite
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            /uses — Stack & Setup.
+            /uses — Stack & Setup
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed font-sans">
             The software, AI models, hardware, and analytical tools I rely on daily to research, model, and build.
@@ -41,7 +42,7 @@ export const UsesPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-neutral-800/40 pb-3">
               <div>
                 <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
-                  {category.category}
+                  {normalizeHeadline(category.category)}
                 </h2>
                 <p className="text-xs text-neutral-400 font-sans mt-0.5">
                   {category.description}

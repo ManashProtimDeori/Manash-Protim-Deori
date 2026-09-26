@@ -1,3 +1,4 @@
+import { normalizeHeadline } from '../utils/headline';
 import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
@@ -56,7 +57,7 @@ export const ProjectDetailPage: React.FC = () => {
         </div>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-          {project.title}
+          {normalizeHeadline(project.title)}
         </h1>
 
         <p className="text-lg sm:text-xl text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic max-w-3xl leading-relaxed">
@@ -227,7 +228,7 @@ export const ProjectDetailPage: React.FC = () => {
                     {rel.categories.join(' · ')}
                   </span>
                   <h3 className="text-base font-bold text-neutral-100 group-hover:text-amber-400 transition-colors mb-2">
-                    {rel.title}
+                    {normalizeHeadline(rel.title)}
                   </h3>
                   <p className="text-xs text-neutral-400 line-clamp-2">
                     {rel.excerpt}

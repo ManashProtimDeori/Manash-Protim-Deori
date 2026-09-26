@@ -9,7 +9,7 @@ export const NotFoundPage: React.FC<{ onOpenCommand?: () => void }> = ({ onOpenC
         Error 404 · Unresolved Vector
       </span>
       <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 font-serif italic">
-        "Signal lost."
+        "Signal lost"
       </h1>
       <p className="text-sm text-neutral-400 leading-relaxed font-sans">
         The coordinate you requested does not map to any active node, system, or case study in the digital headquarters repository.

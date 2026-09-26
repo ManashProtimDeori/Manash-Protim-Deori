@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../utils/headline';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { ArrowUpRight, Plus } from 'lucide-react';
@@ -17,7 +18,7 @@ export const ExperiencePage: React.FC = () => {
             Career Architecture & Track Record
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Professional Experience.
+            Professional Experience
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
             Track record across marketing strategy, quantitative campaign analytics, stakeholder leadership, and AI systems building.
@@ -48,7 +49,7 @@ export const ExperiencePage: React.FC = () => {
                   {item.period}
                 </span>
                 <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
-                  {item.role}
+                  {normalizeHeadline(item.role)}
                 </h2>
                 <div className="text-sm font-medium text-neutral-400 mt-0.5">
                   {item.organization} · <span className="font-mono text-xs">{item.location}</span>
@@ -131,7 +132,7 @@ export const ExperiencePage: React.FC = () => {
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <h3 className="text-base font-bold text-neutral-100">
-                    {edu.degree}
+                    {normalizeHeadline(edu.degree)}
                   </h3>
                   <div className="text-xs font-mono text-amber-400/90">
                     {edu.institution}

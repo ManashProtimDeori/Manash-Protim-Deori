@@ -1,3 +1,4 @@
+import { normalizeHeadline } from '../utils/headline';
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
@@ -75,7 +76,7 @@ export const ArticleDetailPage: React.FC = () => {
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            {article.title}
+            {normalizeHeadline(article.title)}
           </h1>
 
           <p className="text-lg sm:text-xl text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic leading-relaxed">
@@ -121,7 +122,7 @@ export const ArticleDetailPage: React.FC = () => {
           {article.content.sections.map((section, idx) => (
             <section key={idx} className="space-y-4">
               <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
-                {section.heading}
+                {normalizeHeadline(section.heading)}
               </h2>
 
               {section.body.map((para, pIdx) => (

@@ -1,3 +1,4 @@
+import { normalizeHeadline } from '../utils/headline';
 import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
@@ -17,7 +18,7 @@ export const ResearchDetailPage: React.FC = () => {
 
   const handleDownload = () => {
     setDownloaded(true);
-    const content = `RESEARCH WHITEPAPER: ${paper.title}
+    const content = `RESEARCH WHITEPAPER: ${normalizeHeadline(paper.title)}
 Published: ${paper.publishedAt}
 Category: ${paper.category}
 Author: Manash Protim Deori (MBA IIM Shillong, B.Tech Chemical Engineering)

@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../../utils/headline';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { RoiCalculator } from '../tools/RoiCalculator';
@@ -19,7 +20,7 @@ export const InteractiveToolsPreview: React.FC = () => {
               05 · Computational Systems & Decision Engines
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-              Interactive models & financial tools.
+              Interactive models & financial tools
             </h2>
             <p className="text-base text-neutral-400 max-w-xl">
               Live software accessible directly in your browser. Calculate CAC payback thresholds, architect UTM taxonomies, and audit brand positioning.
@@ -56,7 +57,7 @@ export const InteractiveToolsPreview: React.FC = () => {
                   <EditButton type="tool" item={tool} label="Edit" />
                 </div>
                 <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 mb-2">
-                  {tool.name}
+                  {normalizeHeadline(tool.name)}
                 </h3>
                 <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans mb-4">
                   {tool.description}

@@ -598,7 +598,7 @@ export const MarketingDecisionArchitect: React.FC = () => {
       </section>
       <section className="space-y-3">
         {insights.map((insight,index)=><article key={insight.id} className="mi-insight">
-          <div className="flex items-start justify-between gap-4"><div><span className={`mi-severity ${insight.severity}`}>{insight.severity}</span><h4>{index+1}. {insight.title}</h4></div><span className="mi-chip">Confidence · {insight.confidence}</span></div>
+          <div className="flex items-start justify-between gap-4"><div><span className={`mi-severity ${insight.severity}`}>{insight.severity}</span><h4>{String(index + 1).padStart(2, '0')} / {insight.title}</h4></div><span className="mi-chip">Confidence · {insight.confidence}</span></div>
           <p className="mt-3">{insight.observation}</p><p className="text-neutral-400 mt-2">{insight.explanation}</p>
           {insight.recommendation&&<div className="mi-recommend"><span>What to do</span><strong>{insight.recommendation}</strong></div>}
           <div className="text-[10px] font-mono text-neutral-500 mt-3">Evidence · {insight.supportingMetrics.join(' + ')} · Affects {insight.affectedMetrics.join(', ')}</div>
