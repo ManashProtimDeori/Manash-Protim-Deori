@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../../utils/headline';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useData } from '../../context/DataContext';
@@ -51,7 +52,7 @@ export const ProofOfWork: React.FC = () => {
                       Assertion 0{idx + 1}
                     </span>
                     <h3 className="text-base font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-snug">
-                      {proof.claim}
+                      {normalizeHeadline(proof.claim)}
                     </h3>
                   </div>
                   <EditButton type="proof" item={proof} label="Edit" />
