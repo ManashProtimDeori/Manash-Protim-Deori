@@ -329,10 +329,11 @@ main input,main textarea,main select {max-width:100%;}
 .owner-media-note code{font-size:.9em;color:var(--text-primary)}
 
 .about-premium{max-width:var(--container-wide);margin:auto;padding:clamp(70px,8vw,130px) var(--gutter)}
-.about-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.65fr);gap:clamp(50px,8vw,120px);align-items:end;padding-bottom:clamp(90px,10vw,170px)}
+.about-hero{display:block;padding-bottom:clamp(90px,10vw,170px)}
+.about-hero-copy{max-width:1200px}
 .about-hero-copy h1{margin-top:20px}
+.about-name{white-space:nowrap;font-size:clamp(2.3rem,6vw,6.5rem)!important;line-height:.96!important;letter-spacing:-.055em!important}
 .about-hero-copy>.font-serif{font-size:clamp(1.5rem,2.6vw,2.5rem);max-width:30ch;margin-top:28px;color:var(--text-secondary)}
-.about-hero .portrait-about{max-width:420px;justify-self:end;width:100%}
 .about-section{padding:clamp(75px,8vw,130px) 0;border-top:1px solid var(--border-soft)}
 .about-section-head{display:grid;grid-template-columns:160px 1fr;gap:30px;margin-bottom:52px}
 .about-section-head h2{max-width:13ch}
@@ -361,7 +362,7 @@ footer [class*='text-neutral-4'],footer [class*='light:text-neutral-6']{color:#a
 footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
 
 @media(max-width:1000px){
-  .about-hero{grid-template-columns:1fr .55fr}
+  .about-name{font-size:clamp(2.15rem,6.6vw,5rem)!important}
 }
 @media(max-width:767px){
   .signal-state-list{gap:8px 12px}
@@ -370,8 +371,7 @@ footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
   .moments-grid{display:block}
   .moment-card,.moment-card:nth-child(n){margin:0 0 48px;grid-column:auto}
   .moments-heading{margin-bottom:45px}
-  .about-hero{grid-template-columns:1fr}
-  .about-hero .portrait-about{justify-self:start;max-width:300px}
+  .about-name{white-space:nowrap;font-size:clamp(1.85rem,8.1vw,2.75rem)!important}
   .about-section-head{grid-template-columns:1fr;gap:16px}
   .principle-list article,.competency-list article{grid-template-columns:44px 1fr;gap:14px}
   .principle-list article p,.competency-list article>div:last-child{grid-column:2}
@@ -414,4 +414,16 @@ footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
   .education-title{
     margin-bottom:12px;
   }
+}
+
+
+/* About page refinements */
+.about-hero-no-media{
+  min-height:auto;
+}
+.about-education article{
+  grid-template-columns:1fr;
+}
+.about-education h3{
+  max-width:28ch;
 }
