@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
-import { Mail, Send, Check, Copy, MessageSquare, Clock, Globe } from 'lucide-react';
+import { Send, Check, Copy } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 
 export const ContactPage: React.FC = () => {
@@ -155,7 +155,7 @@ export const ContactPage: React.FC = () => {
                     value={name}
                     onChange={e => setName(e.target.value)}
                     placeholder="e.g. Elena Rostova"
-                    className="w-full px-4 py-3 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-amber-400 text-sm transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded bg-neutral-950/80 border border-neutral-800 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-amber-400/90 text-sm transition-colors"
                   />
                 </div>
 
@@ -169,7 +169,7 @@ export const ContactPage: React.FC = () => {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="elena@company.com"
-                    className="w-full px-4 py-3 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-amber-400 text-sm transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded bg-neutral-950/80 border border-neutral-800 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-amber-400/90 text-sm transition-colors"
                   />
                 </div>
               </div>
@@ -184,7 +184,7 @@ export const ContactPage: React.FC = () => {
                     value={organization}
                     onChange={e => setOrganization(e.target.value)}
                     placeholder="e.g. Autonomous AI Lab"
-                    className="w-full px-4 py-3 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-amber-400 text-sm transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded bg-neutral-950/80 border border-neutral-800 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-amber-400/90 text-sm transition-colors"
                   />
                 </div>
 
@@ -195,7 +195,7 @@ export const ContactPage: React.FC = () => {
                   <select
                     value={inquiryType}
                     onChange={e => setInquiryType(e.target.value)}
-                    className="w-full px-4 py-3 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-100 text-sm focus:outline-none focus:border-amber-400 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded bg-neutral-950/80 border border-neutral-800 text-neutral-100 text-sm focus:outline-none focus:border-amber-400/90 transition-colors"
                   >
                     <option value="Strategic Advisory">Strategic Advisory / Consulting</option>
                     <option value="Full-Time Executive">Full-Time Strategic Leadership</option>
@@ -216,7 +216,7 @@ export const ContactPage: React.FC = () => {
                   value={message}
                   onChange={e => setMessage(e.target.value)}
                   placeholder="Outline the core commercial bottleneck, project scope, or opportunity you want to discuss..."
-                  className="w-full px-4 py-3 rounded-lg bg-neutral-950 border border-neutral-800 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-amber-400 text-sm transition-colors font-sans"
+                  className="w-full px-3.5 py-2.5 rounded bg-neutral-950/80 border border-neutral-800 text-neutral-100 placeholder-neutral-600 focus:outline-none focus:border-amber-400/90 text-sm transition-colors font-sans"
                 />
               </div>
 
@@ -232,9 +232,9 @@ export const ContactPage: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full py-3.5 px-6 rounded-lg bg-amber-400 text-neutral-950 font-bold hover:bg-amber-300 transition-all flex items-center justify-center gap-2 text-sm shadow-md"
+                className="w-full py-3 px-6 rounded bg-amber-400 text-neutral-950 font-mono text-xs font-semibold tracking-wide hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 shadow-sm"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-3.5 h-3.5" />
                 <span>Transmit Inquiry Directly</span>
               </button>
 

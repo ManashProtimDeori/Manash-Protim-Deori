@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { ArrowLeft, Share2, Check, Copy, BookOpen } from 'lucide-react';
+import { ArrowLeft, Share2, Check, Copy } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 
 export const ArticleDetailPage: React.FC = () => {
@@ -89,7 +89,7 @@ export const ArticleDetailPage: React.FC = () => {
 
             <button
               onClick={handleShare}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded-md border border-neutral-800 hover:border-neutral-700 bg-neutral-900 text-neutral-300 hover:text-neutral-100 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded border border-neutral-800 hover:border-neutral-700 bg-neutral-900/60 text-neutral-300 hover:text-neutral-100 transition-colors"
             >
               {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
               <span>{copiedLink ? 'Link Copied' : 'Share Article'}</span>
@@ -107,8 +107,8 @@ export const ArticleDetailPage: React.FC = () => {
 
           {/* Pull Quote */}
           {article.content.pullQuote && (
-            <figure className="my-10 p-6 sm:p-8 rounded-xl border border-neutral-800 bg-neutral-900/50 border-l-4 border-l-amber-400">
-              <blockquote className="text-lg sm:text-xl font-serif italic text-amber-200 leading-relaxed">
+            <figure className="my-10 pl-6 sm:pl-8 border-l border-amber-400/80 py-2">
+              <blockquote className="text-xl sm:text-2xl font-serif italic text-neutral-100 leading-relaxed">
                 "{article.content.pullQuote}"
               </blockquote>
               <figcaption className="text-xs font-mono text-neutral-400 mt-3">
@@ -131,13 +131,13 @@ export const ArticleDetailPage: React.FC = () => {
               ))}
 
               {section.callout && (
-                <div className="p-4 rounded-lg bg-neutral-950 border border-neutral-800/80 text-xs sm:text-sm text-neutral-300 border-l-2 border-l-amber-400 leading-relaxed my-4">
+                <div className="p-4 rounded bg-neutral-950/70 border border-neutral-800/80 text-xs sm:text-sm text-neutral-300 border-l border-l-amber-400/80 leading-relaxed my-4">
                   {section.callout}
                 </div>
               )}
 
               {section.codeBlock && (
-                <div className="rounded-lg bg-neutral-950 border border-neutral-800 overflow-hidden my-6">
+                <div className="rounded bg-neutral-950 border border-neutral-800 overflow-hidden my-6">
                   <div className="flex items-center justify-between px-4 py-2 border-b border-neutral-800 text-xs font-mono text-neutral-400">
                     <span>{section.codeBlock.language}</span>
                     <button

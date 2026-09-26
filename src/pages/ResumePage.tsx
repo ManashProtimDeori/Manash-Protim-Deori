@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
-import { Printer, Download, Mail, ExternalLink, Check, Copy } from 'lucide-react';
+import { Printer, Copy } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 
 export const ResumePage: React.FC = () => {
@@ -22,7 +22,7 @@ export const ResumePage: React.FC = () => {
     <div className="py-12 md:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
       {/* Control Action Bar (Hidden on print) */}
-      <div className="no-print flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 mb-8 border-b border-neutral-800">
+      <div className="no-print flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-8 mb-8 border-b border-neutral-800/60">
         <div>
           <h1 className="text-2xl font-bold text-neutral-100">
             Curriculum Vitae / Résumé
@@ -37,14 +37,14 @@ export const ResumePage: React.FC = () => {
 
           <button
             onClick={() => setAtsMode(!atsMode)}
-            className="px-3 py-1.5 text-xs font-mono rounded-md border border-neutral-800 hover:border-neutral-700 bg-neutral-900 text-neutral-300 transition-colors"
+            className="px-3 py-1.5 text-xs font-mono rounded border border-neutral-800 hover:border-neutral-700 bg-neutral-900/60 text-neutral-300 transition-colors"
           >
             {atsMode ? 'Switch to Editorial View' : 'Toggle Plain ATS View'}
           </button>
 
           <button
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-mono font-medium rounded-md bg-amber-400 text-neutral-950 hover:bg-amber-300 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-mono font-medium rounded bg-amber-400 text-neutral-950 hover:bg-amber-300 transition-colors shadow-sm"
           >
             <Printer className="w-3.5 h-3.5" />
             <span>Print / Save PDF</span>
@@ -53,7 +53,7 @@ export const ResumePage: React.FC = () => {
       </div>
 
       {/* Résumé Paper Container */}
-      <div className={`print-page p-8 sm:p-12 rounded-2xl border transition-all ${
+      <div className={`print-page p-8 sm:p-12 rounded border transition-all ${
         atsMode 
           ? 'bg-white text-black border-neutral-300 font-sans' 
           : 'bg-neutral-950 border-neutral-800 text-neutral-200'

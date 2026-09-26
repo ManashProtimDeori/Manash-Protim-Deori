@@ -5,7 +5,7 @@ import { RoiCalculator } from '../components/tools/RoiCalculator';
 import { UtmBuilder } from '../components/tools/UtmBuilder';
 import { PositioningMatrixTool } from '../components/tools/PositioningMatrixTool';
 import { BriefGenerator } from '../components/tools/BriefGenerator';
-import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 
 export const ToolDetailPage: React.FC = () => {
@@ -72,7 +72,7 @@ export const ToolDetailPage: React.FC = () => {
       </div>
 
       {/* Specifications */}
-      <div className="p-8 rounded-2xl border border-neutral-800 bg-neutral-950/60 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-sans">
+      <div className="p-6 sm:p-8 rounded border border-neutral-800/80 bg-neutral-950/40 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-sans">
         <div>
           <span className="font-mono text-amber-400 font-bold uppercase tracking-wider block mb-2">
             Usage Protocol & Instructions

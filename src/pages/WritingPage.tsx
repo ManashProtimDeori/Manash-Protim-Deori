@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { BookOpen, ArrowUpRight, Plus } from 'lucide-react';
+import { ArrowUpRight, Plus } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 
 export const WritingPage: React.FC = () => {

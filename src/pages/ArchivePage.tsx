@@ -96,15 +96,12 @@ export const ArchivePage: React.FC = () => {
   return (
     <div className="py-16 md:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
       
-      {/* Header */}
-      <div className="max-w-3xl space-y-3 pb-8 border-b border-neutral-800">
-        <div className="flex items-center gap-2">
-          <Archive className="w-4 h-4 text-amber-400" />
-          <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
-            Universal Artifact Index
-          </span>
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+      {/* Editorial Header */}
+      <div className="max-w-3xl space-y-3 pb-8 border-b border-neutral-800/40">
+        <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
+          Universal Artifact Index & Ledger
+        </span>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
           The Archive.
         </h1>
         <p className="text-sm font-mono text-neutral-400">
@@ -113,7 +110,7 @@ export const ArchivePage: React.FC = () => {
       </div>
 
       {/* Filter Bar & Search */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-800/60">
         
         {/* Type Filter Buttons */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-2 sm:pb-0 scrollbar-none">
@@ -121,10 +118,10 @@ export const ArchivePage: React.FC = () => {
             <button
               key={t}
               onClick={() => setSelectedType(t)}
-              className={`px-3 py-1.5 text-xs font-mono rounded-md transition-colors ${
+              className={`px-3 py-1.5 text-xs font-mono rounded transition-colors ${
                 selectedType === t
-                  ? 'bg-neutral-100 text-neutral-950 font-bold dark:bg-neutral-100 dark:text-neutral-950 light:bg-neutral-900 light:text-neutral-100'
-                  : 'text-neutral-400 hover:text-neutral-100 hover:bg-neutral-900/60'
+                  ? 'bg-neutral-100 text-neutral-950 font-semibold dark:bg-neutral-100 dark:text-neutral-950 light:bg-neutral-900 light:text-neutral-100'
+                  : 'text-neutral-400 hover:text-neutral-200 border border-neutral-800/80 hover:border-neutral-700 bg-neutral-950/40'
               }`}
             >
               {t}
@@ -140,7 +137,7 @@ export const ArchivePage: React.FC = () => {
             placeholder="Search archive..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full pl-8 pr-3 py-1.5 text-xs rounded-md bg-neutral-900 border border-neutral-800 text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-amber-400"
+            className="w-full pl-8 pr-3 py-1.5 text-xs rounded bg-neutral-950/80 border border-neutral-800 text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-amber-400/90"
           />
         </div>
 

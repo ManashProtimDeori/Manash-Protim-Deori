@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { Wrench, ArrowUpRight, Sparkles, Plus } from 'lucide-react';
+import { ArrowUpRight, Plus } from 'lucide-react';
 import { RoiCalculator } from '../components/tools/RoiCalculator';
 import { UtmBuilder } from '../components/tools/UtmBuilder';
 import { PositioningMatrixTool } from '../components/tools/PositioningMatrixTool';
@@ -38,19 +38,16 @@ export const ToolsPage: React.FC = () => {
   return (
     <div className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-2 mb-2">
-            <Wrench className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
-              Interactive Product Showcase
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+      {/* Editorial Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-800/40">
+        <div className="max-w-3xl space-y-3">
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
+            Interactive Product Showcase & Diagnostics
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
             Tools & Utilities.
           </h1>
-          <p className="text-base text-neutral-400 mt-3 leading-relaxed">
+          <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
             Production-grade, client-side marketing calculators, attribution architects, and strategic diagnostic systems. Each utility is fully functional and designed to solve concrete operational bottlenecks.
           </p>
         </div>
@@ -58,7 +55,7 @@ export const ToolsPage: React.FC = () => {
         {isEditMode && (
           <button
             onClick={() => openEditor('tool', { isNew: true })}
-            className="flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded-lg bg-amber-400 text-neutral-950 hover:bg-amber-300 transition-colors shrink-0 shadow-lg"
+            className="flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded bg-amber-400 text-neutral-950 hover:bg-amber-300 transition-colors shrink-0 shadow-sm"
           >
             <Plus className="w-4 h-4" />
             <span>Add New Tool</span>
@@ -67,17 +64,17 @@ export const ToolsPage: React.FC = () => {
       </div>
 
       {/* Tool Navigation Tabs */}
-      <div className="flex items-center gap-2 pb-6 mb-8 border-b border-neutral-800 overflow-x-auto">
+      <div className="flex items-center gap-2 pb-6 mb-8 border-b border-neutral-800/60 overflow-x-auto">
         {tools.map(tool => {
           const isSelected = tool.slug === currentTool?.slug;
           return (
             <button
               key={tool.id}
               onClick={() => handleSelectTool(tool.slug)}
-              className={`px-4 py-2 text-xs font-mono rounded-lg transition-colors whitespace-nowrap flex items-center gap-2 ${
+              className={`px-3.5 py-1.5 text-xs font-mono rounded transition-colors whitespace-nowrap flex items-center gap-2 ${
                 isSelected
-                  ? 'bg-neutral-100 text-neutral-950 font-bold dark:bg-neutral-100 dark:text-neutral-950 light:bg-neutral-900 light:text-neutral-100'
-                  : 'text-neutral-400 hover:text-neutral-100 hover:bg-neutral-900/60 border border-neutral-800'
+                  ? 'bg-neutral-100 text-neutral-950 font-semibold dark:bg-neutral-100 dark:text-neutral-950 light:bg-neutral-900 light:text-neutral-100'
+                  : 'text-neutral-400 hover:text-neutral-200 border border-neutral-800/80 hover:border-neutral-700 bg-neutral-950/40'
               }`}
             >
               <span>{tool.name}</span>
@@ -96,13 +93,13 @@ export const ToolsPage: React.FC = () => {
 
       {/* Tool Specifications & Features Grid */}
       {currentTool && (
-        <div className="p-8 rounded-2xl border border-neutral-800 bg-neutral-950/60 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs relative">
+        <div className="p-6 sm:p-8 rounded border border-neutral-800/80 bg-neutral-950/40 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs relative">
           <div className="absolute top-4 right-4">
             <EditButton type="tool" item={currentTool} label="Edit Tool Details" />
           </div>
 
           <div>
-            <span className="font-mono text-amber-400 font-bold uppercase tracking-wider block mb-2">
+            <span className="font-mono text-amber-400/90 font-medium uppercase tracking-wider block mb-2">
               Tool Instructions
             </span>
             <p className="text-neutral-300 leading-relaxed">
@@ -111,13 +108,13 @@ export const ToolsPage: React.FC = () => {
           </div>
 
           <div>
-            <span className="font-mono text-amber-400 font-bold uppercase tracking-wider block mb-2">
+            <span className="font-mono text-amber-400/90 font-medium uppercase tracking-wider block mb-2">
               Capabilities & Features
             </span>
             <ul className="space-y-1.5 text-neutral-300">
               {currentTool.features?.map((feat, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <span className="text-amber-400 font-mono">→</span>
+                  <span className="text-amber-400/80 font-mono">→</span>
                   <span>{feat}</span>
                 </li>
               ))}
@@ -125,7 +122,7 @@ export const ToolsPage: React.FC = () => {
           </div>
 
           <div>
-            <span className="font-mono text-amber-400 font-bold uppercase tracking-wider block mb-2">
+            <span className="font-mono text-amber-400/90 font-medium uppercase tracking-wider block mb-2">
               Architecture & Versioning
             </span>
             <div className="space-y-2 text-neutral-400 font-mono">
@@ -135,7 +132,7 @@ export const ToolsPage: React.FC = () => {
               <div className="pt-2">
                 <Link
                   to={`/tools/${currentTool.slug}`}
-                  className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 font-medium"
+                  className="inline-flex items-center gap-1 text-amber-400/90 hover:text-amber-300 font-medium"
                 >
                   <span>Direct Permalink</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />

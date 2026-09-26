@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { User, GraduationCap, Briefcase, Cpu, ArrowUpRight, Plus } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 import { InlineEditable } from '../components/editor/InlineEditable';
 
@@ -187,7 +187,7 @@ export const AboutPage: React.FC = () => {
       <div className="pt-8 border-t border-neutral-800 flex flex-wrap items-center justify-between gap-4">
         <Link
           to="/quick-profile"
-          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono rounded-md bg-amber-400 text-neutral-950 hover:bg-amber-300 font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono rounded bg-amber-400 text-neutral-950 hover:bg-amber-300 font-semibold transition-colors shadow-sm"
         >
           <span>View 60-Second Recruiter Briefing</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
