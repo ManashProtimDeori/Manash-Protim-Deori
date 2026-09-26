@@ -48,7 +48,7 @@ export const ProfessionalMoments: React.FC = () => {
       <div className="moments-heading">
         <div>
           <span className="eyebrow">In the room</span>
-          <h2>Work is also <em>where you show up.</em></h2>
+          <h2>Work is also <em>where you show up</em></h2>
           <p>Selected moments from professional events, conversations and environments — shown only when a real photograph and factual context are provided.</p>
         </div>
       </div>
