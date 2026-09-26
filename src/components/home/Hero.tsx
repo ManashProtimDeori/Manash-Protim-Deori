@@ -18,15 +18,6 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="signal-story wide" aria-labelledby="home-title">
-      <img
-        src="/images/brand/mpd-3d-logo.webp"
-        alt="MPD logo"
-        className="hero-mpd-mark"
-        width="360"
-        height="201"
-        loading="eager"
-        decoding="async"
-      />
       <div className="story-copy">
         <div className="hero-intro" data-signal="neutral">
           <div className="hero-edit-anchor">
