@@ -21,7 +21,7 @@ export const ClosingCta: React.FC = () => {
           </div>
 
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-[1.08] text-balance">
-            A good question is a good beginning.
+            A good question is a good beginning
           </h2>
 
           <p className="text-base sm:text-lg text-neutral-300 dark:text-neutral-300 light:text-neutral-700 max-w-2xl mx-auto leading-relaxed font-serif italic">

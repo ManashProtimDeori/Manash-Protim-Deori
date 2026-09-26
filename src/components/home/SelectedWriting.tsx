@@ -18,7 +18,7 @@ export const SelectedWriting: React.FC = () => {
               07 · Essays, Research & Discourse
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-              Writing on strategy, AI & distribution.
+              Writing on strategy, AI & distribution
             </h2>
             <p className="text-base text-neutral-400 max-w-xl">
               Rigorous long-form publications analyzing attribution decay, AI agent architectures, and market positioning economics.
