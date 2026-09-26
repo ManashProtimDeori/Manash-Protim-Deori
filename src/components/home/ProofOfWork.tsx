@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { useData } from '../../context/DataContext';
 import { EditButton } from '../editor/EditButton';
 
@@ -8,19 +8,20 @@ export const ProofOfWork: React.FC = () => {
   const { proofsData } = useData();
 
   return (
-    <section className="py-20 border-b border-neutral-800/80 dark:border-neutral-800/80 light:border-neutral-200 bg-neutral-950/60 dark:bg-neutral-950/60 light:bg-neutral-50/40">
+    <section className="py-20 md:py-28 border-b border-neutral-800/60 dark:border-neutral-800/60 light:border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 block mb-2 font-semibold">
-              Evidence Over Assertions
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-6 border-b border-neutral-800/40">
+          <div className="max-w-3xl space-y-3">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
+              06 · Empirical Verification & Direct Evidence
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
               Proof &gt; Claims.
             </h2>
-            <p className="text-sm text-neutral-400 mt-2 max-w-xl">
-              Anyone can claim strategic acumen or AI fluency. Credibility is established through tangible artifacts, working software, and verified reasoning.
+            <p className="text-base text-neutral-400 max-w-xl">
+              Strategic claims are easy to fabricate. Professional credibility is established through tangible artifacts, working code, and verified reasoning.
             </p>
           </div>
 
@@ -28,7 +29,7 @@ export const ProofOfWork: React.FC = () => {
             <EditButton type="proof" isNew label="New Proof Point" />
             <Link
               to="/archive"
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-400 hover:text-amber-400 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-400 hover:text-amber-400 transition-colors py-1"
             >
               <span>Explore Complete Index</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -36,43 +37,45 @@ export const ProofOfWork: React.FC = () => {
           </div>
         </div>
 
-        {/* Dynamic Proof Items Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {proofsData.map((proof) => (
+        {/* 2-Column Ledger with Hairline Dividers */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+          {proofsData.map((proof, idx) => (
             <div
               key={proof.id}
-              className="p-6 rounded-xl border border-neutral-800/80 bg-neutral-900/40 hover:border-neutral-700 transition-all flex flex-col justify-between space-y-4"
+              className="space-y-4 pt-4 border-t border-neutral-800/60 flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                    <h3 className="text-sm font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-snug">
+                  <div className="space-y-1">
+                    <span className="text-[11px] font-mono text-amber-400/90 font-medium">
+                      Assertion 0{idx + 1}
+                    </span>
+                    <h3 className="text-base font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-snug">
                       {proof.claim}
                     </h3>
                   </div>
                   <EditButton type="proof" item={proof} label="Edit" />
                 </div>
 
-                <div className="text-xs font-mono text-amber-400/90 pl-6">
+                <div className="text-xs font-mono text-amber-300/80">
                   {proof.counter}
                 </div>
 
-                <p className="text-xs text-neutral-400 pl-6 leading-relaxed font-sans">
+                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
                   {proof.evidence}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-neutral-800/50 flex items-center justify-between pl-6 text-xs font-mono">
+              <div className="pt-4 border-t border-neutral-800/40 flex items-center justify-between text-xs font-mono">
                 <span className="text-[11px] text-neutral-500">
                   {proof.demoType}
                 </span>
                 <Link
                   to={proof.linkUrl}
-                  className="inline-flex items-center gap-1 text-neutral-300 hover:text-amber-400 transition-colors group"
+                  className="inline-flex items-center gap-1.5 text-neutral-300 hover:text-amber-400 transition-colors group py-1"
                 >
                   <span>{proof.linkText}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-amber-400" />
                 </Link>
               </div>
             </div>

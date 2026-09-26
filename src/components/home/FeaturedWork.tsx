@@ -9,28 +9,28 @@ export const FeaturedWork: React.FC = () => {
   const featured = projects.filter(p => p.featured);
 
   return (
-    <section className="py-20 border-b border-neutral-800/80 dark:border-neutral-800/80 light:border-neutral-200">
+    <section className="py-20 md:py-32 border-b border-neutral-800/60 dark:border-neutral-800/60 light:border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-4">
-          <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 block mb-2 font-semibold">
-              Selected Initiatives
+        {/* Editorial Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-6 border-b border-neutral-800/40">
+          <div className="max-w-3xl space-y-3">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
+              04 · Selected Flagship Work & Systems
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
-              Featured Work & Systems.
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
+              Case studies in strategy, systems & code.
             </h2>
-            <p className="text-sm text-neutral-400 mt-2 max-w-xl">
-              Production systems, financial models, and strategic platforms built at the intersection of marketing, data, and AI.
+            <p className="text-base text-neutral-400 max-w-xl">
+              Production architectures, financial attribution algorithms, and deterministic AI systems built with verifiable outcomes.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <EditButton type="project" isNew label="New Project" />
             <Link
               to="/work"
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-mono rounded-md border border-neutral-800 hover:border-neutral-700 bg-neutral-900 text-neutral-300 hover:text-neutral-100 transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400 hover:text-amber-400 transition-colors py-1"
             >
               <span>View All {projects.length} Case Studies</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -38,87 +38,90 @@ export const FeaturedWork: React.FC = () => {
           </div>
         </div>
 
-        {/* Magazine-style Case Study Cards */}
-        <div className="space-y-12">
-          {featured.map((project) => (
+        {/* Editorial Monograph Case Studies */}
+        <div className="space-y-20 md:space-y-28">
+          {featured.map((project, idx) => (
             <article 
               key={project.id}
-              className="group relative rounded-2xl border border-neutral-800 bg-neutral-900/40 dark:border-neutral-800 dark:bg-neutral-900/40 light:border-neutral-300 light:bg-white overflow-hidden transition-all duration-300 hover:border-neutral-700 hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+              className="group pt-8 border-t border-neutral-800/60 transition-all"
             >
-              <div className="p-8 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
                 
-                {/* Left: Content */}
-                <div className="lg:col-span-8 space-y-4">
+                {/* Left: Content (Col 1 to 8) */}
+                <div className="lg:col-span-8 space-y-6">
                   
-                  {/* Clean unboxed metadata (NO PILLS) + Edit Button */}
+                  {/* Clean unboxed metadata */}
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-neutral-400">
-                      <span className="text-amber-400 font-semibold">{project.year}</span>
-                      <span aria-hidden="true">·</span>
-                      <span>{project.categories.join(' / ')}</span>
-                      <span aria-hidden="true">·</span>
-                      <span>Role: {project.role}</span>
-                      <span aria-hidden="true">·</span>
-                      <span className="text-emerald-400 font-medium">{project.status}</span>
+                      <span className="text-amber-400/90 font-medium">0{idx + 1}</span>
+                      <span aria-hidden="true" className="text-neutral-600">/</span>
+                      <span>{project.year}</span>
+                      <span aria-hidden="true" className="text-neutral-600">/</span>
+                      <span>{project.categories.join(' · ')}</span>
+                      <span aria-hidden="true" className="text-neutral-600">/</span>
+                      <span className="text-neutral-300">Role: {project.role}</span>
                     </div>
 
                     <EditButton type="project" item={project} label="Edit Project" />
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors">
-                    <Link to={`/work/${project.slug}`} className="focus:outline-none">
-                      {project.title}
-                    </Link>
-                  </h3>
+                  {/* Title & Subtitle */}
+                  <div className="space-y-3">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors">
+                      <Link to={`/work/${project.slug}`}>
+                        {project.title}
+                      </Link>
+                    </h3>
 
-                  <p className="text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-serif italic">
-                    "{project.subtitle}"
-                  </p>
+                    <p className="text-lg sm:text-xl text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic leading-relaxed">
+                      "{project.subtitle}"
+                    </p>
+                  </div>
 
-                  <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed max-w-2xl font-sans">
+                  <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-sans max-w-3xl">
                     {project.excerpt}
                   </p>
 
-                  {/* Core Problem Callout */}
-                  <div className="pt-2">
-                    <span className="text-xs font-mono text-neutral-500 block uppercase tracking-wider mb-1">
-                      Problem Solved:
+                  {/* Narrative Bottleneck / Insight Accent */}
+                  <div className="border-l-2 border-amber-400/60 pl-5 py-1 space-y-1">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 font-semibold block">
+                      Underlying Commercial Bottleneck
                     </span>
-                    <p className="text-xs text-neutral-300 bg-neutral-950/60 dark:bg-neutral-950/60 light:bg-neutral-100 p-3 rounded-lg border border-neutral-800/80 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
                       {project.problem}
                     </p>
                   </div>
 
-                  {/* Technology Tags (unboxed) */}
-                  <div className="pt-2 text-xs font-mono text-neutral-500">
-                    <span className="text-neutral-400">Stack:</span>{' '}
+                  {/* Technology Stack Line */}
+                  <div className="text-xs font-mono text-neutral-500 pt-2">
+                    <span className="text-neutral-400">Architecture & Tools:</span>{' '}
                     {project.technologies.join(' · ')}
                   </div>
                 </div>
 
-                {/* Right: Architectural Index & Action */}
-                <div className="lg:col-span-4 flex flex-col justify-between h-full space-y-6 lg:border-l lg:border-neutral-800/80 lg:pl-8">
-                  <div>
-                    <span className="text-xs font-mono uppercase tracking-wider text-neutral-500 block mb-3">
-                      Key Highlights
+                {/* Right: Architectural Digest & Link (Col 9 to 12) */}
+                <div className="lg:col-span-4 lg:border-l lg:border-neutral-800/60 lg:pl-10 flex flex-col justify-between space-y-8 pt-2">
+                  <div className="space-y-4">
+                    <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-500 block">
+                      Verified Takeaways
                     </span>
-                    <ul className="space-y-2 text-xs text-neutral-400">
-                      {project.lessons.slice(0, 2).map((lesson, lIdx) => (
-                        <li key={lIdx} className="flex items-start gap-2">
-                          <span className="text-amber-400 font-mono">→</span>
-                          <span>{lesson}</span>
+                    <ul className="space-y-3 text-xs sm:text-sm text-neutral-400">
+                      {project.lessons.slice(0, 3).map((lesson, lIdx) => (
+                        <li key={lIdx} className="flex items-start gap-2.5">
+                          <span className="text-amber-400/80 font-mono text-xs mt-0.5">0{lIdx + 1}</span>
+                          <span className="leading-snug">{lesson}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-4">
+                  <div className="pt-4 border-t border-neutral-800/40">
                     <Link
                       to={`/work/${project.slug}`}
-                      className="inline-flex items-center justify-between w-full p-3 rounded-lg border border-neutral-800 bg-neutral-950 text-neutral-200 hover:text-amber-400 hover:border-neutral-700 transition-colors text-xs font-mono font-medium group/btn"
+                      className="inline-flex items-center gap-2 text-xs font-mono text-neutral-200 group-hover:text-amber-400 transition-colors font-medium py-1"
                     >
-                      <span>Read Deep Case Study</span>
-                      <ArrowUpRight className="w-4 h-4 text-amber-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                      <span>Read Full Architecture Case Study</span>
+                      <ArrowUpRight className="w-4 h-4 text-amber-400 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </Link>
                   </div>
                 </div>

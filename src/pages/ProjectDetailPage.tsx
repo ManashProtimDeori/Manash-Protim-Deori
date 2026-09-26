@@ -83,20 +83,20 @@ export const ProjectDetailPage: React.FC = () => {
       <div className="py-12 space-y-16">
         
         {/* 01. Context & Problem */}
-        <section className="space-y-4">
+        <section className="space-y-6 pt-8 border-t border-neutral-800/60">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400 font-bold">01.</span>
-            <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <span className="text-xs font-mono text-amber-400/90 font-medium">01.</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
               Commercial Context & Problem
             </h2>
           </div>
-          <div className="space-y-4 text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-sans">
+          <div className="space-y-6 text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-sans">
             <p>{project.context}</p>
-            <div className="p-4 rounded-lg bg-neutral-900/60 border border-neutral-800 border-l-amber-400 border-l-2">
-              <span className="text-xs font-mono text-neutral-400 uppercase tracking-wider block mb-1 font-semibold">
+            <div className="border-l-2 border-amber-400/60 pl-5 py-2 space-y-1">
+              <span className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider block font-semibold">
                 The Bottleneck:
               </span>
-              <p className="text-sm text-neutral-200">
+              <p className="text-sm sm:text-base text-neutral-200">
                 {project.problem}
               </p>
             </div>
@@ -104,15 +104,15 @@ export const ProjectDetailPage: React.FC = () => {
         </section>
 
         {/* 02. The Insight & Strategic Approach */}
-        <section className="space-y-4">
+        <section className="space-y-6 pt-8 border-t border-neutral-800/60">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400 font-bold">02.</span>
-            <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <span className="text-xs font-mono text-amber-400/90 font-medium">02.</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
               The Insight & Strategic Architecture
             </h2>
           </div>
-          <div className="space-y-4 text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed">
-            <blockquote className="p-4 rounded-lg bg-neutral-950/80 border border-neutral-800 text-base font-serif italic text-amber-300/90">
+          <div className="space-y-6 text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-sans">
+            <blockquote className="py-4 text-xl sm:text-2xl font-serif italic text-neutral-100 leading-relaxed border-y border-neutral-800/50">
               "{project.insight}"
             </blockquote>
             <p>{project.strategy}</p>
@@ -120,15 +120,15 @@ export const ProjectDetailPage: React.FC = () => {
         </section>
 
         {/* 03. Architecture & Technical Process */}
-        <section className="space-y-6">
+        <section className="space-y-6 pt-8 border-t border-neutral-800/60">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400 font-bold">03.</span>
-            <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <span className="text-xs font-mono text-amber-400/90 font-medium">03.</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
               System Architecture & Execution
             </h2>
           </div>
           
-          <p className="text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed">
+          <p className="text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-sans">
             {project.solution}
           </p>
 
@@ -139,21 +139,21 @@ export const ProjectDetailPage: React.FC = () => {
 
           {/* Architecture Nodes Grid */}
           {project.architectureNodes && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
               {project.architectureNodes.map((node, nIdx) => (
-                <div key={nIdx} className="p-4 rounded-lg border border-neutral-800 bg-neutral-900/40">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-mono text-amber-400 font-bold">
-                      Phase {node.step}
+                <div key={nIdx} className="pt-3 border-t border-neutral-800/60 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono text-amber-400/90 font-medium">
+                      Phase 0{node.step}
                     </span>
                     <span className="text-xs font-semibold text-neutral-200">
                       {node.title}
                     </span>
                   </div>
-                  <p className="text-xs text-neutral-400 leading-relaxed mb-2">
+                  <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
                     {node.description}
                   </p>
-                  <div className="text-[11px] font-mono text-neutral-500 pt-2 border-t border-neutral-800/60">
+                  <div className="text-[11px] font-mono text-neutral-500 pt-1">
                     {node.detail}
                   </div>
                 </div>
@@ -161,26 +161,26 @@ export const ProjectDetailPage: React.FC = () => {
             </div>
           )}
 
-          <p className="text-xs text-neutral-400 leading-relaxed pt-2">
+          <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed pt-2 font-sans">
             {project.process}
           </p>
         </section>
 
         {/* 04. Verified Outcomes & Learnings */}
-        <section className="space-y-4">
+        <section className="space-y-6 pt-8 border-t border-neutral-800/60">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400 font-bold">04.</span>
-            <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <span className="text-xs font-mono text-amber-400/90 font-medium">04.</span>
+            <h2 className="text-xl sm:text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
               Verified Outcomes & Engineering Lessons
             </h2>
           </div>
 
           {project.results && (
-            <div className="p-4 rounded-lg bg-neutral-950/80 border border-neutral-800">
-              <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider block mb-1 font-semibold">
+            <div className="border-l-2 border-emerald-400/60 pl-5 py-2 space-y-1">
+              <span className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider block font-semibold">
                 Outcome Delivery:
               </span>
-              <p className="text-xs sm:text-sm text-neutral-200">
+              <p className="text-sm sm:text-base text-neutral-200 font-sans">
                 {project.results}
               </p>
             </div>

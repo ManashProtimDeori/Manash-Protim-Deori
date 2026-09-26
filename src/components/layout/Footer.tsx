@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
 
             {/* Real-time India Time Indicator */}
             <div className="inline-flex items-center gap-2 pt-2 text-xs font-mono text-neutral-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
               <span>India (IST) · {indiaTime || 'Active'}</span>
               <span className="text-neutral-600">·</span>
               <span className="text-neutral-400">Open Globally</span>

@@ -33,42 +33,39 @@ export const ContactPage: React.FC = () => {
     <div className="py-16 md:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       
       {/* Header */}
-      <div className="max-w-3xl space-y-3 pb-8 border-b border-neutral-800 relative">
+      <div className="max-w-3xl space-y-3 pb-8 border-b border-neutral-800/40 relative">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <MessageSquare className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
-              Direct Communications & Inquiries
-            </span>
-          </div>
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium">
+            Direct Communications & Inquiries
+          </span>
           <EditButton type="contact" item={contactData} label="Edit Contact Info" />
         </div>
 
-        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
           {contactData.inquiryTitle || 'Start a Conversation.'}
         </h1>
-        <p className="text-base text-neutral-300 leading-relaxed font-sans pt-1">
+        <p className="text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-sans pt-1">
           {contactData.inquirySubtitle || 'Have an ambitious problem or high-leverage initiative? I am especially interested in conversations around marketing strategy, autonomous AI systems, unit economics modeling, and full-stack product builds.'}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
         {/* Left: Contact Info & Preferences */}
         <div className="lg:col-span-5 space-y-8">
           
-          {/* Direct Email Card */}
-          <div className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 space-y-3 relative">
+          {/* Direct Email */}
+          <div className="space-y-3 pt-2 border-t border-neutral-800/60 relative">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
-                Direct Email Address
+              <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-400 block font-medium">
+                Direct Email Coordinates
               </span>
               <EditButton type="contact" item={contactData} label="Edit" />
             </div>
             <div className="flex items-center justify-between gap-2">
               <a
                 href={`mailto:${contactData.directEmail || siteConfig.email}`}
-                className="text-sm font-mono text-amber-400 hover:underline break-all"
+                className="text-base font-mono text-neutral-100 hover:text-amber-400 transition-colors break-all"
               >
                 {contactData.directEmail || siteConfig.email}
               </a>
@@ -80,28 +77,27 @@ export const ContactPage: React.FC = () => {
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
               </button>
             </div>
-            <p className="text-xs text-neutral-400 leading-relaxed">
+            <p className="text-xs text-neutral-400 leading-relaxed font-sans">
               {contactData.responseTime || 'Expect a substantive response within 24 business hours.'}
             </p>
           </div>
 
           {/* Availability & Location */}
-          <div className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 space-y-3 text-xs">
-            <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 block font-semibold">
+          <div className="space-y-3 pt-4 border-t border-neutral-800/40 text-xs">
+            <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-neutral-400 block font-medium">
               Location & Availability
             </span>
             <div className="space-y-2 font-mono text-neutral-300">
               <div className="flex items-center gap-2">
-                <Globe className="w-3.5 h-3.5 text-amber-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 <span>{contactData.location || siteConfig.location} · {contactData.availabilityStatus || siteConfig.openStatus}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5 text-emerald-400" />
-                <span>{contactData.timezone || 'IST (UTC +5:30)'} · Highly Flexible for Global Overlap</span>
+              <div className="text-neutral-400">
+                <span>{contactData.timezone || 'IST (UTC +5:30)'} · Full Global Overlap</span>
               </div>
             </div>
             {contactData.advisoryRateInfo && (
-              <p className="text-[11px] text-neutral-400 pt-2 border-t border-neutral-800/80">
+              <p className="text-[11px] text-neutral-400 pt-2 border-t border-neutral-800/40 font-mono">
                 {contactData.advisoryRateInfo}
               </p>
             )}
@@ -109,14 +105,14 @@ export const ContactPage: React.FC = () => {
 
           {/* Conversation Topics */}
           {contactData.consultingTopics && contactData.consultingTopics.length > 0 && (
-            <div className="space-y-2 text-xs">
-              <span className="font-mono text-neutral-400 uppercase tracking-wider block font-semibold">
-                Primary Engagement Topics
+            <div className="space-y-3 pt-4 border-t border-neutral-800/40 text-xs">
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400 block font-medium">
+                Primary Engagement Areas
               </span>
-              <ul className="space-y-1.5 text-neutral-300 font-sans">
+              <ul className="space-y-2 text-neutral-300 font-sans">
                 {contactData.consultingTopics.map((topic, tIdx) => (
                   <li key={tIdx} className="flex items-start gap-2">
-                    <span className="text-amber-400 font-mono">→</span>
+                    <span className="text-amber-400/80 font-mono text-xs">→</span>
                     <span>{topic}</span>
                   </li>
                 ))}
@@ -128,25 +124,25 @@ export const ContactPage: React.FC = () => {
         {/* Right: Contact Form */}
         <div className="lg:col-span-7">
           {submitted ? (
-            <div className="p-8 sm:p-12 rounded-2xl border border-emerald-800/60 bg-emerald-950/20 text-center space-y-4">
-              <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
-                <Check className="w-6 h-6" />
+            <div className="p-8 sm:p-12 border border-neutral-800 bg-neutral-900/30 text-center space-y-4">
+              <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 mx-auto flex items-center justify-center">
+                <Check className="w-5 h-5" />
               </div>
               <h3 className="text-2xl font-bold text-neutral-100">
-                Message Received.
+                Message Transmitted.
               </h3>
               <p className="text-sm text-neutral-300 max-w-md mx-auto leading-relaxed font-sans">
-                Thank you, {name}. Your inquiry has been logged directly. I will review your context and respond back shortly to <span className="font-mono text-amber-400">{email}</span>.
+                Thank you, {name}. Your inquiry has been received. I will review your context and respond back shortly to <span className="font-mono text-amber-400">{email}</span>.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="mt-4 px-4 py-2 text-xs font-mono rounded-md bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-neutral-100"
+                className="mt-4 px-4 py-2 text-xs font-mono rounded bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-neutral-100"
               >
                 Send Another Note
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="p-8 sm:p-10 rounded-2xl border border-neutral-800 bg-neutral-900/40 space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5 pt-2 border-t lg:border-t-0 border-neutral-800/60">
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>

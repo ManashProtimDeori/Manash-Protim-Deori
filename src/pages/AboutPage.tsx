@@ -14,12 +14,9 @@ export const AboutPage: React.FC = () => {
       {/* Header */}
       <section className="space-y-4 max-w-3xl relative">
         <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <User className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
-              Personal Dossier & Philosophy
-            </span>
-          </div>
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium">
+            Personal Dossier & Philosophy
+          </span>
           <EditButton type="about" item={aboutData} label="Edit Dossier" />
         </div>
 
@@ -27,7 +24,7 @@ export const AboutPage: React.FC = () => {
           as="h1"
           value={aboutData.headline || siteConfig.name}
           onSave={(val) => updateAboutData({ headline: val })}
-          className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 block"
+          className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 block leading-tight"
         />
 
         <InlineEditable
@@ -35,16 +32,16 @@ export const AboutPage: React.FC = () => {
           value={aboutData.quote || siteConfig.positioning}
           onSave={(val) => updateAboutData({ quote: val })}
           multiline
-          className="text-lg sm:text-xl text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic leading-relaxed block"
+          className="text-lg sm:text-xl text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic leading-relaxed block pt-1"
         />
       </section>
 
       {/* 01 — Who I Am */}
-      <section className="space-y-4 pt-8 border-t border-neutral-800 relative">
+      <section className="space-y-6 pt-10 border-t border-neutral-800/60 relative">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400 font-bold">01.</span>
-            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <span className="text-xs font-mono text-amber-400/90 font-medium">01.</span>
+            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
               Who I Am
             </h2>
           </div>
@@ -59,24 +56,24 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* 02 — How I Think */}
-      <section className="space-y-6 pt-8 border-t border-neutral-800 relative">
+      <section className="space-y-8 pt-10 border-t border-neutral-800/60 relative">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400 font-bold">02.</span>
-            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <span className="text-xs font-mono text-amber-400/90 font-medium">02.</span>
+            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
               Intellectual Model & First Principles
             </h2>
           </div>
           <EditButton type="about" item={aboutData} label="Edit Principles" />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs">
           {aboutData.intellectualPrinciples?.map((principle, idx) => (
-            <div key={idx} className="p-5 rounded-xl border border-neutral-800 bg-neutral-900/40 space-y-2">
-              <span className="text-amber-400 font-mono font-bold block">
-                {principle.number}. {principle.title}
+            <div key={idx} className="space-y-2 pt-2 border-t border-neutral-800/50">
+              <span className="text-amber-400/90 font-mono font-medium block">
+                0{principle.number}. {principle.title}
               </span>
-              <p className="text-neutral-300 leading-relaxed">
+              <p className="text-neutral-400 leading-relaxed font-sans sm:text-sm">
                 {principle.desc}
               </p>
             </div>
@@ -85,11 +82,11 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* 03 — Journey & Education */}
-      <section className="space-y-6 pt-8 border-t border-neutral-800 relative">
+      <section className="space-y-8 pt-10 border-t border-neutral-800/60 relative">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400 font-bold">03.</span>
-            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <span className="text-xs font-mono text-amber-400/90 font-medium">03.</span>
+            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
               Educational Trajectory
             </h2>
           </div>
@@ -105,18 +102,18 @@ export const AboutPage: React.FC = () => {
           </div>
         )}
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           {education.map((edu, idx) => (
             <div
               key={idx}
-              className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 space-y-3 relative"
+              className="space-y-3 pt-4 border-t border-neutral-800/50 relative"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                 <div>
                   <h3 className="text-lg font-bold text-neutral-100">
                     {edu.degree} — {edu.discipline}
                   </h3>
-                  <div className="text-xs font-mono text-amber-400">
+                  <div className="text-xs font-mono text-amber-400/90">
                     {edu.institution}
                   </div>
                 </div>
@@ -139,7 +136,7 @@ export const AboutPage: React.FC = () => {
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-neutral-400 font-mono">
                   {edu.focus?.map((item, fIdx) => (
                     <li key={fIdx} className="flex items-start gap-1.5">
-                      <span className="text-amber-400">·</span>
+                      <span className="text-amber-400/80">·</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -151,31 +148,31 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* 04 — Core Competency Domains */}
-      <section className="space-y-6 pt-8 border-t border-neutral-800 relative">
+      <section className="space-y-8 pt-10 border-t border-neutral-800/60 relative">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400 font-bold">04.</span>
-            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
+            <span className="text-xs font-mono text-amber-400/90 font-medium">04.</span>
+            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
               Core Competency Domains
             </h2>
           </div>
           <EditButton type="about" item={aboutData} label="Edit Competencies" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {aboutData.competencies?.map((comp, idx) => (
-            <div key={idx} className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/40 flex flex-col justify-between">
+            <div key={idx} className="space-y-3 pt-2 border-t border-neutral-800/50 flex flex-col justify-between">
               <div>
-                <h3 className="text-base font-bold text-neutral-100 mb-2">
+                <h3 className="text-base font-bold text-neutral-100 mb-1">
                   {comp.domain}
                 </h3>
-                <p className="text-xs text-neutral-400 leading-relaxed mb-4">
+                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-4 font-sans">
                   {comp.summary}
                 </p>
                 <ul className="space-y-1.5 text-xs text-neutral-300 font-mono">
                   {comp.capabilities?.map((cap, cIdx) => (
                     <li key={cIdx} className="flex items-start gap-1.5">
-                      <span className="text-amber-400">→</span>
+                      <span className="text-amber-400/80">→</span>
                       <span>{cap}</span>
                     </li>
                   ))}

@@ -60,42 +60,32 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
           })}
         </nav>
 
-        {/* Zone 3: 1-2 Primary Actions + Edit Mode Trigger */}
-        <div className="flex items-center gap-2">
-          {/* Edit Mode Toggle */}
+        {/* Zone 3: Clean Actions */}
+        <div className="flex items-center gap-2.5">
+          {/* Discreet Edit Mode Toggle */}
           <button
             onClick={toggleEditMode}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-mono rounded-md border transition-all ${
+            className={`p-1.5 rounded text-xs font-mono transition-all ${
               isEditMode
-                ? 'bg-amber-400 text-neutral-950 border-amber-400 font-bold shadow-[0_0_12px_rgba(251,191,36,0.25)]'
-                : 'border-neutral-800 bg-neutral-900/60 text-neutral-400 hover:text-amber-400 hover:border-neutral-700'
+                ? 'bg-amber-400 text-neutral-950 font-bold shadow-sm'
+                : 'text-neutral-500 hover:text-neutral-300'
             }`}
-            title={isEditMode ? 'Edit Mode is Active (Click to disable)' : 'Enable Live Edit Mode'}
+            title={isEditMode ? 'Live Edit Mode Active' : 'Toggle Edit Mode'}
             aria-label="Toggle content edit mode"
           >
             <Edit3 className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">{isEditMode ? 'Editing' : 'Edit'}</span>
           </button>
-
-          {/* Studio Link */}
-          <Link
-            to="/studio"
-            className="p-1.5 rounded-md border border-neutral-800 hover:border-neutral-700 bg-neutral-900/60 text-neutral-400 hover:text-neutral-200 transition-colors hidden sm:inline-flex"
-            title="Open Content Studio / Visual CMS"
-          >
-            <Sliders className="w-3.5 h-3.5" />
-          </Link>
 
           {/* Command Palette Trigger */}
           <button
             onClick={onOpenCommand}
-            className="command-palette-trigger flex items-center gap-2 px-2.5 py-1.5 text-xs font-mono rounded-md border border-neutral-800 hover:border-neutral-700 bg-neutral-900/60 text-neutral-400 hover:text-neutral-200 transition-all dark:border-neutral-800 dark:bg-neutral-900/60 dark:text-neutral-400 dark:hover:text-neutral-200 light:border-neutral-300 light:bg-neutral-100 light:text-neutral-700 light:hover:text-neutral-950"
-            title="Open Command Palette (⌘K)"
+            className="command-palette-trigger flex items-center gap-2 px-2.5 py-1.5 text-xs font-mono rounded border border-neutral-800/80 hover:border-neutral-700 bg-neutral-900/50 text-neutral-400 hover:text-neutral-200 transition-all dark:border-neutral-800/80 dark:bg-neutral-900/50 dark:text-neutral-400 dark:hover:text-neutral-200 light:border-neutral-300 light:bg-neutral-100 light:text-neutral-700 light:hover:text-neutral-950"
+            title="Search & Navigation (⌘K)"
             aria-label="Search and command palette"
           >
             <Search className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Search</span>
-            <kbd className="hidden sm:inline px-1 py-0.5 text-[10px] bg-neutral-800 dark:bg-neutral-800 light:bg-neutral-200 rounded text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-semibold">
+            <span className="hidden sm:inline">Index</span>
+            <kbd className="hidden sm:inline px-1 py-0.5 text-[10px] bg-neutral-800 dark:bg-neutral-800 light:bg-neutral-200 rounded text-neutral-400 dark:text-neutral-400 light:text-neutral-700 font-mono">
               ⌘K
             </kbd>
           </button>
@@ -103,28 +93,28 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-1.5 rounded-md border border-neutral-800 hover:border-neutral-700 bg-neutral-900/60 text-neutral-400 hover:text-neutral-200 transition-colors dark:border-neutral-800 dark:bg-neutral-900/60 dark:text-neutral-400 dark:hover:text-neutral-200 light:border-neutral-300 light:bg-neutral-100 light:text-neutral-700 light:hover:text-neutral-950"
+            className="p-1.5 rounded border border-neutral-800/80 hover:border-neutral-700 bg-neutral-900/50 text-neutral-400 hover:text-neutral-200 transition-colors dark:border-neutral-800/80 dark:bg-neutral-900/50 dark:text-neutral-400 dark:hover:text-neutral-200 light:border-neutral-300 light:bg-neutral-100 light:text-neutral-700 light:hover:text-neutral-950"
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-neutral-700" />}
+            {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-amber-400/90" /> : <Moon className="w-3.5 h-3.5 text-neutral-700" />}
           </button>
 
-          {/* 60s Quick Profile CTA */}
+          {/* Single Primary Action: 60s Profile */}
           <Link
             to="/quick-profile"
-            className="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md bg-neutral-100 text-neutral-950 hover:bg-white hover:shadow-sm transition-all whitespace-nowrap dark:bg-neutral-100 dark:text-neutral-950 light:bg-neutral-900 light:text-neutral-100"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded bg-neutral-100 text-neutral-950 hover:bg-white transition-all whitespace-nowrap dark:bg-neutral-100 dark:text-neutral-950 light:bg-neutral-900 light:text-neutral-100"
           >
-            <span>60s Profile</span>
+            <span>Dossier</span>
             <ArrowUpRight className="w-3 h-3" />
           </Link>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-1.5 rounded-md border border-neutral-800 text-neutral-400 hover:text-neutral-200"
+            className="md:hidden p-1.5 rounded border border-neutral-800 text-neutral-400 hover:text-neutral-200"
             aria-label="Toggle navigation menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </button>
         </div>
       </div>

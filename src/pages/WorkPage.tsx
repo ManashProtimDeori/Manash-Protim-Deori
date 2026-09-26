@@ -56,18 +56,15 @@ export const WorkPage: React.FC = () => {
     <div className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       {/* Editorial Page Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-2 mb-2">
-            <Compass className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold">
-              Portfolio & Systems Repository
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
-            Selected Work & Case Studies
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 pb-6 border-b border-neutral-800/40">
+        <div className="max-w-3xl space-y-3">
+          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
+            Portfolio & Systems Repository
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
+            Selected Work & Case Studies.
           </h1>
-          <p className="text-base text-neutral-400 mt-3 leading-relaxed">
+          <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
             In-depth architectural case studies detailing the commercial context, underlying insights, execution hurdles, and verified outcomes across AI systems, marketing strategy, and quantitative analytics.
           </p>
         </div>
@@ -75,7 +72,7 @@ export const WorkPage: React.FC = () => {
         {isEditMode && (
           <button
             onClick={() => openEditor('project', { isNew: true })}
-            className="flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded-lg bg-amber-400 text-neutral-950 hover:bg-amber-300 transition-colors shrink-0 shadow-lg"
+            className="flex items-center gap-2 px-4 py-2 text-xs font-mono font-bold rounded bg-amber-400 text-neutral-950 hover:bg-amber-300 transition-colors shrink-0 shadow-sm"
           >
             <Plus className="w-4 h-4" />
             <span>Add New Case Study</span>
@@ -147,22 +144,22 @@ export const WorkPage: React.FC = () => {
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map(project => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+          {filteredProjects.map((project, idx) => (
             <article
               key={project.id}
-              className="group p-8 rounded-2xl border border-neutral-800 bg-neutral-900/40 dark:border-neutral-800 dark:bg-neutral-900/40 light:border-neutral-300 light:bg-white flex flex-col justify-between hover:border-neutral-700 hover:shadow-xl transition-all relative"
+              className="space-y-5 pt-6 border-t border-neutral-800/60 flex flex-col justify-between group transition-all"
             >
               <div className="space-y-4">
                 
                 {/* Clean Unboxed Metadata + Edit Button */}
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
-                    <span className="text-amber-400 font-semibold">{project.year}</span>
-                    <span aria-hidden="true">·</span>
+                    <span className="text-amber-400/90 font-medium">{project.year}</span>
+                    <span aria-hidden="true" className="text-neutral-600">·</span>
                     <span>{project.categories.join(' / ')}</span>
-                    <span aria-hidden="true">·</span>
-                    <span className="text-emerald-400">{project.status}</span>
+                    <span aria-hidden="true" className="text-neutral-600">·</span>
+                    <span className="text-neutral-300">{project.status}</span>
                   </div>
 
                   <EditButton type="project" item={project} label="Edit" />
@@ -174,43 +171,41 @@ export const WorkPage: React.FC = () => {
                   </Link>
                 </h2>
 
-                <p className="text-xs text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic">
+                <p className="text-sm text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic">
                   "{project.subtitle}"
                 </p>
 
-                <p className="text-xs text-neutral-400 leading-relaxed font-sans">
+                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
                   {project.excerpt}
                 </p>
 
-                {/* Problem & Solution Snippet */}
-                <div className="pt-2 text-xs space-y-2">
-                  <div className="bg-neutral-950/70 dark:bg-neutral-950/70 light:bg-neutral-100 p-3 rounded-lg border border-neutral-800/80">
-                    <span className="font-mono text-neutral-400 block mb-0.5 text-[11px] uppercase tracking-wider font-semibold">
-                      Underlying Problem:
-                    </span>
-                    <p className="text-neutral-300 line-clamp-2">
-                      {project.problem}
-                    </p>
-                  </div>
+                {/* Problem Highlight Line */}
+                <div className="border-l-2 border-amber-400/50 pl-3.5 py-0.5 text-xs text-neutral-300">
+                  <span className="font-mono text-neutral-400 block mb-0.5 text-[10px] uppercase tracking-wider font-semibold">
+                    Core Bottleneck:
+                  </span>
+                  <p className="line-clamp-2">
+                    {project.problem}
+                  </p>
                 </div>
 
                 {/* Technologies */}
-                <div className="pt-1 text-xs font-mono text-neutral-500">
+                <div className="text-xs font-mono text-neutral-500">
                   <span className="text-neutral-400">Stack:</span> {project.technologies.slice(0, 4).join(' · ')}
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-neutral-800/60 flex items-center justify-between">
+              <div className="pt-4 border-t border-neutral-800/40 flex items-center justify-between">
                 <span className="text-xs font-mono text-neutral-500">
                   Role: {project.role}
                 </span>
 
                 <Link
                   to={`/work/${project.slug}`}
-                  className="inline-flex items-center gap-1 text-xs font-mono text-amber-400 hover:text-amber-300 transition-colors font-medium"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-200 group-hover:text-amber-400 transition-colors font-medium py-1"
                 >
                   <span>Explore Case Study</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <ArrowUpRight className="w-3.5 h-3.5 text-amber-400" />
                 </Link>
               </div>
             </article>
