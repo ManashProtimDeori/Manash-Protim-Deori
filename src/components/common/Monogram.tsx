@@ -6,34 +6,53 @@ interface MonogramProps {
   interactive?: boolean;
 }
 
-export const Monogram: React.FC<MonogramProps> = ({ 
-  size = 'md', 
+export const Monogram: React.FC<MonogramProps> = ({
+  size = 'md',
   className = '',
-  interactive = true 
+  interactive = true,
 }) => {
   const dimensions = {
-    sm: 'w-7 h-7 text-xs',
-    md: 'w-9 h-9 text-sm',
-    lg: 'w-12 h-12 text-base'
+    sm: 'w-9 h-6',
+    md: 'w-11 h-7',
+    lg: 'w-14 h-9',
   }[size];
 
   return (
-    <div 
-      className={`relative inline-flex items-center justify-center font-mono font-bold tracking-tight rounded-md border transition-all duration-200 group
-        ${dimensions}
-        bg-neutral-900/80 text-neutral-100 border-neutral-700/60
-        dark:bg-neutral-900/90 dark:text-neutral-100 dark:border-neutral-700/80
-        light:bg-neutral-100 light:text-neutral-900 light:border-neutral-300
-        ${interactive ? 'hover:border-amber-400/80 hover:shadow-[0_0_15px_rgba(251,191,36,0.15)] active:scale-95' : ''}
-        ${className}`}
-      aria-label="Manash Protim Deori (MPD) Monogram"
+    <span
+      className={`inline-flex items-center justify-center text-neutral-100 dark:text-neutral-100 light:text-neutral-900 transition-colors duration-300 ${interactive ? 'group-hover:text-amber-400' : ''} ${dimensions} ${className}`}
+      aria-label="MPD logo"
+      role="img"
     >
-      <span className="relative z-10 transition-colors duration-200 group-hover:text-amber-400">
-        MPD
-      </span>
-      {/* Subtle corner architectural accent */}
-      <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-amber-400/60 transition-opacity duration-200 opacity-60 group-hover:opacity-100" />
-      <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b border-l border-amber-400/60 transition-opacity duration-200 opacity-60 group-hover:opacity-100" />
-    </div>
+      <svg
+        viewBox="0 0 58 32"
+        width="100%"
+        height="100%"
+        aria-hidden="true"
+        fill="none"
+        className="overflow-visible"
+      >
+        <path
+          d="M2.5 28V4L10 15.5L17.5 4V28"
+          stroke="currentColor"
+          strokeWidth="1.85"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+        />
+        <path
+          d="M22 28V4H30.5C35.5 4 38.5 6.6 38.5 10.8C38.5 15 35.5 17.6 30.5 17.6H22"
+          stroke="currentColor"
+          strokeWidth="1.85"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+        />
+        <path
+          d="M42.5 4H47.5C53.3 4 56 8.3 56 16C56 23.7 53.3 28 47.5 28H42.5V4Z"
+          stroke="currentColor"
+          strokeWidth="1.85"
+          strokeLinecap="square"
+          strokeLinejoin="miter"
+        />
+      </svg>
+    </span>
   );
 };
