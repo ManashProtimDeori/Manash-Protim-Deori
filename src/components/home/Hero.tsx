@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../../utils/headline';
 import { Link } from 'react-router-dom';
 import { useData } from '../../context/DataContext';
 import { EditButton } from '../editor/EditButton';
@@ -56,7 +57,7 @@ export const Hero: React.FC = () => {
           {rows.map((row, index) => (
             <article key={row.state} data-signal={row.state} className="capability-row">
               <span className="eyebrow">0{index + 1} / {row.label}</span>
-              <h2>{row.title}</h2>
+              <h2>{normalizeHeadline(row.title)}</h2>
               <p>{row.text}</p>
               <Link className="text-link" to={row.link}>Explore {row.label.toLowerCase()} ↗</Link>
             </article>
