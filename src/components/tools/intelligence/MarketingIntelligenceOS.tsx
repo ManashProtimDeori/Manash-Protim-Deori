@@ -150,14 +150,12 @@ export const MarketingIntelligenceOS:React.FC = () => {
     if(filters.confidence!=='All'&&item.confidence!==filters.confidence)return false;
     if(q&&!([item.title,item.summary,item.company,item.platform,item.topic,item.industry,item.geography].join(' ').toLowerCase().includes(q)))return false;
     return true;
-  }).sort((a,b)=>{
+  }).sort((left,right)=>{
     const roleBoost=(x:IntelligenceItem)=>x.audience.includes(role)?12:0;
-    const a=priorityScore({relevance:aFix(a=>a.strategicRelevanceScore)+roleBoost(a),impact:a.importanceScore,novelty:a.noveltyScore,evidence:a.evidenceStrengthScore,velocity:a.velocityScore,breadth:a.breadthScore});
-    const bscore=priorityScore({relevance:b.strategicRelevanceScore+roleBoost(b),impact:b.importanceScore,novelty:b.noveltyScore,evidence:b.evidenceStrengthScore,velocity:b.velocityScore,breadth:b.breadthScore});
-    return bscore-a;
+    const leftScore=priorityScore({relevance:left.strategicRelevanceScore+roleBoost(left),impact:left.importanceScore,novelty:left.noveltyScore,evidence:left.evidenceStrengthScore,velocity:left.velocityScore,breadth:left.breadthScore});
+    const rightScore=priorityScore({relevance:right.strategicRelevanceScore+roleBoost(right),impact:right.importanceScore,novelty:right.noveltyScore,evidence:right.evidenceStrengthScore,velocity:right.velocityScore,breadth:right.breadthScore});
+    return rightScore-leftScore;
   }),[filters,role]);
-
-  function aFix(fn:(x:IntelligenceItem)=>number){return fn({} as IntelligenceItem)}
 
   const topItems=filteredItems.slice(0,12);
   const selectedTrendObj=trends.find(t=>t.id===selectedTrend)||trends[0];
