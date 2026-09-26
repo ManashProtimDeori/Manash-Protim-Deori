@@ -39,7 +39,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
         </Link>
 
         {/* Zone 2: Premium Primary Navigation */}
-        <PrimaryNavigation className="order-2 hidden md:flex" />
+        <div className="order-2 hidden md:block">
+          <PrimaryNavigation />
+        </div>
 
         {/* Zone 3: Clean Actions */}
         <div className="order-1 flex items-center gap-2.5">
