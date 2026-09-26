@@ -16,7 +16,7 @@ export const educationHistory: EducationItem[] = [
     description: 'Rigorous management education emphasizing empirical problem-solving, strategic framework formulation, stakeholder negotiations, and quantitative decision science.'
   },
   {
-    institution: 'University Institute of Engineering & Technology',
+    institution: 'Rajiv Gandhi Institute of Petroleum Technology (RGIPT)',
     degree: 'Bachelor of Technology (B.Tech)',
     period: 'Undergraduate Program',
     location: 'India',

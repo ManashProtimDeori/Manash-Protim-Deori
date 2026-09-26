@@ -1,4 +1,5 @@
 import React from 'react';
+import { AcademicJourney } from '../components/home/AcademicJourney';
 import { Hero } from '../components/home/Hero';
 import { CurrentSignal } from '../components/home/CurrentSignal';
 import { CorePhilosophy } from '../components/home/CorePhilosophy';
@@ -12,12 +13,14 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-0">
       <Hero />
-      <CurrentSignal />
-      <CorePhilosophy />
+
+
       <FeaturedWork />
       <InteractiveToolsPreview />
       <ProofOfWork />
+      <AcademicJourney />
       <SelectedWriting />
+      <CurrentSignal />
       <ClosingCta />
     </div>
   );

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,7 +26,7 @@
     <!-- Google Fonts: Plus Jakarta Sans, Newsreader, JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
     <!-- Schema.org JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -47,7 +47,7 @@
             },
             {
               "@type": "EducationalOrganization",
-              "name": "Chemical Engineering",
+              "name": "Rajiv Gandhi Institute of Petroleum Technology (RGIPT)",
               "award": "B.Tech"
             }
           ],
@@ -84,7 +84,7 @@
       (function() {
         try {
           var stored = localStorage.getItem('mpd-theme');
-          var isDark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = stored ? stored === 'dark' : false;
           if (isDark) {
             document.documentElement.classList.add('dark');
             document.documentElement.classList.remove('light');

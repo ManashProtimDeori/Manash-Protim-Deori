@@ -148,7 +148,7 @@ export const defaultAboutData = {
   quote: '"I turn strategy, data, and emerging technology into systems people can actually use."',
   whoIAmParagraphs: [
     'I operate at the intersection of marketing strategy, quantitative analytics, and artificial intelligence. My background combines the analytical discipline of Chemical Engineering with the commercial rigor of a Master of Business Administration from the Indian Institute of Management Shillong (IIM Shillong).',
-    'I am not interested in surface-level corporate buzzwords or generic AI prompts that produce hallucinated marketing fluff. I build tangible systems: autonomous competitive intelligence pipelines, unit economics stress-test models, attribution comparators, and automated research workflows.'
+    'My work takes the form of practical systems: autonomous competitive intelligence pipelines, unit economics stress-test models, attribution comparators, and automated research workflows.'
   ],
   intellectualPrinciples: [
     {
@@ -196,7 +196,7 @@ export const defaultAboutData = {
     },
     {
       domain: 'AI, Automation & Systems',
-      summary: 'Moving beyond superficial AI buzzwords to architect functional autonomous pipelines, agents, and deterministic workflows.',
+      summary: 'Building research pipelines, agents and workflows that connect AI to practical tasks.',
       capabilities: [
         'Multi-Agent Research Architectures & State Machines',
         'Vector Embeddings & Semantic Search Pipelines',

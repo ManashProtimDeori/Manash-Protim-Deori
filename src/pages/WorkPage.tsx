@@ -59,13 +59,13 @@ export const WorkPage: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 pb-6 border-b border-neutral-800/40">
         <div className="max-w-3xl space-y-3">
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
-            Portfolio & Systems Repository
+            Work / Selected projects
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Selected Work & Case Studies.
+            Ideas in practice.
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
-            In-depth architectural case studies detailing the commercial context, underlying insights, execution hurdles, and verified outcomes across AI systems, marketing strategy, and quantitative analytics.
+            The questions, decisions and builds behind my work in marketing, analytics and AI.
           </p>
         </div>
 
