@@ -18,18 +18,23 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="signal-story wide" aria-labelledby="home-title">
+      <img
+        src="/images/brand/mpd-3d-logo.webp"
+        alt="MPD logo"
+        className="hero-mpd-mark"
+        width="360"
+        height="201"
+        loading="eager"
+        decoding="async"
+      />
       <div className="story-copy">
         <div className="hero-intro" data-signal="neutral">
-          <div className="hero-identity-row">
-            <div className="eyebrow">
-              <InlineEditable value={siteConfig.name} onSave={name => updateSiteConfig({ name })} />
-            </div>
+          <div className="hero-edit-anchor">
             <EditButton type="siteConfig" item={siteConfig} />
           </div>
 
-          <h1 id="home-title">
-            Make sense of change<br />
-            <em>Build for what comes next</em>
+          <h1 id="home-title" className="hero-name">
+            {siteConfig.name}
           </h1>
 
           <InlineEditable
