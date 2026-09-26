@@ -64,7 +64,7 @@ export const ResumePage: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
             <div>
               <h2 className={`text-3xl font-bold tracking-tight ${atsMode ? 'text-black' : 'text-neutral-100'}`}>
-                {siteConfig.name}
+                {normalizeHeadline(siteConfig.name)}
               </h2>
               <div className={`text-sm font-mono mt-1 ${atsMode ? 'text-neutral-700' : 'text-amber-400'}`}>
                 {siteConfig.title}
