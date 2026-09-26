@@ -1,3 +1,4 @@
+import { normalizeHeadline } from '../utils/headline';
 import React, { useState, useRef } from 'react';
 import { useData } from '../context/DataContext';
 import { 
