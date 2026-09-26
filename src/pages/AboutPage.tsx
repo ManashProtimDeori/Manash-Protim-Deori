@@ -4,203 +4,136 @@ import { useData } from '../context/DataContext';
 import { ArrowUpRight } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 import { InlineEditable } from '../components/editor/InlineEditable';
+import { ProfilePortrait } from '../components/media/ProfilePortrait';
 
 export const AboutPage: React.FC = () => {
-  const { siteConfig, aboutData, education, updateAboutData, isEditMode } = useData();
+  const { siteConfig, aboutData, education, updateAboutData } = useData();
+
+  const orderedEducation = [...education].sort((a, b) => {
+    const rank = (degree: string) => /bachelor|b\.tech/i.test(degree) ? 0 : 1;
+    return rank(a.degree) - rank(b.degree);
+  });
 
   return (
-    <div className="py-16 md:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
-      
-      {/* Header */}
-      <section className="space-y-4 max-w-3xl relative">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium">
-            About / Manash Protim Deori
-          </span>
-          <EditButton type="about" item={aboutData} label="Edit Dossier" />
+    <div className="about-premium">
+      <section className="about-hero" data-signal="neutral">
+        <div className="about-hero-copy">
+          <div className="flex items-center justify-between gap-4">
+            <span className="eyebrow">About / Manash Protim Deori</span>
+            <EditButton type="about" item={aboutData} label="Edit dossier" />
+          </div>
+
+          <InlineEditable
+            as="h1"
+            value={aboutData.headline || siteConfig.name}
+            onSave={(val) => updateAboutData({ headline: val })}
+            className="block"
+          />
+
+          <InlineEditable
+            as="p"
+            value={aboutData.quote || siteConfig.positioning}
+            onSave={(val) => updateAboutData({ quote: val })}
+            multiline
+            className="font-serif italic block"
+          />
         </div>
 
-        <InlineEditable
-          as="h1"
-          value={aboutData.headline || siteConfig.name}
-          onSave={(val) => updateAboutData({ headline: val })}
-          className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 block leading-tight"
-        />
-
-        <InlineEditable
-          as="p"
-          value={aboutData.quote || siteConfig.positioning}
-          onSave={(val) => updateAboutData({ quote: val })}
-          multiline
-          className="text-lg sm:text-xl text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic leading-relaxed block pt-1"
-        />
+        <ProfilePortrait slot="about" />
       </section>
 
-      {/* 01 — Who I Am */}
-      <section className="space-y-6 pt-10 border-t border-neutral-800/60 relative">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400/90 font-medium">01.</span>
-            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
-              Who I Am
-            </h2>
-          </div>
-          <EditButton type="about" item={aboutData} label="Edit Narrative" />
+      <section className="about-section" data-signal="strategy">
+        <div className="about-section-head">
+          <span className="eyebrow">01 / Perspective</span>
+          <h2>How I <em>see the work.</em></h2>
         </div>
 
-        <div className="space-y-4 text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-sans max-w-3xl">
+        <div className="about-copy">
           {aboutData.whoIAmParagraphs?.map((paragraph, idx) => (
             <p key={idx}>{paragraph}</p>
           ))}
         </div>
       </section>
 
-      {/* 02 — How I Think */}
-      <section className="space-y-8 pt-10 border-t border-neutral-800/60 relative">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400/90 font-medium">02.</span>
-            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
-              How I think
-            </h2>
-          </div>
-          <EditButton type="about" item={aboutData} label="Edit Principles" />
+      <section className="about-section" data-signal="analytics">
+        <div className="about-section-head">
+          <span className="eyebrow">02 / How I think</span>
+          <h2>Principles before <em>playbooks.</em></h2>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs">
+
+        <div className="principle-list">
           {aboutData.intellectualPrinciples?.map((principle, idx) => (
-            <div key={idx} className="space-y-2 pt-2 border-t border-neutral-800/50">
-              <span className="text-amber-400/90 font-mono font-medium block">
-                0{principle.number}. {principle.title}
-              </span>
-              <p className="text-neutral-400 leading-relaxed font-sans sm:text-sm">
-                {principle.desc}
-              </p>
-            </div>
+            <article key={idx}>
+              <span className="eyebrow">0{idx + 1}</span>
+              <h3>{principle.title}</h3>
+              <p>{principle.desc}</p>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* 03 — Journey & Education */}
-      <section className="space-y-8 pt-10 border-t border-neutral-800/60 relative">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400/90 font-medium">03.</span>
-            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
-              Academic Pedigree
-            </h2>
-          </div>
-          <EditButton type="education" isNew label="New Degree" />
+      <section className="about-section" data-signal="strategy">
+        <div className="about-section-head">
+          <span className="eyebrow">03 / Academic pedigree</span>
+          <h2>Engineering first.<br /><em>Business in context.</em></h2>
         </div>
 
-        {/* Journey Story narrative */}
-        {aboutData.journeyParagraphs && aboutData.journeyParagraphs.length > 0 && (
-          <div className="space-y-3 text-sm text-neutral-300 leading-relaxed font-sans max-w-3xl pb-2">
-            {aboutData.journeyParagraphs.map((para, pIdx) => (
-              <p key={pIdx}>{para}</p>
-            ))}
+        {aboutData.journeyParagraphs?.length > 0 && (
+          <div className="about-copy mb-16">
+            {aboutData.journeyParagraphs.map((paragraph, idx) => <p key={idx}>{paragraph}</p>)}
           </div>
         )}
 
-        <div className="space-y-8">
-          {education.map((edu, idx) => (
-            <div
-              key={idx}
-              className="space-y-3 pt-4 border-t border-neutral-800/50 relative"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                <div>
-                  <h3 className="text-lg font-bold text-neutral-100">
-                    {edu.degree} — {edu.discipline}
-                  </h3>
-                  <div className="text-xs font-mono text-amber-400/90">
-                    {edu.institution}
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-neutral-500">
-                    {edu.location}
-                  </span>
-                  <EditButton type="education" item={{ ...edu, index: idx }} label="Edit" />
-                </div>
-              </div>
-
-              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
-                {edu.description}
-              </p>
-
-              <div className="pt-2">
-                <span className="text-[11px] font-mono text-neutral-500 block mb-1">
-                  Core Emphases:
-                </span>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-neutral-400 font-mono">
-                  {edu.focus?.map((item, fIdx) => (
-                    <li key={fIdx} className="flex items-start gap-1.5">
-                      <span className="text-amber-400/80">·</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 04 — What I work on */}
-      <section className="space-y-8 pt-10 border-t border-neutral-800/60 relative">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-amber-400/90 font-medium">04.</span>
-            <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
-              What I work on
-            </h2>
-          </div>
-          <EditButton type="about" item={aboutData} label="Edit Competencies" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {aboutData.competencies?.map((comp, idx) => (
-            <div key={idx} className="space-y-3 pt-2 border-t border-neutral-800/50 flex flex-col justify-between">
+        <div className="education-editorial">
+          {orderedEducation.map((edu, index) => (
+            <article key={edu.institution} data-signal={index === 0 ? 'analytics' : 'strategy'}>
+              <span className="eyebrow">0{index + 1}</span>
               <div>
-                <h3 className="text-base font-bold text-neutral-100 mb-1">
-                  {comp.domain}
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-4 font-sans">
-                  {comp.summary}
-                </p>
-                <ul className="space-y-1.5 text-xs text-neutral-300 font-mono">
-                  {comp.capabilities?.map((cap, cIdx) => (
-                    <li key={cIdx} className="flex items-start gap-1.5">
-                      <span className="text-amber-400/80">→</span>
-                      <span>{cap}</span>
-                    </li>
-                  ))}
-                </ul>
+                <h3>{edu.institution}</h3>
+                <p className="edu-degree">{edu.degree} · {edu.discipline}</p>
+                <p className="edu-meta">{[edu.location, edu.period].filter(Boolean).join(' · ')}</p>
+                <p className="edu-description">{edu.description}</p>
               </div>
-            </div>
+              <EditButton type="education" item={{ ...edu, index: education.indexOf(edu) }} label="Edit" />
+            </article>
           ))}
         </div>
       </section>
 
-      {/* Action Footer */}
-      <div className="pt-8 border-t border-neutral-800 flex flex-wrap items-center justify-between gap-4">
-        <Link
-          to="/quick-profile"
-          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono rounded bg-amber-400 text-neutral-950 hover:bg-amber-300 font-semibold transition-colors shadow-sm"
-        >
-          <span>Read the quick profile</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </Link>
+      <section className="about-section" data-signal="build">
+        <div className="about-section-head">
+          <span className="eyebrow">04 / Capabilities</span>
+          <h2>From thought <em>to practice.</em></h2>
+        </div>
 
-        <Link
-          to="/contact"
-          className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-400 hover:text-amber-400 transition-colors"
-        >
-          <span>Start a conversation →</span>
-        </Link>
-      </div>
+        <div className="competency-list">
+          {aboutData.competencies?.map((comp, idx) => (
+            <article key={comp.domain}>
+              <span className="eyebrow">0{idx + 1}</span>
+              <h3>{comp.domain}</h3>
+              <div>
+                <p>{comp.summary}</p>
+                <ul>
+                  {comp.capabilities?.map((capability) => <li key={capability}>{capability}</li>)}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
+      <section className="about-section" data-signal="marketing">
+        <div className="about-section-head">
+          <span className="eyebrow">05 / Continue</span>
+          <h2>See the work.<br /><em>Then judge the claims.</em></h2>
+        </div>
+
+        <div className="flex flex-wrap gap-8">
+          <Link to="/quick-profile" className="text-link">60-second profile ↗</Link>
+          <Link to="/work" className="text-link">Selected work ↗</Link>
+          <Link to="/contact" className="text-link">Start a conversation ↗</Link>
+        </div>
+      </section>
     </div>
   );
 };
