@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../../utils/headline';
 import { useData } from '../../context/DataContext';
 import { EditButton } from '../editor/EditButton';
 
@@ -16,7 +17,7 @@ export const CorePhilosophy: React.FC = () => {
               03 · Operating Methodology & Mental Models
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-              How I approach markets, capital, and systems.
+              How I approach markets, capital, and systems
             </h2>
             <p className="text-base sm:text-lg text-neutral-300 dark:text-neutral-300 light:text-neutral-700 font-serif italic pt-1">
               "A strategy without execution is a daydream. Execution without analytical rigor is expensive randomness."
@@ -45,7 +46,7 @@ export const CorePhilosophy: React.FC = () => {
                 </h3>
                 
                 <h4 className="text-xs font-mono text-neutral-300 dark:text-neutral-300 light:text-neutral-700 mb-3 font-semibold uppercase tracking-wider">
-                  {pillar.title}
+                  {normalizeHeadline(pillar.title)}
                 </h4>
                 
                 <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans">
