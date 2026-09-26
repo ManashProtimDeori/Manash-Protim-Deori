@@ -18,7 +18,7 @@ export const ProofOfWork: React.FC = () => {
               The lab / Working ideas
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-              Ideas you can explore.
+              Ideas you can explore
             </h2>
             <p className="text-base text-neutral-400 max-w-xl">
               Explore the systems, tools and reasoning behind the work.
