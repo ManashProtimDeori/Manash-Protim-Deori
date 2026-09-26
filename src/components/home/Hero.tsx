@@ -4,17 +4,16 @@ import { useData } from '../../context/DataContext';
 import { EditButton } from '../editor/EditButton';
 import { InlineEditable } from '../editor/InlineEditable';
 import { LivingSignal } from '../visualizations/LivingSignal';
-import { ProfilePortrait } from '../media/ProfilePortrait';
 
 export const Hero: React.FC = () => {
   const { siteConfig, updateSiteConfig, aboutData } = useData();
 
   const rows = [
-    { state: 'strategy', title: 'Find the direction.', text: aboutData.competencies?.[0]?.summary, link: '/work', label: 'Strategy' },
-    { state: 'marketing', title: 'Understand the market.', text: aboutData.competencies?.[0]?.capabilities?.slice(0, 3).join(' · '), link: '/work', label: 'Marketing' },
-    { state: 'analytics', title: 'Follow the evidence.', text: aboutData.competencies?.[1]?.summary, link: '/tools', label: 'Analytics' },
-    { state: 'ai', title: 'Explore the possible.', text: aboutData.competencies?.[2]?.summary, link: '/lab', label: 'AI' },
-    { state: 'build', title: 'Make it useful.', text: 'Research systems, interactive tools and experiments. Ideas made tangible.', link: '/lab', label: 'Build' },
+    { state: 'strategy', title: 'Find the Direction', text: aboutData.competencies?.[0]?.summary, link: '/work', label: 'Strategy' },
+    { state: 'marketing', title: 'Understand the Market', text: aboutData.competencies?.[0]?.capabilities?.slice(0, 3).join(' · '), link: '/work', label: 'Marketing' },
+    { state: 'analytics', title: 'Follow the Evidence', text: aboutData.competencies?.[1]?.summary, link: '/tools', label: 'Analytics' },
+    { state: 'ai', title: 'Explore the Possible', text: aboutData.competencies?.[2]?.summary, link: '/lab', label: 'AI' },
+    { state: 'build', title: 'Make It Useful', text: 'Research systems, interactive tools and experiments. Ideas made tangible.', link: '/lab', label: 'Build' },
   ];
 
   return (
@@ -71,7 +70,6 @@ export const Hero: React.FC = () => {
 
       <div className="signal-stage">
         <LivingSignal />
-        <ProfilePortrait slot="main" priority className="signal-portrait" />
       </div>
     </section>
   );

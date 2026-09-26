@@ -263,10 +263,6 @@ main input,main textarea,main select {max-width:100%;}
 .signal-state-list .is-active{opacity:1;color:var(--accent)}
 
 .portrait-frame{margin:0}
-.signal-portrait{
-  position:absolute;right:2%;bottom:4%;width:min(24vw,260px);
-  z-index:2;pointer-events:none;
-}
 .portrait-media{
   position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg-secondary);
   border:1px solid var(--border-soft)
@@ -365,11 +361,9 @@ footer [class*='text-neutral-4'],footer [class*='light:text-neutral-6']{color:#a
 footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
 
 @media(max-width:1000px){
-  .signal-portrait{width:min(26vw,210px)}
   .about-hero{grid-template-columns:1fr .55fr}
 }
 @media(max-width:767px){
-  .signal-portrait{position:relative;right:auto;bottom:auto;width:min(58vw,230px);margin:-65px 0 34px auto}
   .signal-state-list{gap:8px 12px}
   .academic-list article{display:grid;grid-template-columns:38px 1fr;gap:15px}
   .academic-list article>button{grid-column:2}
