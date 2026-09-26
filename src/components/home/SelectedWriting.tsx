@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../../utils/headline';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { useData } from '../../context/DataContext';
@@ -60,7 +61,7 @@ export const SelectedWriting: React.FC = () => {
 
                 <h3 className="text-xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors leading-snug">
                   <Link to={`/writing/${article.slug}`}>
-                    {article.title}
+                    {normalizeHeadline(article.title)}
                   </Link>
                 </h3>
 
