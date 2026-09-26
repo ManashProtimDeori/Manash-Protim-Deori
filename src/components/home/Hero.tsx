@@ -29,8 +29,8 @@ export const Hero: React.FC = () => {
           </div>
 
           <h1 id="home-title">
-            Think clearly.<br />
-            <em>Build what matters.</em>
+            Make sense of change<br />
+            <em>Build for what comes next</em>
           </h1>
 
           <InlineEditable
@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
 
         <div className="personal-thesis" data-signal="strategy">
           <span className="eyebrow">A working perspective</span>
-          <h2>Good questions.<br />Clearer signals.<br /><em>Better decisions.</em></h2>
+          <h2>Clarity before action<br /><em>Direction before scale</em></h2>
           <p>At the intersection of markets, data and intelligent systems.</p>
         </div>
 
