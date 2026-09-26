@@ -15,13 +15,13 @@ export const ClosingCta: React.FC = () => {
           
           <div className="flex items-center justify-center gap-3">
             <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium">
-              08 · Direct Inquiries & Collaboration
+              Start a conversation
             </span>
             <EditButton type="contact" item={contactData} label="Edit CTA" />
           </div>
 
           <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-[1.08] text-balance">
-            Interesting problems are more fun when shared.
+            A good question is a good beginning.
           </h2>
 
           <p className="text-base sm:text-lg text-neutral-300 dark:text-neutral-300 light:text-neutral-700 max-w-2xl mx-auto leading-relaxed font-serif italic">

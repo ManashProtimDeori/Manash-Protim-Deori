@@ -30,3 +30,6 @@ coverage/
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Generated smoke-test bundle
+tests/.smoke.mjs

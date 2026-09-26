@@ -146,10 +146,13 @@ function getStored<T>(key: string, fallback: T): T {
 }
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isEditMode, setIsEditMode] = useState<boolean>(() => {
+  const { isOwner } = useAuth();
+  const [editRequested, setIsEditMode] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false;
     return localStorage.getItem(STORAGE_KEYS.EDIT_MODE) === 'true';
   });
+
+  const isEditMode = isOwner && editRequested;
 
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => 
     getStored(STORAGE_KEYS.SITE_CONFIG, initialSiteConfig)
@@ -180,7 +183,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 
   const [education, setEducation] = useState<EducationItem[]>(() => 
-    getStored(STORAGE_KEYS.EDUCATION, initialEducation)
+    getStored(STORAGE_KEYS.EDUCATION, initialEducation).map((edu: EducationItem) => edu.institution === 'University Institute of Engineering & Technology' ? { ...edu, institution: 'Rajiv Gandhi Institute of Petroleum Technology (RGIPT)' } : edu)
   );
 
   const [signals, setSignals] = useState<SignalItem[]>(() => 
@@ -216,6 +219,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 
   const [activeEditor, setActiveEditor] = useState<{ type: string; item: any } | null>(null);
+  useEffect(() => { if (!isOwner) { setIsEditMode(false); setActiveEditor(null); } }, [isOwner]);
+
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const showStatus = (msg: string) => {
@@ -227,6 +232,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Sync edit mode to storage
   const toggleEditMode = () => {
+    if (!isOwner) return;
     setIsEditMode(prev => {
       const next = !prev;
       localStorage.setItem(STORAGE_KEYS.EDIT_MODE, String(next));
@@ -236,6 +242,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const setEditMode = (val: boolean) => {
+    if (!isOwner) return;
     setIsEditMode(val);
     localStorage.setItem(STORAGE_KEYS.EDIT_MODE, String(val));
     showStatus(val ? 'Live Edit Mode: ACTIVE' : 'Edit Mode Deactivated');
@@ -243,6 +250,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Site Config
   const updateSiteConfig = (update: Partial<SiteConfig>) => {
+    if (!isOwner) return;
     setSiteConfig(prev => {
       const next = { ...prev, ...update };
       localStorage.setItem(STORAGE_KEYS.SITE_CONFIG, JSON.stringify(next));
@@ -253,6 +261,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Projects CRUD
   const addProject = (p: Project) => {
+    if (!isOwner) return;
     setProjects(prev => {
       const next = [p, ...prev];
       localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(next));
@@ -262,6 +271,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateProject = (id: string, update: Partial<Project>) => {
+    if (!isOwner) return;
     setProjects(prev => {
       const next = prev.map(p => (p.id === id || p.slug === id) ? { ...p, ...update } : p);
       localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(next));
@@ -271,6 +281,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteProject = (id: string) => {
+    if (!isOwner) return;
     setProjects(prev => {
       const next = prev.filter(p => p.id !== id && p.slug !== id);
       localStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(next));
@@ -281,6 +292,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Articles CRUD
   const addArticle = (a: Article) => {
+    if (!isOwner) return;
     setArticles(prev => {
       const next = [a, ...prev];
       localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(next));
@@ -290,6 +302,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateArticle = (id: string, update: Partial<Article>) => {
+    if (!isOwner) return;
     setArticles(prev => {
       const next = prev.map(a => (a.id === id || a.slug === id) ? { ...a, ...update } : a);
       localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(next));
@@ -299,6 +312,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteArticle = (id: string) => {
+    if (!isOwner) return;
     setArticles(prev => {
       const next = prev.filter(a => a.id !== id && a.slug !== id);
       localStorage.setItem(STORAGE_KEYS.ARTICLES, JSON.stringify(next));
@@ -309,6 +323,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Tools CRUD
   const addTool = (t: ToolItem) => {
+    if (!isOwner) return;
     setTools(prev => {
       const next = [t, ...prev];
       localStorage.setItem(STORAGE_KEYS.TOOLS, JSON.stringify(next));
@@ -318,6 +333,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateTool = (id: string, update: Partial<ToolItem>) => {
+    if (!isOwner) return;
     setTools(prev => {
       const next = prev.map(t => (t.id === id || t.slug === id) ? { ...t, ...update } : t);
       localStorage.setItem(STORAGE_KEYS.TOOLS, JSON.stringify(next));
@@ -327,6 +343,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteTool = (id: string) => {
+    if (!isOwner) return;
     setTools(prev => {
       const next = prev.filter(t => t.id !== id && t.slug !== id);
       localStorage.setItem(STORAGE_KEYS.TOOLS, JSON.stringify(next));
@@ -337,6 +354,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Experiments CRUD
   const addExperiment = (e: ExperimentItem) => {
+    if (!isOwner) return;
     setExperiments(prev => {
       const next = [e, ...prev];
       localStorage.setItem(STORAGE_KEYS.EXPERIMENTS, JSON.stringify(next));
@@ -346,6 +364,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateExperiment = (id: string, update: Partial<ExperimentItem>) => {
+    if (!isOwner) return;
     setExperiments(prev => {
       const next = prev.map(e => e.id === id ? { ...e, ...update } : e);
       localStorage.setItem(STORAGE_KEYS.EXPERIMENTS, JSON.stringify(next));
@@ -355,6 +374,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteExperiment = (id: string) => {
+    if (!isOwner) return;
     setExperiments(prev => {
       const next = prev.filter(e => e.id !== id);
       localStorage.setItem(STORAGE_KEYS.EXPERIMENTS, JSON.stringify(next));
@@ -365,6 +385,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Research CRUD
   const addResearch = (r: ResearchPaper) => {
+    if (!isOwner) return;
     setResearch(prev => {
       const next = [r, ...prev];
       localStorage.setItem(STORAGE_KEYS.RESEARCH, JSON.stringify(next));
@@ -374,6 +395,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateResearch = (id: string, update: Partial<ResearchPaper>) => {
+    if (!isOwner) return;
     setResearch(prev => {
       const next = prev.map(r => (r.id === id || r.slug === id) ? { ...r, ...update } : r);
       localStorage.setItem(STORAGE_KEYS.RESEARCH, JSON.stringify(next));
@@ -383,6 +405,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteResearch = (id: string) => {
+    if (!isOwner) return;
     setResearch(prev => {
       const next = prev.filter(r => r.id !== id && r.slug !== id);
       localStorage.setItem(STORAGE_KEYS.RESEARCH, JSON.stringify(next));
@@ -393,6 +416,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Experience CRUD
   const addExperience = (e: ExperienceItem) => {
+    if (!isOwner) return;
     setExperience(prev => {
       const next = [e, ...prev];
       localStorage.setItem(STORAGE_KEYS.EXPERIENCE, JSON.stringify(next));
@@ -402,6 +426,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateExperience = (id: string, update: Partial<ExperienceItem>) => {
+    if (!isOwner) return;
     setExperience(prev => {
       const next = prev.map(exp => exp.id === id ? { ...exp, ...update } : exp);
       localStorage.setItem(STORAGE_KEYS.EXPERIENCE, JSON.stringify(next));
@@ -411,6 +436,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteExperience = (id: string) => {
+    if (!isOwner) return;
     setExperience(prev => {
       const next = prev.filter(exp => exp.id !== id);
       localStorage.setItem(STORAGE_KEYS.EXPERIENCE, JSON.stringify(next));
@@ -421,6 +447,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Education CRUD
   const addEducation = (e: EducationItem) => {
+    if (!isOwner) return;
     setEducation(prev => {
       const next = [...prev, e];
       localStorage.setItem(STORAGE_KEYS.EDUCATION, JSON.stringify(next));
@@ -430,6 +457,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateEducation = (index: number, update: Partial<EducationItem>) => {
+    if (!isOwner) return;
     setEducation(prev => {
       const next = [...prev];
       if (next[index]) {
@@ -442,6 +470,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteEducation = (index: number) => {
+    if (!isOwner) return;
     setEducation(prev => {
       const next = prev.filter((_, i) => i !== index);
       localStorage.setItem(STORAGE_KEYS.EDUCATION, JSON.stringify(next));
@@ -452,6 +481,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Signals CRUD
   const addSignal = (s: SignalItem) => {
+    if (!isOwner) return;
     setSignals(prev => {
       const next = [...prev, s];
       localStorage.setItem(STORAGE_KEYS.SIGNALS, JSON.stringify(next));
@@ -461,6 +491,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateSignal = (id: string, update: Partial<SignalItem>) => {
+    if (!isOwner) return;
     setSignals(prev => {
       const next = prev.map(s => s.id === id ? { ...s, ...update } : s);
       localStorage.setItem(STORAGE_KEYS.SIGNALS, JSON.stringify(next));
@@ -470,6 +501,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteSignal = (id: string) => {
+    if (!isOwner) return;
     setSignals(prev => {
       const next = prev.filter(s => s.id !== id);
       localStorage.setItem(STORAGE_KEYS.SIGNALS, JSON.stringify(next));
@@ -480,6 +512,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // /now update
   const updateNowData = (update: Partial<NowData>) => {
+    if (!isOwner) return;
     setNowData(prev => {
       const next = { ...prev, ...update };
       localStorage.setItem(STORAGE_KEYS.NOW, JSON.stringify(next));
@@ -490,6 +523,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Philosophy Pillars
   const addPhilosophyPillar = (p: PhilosophyPillar) => {
+    if (!isOwner) return;
     setPhilosophyPillars(prev => {
       const next = [...prev, p];
       localStorage.setItem(STORAGE_KEYS.PHILOSOPHY, JSON.stringify(next));
@@ -499,6 +533,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updatePhilosophyPillar = (number: string, update: Partial<PhilosophyPillar>) => {
+    if (!isOwner) return;
     setPhilosophyPillars(prev => {
       const next = prev.map(p => p.number === number ? { ...p, ...update } : p);
       localStorage.setItem(STORAGE_KEYS.PHILOSOPHY, JSON.stringify(next));
@@ -508,6 +543,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deletePhilosophyPillar = (number: string) => {
+    if (!isOwner) return;
     setPhilosophyPillars(prev => {
       const next = prev.filter(p => p.number !== number);
       localStorage.setItem(STORAGE_KEYS.PHILOSOPHY, JSON.stringify(next));
@@ -518,6 +554,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Proofs CRUD
   const addProof = (p: ProofItem) => {
+    if (!isOwner) return;
     setProofsData(prev => {
       const next = [...prev, p];
       localStorage.setItem(STORAGE_KEYS.PROOFS, JSON.stringify(next));
@@ -527,6 +564,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateProof = (id: string, update: Partial<ProofItem>) => {
+    if (!isOwner) return;
     setProofsData(prev => {
       const next = prev.map(p => p.id === id ? { ...p, ...update } : p);
       localStorage.setItem(STORAGE_KEYS.PROOFS, JSON.stringify(next));
@@ -536,6 +574,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteProof = (id: string) => {
+    if (!isOwner) return;
     setProofsData(prev => {
       const next = prev.filter(p => p.id !== id);
       localStorage.setItem(STORAGE_KEYS.PROOFS, JSON.stringify(next));
@@ -546,6 +585,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Changelog CRUD
   const addChangelog = (c: ChangelogItem) => {
+    if (!isOwner) return;
     setChangelogData(prev => {
       const next = [c, ...prev];
       localStorage.setItem(STORAGE_KEYS.CHANGELOG, JSON.stringify(next));
@@ -555,6 +595,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateChangelog = (id: string, update: Partial<ChangelogItem>) => {
+    if (!isOwner) return;
     setChangelogData(prev => {
       const next = prev.map(c => c.id === id ? { ...c, ...update } : c);
       localStorage.setItem(STORAGE_KEYS.CHANGELOG, JSON.stringify(next));
@@ -564,6 +605,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteChangelog = (id: string) => {
+    if (!isOwner) return;
     setChangelogData(prev => {
       const next = prev.filter(c => c.id !== id);
       localStorage.setItem(STORAGE_KEYS.CHANGELOG, JSON.stringify(next));
@@ -574,6 +616,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // About Narrative
   const updateAboutData = (update: Partial<AboutData>) => {
+    if (!isOwner) return;
     setAboutData(prev => {
       const next = { ...prev, ...update };
       localStorage.setItem(STORAGE_KEYS.ABOUT, JSON.stringify(next));
@@ -584,6 +627,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Contact Info & SLA
   const updateContactData = (update: Partial<ContactData>) => {
+    if (!isOwner) return;
     setContactData(prev => {
       const next = { ...prev, ...update };
       localStorage.setItem(STORAGE_KEYS.CONTACT, JSON.stringify(next));
@@ -594,6 +638,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // /uses Stack CRUD
   const addUseCategory = (cat: UseCategory) => {
+    if (!isOwner) return;
     setUsesData(prev => {
       const next = [...prev, cat];
       localStorage.setItem(STORAGE_KEYS.USES, JSON.stringify(next));
@@ -603,6 +648,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateUseCategory = (index: number, cat: Partial<UseCategory>) => {
+    if (!isOwner) return;
     setUsesData(prev => {
       const next = [...prev];
       if (next[index]) {
@@ -615,6 +661,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteUseCategory = (index: number) => {
+    if (!isOwner) return;
     setUsesData(prev => {
       const next = prev.filter((_, i) => i !== index);
       localStorage.setItem(STORAGE_KEYS.USES, JSON.stringify(next));
@@ -624,6 +671,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const addUseItem = (categoryIndex: number, item: UseItem) => {
+    if (!isOwner) return;
     setUsesData(prev => {
       const next = [...prev];
       if (next[categoryIndex]) {
@@ -639,6 +687,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateUseItem = (categoryIndex: number, itemIndex: number, item: Partial<UseItem>) => {
+    if (!isOwner) return;
     setUsesData(prev => {
       const next = [...prev];
       if (next[categoryIndex] && next[categoryIndex].items[itemIndex]) {
@@ -654,6 +703,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const deleteUseItem = (categoryIndex: number, itemIndex: number) => {
+    if (!isOwner) return;
     setUsesData(prev => {
       const next = [...prev];
       if (next[categoryIndex]) {
@@ -667,6 +717,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Factory reset
   const resetAllToDefaults = () => {
+    if (!isOwner) return;
     if (confirm('Reset all content back to factory defaults? Any custom modifications will be replaced.')) {
       Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k));
       setSiteConfig(initialSiteConfig);
@@ -723,6 +774,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Complete data import
   const importDataJson = (json: string): boolean => {
+    if (!isOwner) return false;
     try {
       const data = JSON.parse(json);
       if (data.siteConfig) {
@@ -798,6 +850,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const openEditor = (type: string, item: any) => {
+    if (!isOwner) return;
     setActiveEditor({ type, item });
   };
 
@@ -872,7 +925,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       resetAllToDefaults,
       exportAllData,
       importDataJson,
-      activeEditor,
+      activeEditor: isOwner ? activeEditor : null,
       openEditor,
       closeEditor,
       statusMessage,

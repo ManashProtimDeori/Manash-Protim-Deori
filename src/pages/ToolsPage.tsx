@@ -42,13 +42,13 @@ export const ToolsPage: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-800/40">
         <div className="max-w-3xl space-y-3">
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
-            Interactive Product Showcase & Diagnostics
+            Tools / Make a better decision
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Tools & Utilities.
+            Useful by design.
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
-            Production-grade, client-side marketing calculators, attribution architects, and strategic diagnostic systems. Each utility is fully functional and designed to solve concrete operational bottlenecks.
+            Explore a scenario, test your positioning or prepare a campaign. Working tools for everyday marketing decisions.
           </p>
         </div>
 

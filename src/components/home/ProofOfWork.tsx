@@ -8,20 +8,20 @@ export const ProofOfWork: React.FC = () => {
   const { proofsData } = useData();
 
   return (
-    <section className="py-20 md:py-28 border-b border-neutral-800/60 dark:border-neutral-800/60 light:border-neutral-200">
+    <section className="lab-feature py-20 md:py-28 border-b border-neutral-800/60 dark:border-neutral-800/60 light:border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-6 border-b border-neutral-800/40">
           <div className="max-w-3xl space-y-3">
             <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
-              06 · Empirical Verification & Direct Evidence
+              The lab / Working ideas
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-              Proof &gt; Claims.
+              Ideas you can explore.
             </h2>
             <p className="text-base text-neutral-400 max-w-xl">
-              Strategic claims are easy to fabricate. Professional credibility is established through tangible artifacts, working code, and verified reasoning.
+              Explore the systems, tools and reasoning behind the work.
             </p>
           </div>
 

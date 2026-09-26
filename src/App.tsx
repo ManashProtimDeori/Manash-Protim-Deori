@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { DataProvider, useData } from './context/DataContext';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { CommandPalette } from './components/common/CommandPalette';
-import { EditorModal } from './components/editor/EditorModal';
+const EditorModal = lazy(() => import('./components/editor/EditorModal').then(m => ({ default: m.EditorModal })));
 import { NotificationToast } from './components/editor/NotificationToast';
 import { GlobalEditBar } from './components/editor/GlobalEditBar';
 
@@ -29,7 +29,10 @@ import { UsesPage } from './pages/UsesPage';
 import { ArchivePage } from './pages/ArchivePage';
 import { ContactPage } from './pages/ContactPage';
 import { ChangelogPage } from './pages/ChangelogPage';
-import { StudioPage } from './pages/StudioPage';
+import { AuthProvider, useAuth } from './auth/AuthContext';
+import { ProtectedRoute } from './auth/ProtectedRoute';
+import { LoginPage } from './pages/LoginPage';
+const StudioPage = lazy(() => import('./pages/StudioPage').then(m => ({ default: m.StudioPage })));
 import { NotFoundPage } from './pages/NotFoundPage';
 
 // Scroll to top automatically upon route navigation
@@ -44,6 +47,7 @@ const ScrollToTop: React.FC = () => {
 };
 
 export const AppContent: React.FC = () => {
+  const { isOwner } = useAuth();
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const { isEditMode, toggleEditMode } = useData();
 
@@ -66,13 +70,13 @@ export const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-neutral-950 text-neutral-100 dark:bg-neutral-950 dark:text-neutral-100 light:bg-neutral-50 light:text-neutral-900 transition-colors duration-200">
-      <ScrollToTop />
+      <a href="#main-content" className="skip-link">Skip to content</a><ScrollToTop />
       
       {/* Top Bar Header */}
       <Header onOpenCommand={() => setCommandPaletteOpen(true)} />
 
       {/* Main Page Canvas */}
-      <main className="flex-1">
+      <main id="main-content" className="flex-1"><Suspense fallback={<p className="p-8">Loading workspace…</p>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<WorkPage />} />
@@ -93,10 +97,11 @@ export const AppContent: React.FC = () => {
           <Route path="/archive" element={<ArchivePage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/changelog" element={<ChangelogPage />} />
-          <Route path="/studio" element={<StudioPage />} />
-          <Route path="/admin" element={<StudioPage />} />
+          <Route path="/studio" element={<ProtectedRoute><StudioPage /></ProtectedRoute>} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin" element={<ProtectedRoute><StudioPage /></ProtectedRoute>} />
           <Route path="*" element={<NotFoundPage onOpenCommand={() => setCommandPaletteOpen(true)} />} />
-        </Routes>
+        </Routes></Suspense>
       </main>
 
       {/* Global Command Palette */}
@@ -106,10 +111,10 @@ export const AppContent: React.FC = () => {
       />
 
       {/* Universal Content Editor Modal */}
-      <EditorModal />
+      {isOwner && <Suspense fallback={null}><EditorModal /></Suspense>}
 
       {/* Global Floating Edit Controls */}
-      <GlobalEditBar />
+      {isOwner && <GlobalEditBar />}
 
       {/* Notification Toast */}
       <NotificationToast />
@@ -122,12 +127,12 @@ export const AppContent: React.FC = () => {
 
 export default function App() {
   return (
-    <ThemeProvider>
+    <AuthProvider><ThemeProvider>
       <DataProvider>
         <BrowserRouter>
           <AppContent />
         </BrowserRouter>
       </DataProvider>
-    </ThemeProvider>
+    </ThemeProvider></AuthProvider>
   );
 }

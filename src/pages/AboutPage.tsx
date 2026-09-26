@@ -15,7 +15,7 @@ export const AboutPage: React.FC = () => {
       <section className="space-y-4 max-w-3xl relative">
         <div className="flex items-center justify-between mb-2">
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium">
-            Personal Dossier & Philosophy
+            About / Manash Protim Deori
           </span>
           <EditButton type="about" item={aboutData} label="Edit Dossier" />
         </div>
@@ -61,7 +61,7 @@ export const AboutPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono text-amber-400/90 font-medium">02.</span>
             <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
-              Intellectual Model & First Principles
+              How I think
             </h2>
           </div>
           <EditButton type="about" item={aboutData} label="Edit Principles" />
@@ -87,7 +87,7 @@ export const AboutPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono text-amber-400/90 font-medium">03.</span>
             <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
-              Educational Trajectory
+              Academic Pedigree
             </h2>
           </div>
           <EditButton type="education" isNew label="New Degree" />
@@ -147,13 +147,13 @@ export const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 04 — Core Competency Domains */}
+      {/* 04 — What I work on */}
       <section className="space-y-8 pt-10 border-t border-neutral-800/60 relative">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono text-amber-400/90 font-medium">04.</span>
             <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 tracking-tight">
-              Core Competency Domains
+              What I work on
             </h2>
           </div>
           <EditButton type="about" item={aboutData} label="Edit Competencies" />
@@ -189,7 +189,7 @@ export const AboutPage: React.FC = () => {
           to="/quick-profile"
           className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-mono rounded bg-amber-400 text-neutral-950 hover:bg-amber-300 font-semibold transition-colors shadow-sm"
         >
-          <span>View 60-Second Recruiter Briefing</span>
+          <span>Read the quick profile</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
 
@@ -197,7 +197,7 @@ export const AboutPage: React.FC = () => {
           to="/contact"
           className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-400 hover:text-amber-400 transition-colors"
         >
-          <span>Get in Touch for Strategic Opportunities →</span>
+          <span>Start a conversation →</span>
         </Link>
       </div>
 
