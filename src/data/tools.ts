@@ -26,21 +26,24 @@ export const toolsData: ToolItem[] = [
   {
     id: 'tool-2',
     slug: 'utm-builder',
-    name: 'UTM & Campaign Taxonomy Architect',
-    category: 'Marketing Operations',
+    name: 'Marketing Measurement & Decision Intelligence Architect',
+    category: 'Marketing Analytics & Operations',
     status: 'Live',
-    version: 'v2.1',
-    description: 'Standardize campaign naming conventions, validate URL formatting, eliminate tracking errors, and generate consistent UTM parameter links.',
-    instructions: 'Select your marketing channel archetype or customize medium, source, campaign name, term, and content to produce clean, canonical URLs.',
+    version: 'v3.0',
+    description: 'A programmable marketing operating model connecting campaign taxonomy, tracking, spend, funnel performance, customer economics, attribution, incrementality, forecasting, optimization and decision intelligence.',
+    instructions: 'Use the interconnected modules to define campaign architecture, model assumptions, diagnose funnel and economic constraints, trace metric relationships, compare attribution with incrementality, simulate scenarios and translate performance into ranked actions.',
     features: [
-      'Automatic lowercase enforcement and hyphen normalization (prevents analytics fragmentation)',
-      'Pre-configured channel taxonomy presets (Google Search, Meta Ads, LinkedIn, Email Newsletter, Affiliate)',
-      'Instant URL validation and error detection (catches duplicate question marks or unsafe characters)',
-      'One-click clipboard copy with URL parameter preview table'
+      '20 interconnected analytical modules spanning taxonomy, UTM governance, funnel, channels, economics, experiments, attribution and forecasting',
+      'Central formula engine where Spend → CPM → Impressions → CTR → Clicks → CVR → Revenue → Profit recalculates dynamically',
+      'Interactive metric relationship map with formulas, upstream/downstream dependencies, interpretation traps and diagnostics',
+      'Rules-based Decision Intelligence dashboard with evidence, confidence, recommendations and economic leakage prioritization',
+      'Scenario simulator, sensitivity tornado, incrementality lab, budget optimizer, anomaly center and executive summary export',
+      'Deterministic 12-month demo dataset covering 8 channels and 16 campaign archetypes with mathematically reconciled outputs'
     ],
-    technologies: ['TypeScript', 'URLSearchParams API', 'Clipboard API'],
+    technologies: ['React 19', 'TypeScript', 'Native SVG', 'Deterministic Formula Engine', 'URLSearchParams API'],
     interactiveComponent: 'UtmBuilder',
     changelog: [
+      { version: 'v3.0', date: '2026-09', notes: 'Re-architected UTM utility into enterprise marketing measurement and decision intelligence operating system' },
       { version: 'v2.1', date: '2026-01', notes: 'Added automated character sanitization and custom parameter pairs' }
     ]
   },
