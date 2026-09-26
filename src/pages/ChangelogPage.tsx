@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../utils/headline';
 import { GitCommit, Plus } from 'lucide-react';
 import { useData } from '../context/DataContext';
 import { EditButton } from '../components/editor/EditButton';
@@ -16,7 +17,7 @@ export const ChangelogPage: React.FC = () => {
             Version History & Artifact Evolution
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Changelog.
+            Changelog
           </h1>
           <p className="text-sm font-mono text-neutral-400">
             Living proof of continuous iteration, experimentation, and building.
@@ -51,7 +52,7 @@ export const ChangelogPage: React.FC = () => {
             </div>
 
             <h2 className="text-xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
-              {log.title}
+              {normalizeHeadline(log.title)}
             </h2>
 
             <ul className="space-y-2 text-xs sm:text-sm text-neutral-300 font-sans pt-1">
