@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../utils/headline';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { RoiCalculator } from '../components/tools/RoiCalculator';
@@ -58,7 +59,7 @@ export const ToolDetailPage: React.FC = () => {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
-          {toolItem.name}
+          {normalizeHeadline(toolItem.name)}
         </h1>
 
         <p className="text-sm sm:text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-sans max-w-2xl">
