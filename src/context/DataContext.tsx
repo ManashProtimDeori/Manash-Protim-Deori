@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAuth } from '../auth/AuthContext';
 import { 
   Project, ToolItem, Article, ResearchPaper, ExperimentItem, 
   ExperienceItem, EducationItem, SiteConfig, SignalItem, NowData, PhilosophyPillar,

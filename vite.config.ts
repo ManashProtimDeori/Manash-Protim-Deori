@@ -8,7 +8,40 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(), 
+      tailwindcss(),
+      {
+        name: 'api-security-middleware',
+        configureServer(server) {
+          server.middlewares.use('/api/content/update', (req, res) => {
+            if (req.method !== 'POST') {
+              res.statusCode = 405;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ error: 'Method Not Allowed' }));
+              return;
+            }
+
+            const authHeader = req.headers.authorization || req.headers.Authorization;
+            if (!authHeader || typeof authHeader !== 'string' || !authHeader.startsWith('Bearer ')) {
+              res.statusCode = 401;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ 
+                error: '401 Unauthorized: Missing or invalid authentication token.' 
+              }));
+              return;
+            }
+
+            // Reject invalid or unauthenticated calls
+            res.statusCode = 401;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ 
+              error: '401 Unauthorized: Invalid session or unauthorized owner identity.' 
+            }));
+          });
+        }
+      }
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
