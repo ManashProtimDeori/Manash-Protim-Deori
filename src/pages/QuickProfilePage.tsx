@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../utils/headline';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { Printer, ArrowUpRight } from 'lucide-react';
@@ -38,7 +39,7 @@ export const QuickProfilePage: React.FC = () => {
         <div className="space-y-4 pb-8 border-b border-neutral-800/60">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900">
-              {siteConfig.name}
+              {normalizeHeadline(siteConfig.name)}
             </h1>
             <span className="text-xs font-mono text-neutral-400">
               {siteConfig.location} · {siteConfig.openStatus}
