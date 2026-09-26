@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Search, Sun, Moon, Menu, X, ArrowUpRight, Edit3, Sliders } from 'lucide-react';
 import { useAuth } from '../../auth/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useData } from '../../context/DataContext';
-import { mainNavLinks } from '../../config/site.config';
+import { PrimaryNavigation } from '../navigation/PrimaryNavigation';
 
 interface HeaderProps {
   onOpenCommand: () => void;
@@ -14,7 +14,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
   const { isOwner } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const { isEditMode, toggleEditMode, siteConfig } = useData();
-  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   React.useEffect(() => {
@@ -23,10 +22,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
     return () => window.removeEventListener("keydown", close);
   }, []);
 
-  const isActive = (path: string) => {
-    if (path === '/') return location.pathname === '/';
-    return location.pathname.startsWith(path);
-  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b backdrop-blur-md transition-colors duration-200 border-neutral-800/80 bg-neutral-950/85 dark:border-neutral-800/80 dark:bg-neutral-950/85 light:border-neutral-200/90 light:bg-neutral-50/90">
@@ -43,28 +38,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
           </span>
         </Link>
 
-        {/* Zone 2: 4-6 Clean Navigation Links */}
-        <nav className="order-2 hidden md:flex items-center gap-7" aria-label="Main Navigation">
-          {mainNavLinks.map(link => {
-            const active = isActive(link.href);
-            return (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`relative text-sm font-medium transition-colors whitespace-nowrap py-1 ${
-                  active 
-                    ? 'text-amber-400 font-semibold' 
-                    : 'text-neutral-400 hover:text-neutral-100 dark:text-neutral-400 dark:hover:text-neutral-100 light:text-neutral-600 light:hover:text-neutral-950'
-                }`}
-              >
-                {link.label}
-                {active && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400 rounded-full" />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
+        {/* Zone 2: Premium Primary Navigation */}
+        <PrimaryNavigation className="order-2 hidden md:flex" />
 
         {/* Zone 3: Clean Actions */}
         <div className="order-1 flex items-center gap-2.5">
@@ -130,20 +105,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div id="mobile-navigation" className="mobile-navigation md:hidden border-b border-neutral-800 bg-neutral-950/95 dark:bg-neutral-950/95 light:bg-neutral-50/95 px-4 pt-3 pb-5 space-y-2">
-          {mainNavLinks.map(link => (
-            <Link
-              key={link.href}
-              to={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`block px-3 py-2 text-sm font-medium rounded-md ${
-                isActive(link.href)
-                  ? 'bg-neutral-800 text-amber-400 font-semibold'
-                  : 'text-neutral-300 hover:bg-neutral-900'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          <PrimaryNavigation
+            variant="mobile"
+            onNavigate={() => setMobileMenuOpen(false)}
+          />
           <div className="pt-2 border-t border-neutral-800 flex flex-col gap-2">
             {isOwner && <Link
               to="/studio"
