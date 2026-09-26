@@ -135,7 +135,6 @@ export function LivingSignal() {
   return (
     <div ref={root} className="living-signal" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
       <div className="signal-top">
-        <span>MPD / Living Signal</span>
         <span>Strategy → Execution</span>
       </div>
 
