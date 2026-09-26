@@ -1,3 +1,4 @@
+import { normalizeHeadline } from '../utils/headline';
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { Send, Check, Copy } from 'lucide-react';
