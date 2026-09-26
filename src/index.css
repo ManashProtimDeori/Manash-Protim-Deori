@@ -390,24 +390,11 @@ footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
   justify-content:flex-start;
 }
 .hero-name{
-  max-width:8.5ch;
-  font-size:clamp(4rem,7.4vw,9rem)!important;
-  line-height:.88!important;
-  letter-spacing:-.07em!important;
-}
-.hero-mpd-mark{
-  position:absolute;
-  top:34px;
-  right:var(--gutter);
-  width:clamp(118px,12vw,190px);
-  height:auto;
-  z-index:3;
-  display:block;
-  border:1px solid color-mix(in srgb,var(--border-soft) 72%,transparent);
-  box-shadow:0 18px 50px rgba(0,0,0,.08);
-  transform:perspective(700px) rotateY(-5deg) translateY(0);
-  transform-origin:center;
-  animation:mpd-mark-drift 6s var(--ease-premium) infinite alternate;
+  max-width:none;
+  white-space:nowrap;
+  font-size:clamp(2.1rem,5.4vw,5.8rem)!important;
+  line-height:.94!important;
+  letter-spacing:-.055em!important;
 }
 .education-title{
   margin:0 0 24px;
@@ -416,26 +403,15 @@ footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
   letter-spacing:-.055em;
 }
 
-@keyframes mpd-mark-drift{
-  from{transform:perspective(700px) rotateY(-5deg) translateY(0)}
-  to{transform:perspective(700px) rotateY(4deg) translateY(-6px)}
-}
 
 @media(max-width:767px){
-  .hero-mpd-mark{
-    top:18px;
-    right:20px;
-    width:104px;
-  }
   .hero-name{
-    max-width:7ch;
-    padding-top:28px;
+    max-width:none;
+    white-space:nowrap;
+    padding-top:0;
+    font-size:clamp(2.05rem,9vw,3.1rem)!important;
   }
   .education-title{
     margin-bottom:12px;
   }
-}
-
-@media(prefers-reduced-motion:reduce){
-  .hero-mpd-mark{animation:none!important;transform:none!important}
 }
