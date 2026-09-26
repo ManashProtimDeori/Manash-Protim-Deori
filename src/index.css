@@ -946,3 +946,48 @@ footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
     transform:none!important;
   }
 }
+
+
+/* Intelligence hero flow hardening
+   Prevents the command-center title and demo notice from escaping beneath
+   the module navigation at tablet / reduced-width desktop sizes. */
+.intel-hero{
+  position:relative;
+  isolation:isolate;
+  height:auto!important;
+  min-height:0!important;
+  overflow:visible!important;
+  grid-auto-rows:auto;
+  align-items:start;
+}
+.intel-hero>div:first-child{
+  min-width:0;
+  position:relative;
+}
+.intel-hero-title-main{
+  display:inline-block;
+  white-space:nowrap;
+}
+.intel-nav-wrap{
+  position:relative;
+  z-index:2;
+  clear:both;
+}
+@media(max-width:1200px){
+  .intel-hero{
+    display:block;
+    grid-template-columns:none;
+  }
+  .intel-hero-stats{
+    margin-top:30px;
+    width:100%;
+  }
+}
+@media(max-width:640px){
+  .intel-hero-title-main{
+    white-space:normal;
+  }
+  .intel-hero-stats{
+    margin-top:22px;
+  }
+}
