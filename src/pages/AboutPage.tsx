@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../utils/headline';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { EditButton } from '../components/editor/EditButton';
@@ -21,8 +22,8 @@ export const AboutPage: React.FC = () => {
 
           <InlineEditable
             as="h1"
-            value={aboutData.headline || siteConfig.name}
-            onSave={(val) => updateAboutData({ headline: val })}
+            value={normalizeHeadline(aboutData.headline || siteConfig.name)}
+            onSave={(val) => updateAboutData({ headline: normalizeHeadline(val) })}
             className="about-name block"
           />
 
@@ -59,7 +60,7 @@ export const AboutPage: React.FC = () => {
           {aboutData.intellectualPrinciples?.map((principle, idx) => (
             <article key={idx}>
               <span className="eyebrow">0{idx + 1}</span>
-              <h3>{principle.title.replace(/\.$/, '')}</h3>
+              <h3>{normalizeHeadline(principle.title)}</h3>
               <p>{principle.desc}</p>
             </article>
           ))}
@@ -99,7 +100,7 @@ export const AboutPage: React.FC = () => {
           {aboutData.competencies?.map((comp, idx) => (
             <article key={comp.domain}>
               <span className="eyebrow">0{idx + 1}</span>
-              <h3>{comp.domain.replace(/\.$/, '')}</h3>
+              <h3>{normalizeHeadline(comp.domain)}</h3>
               <div>
                 <p>{comp.summary}</p>
                 <ul>
