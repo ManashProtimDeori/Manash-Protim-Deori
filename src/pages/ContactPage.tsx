@@ -42,7 +42,7 @@ export const ContactPage: React.FC = () => {
         </div>
 
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-          {contactData.inquiryTitle || 'Start a Conversation.'}
+          {normalizeHeadline(contactData.inquiryTitle || 'Start a Conversation')}
         </h1>
         <p className="text-base text-neutral-300 dark:text-neutral-300 light:text-neutral-700 leading-relaxed font-sans pt-1">
           {contactData.inquirySubtitle || 'Have an ambitious problem or high-leverage initiative? I am especially interested in conversations around marketing strategy, autonomous AI systems, unit economics modeling, and full-stack product builds.'}
@@ -129,7 +129,7 @@ export const ContactPage: React.FC = () => {
                 <Check className="w-5 h-5" />
               </div>
               <h3 className="text-2xl font-bold text-neutral-100">
-                Message Transmitted.
+                Message Transmitted
               </h3>
               <p className="text-sm text-neutral-300 max-w-md mx-auto leading-relaxed font-sans">
                 Thank you, {name}. Your inquiry has been received. I will review your context and respond back shortly to <span className="font-mono text-amber-400">{email}</span>.
