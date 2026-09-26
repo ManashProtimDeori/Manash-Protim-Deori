@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Sun, Moon, Menu, X, ArrowUpRight, Edit3, Sliders } from 'lucide-react';
-import { Monogram } from '../common/Monogram';
 import { useAuth } from '../../auth/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useData } from '../../context/DataContext';
@@ -39,7 +38,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
           className="order-3 flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-md py-1"
           aria-label={`${siteConfig.name} Home`}
         >
-          <Monogram size="sm" />
+          <img
+            src="/images/profile/header-avatar.jpg"
+            alt="Manash Protim Deori"
+            className="w-8 h-8 shrink-0 rounded-full object-cover object-[50%_28%] border border-neutral-700/60 dark:border-neutral-700/80 light:border-neutral-300 transition-transform duration-300 group-hover:scale-[1.04]"
+            width="32"
+            height="32"
+            loading="eager"
+            decoding="async"
+          />
           <span className="font-semibold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors whitespace-nowrap">
             {siteConfig.name}
           </span>
