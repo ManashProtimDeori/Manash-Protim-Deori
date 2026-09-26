@@ -102,7 +102,7 @@ export const ArchivePage: React.FC = () => {
           Universal Artifact Index & Ledger
         </span>
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-          The Archive.
+          The Archive
         </h1>
         <p className="text-sm font-mono text-neutral-400">
           Chronological index of all case studies, essays, research whitepapers, interactive tools, and lab experiments.
