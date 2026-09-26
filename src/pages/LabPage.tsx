@@ -21,7 +21,7 @@ export const LabPage: React.FC = () => {
             Lab / Work in progress
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            The Lab.
+            The Lab
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
             Not everything worth building needs to become a company. A dedicated playground for emergent prototypes, experimental agent topologies, simulation models, and unfinished explorations.
@@ -81,7 +81,7 @@ export const LabPage: React.FC = () => {
               </div>
 
               <h2 className="text-lg font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors">
-                {exp.title}
+                {normalizeHeadline(exp.title)}
               </h2>
 
               {/* Hypothesis Block */}
