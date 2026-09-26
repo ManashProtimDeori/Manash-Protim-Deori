@@ -1,0 +1,34 @@
+{
+  "name": "Manash Protim Deori",
+  "title": "Marketing Strategist & Systems Builder",
+  "positioning": "I turn strategy, data, and emerging technology into systems people can actually use.",
+  "location": "India",
+  "availability": "Open Globally",
+  "email": "manashdeori09@gmail.com",
+  "education": [
+    {
+      "institution": "Indian Institute of Management Shillong (IIM Shillong)",
+      "degree": "Master of Business Administration (MBA)",
+      "focus": "Marketing, Strategy, Analytics"
+    },
+    {
+      "institution": "University Institute of Chemical Engineering",
+      "degree": "Bachelor of Technology (B.Tech)",
+      "focus": "Chemical Engineering"
+    }
+  ],
+  "competencies": [
+    "Marketing Strategy & Positioning",
+    "Quantitative Marketing Analytics & Unit Economics",
+    "Generative AI & Agent Architectures",
+    "Automated Research & Intelligence Engines",
+    "Campaign Management (Digital & Offline)",
+    "Cross-Functional Stakeholder Leadership",
+    "Consumer Insights & Market Research"
+  ],
+  "social": {
+    "linkedin": "https://linkedin.com",
+    "github": "https://github.com",
+    "email": "mailto:manashdeori09@gmail.com"
+  }
+}

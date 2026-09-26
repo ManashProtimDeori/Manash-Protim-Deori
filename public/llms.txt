@@ -1,0 +1,24 @@
+# Manash Protim Deori — Digital Headquarters
+> Personal brand, portfolio, product showcase & digital headquarters.
+> Operating at the intersection of Marketing × Strategy × Analytics × AI × Technology.
+
+## Profile Summary
+- Name: Manash Protim Deori
+- Education: 
+  - MBA, Indian Institute of Management Shillong (IIM Shillong)
+  - B.Tech in Chemical Engineering
+- Core Focus: Marketing Strategy, Marketing Intelligence, Quantitative Analytics, Autonomous AI Agents, Product Architecture
+- Location: India (Open Globally for strategic leadership, advisory, and high-impact initiatives)
+- Contact Email: manashdeori09@gmail.com
+- Website: https://manashprotim.com
+
+## Primary Content Sections
+- /work: Featured strategic initiatives, AI platforms, and analytics case studies.
+- /lab: Exploratory prototypes, experimental workflows, and agent architectures.
+- /tools: Production-grade client-side utilities including Marketing ROI Calculators, UTM Architects, and Brief Generators.
+- /writing: In-depth essays on modern marketing, algorithmic distribution, and AI-enabled decision frameworks.
+- /research: Methodological whitepapers and strategic market analyses.
+- /about: Intellectual principles, professional trajectory, and philosophy.
+- /quick-profile: 60-second executive summary tailored for recruiters, hiring managers, and founders.
+- /resume: Complete verified career credentials and print-optimized résumé.
+- /now: Real-time update log of current projects, reading list, and exploratory research.

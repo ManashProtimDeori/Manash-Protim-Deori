@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manash Protim Deori — Digital Headquarters</title>
+    <meta name="description" content="Personal brand, portfolio, product showcase, and digital headquarters of Manash Protim Deori. Operating at the intersection of Marketing, Strategy, Analytics, and AI." />
+    <meta name="author" content="Manash Protim Deori" />
+    <meta name="keywords" content="Manash Protim Deori, Marketing Strategy, Marketing Analytics, AI Systems, Growth, Product, IIM Shillong, Portfolio" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Canonical & OpenGraph -->
+    <link rel="canonical" href="https://manashprotim.com" />
+    <meta property="og:title" content="Manash Protim Deori — Digital Headquarters" />
+    <meta property="og:description" content="Personal brand, portfolio, product showcase, and digital headquarters of Manash Protim Deori. Operating at the intersection of Marketing, Strategy, Analytics, and AI." />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Manash Protim Deori" />
+    
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Manash Protim Deori — Digital Headquarters" />
+    <meta name="twitter:description" content="Personal brand, portfolio, product showcase, and digital headquarters of Manash Protim Deori. Operating at the intersection of Marketing, Strategy, Analytics, and AI." />
+
+    <!-- Google Fonts: Plus Jakarta Sans, Newsreader, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://manashprotim.com/#person",
+          "name": "Manash Protim Deori",
+          "jobTitle": "Marketing Strategist & Systems Builder",
+          "description": "Operating at the intersection of Marketing, Strategy, Analytics, and AI.",
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "Indian Institute of Management Shillong (IIM Shillong)",
+              "award": "MBA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Chemical Engineering",
+              "award": "B.Tech"
+            }
+          ],
+          "knowsAbout": [
+            "Marketing Strategy",
+            "Marketing Analytics",
+            "Artificial Intelligence",
+            "Autonomous Agents",
+            "Marketing Intelligence",
+            "Business Analysis",
+            "Campaign Optimization"
+          ],
+          "email": "mailto:manashdeori09@gmail.com",
+          "sameAs": [
+            "https://linkedin.com",
+            "https://github.com"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://manashprotim.com/#website",
+          "url": "https://manashprotim.com",
+          "name": "Manash Protim Deori — Digital Headquarters",
+          "publisher": {
+            "@id": "https://manashprotim.com/#person"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Initial Theme Initialization Script (prevents theme flash) -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('mpd-theme');
+          var isDark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 antialiased selection:bg-amber-400 selection:text-neutral-950">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
