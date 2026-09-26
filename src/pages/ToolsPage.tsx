@@ -45,7 +45,7 @@ export const ToolsPage: React.FC = () => {
             Tools / Make a better decision
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Useful by design.
+            Useful by design
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
             Explore a scenario, test your positioning or prepare a campaign. Working tools for everyday marketing decisions.
