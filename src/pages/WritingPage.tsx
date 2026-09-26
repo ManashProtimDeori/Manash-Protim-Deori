@@ -1,4 +1,5 @@
 import React from 'react';
+import { normalizeHeadline } from '../utils/headline';
 import { Link } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { ArrowUpRight, Plus } from 'lucide-react';
@@ -17,7 +18,7 @@ export const WritingPage: React.FC = () => {
             Publication & Strategic Essays
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Writing & Perspectives.
+            Writing & Perspectives
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
             Essays on modern marketing strategy, algorithmic distribution surfaces, unit economic constraints, and deterministic AI agent architectures.
@@ -60,7 +61,7 @@ export const WritingPage: React.FC = () => {
 
               <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors leading-snug">
                 <Link to={`/writing/${article.slug}`}>
-                  {article.title}
+                  {normalizeHeadline(article.title)}
                 </Link>
               </h2>
 
