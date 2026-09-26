@@ -189,6 +189,24 @@ export const metricDefinitions: MetricDefinition[] = [
     failureModes:['Can conceal slow payback'], diagnostics:['Payback','Retention','Contribution'], relationshipType:'mathematical'
   },
   {
+    id:'roi', label:'ROI', group:'Profitability', definition:'Modeled contribution profit relative to marketing spend.',
+    formula:'Contribution ÷ Marketing Spend', inputs:['contribution','spend'], affectedBy:['margin','revenue','spend','variable costs'], affects:['capital allocation'],
+    increaseMeaning:'More modeled profit per marketing currency unit.', decreaseMeaning:'Profit efficiency is deteriorating.',
+    failureModes:['Depends on cost completeness','Can differ materially from ROAS'], diagnostics:['Contribution','Gross Margin','ROAS'], relationshipType:'mathematical'
+  },
+  {
+    id:'mer', label:'MER', group:'Efficiency', definition:'Total modeled revenue divided by marketing spend.',
+    formula:'Total Revenue ÷ Total Marketing Spend', inputs:['revenue','organicRevenue','spend'], affectedBy:['total demand','spend'], affects:['blended efficiency'],
+    increaseMeaning:'Blended revenue efficiency improved.', decreaseMeaning:'Total revenue is growing slower than marketing investment.',
+    failureModes:['Includes demand not necessarily caused by paid marketing'], diagnostics:['iROAS','Organic revenue','Contribution'], relationshipType:'mathematical'
+  },
+  {
+    id:'paybackMonths', label:'Payback', group:'Customer Economics', definition:'Months required for modeled customer contribution to recover CAC.',
+    formula:'CAC ÷ Monthly Gross Contribution per Customer', inputs:['cac','aov','purchaseFrequency','margin'], affectedBy:['cac','margin','purchase frequency'], affects:['cash efficiency','growth capacity'],
+    increaseMeaning:'Cash is tied up longer after acquisition.', decreaseMeaning:'Acquisition cash is recovered sooner.',
+    failureModes:['Sensitive to repeat-rate and margin assumptions'], diagnostics:['Cohort retention','LTV','CAC'], relationshipType:'modeled causal'
+  },
+  {
     id:'iroas', label:'iROAS', group:'Incrementality', definition:'Incremental revenue divided by marketing spend.',
     formula:'Incremental Revenue ÷ Spend', inputs:['incrementalRevenue','spend'], affectedBy:['treatment lift','spend'], affects:['causal budget decisions'],
     increaseMeaning:'Experimentally modeled incremental return improved.', decreaseMeaning:'Incremental efficiency deteriorated.',
