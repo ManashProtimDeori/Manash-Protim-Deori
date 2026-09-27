@@ -231,10 +231,6 @@ export const ResumePage: React.FC = () => {
             <Download className="w-4 h-4"/>
             Download ATS TXT
           </button>
-          <a href="/resume/Manash-Protim-Deori-Resume.pdf" download className="resume-action-secondary">
-            <Download className="w-4 h-4"/>
-            Original PDF
-          </a>
           <button type="button" onClick={() => window.print()} className="resume-action-primary">
             <Printer className="w-4 h-4"/>
             Print / Save PDF
