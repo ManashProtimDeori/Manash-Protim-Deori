@@ -70,12 +70,12 @@ export const toolsData: ToolItem[] = [
   {
     id: 'tool-4',
     slug: 'marketing-brief-generator',
-    name: 'Marketing Intelligence Command Center',
-    category: 'Marketing Intelligence & Strategy',
+    name: 'Marketing Intelligence Engine',
+    category: 'Marketing Intelligence & Decision Science',
     status: 'Live',
-    version: 'v4.0',
-    description: 'An evidence-first marketing intelligence operating system that turns fragmented information into events, signals, trends, implications, decisions and actions while preserving provenance and uncertainty.',
-    instructions: 'Use global filters and role context to explore the synthetic intelligence environment. Inspect developments, trace signals into trends, compare company and platform activity, examine counter-evidence, run scenarios, build decision priorities and drill every conclusion back to its evidence trail.',
+    version: 'v5.0',
+    description: 'An evidence-first marketing intelligence operating system that converts external change into verified claims, signals, trends, quantified variables, relationship models, scenarios, decision intelligence and differentiated publishing outputs.',
+    instructions: 'Use the command center to move from evidence to quantified business variables. Inspect provenance, manipulate scenario assumptions, lock variables, trace downstream effects, review early warnings, interrogate stored intelligence, compare decision options and inspect the daily publishing contract.',
     features: [
       '20 interconnected intelligence modules spanning command center, daily brief, signals, trends, companies, platforms, competitors, technology, consumers, categories, regulation, research, geography, scenarios, decisions and sources',
       'Deterministic demo corpus with 360 intelligence records, 120 signals, 28 trends, 30 companies, 12 platforms, 15 industries and 720 evidence references',
@@ -84,11 +84,15 @@ export const toolsData: ToolItem[] = [
       'Explainable priority, novelty, confidence, signal-strength, evidence-quality and decision-priority scoring with visible assumptions',
       'Decision Intelligence buckets for Act Now, Test, Watch, Prepare and Ignore for Now with configurable impact and confidence thresholds',
       'Role-aware relevance, global search/filtering, watchlist behavior, intelligence compression and evidence/source inspection',
-      'Strict demo labeling so synthetic records are never represented as current real-world claims'
+      'Strict demo labeling so synthetic records are never represented as current real-world claims',
+      'Quantification engine with provenance-aware variables, relationship types, variable locking, scenario propagation, Monte Carlo ranges and sensitivity analysis',
+      'Source-registry prioritization, daily-run observability, data-quality metrics, early-warning detection, stored-intelligence query interface and differentiated publishing studio',
+      'Production integration scaffold with authenticated run contract, readiness endpoint, Supabase schema and server-only environment configuration'
     ],
-    technologies: ['React 19', 'TypeScript', 'Native SVG', 'Deterministic Intelligence Graph', 'Explainable Scoring Engine'],
+    technologies: ['React 19', 'TypeScript', 'Native SVG', 'Deterministic Intelligence Graph', 'Scenario Engine', 'Supabase Schema'],
     interactiveComponent: 'BriefGenerator',
     changelog: [
+      { version: 'v5.0', date: '2026-09', notes: 'Added quantified variables, relationship modeling, what-if simulation, early warning, orchestration contracts and publication pipeline architecture' },
       { version: 'v4.0', date: '2026-09', notes: 'Re-architected brief generator into enterprise marketing intelligence, signal detection and decision briefing operating system' },
       { version: 'v1.0', date: '2026-03', notes: 'Initial public release' }
     ]

@@ -11,13 +11,16 @@ import {
 } from './scoring';
 import { Filters, IntelligenceAction, IntelligenceItem, Trend } from './types';
 import { SignalGraph, SignalHeatmap, TrendRadar, UncertaintyMap } from './Visuals';
+import { EngineWorkspace } from './EngineWorkspace';
 
 const views = [
   'Intelligence Command Center','Daily Marketing Brief','Live Signal Feed','Trend Radar',
+  'Intelligence Variables','Relationship Model','What-If Simulator','Early Warning',
   'Company Intelligence','Platform Intelligence','Competitor Intelligence','Technology Intelligence',
   'Consumer Intelligence','Category Intelligence','Campaign Intelligence','Regulatory Intelligence',
   'Research Intelligence','Market & Geography Intelligence','Signal Graph','Trend Evolution',
-  'Strategic Implications','Scenario & Impact Lab','Decision Intelligence','Source & Evidence Center'
+  'Strategic Implications','Scenario & Impact Lab','Decision Intelligence','Source & Evidence Center',
+  'Daily Run & Reliability','Intelligence Query','Publishing Engine','System Architecture'
 ] as const;
 
 type View = typeof views[number];
@@ -425,6 +428,10 @@ export const MarketingIntelligenceOS:React.FC = () => {
       case 'Daily Marketing Brief':return renderDailyBrief();
       case 'Live Signal Feed':return renderSignalFeed();
       case 'Trend Radar':return renderTrendRadar();
+      case 'Intelligence Variables':return <EngineWorkspace view="Intelligence Variables"/>;
+      case 'Relationship Model':return <EngineWorkspace view="Relationship Model"/>;
+      case 'What-If Simulator':return <EngineWorkspace view="What-If Simulator"/>;
+      case 'Early Warning':return <EngineWorkspace view="Early Warning"/>;
       case 'Company Intelligence':return renderCompany();
       case 'Platform Intelligence':return renderPlatform();
       case 'Competitor Intelligence':return renderCompetitor();
@@ -441,6 +448,10 @@ export const MarketingIntelligenceOS:React.FC = () => {
       case 'Scenario & Impact Lab':return renderScenario();
       case 'Decision Intelligence':return renderDecision();
       case 'Source & Evidence Center':return renderSourceCenter();
+      case 'Daily Run & Reliability':return <EngineWorkspace view="Daily Run & Reliability"/>;
+      case 'Intelligence Query':return <EngineWorkspace view="Intelligence Query"/>;
+      case 'Publishing Engine':return <EngineWorkspace view="Publishing Engine"/>;
+      case 'System Architecture':return <EngineWorkspace view="System Architecture"/>;
       default:return renderCommandCenter();
     }
   };
@@ -456,7 +467,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
       <div>
         <span className="intel-overline">MARKETING INTELLIGENCE · SIGNAL DETECTION · DECISION BRIEFING</span>
         <h2 id="marketing-intelligence-title"><span className="intel-hero-title-main">Marketing Intelligence</span><br/><em>Command Center</em></h2>
-        <p>Detect what is changing across marketing, separate signal from noise, connect events into trends, understand strategic implications, and turn external information into better decisions.</p>
+        <p>Detect what changed, verify the evidence, quantify the variables, model how consequences propagate, simulate alternative futures, and convert the resulting intelligence into better business decisions.</p>
         <div className="intel-demo-banner"><ShieldCheck className="w-4 h-4"/><strong>DEMO MODE</strong><span>All intelligence records and sources in this implementation are synthetic. No demo scenario is presented as a current real-world fact.</span></div>
       </div>
       <div className="intel-hero-stats">
