@@ -34,6 +34,7 @@ import { ProtectedRoute } from './auth/ProtectedRoute';
 import { LoginPage } from './pages/LoginPage';
 const StudioPage = lazy(() => import('./pages/StudioPage').then(m => ({ default: m.StudioPage })));
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ContextualArt } from './components/visualizations/ContextualArt';
 
 // Scroll to top automatically upon route navigation
 const ScrollToTop: React.FC = () => {
@@ -76,7 +77,7 @@ export const AppContent: React.FC = () => {
       <Header onOpenCommand={() => setCommandPaletteOpen(true)} />
 
       {/* Main Page Canvas */}
-      <main id="main-content" className="flex-1"><Suspense fallback={<p className="p-8">Loading workspace…</p>}>
+      <main id="main-content" className="flex-1"><ContextualArt /><Suspense fallback={<p className="p-8">Loading workspace…</p>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<WorkPage />} />
