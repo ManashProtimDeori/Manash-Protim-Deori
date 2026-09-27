@@ -32,7 +32,10 @@ export const ArticleDataChart: React.FC<{ chart: ArticleChart }> = ({ chart }) =
             </g>
           ))}
         </svg>
-        <div className="article-line-labels">
+        <div
+          className="article-line-labels"
+          style={{ gridTemplateColumns: `repeat(${chart.data.length}, minmax(0, 1fr))` }}
+        >
           {chart.data.map(point => <span key={point.label}>{point.label}</span>)}
         </div>
       </div>
