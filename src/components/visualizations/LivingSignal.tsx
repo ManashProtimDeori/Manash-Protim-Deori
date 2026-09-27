@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import './LivingSignal.css';
 
 export type SignalState = 'neutral' | 'strategy' | 'marketing' | 'analytics' | 'ai' | 'build';
 
