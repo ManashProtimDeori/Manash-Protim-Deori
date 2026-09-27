@@ -7,9 +7,6 @@
       "ES2022",
       "DOM"
     ],
-    "types": [
-      "node"
-    ],
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true
