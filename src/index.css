@@ -2337,3 +2337,50 @@ footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
   .resume-competencies-end{page-break-before:auto}
   .resume-competencies-end .grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
+
+
+/* Resume readability fixes */
+.light header.resume-source-header{
+  background:#244f9e!important;
+  color:#ffffff!important;
+  border-color:#244f9e!important;
+}
+.dark header.resume-source-header{
+  background:#17345f!important;
+  color:#ffffff!important;
+  border-color:#17345f!important;
+}
+.light .resume-source-header .resume-header-copy h2,
+.light .resume-source-header .resume-header-copy>div>div>p,
+.light .resume-source-header .resume-contact-line,
+.dark .resume-source-header .resume-header-copy h2,
+.dark .resume-source-header .resume-header-copy>div>div>p,
+.dark .resume-source-header .resume-contact-line{
+  color:#ffffff!important;
+}
+.resume-entry ul,
+.resume-achievements{
+  list-style:disc outside!important;
+  padding-left:1.25rem!important;
+}
+.resume-entry li,
+.resume-achievements li{
+  display:list-item!important;
+  padding-left:.15rem!important;
+}
+.resume-entry li::marker,
+.resume-achievements li::marker{
+  color:#111111;
+  font-size:.9em;
+}
+@media print{
+  header.resume-source-header{
+    background:#244f9e!important;
+    color:#ffffff!important;
+  }
+  .resume-entry ul,
+  .resume-achievements{
+    list-style:disc outside!important;
+    padding-left:1.15rem!important;
+  }
+}
