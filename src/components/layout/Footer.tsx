@@ -40,10 +40,6 @@ export const Footer: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-sm max-w-lg leading-relaxed">
-              Marketing, strategy, analytics and AI — informed by a B.Tech in Chemical Engineering from Rajiv Gandhi Institute of Petroleum Technology and an MBA from IIM Shillong.
-            </p>
-
             <div className="inline-flex items-center gap-2 pt-2 text-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
               <span>India (IST) · {indiaTime || 'Active'}</span>
