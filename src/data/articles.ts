@@ -387,11 +387,7 @@ export const articles: Article[] = [
             'Take an intelligence-to-content workflow. A fragile design says: "Search the web, identify the most important story, write a post and publish it." A production design separates the stages: retrieve → deduplicate → verify → score → synthesize → fact-check → draft → validate → approve → publish.',
             'Each arrow becomes a control point. Retrieval can enforce source tiers. Verification can require a primary source plus an independent source. Scoring can be deterministic. Drafting can be probabilistic. Validation can check unsupported claims. Publishing can remain human-approved.',
             'This separation is not bureaucracy. It is how you stop one impressive model call from becoming one invisible single point of failure.'
-          ],
-          codeBlock: {
-            language: 'typescript',
-            code: 'type WorkflowState =\n  | \'DISCOVERING\'\n  | \'VERIFYING\'\n  | \'SCORING\'\n  | \'DRAFTING\'\n  | \'VALIDATING\'\n  | \'READY_FOR_REVIEW\'\n  | \'PUBLISHING\'\n  | \'PUBLISHED\'\n  | \'FAILED\';\n\ntype EvidenceClaim = {\n  claim: string;\n  sourceUrl: string;\n  sourceType: \'primary\' | \'independent\';\n  support: \'direct\' | \'inference\';\n  confidence: number;\n};'
-          }
+          ]
         },
         {
           heading: 'The decision framework for teams building agents now',
