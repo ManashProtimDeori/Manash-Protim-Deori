@@ -3,7 +3,7 @@ import { useAuth } from '../auth/AuthContext';
 import { 
   Project, ToolItem, Article, ResearchPaper, ExperimentItem, 
   ExperienceItem, EducationItem, SiteConfig, SignalItem, NowData, PhilosophyPillar,
-  ProofItem, ChangelogItem, AboutData, ContactData, UseCategory, UseItem
+  ProofItem, ChangelogItem, AboutData, ContactData, UseCategory, UseItem, ResumeData
 } from '../types';
 import { projects as initialProjects } from '../data/projects';
 import { toolsData as initialTools } from '../data/tools';
@@ -13,6 +13,7 @@ import { experiments as initialExperiments } from '../data/experiments';
 import { experienceHistory as initialExperience, educationHistory as initialEducation } from '../data/experience';
 import { siteConfig as initialSiteConfig } from '../config/site.config';
 import { usesData as initialUsesData } from '../data/uses';
+import { defaultResumeData } from '../data/resume';
 import { 
   defaultSignals, defaultNowData, defaultPhilosophyPillars,
   defaultProofs, defaultChangelog, defaultAboutData, defaultContactData 
@@ -60,6 +61,9 @@ interface DataContextType {
   addEducation: (e: EducationItem) => void;
   updateEducation: (index: number, e: Partial<EducationItem>) => void;
   deleteEducation: (index: number) => void;
+
+  resumeData: ResumeData;
+  updateResumeData: (data: ResumeData) => void;
 
   signals: SignalItem[];
   addSignal: (s: SignalItem) => void;
@@ -131,17 +135,36 @@ const STORAGE_KEYS = {
   CHANGELOG: 'mpd_data_changelog',
   ABOUT: 'mpd_data_about',
   CONTACT: 'mpd_data_contact',
-  USES: 'mpd_data_uses'
+  USES: 'mpd_data_uses',
+  RESUME: 'mpd_data_resume'
 };
 
+const LEGACY_PROFILE_SENTENCE = 'Marketing, strategy, analytics and AI — informed by a B.Tech in Chemical Engineering from Rajiv Gandhi Institute of Petroleum Technology and an MBA from IIM Shillong.';
+
+function stripLegacyProfileSentenceDeep<T>(value: T): T {
+  if (typeof value === 'string') {
+    return value.replace(LEGACY_PROFILE_SENTENCE, '').trim() as T;
+  }
+  if (Array.isArray(value)) {
+    return value.map(item => stripLegacyProfileSentenceDeep(item)) as T;
+  }
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>).map(([key, item]) => [key, stripLegacyProfileSentenceDeep(item)])
+    ) as T;
+  }
+  return value;
+}
+
 function getStored<T>(key: string, fallback: T): T {
-  if (typeof window === 'undefined') return fallback;
+  if (typeof window === 'undefined') return stripLegacyProfileSentenceDeep(fallback);
   try {
     const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
+    const value = raw ? JSON.parse(raw) : fallback;
+    return stripLegacyProfileSentenceDeep(value);
   } catch (e) {
     console.error(`Error reading ${key} from storage:`, e);
-    return fallback;
+    return stripLegacyProfileSentenceDeep(fallback);
   }
 }
 
@@ -216,6 +239,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [usesData, setUsesData] = useState<UseCategory[]>(() => 
     getStored(STORAGE_KEYS.USES, initialUsesData)
+  );
+
+  const [resumeData, setResumeData] = useState<ResumeData>(() =>
+    getStored(STORAGE_KEYS.RESUME, defaultResumeData)
   );
 
   const [activeEditor, setActiveEditor] = useState<{ type: string; item: any } | null>(null);
@@ -636,6 +663,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
+  // Resume / CV
+  const updateResumeData = (data: ResumeData) => {
+    if (!isOwner) return;
+    setResumeData(data);
+    localStorage.setItem(STORAGE_KEYS.RESUME, JSON.stringify(data));
+    showStatus('Resume section updated');
+  };
+
   // /uses Stack CRUD
   const addUseCategory = (cat: UseCategory) => {
     if (!isOwner) return;
@@ -736,6 +771,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setAboutData(defaultAboutData);
       setContactData(defaultContactData);
       setUsesData(initialUsesData);
+      setResumeData(defaultResumeData);
       showStatus('Reset all content to factory defaults');
     }
   };
@@ -759,6 +795,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       aboutData,
       contactData,
       usesData,
+      resumeData,
       exportedAt: new Date().toISOString()
     };
     const jsonStr = JSON.stringify(data, null, 2);
@@ -841,6 +878,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUsesData(data.usesData);
         localStorage.setItem(STORAGE_KEYS.USES, JSON.stringify(data.usesData));
       }
+      if (data.resumeData) {
+        setResumeData(data.resumeData);
+        localStorage.setItem(STORAGE_KEYS.RESUME, JSON.stringify(data.resumeData));
+      }
       showStatus('Content backup imported successfully');
       return true;
     } catch (e) {
@@ -893,6 +934,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       addEducation,
       updateEducation,
       deleteEducation,
+      resumeData,
+      updateResumeData,
       signals,
       addSignal,
       updateSignal,
