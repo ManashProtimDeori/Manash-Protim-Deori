@@ -6,6 +6,7 @@ import { RoiCalculator } from '../components/tools/RoiCalculator';
 import { UtmBuilder } from '../components/tools/UtmBuilder';
 import { PositioningMatrixTool } from '../components/tools/PositioningMatrixTool';
 import { BriefGenerator } from '../components/tools/BriefGenerator';
+import { MarketSignalOS } from '../components/tools/marketsignal/MarketSignalOS';
 import { ArrowLeft } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 
@@ -28,13 +29,15 @@ export const ToolDetailPage: React.FC = () => {
         return <PositioningMatrixTool />;
       case 'marketing-brief-generator':
         return <BriefGenerator />;
+      case 'marketsignal-os':
+        return <MarketSignalOS />;
       default:
         return <RoiCalculator />;
     }
   };
 
   return (
-    <div className={`py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'utm-builder' || toolItem.slug === 'marketing-brief-generator' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
+    <div className={`py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'utm-builder' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
       {/* Back Link & Edit */}
       <div className="mb-8 flex items-center justify-between">
         <Link

@@ -96,5 +96,32 @@ export const toolsData: ToolItem[] = [
       { version: 'v4.0', date: '2026-09', notes: 'Re-architected brief generator into enterprise marketing intelligence, signal detection and decision briefing operating system' },
       { version: 'v1.0', date: '2026-03', notes: 'Initial public release' }
     ]
+  },
+  {
+    id: 'tool-5',
+    slug: 'marketsignal-os',
+    name: 'MarketSignal OS',
+    category: 'Marketing Decision Intelligence & Measurement',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'An integrated marketing decision operating system combining measurement, attribution, incrementality, marketing mix modeling, experimentation, forecasting, scenario simulation, budget optimization, root-cause analysis and executive decision intelligence.',
+    instructions: 'Use the 24 analytical modules to move from business performance to diagnosis, evidence, simulation, recommendation, expected financial impact, confidence and action. All visible performance and competitor information is synthetic demo data until real sources are connected.',
+    features: [
+      '24 interconnected modules spanning data, measurement, funnel analytics, attribution, incrementality, MMM, experimentation, channels, creative, audiences, customer economics, forecasting, optimization, root cause, reliability and strategy',
+      'Centralized formula engine for Spend → CPM → Impressions → CTR → Traffic → CVR → Revenue → Profit → CAC → LTV and related economics',
+      'Interactive What Moved This Number diagnostics with recursive driver decomposition and metric dependency explanations',
+      'Attribution model switching with explicit Attribution ≠ Incrementality guardrails',
+      'Treatment/control incrementality lab and A/B experimentation calculator with confidence warnings',
+      'Synthetic MMM response curves, saturation, marginal ROAS, forecasting bands and scenario comparison',
+      'Budget optimization using marginal economics, saturation and confidence rather than historical ROAS alone',
+      'Creative fatigue, audience economics, funnel leakage, anomalies, tracking health and measurement reliability diagnostics',
+      'AI Marketing Scientist interface grounded only in structured application data',
+      'Executive Strategy Room translating measurement into financial implications and next-best actions'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Central Formula Engine', 'Native SVG', 'Deterministic Demo Data', 'Decision Intelligence'],
+    interactiveComponent: 'MarketSignalOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-09', notes: 'Initial release of MarketSignal OS as a separate enterprise marketing decision intelligence tool' }
+    ]
   }
 ];
