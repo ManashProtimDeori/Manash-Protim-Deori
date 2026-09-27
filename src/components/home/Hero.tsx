@@ -39,6 +39,16 @@ export const Hero: React.FC = () => {
           <p className="eyebrow disciplines">{siteConfig.tagline}</p>
 
           <div className="hero-links">
+            <a
+              className="marketing-intelligence-cta"
+              href={import.meta.env.VITE_MARKETING_INTELLIGENCE_URL || 'https://github.com/ManashProtimDeori/marketing-intelligence-engine'}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Open Marketing Intelligence"
+            >
+              <span className="marketing-intelligence-cta__eyebrow">Live intelligence product</span>
+              <span className="marketing-intelligence-cta__label">Open Marketing Intelligence ↗</span>
+            </a>
             <Link className="text-link" to="/work">Explore work ↗</Link>
             <Link className="text-link secondary" to="/about">About ↗</Link>
           </div>
