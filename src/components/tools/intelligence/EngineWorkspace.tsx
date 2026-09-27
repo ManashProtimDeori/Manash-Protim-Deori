@@ -136,7 +136,7 @@ export const EngineWorkspace:React.FC<{view:EngineWorkspaceView}> = ({view}) => 
         </div>
       </section>
       <section className="intel-panel">
-        <div className="engine-heading"><div><span>VARIABLE MODEL</span><h3>Drivers, outcomes and provenance</h3><p>Lock any variable, manipulate scenario inputs and inspect downstream calculations without a page reload.</p></div><button className="engine-secondary" onClick={()=>{setOverrides({});setPresetId('base');setLocked(new Set());}}><RefreshCw className="w-3.5 h-3.5"/>Reset</button></div>
+        <div className="engine-heading"><div><span>VARIABLE MODEL</span><h3>Drivers, outcomes and provenance</h3><p>Lock any variable, manipulate scenario inputs and inspect downstream calculations without a page reload.</p></div><button className="engine-secondary" onClick={()=>{setOverrides({});setPresetId('base');setLocked(new Set<string>());}}><RefreshCw className="w-3.5 h-3.5"/>Reset</button></div>
         <div className="engine-variable-grid">{variables.map(variable=><VariableCard key={variable.id} variable={variable} locked={locked.has(variable.id)} onToggleLock={()=>toggleLock(variable.id)} onChange={value=>updateVariable(variable.id,value)}/>)}</div>
       </section>
     </div>
