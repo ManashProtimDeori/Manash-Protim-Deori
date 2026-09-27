@@ -1,12 +1,22 @@
 import { normalizeHeadline } from '../utils/headline';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { Filter, Plus } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 
 export const LabPage: React.FC = () => {
   const { experiments, isEditMode, openEditor } = useData();
+  const location = useLocation();
   const [selectedStatus, setSelectedStatus] = useState<string>('All');
+
+  useEffect(() => {
+    if (!location.hash) return;
+    const targetId = decodeURIComponent(location.hash.slice(1));
+    requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }, [location.hash]);
 
   const filteredExperiments = selectedStatus === 'All'
     ? experiments
@@ -65,7 +75,8 @@ export const LabPage: React.FC = () => {
         {filteredExperiments.map(exp => (
           <article
             key={exp.id}
-            className="p-6 rounded border border-neutral-800/80 bg-neutral-950/40 dark:border-neutral-800/80 dark:bg-neutral-950/40 light:border-neutral-200 light:bg-white flex flex-col justify-between space-y-4 relative group"
+            id={exp.slug}
+            className="lab-experiment-anchor p-6 rounded border border-neutral-800/80 bg-neutral-950/40 dark:border-neutral-800/80 dark:bg-neutral-950/40 light:border-neutral-200 light:bg-white flex flex-col justify-between space-y-4 relative group"
           >
             <div className="space-y-3">
               {/* Status & Edit */}
