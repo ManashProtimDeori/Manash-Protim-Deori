@@ -1,12 +1,22 @@
 import { normalizeHeadline } from '../utils/headline';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useData } from '../context/DataContext';
 import { Filter, Plus } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 
 export const LabPage: React.FC = () => {
   const { experiments, isEditMode, openEditor } = useData();
+  const location = useLocation();
   const [selectedStatus, setSelectedStatus] = useState<string>('All');
+
+  useEffect(() => {
+    if (!location.hash) return;
+    const targetId = decodeURIComponent(location.hash.slice(1));
+    requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }, [location.hash]);
 
   const filteredExperiments = selectedStatus === 'All'
     ? experiments
