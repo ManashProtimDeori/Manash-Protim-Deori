@@ -41,7 +41,7 @@ export const Hero: React.FC = () => {
           <div className="hero-links">
             <a
               className="marketing-intelligence-cta"
-              href={import.meta.env.VITE_MARKETING_INTELLIGENCE_URL || 'https://github.com/ManashProtimDeori/marketing-intelligence-engine'}
+              href={import.meta.env.VITE_MARKETING_INTELLIGENCE_URL || 'https://marketing-intelligence-engine.vercel.app'}
               target="_blank"
               rel="noreferrer"
               aria-label="Open Marketing Intelligence"
