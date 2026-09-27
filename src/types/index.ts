@@ -76,6 +76,29 @@ export interface ToolItem {
   changelog?: { version: string; date: string; notes: string }[];
 }
 
+export interface ArticleChartPoint {
+  label: string;
+  value: number;
+  display?: string;
+}
+
+export interface ArticleChart {
+  type: 'bar' | 'line' | 'comparison';
+  title: string;
+  subtitle?: string;
+  unit?: string;
+  source?: string;
+  sourceUrl?: string;
+  note?: string;
+  data: ArticleChartPoint[];
+}
+
+export interface ArticleStat {
+  value: string;
+  label: string;
+  context?: string;
+}
+
 export interface Article {
   id: string;
   slug: string;
@@ -83,17 +106,20 @@ export interface Article {
   subtitle: string;
   excerpt: string;
   publishedAt: string;
+  updatedAt?: string;
   readTime: string;
   categories: string[];
   tags: string[];
   featured: boolean;
   content: {
     lead: string;
+    heroStats?: ArticleStat[];
     sections: {
       heading: string;
       body: string[];
       callout?: string;
       codeBlock?: { language: string; code: string };
+      charts?: ArticleChart[];
     }[];
     pullQuote?: string;
     footnotes?: { number: number; text: string; url?: string }[];

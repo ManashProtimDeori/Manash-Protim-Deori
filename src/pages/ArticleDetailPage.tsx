@@ -2,8 +2,9 @@ import { normalizeHeadline } from '../utils/headline';
 import React, { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useData } from '../context/DataContext';
-import { ArrowLeft, Share2, Check, Copy } from 'lucide-react';
+import { ArrowLeft, Share2, Check, Copy, ArrowUpRight } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
+import { ArticleDataChart } from '../components/writing/ArticleDataChart';
 
 export const ArticleDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -48,7 +49,7 @@ export const ArticleDetailPage: React.FC = () => {
         style={{ width: `${scrollProgress}%` }}
       />
 
-      <article className="py-16 md:py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article className="article-intelligence py-16 md:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Back Link & Edit Button */}
         <div className="mb-10 flex items-center justify-between">
@@ -67,8 +68,9 @@ export const ArticleDetailPage: React.FC = () => {
         <header className="space-y-6 pb-12 border-b border-neutral-800">
           
           {/* Metadata */}
-          <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
-            <span className="text-amber-400 font-semibold">{article.publishedAt}</span>
+          <div className="article-meta">
+            <span>{article.publishedAt}</span>
+            {article.updatedAt && <><span aria-hidden="true">·</span><span>Updated {article.updatedAt}</span></>}
             <span aria-hidden="true">·</span>
             <span>{article.readTime}</span>
             <span aria-hidden="true">·</span>
@@ -100,9 +102,21 @@ export const ArticleDetailPage: React.FC = () => {
 
         {/* Article Body */}
         <div className="py-12 space-y-12">
+
+          {article.content.heroStats && (
+            <section className="article-hero-stats" aria-label="Key evidence">
+              {article.content.heroStats.map((stat) => (
+                <div key={stat.label}>
+                  <strong>{stat.value}</strong>
+                  <span>{stat.label}</span>
+                  {stat.context && <em>{stat.context}</em>}
+                </div>
+              ))}
+            </section>
+          )}
           
           {/* Lead Paragraph */}
-          <p className="text-lg sm:text-xl text-neutral-200 font-serif leading-relaxed">
+          <p className="article-lead">
             {article.content.lead}
           </p>
 
@@ -132,10 +146,15 @@ export const ArticleDetailPage: React.FC = () => {
               ))}
 
               {section.callout && (
-                <div className="p-4 rounded bg-neutral-950/70 border border-neutral-800/80 text-xs sm:text-sm text-neutral-300 border-l border-l-amber-400/80 leading-relaxed my-4">
-                  {section.callout}
+                <div className="article-callout">
+                  <span>DECISION NOTE</span>
+                  <p>{section.callout}</p>
                 </div>
               )}
+
+              {section.charts?.map((chart, chartIndex) => (
+                <ArticleDataChart key={chart.title + chartIndex} chart={chart} />
+              ))}
 
               {section.codeBlock && (
                 <div className="rounded bg-neutral-950 border border-neutral-800 overflow-hidden my-6">
@@ -159,17 +178,24 @@ export const ArticleDetailPage: React.FC = () => {
 
           {/* Footnotes & Citations */}
           {article.content.footnotes && (
-            <footer className="pt-10 mt-16 border-t border-neutral-800/80 text-xs text-neutral-500 font-mono space-y-2">
+            <section className="article-references pt-10 mt-16 border-t border-neutral-800/80 text-xs text-neutral-500 font-mono space-y-2">
               <span className="uppercase tracking-wider text-neutral-400 font-bold block mb-2">
                 References & Citations:
               </span>
               {article.content.footnotes.map((fn) => (
-                <div key={fn.number} className="flex items-start gap-2">
-                  <span className="text-amber-400">[{fn.number}]</span>
-                  <span>{fn.text}</span>
+                <div key={fn.number} className="article-reference">
+                  <span>[{fn.number}]</span>
+                  <div>
+                    <p>{fn.text}</p>
+                    {fn.url && (
+                      <a href={fn.url} target="_blank" rel="noreferrer">
+                        Open source <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
-            </footer>
+            </section>
           )}
 
         </div>
