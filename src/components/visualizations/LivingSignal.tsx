@@ -123,32 +123,51 @@ export function LivingSignal() {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
     const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    event.currentTarget.style.setProperty('--signal-rx', `${(-y * 2.4).toFixed(2)}deg`);
-    event.currentTarget.style.setProperty('--signal-ry', `${(x * 3.2).toFixed(2)}deg`);
+    event.currentTarget.style.setProperty('--signal-rx', `${(-y * 5.5).toFixed(2)}deg`);
+    event.currentTarget.style.setProperty('--signal-ry', `${(x * 7.5).toFixed(2)}deg`);
+    event.currentTarget.style.setProperty('--signal-x', `${((x + 1) * 50).toFixed(1)}%`);
+    event.currentTarget.style.setProperty('--signal-y', `${((y + 1) * 50).toFixed(1)}%`);
   };
 
   const resetPointer = (event: React.PointerEvent<HTMLDivElement>) => {
     event.currentTarget.style.setProperty('--signal-rx', '0deg');
     event.currentTarget.style.setProperty('--signal-ry', '0deg');
+    event.currentTarget.style.setProperty('--signal-x', '50%');
+    event.currentTarget.style.setProperty('--signal-y', '50%');
   };
 
   return (
-    <div ref={root} className="living-signal" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+    <div ref={root} className={`living-signal signal-art signal-art--${state}`} onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
       <div className="signal-top">
-        <span>Strategy → Execution</span>
+        <span>Chromatic intelligence field / Strategy → Execution</span>
       </div>
 
       <div className="signal-object-wrap">
-        <svg viewBox="0 0 600 520" aria-hidden="true" className="signal-surface">
+        <div className="chromatic-volume" aria-hidden="true">
+          <div className="chromatic-volume__halo" />
+          <div className="chromatic-volume__core">
+            <span className="chromatic-blob chromatic-blob--a" />
+            <span className="chromatic-blob chromatic-blob--b" />
+            <span className="chromatic-blob chromatic-blob--c" />
+            <span className="chromatic-blob chromatic-blob--d" />
+            <span className="chromatic-ring chromatic-ring--a" />
+            <span className="chromatic-ring chromatic-ring--b" />
+            <span className="chromatic-plane chromatic-plane--a" />
+            <span className="chromatic-plane chromatic-plane--b" />
+          </div>
+        </div>
+        <svg viewBox="0 0 600 520" aria-hidden="true" className="signal-surface signal-surface--3d">
           <defs>
             <linearGradient id="signal-ink" x1="0" y1="0" x2="1" y2="1">
-              <stop stopColor="currentColor" />
-              <stop offset="0.48" stopColor="var(--accent)" />
-              <stop offset="1" stopColor="currentColor" />
+              <stop stopColor="var(--signal-c1)" />
+              <stop offset="0.32" stopColor="var(--signal-c2)" />
+              <stop offset="0.68" stopColor="var(--signal-c3)" />
+              <stop offset="1" stopColor="var(--signal-c4)" />
             </linearGradient>
             <radialGradient id="signal-halo">
-              <stop offset="0" stopColor="var(--accent)" stopOpacity=".13" />
-              <stop offset="1" stopColor="var(--accent)" stopOpacity="0" />
+              <stop offset="0" stopColor="var(--signal-c2)" stopOpacity=".18" />
+              <stop offset=".5" stopColor="var(--signal-c3)" stopOpacity=".07" />
+              <stop offset="1" stopColor="var(--signal-c1)" stopOpacity="0" />
             </radialGradient>
           </defs>
           <circle cx="305" cy="270" r="220" fill="url(#signal-halo)" />
