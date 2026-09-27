@@ -29,7 +29,7 @@
   inset:3% 1%;
   z-index:0;
   transform-style:preserve-3d;
-  transform:rotateX(calc(var(--signal-rx,0deg) * .72)) rotateY(calc(var(--signal-ry,0deg) * .72));
+  transform:rotateX(var(--signal-rx,0deg)) rotateY(var(--signal-ry,0deg));
   transition:transform .9s var(--ease-premium);
   pointer-events:none;
   will-change:transform;
