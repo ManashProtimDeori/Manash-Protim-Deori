@@ -178,7 +178,7 @@ export const ArticleDetailPage: React.FC = () => {
 
           {/* Footnotes & Citations */}
           {article.content.footnotes && (
-            <footer className="pt-10 mt-16 border-t border-neutral-800/80 text-xs text-neutral-500 font-mono space-y-2">
+            <section className="article-references pt-10 mt-16 border-t border-neutral-800/80 text-xs text-neutral-500 font-mono space-y-2">
               <span className="uppercase tracking-wider text-neutral-400 font-bold block mb-2">
                 References & Citations:
               </span>
@@ -195,7 +195,7 @@ export const ArticleDetailPage: React.FC = () => {
                   </div>
                 </div>
               ))}
-            </footer>
+            </section>
           )}
 
         </div>
