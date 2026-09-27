@@ -303,7 +303,7 @@ export const ResumePage: React.FC = () => {
           </div>
         </section>
 
-        <section className="resume-section">
+        <section className="resume-section resume-projects-section">
           <div className="resume-section-heading"><h3>Projects</h3></div>
           <div className="resume-stack">
             {resumeData.projects.map((item, index) => (
