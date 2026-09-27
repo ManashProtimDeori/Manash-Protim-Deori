@@ -273,3 +273,51 @@ export interface SiteConfig {
     github: string;
   };
 }
+
+
+export interface ResumeHeaderData {
+  name: string;
+  titleLine: string;
+  phone: string;
+  email: string;
+  linkedin: string;
+  relocation: string;
+  portfolio: string;
+}
+
+export interface ResumeSkillGroup {
+  heading: string;
+  items: string[];
+}
+
+export interface ResumeExperienceEntry {
+  role: string;
+  period: string;
+  organization: string;
+  bullets: string[];
+}
+
+export interface ResumeProjectEntry {
+  title: string;
+  period: string;
+  organization: string;
+  bullets: string[];
+}
+
+export interface ResumeEducationEntry {
+  degree: string;
+  period: string;
+  institution: string;
+}
+
+export interface ResumeData {
+  header: ResumeHeaderData;
+  summary: string;
+  skills: ResumeSkillGroup[];
+  workExperience: ResumeExperienceEntry[];
+  projects: ResumeProjectEntry[];
+  education: ResumeEducationEntry[];
+  otherInformationHeading: string;
+  achievementsHeading: string;
+  achievements: string[];
+}
