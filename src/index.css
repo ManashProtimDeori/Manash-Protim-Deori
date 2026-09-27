@@ -2384,3 +2384,21 @@ footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
     padding-left:1.15rem!important;
   }
 }
+
+
+/* Resume print pagination: keep Projects and all of its bullets together on page 2 */
+@media print{
+  .resume-projects-section{
+    break-before:page!important;
+    page-break-before:always!important;
+    margin-top:0!important;
+  }
+  .resume-projects-section>.resume-section-heading{
+    break-after:avoid-page!important;
+    page-break-after:avoid!important;
+  }
+  .resume-projects-section .resume-entry{
+    break-inside:avoid-page!important;
+    page-break-inside:avoid!important;
+  }
+}
