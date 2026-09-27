@@ -15,13 +15,13 @@ export const WritingPage: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-6 border-b border-neutral-800/40">
         <div className="max-w-3xl space-y-3">
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
-            Publication & Strategic Essays
+            Evidence-led essays · industry intelligence
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
             Writing & Perspectives
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
-            Essays on modern marketing strategy, algorithmic distribution surfaces, unit economic constraints, and deterministic AI agent architectures.
+            Research-backed essays that turn industry data into decisions — with primary sources, charts, quantitative models, uncomfortable questions and the occasional useful joke.
           </p>
         </div>
 
@@ -38,10 +38,12 @@ export const WritingPage: React.FC = () => {
 
       {/* Articles Archive List */}
       <div className="space-y-12 max-w-4xl">
-        {articles.map((article, idx) => (
+        {articles.map((article, idx) => {
+          const chartCount = article.content.sections.reduce((sum, section) => sum + (section.charts?.length || 0), 0);
+          return (
           <article
             key={article.id}
-            className="space-y-4 pt-6 border-t border-neutral-800/60 flex flex-col justify-between group transition-all"
+            className="writing-intelligence-card group"
           >
             <div className="space-y-3">
               {/* Unboxed Metadata + Edit Button */}
@@ -49,7 +51,7 @@ export const WritingPage: React.FC = () => {
                 <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
                   <span className="text-amber-400/90 font-medium">0{idx + 1}</span>
                   <span aria-hidden="true" className="text-neutral-600">·</span>
-                  <span>{article.publishedAt}</span>
+                  <span>{article.updatedAt ? 'Updated ' + article.updatedAt : article.publishedAt}</span>
                   <span aria-hidden="true" className="text-neutral-600">·</span>
                   <span>{article.readTime}</span>
                   <span aria-hidden="true" className="text-neutral-600">·</span>
@@ -72,11 +74,22 @@ export const WritingPage: React.FC = () => {
               <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-sans max-w-3xl pt-1">
                 {article.excerpt}
               </p>
+
+              {article.content.heroStats && (
+                <div className="writing-preview-stats">
+                  {article.content.heroStats.slice(0, 3).map(stat => (
+                    <div key={stat.label}>
+                      <strong>{stat.value}</strong>
+                      <span>{stat.label}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            <div className="pt-4 border-t border-neutral-800/40 flex items-center justify-between">
+            <div className="writing-card-footer">
               <span className="text-xs font-mono text-neutral-500">
-                Tags: {article.tags.join(' · ')}
+                {chartCount} data figure{chartCount === 1 ? '' : 's'} · {article.content.footnotes?.length || 0} cited source{(article.content.footnotes?.length || 0) === 1 ? '' : 's'}
               </span>
 
               <Link
@@ -88,7 +101,8 @@ export const WritingPage: React.FC = () => {
               </Link>
             </div>
           </article>
-        ))}
+          );
+        })}
       </div>
 
     </div>
