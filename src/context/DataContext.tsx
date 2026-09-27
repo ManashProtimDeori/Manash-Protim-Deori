@@ -139,11 +139,14 @@ const STORAGE_KEYS = {
   RESUME: 'mpd_data_resume'
 };
 
-const LEGACY_PROFILE_SENTENCE = 'Marketing, strategy, analytics and AI — informed by a B.Tech in Chemical Engineering from Rajiv Gandhi Institute of Petroleum Technology and an MBA from IIM Shillong.';
+const LEGACY_PROFILE_SENTENCE_PATTERN = /Marketing,\s*strategy,\s*analytics\s*and\s*AI\s*[—–-]\s*informed\s*by\s*a\s*B\.?\s*Tech\s*in\s*Chemical\s*Engineering\s*from\s*Rajiv\s*Gandhi\s*Institute\s*of\s*Petroleum\s*Technology\s*and\s*an\s*MBA\s*from\s*IIM\s*Shillong\.?/gi;
 
 function stripLegacyProfileSentenceDeep<T>(value: T): T {
   if (typeof value === 'string') {
-    return value.replace(LEGACY_PROFILE_SENTENCE, '').trim() as T;
+    return value
+      .replace(LEGACY_PROFILE_SENTENCE_PATTERN, '')
+      .replace(/\s{2,}/g, ' ')
+      .trim() as T;
   }
   if (Array.isArray(value)) {
     return value.map(item => stripLegacyProfileSentenceDeep(item)) as T;
@@ -161,7 +164,13 @@ function getStored<T>(key: string, fallback: T): T {
   try {
     const raw = localStorage.getItem(key);
     const value = raw ? JSON.parse(raw) : fallback;
-    return stripLegacyProfileSentenceDeep(value);
+    const sanitized = stripLegacyProfileSentenceDeep(value);
+
+    if (raw && JSON.stringify(sanitized) !== JSON.stringify(value)) {
+      localStorage.setItem(key, JSON.stringify(sanitized));
+    }
+
+    return sanitized;
   } catch (e) {
     console.error(`Error reading ${key} from storage:`, e);
     return stripLegacyProfileSentenceDeep(fallback);
