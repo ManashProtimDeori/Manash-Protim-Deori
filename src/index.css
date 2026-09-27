@@ -96,29 +96,34 @@
  --font-mono: 'Geist', sans-serif;
 }
 :root {
- --bg-primary:#f5f4f0; --bg-secondary:#eae9e3; --bg-dark:#0b0b0b;
- --text-primary:#111111; --text-secondary:#62625e; --text-inverse:#f5f4f0;
- --accent:#335cff; --border-soft:rgba(20,20,20,.15);
+ --bg-primary:#f8fafc; --bg-secondary:#edf2f7; --bg-dark:#090b0f;
+ --text-primary:#111318; --text-secondary:#5f6875; --text-inverse:#f8fafc;
+ --accent:#315f9f; --accent-blue:#315f9f; --accent-blue-soft:#eaf1f9;
+ --accent-red:#d77b7f; --accent-red-soft:#f9ecec;
+ --surface-white:#ffffff; --surface-black:#0b0d11;
+ --border-soft:rgba(17,19,24,.13);
  --font-body:'Geist',sans-serif; --font-display:'Instrument Serif',Georgia,serif;
  --font-sans:var(--font-body); --font-serif:var(--font-display); --font-mono:var(--font-body);
  --container-wide:1500px; --container-reading:720px; --gutter:clamp(24px,5vw,88px);
  --ease-premium:cubic-bezier(.22,1,.36,1);
  --space-1:4px; --space-2:8px; --space-3:16px; --space-4:24px; --space-5:40px;
  --space-6:64px; --space-7:96px; --space-8:128px; --space-9:160px; --space-10:200px;
- --color-neutral-950:#f5f4f0; --color-neutral-900:#eae9e3; --color-neutral-800:#d4d3cd;
- --color-neutral-700:#74746f; --color-neutral-600:#686863; --color-neutral-500:#62625e;
- --color-neutral-400:#62625e; --color-neutral-300:#42423e; --color-neutral-200:#272725;
- --color-neutral-100:#111111; --color-neutral-50:#f5f4f0;
- --color-amber-300:#335cff; --color-amber-400:#335cff; --color-amber-500:#335cff;
+ --color-neutral-950:#f8fafc; --color-neutral-900:#edf2f7; --color-neutral-800:#d6dde6;
+ --color-neutral-700:#727c88; --color-neutral-600:#66707c; --color-neutral-500:#5f6875;
+ --color-neutral-400:#5f6875; --color-neutral-300:#414953; --color-neutral-200:#252a31;
+ --color-neutral-100:#111318; --color-neutral-50:#ffffff;
+ --color-amber-300:#315f9f; --color-amber-400:#315f9f; --color-amber-500:#315f9f;
 }
 .dark {
- --bg-primary:#111111; --bg-secondary:#1b1b1a; --text-primary:#f5f4f0; --text-secondary:#b0b0a9;
- --border-soft:rgba(245,244,240,.17); --accent:#91a7ff;
- --color-neutral-950:#111111; --color-neutral-900:#1b1b1a; --color-neutral-800:#343432;
- --color-neutral-700:#777770; --color-neutral-600:#a0a09a; --color-neutral-500:#a0a09a;
- --color-neutral-400:#b0b0a9; --color-neutral-300:#d0d0c8; --color-neutral-200:#e5e5dd;
- --color-neutral-100:#f5f4f0; --color-neutral-50:#f5f4f0;
- --color-amber-300:#91a7ff; --color-amber-400:#91a7ff; --color-amber-500:#91a7ff;
+ --bg-primary:#0b0d11; --bg-secondary:#15191f; --text-primary:#f7f9fc; --text-secondary:#aeb6c1;
+ --border-soft:rgba(247,249,252,.15); --accent:#7fa7dc; --accent-blue:#7fa7dc;
+ --accent-blue-soft:#152237; --accent-red:#e59699; --accent-red-soft:#2a181b;
+ --surface-white:#f7f9fc; --surface-black:#08090c;
+ --color-neutral-950:#0b0d11; --color-neutral-900:#15191f; --color-neutral-800:#303640;
+ --color-neutral-700:#6f7885; --color-neutral-600:#9ba4af; --color-neutral-500:#9ba4af;
+ --color-neutral-400:#aeb6c1; --color-neutral-300:#d1d7de; --color-neutral-200:#e6eaf0;
+ --color-neutral-100:#f7f9fc; --color-neutral-50:#ffffff;
+ --color-amber-300:#7fa7dc; --color-amber-400:#7fa7dc; --color-amber-500:#7fa7dc;
 }
 body { background:var(--bg-primary); color:var(--text-primary); font-family:var(--font-body); }
 #root>div { background:var(--bg-primary); color:var(--text-primary); }
@@ -2400,5 +2405,261 @@ footer [class*='border-neutral']{border-color:rgba(255,255,255,.13)!important}
   .resume-projects-section .resume-entry{
     break-inside:avoid-page!important;
     page-break-inside:avoid!important;
+  }
+}
+
+
+/* --- Restrained blue / light-red premium palette ------------------------ */
+html{
+  background:var(--surface-black);
+}
+body{
+  background:var(--bg-primary);
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0 0 auto 0;
+  height:2px;
+  z-index:120;
+  pointer-events:none;
+  background:linear-gradient(90deg,var(--accent-blue) 0 74%,var(--accent-red) 74% 100%);
+}
+::selection{
+  background:color-mix(in srgb,var(--accent-blue) 22%,transparent)!important;
+}
+
+/* Keep the page mostly black/white, with chroma concentrated at decision points. */
+.light header{
+  background:color-mix(in srgb,#ffffff 94%,transparent)!important;
+  box-shadow:0 1px 0 color-mix(in srgb,var(--accent-blue) 13%,transparent);
+}
+.dark header{
+  background:color-mix(in srgb,#090b0f 94%,transparent)!important;
+  box-shadow:0 1px 0 color-mix(in srgb,var(--accent-blue) 18%,transparent);
+}
+.primary-nav-indicator{
+  background:var(--accent-blue)!important;
+}
+.primary-nav-group:nth-child(4n+2) .primary-nav-indicator,
+.primary-nav-group:nth-child(4n+4) .primary-nav-indicator{
+  background:var(--accent-red)!important;
+}
+.primary-nav-dropdown{
+  border-color:color-mix(in srgb,var(--accent-blue) 22%,var(--border-soft));
+}
+.primary-nav-dropdown-head{
+  background:color-mix(in srgb,var(--accent-blue-soft) 52%,var(--bg-primary));
+}
+.primary-nav-dropdown-item:nth-child(even):hover,
+.primary-nav-dropdown-item:nth-child(even):focus-visible{
+  background:color-mix(in srgb,var(--accent-red-soft) 60%,var(--bg-primary));
+}
+.primary-nav-dropdown-item:nth-child(odd):hover,
+.primary-nav-dropdown-item:nth-child(odd):focus-visible{
+  background:color-mix(in srgb,var(--accent-blue-soft) 70%,var(--bg-primary));
+}
+.primary-nav-dropdown-item:nth-child(even) .primary-nav-dropdown-index{
+  color:var(--accent-red);
+}
+
+/* Editorial headlines stay black/white; selected italic words carry the softer red. */
+h1 em,h2 em,h3 em,
+.hero-intro h1 em,
+.about-section h2 em{
+  color:var(--accent-red);
+}
+
+/* Homepage rhythm: white -> soft blue -> black -> soft red -> white */
+.hero-intro{
+  position:relative;
+}
+.hero-intro::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:18%;
+  width:48px;
+  height:3px;
+  background:var(--accent-blue);
+}
+.hero-intro::after{
+  content:"";
+  position:absolute;
+  left:58px;
+  top:18%;
+  width:16px;
+  height:3px;
+  background:var(--accent-red);
+}
+.selected-work{
+  position:relative;
+}
+.project-feature:nth-of-type(odd) .project-visual{
+  background:color-mix(in srgb,var(--accent-blue-soft) 66%,var(--bg-secondary));
+}
+.project-feature:nth-of-type(even) .project-visual{
+  background:color-mix(in srgb,var(--accent-red-soft) 64%,var(--bg-secondary));
+}
+.project-feature:nth-of-type(even) .project-structure span{
+  color:var(--accent-red);
+}
+.project-feature:nth-of-type(even) .text-link:hover{
+  color:var(--accent-red);
+}
+.lab-feature{
+  background:#090b0f!important;
+  border-top:1px solid color-mix(in srgb,var(--accent-blue) 36%,transparent)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--accent-red) 28%,transparent)!important;
+}
+.academic-section{
+  position:relative;
+}
+.academic-list article:first-child{
+  background:color-mix(in srgb,var(--accent-blue-soft) 58%,transparent);
+  border-top-color:color-mix(in srgb,var(--accent-blue) 30%,var(--border-soft));
+  padding-inline:clamp(16px,2vw,28px);
+}
+.academic-list article:last-child{
+  background:color-mix(in srgb,var(--accent-red-soft) 58%,transparent);
+  border-top-color:color-mix(in srgb,var(--accent-red) 30%,var(--border-soft));
+  padding-inline:clamp(16px,2vw,28px);
+}
+
+/* About uses its existing signal taxonomy to distribute colour deliberately. */
+.about-section[data-signal="strategy"] .eyebrow,
+.about-section[data-signal="marketing"] .eyebrow{
+  color:var(--accent-red);
+}
+.about-section[data-signal="analytics"] .eyebrow,
+.about-section[data-signal="build"] .eyebrow{
+  color:var(--accent-blue);
+}
+.principle-list article:nth-child(odd),
+.competency-list article:nth-child(odd){
+  background:color-mix(in srgb,var(--accent-blue-soft) 34%,transparent);
+}
+.principle-list article:nth-child(even),
+.competency-list article:nth-child(even){
+  background:color-mix(in srgb,var(--accent-red-soft) 34%,transparent);
+}
+.principle-list article,
+.competency-list article{
+  padding-inline:clamp(12px,1.5vw,22px);
+}
+
+/* Writing becomes an editorial research ledger rather than a monochrome list. */
+.writing-intelligence-card{
+  padding-inline:clamp(12px,1.5vw,20px);
+  border-left:2px solid transparent;
+}
+.writing-intelligence-card:nth-child(odd){
+  border-left-color:color-mix(in srgb,var(--accent-blue) 70%,transparent);
+  background:color-mix(in srgb,var(--accent-blue-soft) 34%,transparent);
+}
+.writing-intelligence-card:nth-child(even){
+  border-left-color:color-mix(in srgb,var(--accent-red) 70%,transparent);
+  background:color-mix(in srgb,var(--accent-red-soft) 34%,transparent);
+}
+.writing-intelligence-card:nth-child(even) [class*="text-amber-400"]{
+  color:var(--accent-red)!important;
+}
+.article-callout{
+  border-left:2px solid var(--accent-red);
+  padding-left:14px;
+}
+.article-data-chart:nth-of-type(even){
+  border-color:color-mix(in srgb,var(--accent-red) 24%,var(--article-rule));
+}
+.article-data-chart:nth-of-type(even) .article-bar-track i,
+.article-data-chart:nth-of-type(even) .article-chart-line{
+  background:var(--accent-red);
+  stroke:var(--accent-red);
+}
+
+/* Lab and tool cards get controlled colour, not rainbow styling. */
+.lab-experiment-anchor:nth-child(odd){
+  border-top:2px solid color-mix(in srgb,var(--accent-blue) 70%,transparent)!important;
+  background:color-mix(in srgb,var(--accent-blue-soft) 34%,var(--bg-primary))!important;
+}
+.lab-experiment-anchor:nth-child(even){
+  border-top:2px solid color-mix(in srgb,var(--accent-red) 70%,transparent)!important;
+  background:color-mix(in srgb,var(--accent-red-soft) 34%,var(--bg-primary))!important;
+}
+.mi-panel:nth-of-type(even),
+.intel-panel:nth-of-type(even),
+.hc-panel:nth-of-type(even){
+  border-color:color-mix(in srgb,var(--accent-red) 18%,var(--border-soft));
+}
+.mi-panel:nth-of-type(odd),
+.intel-panel:nth-of-type(odd),
+.hc-panel:nth-of-type(odd){
+  border-color:color-mix(in srgb,var(--accent-blue) 18%,var(--border-soft));
+}
+
+/* Inputs, active controls and premium CTAs retain strong black/white contrast. */
+input:focus,textarea:focus,select:focus{
+  border-color:var(--accent-blue)!important;
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--accent-blue) 10%,transparent);
+}
+.text-link:hover,
+a:hover{
+  text-decoration-color:var(--accent-blue);
+}
+.resume-action-primary,
+.light .resume-action-primary{
+  background:#101318;
+  color:#ffffff;
+  border-color:#101318;
+}
+.resume-action-secondary:hover{
+  border-color:color-mix(in srgb,var(--accent-blue) 48%,var(--border-soft));
+}
+
+/* Footer stays black, with a restrained two-colour signature. */
+footer{
+  position:relative;
+  background:#090b0f!important;
+  color:#b9c0ca!important;
+}
+footer::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:76%;
+  height:1px;
+  background:var(--accent-blue);
+}
+footer::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:24%;
+  height:1px;
+  background:var(--accent-red);
+}
+footer .eyebrow{
+  color:#8faee0!important;
+}
+footer a:hover{
+  color:#f0a1a4!important;
+}
+
+@media(max-width:767px){
+  .hero-intro::before{width:34px}
+  .hero-intro::after{left:42px;width:12px}
+  .academic-list article{padding-inline:14px}
+  .writing-intelligence-card{padding-inline:12px}
+}
+@media print{
+  body::before{display:none!important}
+  .writing-intelligence-card,
+  .academic-list article,
+  .principle-list article,
+  .competency-list article{
+    background:#fff!important;
+    border-color:#000!important;
   }
 }
