@@ -123,5 +123,34 @@ export const toolsData: ToolItem[] = [
     changelog: [
       { version: 'v1.0', date: '2026-09', notes: 'Initial release of MarketSignal OS as a separate enterprise marketing decision intelligence tool' }
     ]
+  },
+  {
+    id: 'tool-6',
+    slug: 'hillchain-twin',
+    name: 'HillChain Twin',
+    category: 'Supply Chain Digital Twin & Infrastructure Intelligence',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A mountain supply-chain financial, geospatial, resilience and public-value digital twin for difficult terrain, beginning with a synthetic Meghalaya-style network.',
+    instructions: 'Use the control towers, route and district rooms, tariff and equity engine, inventory model, disruption lab, monsoon mode, public investment optimizer and AI analyst to explore how geography, infrastructure, demand, inventory, transport, risk and finance interact. All operational values are clearly labeled synthetic demo data until verified live sources are connected.',
+    features: [
+      'Configurable supply nodes and transport edges linking quantity, origin, destination, vehicle, distance, terrain, time, cost, risk and service',
+      'Terrain Complexity Index and Effective Logistics Distance engine using Meghalaya-weighted engineering priors',
+      'Route-level cost-to-serve model with fuel, labor, handling, maintenance, terrain, weather, disruption and risk premiums',
+      'Dynamic inventory, safety stock, stockout risk, warehouse utilization and days-of-supply calculations',
+      'Government Flat vs Variable vs Hybrid terrain-equity reimbursement simulation',
+      'Private operator break-even economics and transporter reliability scoring',
+      'Monsoon, landslide, Assam-access, fuel-shock and compound disruption scenarios with propagated service and financial effects',
+      'Network digital twin allowing route removal and system-wide recalculation',
+      'Monte Carlo cost, stockout and service-level uncertainty ranges',
+      'One Rupee Optimizer and infrastructure prioritizer balancing NPV, service, resilience, equity and population benefited',
+      'District control room, route control room, schematic network map, risk heatmap and resilience control tower',
+      'AI Supply Chain Analyst grounded only in the current model state, with explicit confidence and synthetic-data boundaries'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Native SVG', 'Deterministic Operations Research Engine', 'Monte Carlo Simulation', 'Decision Intelligence'],
+    interactiveComponent: 'HillChainTwin',
+    changelog: [
+      { version: 'v1.0', date: '2026-09', notes: 'Initial HillChain Twin release with digital-twin network, financial, risk, inventory, tariff, resilience and infrastructure-planning modules' }
+    ]
   }
 ];
