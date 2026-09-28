@@ -1,0 +1,163 @@
+.owner-inquiry-indicator{
+  position:relative;
+  display:inline-grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border:1px solid rgba(185,199,222,.22);
+  border-radius:10px;
+  background:linear-gradient(180deg,#202835,#10161f);
+  color:#dbe3ec;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 4px 10px rgba(0,0,0,.22);
+  text-decoration:none;
+}
+.owner-inquiry-indicator>span{
+  position:absolute;
+  right:-6px;
+  top:-6px;
+  min-width:18px;
+  height:18px;
+  padding:0 4px;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:#8e4651;
+  color:#fff;
+  border:2px solid #151a21;
+  font:700 10px/1 var(--font-body);
+}
+.inquiry-inbox{position:relative;z-index:2}
+.inquiry-inbox__header{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--border-soft);
+}
+.inquiry-inbox__header h1{
+  margin-top:8px;
+  font-size:clamp(2.1rem,5vw,4rem);
+  line-height:1;
+}
+.inquiry-inbox__header p{
+  max-width:720px;
+  margin-top:12px;
+  color:var(--text-secondary);
+  font-size:.96rem;
+}
+.inquiry-inbox__actions{display:flex;gap:8px;flex-wrap:wrap}
+.inquiry-inbox__actions button,
+.inquiry-card__controls button,
+.inquiry-card__controls a{
+  min-height:38px;
+  padding:0 12px;
+  border:1px solid var(--border-soft);
+  border-radius:9px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:var(--surface-elevated);
+  color:var(--text-primary);
+  font-size:.8rem;
+  font-weight:600;
+  text-decoration:none;
+}
+.inquiry-inbox__filters{
+  display:flex;
+  gap:7px;
+  margin:22px 0;
+  overflow-x:auto;
+}
+.inquiry-inbox__filters button{
+  min-height:40px;
+  padding:0 12px;
+  border:1px solid var(--border-soft);
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:var(--surface-elevated);
+  color:var(--text-secondary);
+}
+.inquiry-inbox__filters button.is-active{
+  color:var(--text-primary);
+  border-color:var(--border-strong);
+  background:var(--surface-muted);
+}
+.inquiry-inbox__filters b{
+  min-width:22px;
+  padding:2px 6px;
+  border-radius:999px;
+  background:var(--bg-secondary);
+  color:var(--text-primary);
+  font-size:.72rem;
+}
+.inquiry-inbox__list{display:grid;gap:12px}
+.inquiry-card{
+  padding:20px;
+  border:1px solid var(--border-soft);
+  border-radius:14px;
+  background:var(--surface-elevated);
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+}
+.inquiry-card--new{border-left:4px solid #6d839c}
+.inquiry-card--archived{opacity:.72}
+.inquiry-card__top{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+}
+.inquiry-card__identity{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.inquiry-card__identity strong{font-size:1rem}
+.inquiry-card__identity span{color:var(--text-secondary);font-size:.79rem}
+.inquiry-card__meta{
+  margin-top:5px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px 12px;
+  color:var(--text-secondary);
+  font-size:.76rem;
+}
+.inquiry-card__meta a{display:inline-flex;align-items:center;gap:5px;color:inherit}
+.inquiry-status{
+  align-self:flex-start;
+  padding:4px 8px;
+  border:1px solid var(--border-soft);
+  border-radius:999px;
+  color:var(--text-secondary);
+  font-size:.69rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.inquiry-status--new{color:#44617e}
+.dark .inquiry-status--new{color:#a8bfd8}
+.inquiry-card__message{
+  margin:17px 0;
+  padding:15px;
+  border-radius:10px;
+  background:var(--bg-secondary);
+  color:var(--text-primary)!important;
+  font-size:.92rem;
+  line-height:1.6;
+  white-space:pre-wrap;
+}
+.inquiry-card__controls{display:flex;gap:7px;flex-wrap:wrap}
+.inquiry-inbox__empty,.inquiry-inbox__error{
+  min-height:140px;
+  padding:24px;
+  border:1px solid var(--border-soft);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:var(--text-secondary);
+  background:var(--surface-elevated);
+}
+.inquiry-inbox__error{min-height:auto;color:#a34a54;border-color:#a34a54}
+@media(max-width:760px){
+  .inquiry-inbox__header{align-items:flex-start;flex-direction:column}
+  .inquiry-card__top{flex-direction:column}
+}
