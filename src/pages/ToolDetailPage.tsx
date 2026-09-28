@@ -41,7 +41,7 @@ export const ToolDetailPage: React.FC = () => {
   };
 
   return (
-    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'utm-builder' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
+    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'roi-calculator' || toolItem.slug === 'utm-builder' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
       {/* Back Link & Edit */}
       <div className="tools-premium-backbar mb-8 flex items-center justify-between">
         <Link

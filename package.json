@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit && tsc -p api/tsconfig.json --noEmit"
+    "lint": "tsc --noEmit && tsc -p api/tsconfig.json --noEmit",
+    "test:economics": "tsx tests/campaign-economics.ts",
+    "verify": "npm run lint && npm run test:economics && npm run build"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

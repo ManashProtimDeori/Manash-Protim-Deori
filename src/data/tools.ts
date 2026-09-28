@@ -5,22 +5,28 @@ export const toolsData: ToolItem[] = [
     id: 'tool-1',
     slug: 'roi-calculator',
     name: 'Campaign ROI & Payback Engine',
-    category: 'Marketing Analytics',
+    category: 'Marketing Analytics & Finance',
     status: 'Live',
-    version: 'v1.4',
-    description: 'An interactive financial calculator for marketing spend, unit margins, Customer Acquisition Cost (CAC), Lifetime Value (LTV), and cash payback horizons.',
-    instructions: 'Adjust your acquisition spend, customer order values, repeat purchase frequency, and gross margins to calculate net margins, payback months, and sensitivity scenarios.',
+    version: 'v2.0',
+    description: 'A deterministic campaign economics engine connecting paid media, causal incrementality, fully-loaded acquisition cost, contribution-margin LTV, discounted payback, break-even thresholds and scenario risk.',
+    instructions: 'Enter media and fixed acquisition costs, CPC, customer conversion, causal incrementality, order economics, refunds, variable costs, churn and discount rate. Use the executive economics, break-even controls, scenario table, sensitivity surface and formula audit trail to judge whether growth creates value.',
     features: [
-      'Calculates Paid CAC, Blended CAC, and LTV:CAC ratios',
-      'Determines exact Cash Payback period in months',
-      'Dynamic 5x5 sensitivity stress test matrix',
-      'Export calculation summary with one click'
+      'Separates attributed customers from causal incremental customers so attribution is never treated as incrementality',
+      'Calculates attributed paid CAC, incremental media CAC and fully-loaded incremental CAC',
+      'Models finite-horizon cohort contribution LTV with churn, refunds, non-COGS variable costs and annual discounting',
+      'Computes discounted cash payback with within-month interpolation rather than a simplistic CAC divided by monthly margin shortcut',
+      'Calculates marketing ROI, incremental ROAS, contribution ROAS, campaign profit PV and profit per incremental customer',
+      'Solves break-even CPC, target 3.0x LTV:CAC CPC, minimum CVR, minimum incrementality and fixed-cost scale threshold algebraically',
+      'Runs downside, base and upside scenarios plus a 5x5 CPC × conversion ROI sensitivity surface',
+      'Includes visible formulas, model diagnostics, multi-currency display and exportable audit summary',
+      'Pure TypeScript formula engine with deterministic unit tests covering arithmetic, churn, incrementality, payback and invalid inputs'
     ],
-    technologies: ['React 19', 'TypeScript', 'Tailwind CSS', 'Tabular Numerals'],
+    technologies: ['React 19', 'TypeScript', 'Deterministic Formula Engine', 'Discounted Cohort Model', 'Sensitivity Analysis', 'Unit Tests'],
     interactiveComponent: 'RoiCalculator',
     changelog: [
-      { version: 'v1.4', date: '2026-02', notes: 'Added working capital drag factor and sensitivity heatmap visualization' },
-      { version: 'v1.0', date: '2025-10', notes: 'Initial release with cohort decay calculations' }
+      { version: 'v2.0', date: '2026-09', notes: 'Rebuilt economics model around causal incrementality, fully-loaded CAC, finite-horizon discounted contribution LTV, exact payback interpolation, break-even algebra, stress scenarios, formula transparency and deterministic tests' },
+      { version: 'v1.4', date: '2026-02', notes: 'Added initial sensitivity analysis' },
+      { version: 'v1.0', date: '2025-10', notes: 'Initial release' }
     ]
   },
   {

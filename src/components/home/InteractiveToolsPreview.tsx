@@ -41,7 +41,7 @@ export const InteractiveToolsPreview: React.FC = () => {
 
         {/* Live Embedded Tool with Minimalist Hairline Frame */}
         <div className="mb-14">
-          <RoiCalculator />
+          <RoiCalculator compact />
         </div>
 
         {/* Companion Tools: Clean 3-Column Editorial Split */}
