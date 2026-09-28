@@ -89,6 +89,19 @@ function pseudoRandom(seed:number) {
   return ()=>{state=(1664525*state+1013904223)>>>0;return state/4294967296;};
 }
 
+function normalRandom(rng:()=>number){
+  const u1=Math.max(1e-12,rng());
+  const u2=Math.max(1e-12,rng());
+  return Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);
+}
+
+function uncertaintyFraction(confidence:number){
+  // 95% confidence still receives a narrow model-error band; low-confidence
+  // scenario variables receive wider perturbations. This is an assumption
+  // distribution for stress testing, not an empirical forecast distribution.
+  return .015+((100-clamp(confidence,0,100))/100)*.105;
+}
+
 function percentile(values:number[],p:number){
   const sorted=[...values].sort((a,b)=>a-b);
   const index=Math.min(sorted.length-1,Math.max(0,Math.floor((sorted.length-1)*p)));
@@ -113,11 +126,16 @@ export function buildScenarioResult(
   const simulationKeys=['organicCtrIndex','referralTrafficIndex','cacPressureIndex','marketingProductivityIndex'];
   const sims:Record<string,number[]>={};
   simulationKeys.forEach(k=>sims[k]=[]);
-  for(let i=0;i<500;i++){
+  const uncertainDrivers=['aiSearchShare','retailMediaShare','creatorCommerceAdoption','thirdPartySignalLoss','aiCreativeAdoption','mediaCostPressure'];
+
+  for(let i=0;i<1000;i++){
     const jittered={...overrides};
-    for(const id of ['aiSearchShare','thirdPartySignalLoss','aiCreativeAdoption','mediaCostPressure']){
+    for(const id of uncertainDrivers){
       const v=variables.find(x=>x.id===id);
-      if(v) jittered[id]=clamp(v.currentValue*((.92)+(rng()*.16)),v.min,v.max);
+      if(!v||locked.has(id)) continue;
+      const sigma=uncertaintyFraction(v.confidence);
+      const shock=normalRandom(rng)*sigma;
+      jittered[id]=clamp(v.currentValue*(1+shock),v.min,v.max);
     }
     const run=computeScenario(base,jittered,locked);
     simulationKeys.forEach(k=>sims[k].push(run.find(v=>v.id===k)?.currentValue ?? 0));
@@ -127,12 +145,15 @@ export function buildScenarioResult(
   simulationKeys.forEach(k=>{p10[k]=percentile(sims[k],.10);p50[k]=percentile(sims[k],.50);p90[k]=percentile(sims[k],.90);});
 
   const sourceDrivers=['aiSearchShare','retailMediaShare','creatorCommerceAdoption','thirdPartySignalLoss','aiCreativeAdoption','mediaCostPressure'];
-  const baselineOutput=variables.find(v=>v.id==='cacPressureIndex')?.currentValue ?? 100;
   const sensitivity=sourceDrivers.map(id=>{
     const v=variables.find(x=>x.id===id)!;
-    const bump={...overrides,[id]:clamp(v.currentValue+(Math.max(1,(v.max-v.min)*.05)),v.min,v.max)};
-    const bumped=computeScenario(base,bump,locked).find(x=>x.id==='cacPressureIndex')?.currentValue ?? baselineOutput;
-    return {id,name:v.name,impact:bumped-baselineOutput};
+    if(locked.has(id)) return {id,name:v.name,impact:0};
+    const step=Math.max(1,(v.max-v.min)*.05);
+    const high={...overrides,[id]:clamp(v.currentValue+step,v.min,v.max)};
+    const low={...overrides,[id]:clamp(v.currentValue-step,v.min,v.max)};
+    const highOutput=computeScenario(base,high,locked).find(x=>x.id==='cacPressureIndex')?.currentValue ?? 100;
+    const lowOutput=computeScenario(base,low,locked).find(x=>x.id==='cacPressureIndex')?.currentValue ?? 100;
+    return {id,name:v.name,impact:(highOutput-lowOutput)/2};
   }).sort((a,b)=>Math.abs(b.impact)-Math.abs(a.impact));
 
   return {variables,changed,p10,p50,p90,sensitivity};
