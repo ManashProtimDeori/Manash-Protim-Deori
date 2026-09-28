@@ -3197,3 +3197,75 @@ p,li{
   #main-content>:not(.contextual-art)::before{display:none!important}
   body{font-size:11pt}
 }
+
+
+/* --- Navigation readability correction ---------------------------------- */
+.site-header-premium .primary-nav-dropdown{
+  min-width:380px;
+  padding:10px;
+  background:linear-gradient(155deg,#18202c 0%,#0d131c 100%)!important;
+  border-color:rgba(191,205,226,.34)!important;
+}
+.site-header-premium .primary-nav-dropdown-head{
+  padding:11px 12px;
+  background:linear-gradient(180deg,#263246,#18212e)!important;
+  border-color:rgba(211,221,236,.14)!important;
+}
+.site-header-premium .primary-nav-dropdown-head span{
+  color:#f4f7fb!important;
+  font-size:.82rem!important;
+  font-weight:700;
+  letter-spacing:.055em;
+}
+.site-header-premium .primary-nav-dropdown-head a{
+  color:#d4deeb!important;
+  font-size:.82rem!important;
+  font-weight:650;
+}
+.site-header-premium .primary-nav-dropdown-item{
+  padding:14px 13px;
+  background:linear-gradient(180deg,#222d3d 0%,#151d29 100%)!important;
+  border-color:rgba(198,211,230,.18)!important;
+}
+.site-header-premium .primary-nav-dropdown-item:hover,
+.site-header-premium .primary-nav-dropdown-item:focus-visible{
+  background:linear-gradient(180deg,#2c3a4e 0%,#1a2533 100%)!important;
+  border-color:rgba(155,190,238,.52)!important;
+}
+.site-header-premium .primary-nav-dropdown-index{
+  color:#b9d3f6!important;
+  font-size:.78rem!important;
+  line-height:1.45!important;
+}
+.site-header-premium .primary-nav-dropdown-item small{
+  color:#c4cfdd!important;
+  font-size:.79rem!important;
+  line-height:1.5!important;
+  letter-spacing:.015em!important;
+  opacity:1!important;
+}
+.site-header-premium .primary-nav-dropdown-item strong{
+  color:#ffffff!important;
+  font-size:1.04rem!important;
+  font-weight:650!important;
+  line-height:1.32!important;
+  letter-spacing:-.008em!important;
+  text-shadow:0 1px 1px rgba(0,0,0,.5);
+}
+.site-header-premium .primary-nav-dropdown-item p{
+  color:#d2dbe7!important;
+  font-size:.86rem!important;
+  line-height:1.5!important;
+  margin-top:6px!important;
+  opacity:1!important;
+}
+.site-header-premium .primary-nav-mobile-child strong{
+  color:#fff!important;
+  font-size:1rem!important;
+}
+.site-header-premium .primary-nav-mobile-child small,
+.site-header-premium .primary-nav-mobile-child p{
+  color:#d0d9e5!important;
+  font-size:.84rem!important;
+  line-height:1.5!important;
+}
