@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { Send, Check, Copy } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
+import { submitPortfolioInquiry } from '../lib/inquiries';
 
 export const ContactPage: React.FC = () => {
   const { siteConfig, contactData } = useData();
@@ -13,15 +14,35 @@ export const ContactPage: React.FC = () => {
   const [message, setMessage] = useState('');
   const [honeypot, setHoneypot] = useState(''); // Spam protection
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (honeypot) return; // Silent discard for bots
     if (!name.trim() || !email.trim() || !message.trim()) return;
 
-    // Simulate submission handling
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError(null);
+    try {
+      await submitPortfolioInquiry({
+        name,
+        email,
+        organization,
+        inquiryType,
+        message,
+        sourcePath: window.location.pathname,
+      });
+      setSubmitted(true);
+    } catch (error: any) {
+      console.error('[Contact] Inquiry submission failed:', error);
+      setSubmitError(
+        'The secure inquiry inbox is temporarily unavailable. Please use the direct email address shown on this page.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleCopyEmail = () => {
@@ -133,7 +154,7 @@ export const ContactPage: React.FC = () => {
                 Message Transmitted
               </h3>
               <p className="text-sm text-neutral-300 max-w-md mx-auto leading-relaxed font-sans">
-                Thank you, {name}. Your inquiry has been received. I will review your context and respond back shortly to <span className="font-mono text-amber-400">{email}</span>.
+                Thank you, {name}. Your inquiry has been securely received and added to my private inquiry inbox. I will review your context and respond back shortly to <span className="font-mono text-amber-400">{email}</span>.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
@@ -231,12 +252,19 @@ export const ContactPage: React.FC = () => {
                 autoComplete="off"
               />
 
+              {submitError && (
+                <div className="p-3 rounded border border-rose-800/50 bg-rose-950/20 text-sm text-rose-300 leading-relaxed">
+                  {submitError}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full py-3 px-6 rounded bg-amber-400 text-neutral-950 font-mono text-xs font-semibold tracking-wide hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 shadow-sm"
+                disabled={isSubmitting}
+                className="w-full py-3 px-6 rounded bg-amber-400 text-neutral-950 font-mono text-xs font-semibold tracking-wide hover:bg-amber-300 transition-colors flex items-center justify-center gap-2 shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 <Send className="w-3.5 h-3.5" />
-                <span>Transmit Inquiry Directly</span>
+                <span>{isSubmitting ? 'Transmitting securely…' : 'Transmit Inquiry Directly'}</span>
               </button>
 
             </form>
