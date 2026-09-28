@@ -3269,3 +3269,95 @@ p,li{
   font-size:.84rem!important;
   line-height:1.5!important;
 }
+
+
+/* --- Viewport-safe premium navigation menus ------------------------------ */
+.site-header-premium .primary-nav-dropdown{
+  width:min(420px,calc(100vw - 24px));
+  max-width:calc(100vw - 24px);
+  max-height:calc(100dvh - 92px);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  overscroll-behavior:contain;
+}
+.site-header-premium .primary-nav-dropdown-head{
+  flex:0 0 auto;
+}
+.site-header-premium .primary-nav-dropdown-list{
+  min-height:0;
+  max-height:calc(100dvh - 174px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  padding-right:4px;
+  padding-bottom:2px;
+}
+.site-header-premium .primary-nav-dropdown-list::-webkit-scrollbar{
+  width:9px;
+}
+.site-header-premium .primary-nav-dropdown-list::-webkit-scrollbar-track{
+  background:#0b1118;
+  border-radius:999px;
+  box-shadow:inset 0 1px 4px rgba(0,0,0,.52);
+}
+.site-header-premium .primary-nav-dropdown-list::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,#7187a5,#43566f);
+  border:2px solid #0b1118;
+  border-radius:999px;
+}
+.site-header-premium .primary-nav-dropdown-list::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg,#91a9c8,#58708f);
+}
+.site-header-premium .primary-nav-dropdown-list{
+  scrollbar-width:thin;
+  scrollbar-color:#627b9b #0b1118;
+}
+
+/* Short laptop screens keep the same readability while using less vertical
+   padding; scrolling remains available rather than clipping the final item. */
+@media(max-height:760px) and (min-width:768px){
+  .site-header-premium .primary-nav-dropdown{
+    margin-top:7px;
+    padding:8px;
+    max-height:calc(100dvh - 82px);
+  }
+  .site-header-premium .primary-nav-dropdown-head{
+    margin-bottom:5px;
+    padding:9px 10px;
+  }
+  .site-header-premium .primary-nav-dropdown-list{
+    gap:4px;
+    max-height:calc(100dvh - 150px);
+  }
+  .site-header-premium .primary-nav-dropdown-item{
+    padding:10px 11px!important;
+  }
+  .site-header-premium .primary-nav-dropdown-item strong{
+    font-size:.98rem!important;
+  }
+  .site-header-premium .primary-nav-dropdown-item small{
+    font-size:.75rem!important;
+  }
+  .site-header-premium .primary-nav-dropdown-item p{
+    font-size:.82rem!important;
+    line-height:1.42!important;
+    margin-top:4px!important;
+  }
+}
+
+/* Mobile navigation itself must never extend beyond the visible viewport. */
+.site-header-premium .mobile-navigation{
+  max-height:calc(100dvh - 64px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+}
+.site-header-premium .mobile-navigation::-webkit-scrollbar{
+  width:8px;
+}
+.site-header-premium .mobile-navigation::-webkit-scrollbar-thumb{
+  background:#526a88;
+  border-radius:999px;
+}

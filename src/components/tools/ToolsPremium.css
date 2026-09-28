@@ -1037,3 +1037,188 @@
     box-shadow:none!important;
   }
 }
+
+
+/* --- Theme-proof variable controls and analytical line visibility -------- */
+/* Range inputs need explicit browser tracks; styling only the input element
+   allows some engines to render an almost invisible native line. */
+.tools-premium-shell input[type="range"]{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  width:100%;
+  min-height:26px!important;
+  height:26px!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  cursor:pointer;
+}
+
+.dark .tools-premium-shell input[type="range"]::-webkit-slider-runnable-track{
+  height:8px;
+  border:1px solid #607087;
+  border-radius:999px;
+  background:linear-gradient(180deg,#4d5d72 0%,#303d50 42%,#202b3a 100%)!important;
+  box-shadow:
+    inset 0 2px 3px rgba(0,0,0,.44),
+    0 1px 0 rgba(255,255,255,.10),
+    0 0 0 1px rgba(255,255,255,.025);
+}
+.light .tools-premium-shell input[type="range"]::-webkit-slider-runnable-track{
+  height:8px;
+  border:1px solid #7e8da1;
+  border-radius:999px;
+  background:linear-gradient(180deg,#dbe3ec 0%,#bcc9d7 52%,#aebccc 100%)!important;
+  box-shadow:
+    inset 0 1px 3px rgba(35,54,78,.18),
+    0 1px 0 #ffffff;
+}
+
+.dark .tools-premium-shell input[type="range"]::-moz-range-track{
+  height:8px;
+  border:1px solid #607087;
+  border-radius:999px;
+  background:linear-gradient(180deg,#4d5d72,#253244)!important;
+  box-shadow:inset 0 2px 3px rgba(0,0,0,.44);
+}
+.light .tools-premium-shell input[type="range"]::-moz-range-track{
+  height:8px;
+  border:1px solid #7e8da1;
+  border-radius:999px;
+  background:linear-gradient(180deg,#dbe3ec,#aebccc)!important;
+  box-shadow:inset 0 1px 3px rgba(35,54,78,.18);
+}
+
+/* Firefox can also expose the filled portion independently. */
+.dark .tools-premium-shell input[type="range"]::-moz-range-progress{
+  height:8px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#6fa0e6,var(--tool-accent))!important;
+  box-shadow:0 0 9px color-mix(in srgb,var(--tool-accent) 26%,transparent);
+}
+.light .tools-premium-shell input[type="range"]::-moz-range-progress{
+  height:8px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#315e99,#4f79ad)!important;
+}
+
+/* Thumb is deliberately high-contrast in both themes. */
+.tools-premium-shell input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none!important;
+  appearance:none!important;
+  width:20px!important;
+  height:20px!important;
+  margin-top:-7px;
+  border-radius:50%!important;
+  border:2px solid #ffffff!important;
+  background:linear-gradient(145deg,#f9fbfd,#afbdd0)!important;
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.42),
+    0 0 0 3px color-mix(in srgb,var(--tool-accent) 32%,transparent),
+    inset 0 1px 0 #ffffff!important;
+}
+.light .tools-premium-shell input[type="range"]::-webkit-slider-thumb{
+  border-color:#24364e!important;
+  background:linear-gradient(145deg,#ffffff,#d8e0e9)!important;
+  box-shadow:
+    0 3px 8px rgba(34,51,73,.22),
+    0 0 0 3px rgba(61,105,166,.16),
+    inset 0 1px 0 #ffffff!important;
+}
+.tools-premium-shell input[type="range"]::-moz-range-thumb{
+  width:18px!important;
+  height:18px!important;
+  border-radius:50%!important;
+  border:2px solid #ffffff!important;
+  background:linear-gradient(145deg,#f9fbfd,#afbdd0)!important;
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.42),
+    0 0 0 3px color-mix(in srgb,var(--tool-accent) 32%,transparent)!important;
+}
+.light .tools-premium-shell input[type="range"]::-moz-range-thumb{
+  border-color:#24364e!important;
+  background:linear-gradient(145deg,#ffffff,#d8e0e9)!important;
+}
+
+/* Keyboard focus is visible around variable sliders as well. */
+.tools-premium-shell input[type="range"]:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--tool-accent) 82%,white)!important;
+  outline-offset:4px!important;
+  border-radius:999px;
+}
+
+/* Strengthen low-energy analytical lines that can disappear in either theme. */
+.dark .tools-premium-shell :is(
+  hr,.intel-grid-line,.intel-axis,.intel-edge,
+  .hc-route line,.hc-state-shape,
+  table th,table td
+){
+  opacity:1!important;
+}
+.light .tools-premium-shell :is(
+  hr,.intel-grid-line,.intel-axis,.intel-edge,
+  .hc-route line,.hc-state-shape,
+  table th,table td
+){
+  opacity:1!important;
+}
+
+.dark .tools-premium-shell hr{
+  border-color:#46566c!important;
+}
+.light .tools-premium-shell hr{
+  border-color:#a2afbf!important;
+}
+.dark .tools-premium-shell .intel-grid-line{
+  stroke:#4e6077!important;
+}
+.light .tools-premium-shell .intel-grid-line{
+  stroke:#b0bbc8!important;
+}
+.dark .tools-premium-shell .intel-axis{
+  stroke:#93a4b8!important;
+}
+.light .tools-premium-shell .intel-axis{
+  stroke:#63758c!important;
+}
+.dark .tools-premium-shell .intel-edge{
+  stroke:#8191a5!important;
+  opacity:.48!important;
+}
+.light .tools-premium-shell .intel-edge{
+  stroke:#6b7d93!important;
+  opacity:.44!important;
+}
+
+/* Generic dividers and boxes inside tools get a visible but sophisticated edge. */
+.dark .tools-premium-shell [class*="border-neutral-8"],
+.dark .tools-premium-shell [class*="border-neutral-7"]{
+  border-color:#415066!important;
+}
+.light .tools-premium-shell [class*="border-neutral-8"],
+.light .tools-premium-shell [class*="border-neutral-7"],
+.light .tools-premium-shell [class*="border-neutral-2"]{
+  border-color:#a6b2c1!important;
+}
+
+/* Data figures always sit above decorative depth effects. */
+.tools-premium-shell :is(
+  .mi-kpi,.intel-stat,.ms-kpi,.hc-stat,
+  .ms-big-number,.intel-small-score,
+  table,svg,.hc-map,.intel-chart-frame
+){
+  position:relative;
+  z-index:1;
+}
+
+/* Global portfolio fallback for native form controls outside Tools. */
+#main-content input[type="range"]:not(.tools-premium-shell input[type="range"]){
+  accent-color:var(--accent-blue);
+}
+.dark #main-content input[type="range"]:not(.tools-premium-shell input[type="range"]){
+  filter:brightness(1.35) contrast(1.12);
+}
+.light #main-content input[type="range"]:not(.tools-premium-shell input[type="range"]){
+  filter:contrast(1.08);
+}
