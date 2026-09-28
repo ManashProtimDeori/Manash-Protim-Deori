@@ -5,6 +5,7 @@ import { useAuth } from '../../auth/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useData } from '../../context/DataContext';
 import { PrimaryNavigation } from '../navigation/PrimaryNavigation';
+import { OwnerInquiryIndicator } from '../inquiries/OwnerInquiryIndicator';
 
 interface HeaderProps {
   onOpenCommand: () => void;
@@ -112,6 +113,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
             onNavigate={() => setMobileMenuOpen(false)}
           />
           <div className="pt-2 border-t border-neutral-800 flex flex-col gap-2">
+            {isOwner && <Link
+              to="/inquiries"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-between px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-900 rounded-md"
+            >
+              <span>Inquiry Inbox</span>
+              <span className="text-[11px] font-mono text-neutral-500">PRIVATE</span>
+            </Link>}
             {isOwner && <Link
               to="/studio"
               onClick={() => setMobileMenuOpen(false)}
