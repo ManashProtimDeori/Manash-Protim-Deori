@@ -3582,3 +3582,23 @@ p,li{
 .site-header-premium .primary-nav-dropdown-index{
   text-shadow:none!important;
 }
+
+
+/* --- Brand-name restraint ------------------------------------------------ */
+.site-header-premium .site-brand-name{
+  font-family:var(--font-body)!important;
+  font-size:.86rem!important;
+  font-weight:600!important;
+  letter-spacing:.005em!important;
+  line-height:1!important;
+  color:#dfe5ec!important;
+  text-shadow:none!important;
+  filter:none!important;
+  transition:color .18s ease!important;
+}
+.site-header-premium a:hover .site-brand-name{
+  color:#ffffff!important;
+}
+.light .site-header-premium .site-brand-name{
+  color:#e3e8ee!important;
+}

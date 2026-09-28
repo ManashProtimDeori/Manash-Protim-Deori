@@ -75,7 +75,7 @@ export const SignalHeatmap: React.FC = () => {
   return <div className="intel-heatmap">
     <div/>
     {cols.map(c=><strong key={c}>{c}</strong>)}
-    {rows.map((row,r)=><React.Fragment key={row}><span>{row}</span>{cols.map((_,c)=>{const value=22+((r*31+c*23)%76);return <i key={c} title={`${row}: modeled activity ${value}/100`} style={{opacity:.18+value/125}}>{value}</i>})}</React.Fragment>)}
+    {rows.map((row,r)=><React.Fragment key={row}><span>{row}</span>{cols.map((_,c)=>{const value=22+((r*31+c*23)%76);return <i key={c} title={`${row}: modeled activity ${value}/100`} style={{'--heat':value/100} as React.CSSProperties}>{value}</i>})}</React.Fragment>)}
   </div>;
 };
 

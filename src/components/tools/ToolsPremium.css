@@ -1467,3 +1467,204 @@
     forced-color-adjust:auto;
   }
 }
+
+
+/* --- Remaining light-mode contrast targets ------------------------------ */
+
+/* Strategic Positioning / ICP Evaluator status badge */
+.positioning-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:32px;
+  padding:7px 12px!important;
+  border:1px solid transparent!important;
+  border-radius:6px!important;
+  font-weight:700!important;
+  letter-spacing:.045em!important;
+  line-height:1.3!important;
+  text-shadow:none!important;
+}
+.light .positioning-badge--advantage{background:#dcefe6!important;border-color:#8fb8a4!important;color:#285a45!important}
+.light .positioning-badge--foundation{background:#f0e8d8!important;border-color:#c8ad78!important;color:#654d20!important}
+.light .positioning-badge--partial{background:#e5e9ee!important;border-color:#aeb8c5!important;color:#39485b!important}
+.light .positioning-badge--friction{background:#8b5964!important;border-color:#744650!important;color:#ffffff!important}
+.light .positioning-badge--critical{background:#74434e!important;border-color:#633740!important;color:#ffffff!important}
+.dark .positioning-badge--advantage{background:#234638!important;border-color:#4f806b!important;color:#c5ead9!important}
+.dark .positioning-badge--foundation{background:#4d4027!important;border-color:#7b673a!important;color:#ead7a4!important}
+.dark .positioning-badge--partial{background:#29313c!important;border-color:#536071!important;color:#dbe2ea!important}
+.dark .positioning-badge--friction{background:#653a44!important;border-color:#8b5662!important;color:#ffe6e9!important}
+.dark .positioning-badge--critical{background:#572f39!important;border-color:#854956!important;color:#ffe8eb!important}
+
+/* Marketing Intelligence Command Center hero stays a deliberate dark fascia. */
+.light .tools-premium-shell .intel-hero,
+.dark .tools-premium-shell .intel-hero{
+  background:
+    radial-gradient(circle at 82% 10%,rgba(122,143,167,.10),transparent 31%),
+    linear-gradient(155deg,#202a37 0%,#121923 68%,#0e141c 100%)!important;
+  border-color:#354255!important;
+}
+.tools-premium-shell .intel-hero>div:first-child h2,
+.tools-premium-shell .intel-hero>div:first-child h2 span,
+.tools-premium-shell .intel-hero>div:first-child h2 em{
+  color:#f3f6f9!important;
+  -webkit-text-fill-color:#f3f6f9!important;
+  text-shadow:none!important;
+}
+.tools-premium-shell .intel-hero .intel-overline{color:#a9b8c9!important}
+.tools-premium-shell .intel-hero>div:first-child>p{color:#c7d0db!important}
+.tools-premium-shell .intel-hero .intel-demo-banner{
+  background:#f3f5f8!important;
+  border-color:#aeb9c7!important;
+  color:#425166!important;
+}
+.tools-premium-shell .intel-hero .intel-demo-banner strong{color:#263548!important}
+.tools-premium-shell .intel-hero .intel-demo-banner svg{color:#536b84!important}
+
+/* Control tower and hidden-signal cards must be legible in light mode. */
+.light .tools-premium-shell .intel-control-tower{
+  background:#c6ced8!important;
+  border-color:#b2bdca!important;
+}
+.light .tools-premium-shell :is(.intel-tower-main,.intel-hidden-signal){
+  background:#ffffff!important;
+  color:#182230!important;
+}
+.light .tools-premium-shell .intel-hidden-signal .intel-kicker{color:#526880!important}
+.light .tools-premium-shell .intel-hidden-signal h4{color:#182230!important}
+.light .tools-premium-shell .intel-hidden-signal p{color:#4d5c70!important}
+.light .tools-premium-shell .intel-hidden-metrics span{
+  color:#3f4f63!important;
+  border-color:#b6c0cc!important;
+  background:#f3f6f9!important;
+}
+.light .tools-premium-shell .intel-hidden-signal button{color:#3e5e82!important}
+.light .tools-premium-shell .intel-tower-grid{background:#c4ccd7!important}
+.light .tools-premium-shell .intel-tower-grid>div{background:#f7f9fb!important}
+.light .tools-premium-shell .intel-tower-grid span{color:#526b88!important}
+.light .tools-premium-shell .intel-tower-grid strong{color:#233044!important}
+
+/* Heatmap: never fade the number itself. */
+.tools-premium-shell .intel-heatmap>i{
+  opacity:1!important;
+  font-weight:700!important;
+  font-size:.78rem!important;
+  text-shadow:none!important;
+}
+.light .tools-premium-shell .intel-heatmap{
+  background:#c0c9d4!important;
+}
+.light .tools-premium-shell .intel-heatmap>*{
+  background:#ffffff!important;
+  color:#334257!important;
+}
+.light .tools-premium-shell .intel-heatmap>i{
+  color:#172236!important;
+  background:
+    color-mix(in srgb,#6f8ead calc(var(--heat, .5) * 42%),#edf2f6)!important;
+  border:1px solid #aeb9c6;
+}
+.dark .tools-premium-shell .intel-heatmap>i{
+  color:#f3f6f9!important;
+  background:
+    color-mix(in srgb,#7f9dbd calc(var(--heat, .5) * 54%),#18212b)!important;
+}
+
+/* MarketSignal hero and marketing-control formula */
+.light .tools-premium-shell .ms-hero,
+.dark .tools-premium-shell .ms-hero{
+  background:
+    radial-gradient(circle at 82% 9%,rgba(119,141,165,.10),transparent 30%),
+    linear-gradient(155deg,#202a37 0%,#121923 68%,#0e141c 100%)!important;
+  border-color:#354255!important;
+}
+.tools-premium-shell .ms-hero>div:first-child h2,
+.tools-premium-shell .ms-hero>div:first-child h2 em{
+  color:#f3f6f9!important;
+  -webkit-text-fill-color:#f3f6f9!important;
+  text-shadow:none!important;
+}
+.tools-premium-shell .ms-hero .ms-overline{color:#a9b8c9!important}
+.tools-premium-shell .ms-hero>div:first-child>p{color:#c7d0db!important}
+.light .tools-premium-shell .ms-hero .ms-demo-banner{
+  background:#f3f5f8!important;
+  border-color:#aeb9c7!important;
+  color:#425166!important;
+}
+.light .tools-premium-shell .ms-hero .ms-demo-banner strong{color:#263548!important}
+
+.light .tools-premium-shell .ms-equation{
+  background:#eef2f6!important;
+  border-color:#aeb9c7!important;
+  color:#1d2938!important;
+  box-shadow:inset 0 2px 6px rgba(37,52,72,.08),0 5px 14px rgba(37,52,72,.09)!important;
+  text-shadow:none!important;
+}
+.light .tools-premium-shell .ms-equation b{color:#526b84!important}
+.dark .tools-premium-shell .ms-equation{
+  background:#101720!important;
+  border-color:#435064!important;
+  color:#eef3f8!important;
+}
+.dark .tools-premium-shell .ms-equation b{color:#a6b7c9!important}
+
+/* HillChain hero uses the same dark premium fascia with locked light copy. */
+.light .tools-premium-shell .hc-hero,
+.dark .tools-premium-shell .hc-hero{
+  background:
+    radial-gradient(circle at 84% 8%,rgba(118,146,135,.11),transparent 31%),
+    linear-gradient(155deg,#202a37 0%,#121923 68%,#0e141c 100%)!important;
+  border-color:#354255!important;
+}
+.tools-premium-shell .hc-hero>div:first-child h2,
+.tools-premium-shell .hc-hero>div:first-child h2 em{
+  color:#f3f6f9!important;
+  -webkit-text-fill-color:#f3f6f9!important;
+  text-shadow:none!important;
+}
+.tools-premium-shell .hc-hero .hc-overline{color:#a9b8c9!important}
+.tools-premium-shell .hc-hero>div:first-child>p{color:#c7d0db!important}
+.light .tools-premium-shell .hc-hero .hc-demo-banner{
+  background:#f3f5f8!important;
+  border-color:#aeb9c7!important;
+  color:#425166!important;
+}
+.light .tools-premium-shell .hc-hero .hc-demo-banner strong{color:#263548!important}
+
+/* Critical-alert cards: readable without zooming. */
+.tools-premium-shell .hc-alert-list{
+  gap:6px!important;
+  background:transparent!important;
+}
+.tools-premium-shell .hc-alert-list button{
+  min-height:72px;
+  padding:12px 13px!important;
+  border:1px solid var(--tool-line)!important;
+  border-radius:9px!important;
+}
+.tools-premium-shell .hc-alert-list button>span{
+  font-size:.72rem!important;
+  line-height:1.3!important;
+}
+.tools-premium-shell .hc-alert-list strong{
+  font-size:.88rem!important;
+  line-height:1.35!important;
+  font-weight:650!important;
+}
+.tools-premium-shell .hc-alert-list p{
+  font-size:.78rem!important;
+  line-height:1.5!important;
+  margin-top:5px!important;
+}
+.light .tools-premium-shell .hc-alert-list button{
+  background:#f8fafc!important;
+  color:#1e2a39!important;
+  border-color:#b8c2ce!important;
+}
+.light .tools-premium-shell .hc-alert-list p{color:#536176!important}
+.light .tools-premium-shell .hc-alert-list button>span{color:#526f88!important}
+.dark .tools-premium-shell .hc-alert-list button{
+  background:#171f29!important;
+  color:#edf2f7!important;
+  border-color:#435064!important;
+}
+.dark .tools-premium-shell .hc-alert-list p{color:#b8c3d0!important}

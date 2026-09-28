@@ -351,22 +351,22 @@ export const PositioningMatrixTool: React.FC = () => {
 
     // 3. Classification level
     let classification = 'STRONG FOUNDATION';
-    let classificationBadge = 'bg-amber-950/60 border-amber-800/50 text-amber-400';
+    let classificationBadge = 'positioning-badge positioning-badge--foundation';
     if (overallScore >= 85) {
       classification = 'POSITIONING ADVANTAGE';
-      classificationBadge = 'bg-emerald-950/60 border-emerald-800/50 text-emerald-400';
+      classificationBadge = 'positioning-badge positioning-badge--advantage';
     } else if (overallScore >= 70) {
       classification = 'STRONG FOUNDATION';
-      classificationBadge = 'bg-amber-950/60 border-amber-800/50 text-amber-400';
+      classificationBadge = 'positioning-badge positioning-badge--foundation';
     } else if (overallScore >= 55) {
       classification = 'PARTIALLY DEFINED';
-      classificationBadge = 'bg-neutral-900 border-neutral-700 text-neutral-300';
+      classificationBadge = 'positioning-badge positioning-badge--partial';
     } else if (overallScore >= 40) {
       classification = 'POSITIONING FRICTION';
-      classificationBadge = 'bg-rose-950/60 border-rose-800/50 text-rose-400';
+      classificationBadge = 'positioning-badge positioning-badge--friction';
     } else {
       classification = 'ICP / POSITIONING MISALIGNMENT';
-      classificationBadge = 'bg-rose-950/80 border-rose-800/70 text-rose-300';
+      classificationBadge = 'positioning-badge positioning-badge--critical';
     }
 
     // 4. Matrix coordinate calculations (Diff vs Urgency)

@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
           className="order-3 flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-md py-1"
           aria-label={`${siteConfig.name} Home`}
         >
-          <span className="font-semibold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 group-hover:text-amber-400 transition-colors whitespace-nowrap">
+          <span className="site-brand-name font-semibold tracking-tight whitespace-nowrap">
             {siteConfig.name}
           </span>
         </Link>
