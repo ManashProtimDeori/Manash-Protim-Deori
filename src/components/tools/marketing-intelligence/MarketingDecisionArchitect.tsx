@@ -101,8 +101,9 @@ const Slider: React.FC<{
   label:string; value:number; min:number; max:number; step:number; format?:(v:number)=>string; onChange:(v:number)=>void;
 }> = ({label,value,min,max,step,format,onChange}) => (
   <label className="mi-slider">
-    <div><span>{label}</span><strong>{format?format(value):value.toLocaleString()}</strong></div>
+    <span className="mi-slider-label">{label}</span>
     <input type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(Number(e.target.value))}/>
+    <strong className="mi-slider-value">{format?format(value):value.toLocaleString()}</strong>
   </label>
 );
 
@@ -260,7 +261,7 @@ export const MarketingDecisionArchitect: React.FC = () => {
           <div className="mi-equation">
             <span>Revenue</span><b>=</b><span>Spend</span><b>×</b><span>1000 / CPM</span><b>×</b><span>CTR</span><b>×</b><span>CVR</span><b>×</b><span>AOV</span>
           </div>
-          <div className="grid sm:grid-cols-2 xl:grid-cols-7 gap-3 mt-6">
+          <div className="mi-control-grid">
             <Slider label="Spend" value={inputs.spend} min={500000} max={6000000} step={50000} format={compactCurrency} onChange={v=>update('spend',v)}/>
             <Slider label="Fixed marketing cost" value={inputs.fixedMarketingCost} min={0} max={1500000} step={25000} format={compactCurrency} onChange={v=>update('fixedMarketingCost',v)}/>
             <Slider label="Addressable audience" value={inputs.addressableAudience} min={1000000} max={50000000} step={500000} onChange={v=>update('addressableAudience',v)}/>
