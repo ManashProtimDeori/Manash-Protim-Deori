@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "build": "npm run test:economics && npm run test:measurement && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit && tsc -p api/tsconfig.json --noEmit",
     "test:economics": "tsx tests/campaign-economics.ts",
-    "verify": "npm run lint && npm run test:economics && npm run build"
+    "verify": "npm run lint && npm run build",
+    "test:measurement": "tsx tests/marketing-measurement.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

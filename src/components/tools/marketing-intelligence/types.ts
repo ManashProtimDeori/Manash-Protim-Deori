@@ -5,6 +5,7 @@ export type Confidence = 'low' | 'medium' | 'high';
 
 export type MarketingInputs = {
   spend: number;
+  fixedMarketingCost: number;
   cpm: number;
   ctr: number;
   cvr: number;
@@ -13,9 +14,11 @@ export type MarketingInputs = {
   repeatRate: number;
   purchaseFrequency: number;
   customerLifespan: number;
+  annualDiscountRate: number;
   variableCostRate: number;
   promoCostRate: number;
   organicRevenue: number;
+  addressableAudience: number;
   reachFactor: number;
   treatmentLift: number;
   controlCvr: number;
@@ -34,9 +37,14 @@ export type MarketingMetrics = {
   revenue: number;
   grossProfit: number;
   contribution: number;
+  contributionBeforeMarketing: number;
+  contributionMarginRate: number;
+  contributionPerOrder: number;
+  totalMarketingInvestment: number;
   cpm: number;
   ctr: number;
   cvr: number;
+  paidCac: number;
   cac: number;
   roas: number;
   mer: number;
@@ -45,10 +53,63 @@ export type MarketingMetrics = {
   ltv: number;
   ltvCac: number;
   paybackMonths: number;
+  ltvHorizonMonths: number;
   incrementalConversions: number;
   incrementalRevenue: number;
+  incrementalContribution: number;
+  incrementalProfit: number;
   iroas: number;
+  iroi: number;
+  treatmentCvr: number;
+  experimentAbsoluteLift: number;
+  experimentRelativeLift: number;
+  experimentCiLow: number;
+  experimentCiHigh: number;
+  experimentPValue: number;
+  experimentZScore: number;
+  experimentSignificant: boolean;
   margin: number;
+};
+
+export type ExperimentStats = {
+  controlRate: number;
+  treatmentRate: number;
+  controlConversions: number;
+  treatmentConversions: number;
+  absoluteLift: number;
+  relativeLift: number;
+  incrementalConversions: number;
+  standardError: number;
+  ciLow: number;
+  ciHigh: number;
+  zScore: number;
+  pValue: number;
+  significant95: boolean;
+  sampleRatio: number;
+};
+
+export type ForecastPoint = {
+  period: number;
+  value: number;
+  lower95: number;
+  upper95: number;
+};
+
+export type ForecastResult = {
+  slope: number;
+  intercept: number;
+  rSquared: number;
+  residualStdError: number;
+  points: ForecastPoint[];
+};
+
+export type MeasurementReliability = {
+  overall: number;
+  dataIntegrity: number;
+  taggingCompleteness: number;
+  taxonomyGovernance: number;
+  experimentDesign: number;
+  syntheticCapApplied: boolean;
 };
 
 export type Insight = {
@@ -89,6 +150,20 @@ export type ChannelModel = {
   saturation: number;
   ctrIndex: number;
   cvrIndex: number;
+};
+
+export type OptimizedChannel = ChannelModel & {
+  currentSpend: number;
+  recommendedSpend: number;
+  delta: number;
+  deltaPct: number;
+  marginalReturnIndex: number;
+};
+
+export type AttributionCredit = {
+  channel: string;
+  creditShare: number;
+  modelScore: number;
 };
 
 export type TaxonomyConfig = {

@@ -1,9 +1,11 @@
 import { Insight, MarketingInputs, MarketingMetrics } from './types';
-import { calculateMetrics } from './engine';
+import { calculateMetrics, calculateSensitivity } from './engine';
+
+const delta = (current: number, previous: number) =>
+  previous === 0 ? 0 : (current - previous) / Math.abs(previous);
 
 export function generateInsights(current: MarketingMetrics, previous: MarketingMetrics, inputs: MarketingInputs): Insight[] {
-  const delta = (a: number, b: number) => b === 0 ? 0 : (a - b) / Math.abs(b);
-  const spendChange = delta(inputs.spend, inputs.spend * .90);
+  const spendChange = delta(current.totalMarketingInvestment, previous.totalMarketingInvestment);
   const revenueChange = delta(current.revenue, previous.revenue);
   const ctrChange = delta(current.ctr, previous.ctr);
   const cvrChange = delta(current.cvr, previous.cvr);
@@ -11,16 +13,16 @@ export function generateInsights(current: MarketingMetrics, previous: MarketingM
   const roasChange = delta(current.roas, previous.roas);
   const insights: Insight[] = [];
 
-  if (spendChange > .08 && revenueChange < .04) {
+  if (spendChange > .08 && revenueChange < spendChange * .55) {
     insights.push({
       id:'marginal-efficiency', severity:'warning', category:'Efficiency',
-      title:'Spend is growing faster than revenue',
-      observation:`Spend is up while modeled revenue growth is only ${(revenueChange*100).toFixed(1)}%`,
-      explanation:'The pattern is consistent with declining marginal efficiency or a downstream conversion constraint rather than a pure traffic shortage.',
-      affectedMetrics:['ROAS','CAC','Contribution'], supportingMetrics:['Spend','Revenue','ROAS'],
-      recommendation:'Inspect channel saturation and reallocate incremental budget toward channels with stronger marginal economics.',
-      expectedImpact:'Protect contribution while maintaining comparable customer volume.', confidence:'high',
-      assumptions:['Current response curve is representative','No material offline demand shift']
+      title:'Investment is growing faster than attributed revenue',
+      observation:'Total marketing investment changed ' + (spendChange * 100).toFixed(1) + '% while attributed revenue changed ' + (revenueChange * 100).toFixed(1) + '%.',
+      explanation:'The pattern is consistent with declining marginal efficiency or a downstream constraint. It does not, by itself, prove saturation.',
+      affectedMetrics:['ROAS','CAC','Contribution Profit'], supportingMetrics:['Total Marketing Investment','Revenue','ROAS'],
+      recommendation:'Inspect marginal channel response and downstream conversion before adding budget.',
+      expectedImpact:'Protect contribution while preserving the highest-value acquisition volume.', confidence:'medium',
+      assumptions:['Scope and cost definitions are comparable between periods']
     });
   }
 
@@ -28,10 +30,10 @@ export function generateInsights(current: MarketingMetrics, previous: MarketingM
     insights.push({
       id:'post-click-friction', severity:'critical', category:'Funnel',
       title:'Engagement improved while conversion weakened',
-      observation:'CTR improved but CVR deteriorated in the same modeled period.',
-      explanation:'This combination points away from the ad click itself and toward landing-page friction, traffic-quality mismatch, offer inconsistency or checkout issues.',
+      observation:'CTR improved while click-to-customer conversion deteriorated.',
+      explanation:'The joint movement points toward traffic-quality shift, offer mismatch, landing-page friction or checkout issues rather than a simple attention problem.',
       affectedMetrics:['CVR','CAC','Revenue'], supportingMetrics:['CTR','CVR','CPC'],
-      recommendation:'Prioritize post-click diagnostics before increasing media spend.',
+      recommendation:'Run post-click diagnostics and segment by audience, device, landing page and offer before increasing media pressure.',
       expectedImpact:'Recover conversion efficiency without buying additional traffic.', confidence:'high'
     });
   }
@@ -39,13 +41,13 @@ export function generateInsights(current: MarketingMetrics, previous: MarketingM
   if (current.frequency > 2.4 && current.ctr < previous.ctr && current.cpc > previous.cpc) {
     insights.push({
       id:'creative-fatigue', severity:'warning', category:'Creative',
-      title:'Frequency pattern suggests possible creative fatigue',
-      observation:`Frequency is ${current.frequency.toFixed(2)}× while CTR is softening and CPC is rising`,
-      explanation:'Repeated exposure combined with weaker engagement and more expensive clicks is a fatigue signal, not proof of causation.',
+      title:'Exposure pattern is consistent with possible creative fatigue',
+      observation:'Modeled frequency is ' + current.frequency.toFixed(2) + '× while CTR softened and CPC increased.',
+      explanation:'Repeated exposure plus weaker engagement and more expensive traffic is a fatigue signal, not causal proof.',
       affectedMetrics:['CTR','CPC','CAC'], supportingMetrics:['Frequency','CTR','CPC'],
-      recommendation:'Refresh creative or expand qualified audience before scaling frequency further.',
+      recommendation:'Test creative refresh and qualified audience expansion while holding other major variables stable.',
       confidence:'medium',
-      assumptions:['Auction environment is broadly stable']
+      assumptions:['Auction conditions and audience composition are broadly comparable']
     });
   }
 
@@ -53,23 +55,23 @@ export function generateInsights(current: MarketingMetrics, previous: MarketingM
     insights.push({
       id:'unit-economics', severity: current.ltvCac < 1.5 ? 'critical' : 'warning', category:'Customer Economics',
       title:'Customer economics are constraining scale',
-      observation:`Modeled LTV:CAC is ${current.ltvCac.toFixed(2)}×`,
-      explanation:'Even efficient top-funnel metrics cannot compensate for weak lifetime value relative to acquisition cost.',
-      affectedMetrics:['LTV:CAC','Payback','Contribution'], supportingMetrics:['CAC','LTV'],
-      recommendation:'Improve retention, margin or acquisition efficiency before aggressive scaling.',
+      observation:'Discounted contribution LTV:CAC is ' + current.ltvCac.toFixed(2) + '× using fully-loaded attributed CAC.',
+      explanation:'Top-funnel efficiency cannot compensate indefinitely for weak contribution value relative to acquisition cost.',
+      affectedMetrics:['LTV:CAC','Payback','Contribution Profit'], supportingMetrics:['Fully-loaded CAC','Contribution LTV'],
+      recommendation:'Improve contribution margin, retention, purchase frequency or acquisition efficiency before aggressive scaling.',
       confidence:'medium',
-      assumptions:['LTV inputs are forecast assumptions rather than observed cohorts']
+      assumptions:['Customer lifespan and purchase frequency are modeled inputs, not observed cohort curves']
     });
   }
 
   if (current.roas > 3 && current.roi < .15) {
     insights.push({
       id:'roas-profit-gap', severity:'watch', category:'Profitability',
-      title:'Strong ROAS is not translating into equivalent profit',
-      observation:`ROAS is ${current.roas.toFixed(2)}× while modeled ROI is ${(current.roi*100).toFixed(1)}%`,
-      explanation:'Gross margin, fulfilment and promotional costs are absorbing a material share of attributed revenue.',
-      affectedMetrics:['ROI','Contribution'], supportingMetrics:['ROAS','Margin','Variable costs'],
-      recommendation:'Optimize toward contribution profit, not ROAS alone.',
+      title:'Strong attributed ROAS is not translating into equivalent profit',
+      observation:'ROAS is ' + current.roas.toFixed(2) + '× while modeled marketing ROI is ' + (current.roi * 100).toFixed(1) + '%.',
+      explanation:'Gross margin, variable selling costs, promotions and fixed marketing costs absorb a material share of attributed revenue.',
+      affectedMetrics:['Marketing ROI','Contribution Profit'], supportingMetrics:['ROAS','Contribution Margin','Total Marketing Investment'],
+      recommendation:'Optimize toward contribution profit and causal return rather than ROAS alone.',
       confidence:'high'
     });
   }
@@ -77,13 +79,25 @@ export function generateInsights(current: MarketingMetrics, previous: MarketingM
   if (current.iroas < 1 && current.roas > 2) {
     insights.push({
       id:'attribution-incrementality-gap', severity:'critical', category:'Incrementality',
-      title:'Attributed return materially exceeds incremental return',
-      observation:`ROAS is ${current.roas.toFixed(2)}× but modeled iROAS is only ${current.iroas.toFixed(2)}×`,
-      explanation:'Attribution may be crediting demand that would have occurred without the campaign.',
-      affectedMetrics:['iROAS','Budget'], supportingMetrics:['ROAS','Incremental Revenue'],
-      recommendation:'Use holdouts or geo tests before treating attributed revenue as causal lift.',
-      confidence:'medium',
-      assumptions:['Treatment lift is a valid approximation']
+      title:'Attributed return materially exceeds experiment-implied return',
+      observation:'Attributed ROAS is ' + current.roas.toFixed(2) + '× while experiment-implied iROAS is ' + current.iroas.toFixed(2) + '×.',
+      explanation:'The gap may represent demand credit that attribution assigns to marketing even when the causal effect is smaller.',
+      affectedMetrics:['iROAS','iROI','Budget'], supportingMetrics:['Attributed ROAS','Incremental Revenue','Experiment Lift'],
+      recommendation:'Use a valid holdout, geo test or randomized experiment before treating attributed revenue as causal lift.',
+      confidence: current.experimentSignificant ? 'high' : 'medium',
+      assumptions:['Experiment treatment, control and cost scope are comparable']
+    });
+  }
+
+  if (!current.experimentSignificant) {
+    insights.push({
+      id:'experiment-uncertainty', severity:'watch', category:'Experimentation',
+      title:'Experiment uncertainty is too wide for a confident lift claim',
+      observation:'The 95% interval for absolute lift crosses zero.',
+      explanation:'The observed point estimate may be positive or negative, but the current design does not distinguish the effect from sampling noise at the 95% level.',
+      affectedMetrics:['Incremental Revenue','iROAS','iROI'], supportingMetrics:['95% CI','p-value','Sample size'],
+      recommendation:'Increase power, reduce variance, improve experiment design or collect more data before scaling on the point estimate.',
+      confidence:'high'
     });
   }
 
@@ -91,29 +105,37 @@ export function generateInsights(current: MarketingMetrics, previous: MarketingM
     insights.push({
       id:'acquisition-deterioration', severity:'warning', category:'Acquisition',
       title:'Acquisition efficiency is deteriorating',
-      observation:'CAC increased while ROAS declined.',
-      explanation:'The simultaneous movement suggests that more spend is required to acquire customers while each marketing unit returns less attributed revenue.',
-      affectedMetrics:['CAC','ROAS','Contribution'], supportingMetrics:['CAC','ROAS','Spend'],
-      recommendation:'Trace the driver chain through CPM → CTR → CVR before changing budget.',
+      observation:'Fully-loaded attributed CAC increased while ROAS declined.',
+      explanation:'The simultaneous movement suggests more investment is required per attributed customer while each paid-media unit returns less attributed revenue.',
+      affectedMetrics:['CAC','ROAS','Contribution Profit'], supportingMetrics:['Fully-loaded CAC','ROAS','Spend'],
+      recommendation:'Trace the driver chain through CPM → CTR → CVR and fixed cost before changing budget.',
+      confidence:'high'
+    });
+  }
+
+  if (current.contributionMarginRate <= 0) {
+    insights.push({
+      id:'negative-contribution-margin', severity:'critical', category:'Profitability',
+      title:'Contribution margin is non-positive before marketing investment',
+      observation:'Gross margin does not cover the modeled variable and promotional cost rates.',
+      explanation:'No paid acquisition strategy can create positive contribution economics while each order loses contribution before media.',
+      affectedMetrics:['Contribution Profit','LTV','Payback'], supportingMetrics:['Gross Margin','Variable Cost Rate','Promo Cost Rate'],
+      recommendation:'Fix unit contribution economics or redefine the cost inputs before evaluating media scale.',
       confidence:'high'
     });
   }
 
   if (insights.length < 4) {
-    const sensitivity = [
-      {name:'CVR', impact: .1 * current.revenue},
-      {name:'CTR', impact: .1 * current.revenue},
-      {name:'AOV', impact: .1 * current.revenue},
-    ].sort((a,b)=>b.impact-a.impact)[0];
+    const sensitivity = calculateSensitivity(inputs)[0];
     insights.push({
       id:'sensitivity', severity:'info', category:'Decision',
-      title:`${sensitivity.name} is a high-leverage controllable variable`,
-      observation:'A relative 10% improvement produces an approximately proportional revenue change while spend is held constant in the current multiplicative model.',
-      explanation:'The model decomposes revenue into Spend, CPM, CTR, CVR and AOV, making sensitivity explicit.',
-      affectedMetrics:['Revenue','CAC','ROAS'], supportingMetrics:[sensitivity.name],
-      recommendation:`Test interventions that improve ${sensitivity.name} before simply increasing budget.`,
+      title:String(sensitivity?.driver || 'CVR') + ' is currently a high-sensitivity modeled variable',
+      observation:'A symmetric ±10% stress test produces one of the largest contribution movements among the modeled drivers.',
+      explanation:'Sensitivity is a decision-prioritization aid. It does not establish that the variable can be changed independently or causally.',
+      affectedMetrics:['Contribution Profit','ROI','CAC'], supportingMetrics:[String(sensitivity?.driver || 'CVR')],
+      recommendation:'Design a test that changes the driver while protecting against correlated changes in traffic mix, price and cost.',
       confidence:'medium',
-      assumptions:['All other variables remain constant']
+      assumptions:['Other modeled variables remain stable inside the local stress range']
     });
   }
 

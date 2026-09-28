@@ -7,7 +7,7 @@ import {
   Settings2, ShieldCheck, SlidersHorizontal, Sparkles, Target, TrendingUp,
   Upload, WalletCards, Zap
 } from 'lucide-react';
-import { calculateMetrics, calculateSensitivity, formatMetric, metricDefinitions, optimizeChannels, percentageChange } from './engine';
+import { buildAttributionCredit, buildLinearForecast, calculateExperimentStats, calculateMeasurementReliability, calculateMetrics, calculateSensitivity, detectRobustAnomalies, formatMetric, metricDefinitions, optimizeChannels, percentageChange } from './engine';
 import { channels, demoObservations } from './demoData';
 import { generateInsights } from './insights';
 import { BusinessObjective, IndustryMode, MarketingInputs, MarketingMetrics, TaxonomyConfig, UTMState } from './types';
@@ -24,6 +24,7 @@ type View = typeof views[number];
 
 const initialInputs: MarketingInputs = {
   spend: 2500000,
+  fixedMarketingCost: 320000,
   cpm: 185,
   ctr: .016,
   cvr: .032,
@@ -32,9 +33,11 @@ const initialInputs: MarketingInputs = {
   repeatRate: .34,
   purchaseFrequency: 3.1,
   customerLifespan: 2.4,
+  annualDiscountRate: .10,
   variableCostRate: .09,
   promoCostRate: .04,
   organicRevenue: 1800000,
+  addressableAudience: 12000000,
   reachFactor: .58,
   treatmentLift: .006,
   controlCvr: .026,
@@ -145,6 +148,8 @@ export const MarketingDecisionArchitect: React.FC = () => {
   const sensitivity=useMemo(()=>calculateSensitivity(inputs),[inputs]);
   const insights=useMemo(()=>generateInsights(metrics,previous,inputs),[metrics,previous,inputs]);
   const optimized=useMemo(()=>optimizeChannels(inputs.spend,channels),[inputs.spend]);
+  const experiment=useMemo(()=>calculateExperimentStats(inputs),[inputs]);
+  const attributionCredit=useMemo(()=>buildAttributionCredit(channels,attribution),[attribution]);
 
   const taxonomyPreview=useMemo(()=>{
     const values:Record<string,string>={
@@ -211,11 +216,9 @@ export const MarketingDecisionArchitect: React.FC = () => {
     return rows;
   },[]);
 
-  const anomalies=useMemo(()=>{
-    const avg=monthly.reduce((s,m)=>s+m.revenue,0)/monthly.length;
-    const sd=Math.sqrt(monthly.reduce((s,m)=>s+(m.revenue-avg)**2,0)/monthly.length);
-    return monthly.map(m=>({...m,z:sd?(m.revenue-avg)/sd:0})).filter(m=>Math.abs(m.z)>1).sort((a,b)=>Math.abs(b.z)-Math.abs(a.z));
-  },[monthly]);
+  const anomalies=useMemo(()=>detectRobustAnomalies(monthly),[monthly]);
+  const forecast=useMemo(()=>buildLinearForecast(monthly.map(m=>m.revenue),3),[monthly]);
+  const reliability=useMemo(()=>calculateMeasurementReliability(demoObservations,taxonomyHealth,experiment,true),[taxonomyHealth,experiment]);
 
   const currentMetricDef=metricDefinitions.find(m=>m.id===selectedMetric) || metricDefinitions[0];
 
@@ -257,8 +260,10 @@ export const MarketingDecisionArchitect: React.FC = () => {
           <div className="mi-equation">
             <span>Revenue</span><b>=</b><span>Spend</span><b>×</b><span>1000 / CPM</span><b>×</b><span>CTR</span><b>×</b><span>CVR</span><b>×</b><span>AOV</span>
           </div>
-          <div className="grid sm:grid-cols-2 xl:grid-cols-5 gap-3 mt-6">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-7 gap-3 mt-6">
             <Slider label="Spend" value={inputs.spend} min={500000} max={6000000} step={50000} format={compactCurrency} onChange={v=>update('spend',v)}/>
+            <Slider label="Fixed marketing cost" value={inputs.fixedMarketingCost} min={0} max={1500000} step={25000} format={compactCurrency} onChange={v=>update('fixedMarketingCost',v)}/>
+            <Slider label="Addressable audience" value={inputs.addressableAudience} min={1000000} max={50000000} step={500000} onChange={v=>update('addressableAudience',v)}/>
             <Slider label="CPM" value={inputs.cpm} min={70} max={420} step={5} format={v=>`₹${v}`} onChange={v=>update('cpm',v)}/>
             <Slider label="CTR" value={inputs.ctr} min={.004} max={.05} step={.001} format={v=>`${(v*100).toFixed(1)}%`} onChange={v=>update('ctr',v)}/>
             <Slider label="CVR" value={inputs.cvr} min={.005} max={.10} step={.001} format={v=>`${(v*100).toFixed(1)}%`} onChange={v=>update('cvr',v)}/>
@@ -461,22 +466,27 @@ export const MarketingDecisionArchitect: React.FC = () => {
   const renderEconomics=()=>(
     <div className="grid lg:grid-cols-3 gap-6">
       <section className="mi-panel lg:col-span-2">
-        <SectionTitle eyebrow="Customer Economics" title="Acquisition quality is measured after the click"/>
-        <div className="grid sm:grid-cols-3 gap-3 mt-6">
-          <div className="mi-stat"><span>CAC</span><strong>{formatMetric('cac',metrics.cac)}</strong></div>
-          <div className="mi-stat"><span>LTV</span><strong>{formatMetric('ltv',metrics.ltv)}</strong></div>
+        <SectionTitle eyebrow="Customer Economics" title="Contribution economics after the click" copy="Paid CAC, fully-loaded CAC, discounted contribution LTV and cash payback are separated so growth quality is not confused with top-line efficiency."/>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
+          <div className="mi-stat"><span>Paid CAC</span><strong>{formatMetric('paidCac',metrics.paidCac)}</strong></div>
+          <div className="mi-stat"><span>Fully-loaded CAC</span><strong>{formatMetric('cac',metrics.cac)}</strong></div>
+          <div className="mi-stat"><span>Contribution LTV</span><strong>{formatMetric('ltv',metrics.ltv)}</strong></div>
           <div className="mi-stat"><span>LTV:CAC</span><strong>{formatMetric('ltvCac',metrics.ltvCac)}</strong></div>
-          <div className="mi-stat"><span>Payback</span><strong>{formatMetric('paybackMonths',metrics.paybackMonths)}</strong></div>
-          <div className="mi-stat"><span>Gross Margin</span><strong>{(inputs.grossMargin*100).toFixed(0)}%</strong></div>
-          <div className="mi-stat"><span>Break-even customers</span><strong>{Math.ceil(inputs.spend/Math.max(inputs.aov*inputs.grossMargin,1)).toLocaleString()}</strong></div>
+          <div className="mi-stat"><span>Discounted payback</span><strong>{formatMetric('paybackMonths',metrics.paybackMonths)}</strong></div>
+          <div className="mi-stat"><span>Contribution margin</span><strong>{(metrics.contributionMarginRate*100).toFixed(1)}%</strong></div>
+          <div className="mi-stat"><span>Total marketing investment</span><strong>{formatMetric('totalMarketingInvestment',metrics.totalMarketingInvestment)}</strong></div>
+          <div className="mi-stat"><span>LTV model horizon</span><strong>{metrics.ltvHorizonMonths} mo</strong></div>
         </div>
       </section>
       <section className="mi-panel">
         <SectionTitle eyebrow="LTV Model" title="Assumption controls"/>
         <div className="space-y-5 mt-5">
-          <Slider label="Purchase frequency / year" value={inputs.purchaseFrequency} min={1} max={8} step={.1} onChange={v=>update('purchaseFrequency',v)}/>
-          <Slider label="Customer lifespan / years" value={inputs.customerLifespan} min={.5} max={6} step={.1} onChange={v=>update('customerLifespan',v)}/>
-          <Slider label="Gross margin" value={inputs.grossMargin} min={.1} max={.9} step={.01} format={v=>`${(v*100).toFixed(0)}%`} onChange={v=>update('grossMargin',v)}/>
+          <Slider label="Purchase frequency / year" value={inputs.purchaseFrequency} min={.2} max={12} step={.1} onChange={v=>update('purchaseFrequency',v)}/>
+          <Slider label="Customer lifespan / years" value={inputs.customerLifespan} min={.25} max={8} step={.1} onChange={v=>update('customerLifespan',v)}/>
+          <Slider label="Gross margin" value={inputs.grossMargin} min={.05} max={.95} step={.01} format={v=>`${(v*100).toFixed(0)}%`} onChange={v=>update('grossMargin',v)}/>
+          <Slider label="Variable cost rate" value={inputs.variableCostRate} min={0} max={.5} step={.01} format={v=>`${(v*100).toFixed(0)}%`} onChange={v=>update('variableCostRate',v)}/>
+          <Slider label="Promo cost rate" value={inputs.promoCostRate} min={0} max={.4} step={.01} format={v=>`${(v*100).toFixed(0)}%`} onChange={v=>update('promoCostRate',v)}/>
+          <Slider label="Annual discount rate" value={inputs.annualDiscountRate} min={0} max={.4} step={.01} format={v=>`${(v*100).toFixed(0)}%`} onChange={v=>update('annualDiscountRate',v)}/>
         </div>
       </section>
     </div>
@@ -486,14 +496,14 @@ export const MarketingDecisionArchitect: React.FC = () => {
     <div className="grid lg:grid-cols-[.75fr_1.25fr] gap-6">
       <section className="mi-panel">
         <SectionTitle eyebrow="Attribution Lab" title="Credit is not causality"/>
-        <label className="mi-field mt-6"><span>Attribution model</span><select value={attribution} onChange={e=>setAttribution(e.target.value)}>{['Last Click','First Click','Linear','Position Based','Time Decay','Data Driven Simulation','Markov Chain','Shapley Approximation'].map(x=><option key={x}>{x}</option>)}</select></label>
+        <label className="mi-field mt-6"><span>Attribution model</span><select value={attribution} onChange={e=>setAttribution(e.target.value)}>{['Last Click','First Click','Linear','Position Based','Time Decay','Data Driven Simulation'].map(x=><option key={x}>{x}</option>)}</select></label>
         <div className="mi-action-box mt-6"><span>Attribution asks</span><strong>Which touchpoint receives credit?</strong></div>
         <div className="mi-action-box mt-3"><span>Incrementality asks</span><strong>Would the conversion have happened without marketing?</strong></div>
       </section>
       <section className="mi-panel">
         <SectionTitle eyebrow="Modeled Credit Distribution" title={attribution}/>
-        <div className="space-y-4 mt-6">{channels.slice(0,6).map((ch,i)=>{const modifier=attribution==='Last Click'?(i===0?1.6:.8):attribution==='First Click'?(i===2?1.5:.9):1;const credit=ch.efficiency*modifier;return <div key={ch.channel} className="grid grid-cols-[150px_1fr_60px] gap-3 items-center text-xs"><span>{ch.channel}</span><MiniBar value={credit} max={2}/><strong>{credit.toFixed(2)}</strong></div>})}</div>
-        <p className="text-[10px] text-neutral-500 mt-5">This distribution is a simulation for model comparison, not evidence of causal channel lift.</p>
+        <div className="space-y-4 mt-6">{attributionCredit.map(row=><div key={row.channel} className="grid grid-cols-[150px_1fr_70px] gap-3 items-center text-xs"><span>{row.channel}</span><MiniBar value={row.creditShare} max={Math.max(...attributionCredit.map(x=>x.creditShare),.01)}/><strong>{(row.creditShare*100).toFixed(1)}%</strong></div>)}</div>
+        <p className="text-[10px] text-neutral-500 mt-5">Credits are normalized to 100% and are illustrative model allocations. Markov and Shapley methods are intentionally not offered without path-level journey data; attribution credit is not causal lift.</p>
       </section>
     </div>
   );
@@ -503,44 +513,57 @@ export const MarketingDecisionArchitect: React.FC = () => {
       <section className="mi-panel">
         <SectionTitle eyebrow="Incrementality Lab" title="Treatment versus control"/>
         <div className="space-y-5 mt-6">
-          <Slider label="Treatment lift" value={inputs.treatmentLift} min={-.01} max={.03} step={.001} format={v=>`${(v*100).toFixed(1)} pp`} onChange={v=>update('treatmentLift',v)}/>
-          <Slider label="Treatment users" value={inputs.treatmentUsers} min={10000} max={150000} step={1000} onChange={v=>update('treatmentUsers',v)}/>
-          <Slider label="Control CVR" value={inputs.controlCvr} min={.005} max={.08} step={.001} format={v=>`${(v*100).toFixed(1)}%`} onChange={v=>update('controlCvr',v)}/>
+          <Slider label="Absolute treatment lift" value={inputs.treatmentLift} min={-.02} max={.04} step={.001} format={v=>`${(v*100).toFixed(1)} pp`} onChange={v=>update('treatmentLift',v)}/>
+          <Slider label="Treatment users" value={inputs.treatmentUsers} min={5000} max={200000} step={1000} onChange={v=>update('treatmentUsers',v)}/>
+          <Slider label="Control users" value={inputs.controlUsers} min={5000} max={200000} step={1000} onChange={v=>update('controlUsers',v)}/>
+          <Slider label="Control CVR" value={inputs.controlCvr} min={.002} max={.15} step={.001} format={v=>`${(v*100).toFixed(1)}%`} onChange={v=>update('controlCvr',v)}/>
         </div>
       </section>
       <section className="mi-panel">
         <SectionTitle eyebrow="Causal Estimate" title="Incremental business impact"/>
-        <div className="grid sm:grid-cols-2 gap-3 mt-6">
-          <div className="mi-stat"><span>Incremental conversions</span><strong>{metrics.incrementalConversions.toLocaleString(undefined,{maximumFractionDigits:0})}</strong></div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-6">
+          <div className="mi-stat"><span>Incremental conversions</span><strong>{metrics.incrementalConversions.toLocaleString(undefined,{maximumFractionDigits:1})}</strong></div>
           <div className="mi-stat"><span>Incremental revenue</span><strong>{formatMetric('incrementalRevenue',metrics.incrementalRevenue)}</strong></div>
+          <div className="mi-stat"><span>Incremental contribution</span><strong>{formatMetric('incrementalContribution',metrics.incrementalContribution)}</strong></div>
           <div className="mi-stat"><span>iROAS</span><strong>{formatMetric('iroas',metrics.iroas)}</strong></div>
-          <div className="mi-stat"><span>Attributed ROAS</span><strong>{formatMetric('roas',metrics.roas)}</strong></div>
+          <div className="mi-stat"><span>iROI</span><strong>{formatMetric('iroi',metrics.iroi)}</strong></div>
+          <div className="mi-stat"><span>95% lift interval</span><strong>{(experiment.ciLow*100).toFixed(2)} to {(experiment.ciHigh*100).toFixed(2)} pp</strong></div>
         </div>
-        <div className="mt-5 text-xs text-neutral-400">Interpretation: the gap between attributed ROAS and iROAS represents demand credit that may not be incremental. Confidence depends on experiment design, sample balance and contamination.</div>
+        <div className="mt-5 text-xs text-neutral-400">Two-proportion normal approximation · z {Number.isFinite(experiment.zScore)?experiment.zScore.toFixed(2):'∞'} · p {experiment.pValue<.001?'<0.001':experiment.pValue.toFixed(3)} · {experiment.significant95?'95% interval excludes zero':'95% interval crosses zero'}. Business significance must still be assessed separately.</div>
       </section>
     </div>
   );
 
   const renderExperimentation=()=>(
     <section className="mi-panel">
-      <SectionTitle eyebrow="Experimentation Lab" title="Test design before significance"/>
-      <div className="grid md:grid-cols-4 gap-3 mt-6">
-        <div className="mi-stat"><span>Control CVR</span><strong>{(inputs.controlCvr*100).toFixed(2)}%</strong></div>
-        <div className="mi-stat"><span>Treatment CVR</span><strong>{((inputs.controlCvr+inputs.treatmentLift)*100).toFixed(2)}%</strong></div>
-        <div className="mi-stat"><span>Relative lift</span><strong>{inputs.controlCvr?((inputs.treatmentLift/inputs.controlCvr)*100).toFixed(1):'0'}%</strong></div>
-        <div className="mi-stat"><span>Sample size</span><strong>{(inputs.treatmentUsers+inputs.controlUsers).toLocaleString()}</strong></div>
+      <SectionTitle eyebrow="Experimentation Lab" title="Statistical evidence before business claims" copy="The engine separates absolute lift, relative lift, uncertainty and economic value. A small p-value does not make an economically trivial effect important."/>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-6 gap-3 mt-6">
+        <div className="mi-stat"><span>Control CVR</span><strong>{(experiment.controlRate*100).toFixed(2)}%</strong></div>
+        <div className="mi-stat"><span>Treatment CVR</span><strong>{(experiment.treatmentRate*100).toFixed(2)}%</strong></div>
+        <div className="mi-stat"><span>Absolute lift</span><strong>{(experiment.absoluteLift*100).toFixed(2)} pp</strong></div>
+        <div className="mi-stat"><span>Relative lift</span><strong>{Number.isFinite(experiment.relativeLift)?(experiment.relativeLift*100).toFixed(1)+'%':'—'}</strong></div>
+        <div className="mi-stat"><span>p-value</span><strong>{experiment.pValue<.001?'<0.001':experiment.pValue.toFixed(3)}</strong></div>
+        <div className="mi-stat"><span>95% conclusion</span><strong className={experiment.significant95?'text-emerald-400':'text-amber-400'}>{experiment.significant95?'Signal detected':'Inconclusive'}</strong></div>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-6 text-xs">
-        {['Avoid peeking before the planned stopping rule','Correct for multiple comparisons','Check seasonality and sample-ratio mismatch','Treat statistical significance separately from business significance'].map(x=><div key={x} className="mi-note"><Beaker className="w-4 h-4 text-amber-400"/><span>{x}</span></div>)}
+        <div className="mi-note"><Beaker className="w-4 h-4 text-amber-400"/><span>95% CI {(experiment.ciLow*100).toFixed(2)} to {(experiment.ciHigh*100).toFixed(2)} pp</span></div>
+        <div className="mi-note"><Beaker className="w-4 h-4 text-amber-400"/><span>Sample ratio {experiment.sampleRatio.toFixed(3)} treatment/control</span></div>
+        <div className="mi-note"><Beaker className="w-4 h-4 text-amber-400"/><span>Avoid peeking; honor the planned stopping rule and multiple-testing correction</span></div>
+        <div className="mi-note"><Beaker className="w-4 h-4 text-amber-400"/><span>Validate randomization, contamination, novelty effects and metric definition before causal rollout</span></div>
       </div>
     </section>
   );
 
   const renderBudget=()=>(
     <section className="mi-panel overflow-x-auto">
-      <SectionTitle eyebrow="Budget Optimizer" title="Allocate on marginal headroom, not historical averages" copy="A constrained heuristic combines modeled efficiency and saturation to suggest where the next marketing rupee has more headroom."/>
-      <table className="mi-table mt-6 min-w-[840px]"><thead><tr><th><SemanticIcon label="Channel" /></th><th><SemanticIcon label="Current" /></th><th><SemanticIcon label="Recommended" /></th><th><SemanticIcon label="Change" /></th><th><SemanticIcon label="Saturation" /></th><th><SemanticIcon label="Action" /></th></tr></thead><tbody>{optimized.map(row=><tr key={row.channel}><td>{row.channel}</td><td>{compactCurrency(row.currentSpend)}</td><td>{compactCurrency(row.recommendedSpend)}</td><td className={row.delta>=0?'text-emerald-400':'text-rose-400'}>{row.delta>=0?'+':''}{(row.deltaPct*100).toFixed(1)}%</td><td>{(row.saturation*100).toFixed(0)}%</td><td>{row.deltaPct>.08?'Increase':row.deltaPct<-.08?'Reduce':'Hold'}</td></tr>)}</tbody></table>
-      <p className="text-[10px] text-neutral-500 mt-4">Recommendation is a decision framework based on simulated response headroom. It is not a guaranteed causal outcome.</p>
+      <SectionTitle eyebrow="Budget Optimizer" title="Allocate on marginal response, not historical averages" copy="A deterministic diminishing-return allocator combines channel efficiency, CTR/CVR quality and saturation. It conserves the total budget and applies spend floors/caps to avoid implausible all-or-nothing allocations."/>
+      <table className="mi-table mt-6 min-w-[960px]"><thead><tr><th><SemanticIcon label="Channel" /></th><th><SemanticIcon label="Current" /></th><th><SemanticIcon label="Recommended" /></th><th><SemanticIcon label="Change" /></th><th><SemanticIcon label="Saturation" /></th><th><SemanticIcon label="Marginal" /></th><th><SemanticIcon label="Action" /></th></tr></thead><tbody>{optimized.map(row=><tr key={row.channel}><td>{row.channel}</td><td>{compactCurrency(row.currentSpend)}</td><td>{compactCurrency(row.recommendedSpend)}</td><td className={row.delta>=0?'text-emerald-400':'text-rose-400'}>{row.delta>=0?'+':''}{(row.deltaPct*100).toFixed(1)}%</td><td>{(row.saturation*100).toFixed(0)}%</td><td>{row.marginalReturnIndex.toFixed(3)}</td><td>{row.deltaPct>.08?'Increase':row.deltaPct<-.08?'Reduce':'Hold'}</td></tr>)}</tbody></table>
+      <div className="grid sm:grid-cols-3 gap-3 mt-5">
+        <div className="mi-stat"><span>Budget in</span><strong>{compactCurrency(inputs.spend)}</strong></div>
+        <div className="mi-stat"><span>Budget allocated</span><strong>{compactCurrency(optimized.reduce((s,r)=>s+r.recommendedSpend,0))}</strong></div>
+        <div className="mi-stat"><span>Conservation error</span><strong>{compactCurrency(Math.abs(inputs.spend-optimized.reduce((s,r)=>s+r.recommendedSpend,0)))}</strong></div>
+      </div>
+      <p className="text-[10px] text-neutral-500 mt-4">Response curves are explicit simulated priors, not measured causal curves. Replace them with geo experiments, lift tests or MMM response functions before production budget deployment.</p>
     </section>
   );
 
@@ -571,15 +594,20 @@ export const MarketingDecisionArchitect: React.FC = () => {
 
   const renderForecast=()=>(
     <section className="mi-panel">
-      <SectionTitle eyebrow="Forecasting Engine" title="Trend, seasonality and uncertainty should be visible"/>
-      <div className="mt-6 overflow-x-auto">
-        <svg viewBox="0 0 980 320" className="min-w-[760px] w-full" role="img" aria-label="Revenue forecast chart">
-          <line x1="50" y1="270" x2="950" y2="270" stroke="#3b3b38"/>
-          {monthly.map((m,i)=>{const max=Math.max(...monthly.map(x=>x.revenue));const x=60+i*68;const y=260-(m.revenue/max)*210;return <g key={m.month}><circle cx={x} cy={y} r="4" fill="#91a7ff"/>{i<11&&(()=>{const n=monthly[i+1];const ny=260-(n.revenue/max)*210;return <line x1={x} y1={y} x2={x+68} y2={ny} stroke="#91a7ff" strokeWidth="2"/>})()}<text x={x} y="292" fill="#777" fontSize="9" textAnchor="middle">M{m.month}</text></g>})}
-          {[1,2,3].map(step=>{const last=monthly[11];const prev=monthly[10];const growth=(last.revenue-prev.revenue)/Math.max(prev.revenue,1);const forecast=last.revenue*(1+growth*.6*step);const max=Math.max(...monthly.map(x=>x.revenue),forecast);const x=60+(11+step)*68;const y=260-(forecast/max)*210;const priorX=x-68;const priorVal=step===1?last.revenue:last.revenue*(1+growth*.6*(step-1));const priorY=260-(priorVal/max)*210;return <g key={step}><line x1={priorX} y1={priorY} x2={x} y2={y} stroke="#d5a74a" strokeDasharray="6 5"/><circle cx={x} cy={y} r="4" fill="#d5a74a"/><line x1={x} y1={y-18} x2={x} y2={y+18} stroke="#d5a74a" opacity=".35"/><text x={x} y="292" fill="#a58d5d" fontSize="9" textAnchor="middle">F{step}</text></g>})}
-        </svg>
+      <SectionTitle eyebrow="Forecasting Engine" title="Trend with explicit uncertainty" copy="Ordinary least squares is fitted to the 12-month demo series. Forecast intervals widen as the horizon extends; this is a baseline model, not a claim that future demand is linear."/>
+      <div className="grid sm:grid-cols-4 gap-3 mt-6">
+        <div className="mi-stat"><span>Trend / month</span><strong>{compactCurrency(forecast.slope)}</strong></div>
+        <div className="mi-stat"><span>R²</span><strong>{forecast.rSquared.toFixed(3)}</strong></div>
+        <div className="mi-stat"><span>Residual error</span><strong>{compactCurrency(forecast.residualStdError)}</strong></div>
+        <div className="mi-stat"><span>Forecast horizon</span><strong>{forecast.points.length} mo</strong></div>
       </div>
-      <div className="flex flex-wrap gap-4 mt-4 text-[10px] font-mono text-neutral-500"><span>● Historical Data</span><span className="text-amber-400">--- Forecast</span><span>│ Confidence Range</span><span>Model · Linear trend + damped continuation</span></div>
+      <div className="mt-6 overflow-x-auto">
+        <table className="mi-table min-w-[760px]">
+          <thead><tr><th>Period</th><th>Point forecast</th><th>95% lower</th><th>95% upper</th><th>Interval width</th></tr></thead>
+          <tbody>{forecast.points.map(point=><tr key={point.period}><td>F{point.period-monthly.length}</td><td>{compactCurrency(point.value)}</td><td>{compactCurrency(point.lower95)}</td><td>{compactCurrency(point.upper95)}</td><td>{compactCurrency(point.upper95-point.lower95)}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p className="text-[10px] font-mono text-neutral-500 mt-4">Model · OLS linear trend + 95% prediction interval · For seasonal production forecasting, supply longer history and exogenous drivers.</p>
     </section>
   );
 
@@ -612,12 +640,12 @@ export const MarketingDecisionArchitect: React.FC = () => {
     <div className="grid lg:grid-cols-2 gap-6">
       <section className="mi-panel">
         <SectionTitle eyebrow="Anomaly & Risk Center" title="Unusual movement deserves context"/>
-        <div className="space-y-3 mt-6">{anomalies.length?anomalies.map(a=><div key={a.month} className="mi-alert"><AlertTriangle className="w-4 h-4 text-amber-400"/><div><strong>Month {a.month} revenue deviation</strong><p>{a.z.toFixed(2)} standard deviations from the 12-month mean · {compactCurrency(a.revenue)}</p></div></div>):<p className="text-sm text-neutral-500">No material anomalies detected.</p>}</div>
+        <div className="space-y-3 mt-6">{anomalies.length?anomalies.map(a=><div key={a.month} className="mi-alert"><AlertTriangle className="w-4 h-4 text-amber-400"/><div><strong>Month {a.month} robust revenue anomaly</strong><p>{a.robustZ.toFixed(2)} robust z using median absolute deviation · {compactCurrency(a.revenue)}</p></div></div>):<p className="text-sm text-neutral-500">No revenue points exceed the robust |z| &gt; 3.5 anomaly threshold.</p>}</div>
       </section>
       <section className="mi-panel">
-        <SectionTitle eyebrow="Measurement Reliability" title="86 / 100"/>
-        <div className="grid grid-cols-2 gap-3 mt-6">{[['Tagging completeness','94%'],['Naming consistency','91%'],['Attribution coverage','82%'],['Sample strength','High']].map(([a,b])=><div key={a} className="mi-stat"><span>{a}</span><strong>{b}</strong></div>)}</div>
-        <div className="mt-6 space-y-2 text-xs text-neutral-400"><p>✓ Clicks do not exceed impressions</p><p>✓ Revenue values are non-negative</p><p>✓ Conversion volume reconciles to funnel</p><p className="text-amber-400">! Incrementality remains simulated until a real experiment is imported</p></div>
+        <SectionTitle eyebrow="Measurement Reliability" title={reliability.overall+' / 100'}/>
+        <div className="grid grid-cols-2 gap-3 mt-6">{[['Data integrity',reliability.dataIntegrity+'%'],['Tagging completeness',reliability.taggingCompleteness+'%'],['Taxonomy governance',reliability.taxonomyGovernance+'%'],['Experiment design',reliability.experimentDesign+'%']].map(([a,b])=><div key={a} className="mi-stat"><span>{a}</span><strong>{b}</strong></div>)}</div>
+        <div className="mt-6 space-y-2 text-xs text-neutral-400"><p>✓ Reliability is computed from row-level integrity, required metadata, taxonomy governance and experiment design checks</p><p>✓ Score is recalculated when taxonomy or experiment assumptions change</p><p className="text-amber-400">! Demo mode caps reliability at 88/100 because synthetic data cannot establish real measurement validity</p></div>
       </section>
     </div>
   );
@@ -628,8 +656,8 @@ export const MarketingDecisionArchitect: React.FC = () => {
       <div className="mi-executive mt-6">
         <p>Marketing is currently generating <strong>{formatMetric('revenue',metrics.revenue)}</strong> in modeled revenue from <strong>{formatMetric('spend',inputs.spend)}</strong> of spend, with ROAS at <strong>{metrics.roas.toFixed(2)}×</strong> and contribution at <strong>{formatMetric('contribution',metrics.contribution)}</strong>.</p>
         <p>The strongest diagnostic signal is <strong>{insights[0]?.title.toLowerCase()}</strong>. The model points to <strong>{leakage[0]?.from} → {leakage[0]?.to}</strong> as the highest modeled economic leakage point rather than merely the largest percentage drop.</p>
-        <p>Customer economics are modeled at <strong>{metrics.ltvCac.toFixed(2)}× LTV:CAC</strong> with <strong>{metrics.paybackMonths.toFixed(1)} months</strong> payback. Attributed ROAS is <strong>{metrics.roas.toFixed(2)}×</strong> while simulated incremental ROAS is <strong>{metrics.iroas.toFixed(2)}×</strong>, so attribution should not be treated as causal lift.</p>
-        <p>The next decision should be to <strong>{(insights[0]?.recommendation||'continue testing the highest-sensitivity variable').toLowerCase()}</strong>. Measurement confidence is <strong>medium</strong> because incrementality and response curves use modeled demo assumptions until real data is imported.</p>
+        <p>Customer economics are modeled at <strong>{metrics.ltvCac.toFixed(2)}× contribution LTV:CAC</strong> using fully-loaded attributed CAC and <strong>{Number.isFinite(metrics.paybackMonths)?metrics.paybackMonths.toFixed(1)+' months':'no payback inside the modeled horizon'}</strong>. Attributed ROAS is <strong>{metrics.roas.toFixed(2)}×</strong>; experiment-implied iROAS is <strong>{metrics.iroas.toFixed(2)}×</strong> with a 95% lift interval of <strong>{(experiment.ciLow*100).toFixed(2)} to {(experiment.ciHigh*100).toFixed(2)} percentage points</strong>.</p>
+        <p>The next decision should be to <strong>{(insights[0]?.recommendation||'continue testing the highest-sensitivity variable').toLowerCase()}</strong>. The current measurement reliability score is <strong>{reliability.overall}/100</strong>; it is deliberately capped in demo mode because synthetic data can validate arithmetic and architecture, not real-world causal truth.</p>
       </div>
       <div className="flex flex-wrap gap-3 mt-7">
         <button className="mi-primary" onClick={()=>downloadText('marketing-executive-summary.txt',document.querySelector('.mi-executive')?.textContent||'')}><Download className="w-4 h-4"/>Download summary</button>
@@ -675,7 +703,7 @@ export const MarketingDecisionArchitect: React.FC = () => {
         <div className="mi-hero-meta">
           <div><span>Industry</span><strong>{industry}</strong></div>
           <div><span>Objective</span><strong>{objective}</strong></div>
-          <div><span>Reliability</span><strong>86 / 100</strong></div>
+          <div><span>Reliability</span><strong>{reliability.overall} / 100</strong></div>
           <button onClick={()=>setInputs(initialInputs)} className="mi-secondary"><RefreshCw className="w-3.5 h-3.5"/>Reset model</button>
         </div>
       </div>
@@ -689,15 +717,15 @@ export const MarketingDecisionArchitect: React.FC = () => {
       <div className="mi-global-bar">
         <label><span>Industry</span><select value={industry} onChange={e=>setIndustry(e.target.value as IndustryMode)}>{(['E-Commerce','SaaS','B2B','Marketplace','Retail','FMCG','Mobile App','Financial Services','Travel','Generic'] as IndustryMode[]).map(x=><option key={x}>{x}</option>)}</select></label>
         <label><span>Objective</span><select value={objective} onChange={e=>setObjective(e.target.value as BusinessObjective)}>{(['Awareness','Traffic','Leads','Pipeline','Customers','Revenue','Profit','Retention','LTV','Market Share'] as BusinessObjective[]).map(x=><option key={x}>{x}</option>)}</select></label>
-        <label><span>Attribution</span><select value={attribution} onChange={e=>setAttribution(e.target.value)}>{['Last Click','First Click','Linear','Position Based','Time Decay','Data Driven Simulation','Markov Chain','Shapley Approximation'].map(x=><option key={x}>{x}</option>)}</select></label>
-        <div className="ml-auto hidden lg:flex items-center gap-2 text-[10px] font-mono text-neutral-500"><ShieldCheck className="w-4 h-4 text-emerald-400"/>Demo data reconciled · outputs labeled modeled / simulated where appropriate</div>
+        <label><span>Attribution</span><select value={attribution} onChange={e=>setAttribution(e.target.value)}>{['Last Click','First Click','Linear','Position Based','Time Decay','Data Driven Simulation'].map(x=><option key={x}>{x}</option>)}</select></label>
+        <div className="ml-auto hidden lg:flex items-center gap-2 text-[10px] font-mono text-neutral-500"><ShieldCheck className="w-4 h-4 text-emerald-400"/>Deterministic formula engine · reliability {reliability.overall}/100 · synthetic demo evidence explicitly capped</div>
       </div>
 
       <main className="mi-main">{renderView()}</main>
 
       <footer className="mi-disclaimer">
         <strong>Analytical discipline</strong>
-        <span>Attribution ≠ causality</span><span>Correlation ≠ causation</span><span>ROAS ≠ profit</span><span>Revenue ≠ incrementality</span><span>Average efficiency ≠ marginal efficiency</span>
+        <span>Attribution ≠ causality</span><span>Correlation ≠ causation</span><span>ROAS ≠ profit</span><span>Revenue ≠ incrementality</span><span>Average efficiency ≠ marginal efficiency</span><span>Forecast ≠ certainty</span><span>Statistical significance ≠ business significance</span>
       </footer>
     </div>
   );
