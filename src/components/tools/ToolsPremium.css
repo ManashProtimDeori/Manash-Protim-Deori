@@ -1668,3 +1668,516 @@
   border-color:#435064!important;
 }
 .dark .tools-premium-shell .hc-alert-list p{color:#b8c3d0!important}
+
+
+/* --- Unified readable tool typography + HillChain legibility ------------ */
+.tools-premium-shell{
+  --tool-ui-xs:.74rem;
+  --tool-ui-sm:.82rem;
+  --tool-ui-md:.9rem;
+  --tool-ui-lg:1rem;
+}
+
+/* Global minimum readable scale across every tool. */
+.tools-premium-shell :is(button,select,input:not([type="range"]),textarea){
+  font-size:var(--tool-ui-sm)!important;
+  line-height:1.4!important;
+}
+.tools-premium-shell :is(table,dl){
+  font-size:var(--tool-ui-sm)!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell table th{
+  font-size:.78rem!important;
+  line-height:1.35!important;
+  font-weight:700!important;
+  letter-spacing:.035em!important;
+}
+.tools-premium-shell table td{
+  font-size:.82rem!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell :is(dt,dd){
+  font-size:.8rem!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell :is(small,figcaption){
+  font-size:.76rem!important;
+  line-height:1.45!important;
+}
+
+/* Shared metadata scales across MI / Intelligence / MarketSignal / HillChain. */
+.tools-premium-shell :is(
+  .mi-overline,.intel-overline,.ms-overline,.hc-overline,
+  .mi-eyebrow,.intel-kicker,.ms-eyebrow,.hc-eyebrow,
+  .mi-nav button,.intel-nav button,.ms-nav button,.hc-nav button,
+  .mi-global-bar label>span,.intel-filterbar label>span,.ms-filterbar label>span,.hc-toolbar label>span,
+  .mi-field>span,.hc-field>span
+){
+  font-size:.76rem!important;
+  line-height:1.35!important;
+  letter-spacing:.08em!important;
+}
+.tools-premium-shell :is(
+  .mi-section-title p,.intel-section-title p,.ms-section-title p,.hc-section-head p
+){
+  font-size:.9rem!important;
+  line-height:1.6!important;
+}
+
+/* HillChain toolbar and context */
+.tools-premium-shell .hc-toolbar{
+  gap:10px!important;
+  padding:12px 14px!important;
+}
+.tools-premium-shell .hc-toolbar label{
+  gap:6px!important;
+  min-width:165px!important;
+}
+.tools-premium-shell .hc-toolbar label>span,
+.tools-premium-shell .hc-field>span{
+  font-size:.74rem!important;
+  font-weight:650!important;
+  letter-spacing:.07em!important;
+}
+.tools-premium-shell .hc-toolbar select,
+.tools-premium-shell .hc-field select{
+  min-height:42px!important;
+  padding:0 12px!important;
+  font-size:.86rem!important;
+  font-weight:520!important;
+}
+.tools-premium-shell .hc-toolbar button{
+  min-height:42px!important;
+  padding:0 13px!important;
+  font-size:.82rem!important;
+  font-weight:600!important;
+}
+.tools-premium-shell .hc-context>div{
+  min-width:145px!important;
+  padding:11px 14px!important;
+}
+.tools-premium-shell .hc-context span{
+  font-size:.72rem!important;
+  font-weight:650!important;
+  letter-spacing:.06em!important;
+}
+.tools-premium-shell .hc-context strong{
+  font-size:.86rem!important;
+  margin-top:5px!important;
+}
+
+/* HillChain main stats and section headings */
+.tools-premium-shell .hc-stat{
+  padding:15px!important;
+}
+.tools-premium-shell .hc-stat>span{
+  font-size:.74rem!important;
+  line-height:1.35!important;
+  font-weight:650!important;
+}
+.tools-premium-shell .hc-stat>strong{
+  font-size:1.45rem!important;
+  line-height:1.15!important;
+}
+.tools-premium-shell .hc-stat>em{
+  font-size:.75rem!important;
+  line-height:1.4!important;
+}
+.tools-premium-shell .hc-section-head>div>span{
+  font-size:.76rem!important;
+}
+.tools-premium-shell .hc-section-head p{
+  font-size:.9rem!important;
+}
+
+/* Financial Control Tower waterfall: light surface in light mode, readable labels everywhere. */
+.tools-premium-shell .hc-waterfall{
+  gap:12px!important;
+  padding:14px!important;
+  border:1px solid var(--tool-line)!important;
+  border-radius:12px!important;
+}
+.light .tools-premium-shell .hc-waterfall{
+  background:#f8fafc!important;
+  border-color:#b7c1cd!important;
+  box-shadow:inset 0 1px 0 #fff,0 5px 14px rgba(38,54,75,.08)!important;
+}
+.dark .tools-premium-shell .hc-waterfall{
+  background:#101720!important;
+  border-color:#435064!important;
+}
+.tools-premium-shell .hc-waterfall>div{
+  grid-template-columns:minmax(180px,1.1fr) minmax(100px,.55fr) minmax(180px,2fr)!important;
+  gap:14px!important;
+  min-height:34px;
+}
+.tools-premium-shell .hc-waterfall span{
+  font-size:.84rem!important;
+  line-height:1.35!important;
+  font-weight:550!important;
+}
+.tools-premium-shell .hc-waterfall strong{
+  font-size:.84rem!important;
+  line-height:1.35!important;
+  font-weight:700!important;
+}
+.light .tools-premium-shell .hc-waterfall span,
+.light .tools-premium-shell .hc-waterfall strong{color:#26364a!important}
+.dark .tools-premium-shell .hc-waterfall span,
+.dark .tools-premium-shell .hc-waterfall strong{color:#dbe3ec!important}
+.tools-premium-shell .hc-waterfall i{
+  height:11px!important;
+  min-width:120px;
+}
+
+/* Financial stress tiles */
+.tools-premium-shell .hc-mc-grid span{
+  font-size:.76rem!important;
+  font-weight:600!important;
+}
+.tools-premium-shell .hc-mc-grid strong{
+  font-size:1.12rem!important;
+  line-height:1.25!important;
+}
+
+/* Resilience tower */
+.tools-premium-shell .hc-resilience-grid{
+  gap:10px!important;
+}
+.light .tools-premium-shell .hc-resilience-grid{
+  background:transparent!important;
+}
+.tools-premium-shell .hc-resilience-grid>div{
+  padding:14px!important;
+  border-radius:10px!important;
+}
+.light .tools-premium-shell .hc-resilience-grid>div{
+  background:#ffffff!important;
+  border-color:#b8c2ce!important;
+}
+.dark .tools-premium-shell .hc-resilience-grid>div{
+  background:#171f29!important;
+  border-color:#435064!important;
+}
+.tools-premium-shell .hc-resilience-grid span{
+  font-size:.84rem!important;
+  line-height:1.4!important;
+  font-weight:600!important;
+}
+.tools-premium-shell .hc-resilience-grid strong{
+  font-size:.9rem!important;
+  line-height:1.3!important;
+  font-weight:750!important;
+}
+.light .tools-premium-shell .hc-resilience-grid span,
+.light .tools-premium-shell .hc-resilience-grid strong{color:#27384e!important}
+.dark .tools-premium-shell .hc-resilience-grid span,
+.dark .tools-premium-shell .hc-resilience-grid strong{color:#dde5ee!important}
+.tools-premium-shell .hc-resilience-grid i{
+  height:8px!important;
+  margin-top:12px!important;
+}
+
+/* Risk heatmap: headers + values large, bold, and full-opacity. */
+.tools-premium-shell .hc-heatmap-wrap{
+  margin-top:20px!important;
+  border-radius:10px;
+}
+.tools-premium-shell .hc-heatmap{
+  min-width:900px!important;
+  font-size:.84rem!important;
+  border-spacing:0!important;
+}
+.tools-premium-shell .hc-heatmap th{
+  padding:12px 10px!important;
+  font-size:.78rem!important;
+  line-height:1.35!important;
+  font-weight:750!important;
+  letter-spacing:.035em!important;
+  white-space:nowrap;
+}
+.tools-premium-shell .hc-heatmap td{
+  padding:10px!important;
+  font-size:.84rem!important;
+  line-height:1.4!important;
+}
+.tools-premium-shell .hc-heatmap td:first-child{
+  font-weight:650!important;
+  min-width:190px!important;
+}
+.tools-premium-shell .hc-heatmap i{
+  opacity:1!important;
+  min-height:38px!important;
+  height:38px!important;
+  min-width:52px;
+  font-size:.88rem!important;
+  font-weight:800!important;
+  border-radius:7px!important;
+  text-shadow:none!important;
+}
+.light .tools-premium-shell .hc-heatmap i{
+  color:#172236!important;
+  background:color-mix(in srgb,#b65f67 calc(var(--risk,.5) * 34%),#edf2f6)!important;
+  border:1px solid #b7c1cd;
+}
+.dark .tools-premium-shell .hc-heatmap i{
+  color:#f5f7fa!important;
+  background:color-mix(in srgb,#c36f77 calc(var(--risk,.5) * 48%),#1a222c)!important;
+  border:1px solid #4b596c;
+}
+
+/* District & Route control rooms */
+.tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars){
+  gap:12px!important;
+  padding:12px!important;
+  border:1px solid var(--tool-line)!important;
+  border-radius:10px!important;
+  overflow:visible!important;
+}
+.light .tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars){
+  background:#f8fafc!important;
+}
+.dark .tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars){
+  background:#101720!important;
+}
+.tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars)>div{
+  grid-template-columns:minmax(125px,1fr) minmax(150px,2fr) 54px!important;
+  gap:12px!important;
+  align-items:center!important;
+  min-height:32px;
+  overflow:visible!important;
+}
+.tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars) span{
+  font-size:.84rem!important;
+  line-height:1.35!important;
+  font-weight:600!important;
+  overflow:visible!important;
+  white-space:normal!important;
+}
+.tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars) strong{
+  font-size:.84rem!important;
+  line-height:1.35!important;
+  font-weight:750!important;
+  text-align:right!important;
+  overflow:visible!important;
+}
+.light .tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars) :is(span,strong){color:#27384e!important}
+.dark .tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars) :is(span,strong){color:#dce4ed!important}
+.tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars) i{
+  height:9px!important;
+  min-width:100px;
+  overflow:hidden!important;
+}
+
+/* Route details */
+.tools-premium-shell .hc-route-card{
+  padding:16px!important;
+}
+.tools-premium-shell .hc-route-card>span{
+  font-size:.76rem!important;
+}
+.tools-premium-shell .hc-route-card h4{
+  font-size:1.18rem!important;
+  line-height:1.35!important;
+}
+.tools-premium-shell .hc-route-card dl,
+.tools-premium-shell .hc-definition-list{
+  grid-template-columns:minmax(160px,1fr) minmax(90px,auto)!important;
+  gap:10px 16px!important;
+  font-size:.84rem!important;
+}
+.tools-premium-shell .hc-route-card :is(dt,dd),
+.tools-premium-shell .hc-definition-list :is(dt,dd){
+  font-size:.84rem!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell .hc-route-card dd,
+.tools-premium-shell .hc-definition-list dd{
+  font-weight:650!important;
+  white-space:normal!important;
+}
+
+/* Network failure / route / district select menus */
+.tools-premium-shell .hc-twin-actions .hc-field{
+  min-width:min(660px,100%)!important;
+}
+.tools-premium-shell .hc-twin-actions select,
+.tools-premium-shell .hc-field select{
+  font-size:.86rem!important;
+  line-height:1.35!important;
+  min-height:44px!important;
+}
+.tools-premium-shell .hc-twin-actions select option,
+.tools-premium-shell .hc-field select option,
+.tools-premium-shell .hc-toolbar select option{
+  font-size:.86rem!important;
+  line-height:1.4!important;
+  padding:8px!important;
+}
+
+/* Inventory / warehousing table */
+.tools-premium-shell .hc-table{
+  font-size:.84rem!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell .hc-table th{
+  padding:12px 11px!important;
+  font-size:.78rem!important;
+  line-height:1.35!important;
+  font-weight:750!important;
+  white-space:normal!important;
+}
+.tools-premium-shell .hc-table td{
+  padding:11px!important;
+  font-size:.84rem!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell .hc-table td strong{
+  font-size:.86rem!important;
+  font-weight:700!important;
+}
+
+/* Commodity/inventory policy cards */
+.tools-premium-shell .hc-commodity-grid{
+  gap:10px!important;
+}
+.tools-premium-shell .hc-commodity-grid article{
+  padding:15px!important;
+}
+.tools-premium-shell .hc-commodity-grid article>span{
+  font-size:.76rem!important;
+  line-height:1.35!important;
+}
+.tools-premium-shell .hc-commodity-grid article>strong{
+  font-size:1rem!important;
+  line-height:1.35!important;
+}
+.tools-premium-shell .hc-commodity-grid dl{
+  gap:8px 12px!important;
+  font-size:.82rem!important;
+}
+.tools-premium-shell .hc-commodity-grid :is(dt,dd){
+  font-size:.82rem!important;
+}
+
+/* Footer guardrails */
+.tools-premium-shell .hc-footer{
+  gap:10px 16px!important;
+  padding:18px 4px 4px!important;
+  font-size:.8rem!important;
+  line-height:1.5!important;
+  font-weight:560!important;
+}
+.tools-premium-shell .hc-footer strong{
+  font-size:.82rem!important;
+  font-weight:750!important;
+}
+.tools-premium-shell .hc-footer span{
+  font-size:.8rem!important;
+  line-height:1.5!important;
+}
+
+/* Remaining HillChain tiny-text families */
+.tools-premium-shell :is(
+  .hc-slider>div,.hc-monsoon-grid span,.hc-action-list,.hc-quality-list,
+  .hc-trace-chain,.hc-governance,.hc-tariff-grid,.hc-break-grid,
+  .hc-reco,.hc-equity-callout,.hc-impact-banner,.hc-query-list
+){
+  font-size:.8rem!important;
+}
+.tools-premium-shell .hc-slider>div{
+  font-size:.82rem!important;
+}
+.tools-premium-shell :is(
+  .hc-monsoon-grid span,.hc-action-list span,.hc-action-list strong,.hc-action-list p,.hc-action-list b,
+  .hc-quality-list span,.hc-quality-list strong,.hc-quality-list p,
+  .hc-trace-chain span,.hc-trace-chain strong,
+  .hc-governance span,.hc-governance p,
+  .hc-tariff-grid article>span,.hc-tariff-grid em,.hc-tariff-grid strong,.hc-tariff-grid p,
+  .hc-break-grid span,.hc-break-grid em,.hc-break-grid b,
+  .hc-reco strong,.hc-reco p,.hc-equity-callout strong,.hc-equity-callout p,
+  .hc-impact-banner strong,.hc-impact-banner p,.hc-query-list button
+){
+  font-size:.8rem!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell .hc-tariff-grid h4{
+  font-size:1rem!important;
+  line-height:1.35!important;
+}
+
+/* Schematic map labels are SVG viewBox units, not CSS pixels. */
+.tools-premium-shell .hc-node text{
+  font-size:2.75px!important;
+  font-weight:650!important;
+  paint-order:stroke;
+  stroke-width:.18px;
+}
+.light .tools-premium-shell .hc-node text{
+  fill:#26384f!important;
+  stroke:#f8fafc!important;
+}
+.dark .tools-premium-shell .hc-node text{
+  fill:#e1e7ee!important;
+  stroke:#101720!important;
+}
+.tools-premium-shell .hc-map-legend{
+  font-size:.78rem!important;
+  line-height:1.4!important;
+  padding:11px 13px!important;
+}
+
+/* Make compact analytical layouts wrap rather than clip their labels. */
+.tools-premium-shell :is(
+  .hc-risk-profile,.hc-driver-bars,.hc-waterfall,.hc-route-card,.hc-table,
+  .hc-resilience-grid,.hc-heatmap
+){
+  overflow:visible;
+}
+.tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars,.hc-waterfall) :is(span,strong){
+  text-overflow:clip!important;
+}
+
+/* Apply a consistent readable floor to the other tool families too. */
+.tools-premium-shell :is(
+  .mi-shell,.intel-shell,.ms-shell
+) :is(
+  button,select,input:not([type="range"]),textarea,td,dd
+){
+  font-size:.82rem!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell :is(.mi-shell,.intel-shell,.ms-shell) th{
+  font-size:.78rem!important;
+  font-weight:700!important;
+}
+.tools-premium-shell :is(.mi-shell,.intel-shell,.ms-shell) :is(
+  .mi-kpi-context,.mi-driver,.mi-disclaimer,
+  .intel-meta-row,.intel-card-foot,.intel-source-metrics,.intel-side-note,
+  .ms-kpi-meta,.ms-context,.ms-definition-list,.ms-warning p
+){
+  font-size:.76rem!important;
+  line-height:1.45!important;
+}
+
+/* Smaller screens retain readability; overflow becomes scroll/wrap, not clipping. */
+@media(max-width:900px){
+  .tools-premium-shell .hc-waterfall>div{
+    grid-template-columns:minmax(150px,1fr) minmax(90px,.5fr) minmax(130px,1.2fr)!important;
+  }
+  .tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars)>div{
+    grid-template-columns:minmax(115px,1fr) minmax(120px,1.5fr) 48px!important;
+  }
+}
+@media(max-width:640px){
+  .tools-premium-shell .hc-waterfall>div{
+    grid-template-columns:1fr auto!important;
+  }
+  .tools-premium-shell .hc-waterfall i{
+    grid-column:1/-1!important;
+  }
+  .tools-premium-shell :is(.hc-risk-profile,.hc-driver-bars)>div{
+    grid-template-columns:110px minmax(100px,1fr) 44px!important;
+  }
+}

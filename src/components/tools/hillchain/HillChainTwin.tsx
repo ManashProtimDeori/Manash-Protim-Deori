@@ -236,7 +236,7 @@ export const HillChainTwin: React.FC = () => {
               <tr key={d.id}>
                 <td>{d.name}</td>
                 {[d.rainfallRisk,d.landslideRisk,d.roadRisk,clamp((16-d.inventoryDays)/16,0,1),clamp((d.warehouseUtilization-80)/25,0,1),clamp((94-d.serviceLevel)/15,0,1)].map((v,i)=>
-                  <td key={i}><i style={{opacity:.18+v*.82}}>{Math.round(v*100)}</i></td>
+                  <td key={i}><i style={{'--risk':v} as React.CSSProperties}>{Math.round(v*100)}</i></td>
                 )}
               </tr>
             ))}</tbody>
