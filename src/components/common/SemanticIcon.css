@@ -1,0 +1,61 @@
+.semantic-label{
+  display:inline-flex;
+  align-items:center;
+  gap:.42rem;
+  min-width:0;
+  vertical-align:middle;
+}
+.semantic-icon{
+  display:inline-grid;
+  place-items:center;
+  width:1.34rem;
+  height:1.34rem;
+  flex:0 0 1.34rem;
+  border:1px solid currentColor;
+  border-radius:.36rem;
+  color:var(--accent-blue,var(--accent));
+  background:color-mix(in srgb,currentColor 7%,transparent);
+  opacity:.82;
+}
+.semantic-icon svg{
+  width:.76rem;
+  height:.76rem;
+  stroke-width:1.75;
+  filter:none!important;
+}
+.light .semantic-icon{
+  color:#516b87;
+  background:#eef2f6;
+  border-color:#aab6c5;
+}
+.dark .semantic-icon{
+  color:#aabbd0;
+  background:#1c2530;
+  border-color:#4d5b6e;
+}
+.project-structure-icon{
+  width:1.72rem;
+  height:1.72rem;
+  margin-bottom:.85rem;
+  border-radius:.45rem;
+}
+.project-structure-icon svg{
+  width:.92rem;
+  height:.92rem;
+}
+table th .semantic-label{
+  white-space:normal;
+  line-height:1.25;
+}
+table th .semantic-icon{
+  width:1.2rem;
+  height:1.2rem;
+  flex-basis:1.2rem;
+}
+table th .semantic-icon svg{
+  width:.68rem;
+  height:.68rem;
+}
+@media(max-width:640px){
+  .semantic-icon{width:1.22rem;height:1.22rem;flex-basis:1.22rem}
+}
