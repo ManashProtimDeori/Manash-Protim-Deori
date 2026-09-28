@@ -1222,3 +1222,63 @@
 .light #main-content input[type="range"]:not(.tools-premium-shell input[type="range"]){
   filter:contrast(1.08);
 }
+
+
+/* --- Final Tools palette normalization ---------------------------------- */
+.light .tools-premium-shell{
+  --tool-accent:#4a6581;
+  --tool-accent-2:#66758a;
+  --tool-accent-3:#56746f;
+  --tool-warm:#876f48;
+  --tool-text:#18202a;
+  --tool-muted:#526071;
+  --tool-line:#c1c9d4;
+  --tool-line-strong:#9faab8;
+}
+.dark .tools-premium-shell{
+  --tool-accent:#93a8bf;
+  --tool-accent-2:#8491a3;
+  --tool-accent-3:#7e9c98;
+  --tool-warm:#b8a47d;
+  --tool-text:#f1f4f7;
+  --tool-muted:#bcc5d1;
+  --tool-line:#414d5d;
+  --tool-line-strong:#59677a;
+}
+
+/* Remove high-chroma decorative gradients from analytical surfaces. */
+.light .tools-premium-shell :is(
+  .mi-panel,.intel-panel,.ms-panel,.hc-panel,.mi-kpi,.intel-stat,.ms-kpi,.hc-stat
+){
+  background:linear-gradient(155deg,#ffffff,#f1f4f7)!important;
+}
+.dark .tools-premium-shell :is(
+  .mi-panel,.intel-panel,.ms-panel,.hc-panel,.mi-kpi,.intel-stat,.ms-kpi,.hc-stat
+){
+  background:linear-gradient(155deg,#1b222b,#121820)!important;
+}
+
+/* Tool labels, numbers, and chart text get one final explicit foreground. */
+.light .tools-premium-shell :is(
+  .mi-shell,.intel-shell,.ms-shell,.hc-shell,
+  .mi-main,.intel-main,.ms-main,.hc-main,
+  .mi-kpi,.intel-stat,.ms-kpi,.hc-stat
+){color:#18202a!important}
+.dark .tools-premium-shell :is(
+  .mi-shell,.intel-shell,.ms-shell,.hc-shell,
+  .mi-main,.intel-main,.ms-main,.hc-main,
+  .mi-kpi,.intel-stat,.ms-kpi,.hc-stat
+){color:#f1f4f7!important}
+
+.light .tools-premium-shell svg text{fill:#425064!important}
+.dark .tools-premium-shell svg text{fill:#c7d0db!important}
+.light .tools-premium-shell :is(.intel-axis,.intel-grid-line){stroke:#7c899a!important}
+.dark .tools-premium-shell :is(.intel-axis,.intel-grid-line){stroke:#718096!important}
+
+/* Keep status colors semantic but subdued. */
+.light .tools-premium-shell :is(.good,.up,.text-emerald-400){color:#246b52!important}
+.light .tools-premium-shell :is(.warn,.text-amber-400){color:#7b612b!important}
+.light .tools-premium-shell :is(.bad,.down,.text-rose-400){color:#a24d55!important}
+.dark .tools-premium-shell :is(.good,.up,.text-emerald-400){color:#7fc4a9!important}
+.dark .tools-premium-shell :is(.warn,.text-amber-400){color:#d1b77b!important}
+.dark .tools-premium-shell :is(.bad,.down,.text-rose-400){color:#e59ca2!important}

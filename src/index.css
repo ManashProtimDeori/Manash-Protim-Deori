@@ -3361,3 +3361,224 @@ p,li{
   background:#526a88;
   border-radius:999px;
 }
+
+
+/* --- Final portfolio-wide visibility contract ---------------------------- */
+/* Visual priority: text/data first, decoration second. Palettes are deliberately
+   neutral and low-chroma so both themes remain comfortable for long reading. */
+.light{
+  --bg-primary:#f6f7f9;
+  --bg-secondary:#eceff3;
+  --surface-elevated:#ffffff;
+  --surface-muted:#f0f3f6;
+  --text-primary:#161b22;
+  --text-secondary:#4b5563;
+  --text-muted:#667085;
+  --border-soft:#c9d0d9;
+  --border-strong:#aeb8c5;
+  --accent:#45617f;
+  --accent-blue:#45617f;
+  --accent-blue-soft:#e8edf3;
+  color-scheme:light;
+}
+.dark{
+  --bg-primary:#0f1318;
+  --bg-secondary:#171d24;
+  --surface-elevated:#1a212a;
+  --surface-muted:#141a21;
+  --text-primary:#f2f4f7;
+  --text-secondary:#c3cad4;
+  --text-muted:#9da8b6;
+  --border-soft:#3b4655;
+  --border-strong:#536174;
+  --accent:#91a6bd;
+  --accent-blue:#91a6bd;
+  --accent-blue-soft:#1d2a38;
+  color-scheme:dark;
+}
+
+.light body,.light #root>div{background:var(--bg-primary)!important;color:var(--text-primary)!important}
+.dark body,.dark #root>div{background:var(--bg-primary)!important;color:var(--text-primary)!important}
+
+/* Neutral utility colors are made deterministic in both themes. */
+.light :is(
+  .text-neutral-100,.text-neutral-200,.text-neutral-300
+){color:#202833!important}
+.light :is(
+  .text-neutral-400,.text-neutral-500,.text-neutral-600,.text-neutral-700
+){color:#536071!important}
+.light :is(.text-neutral-800,.text-neutral-900,.text-neutral-950){color:#161b22!important}
+
+.dark :is(
+  .text-neutral-100,.text-neutral-200,.text-neutral-300
+){color:#f1f4f7!important}
+.dark :is(
+  .text-neutral-400,.text-neutral-500,.text-neutral-600,.text-neutral-700
+){color:#b8c1cd!important}
+.dark :is(.text-neutral-800,.text-neutral-900,.text-neutral-950){color:#dfe5ec!important}
+
+.light :is(.bg-neutral-950,.bg-neutral-900,.bg-neutral-800){background-color:#e9edf2!important}
+.light :is(.bg-neutral-100,.bg-neutral-50,.bg-white){background-color:#ffffff}
+.dark :is(.bg-neutral-950,.bg-neutral-900,.bg-neutral-800){background-color:#121820!important}
+.dark :is(.bg-neutral-100,.bg-neutral-50){background-color:#202833!important}
+
+.light :is(
+  .border-neutral-800,.border-neutral-700,.border-neutral-600,
+  .border-neutral-300,.border-neutral-200
+){border-color:#b9c2ce!important}
+.dark :is(
+  .border-neutral-800,.border-neutral-700,.border-neutral-600,
+  .border-neutral-300,.border-neutral-200
+){border-color:#465365!important}
+
+/* Unstyled editorial copy inherits a reliably readable foreground. */
+.light #main-content :where(p,li,dd,figcaption,small):not([class*="text-"]){color:#4b5563}
+.dark #main-content :where(p,li,dd,figcaption,small):not([class*="text-"]){color:#c3cad4}
+.light #main-content :where(h1,h2,h3,h4,h5,h6):not([class*="text-"]){color:#161b22}
+.dark #main-content :where(h1,h2,h3,h4,h5,h6):not([class*="text-"]){color:#f2f4f7}
+
+/* Dividers should never disappear into their surface. */
+.light #main-content :is(hr,[class*="border-b"],[class*="border-t"]){border-color:#c5cdd7}
+.dark #main-content :is(hr,[class*="border-b"],[class*="border-t"]){border-color:#3f4b5b}
+
+/* Forms across every page use explicit foreground/surface contrast. */
+.light #main-content :is(input:not([type="range"]),textarea,select){
+  color:#18202a!important;
+  background:#ffffff!important;
+  border-color:#aeb8c5!important;
+}
+.dark #main-content :is(input:not([type="range"]),textarea,select){
+  color:#f0f3f7!important;
+  background:#151c24!important;
+  border-color:#536174!important;
+}
+.light #main-content ::placeholder{color:#6c7786!important;opacity:1}
+.dark #main-content ::placeholder{color:#98a4b3!important;opacity:1}
+
+/* Generic tables throughout the portfolio. */
+.light #main-content table{
+  color:#253142;
+}
+.dark #main-content table{
+  color:#dce2e9;
+}
+.light #main-content table :is(th,td){border-color:#c7cfd9}
+.dark #main-content table :is(th,td){border-color:#414d5d}
+.light #main-content table th{color:#3f4d60}
+.dark #main-content table th{color:#c9d1dc}
+
+/* SVG labels without a deliberate fill get a theme-safe foreground. */
+.light #main-content svg text:not([fill]){fill:#445266}
+.dark #main-content svg text:not([fill]){fill:#c5ced9}
+
+/* Global range controls outside the tool-specific skin. */
+#main-content input[type="range"]{
+  -webkit-appearance:none;
+  appearance:none;
+  min-height:24px;
+  background:transparent!important;
+  cursor:pointer;
+}
+.light #main-content input[type="range"]::-webkit-slider-runnable-track{
+  height:7px;border:1px solid #8996a7;border-radius:999px;background:#c7d0dc;
+}
+.dark #main-content input[type="range"]::-webkit-slider-runnable-track{
+  height:7px;border:1px solid #647287;border-radius:999px;background:#384659;
+}
+.light #main-content input[type="range"]::-moz-range-track{
+  height:7px;border:1px solid #8996a7;border-radius:999px;background:#c7d0dc;
+}
+.dark #main-content input[type="range"]::-moz-range-track{
+  height:7px;border:1px solid #647287;border-radius:999px;background:#384659;
+}
+#main-content input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-6.5px;border-radius:50%;
+}
+.light #main-content input[type="range"]::-webkit-slider-thumb{
+  background:#ffffff;border:2px solid #3d5068;box-shadow:0 2px 6px rgba(32,46,64,.24);
+}
+.dark #main-content input[type="range"]::-webkit-slider-thumb{
+  background:#e8edf3;border:2px solid #7f91a8;box-shadow:0 2px 8px rgba(0,0,0,.45);
+}
+#main-content input[type="range"]::-moz-range-thumb{
+  width:16px;height:16px;border-radius:50%;
+}
+.light #main-content input[type="range"]::-moz-range-thumb{background:#fff;border:2px solid #3d5068}
+.dark #main-content input[type="range"]::-moz-range-thumb{background:#e8edf3;border:2px solid #7f91a8}
+
+/* Decoration must never compete with content. */
+.light #main-content>.contextual-art{opacity:.20!important;filter:saturate(.55) brightness(1.04) contrast(.72)!important}
+.dark #main-content>.contextual-art{opacity:.28!important;filter:saturate(.62) brightness(.72) contrast(.82)!important}
+
+/* --- Modest, theme-aware dropdown --------------------------------------- */
+.site-header-premium .primary-nav-dropdown{
+  box-shadow:0 18px 42px rgba(0,0,0,.20)!important;
+  backdrop-filter:blur(14px) saturate(.9)!important;
+}
+.light .site-header-premium .primary-nav-dropdown{
+  background:#f7f8fa!important;
+  border-color:#b9c2ce!important;
+  color:#18202a!important;
+}
+.dark .site-header-premium .primary-nav-dropdown{
+  background:#171d24!important;
+  border-color:#465365!important;
+  color:#eef2f6!important;
+}
+.light .site-header-premium .primary-nav-dropdown-head{
+  background:#eceff3!important;
+  border-color:#c4ccd6!important;
+}
+.dark .site-header-premium .primary-nav-dropdown-head{
+  background:#202833!important;
+  border-color:#445163!important;
+}
+.light .site-header-premium .primary-nav-dropdown-head span,
+.light .site-header-premium .primary-nav-dropdown-head a{
+  color:#2d3847!important;
+}
+.dark .site-header-premium .primary-nav-dropdown-head span,
+.dark .site-header-premium .primary-nav-dropdown-head a{
+  color:#dbe2ea!important;
+}
+.site-header-premium .primary-nav-dropdown-head span{
+  font-weight:650!important;
+  letter-spacing:.035em!important;
+}
+
+.light .site-header-premium .primary-nav-dropdown-item{
+  background:#ffffff!important;
+  border-color:#cbd2dc!important;
+  box-shadow:0 2px 7px rgba(30,42,58,.07)!important;
+}
+.dark .site-header-premium .primary-nav-dropdown-item{
+  background:#1c232c!important;
+  border-color:#3d4858!important;
+  box-shadow:0 2px 8px rgba(0,0,0,.18)!important;
+}
+.light .site-header-premium .primary-nav-dropdown-item:hover,
+.light .site-header-premium .primary-nav-dropdown-item:focus-visible{
+  background:#eef2f6!important;
+  border-color:#9da9b8!important;
+}
+.dark .site-header-premium .primary-nav-dropdown-item:hover,
+.dark .site-header-premium .primary-nav-dropdown-item:focus-visible{
+  background:#252e39!important;
+  border-color:#5d6b7e!important;
+}
+.light .site-header-premium .primary-nav-dropdown-index{color:#66758a!important}
+.dark .site-header-premium .primary-nav-dropdown-index{color:#9facbd!important}
+.light .site-header-premium .primary-nav-dropdown-item small{color:#667085!important}
+.dark .site-header-premium .primary-nav-dropdown-item small{color:#aeb8c6!important}
+.light .site-header-premium .primary-nav-dropdown-item strong{color:#17202b!important;text-shadow:none!important}
+.dark .site-header-premium .primary-nav-dropdown-item strong{color:#f1f4f7!important;text-shadow:none!important}
+.light .site-header-premium .primary-nav-dropdown-item p{color:#526071!important}
+.dark .site-header-premium .primary-nav-dropdown-item p{color:#bdc6d2!important}
+
+/* Drop the remaining visual intensity: no colored glow in menu text. */
+.site-header-premium .primary-nav-dropdown-item strong,
+.site-header-premium .primary-nav-dropdown-item p,
+.site-header-premium .primary-nav-dropdown-item small,
+.site-header-premium .primary-nav-dropdown-index{
+  text-shadow:none!important;
+}
