@@ -8,8 +8,11 @@ import {
 } from 'lucide-react';
 import { actions, evidence, filtersMeta, items, signals, trends } from './demoData';
 import {
-  attentionImportanceZone, decisionPriority, priorityScore, signalNoiseClass, signalStrengthLabel
+  attentionImportanceZone, signalNoiseClass, signalStrengthLabel
 } from './scoring';
+import {
+  assessDecisionAction, assessIntelligenceItem, buildPlatformIntelligence, calculateIntelligenceReliability
+} from './decisionScience';
 import { Filters, IntelligenceAction, IntelligenceItem, Trend } from './types';
 import { SignalGraph, SignalHeatmap, TrendRadar, UncertaintyMap } from './Visuals';
 import { EngineWorkspace } from './EngineWorkspace';
@@ -53,10 +56,11 @@ const SectionTitle:React.FC<{eyebrow:string;title:string;copy?:string;action?:Re
 const IntelligenceCard:React.FC<{
   item:IntelligenceItem;onOpen:(item:IntelligenceItem)=>void;role:string;watching:boolean;onWatch:()=>void;
 }> = ({item,onOpen,role,watching,onWatch}) => {
-  const signalClass=signalNoiseClass(item.strategicRelevanceScore,item.attentionScore,item.evidenceStrengthScore,item.noveltyScore);
+  const assessment=assessIntelligenceItem(item,evidence,true);
+  const signalClass=signalNoiseClass(item.strategicRelevanceScore,item.attentionScore,assessment.calibratedConfidence,item.noveltyScore);
   return <article className="intel-story-card">
     <div className="intel-card-top">
-      <span className={priorityClass(item.priority)}>{item.priority}</span>
+      <span className={priorityClass(assessment.priority)}>{assessment.priority}</span>
       <span className="intel-type-tag">{item.statementType}</span>
       <button onClick={onWatch} className={watching?'intel-watch active':'intel-watch'} aria-label={watching?'Remove from watchlist':'Add to watchlist'}><Bell className="w-3.5 h-3.5"/></button>
     </div>
@@ -67,13 +71,13 @@ const IntelligenceCard:React.FC<{
     </button>
     <div className="intel-card-grid">
       <div><span>Impact</span><strong>{item.importanceScore}</strong></div>
-      <div><span>Confidence</span><strong>{item.confidence}</strong></div>
+      <div><span>Calibrated confidence</span><strong>{assessment.calibratedConfidence}</strong></div>
       <div><span>Novelty</span><strong>{item.noveltyScore}</strong></div>
       <div><span>Signal / noise</span><strong>{signalClass}</strong></div>
     </div>
     <div className="intel-card-foot">
-      <span>{item.sourceIds.length} source refs</span>
-      <span>Trend · {trends.find(t=>t.id===item.trendId)?.name}</span>
+      <span>{item.sourceIds.length} source refs · evidence {assessment.evidence.reliability}/100</span>
+      <span>Decision readiness · {assessment.decisionReadiness}/100</span>
       <span>For {role}</span>
     </div>
   </article>;
@@ -85,7 +89,8 @@ const StoryDrawer:React.FC<{
   if(!item)return null;
   const trend=trends.find(t=>t.id===item.trendId);
   const refs=evidence.filter(e=>item.sourceIds.includes(e.id));
-  const signalClass=signalNoiseClass(item.strategicRelevanceScore,item.attentionScore,item.evidenceStrengthScore,item.noveltyScore);
+  const assessment=assessIntelligenceItem(item,evidence,true);
+  const signalClass=signalNoiseClass(item.strategicRelevanceScore,item.attentionScore,assessment.calibratedConfidence,item.noveltyScore);
   return <div className="intel-drawer-backdrop" onClick={onClose}>
     <aside className="intel-drawer" onClick={e=>e.stopPropagation()}>
       <div className="intel-drawer-head">
@@ -96,7 +101,7 @@ const StoryDrawer:React.FC<{
       <p className="intel-drawer-summary">{item.summary}</p>
       <div className="intel-drawer-scores">
         <SmallScore label="Impact" value={item.importanceScore}/>
-        <SmallScore label="Evidence" value={item.evidenceStrengthScore}/>
+        <SmallScore label="Calibrated confidence" value={assessment.calibratedConfidence}/>
         <SmallScore label="Novelty" value={item.noveltyScore}/>
         <SmallScore label="Attention" value={item.attentionScore}/>
       </div>
@@ -109,7 +114,7 @@ const StoryDrawer:React.FC<{
       </section>
       <section><span className="intel-kicker">WHY IT MATTERS</span><p>{item.whyItMatters}</p></section>
       <section><span className="intel-kicker">WHY IT MATTERS TO ME</span><p>For a {role} in {industry} focused on {geography}, this development is most relevant where it intersects with {item.topic.toLowerCase()}, measurement choices and operating capability. The factual demo record above is unchanged; only relevance framing is personalized.</p></section>
-      <section><span className="intel-kicker">SIGNAL OR NOISE?</span><div className="intel-signal-answer"><strong>{signalClass}</strong><span>Signal {item.strategicRelevanceScore} · Evidence {item.evidenceStrengthScore} · Attention {item.attentionScore} · Novelty {item.noveltyScore}</span></div></section>
+      <section><span className="intel-kicker">SIGNAL OR NOISE?</span><div className="intel-signal-answer"><strong>{signalClass}</strong><span>Relevance {item.strategicRelevanceScore} · Calibrated confidence {assessment.calibratedConfidence} · Attention {item.attentionScore} · Novelty {item.noveltyScore}</span></div></section>
       <section><span className="intel-kicker">TREND CONNECTION</span><h4>{trend?.name}</h4><p>{trend?.thesis}</p></section>
 
       <section><span className="intel-kicker">EVIDENCE TRAIL</span>
@@ -117,6 +122,7 @@ const StoryDrawer:React.FC<{
         <div className="space-y-2 mt-3">{refs.map(ref=><div key={ref.id} className="intel-source-row"><div><strong>{ref.sourceTitle}</strong><span>{ref.publisher} · Tier {ref.tier} · {ref.publicationDate}</span></div><div><span>{ref.corroborated?'Corroborated':'Single-source'}</span><b>{ref.evidenceScore}/100</b></div></div>)}</div>
       </section>
 
+      <section><span className="intel-kicker">EVIDENCE CALIBRATION</span><p>Reliability {assessment.evidence.reliability}/100 · corroboration {assessment.evidence.corroboration}% · independence {assessment.evidence.independence}% · tier strength {assessment.evidence.tierStrength}% · bias burden {assessment.evidence.biasBurden}%.</p><p>Decision readiness {assessment.decisionReadiness}/100. Limiting factor: {assessment.limitingFactor}.</p></section>
       <section><span className="intel-kicker">COUNTER EVIDENCE</span>{item.counterEvidence.map(x=><p key={x} className="intel-counter">− {x}</p>)}</section>
       <section><span className="intel-kicker">WHAT IS STILL UNKNOWN</span>{item.unknowns.map(x=><p key={x}>• {x}</p>)}</section>
       <section><span className="intel-kicker">WHAT SHOULD BE MONITORED NEXT</span><p>{item.monitorNext}</p></section>
@@ -143,44 +149,63 @@ export const MarketingIntelligenceOS:React.FC = () => {
   const toggleWatch=(id:string)=>setWatchlist(prev=>prev.includes(id)?prev.filter(x=>x!==id):[...prev,id]);
   const setFilter=(key:keyof Filters,value:string)=>setFilters(prev=>({...prev,[key]:value}));
 
+  const assessmentMap=useMemo(()=>new Map(
+    items.map(item=>[item.id,assessIntelligenceItem(item,evidence,true)])
+  ),[]);
+
+  const reliabilityProfile=useMemo(()=>calculateIntelligenceReliability(evidence,items,true),[]);
+
   const filteredItems=useMemo(()=>items.filter(item=>{
     const q=filters.search.trim().toLowerCase();
+    const assessment=assessmentMap.get(item.id)!;
     if(filters.geography!=='All'&&item.geography!==filters.geography)return false;
     if(filters.industry!=='All'&&item.industry!==filters.industry)return false;
     if(filters.company!=='All'&&item.company!==filters.company)return false;
     if(filters.platform!=='All'&&item.platform!==filters.platform)return false;
     if(filters.topic!=='All'&&item.topic!==filters.topic)return false;
-    if(filters.priority!=='All'&&item.priority!==filters.priority)return false;
-    if(filters.confidence!=='All'&&item.confidence!==filters.confidence)return false;
-    if(q&&!([item.title,item.summary,item.company,item.platform,item.topic,item.industry,item.geography].join(' ').toLowerCase().includes(q)))return false;
+    if(filters.priority!=='All'&&assessment.priority!==filters.priority)return false;
+    if(filters.confidence!=='All'&&assessment.evidence.confidenceBand!==filters.confidence)return false;
+    if(q&&!([item.title,item.summary,item.company,item.platform,item.topic,item.industry,item.geography,item.whyItMatters].join(' ').toLowerCase().includes(q)))return false;
     return true;
   }).sort((left,right)=>{
-    const roleBoost=(x:IntelligenceItem)=>x.audience.includes(role)?12:0;
-    const leftScore=priorityScore({relevance:left.strategicRelevanceScore+roleBoost(left),impact:left.importanceScore,novelty:left.noveltyScore,evidence:left.evidenceStrengthScore,velocity:left.velocityScore,breadth:left.breadthScore});
-    const rightScore=priorityScore({relevance:right.strategicRelevanceScore+roleBoost(right),impact:right.importanceScore,novelty:right.noveltyScore,evidence:right.evidenceStrengthScore,velocity:right.velocityScore,breadth:right.breadthScore});
-    return rightScore-leftScore;
-  }),[filters,role]);
+    const leftAssessment=assessmentMap.get(left.id)!;
+    const rightAssessment=assessmentMap.get(right.id)!;
+    const roleBoost=(x:IntelligenceItem)=>x.audience.includes(role)?8:0;
+    return (rightAssessment.executivePriority+roleBoost(right))-(leftAssessment.executivePriority+roleBoost(left));
+  }),[filters,role,assessmentMap]);
 
   const topItems=filteredItems.slice(0,12);
   const selectedTrendObj=trends.find(t=>t.id===selectedTrend)||trends[0];
 
   const trendCounts=useMemo(()=>trends.map(t=>({...t,count:filteredItems.filter(i=>i.trendId===t.id).length})).sort((a,b)=>b.count-a.count),[filteredItems]);
-  const hiddenSignal=useMemo(()=>filteredItems.filter(i=>i.attentionScore<48&&i.evidenceStrengthScore>68&&i.importanceScore>70).sort((a,b)=>b.importanceScore-a.importanceScore)[0]||filteredItems[0],[filteredItems]);
-  const criticalCount=filteredItems.filter(i=>i.priority==='CRITICAL').length;
+  const hiddenSignal=useMemo(()=>filteredItems
+    .filter(i=>i.attentionScore<55&&(assessmentMap.get(i.id)?.calibratedConfidence??0)>=55)
+    .sort((a,b)=>(assessmentMap.get(b.id)?.hiddenSignalScore??0)-(assessmentMap.get(a.id)?.hiddenSignalScore??0))[0]||filteredItems[0],[filteredItems,assessmentMap]);
+  const criticalCount=filteredItems.filter(i=>assessmentMap.get(i.id)?.priority==='CRITICAL').length;
   const emergingCount=signals.filter(s=>s.status==='emerging'||s.status==='strengthening').length;
-  const reliability=Math.round(evidence.reduce((s,e)=>s+e.evidenceScore,0)/evidence.length);
+  const reliability=reliabilityProfile.overall;
 
   const companyRows=useMemo(()=>filtersMeta.companies.map(company=>{
     const subset=items.filter(i=>i.company===company);
-    return {company,moves:subset.length,impact:Math.round(subset.reduce((s,i)=>s+i.importanceScore,0)/Math.max(subset.length,1)),ai:subset.filter(i=>i.topic.includes('AI')||i.trendId.includes('ai')).length,latest:subset.sort((a,b)=>b.date.localeCompare(a.date))[0]};
-  }).sort((a,b)=>b.impact-a.impact),[]);
+    return {
+      company,
+      moves:subset.length,
+      impact:Math.round(subset.reduce((sum,item)=>sum+(assessmentMap.get(item.id)?.executivePriority??0),0)/Math.max(subset.length,1)),
+      ai:subset.filter(i=>i.topic.includes('AI')||i.trendId.includes('ai')).length,
+      latest:[...subset].sort((a,b)=>b.date.localeCompare(a.date))[0]
+    };
+  }).sort((a,b)=>b.impact-a.impact),[assessmentMap]);
 
-  const platformRows=useMemo(()=>filtersMeta.platforms.map(platform=>{
-    const subset=items.filter(i=>i.platform===platform);
-    return {platform,count:subset.length,measurement:35+(subset.length*7)%60,targeting:40+(subset.length*11)%55,creative:30+(subset.length*17)%65,commerce:28+(subset.length*23)%68,confidence:subset.length?Math.round(subset.reduce((s,i)=>s+i.confidenceScore,0)/subset.length):0};
-  }),[]);
+  const platformRows=useMemo(()=>buildPlatformIntelligence(filtersMeta.platforms,items,evidence),[]);
 
-  const actionRows=useMemo(()=>actions.map(a=>({...a,priorityScore:decisionPriority(a,role==='CMO'?90:78),bucket:a.expectedImpact>=impactThreshold&&a.confidence>=confidenceThreshold?'ACT NOW':a.expectedImpact>=impactThreshold?'TEST':a.confidence>=confidenceThreshold?'PREPARE':a.actionType==='watch'?'WATCH':'IGNORE FOR NOW'})).sort((a,b)=>b.priorityScore-a.priorityScore),[impactThreshold,confidenceThreshold,role]);
+  const actionRows=useMemo(()=>actions.map(action=>{
+    const assessment=assessDecisionAction(action,items,evidence,{
+      impactThreshold,
+      confidenceThreshold,
+      roleRelevance:role==='CMO'?92:80,
+    });
+    return {...action,...assessment,priorityScore:assessment.score};
+  }).sort((a,b)=>b.priorityScore-a.priorityScore),[impactThreshold,confidenceThreshold,role]);
 
   const clearFilters=()=>setFilters({geography:'All',industry:'All',company:'All',platform:'All',topic:'All',priority:'All',confidence:'All',audience:'All',search:''});
 
@@ -208,7 +233,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
           <span className="intel-kicker">THE SIGNAL MOST MARKETERS MAY BE MISSING</span>
           <h4>{hiddenSignal?.title}</h4>
           <p>{hiddenSignal?.whyItMatters}</p>
-          <div className="intel-hidden-metrics"><span>Attention {hiddenSignal?.attentionScore}</span><span>Evidence {hiddenSignal?.evidenceStrengthScore}</span><span>Impact {hiddenSignal?.importanceScore}</span></div>
+          <div className="intel-hidden-metrics"><span>Attention {hiddenSignal?.attentionScore}</span><span>Calibrated confidence {hiddenSignal?assessmentMap.get(hiddenSignal.id)?.calibratedConfidence:'—'}</span><span>Hidden-signal score {hiddenSignal?assessmentMap.get(hiddenSignal.id)?.hiddenSignalScore:'—'}</span></div>
           {hiddenSignal&&<button onClick={()=>setSelectedItem(hiddenSignal)}>Inspect evidence <ArrowUpRight className="w-3.5 h-3.5"/></button>}
         </aside>
       </section>
@@ -218,7 +243,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
         <div><span>Signals</span><strong>{signals.length}</strong><em>{emergingCount} active early signals</em></div>
         <div><span>Trends</span><strong>{trends.length}</strong><em>{trends.filter(t=>t.stage==='Accelerating').length} accelerating</em></div>
         <div><span>Evidence references</span><strong>{evidence.length}</strong><em>Tiered synthetic provenance</em></div>
-        <div><span>Reliability</span><strong>{reliability}</strong><em>Demo evidence quality index</em></div>
+        <div><span>Reliability</span><strong>{reliability}</strong><em>Evidence-calibrated · demo capped at 88</em></div>
       </section>
 
       <div className="grid xl:grid-cols-[1.35fr_.65fr] gap-6">
@@ -292,7 +317,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
     <div className="space-y-6">
       <section className="intel-panel overflow-x-auto">
         <SectionTitle eyebrow="PLATFORM INTELLIGENCE" title="Change impact across the marketing operating model"/>
-        <table className="intel-table min-w-[920px] mt-6"><thead><tr><th><SemanticIcon label="Platform" /></th><th><SemanticIcon label="Updates" /></th><th><SemanticIcon label="Measurement" /></th><th><SemanticIcon label="Targeting" /></th><th><SemanticIcon label="Creative" /></th><th><SemanticIcon label="Commerce" /></th><th><SemanticIcon label="Confidence" /></th></tr></thead><tbody>{platformRows.map(r=><tr key={r.platform}><td><strong>{r.platform}</strong></td><td>{r.count}</td><td>{Math.round(r.measurement/20)}/5</td><td>{Math.round(r.targeting/20)}/5</td><td>{Math.round(r.creative/20)}/5</td><td>{Math.round(r.commerce/20)}/5</td><td>{r.confidence}</td></tr>)}</tbody></table>
+        <table className="intel-table min-w-[920px] mt-6"><thead><tr><th><SemanticIcon label="Platform" /></th><th><SemanticIcon label="Updates" /></th><th><SemanticIcon label="Measurement" /></th><th><SemanticIcon label="Targeting" /></th><th><SemanticIcon label="Creative" /></th><th><SemanticIcon label="Commerce" /></th><th><SemanticIcon label="Confidence" /></th></tr></thead><tbody>{platformRows.map(r=><tr key={r.platform}><td><strong>{r.platform}</strong></td><td>{r.count}</td><td>{r.measurement}/5</td><td>{r.targeting}/5</td><td>{r.creative}/5</td><td>{r.commerce}/5</td><td>{r.confidence}</td></tr>)}</tbody></table>
       </section>
       <section className="intel-panel"><SectionTitle eyebrow="PLATFORM CHANGE IMPACT MATRIX" title="Scores are explainable, not decorative"/><div className="intel-impact-matrix mt-5">{['Media Buying','Creative','Measurement','Targeting','Search','Organic','Commerce','CRM','Data','Agency Operations'].map((row,i)=><div key={row}><span>{row}</span>{filtersMeta.platforms.slice(0,8).map((p,j)=><i key={p} style={{opacity:.2+(((i*13+j*17)%85)/110)}} title={`${p} / ${row}: modeled impact ${((i*13+j*17)%5)+1}/5`}>{((i*13+j*17)%5)+1}</i>)}</div>)}</div></section>
     </div>
@@ -404,13 +429,13 @@ export const MarketingIntelligenceOS:React.FC = () => {
   const renderDecision=()=>(
     <div className="space-y-6">
       <section className="intel-panel">
-        <SectionTitle eyebrow="WHAT SHOULD I DO WITH THIS?" title="Impact × confidence × urgency ÷ cost" copy="Thresholds are configurable. Prioritization is a decision framework, not a guaranteed outcome."/>
+        <SectionTitle eyebrow="WHAT SHOULD I DO WITH THIS?" title="Evidence-calibrated decision portfolio" copy="Impact, calibrated confidence, urgency, reversibility, cost, evidence reliability and downside are evaluated separately. The score supports judgment; it never guarantees an outcome."/>
         <div className="grid md:grid-cols-2 gap-5 mt-6">
           <label className="intel-slider"><span>Act / test impact threshold <b>{impactThreshold}</b></span><input type="range" min="40" max="90" value={impactThreshold} onChange={e=>setImpactThreshold(Number(e.target.value))}/></label>
           <label className="intel-slider"><span>Confidence threshold <b>{confidenceThreshold}</b></span><input type="range" min="35" max="90" value={confidenceThreshold} onChange={e=>setConfidenceThreshold(Number(e.target.value))}/></label>
         </div>
       </section>
-      <section className="intel-decision-columns">{['ACT NOW','TEST','WATCH','PREPARE','IGNORE FOR NOW'].map(bucket=><div key={bucket}><h4>{bucket}</h4>{actionRows.filter(a=>a.bucket===bucket).map(a=><article key={a.id}><span>{a.affectedFunction}</span><strong>{a.title}</strong><p>{a.description}</p><div><b>Priority {a.priorityScore}</b><em>Impact {a.expectedImpact} · Confidence {a.confidence} · Cost {a.cost}</em></div><details><summary>Reasoning & assumptions</summary><p>Evidence: {a.evidenceIds.join(', ')}</p><p>Assumptions: {a.assumptions.join(' · ')}</p><p>Trigger: {a.triggerConditions.join(' · ')}</p></details></article>)}</div>)}</section>
+      <section className="intel-decision-columns">{['ACT NOW','TEST','WATCH','PREPARE','IGNORE FOR NOW'].map(bucket=><div key={bucket}><h4>{bucket}</h4>{actionRows.filter(a=>a.bucket===bucket).map(a=><article key={a.id}><span>{a.affectedFunction}</span><strong>{a.title}</strong><p>{a.description}</p><div><b>Decision score {a.priorityScore}</b><em>Impact {a.expectedImpact} · Calibrated confidence {a.calibratedConfidence} · Evidence {a.evidenceReliability} · Downside {a.downsideRisk} · VOI {a.valueOfInformation}</em></div><details><summary>Reasoning & assumptions</summary><p>{a.rationale}</p><p>Evidence records: {a.evidenceIds.join(', ')}</p><p>Assumptions: {a.assumptions.join(' · ')}</p><p>Trigger: {a.triggerConditions.join(' · ')}</p></details></article>)}</div>)}</section>
       <section className="intel-panel"><SectionTitle eyebrow="UNCERTAINTY MAP" title="Potential impact vs evidence certainty"/><UncertaintyMap items={topItems.concat(filteredItems.slice(12,32))}/></section>
     </div>
   );
@@ -419,7 +444,16 @@ export const MarketingIntelligenceOS:React.FC = () => {
     <div className="space-y-6">
       <section className="intel-panel"><SectionTitle eyebrow="SOURCE & EVIDENCE CENTER" title="Provenance before narrative"/><div className="intel-source-metrics mt-6">{[[1,'Primary / Tier 1'],[2,'Research + quality reporting'],[3,'Analyst'],[4,'Low-verification']].map(([tier,label])=><div key={String(tier)}><span>{label}</span><strong>{evidence.filter(e=>e.tier===tier).length}</strong><p>source references</p></div>)}</div></section>
       <section className="intel-panel overflow-x-auto"><SectionTitle eyebrow="CLAIM VERIFICATION MATRIX" title="Conflicting evidence can coexist"/><table className="intel-table min-w-[980px] mt-6"><thead><tr><th><SemanticIcon label="Claim" /></th><th><SemanticIcon label="Source" /></th><th><SemanticIcon label="Type" /></th><th><SemanticIcon label="Tier" /></th><th><SemanticIcon label="Corroborated" /></th><th><SemanticIcon label="Evidence quality" /></th><th><SemanticIcon label="Bias context" /></th></tr></thead><tbody>{evidence.slice(0,30).map(e=><tr key={e.id}><td>{e.exactClaim}</td><td>{e.sourceTitle}</td><td>{e.sourceType}</td><td>{e.tier}</td><td>{e.corroborated?'Yes':'No'}</td><td>{e.evidenceScore}</td><td>{e.biasFlag||'No demo flag'}</td></tr>)}</tbody></table></section>
-      <section className="intel-panel"><SectionTitle eyebrow="DATA QUALITY" title="Intelligence Reliability Score"/><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5"><div className="intel-stat"><span>Overall</span><strong>{reliability}/100</strong><p>Synthetic evidence quality mean</p></div><div className="intel-stat"><span>Corroborated</span><strong>{Math.round(evidence.filter(e=>e.corroborated).length/evidence.length*100)}%</strong><p>of demo references</p></div><div className="intel-stat"><span>Bias flags</span><strong>{evidence.filter(e=>e.biasFlag).length}</strong><p>contextualized, not discarded</p></div><div className="intel-stat"><span>Live sources</span><strong>0</strong><p>demo mode by design</p></div></div></section>
+      <section className="intel-panel"><SectionTitle eyebrow="DATA QUALITY" title="Evidence-Calibrated Intelligence Reliability"/><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5">
+        <div className="intel-stat"><span>Overall</span><strong>{reliabilityProfile.overall}/100</strong><p>Synthetic mode capped at 88</p></div>
+        <div className="intel-stat"><span>Evidence quality</span><strong>{reliabilityProfile.quality}/100</strong><p>Tier + source-type weighted</p></div>
+        <div className="intel-stat"><span>Corroboration</span><strong>{reliabilityProfile.corroboration}%</strong><p>references marked corroborated</p></div>
+        <div className="intel-stat"><span>Independence</span><strong>{reliabilityProfile.independence}%</strong><p>publisher + source-type diversity proxy</p></div>
+        <div className="intel-stat"><span>Claim coverage</span><strong>{reliabilityProfile.claimCoverage}%</strong><p>records linked to evidence</p></div>
+        <div className="intel-stat"><span>Multi-source coverage</span><strong>{reliabilityProfile.multiSourceCoverage}%</strong><p>records with 2+ refs</p></div>
+        <div className="intel-stat"><span>Counter-evidence discipline</span><strong>{reliabilityProfile.counterEvidenceCoverage}%</strong><p>unknowns + counter-signals retained</p></div>
+        <div className="intel-stat"><span>Bias burden</span><strong>{reliabilityProfile.biasBurden}%</strong><p>flagged, disclosed and penalized</p></div>
+      </div></section>
     </div>
   );
 
@@ -469,7 +503,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
         <span className="intel-overline">MARKETING INTELLIGENCE · SIGNAL DETECTION · DECISION BRIEFING</span>
         <h2 id="marketing-intelligence-title"><span className="intel-hero-title-main">Marketing Intelligence</span><br/><em>Command Center</em></h2>
         <p>Detect what changed, verify the evidence, quantify the variables, model how consequences propagate, simulate alternative futures, and convert the resulting intelligence into better business decisions.</p>
-        <div className="intel-demo-banner"><ShieldCheck className="w-4 h-4"/><strong>DEMO MODE</strong><span>All intelligence records and sources in this implementation are synthetic. No demo scenario is presented as a current real-world fact.</span></div>
+        <div className="intel-demo-banner"><ShieldCheck className="w-4 h-4"/><strong>DEMO MODE</strong><span>All intelligence records and sources are synthetic. Arithmetic and rules are deterministic; business truth still depends on live source quality, causal validity, context and human review.</span></div>
       </div>
       <div className="intel-hero-stats">
         <div><span>Intelligence</span><strong>{items.length}</strong><em>records</em></div>
@@ -494,7 +528,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
 
     <footer className="intel-rules">
       <strong>Analytical rules</strong>
-      <span>More articles ≠ stronger trend</span><span>Company claim ≠ independent fact</span><span>Social buzz ≠ adoption</span><span>Survey intent ≠ behavior</span><span>Correlation ≠ causation</span><span>Attention ≠ importance</span>
+      <span>More articles ≠ stronger trend</span><span>Company claim ≠ independent fact</span><span>Social buzz ≠ adoption</span><span>Survey intent ≠ behavior</span><span>Correlation ≠ causation</span><span>Attention ≠ importance</span><span>Model output ≠ truth</span><span>Decision score ≠ certainty</span>
     </footer>
 
     <StoryDrawer item={selectedItem} onClose={()=>setSelectedItem(null)} role={role} industry={filters.industry==='All'?'cross-industry':filters.industry} geography={filters.geography==='All'?'global markets':filters.geography}/>
