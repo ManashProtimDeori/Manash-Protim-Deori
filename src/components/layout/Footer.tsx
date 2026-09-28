@@ -28,12 +28,12 @@ export const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer className="border-t">
+    <footer className="site-footer-premium border-t">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-2 space-y-5">
             <div className="flex items-center gap-3">
-              <Monogram size="md" />
+              <Monogram size="lg" className="footer-mpd" interactive={false} />
               <div>
                 <span className="font-semibold block tracking-tight">{siteConfig.name}</span>
                 <span className="text-xs font-mono text-neutral-500">{siteConfig.tagline}</span>

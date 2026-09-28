@@ -2181,3 +2181,148 @@
     grid-template-columns:110px minmax(100px,1fr) 44px!important;
   }
 }
+
+
+/* --- Final cross-tool microcopy floor ----------------------------------- */
+.tools-premium-shell :is(.mi-shell,.intel-shell,.ms-shell,.hc-shell) :is(
+  p,small,figcaption,dt,dd
+){
+  font-size:.84rem!important;
+  line-height:1.52!important;
+}
+.tools-premium-shell :is(.mi-shell,.intel-shell,.ms-shell,.hc-shell) :is(
+  button,select,input:not([type="range"]),textarea
+){
+  font-size:.84rem!important;
+  line-height:1.42!important;
+}
+.tools-premium-shell :is(.mi-shell,.intel-shell,.ms-shell,.hc-shell) :is(
+  [class*="-overline"],[class*="-eyebrow"],[class*="-kicker"],
+  [class*="-meta"],[class*="-context"],[class*="-note"],
+  [class*="-footer"],[class*="-label"],[class*="-disclaimer"]
+){
+  font-size:.79rem!important;
+  line-height:1.45!important;
+}
+.tools-premium-shell :is(.mi-shell,.intel-shell,.ms-shell,.hc-shell) :is(
+  table,dl
+){
+  font-size:.84rem!important;
+}
+.tools-premium-shell :is(.mi-shell,.intel-shell,.ms-shell,.hc-shell) table th{
+  font-size:.79rem!important;
+  font-weight:700!important;
+  line-height:1.4!important;
+}
+.tools-premium-shell :is(.mi-shell,.intel-shell,.ms-shell,.hc-shell) table td{
+  font-size:.84rem!important;
+  line-height:1.48!important;
+}
+
+/* HillChain hero metrics and synthetic-data disclaimer. */
+.tools-premium-shell .hc-demo-banner{
+  grid-template-columns:auto auto minmax(0,1fr)!important;
+  gap:9px 10px!important;
+  padding:13px 15px!important;
+  font-size:.82rem!important;
+  line-height:1.5!important;
+}
+.tools-premium-shell .hc-demo-banner strong{
+  font-size:.78rem!important;
+  line-height:1.4!important;
+  font-weight:700!important;
+  letter-spacing:.055em!important;
+}
+.tools-premium-shell .hc-demo-banner span{
+  font-size:.82rem!important;
+  line-height:1.5!important;
+}
+.tools-premium-shell .hc-hero-grid>div{
+  padding:20px!important;
+}
+.tools-premium-shell .hc-hero-grid span{
+  font-size:.78rem!important;
+  line-height:1.35!important;
+  font-weight:650!important;
+  letter-spacing:.06em!important;
+}
+.tools-premium-shell .hc-hero-grid strong{
+  font-size:1.7rem!important;
+  line-height:1.15!important;
+  font-weight:650!important;
+  margin-top:8px!important;
+}
+.tools-premium-shell .hc-hero-grid em{
+  font-size:.8rem!important;
+  line-height:1.4!important;
+  margin-top:5px!important;
+}
+
+/* Same hero-metric standard across the other sophisticated tools. */
+.tools-premium-shell :is(.mi-hero-meta,.intel-hero-stats,.ms-hero-meta)>div{
+  padding:17px!important;
+}
+.tools-premium-shell :is(.mi-hero-meta,.intel-hero-stats,.ms-hero-meta) span{
+  font-size:.78rem!important;
+  line-height:1.35!important;
+  font-weight:650!important;
+}
+.tools-premium-shell :is(.mi-hero-meta,.intel-hero-stats,.ms-hero-meta) strong{
+  font-size:1.45rem!important;
+  line-height:1.2!important;
+}
+.tools-premium-shell :is(.mi-hero-meta,.intel-hero-stats,.ms-hero-meta) em{
+  font-size:.79rem!important;
+  line-height:1.4!important;
+}
+
+/* Dense legacy cards that originated from 7–10 px source rules. */
+.tools-premium-shell :is(
+  .mi-chip,.mi-choice,.mi-architecture-flow span,.mi-recommend span,
+  .mi-severity,.mi-alert,.mi-rank-row,.mi-audience-card>span,
+  .intel-contextbar,.intel-hidden-metrics span,.intel-card-grid span,
+  .intel-card-grid strong,.intel-card-foot,.intel-attention-row span,
+  .intel-reading-levels button,.intel-brief-story,.intel-question-list span,
+  .intel-signal-feed,.intel-side-note,.intel-small-score,
+  .intel-trend-evidence,.intel-impact-matrix,.intel-company-selector,
+  .intel-tech-card>span,.intel-capability-map,.intel-consumer-grid,
+  .intel-definition-list,.intel-category-grid,.intel-campaign-card,
+  .intel-demo-note,.intel-source-metrics,.intel-geo-flow,.intel-ripple,
+  .intel-transfer,.intel-timeline,.intel-narrative,.intel-scenario-buttons,
+  .intel-slider,.intel-decision-columns,.intel-rules,.intel-drawer,
+  .intel-before-now,.intel-signal-answer,.intel-evidence-chain,
+  .intel-source-row,.intel-demo-warning,
+  .ms-kpi-meta,.ms-definition-list,.ms-note,.ms-response-grid,
+  .ms-governance,.ms-card-grid,.ms-timeline,.ms-profit-bridge,
+  .ms-forecast,.ms-system-map,.ms-edge-examples,.ms-driver-tree,
+  .ms-recommendation,.ms-decision-grid,.ms-action-list,.ms-anomaly-list,
+  .ms-reliability,.ms-question-list,.ms-strategy-grid,.ms-footer,
+  .hc-map-legend,.hc-alert-list,.hc-reco,.hc-equity-callout,.hc-impact-banner,
+  .hc-waterfall,.hc-mc-grid,.hc-resilience-grid,.hc-risk-profile,
+  .hc-driver-bars,.hc-route-card,.hc-definition-list,.hc-table,
+  .hc-commodity-grid,.hc-tariff-grid,.hc-break-grid,.hc-scenario-tabs,
+  .hc-slider,.hc-monsoon-grid,.hc-action-list,.hc-quality-list,
+  .hc-trace-chain,.hc-governance,.hc-query-list,.hc-footer
+){
+  font-size:.82rem!important;
+  line-height:1.48!important;
+}
+
+/* Tool navigation labels are readable without becoming oversized. */
+.tools-premium-shell :is(.mi-nav,.intel-nav,.ms-nav,.hc-nav) button{
+  font-size:.8rem!important;
+  line-height:1.3!important;
+}
+.tools-premium-shell :is(.mi-nav,.intel-nav,.ms-nav,.hc-nav) button>span{
+  font-size:.73rem!important;
+  line-height:1.25!important;
+}
+
+/* Prevent enlarged text from being clipped in dense cards/tables. */
+.tools-premium-shell :is(
+  .mi-panel,.intel-panel,.ms-panel,.hc-panel,
+  .mi-action-box,.intel-story-card,.ms-card-grid article,.hc-route-card,
+  .hc-commodity-grid article,.hc-tariff-grid article
+){
+  overflow-wrap:anywhere;
+}

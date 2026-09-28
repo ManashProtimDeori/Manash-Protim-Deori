@@ -3602,3 +3602,66 @@ p,li{
 .light .site-header-premium .site-brand-name{
   color:#e3e8ee!important;
 }
+
+
+/* --- Portfolio final legibility floor ----------------------------------- */
+#main-content [class*="text-[11px]"],
+#main-content [class*="text-[10px]"],
+#main-content [class*="text-[9px]"],
+#main-content [class*="text-[8px]"],
+#main-content [class*="text-[7px]"],
+#main-content [class*="text-[6px]"]{
+  font-size:.78rem!important;
+  line-height:1.45!important;
+}
+#main-content .eyebrow,
+.site-footer-premium .eyebrow{
+  font-size:.78rem!important;
+  line-height:1.4!important;
+  letter-spacing:.11em!important;
+}
+#main-content small,
+.site-footer-premium small{
+  font-size:.78rem;
+  line-height:1.45;
+}
+
+/* Footer: MPD becomes an intentional signature, not a tiny utility mark. */
+.site-footer-premium .footer-mpd{
+  width:5.2rem!important;
+  height:3.05rem!important;
+  flex:0 0 auto;
+  color:var(--text-primary)!important;
+}
+.site-footer-premium .footer-mpd svg path{
+  stroke-width:2.7!important;
+}
+.site-footer-premium .footer-mpd + div>span:first-child{
+  font-size:1.05rem!important;
+  font-weight:700!important;
+  line-height:1.25!important;
+}
+.site-footer-premium .footer-mpd + div>span:last-child{
+  font-size:.82rem!important;
+  line-height:1.45!important;
+}
+.site-footer-premium .text-xs{
+  font-size:.82rem!important;
+  line-height:1.5!important;
+}
+.site-footer-premium .text-sm{
+  font-size:.94rem!important;
+  line-height:1.5!important;
+}
+.site-footer-premium li,
+.site-footer-premium a,
+.site-footer-premium span{
+  text-rendering:optimizeLegibility;
+}
+
+@media(max-width:640px){
+  .site-footer-premium .footer-mpd{
+    width:4.6rem!important;
+    height:2.7rem!important;
+  }
+}
