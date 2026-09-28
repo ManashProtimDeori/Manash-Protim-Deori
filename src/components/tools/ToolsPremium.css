@@ -1,0 +1,702 @@
+/* Premium 3D instrument system for /tools and /tools/:tool */
+
+.tools-premium-shell{
+  --tool-accent:#5f8fe8;
+  --tool-accent-2:#8a67dd;
+  --tool-accent-3:#28c2c7;
+  --tool-warm:#d7a64d;
+  --tool-surface:#111721;
+  --tool-surface-2:#171f2b;
+  --tool-surface-3:#0b1017;
+  --tool-line:rgba(177,194,219,.18);
+  --tool-line-strong:rgba(177,194,219,.34);
+  --tool-shadow:rgba(0,0,0,.34);
+  --tool-text:#f3f6fb;
+  --tool-muted:#aeb9c8;
+  position:relative;
+  isolation:isolate;
+  perspective:1600px;
+}
+
+.tools-premium-shell[data-tool="roi-calculator"]{
+  --tool-accent:#75a6f8;--tool-accent-2:#7a63dc;--tool-accent-3:#45c7ad;--tool-warm:#d9aa52;
+}
+.tools-premium-shell[data-tool="positioning-analyser"]{
+  --tool-accent:#8a74f1;--tool-accent-2:#c168c9;--tool-accent-3:#54c8d8;--tool-warm:#d8a55a;
+}
+.tools-premium-shell[data-tool="utm-builder"]{
+  --tool-accent:#5d9ce8;--tool-accent-2:#745fd6;--tool-accent-3:#38bdc6;--tool-warm:#d5a44f;
+}
+.tools-premium-shell[data-tool="marketing-brief-generator"]{
+  --tool-accent:#6a95e3;--tool-accent-2:#7968d8;--tool-accent-3:#42bfc8;--tool-warm:#cfa253;
+}
+.tools-premium-shell[data-tool="marketsignal-os"]{
+  --tool-accent:#4e9fd4;--tool-accent-2:#6979d8;--tool-accent-3:#32b9a5;--tool-warm:#caa04c;
+}
+.tools-premium-shell[data-tool="hillchain-twin"]{
+  --tool-accent:#5e9f87;--tool-accent-2:#5579bf;--tool-accent-3:#89ad6d;--tool-warm:#c69c50;
+}
+
+.tools-premium-shell::before{
+  content:"";
+  position:absolute;
+  inset:84px 0 auto;
+  height:420px;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 16% 25%,color-mix(in srgb,var(--tool-accent) 14%,transparent),transparent 30%),
+    radial-gradient(circle at 78% 12%,color-mix(in srgb,var(--tool-accent-2) 12%,transparent),transparent 32%);
+  filter:blur(30px);
+}
+.tools-premium-shell::after{
+  content:"";
+  position:absolute;
+  inset:180px 0 auto;
+  height:380px;
+  z-index:-3;
+  pointer-events:none;
+  opacity:.14;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--tool-line) 65%,transparent) 1px,transparent 1px),
+    linear-gradient(0deg,color-mix(in srgb,var(--tool-line) 65%,transparent) 1px,transparent 1px);
+  background-size:34px 34px;
+  transform:perspective(720px) rotateX(66deg) scale(1.1);
+  transform-origin:top center;
+  mask-image:linear-gradient(to bottom,black,transparent 86%);
+}
+
+.tools-premium-header{
+  position:relative;
+  z-index:2;
+}
+.tools-premium-header h1{
+  font-family:var(--font-display);
+  font-weight:600!important;
+  letter-spacing:-.035em!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.16);
+}
+.tools-premium-header p{
+  color:var(--tool-muted)!important;
+  font-size:1rem!important;
+  line-height:1.68!important;
+}
+.tools-premium-header>div:first-child>span,
+.tools-premium-backbar a{
+  color:color-mix(in srgb,var(--tool-accent) 84%,white)!important;
+}
+
+/* Navigation between tools becomes a row of tactile instrument keys. */
+.tools-premium-tabs{
+  padding-top:4px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--tool-line-strong) transparent;
+}
+.tools-premium-tabs>button{
+  position:relative;
+  min-height:42px;
+  padding:8px 14px!important;
+  border:1px solid var(--tool-line)!important;
+  border-radius:11px!important;
+  background:
+    linear-gradient(180deg,rgba(31,40,54,.96),rgba(13,18,26,.98))!important;
+  color:#dfe7f2!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    inset 0 -1px 0 rgba(0,0,0,.68),
+    0 5px 12px rgba(0,0,0,.22);
+  text-shadow:0 1px 1px rgba(0,0,0,.52);
+  transform:translateZ(0);
+  transition:transform .2s var(--ease-premium),box-shadow .2s ease,border-color .2s ease,background .2s ease!important;
+}
+.tools-premium-tabs>button:hover{
+  transform:translateY(-2px) translateZ(8px);
+  border-color:color-mix(in srgb,var(--tool-accent) 56%,var(--tool-line))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 9px 18px rgba(0,0,0,.28);
+}
+.tools-premium-tabs>button[class*="bg-neutral-100"],
+.tools-premium-tabs>button[class*="light:bg-neutral-900"]{
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--tool-accent) 34%,#263246),color-mix(in srgb,var(--tool-accent-2) 14%,#0d121a))!important;
+  color:#fff!important;
+  border-color:color-mix(in srgb,var(--tool-accent) 62%,var(--tool-line))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -1px 0 rgba(0,0,0,.65),
+    0 9px 22px color-mix(in srgb,var(--tool-accent) 12%,rgba(0,0,0,.34));
+}
+
+/* Main tool viewport */
+.tools-visual-stage{
+  position:relative;
+  z-index:2;
+  perspective:1800px;
+  transform-style:preserve-3d;
+}
+.tools-visual-stage::before{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  z-index:-1;
+  border-radius:20px;
+  pointer-events:none;
+  background:
+    linear-gradient(135deg,color-mix(in srgb,var(--tool-accent) 7%,transparent),transparent 32%,color-mix(in srgb,var(--tool-accent-2) 5%,transparent));
+  filter:blur(2px);
+}
+.tools-visual-stage>div{
+  position:relative;
+  transform-style:preserve-3d;
+}
+
+/* Root surfaces of every current tool */
+.tools-visual-stage>.mi-shell,
+.tools-visual-stage>.intel-shell,
+.tools-visual-stage>.ms-shell,
+.tools-visual-stage>.hc-shell,
+.tools-visual-stage>div[class*="border"]{
+  border-color:var(--tool-line)!important;
+  background:
+    linear-gradient(155deg,rgba(20,27,38,.965),rgba(8,12,18,.98))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.065),
+    inset 0 -1px 0 rgba(0,0,0,.64),
+    0 26px 70px rgba(0,0,0,.28),
+    0 6px 18px rgba(0,0,0,.18);
+}
+
+/* Shared dimensional panels */
+.tools-premium-shell :is(
+  .mi-panel,.intel-panel,.ms-panel,.hc-panel,
+  .mi-action-box,.mi-audience-card,.mi-insight,.mi-recommend,.mi-alert,.mi-executive,
+  .intel-story-card,.intel-tech-card,.intel-campaign-card,.intel-brief-story,.intel-hidden-signal,
+  .ms-reco,.ms-note,.ms-warning,.ms-governance,.ms-ai-answer,.ms-recommendation,
+  .hc-reco,.hc-route-card,.hc-impact-banner,.hc-governance,.hc-ai-answer
+){
+  position:relative;
+  border:1px solid var(--tool-line)!important;
+  border-radius:14px!important;
+  background:
+    linear-gradient(155deg,rgba(27,36,49,.96),rgba(12,17,25,.975))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.075),
+    inset 0 -1px 0 rgba(0,0,0,.62),
+    0 10px 24px rgba(0,0,0,.20),
+    0 24px 50px rgba(0,0,0,.10);
+  transform:translateZ(0);
+  transition:transform .24s var(--ease-premium),border-color .24s ease,box-shadow .24s ease;
+  overflow:hidden;
+}
+.tools-premium-shell :is(
+  .mi-panel,.intel-panel,.ms-panel,.hc-panel,
+  .mi-action-box,.mi-audience-card,.mi-insight,.mi-recommend,.mi-alert,
+  .intel-story-card,.intel-tech-card,.intel-campaign-card,.intel-brief-story,
+  .ms-reco,.ms-note,.ms-warning,.ms-governance,
+  .hc-reco,.hc-route-card,.hc-impact-banner
+)::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:1px;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--tool-accent) 58%,white),color-mix(in srgb,var(--tool-accent-2) 45%,white),transparent);
+  opacity:.55;
+  pointer-events:none;
+}
+@media(hover:hover){
+  .tools-premium-shell :is(
+    .mi-panel,.intel-panel,.ms-panel,.hc-panel,
+    .mi-action-box,.mi-audience-card,.mi-insight,.mi-recommend,
+    .intel-story-card,.intel-tech-card,.intel-campaign-card,
+    .ms-reco,.hc-reco,.hc-route-card
+  ):hover{
+    transform:translateY(-3px) translateZ(12px);
+    border-color:color-mix(in srgb,var(--tool-accent) 40%,var(--tool-line))!important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.09),
+      0 16px 34px rgba(0,0,0,.28),
+      0 30px 64px rgba(0,0,0,.12);
+  }
+}
+
+/* KPI/stat tiles: dense, sculpted, easy to scan */
+.tools-premium-shell :is(
+  .mi-kpi,.intel-stat,.intel-small-score,.ms-kpi,.hc-stat,
+  [class*="bg-neutral-950/40"][class*="border-neutral-800"]
+){
+  position:relative;
+  border:1px solid var(--tool-line)!important;
+  border-radius:12px!important;
+  background:
+    linear-gradient(145deg,rgba(33,43,58,.95),rgba(12,17,25,.98))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.085),
+    inset 0 -1px 0 rgba(0,0,0,.62),
+    0 7px 18px rgba(0,0,0,.22);
+  overflow:hidden;
+}
+.tools-premium-shell :is(.mi-kpi,.ms-kpi,.hc-stat,.intel-stat)::after{
+  content:"";
+  position:absolute;
+  inset:auto -20% -60% auto;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle,color-mix(in srgb,var(--tool-accent) 18%,transparent),transparent 68%);
+  pointer-events:none;
+}
+.tools-premium-shell :is(.mi-kpi,.ms-kpi,.hc-stat,.intel-stat) strong{
+  text-shadow:0 2px 12px rgba(0,0,0,.30);
+}
+
+/* All tool controls have a consistent tactile 3D depth. */
+.tools-visual-stage button,
+.tools-premium-spec button,
+.tools-premium-backbar button{
+  border-radius:9px;
+  transition:transform .18s var(--ease-premium),box-shadow .18s ease,border-color .18s ease,filter .18s ease!important;
+}
+.tools-visual-stage button:not([class*="text-button"]):not(.intel-clear),
+.tools-premium-spec button{
+  border-color:var(--tool-line)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.075),
+    inset 0 -1px 0 rgba(0,0,0,.58),
+    0 4px 10px rgba(0,0,0,.18);
+}
+@media(hover:hover){
+  .tools-visual-stage button:hover,
+  .tools-premium-spec button:hover{
+    transform:translateY(-2px) translateZ(7px);
+    filter:brightness(1.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.10),
+      0 8px 18px rgba(0,0,0,.25);
+  }
+}
+.tools-visual-stage :is(.mi-primary,.ms-primary,.hc-primary),
+.tools-visual-stage button[class*="bg-amber-400"]{
+  color:#f8fbff!important;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--tool-accent) 72%,#243143),color-mix(in srgb,var(--tool-accent-2) 42%,#0d131b))!important;
+  border:1px solid color-mix(in srgb,var(--tool-accent) 54%,var(--tool-line))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -1px 0 rgba(0,0,0,.68),
+    0 7px 17px color-mix(in srgb,var(--tool-accent) 14%,rgba(0,0,0,.25));
+  text-shadow:0 1px 1px rgba(0,0,0,.55);
+}
+.tools-visual-stage :is(.mi-secondary,.hc-secondary){
+  background:linear-gradient(180deg,#202937,#10161f)!important;
+  color:#dfe8f4!important;
+}
+
+/* Inputs feel recessed, not flat. */
+.tools-premium-shell :is(input:not([type="range"]),textarea,select){
+  min-height:40px;
+  border:1px solid var(--tool-line-strong)!important;
+  border-radius:9px!important;
+  background:
+    linear-gradient(180deg,rgba(8,12,18,.96),rgba(16,22,31,.98))!important;
+  color:#edf3fa!important;
+  box-shadow:
+    inset 0 2px 7px rgba(0,0,0,.42),
+    0 1px 0 rgba(255,255,255,.04);
+}
+.tools-premium-shell :is(input:not([type="range"]),textarea,select):focus{
+  border-color:color-mix(in srgb,var(--tool-accent) 68%,white)!important;
+  box-shadow:
+    inset 0 2px 7px rgba(0,0,0,.38),
+    0 0 0 3px color-mix(in srgb,var(--tool-accent) 13%,transparent)!important;
+  outline:none;
+}
+.tools-premium-shell select option{
+  background:#111721;
+  color:#eef4fb;
+}
+.tools-premium-shell input[type="range"]{
+  appearance:none;
+  height:7px;
+  border-radius:999px;
+  background:
+    linear-gradient(180deg,#090d13,#1a2230);
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.50),
+    0 1px 0 rgba(255,255,255,.05);
+}
+.tools-premium-shell input[type="range"]::-webkit-slider-thumb{
+  appearance:none;
+  width:17px;
+  height:17px;
+  border-radius:50%;
+  border:2px solid color-mix(in srgb,var(--tool-accent) 58%,white);
+  background:linear-gradient(145deg,#f7f9fc,#aebcd0);
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.38),
+    0 0 0 4px color-mix(in srgb,var(--tool-accent) 10%,transparent);
+}
+
+/* Charts, graphs, network maps and data visuals become recessed display stages. */
+.tools-premium-shell :is(
+  .intel-chart-frame,.intel-heatmap,.ms-flow,.ms-funnel,.ms-bars,.ms-response-grid,
+  .ms-profit-bridge,.ms-forecast,.ms-system-map,.ms-driver-tree,.ms-reliability,
+  .hc-map,.hc-waterfall,.hc-mc-grid,.hc-resilience-grid,.hc-risk-profile,.hc-driver-bars,
+  .mi-architecture-flow,.mi-decomp,.mi-funnel-bar,.mi-score-ring,
+  figure
+){
+  position:relative;
+  border-radius:13px!important;
+  border-color:var(--tool-line)!important;
+  background:
+    radial-gradient(circle at 18% 12%,color-mix(in srgb,var(--tool-accent) 8%,transparent),transparent 30%),
+    linear-gradient(155deg,rgba(9,14,21,.98),rgba(16,23,32,.98))!important;
+  box-shadow:
+    inset 0 2px 12px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 8px 22px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+.tools-premium-shell :is(.intel-chart-frame,.hc-map,.ms-system-map,.mi-architecture-flow)::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(115deg,rgba(255,255,255,.025),transparent 22% 72%,rgba(255,255,255,.018));
+}
+.tools-premium-shell svg{
+  overflow:visible;
+  filter:
+    drop-shadow(0 5px 9px rgba(0,0,0,.22))
+    drop-shadow(0 0 12px color-mix(in srgb,var(--tool-accent) 5%,transparent));
+}
+.tools-premium-shell svg text{
+  fill:color-mix(in srgb,var(--tool-muted) 92%,white);
+  text-shadow:none;
+}
+.tools-premium-shell svg :is(path,line,polyline,polygon,circle,rect){
+  transition:opacity .18s ease,filter .18s ease,stroke-width .18s ease;
+}
+.tools-premium-shell svg g:hover :is(path,line,polyline,polygon,circle,rect){
+  filter:drop-shadow(0 0 4px color-mix(in srgb,var(--tool-accent) 32%,transparent));
+}
+
+/* Bars and relationship tracks receive a beveled top edge. */
+.tools-premium-shell :is(
+  .mi-mini-bar,.mi-funnel-bar,.ms-kpi i,.ms-bars i,.ms-reliability i,
+  .hc-waterfall i,.hc-resilience-grid i,.hc-risk-profile i,.hc-driver-bars i,
+  .progress
+){
+  border-radius:999px;
+  background:linear-gradient(180deg,#080c12,#1a2230)!important;
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.48),
+    0 1px 0 rgba(255,255,255,.04);
+  overflow:hidden;
+}
+.tools-premium-shell :is(
+  .mi-mini-bar,.mi-funnel-bar,.ms-kpi i,.ms-bars i,.ms-reliability i,
+  .hc-waterfall i,.hc-resilience-grid i,.hc-risk-profile i,.hc-driver-bars i
+) b{
+  border-radius:inherit;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--tool-accent) 82%,white),var(--tool-accent))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 0 12px color-mix(in srgb,var(--tool-accent) 18%,transparent);
+}
+
+/* Tables: raised header rail + separated dimensional rows. */
+.tools-premium-shell :is(table,.mi-table,.intel-table,.ms-table,.hc-table,.hc-heatmap){
+  width:100%;
+  border-collapse:separate!important;
+  border-spacing:0 5px!important;
+  font-size:.82rem;
+}
+.tools-premium-shell table thead th,
+.tools-premium-shell :is(.mi-table,.intel-table,.ms-table,.hc-table,.hc-heatmap) th{
+  color:#bdc9d8!important;
+  font-weight:650!important;
+  letter-spacing:.025em;
+  background:linear-gradient(180deg,rgba(37,47,62,.92),rgba(18,25,35,.94))!important;
+  border-top:1px solid rgba(255,255,255,.055);
+  border-bottom:1px solid var(--tool-line)!important;
+  padding:10px 12px!important;
+  text-shadow:0 1px 1px rgba(0,0,0,.45);
+}
+.tools-premium-shell table tbody tr,
+.tools-premium-shell :is(.mi-table,.intel-table,.ms-table,.hc-table,.hc-heatmap) tbody tr{
+  background:
+    linear-gradient(180deg,rgba(25,33,45,.78),rgba(12,17,24,.84));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.032),
+    0 3px 8px rgba(0,0,0,.14);
+  transition:transform .18s ease,background .18s ease;
+}
+@media(hover:hover){
+  .tools-premium-shell table tbody tr:hover{
+    transform:translateY(-1px);
+    background:linear-gradient(180deg,rgba(34,45,60,.88),rgba(15,21,30,.92));
+  }
+}
+.tools-premium-shell table td{
+  padding:10px 12px!important;
+  border-top:1px solid color-mix(in srgb,var(--tool-line) 62%,transparent)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--tool-line) 45%,transparent)!important;
+  color:#d6dfeb!important;
+}
+.tools-premium-shell table td:first-child,
+.tools-premium-shell table th:first-child{
+  border-left:1px solid color-mix(in srgb,var(--tool-line) 55%,transparent);
+  border-radius:8px 0 0 8px;
+}
+.tools-premium-shell table td:last-child,
+.tools-premium-shell table th:last-child{
+  border-right:1px solid color-mix(in srgb,var(--tool-line) 55%,transparent);
+  border-radius:0 8px 8px 0;
+}
+
+/* Heatmap cells retain meaning but gain depth. */
+.tools-premium-shell .hc-heatmap td i,
+.tools-premium-shell table td>span[class*="bg-emerald"],
+.tools-premium-shell table td>span[class*="bg-amber"],
+.tools-premium-shell table td>span[class*="bg-rose"]{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  min-height:30px;
+  border-radius:7px!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -1px 0 rgba(0,0,0,.38),
+    0 3px 8px rgba(0,0,0,.16);
+}
+
+/* Segmented controls/chips */
+.tools-premium-shell :is(.hc-segmented,.hc-scenario-tabs,.ms-choice-row,.mi-choice,.intel-scenario-buttons){
+  padding:4px;
+  border:1px solid var(--tool-line);
+  border-radius:11px;
+  background:linear-gradient(180deg,#090d13,#141b25);
+  box-shadow:inset 0 2px 7px rgba(0,0,0,.38);
+}
+.tools-premium-shell :is(.hc-segmented,.hc-scenario-tabs,.ms-choice-row,.intel-scenario-buttons) button.active,
+.tools-premium-shell .mi-choice.active{
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--tool-accent) 45%,#283649),color-mix(in srgb,var(--tool-accent-2) 24%,#10161f))!important;
+  color:#fff!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 4px 10px rgba(0,0,0,.28);
+}
+
+/* Relationship maps, equations and code blocks */
+.tools-premium-shell :is(.mi-equation,.ms-equation,.mi-architecture-flow,.intel-evidence-chain,.hc-trace-chain,.ms-code){
+  border:1px solid var(--tool-line)!important;
+  border-radius:10px!important;
+  background:
+    linear-gradient(180deg,rgba(7,11,17,.96),rgba(15,21,30,.98))!important;
+  box-shadow:
+    inset 0 2px 8px rgba(0,0,0,.40),
+    0 4px 12px rgba(0,0,0,.14);
+  color:#dce6f2!important;
+}
+.tools-premium-shell :is(.mi-equation,.ms-equation) b{
+  color:color-mix(in srgb,var(--tool-accent) 82%,white)!important;
+}
+
+/* Descriptions and analytical text get a premium readable scale. */
+.tools-premium-shell{
+  color:var(--tool-text);
+}
+.tools-premium-shell :is(p,li,dd){
+  color:var(--tool-muted);
+  line-height:1.62;
+}
+.tools-premium-shell :is(.mi-section-title,.intel-section-title,.ms-section-title,.hc-section-head) h3{
+  color:#f4f7fb!important;
+  font-family:var(--font-display);
+  font-weight:600;
+  letter-spacing:-.018em;
+  line-height:1.16;
+}
+.tools-premium-shell :is(.mi-section-title,.intel-section-title,.ms-section-title,.hc-section-head) p{
+  color:#aeb9c9!important;
+  font-size:.89rem!important;
+  line-height:1.58;
+}
+.tools-premium-shell :is(.mi-overline,.intel-overline,.ms-overline,.hc-overline,.ms-eyebrow,.hc-eyebrow,.intel-kicker){
+  color:color-mix(in srgb,var(--tool-accent) 78%,white)!important;
+  letter-spacing:.13em;
+}
+
+/* Hero areas of complex tools become dimensional control-room fascia. */
+.tools-premium-shell :is(.mi-hero,.intel-hero,.ms-hero,.hc-hero){
+  position:relative;
+  border:1px solid var(--tool-line)!important;
+  border-radius:15px!important;
+  background:
+    radial-gradient(circle at 80% 10%,color-mix(in srgb,var(--tool-accent) 12%,transparent),transparent 30%),
+    linear-gradient(155deg,rgba(28,37,50,.97),rgba(9,13,20,.985))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 15px 36px rgba(0,0,0,.24);
+  overflow:hidden;
+}
+
+/* Specification cards below tools */
+.tools-premium-spec{
+  position:relative;
+  border-color:var(--tool-line)!important;
+  border-radius:15px!important;
+  background:
+    linear-gradient(155deg,rgba(24,32,44,.95),rgba(10,15,22,.98))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.065),
+    0 14px 34px rgba(0,0,0,.20);
+  overflow:hidden;
+}
+.tools-premium-spec::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:2px;
+  background:linear-gradient(90deg,var(--tool-accent),var(--tool-accent-2),var(--tool-accent-3));
+  opacity:.68;
+}
+.tools-premium-spec>div{
+  position:relative;
+  padding:2px 6px;
+}
+.tools-premium-spec>div:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:-16px;
+  width:1px;
+  height:100%;
+  background:linear-gradient(transparent,var(--tool-line),transparent);
+}
+.tools-premium-spec span[class*="text-amber"]{
+  color:color-mix(in srgb,var(--tool-accent) 78%,white)!important;
+}
+
+/* Special maps and matrix visual clarity */
+.tools-premium-shell .hc-state-shape{
+  filter:drop-shadow(0 8px 10px rgba(0,0,0,.28));
+}
+.tools-premium-shell .hc-route{
+  cursor:pointer;
+}
+.tools-premium-shell .hc-route line{
+  filter:drop-shadow(0 0 3px rgba(0,0,0,.38));
+}
+.tools-premium-shell :is(.intel-zone,.intel-uncertainty-dot){
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.24));
+}
+.tools-premium-shell .intel-edge-arrow{
+  filter:drop-shadow(0 0 4px color-mix(in srgb,var(--tool-accent) 18%,transparent));
+}
+
+/* Back navigation also gets a low-profile tactile finish */
+.tools-premium-backbar>a{
+  min-height:36px;
+  padding:8px 11px;
+  border:1px solid var(--tool-line);
+  border-radius:9px;
+  background:linear-gradient(180deg,rgba(27,35,47,.90),rgba(12,17,24,.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 4px 10px rgba(0,0,0,.16);
+  text-decoration:none;
+}
+
+/* Light theme: keep the 3D structure without muddying the analytical surface. */
+.light .tools-premium-shell{
+  --tool-surface:#f4f6f9;
+  --tool-surface-2:#ffffff;
+  --tool-surface-3:#e9edf3;
+  --tool-line:rgba(41,57,79,.18);
+  --tool-line-strong:rgba(41,57,79,.30);
+  --tool-shadow:rgba(38,52,73,.16);
+  --tool-text:#152033;
+  --tool-muted:#536176;
+}
+.light .tools-premium-shell :is(
+  .mi-panel,.intel-panel,.ms-panel,.hc-panel,
+  .mi-action-box,.mi-audience-card,.mi-insight,.mi-recommend,.mi-alert,
+  .intel-story-card,.intel-tech-card,.intel-campaign-card,.intel-brief-story,
+  .ms-reco,.ms-note,.ms-warning,.ms-governance,.hc-reco,.hc-route-card,
+  .tools-premium-spec
+){
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.97),rgba(238,242,247,.98))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    inset 0 -1px 0 rgba(70,88,112,.10),
+    0 10px 25px rgba(43,58,78,.10);
+}
+.light .tools-premium-shell :is(.mi-section-title,.intel-section-title,.ms-section-title,.hc-section-head) h3{
+  color:#182235!important;
+}
+.light .tools-premium-shell :is(p,li,dd),
+.light .tools-premium-header p{
+  color:#526176!important;
+}
+.light .tools-premium-shell :is(input:not([type="range"]),textarea,select){
+  background:linear-gradient(180deg,#f7f9fb,#eef2f6)!important;
+  color:#162034!important;
+  box-shadow:inset 0 2px 5px rgba(55,73,96,.10),0 1px 0 #fff;
+}
+.light .tools-premium-shell table tbody tr{
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(239,243,248,.96));
+}
+.light .tools-premium-shell table td{
+  color:#344258!important;
+}
+.light .tools-premium-shell table thead th{
+  color:#4d5b70!important;
+  background:linear-gradient(180deg,#edf2f7,#e4eaf1)!important;
+}
+.light .tools-premium-tabs>button{
+  background:linear-gradient(180deg,#f7f9fb,#e7ecf2)!important;
+  color:#26354c!important;
+  box-shadow:inset 0 1px 0 #fff,0 4px 10px rgba(45,60,81,.10);
+}
+
+/* Responsive restraint */
+@media(max-width:900px){
+  .tools-premium-shell::after{opacity:.07}
+  .tools-premium-shell :is(.mi-panel,.intel-panel,.ms-panel,.hc-panel):hover{transform:none}
+  .tools-premium-spec>div:not(:last-child)::after{display:none}
+}
+@media(max-width:640px){
+  .tools-premium-shell{perspective:none}
+  .tools-visual-stage{perspective:none}
+  .tools-premium-tabs>button{min-height:44px}
+  .tools-premium-shell table{font-size:.78rem}
+  .tools-premium-shell table td,
+  .tools-premium-shell table th{padding:9px 10px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .tools-premium-shell *,
+  .tools-premium-shell *::before,
+  .tools-premium-shell *::after{
+    transition:none!important;
+    animation-duration:.001ms!important;
+  }
+  .tools-premium-shell :is(button,.mi-panel,.intel-panel,.ms-panel,.hc-panel):hover{
+    transform:none!important;
+  }
+}
+@media print{
+  .tools-premium-shell::before,
+  .tools-premium-shell::after,
+  .tools-visual-stage::before{display:none!important}
+  .tools-premium-shell *{
+    box-shadow:none!important;
+    text-shadow:none!important;
+    filter:none!important;
+  }
+}
