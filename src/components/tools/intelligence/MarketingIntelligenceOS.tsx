@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { SemanticIcon } from '../../common/SemanticIcon';
 import {
   Activity, AlertTriangle, ArrowDownRight, ArrowRight, ArrowUpRight, BarChart3, Bell,
   BookOpen, BriefcaseBusiness, Building2, CheckCircle2, ChevronDown, CircleDot,
@@ -283,7 +284,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
   const renderCompany=()=>(
     <section className="intel-panel overflow-x-auto">
       <SectionTitle eyebrow="COMPANY INTELLIGENCE" title="Moves, patterns and trend exposure" copy="Activity counts and impact scores below are generated from the synthetic demonstration dataset."/>
-      <table className="intel-table min-w-[900px] mt-6"><thead><tr><th>Company</th><th>Modeled moves</th><th>Impact index</th><th>AI / automation</th><th>Latest demo development</th><th>Trend exposure</th></tr></thead><tbody>{companyRows.map(row=><tr key={row.company}><td><strong>{row.company}</strong></td><td>{row.moves}</td><td>{row.impact}</td><td>{row.ai}</td><td>{row.latest?.title.replace('Demo scenario — ','')}</td><td>{trends.find(t=>t.id===row.latest?.trendId)?.name}</td></tr>)}</tbody></table>
+      <table className="intel-table min-w-[900px] mt-6"><thead><tr><th><SemanticIcon label="Company" /></th><th><SemanticIcon label="Modeled moves" /></th><th><SemanticIcon label="Impact index" /></th><th><SemanticIcon label="AI / automation" /></th><th><SemanticIcon label="Latest demo development" /></th><th><SemanticIcon label="Trend exposure" /></th></tr></thead><tbody>{companyRows.map(row=><tr key={row.company}><td><strong>{row.company}</strong></td><td>{row.moves}</td><td>{row.impact}</td><td>{row.ai}</td><td>{row.latest?.title.replace('Demo scenario — ','')}</td><td>{trends.find(t=>t.id===row.latest?.trendId)?.name}</td></tr>)}</tbody></table>
     </section>
   );
 
@@ -291,7 +292,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
     <div className="space-y-6">
       <section className="intel-panel overflow-x-auto">
         <SectionTitle eyebrow="PLATFORM INTELLIGENCE" title="Change impact across the marketing operating model"/>
-        <table className="intel-table min-w-[920px] mt-6"><thead><tr><th>Platform</th><th>Updates</th><th>Measurement</th><th>Targeting</th><th>Creative</th><th>Commerce</th><th>Confidence</th></tr></thead><tbody>{platformRows.map(r=><tr key={r.platform}><td><strong>{r.platform}</strong></td><td>{r.count}</td><td>{Math.round(r.measurement/20)}/5</td><td>{Math.round(r.targeting/20)}/5</td><td>{Math.round(r.creative/20)}/5</td><td>{Math.round(r.commerce/20)}/5</td><td>{r.confidence}</td></tr>)}</tbody></table>
+        <table className="intel-table min-w-[920px] mt-6"><thead><tr><th><SemanticIcon label="Platform" /></th><th><SemanticIcon label="Updates" /></th><th><SemanticIcon label="Measurement" /></th><th><SemanticIcon label="Targeting" /></th><th><SemanticIcon label="Creative" /></th><th><SemanticIcon label="Commerce" /></th><th><SemanticIcon label="Confidence" /></th></tr></thead><tbody>{platformRows.map(r=><tr key={r.platform}><td><strong>{r.platform}</strong></td><td>{r.count}</td><td>{Math.round(r.measurement/20)}/5</td><td>{Math.round(r.targeting/20)}/5</td><td>{Math.round(r.creative/20)}/5</td><td>{Math.round(r.commerce/20)}/5</td><td>{r.confidence}</td></tr>)}</tbody></table>
       </section>
       <section className="intel-panel"><SectionTitle eyebrow="PLATFORM CHANGE IMPACT MATRIX" title="Scores are explainable, not decorative"/><div className="intel-impact-matrix mt-5">{['Media Buying','Creative','Measurement','Targeting','Search','Organic','Commerce','CRM','Data','Agency Operations'].map((row,i)=><div key={row}><span>{row}</span>{filtersMeta.platforms.slice(0,8).map((p,j)=><i key={p} style={{opacity:.2+(((i*13+j*17)%85)/110)}} title={`${p} / ${row}: modeled impact ${((i*13+j*17)%5)+1}/5`}>{((i*13+j*17)%5)+1}</i>)}</div>)}</div></section>
     </div>
@@ -303,7 +304,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
         <SectionTitle eyebrow="COMPETITOR INTELLIGENCE" title="Competitive move matrix"/>
         <div className="intel-company-selector mt-5">{companyRows.slice(0,8).map(r=><button key={r.company} onClick={()=>setFilter('company',r.company)}>{r.company}<span>{r.moves} moves</span></button>)}</div>
       </section>
-      <section className="intel-panel overflow-x-auto"><table className="intel-table min-w-[900px]"><thead><tr><th>Company</th><th>Move</th><th>Category</th><th>Market</th><th>Impact</th><th>Confidence</th><th>Date</th></tr></thead><tbody>{topItems.slice(0,15).map(i=><tr key={i.id}><td>{i.company}</td><td><button onClick={()=>setSelectedItem(i)}>{i.title.replace(`Demo scenario — ${i.company} `,'')}</button></td><td>{i.type}</td><td>{i.geography}</td><td>{i.importanceScore}</td><td>{i.confidence}</td><td>{i.date}</td></tr>)}</tbody></table></section>
+      <section className="intel-panel overflow-x-auto"><table className="intel-table min-w-[900px]"><thead><tr><th><SemanticIcon label="Company" /></th><th><SemanticIcon label="Move" /></th><th><SemanticIcon label="Category" /></th><th><SemanticIcon label="Market" /></th><th><SemanticIcon label="Impact" /></th><th><SemanticIcon label="Confidence" /></th><th><SemanticIcon label="Date" /></th></tr></thead><tbody>{topItems.slice(0,15).map(i=><tr key={i.id}><td>{i.company}</td><td><button onClick={()=>setSelectedItem(i)}>{i.title.replace(`Demo scenario — ${i.company} `,'')}</button></td><td>{i.type}</td><td>{i.geography}</td><td>{i.importanceScore}</td><td>{i.confidence}</td><td>{i.date}</td></tr>)}</tbody></table></section>
       <section className="intel-panel"><SectionTitle eyebrow="COMPETITIVE WHITE SPACE" title="Areas for investigation, not automatic opportunities"/><div className="grid sm:grid-cols-3 gap-3 mt-5">{[['Commerce Media',78,34],['Synthetic Research',65,28],['Owned Audience',72,41]].map(([name,market,competitor])=><div className="intel-stat" key={String(name)}><span>{name}</span><strong>Market activity {market}</strong><p>Competitor activity {competitor} · Area for investigation</p></div>)}</div></section>
     </div>
   );
@@ -349,7 +350,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
   const renderRegulation=()=>(
     <section className="intel-panel overflow-x-auto">
       <SectionTitle eyebrow="REGULATORY INTELLIGENCE" title="Status, jurisdiction and affected practice must be explicit"/>
-      <table className="intel-table min-w-[900px] mt-6"><thead><tr><th>Development</th><th>Jurisdiction</th><th>Status</th><th>Affected practice</th><th>Impact</th><th>Monitoring</th></tr></thead><tbody>{[
+      <table className="intel-table min-w-[900px] mt-6"><thead><tr><th><SemanticIcon label="Development" /></th><th><SemanticIcon label="Jurisdiction" /></th><th><SemanticIcon label="Status" /></th><th><SemanticIcon label="Affected practice" /></th><th><SemanticIcon label="Impact" /></th><th><SemanticIcon label="Monitoring" /></th></tr></thead><tbody>{[
         ['Demo AI advertising disclosure proposal','Europe','Consultation','Synthetic creative disclosure','High','Track final guidance'],
         ['Demo privacy measurement rule','North America','Passed','Attribution + data sharing','High','Implementation timeline'],
         ['Demo children advertising update','United Kingdom','Effective','Audience targeting','Medium','Enforcement examples'],
@@ -361,7 +362,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
 
   const renderResearch=()=>(
     <div className="space-y-6">
-      <section className="intel-panel overflow-x-auto"><SectionTitle eyebrow="RESEARCH INTELLIGENCE" title="Methodology context travels with the finding"/><table className="intel-table min-w-[960px] mt-6"><thead><tr><th>Research question</th><th>Method</th><th>Sample</th><th>Country</th><th>Finding</th><th>Quality</th><th>Limitation</th></tr></thead><tbody>{[
+      <section className="intel-panel overflow-x-auto"><SectionTitle eyebrow="RESEARCH INTELLIGENCE" title="Methodology context travels with the finding"/><table className="intel-table min-w-[960px] mt-6"><thead><tr><th><SemanticIcon label="Research question" /></th><th><SemanticIcon label="Method" /></th><th><SemanticIcon label="Sample" /></th><th><SemanticIcon label="Country" /></th><th><SemanticIcon label="Finding" /></th><th><SemanticIcon label="Quality" /></th><th><SemanticIcon label="Limitation" /></th></tr></thead><tbody>{[
         ['Does AI-assisted creative improve iteration speed?','Controlled workflow study','n=620 marketers','Multi-market','Faster production; performance effects mixed','78','Vendor tooling varied'],
         ['Is social search changing discovery?','Behavioral + survey','n=2,400 adults','4 markets','Strong age and category differences','82','Self-report partly included'],
         ['Do synthetic audiences match real panels?','Benchmark study','n=40 datasets','Global','Accuracy varies by question type','69','Small benchmark universe'],
@@ -417,7 +418,7 @@ export const MarketingIntelligenceOS:React.FC = () => {
   const renderSourceCenter=()=>(
     <div className="space-y-6">
       <section className="intel-panel"><SectionTitle eyebrow="SOURCE & EVIDENCE CENTER" title="Provenance before narrative"/><div className="intel-source-metrics mt-6">{[[1,'Primary / Tier 1'],[2,'Research + quality reporting'],[3,'Analyst'],[4,'Low-verification']].map(([tier,label])=><div key={String(tier)}><span>{label}</span><strong>{evidence.filter(e=>e.tier===tier).length}</strong><p>source references</p></div>)}</div></section>
-      <section className="intel-panel overflow-x-auto"><SectionTitle eyebrow="CLAIM VERIFICATION MATRIX" title="Conflicting evidence can coexist"/><table className="intel-table min-w-[980px] mt-6"><thead><tr><th>Claim</th><th>Source</th><th>Type</th><th>Tier</th><th>Corroborated</th><th>Evidence quality</th><th>Bias context</th></tr></thead><tbody>{evidence.slice(0,30).map(e=><tr key={e.id}><td>{e.exactClaim}</td><td>{e.sourceTitle}</td><td>{e.sourceType}</td><td>{e.tier}</td><td>{e.corroborated?'Yes':'No'}</td><td>{e.evidenceScore}</td><td>{e.biasFlag||'No demo flag'}</td></tr>)}</tbody></table></section>
+      <section className="intel-panel overflow-x-auto"><SectionTitle eyebrow="CLAIM VERIFICATION MATRIX" title="Conflicting evidence can coexist"/><table className="intel-table min-w-[980px] mt-6"><thead><tr><th><SemanticIcon label="Claim" /></th><th><SemanticIcon label="Source" /></th><th><SemanticIcon label="Type" /></th><th><SemanticIcon label="Tier" /></th><th><SemanticIcon label="Corroborated" /></th><th><SemanticIcon label="Evidence quality" /></th><th><SemanticIcon label="Bias context" /></th></tr></thead><tbody>{evidence.slice(0,30).map(e=><tr key={e.id}><td>{e.exactClaim}</td><td>{e.sourceTitle}</td><td>{e.sourceType}</td><td>{e.tier}</td><td>{e.corroborated?'Yes':'No'}</td><td>{e.evidenceScore}</td><td>{e.biasFlag||'No demo flag'}</td></tr>)}</tbody></table></section>
       <section className="intel-panel"><SectionTitle eyebrow="DATA QUALITY" title="Intelligence Reliability Score"/><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5"><div className="intel-stat"><span>Overall</span><strong>{reliability}/100</strong><p>Synthetic evidence quality mean</p></div><div className="intel-stat"><span>Corroborated</span><strong>{Math.round(evidence.filter(e=>e.corroborated).length/evidence.length*100)}%</strong><p>of demo references</p></div><div className="intel-stat"><span>Bias flags</span><strong>{evidence.filter(e=>e.biasFlag).length}</strong><p>contextualized, not discarded</p></div><div className="intel-stat"><span>Live sources</span><strong>0</strong><p>demo mode by design</p></div></div></section>
     </div>
   );

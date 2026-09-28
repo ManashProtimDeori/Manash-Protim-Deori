@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { SemanticIcon } from '../../common/SemanticIcon';
 import {
   Activity, AlertTriangle, ArrowRight, Boxes, ChevronRight, CloudRain, Download, Landmark,
   RefreshCw, Route, Search, ShieldAlert, ShieldCheck, Truck
@@ -231,7 +232,7 @@ export const HillChainTwin: React.FC = () => {
         <Section eyebrow="RISK HEATMAP" title="Do not compress every risk into one number"/>
         <div className="hc-heatmap-wrap">
           <table className="hc-heatmap">
-            <thead><tr><th>District</th><th>Rainfall</th><th>Landslide</th><th>Road</th><th>Inventory</th><th>Warehouse</th><th>Service</th></tr></thead>
+            <thead><tr><th><SemanticIcon label="District" /></th><th><SemanticIcon label="Rainfall" /></th><th><SemanticIcon label="Landslide" /></th><th><SemanticIcon label="Road" /></th><th><SemanticIcon label="Inventory" /></th><th><SemanticIcon label="Warehouse" /></th><th><SemanticIcon label="Service" /></th></tr></thead>
             <tbody>{districts.map(d=>(
               <tr key={d.id}>
                 <td>{d.name}</td>
@@ -327,7 +328,7 @@ export const HillChainTwin: React.FC = () => {
     <section className="hc-panel overflow-x-auto">
       <Section eyebrow="FULL COST-TO-SERVE ENGINE" title="Cost by route with terrain, fuel, risk and service context"/>
       <table className="hc-table min-w-[1050px] mt-5">
-        <thead><tr><th>Route</th><th>Distance</th><th>Effective</th><th>Terrain</th><th>Fuel</th><th>Cost</th><th>Cost/kg</th><th>Risk</th><th>Service</th><th>Equity</th></tr></thead>
+        <thead><tr><th><SemanticIcon label="Route" /></th><th><SemanticIcon label="Distance" /></th><th><SemanticIcon label="Effective" /></th><th><SemanticIcon label="Terrain" /></th><th><SemanticIcon label="Fuel" /></th><th><SemanticIcon label="Cost" /></th><th><SemanticIcon label="Cost/kg" /></th><th><SemanticIcon label="Risk" /></th><th><SemanticIcon label="Service" /></th><th><SemanticIcon label="Equity" /></th></tr></thead>
         <tbody>{routes.map(r=>{const e=calculateRouteEconomics(r,scenario,weights);return <tr key={r.id}><td><strong>{nodeById(r.originNodeId)?.name} → {nodeById(r.destinationNodeId)?.name}</strong></td><td>{r.roadDistanceKm} km</td><td>{e.effectiveDistanceKm.toFixed(0)} km</td><td>{pct(e.terrainComplexity*100,0)}</td><td>{e.fuelLitres.toFixed(0)} L</td><td>{inr(e.transportCost)}</td><td>{inr(e.costPerKg)}</td><td>{riskBand(e.riskExposure)}</td><td>{pct(e.serviceLevel*100)}</td><td>{pct(e.equityIndex*100,0)}</td></tr>})}</tbody>
       </table>
     </section>
@@ -337,7 +338,7 @@ export const HillChainTwin: React.FC = () => {
     <div className="space-y-6">
       <section className="hc-panel overflow-x-auto">
         <Section eyebrow="INVENTORY & WAREHOUSING" title="Capacity, safety stock, days of supply and service risk"/>
-        <table className="hc-table min-w-[920px] mt-5"><thead><tr><th>Warehouse</th><th>Inventory</th><th>Usable Capacity</th><th>Utilization</th><th>Days Supply</th><th>Dynamic Safety Stock</th><th>Stockout Risk</th><th>Service Risk</th></tr></thead><tbody>{warehouseRows.map(({node,eco})=><tr key={node.id}><td><strong>{node.name}</strong></td><td>{num(node.currentInventoryKg/1000)} t</td><td>{num(node.usableCapacityKg/1000)} t</td><td>{pct(eco.utilization*100)}</td><td>{eco.daysOfSupply.toFixed(1)} d</td><td>{num(eco.safetyStockKg/1000)} t</td><td>{pct(eco.stockoutProbability*100)}</td><td>{pct(eco.serviceRisk*100)}</td></tr>)}</tbody></table>
+        <table className="hc-table min-w-[920px] mt-5"><thead><tr><th><SemanticIcon label="Warehouse" /></th><th><SemanticIcon label="Inventory" /></th><th><SemanticIcon label="Usable Capacity" /></th><th><SemanticIcon label="Utilization" /></th><th><SemanticIcon label="Days Supply" /></th><th><SemanticIcon label="Dynamic Safety Stock" /></th><th><SemanticIcon label="Stockout Risk" /></th><th><SemanticIcon label="Service Risk" /></th></tr></thead><tbody>{warehouseRows.map(({node,eco})=><tr key={node.id}><td><strong>{node.name}</strong></td><td>{num(node.currentInventoryKg/1000)} t</td><td>{num(node.usableCapacityKg/1000)} t</td><td>{pct(eco.utilization*100)}</td><td>{eco.daysOfSupply.toFixed(1)} d</td><td>{num(eco.safetyStockKg/1000)} t</td><td>{pct(eco.stockoutProbability*100)}</td><td>{pct(eco.serviceRisk*100)}</td></tr>)}</tbody></table>
       </section>
       <section className="hc-panel">
         <Section eyebrow="COMMODITY QUALITY RISK" title="Inventory policy differs by product"/>
@@ -357,7 +358,7 @@ export const HillChainTwin: React.FC = () => {
     <div className="space-y-6">
       <section className="hc-panel overflow-x-auto">
         <Section eyebrow="PRIVATE OPERATOR ECONOMICS" title="Commercial viability must coexist with public-service obligations"/>
-        <table className="hc-table min-w-[980px] mt-5"><thead><tr><th>Transporter</th><th>Tonnes</th><th>On-time</th><th>Damage</th><th>Loss</th><th>Avg Delay</th><th>Terrain Capability</th><th>Compliance</th><th>Reliability Score</th></tr></thead><tbody>{transporterPerformance.map(t=>{const rel=(t.onTime*.32)+(100-t.damage*10)*.10+(100-t.loss*15)*.08+(100-Math.min(100,t.delayHours*7))*.12+t.terrainCapability*.16+t.compliance*.14+t.financialCapacity*.08;return <tr key={t.name}><td><strong>{t.name}</strong></td><td>{t.tonnes.toLocaleString()}</td><td>{t.onTime}%</td><td>{t.damage}%</td><td>{t.loss}%</td><td>{t.delayHours} h</td><td>{t.terrainCapability}</td><td>{t.compliance}%</td><td>{rel.toFixed(0)}/100</td></tr>})}</tbody></table>
+        <table className="hc-table min-w-[980px] mt-5"><thead><tr><th><SemanticIcon label="Transporter" /></th><th><SemanticIcon label="Tonnes" /></th><th><SemanticIcon label="On-time" /></th><th><SemanticIcon label="Damage" /></th><th><SemanticIcon label="Loss" /></th><th><SemanticIcon label="Avg Delay" /></th><th><SemanticIcon label="Terrain Capability" /></th><th><SemanticIcon label="Compliance" /></th><th><SemanticIcon label="Reliability Score" /></th></tr></thead><tbody>{transporterPerformance.map(t=>{const rel=(t.onTime*.32)+(100-t.damage*10)*.10+(100-t.loss*15)*.08+(100-Math.min(100,t.delayHours*7))*.12+t.terrainCapability*.16+t.compliance*.14+t.financialCapacity*.08;return <tr key={t.name}><td><strong>{t.name}</strong></td><td>{t.tonnes.toLocaleString()}</td><td>{t.onTime}%</td><td>{t.damage}%</td><td>{t.loss}%</td><td>{t.delayHours} h</td><td>{t.terrainCapability}</td><td>{t.compliance}%</td><td>{rel.toFixed(0)}/100</td></tr>})}</tbody></table>
       </section>
       <section className="hc-panel">
         <Section eyebrow="BREAK-EVEN ENGINE" title="At what tariff does a difficult route remain viable?"/>
@@ -430,7 +431,7 @@ export const HillChainTwin: React.FC = () => {
   const renderInfrastructure = () => (
     <section className="hc-panel overflow-x-auto">
       <Section eyebrow="INFRASTRUCTURE INVESTMENT PRIORITIZER" title="Economic return and public value remain separate"/>
-      <table className="hc-table min-w-[1050px] mt-5"><thead><tr><th>Investment</th><th>District</th><th>Capex</th><th>Annual Benefit</th><th>NPV</th><th>Payback</th><th>Service</th><th>Resilience</th><th>Equity</th><th>Public Value</th></tr></thead><tbody>{interventionRanking.map(i=><tr key={i.id}><td><strong>{i.name}</strong></td><td>{i.district}</td><td>{inr(i.capex)}</td><td>{inr(i.annualNet)}</td><td>{inr(i.projectNpv)}</td><td>{Number.isFinite(i.payback)?i.payback.toFixed(1)+' y':'n/a'}</td><td>+{pct(i.serviceImprovement*100,0)}</td><td>+{pct(i.resilienceImprovement*100,0)}</td><td>+{pct(i.equityImprovement*100,0)}</td><td>{(i.publicValue*100).toFixed(1)}</td></tr>)}</tbody></table>
+      <table className="hc-table min-w-[1050px] mt-5"><thead><tr><th><SemanticIcon label="Investment" /></th><th><SemanticIcon label="District" /></th><th><SemanticIcon label="Capex" /></th><th><SemanticIcon label="Annual Benefit" /></th><th><SemanticIcon label="NPV" /></th><th><SemanticIcon label="Payback" /></th><th><SemanticIcon label="Service" /></th><th><SemanticIcon label="Resilience" /></th><th><SemanticIcon label="Equity" /></th><th><SemanticIcon label="Public Value" /></th></tr></thead><tbody>{interventionRanking.map(i=><tr key={i.id}><td><strong>{i.name}</strong></td><td>{i.district}</td><td>{inr(i.capex)}</td><td>{inr(i.annualNet)}</td><td>{inr(i.projectNpv)}</td><td>{Number.isFinite(i.payback)?i.payback.toFixed(1)+' y':'n/a'}</td><td>+{pct(i.serviceImprovement*100,0)}</td><td>+{pct(i.resilienceImprovement*100,0)}</td><td>+{pct(i.equityImprovement*100,0)}</td><td>{(i.publicValue*100).toFixed(1)}</td></tr>)}</tbody></table>
     </section>
   );
 

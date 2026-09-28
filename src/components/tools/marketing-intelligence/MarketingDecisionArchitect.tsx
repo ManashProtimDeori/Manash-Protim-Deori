@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { SemanticIcon } from '../../common/SemanticIcon';
 import {
   Activity, AlertTriangle, ArrowRight, BarChart3, Beaker, BrainCircuit, Check,
   ChevronDown, ChevronUp, CircleDollarSign, Copy, Download, FlaskConical,
@@ -432,7 +433,7 @@ export const MarketingDecisionArchitect: React.FC = () => {
     <section className="mi-panel overflow-x-auto">
       <SectionTitle eyebrow="Channel Intelligence" title="Scale and efficiency should be evaluated together"/>
       <table className="mi-table mt-6 min-w-[900px]">
-        <thead><tr><th>Channel</th><th>Spend</th><th>Efficiency Index</th><th>Saturation</th><th>CTR Index</th><th>CVR Index</th><th>Decision</th></tr></thead>
+        <thead><tr><th><SemanticIcon label="Channel" /></th><th><SemanticIcon label="Spend" /></th><th><SemanticIcon label="Efficiency Index" /></th><th><SemanticIcon label="Saturation" /></th><th><SemanticIcon label="CTR Index" /></th><th><SemanticIcon label="CVR Index" /></th><th><SemanticIcon label="Decision" /></th></tr></thead>
         <tbody>{channels.map(ch=>{const scale=ch.spendShare>.12;const efficient=ch.efficiency>1;const decision=scale&&efficient?'Scale Candidate':!scale&&efficient?'Expansion Opportunity':scale&&!efficient?'Optimization Priority':'Reconsider';return <tr key={ch.channel}><td>{ch.channel}</td><td>{compactCurrency(inputs.spend*ch.spendShare)}</td><td>{ch.efficiency.toFixed(2)}×</td><td>{(ch.saturation*100).toFixed(0)}%</td><td>{ch.ctrIndex.toFixed(2)}</td><td>{ch.cvrIndex.toFixed(2)}</td><td><span className="mi-chip">{decision}</span></td></tr>})}</tbody>
       </table>
       <p className="text-[10px] text-neutral-500 mt-4">Quadrant labels are configurable heuristics, not universal truths. Efficiency indices are simulated demo values.</p>
@@ -538,7 +539,7 @@ export const MarketingDecisionArchitect: React.FC = () => {
   const renderBudget=()=>(
     <section className="mi-panel overflow-x-auto">
       <SectionTitle eyebrow="Budget Optimizer" title="Allocate on marginal headroom, not historical averages" copy="A constrained heuristic combines modeled efficiency and saturation to suggest where the next marketing rupee has more headroom."/>
-      <table className="mi-table mt-6 min-w-[840px]"><thead><tr><th>Channel</th><th>Current</th><th>Recommended</th><th>Change</th><th>Saturation</th><th>Action</th></tr></thead><tbody>{optimized.map(row=><tr key={row.channel}><td>{row.channel}</td><td>{compactCurrency(row.currentSpend)}</td><td>{compactCurrency(row.recommendedSpend)}</td><td className={row.delta>=0?'text-emerald-400':'text-rose-400'}>{row.delta>=0?'+':''}{(row.deltaPct*100).toFixed(1)}%</td><td>{(row.saturation*100).toFixed(0)}%</td><td>{row.deltaPct>.08?'Increase':row.deltaPct<-.08?'Reduce':'Hold'}</td></tr>)}</tbody></table>
+      <table className="mi-table mt-6 min-w-[840px]"><thead><tr><th><SemanticIcon label="Channel" /></th><th><SemanticIcon label="Current" /></th><th><SemanticIcon label="Recommended" /></th><th><SemanticIcon label="Change" /></th><th><SemanticIcon label="Saturation" /></th><th><SemanticIcon label="Action" /></th></tr></thead><tbody>{optimized.map(row=><tr key={row.channel}><td>{row.channel}</td><td>{compactCurrency(row.currentSpend)}</td><td>{compactCurrency(row.recommendedSpend)}</td><td className={row.delta>=0?'text-emerald-400':'text-rose-400'}>{row.delta>=0?'+':''}{(row.deltaPct*100).toFixed(1)}%</td><td>{(row.saturation*100).toFixed(0)}%</td><td>{row.deltaPct>.08?'Increase':row.deltaPct<-.08?'Reduce':'Hold'}</td></tr>)}</tbody></table>
       <p className="text-[10px] text-neutral-500 mt-4">Recommendation is a decision framework based on simulated response headroom. It is not a guaranteed causal outcome.</p>
     </section>
   );

@@ -3665,3 +3665,125 @@ p,li{
     height:2.7rem!important;
   }
 }
+
+
+/* --- Proof ledger contrast + semantic table visuals ---------------------- */
+.lab-feature{
+  position:relative;
+}
+.light .lab-feature{
+  background:#f7f8fa!important;
+  color:#18202a!important;
+}
+.dark .lab-feature{
+  background:#0d1116!important;
+  color:#f1f4f7!important;
+}
+.light .lab-feature .proof-kicker,
+.light .lab-feature .proof-intro,
+.light .lab-feature .proof-evidence,
+.light .lab-feature .proof-demo{
+  color:#4b596b!important;
+}
+.dark .lab-feature .proof-kicker,
+.dark .lab-feature .proof-intro,
+.dark .lab-feature .proof-evidence,
+.dark .lab-feature .proof-demo{
+  color:#b8c3d0!important;
+}
+.light .lab-feature .proof-heading,
+.light .lab-feature .proof-claim{
+  color:#17202b!important;
+  text-shadow:none!important;
+}
+.dark .lab-feature .proof-heading,
+.dark .lab-feature .proof-claim{
+  color:#f3f6f9!important;
+  text-shadow:none!important;
+}
+.light .lab-feature .proof-index{
+  color:#526d8a!important;
+}
+.dark .lab-feature .proof-index{
+  color:#a8bbd0!important;
+}
+.light .lab-feature .proof-counter{
+  color:#385a7b!important;
+  font-weight:650!important;
+}
+.dark .lab-feature .proof-counter{
+  color:#9eb6cf!important;
+  font-weight:650!important;
+}
+.light .lab-feature .proof-card{
+  border-color:#aeb8c5!important;
+}
+.dark .lab-feature .proof-card{
+  border-color:#465365!important;
+}
+.light .lab-feature .proof-link{
+  color:#334b64!important;
+}
+.dark .lab-feature .proof-link{
+  color:#d2dae4!important;
+}
+.lab-feature .proof-claim{
+  font-size:1rem!important;
+  line-height:1.42!important;
+}
+.lab-feature .proof-counter,
+.lab-feature .proof-evidence,
+.lab-feature .proof-demo,
+.lab-feature .proof-link{
+  font-size:.82rem!important;
+  line-height:1.5!important;
+}
+
+/* Selected-work architecture receives subtle semantic icons. */
+.project-category-label{
+  display:flex!important;
+  align-items:center;
+  gap:.55rem;
+}
+.project-category-label .semantic-icon{
+  width:1.42rem;
+  height:1.42rem;
+  flex-basis:1.42rem;
+}
+.project-structure>div{
+  position:relative;
+}
+.project-structure>div>strong{
+  display:block;
+  line-height:1.35;
+}
+.project-structure .project-structure-icon{
+  color:currentColor;
+  opacity:.78;
+}
+
+/* Table icons stay quiet: text remains the primary information. */
+#main-content table th .semantic-label{
+  color:inherit;
+  font-weight:inherit;
+}
+#main-content table th .semantic-icon{
+  opacity:.74;
+}
+.light #main-content table th .semantic-icon{
+  background:#edf1f5;
+  border-color:#aab5c2;
+  color:#4e6781;
+}
+.dark #main-content table th .semantic-icon{
+  background:#1b2430;
+  border-color:#4b586a;
+  color:#a8b8ca;
+}
+
+/* Larger architecture cards can carry an icon without crowding copy. */
+@media(min-width:768px){
+  .project-structure>div{
+    padding-top:26px;
+  }
+}

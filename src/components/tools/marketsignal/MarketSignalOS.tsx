@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { SemanticIcon } from '../../common/SemanticIcon';
 import {
   Activity, AlertTriangle, ArrowRight, BarChart3, Beaker, BrainCircuit, CheckCircle2,
   ChevronRight, CircleDollarSign, Copy, Database, Download, FlaskConical, Gauge,
@@ -336,7 +337,7 @@ export const MarketSignalOS:React.FC=()=>{
   const renderChannel=()=>(
     <section className="ms-panel overflow-x-auto">
       <SectionTitle eyebrow="CHANNEL INTELLIGENCE" title="Average economics and marginal economics side by side"/>
-      <table className="ms-table min-w-[980px] mt-5"><thead><tr><th>Channel</th><th>Spend</th><th>Revenue</th><th>iRevenue</th><th>ROAS</th><th>Marginal ROAS</th><th>CAC</th><th>CTR</th><th>CVR</th><th>Saturation</th><th>Confidence</th></tr></thead><tbody>{channelRows.map(c=><tr key={c.channel}><td><strong>{c.channel}</strong></td><td>{currency(c.spend)}</td><td>{currency(c.revenue)}</td><td>{currency(c.incrementalRevenue)}</td><td>{(c.revenue/c.spend).toFixed(2)}×</td><td>{c.marginalRoas.toFixed(2)}×</td><td>{currency(c.cac)}</td><td>{pct(c.ctr)}</td><td>{pct(c.cvr)}</td><td>{pct(c.saturation)}</td><td>{c.confidence}%</td></tr>)}</tbody></table>
+      <table className="ms-table min-w-[980px] mt-5"><thead><tr><th><SemanticIcon label="Channel" /></th><th><SemanticIcon label="Spend" /></th><th><SemanticIcon label="Revenue" /></th><th><SemanticIcon label="iRevenue" /></th><th><SemanticIcon label="ROAS" /></th><th><SemanticIcon label="Marginal ROAS" /></th><th><SemanticIcon label="CAC" /></th><th><SemanticIcon label="CTR" /></th><th><SemanticIcon label="CVR" /></th><th><SemanticIcon label="Saturation" /></th><th><SemanticIcon label="Confidence" /></th></tr></thead><tbody>{channelRows.map(c=><tr key={c.channel}><td><strong>{c.channel}</strong></td><td>{currency(c.spend)}</td><td>{currency(c.revenue)}</td><td>{currency(c.incrementalRevenue)}</td><td>{(c.revenue/c.spend).toFixed(2)}×</td><td>{c.marginalRoas.toFixed(2)}×</td><td>{currency(c.cac)}</td><td>{pct(c.ctr)}</td><td>{pct(c.cvr)}</td><td>{pct(c.saturation)}</td><td>{c.confidence}%</td></tr>)}</tbody></table>
     </section>
   );
 
@@ -350,7 +351,7 @@ export const MarketSignalOS:React.FC=()=>{
   const renderAudience=()=>(
     <section className="ms-panel overflow-x-auto">
       <SectionTitle eyebrow="AUDIENCE INTELLIGENCE" title="Cheap acquisition is not always high-value acquisition"/>
-      <table className="ms-table min-w-[900px] mt-5"><thead><tr><th>Segment</th><th>Spend</th><th>Reach</th><th>CTR</th><th>CVR</th><th>CAC</th><th>LTV</th><th>Retention</th><th>Incrementality</th></tr></thead><tbody>{audienceRows.map(a=><tr key={a.segment}><td><strong>{a.segment}</strong></td><td>{currency(a.spend)}</td><td>{a.reach.toLocaleString()}</td><td>{pct(a.ctr)}</td><td>{pct(a.cvr)}</td><td>{currency(a.cac)}</td><td>{currency(a.ltv)}</td><td>{pct(a.retention)}</td><td>{pct(a.incrementality)}</td></tr>)}</tbody></table>
+      <table className="ms-table min-w-[900px] mt-5"><thead><tr><th><SemanticIcon label="Segment" /></th><th><SemanticIcon label="Spend" /></th><th><SemanticIcon label="Reach" /></th><th><SemanticIcon label="CTR" /></th><th><SemanticIcon label="CVR" /></th><th><SemanticIcon label="CAC" /></th><th><SemanticIcon label="LTV" /></th><th><SemanticIcon label="Retention" /></th><th><SemanticIcon label="Incrementality" /></th></tr></thead><tbody>{audienceRows.map(a=><tr key={a.segment}><td><strong>{a.segment}</strong></td><td>{currency(a.spend)}</td><td>{a.reach.toLocaleString()}</td><td>{pct(a.ctr)}</td><td>{pct(a.cvr)}</td><td>{currency(a.cac)}</td><td>{currency(a.ltv)}</td><td>{pct(a.retention)}</td><td>{pct(a.incrementality)}</td></tr>)}</tbody></table>
     </section>
   );
 
@@ -397,7 +398,7 @@ export const MarketSignalOS:React.FC=()=>{
   const renderBudget=()=>(
     <section className="ms-panel overflow-x-auto">
       <SectionTitle eyebrow="BUDGET OPTIMIZATION ENGINE" title="Use marginal economics, not historical average ROAS"/>
-      <table className="ms-table min-w-[920px] mt-5"><thead><tr><th>Channel</th><th>Current</th><th>Recommended</th><th>Change</th><th>Marginal ROAS</th><th>Saturation</th><th>Expected incremental outcome</th><th>Confidence</th></tr></thead><tbody>{optimized.map(c=><tr key={c.channel}><td><strong>{c.channel}</strong></td><td>{currency(c.spend)}</td><td>{currency(c.recommended)}</td><td className={c.change>=0?'ms-positive':'ms-negative'}>{c.change>=0?'+':''}{currency(c.change)}</td><td>{c.marginalRoas.toFixed(1)}×</td><td>{pct(c.saturation)}</td><td>{currency(c.expectedIncremental)}</td><td>{c.confidence}%</td></tr>)}</tbody></table>
+      <table className="ms-table min-w-[920px] mt-5"><thead><tr><th><SemanticIcon label="Channel" /></th><th><SemanticIcon label="Current" /></th><th><SemanticIcon label="Recommended" /></th><th><SemanticIcon label="Change" /></th><th><SemanticIcon label="Marginal ROAS" /></th><th><SemanticIcon label="Saturation" /></th><th><SemanticIcon label="Expected incremental outcome" /></th><th><SemanticIcon label="Confidence" /></th></tr></thead><tbody>{optimized.map(c=><tr key={c.channel}><td><strong>{c.channel}</strong></td><td>{currency(c.spend)}</td><td>{currency(c.recommended)}</td><td className={c.change>=0?'ms-positive':'ms-negative'}>{c.change>=0?'+':''}{currency(c.change)}</td><td>{c.marginalRoas.toFixed(1)}×</td><td>{pct(c.saturation)}</td><td>{currency(c.expectedIncremental)}</td><td>{c.confidence}%</td></tr>)}</tbody></table>
       <p className="ms-note">Recommendation is a synthetic optimization using marginal ROAS × remaining saturation capacity × confidence. It is not a budget instruction for real funds.</p>
     </section>
   );
