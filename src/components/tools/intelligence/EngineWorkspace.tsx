@@ -12,6 +12,7 @@ import { IntelligenceVariable } from './engineTypes';
 import {
   baselineVariables, buildScenarioResult, formatVariableValue, scenarioPresets, variableRelationships
 } from './variableEngine';
+import { assessIntelligenceItem, calculateIntelligenceReliability } from './decisionScience';
 
 export type EngineWorkspaceView =
   | 'Intelligence Variables'
@@ -98,29 +99,43 @@ export const EngineWorkspace:React.FC<{view:EngineWorkspaceView}> = ({view}) => 
   const upstream=variableRelationships.filter(r=>r.targetVariableId===selected.id);
   const downstream=variableRelationships.filter(r=>r.sourceVariableId===selected.id);
 
+  const assessmentMap=useMemo(()=>new Map(items.map(item=>[item.id,assessIntelligenceItem(item,evidence,true)])),[]);
+  const reliabilityProfile=useMemo(()=>calculateIntelligenceReliability(evidence,items,true),[]);
+
   const earlyWarnings=useMemo(()=>items
-    .filter(i=>i.importanceScore>=72&&i.evidenceStrengthScore>=64&&i.attentionScore<=55&&i.velocityScore>=55)
-    .sort((a,b)=>(b.importanceScore+b.velocityScore+b.evidenceStrengthScore-b.attentionScore)-(a.importanceScore+a.velocityScore+a.evidenceStrengthScore-a.attentionScore))
-    .slice(0,8),[]);
+    .filter(item=>{
+      const assessment=assessmentMap.get(item.id)!;
+      return item.importanceScore>=68&&assessment.calibratedConfidence>=55&&item.attentionScore<=58&&item.velocityScore>=50;
+    })
+    .sort((a,b)=>(assessmentMap.get(b.id)?.hiddenSignalScore??0)-(assessmentMap.get(a.id)?.hiddenSignalScore??0))
+    .slice(0,8),[assessmentMap]);
 
   const queryResponse=useMemo(()=>{
     const q=submittedQuery.toLowerCase();
-    const tokens=q.split(/\W+/).filter(t=>t.length>3);
+    const tokens=[...new Set(q.split(/\W+/).filter(t=>t.length>2))];
+    const overlap=(text:string)=>tokens.reduce((sum,token)=>sum+(text.includes(token)?1:0),0)/Math.max(tokens.length,1);
+
     const scoredItems=items.map(item=>{
-      const hay=[item.title,item.summary,item.company,item.topic,item.geography,item.industry,item.whyItMatters].join(' ').toLowerCase();
-      const score=tokens.reduce((sum,t)=>sum+(hay.includes(t)?1:0),0)+item.strategicRelevanceScore/200;
-      return {item,score};
-    }).sort((a,b)=>b.score-a.score).slice(0,4);
+      const hay=[item.title,item.summary,item.company,item.platform,item.topic,item.geography,item.industry,item.whyItMatters,...item.factualClaims,...item.inferredSignals].join(' ').toLowerCase();
+      const assessment=assessmentMap.get(item.id)!;
+      const semanticMatch=overlap(hay);
+      const score=semanticMatch*.62+(assessment.executivePriority/100)*.23+(assessment.calibratedConfidence/100)*.15;
+      return {item,assessment,score};
+    }).filter(row=>row.score>.10).sort((a,b)=>b.score-a.score).slice(0,5);
+
     const scoredTrends=trends.map(trend=>{
-      const hay=[trend.name,trend.thesis,...trend.affectedFunctions,...trend.affectedIndustries].join(' ').toLowerCase();
-      return {trend,score:tokens.reduce((sum,t)=>sum+(hay.includes(t)?1:0),0)+trend.momentum/220};
-    }).sort((a,b)=>b.score-a.score).slice(0,3);
+      const hay=[trend.name,trend.thesis,...trend.affectedFunctions,...trend.affectedIndustries,...trend.supportingEvidence].join(' ').toLowerCase();
+      const semanticMatch=overlap(hay);
+      return {trend,score:semanticMatch*.70+(trend.evidenceStrength/100)*.18+(trend.momentum/100)*.12};
+    }).filter(row=>row.score>.08).sort((a,b)=>b.score-a.score).slice(0,3);
+
     const scoredVars=variables.map(variable=>{
       const hay=[variable.name,variable.definition,...variable.businessAreas].join(' ').toLowerCase();
-      return {variable,score:tokens.reduce((sum,t)=>sum+(hay.includes(t)?1:0),0)};
-    }).sort((a,b)=>b.score-a.score).slice(0,3);
+      return {variable,score:overlap(hay)*.8+(variable.confidence/100)*.2};
+    }).filter(row=>row.score>.08).sort((a,b)=>b.score-a.score).slice(0,4);
+
     return {items:scoredItems,trends:scoredTrends,variables:scoredVars};
-  },[submittedQuery,variables]);
+  },[submittedQuery,variables,assessmentMap]);
 
   const selectedDecisionBrief=decisionBriefs.find(d=>d.id===selectedDecision) ?? decisionBriefs[0];
 
@@ -197,8 +212,8 @@ export const EngineWorkspace:React.FC<{view:EngineWorkspaceView}> = ({view}) => 
             <div className="engine-outcome-grid mt-5">{variables.filter(v=>['traditionalSearchShare','organicCtrIndex','referralTrafficIndex','paidSearchDependence','cacPressureIndex','marketingProductivityIndex'].includes(v.id)).map(v=><div key={v.id}><span>{v.name}</span><strong>{formatVariableValue(v)}</strong><em className={v.currentValue-v.baseline>=0?'positive':'negative'}>{v.currentValue-v.baseline>=0?'+':''}{(v.currentValue-v.baseline).toFixed(1)} vs baseline</em></div>)}</div>
           </section>
           <section className="intel-panel">
-            <span className="intel-kicker">MONTE CARLO RANGE · 500 DETERMINISTIC DEMO RUNS</span>
-            <div className="engine-range-grid mt-5">{['organicCtrIndex','referralTrafficIndex','cacPressureIndex','marketingProductivityIndex'].map(id=>{const v=variables.find(x=>x.id===id)!;return <div key={id}><span>{v.name}</span><div><b>P10 {scenarioResult.p10[id]?.toFixed(1)}</b><strong>P50 {scenarioResult.p50[id]?.toFixed(1)}</strong><b>P90 {scenarioResult.p90[id]?.toFixed(1)}</b></div></div>})}</div>
+            <span className="intel-kicker">UNCERTAINTY RANGE · 1,000 REPRODUCIBLE ASSUMPTION RUNS</span>
+            <div className="engine-range-grid mt-5">{['organicCtrIndex','referralTrafficIndex','cacPressureIndex','marketingProductivityIndex'].map(id=>{const v=variables.find(x=>x.id===id)!;return <div key={id}><span>{v.name}</span><div><b>P10 {scenarioResult.p10[id]?.toFixed(1)}</b><strong>P50 {scenarioResult.p50[id]?.toFixed(1)}</strong><b>P90 {scenarioResult.p90[id]?.toFixed(1)}</b></div></div>})}</div><p className="intel-demo-note">Input uncertainty widens as variable confidence falls. The seeded normal perturbations are transparent stress-test assumptions, not estimated real-world probability distributions.</p>
           </section>
           <section className="intel-panel">
             <span className="intel-kicker">SENSITIVITY · CAC PRESSURE</span>
@@ -217,11 +232,11 @@ export const EngineWorkspace:React.FC<{view:EngineWorkspaceView}> = ({view}) => 
     <div className="space-y-6">
       <section className="intel-panel">
         <div className="engine-heading"><div><span>EARLY WARNING</span><h3>High impact × high momentum × strong evidence × low attention</h3><p>This view deliberately searches for important developments that have not yet attracted equivalent mainstream attention.</p></div></div>
-        <div className="engine-warning-list mt-5">{earlyWarnings.map((item,index)=><article key={item.id}><span>{String(index+1).padStart(2,'0')}</span><div><strong>{item.title}</strong><p>{item.whyItMatters}</p><em>{item.company} · {item.topic} · {item.geography}</em></div><div><b>Impact {item.importanceScore}</b><b>Velocity {item.velocityScore}</b><b>Evidence {item.evidenceStrengthScore}</b><b>Attention {item.attentionScore}</b></div></article>)}</div>
+        <div className="engine-warning-list mt-5">{earlyWarnings.map((item,index)=>{const assessment=assessmentMap.get(item.id)!;return <article key={item.id}><span>{String(index+1).padStart(2,'0')}</span><div><strong>{item.title}</strong><p>{item.whyItMatters}</p><em>{item.company} · {item.topic} · {item.geography}</em></div><div><b>Impact {item.importanceScore}</b><b>Velocity {item.velocityScore}</b><b>Confidence {assessment.calibratedConfidence}</b><b>Hidden-signal {assessment.hiddenSignalScore}</b><b>Attention {item.attentionScore}</b></div></article>})}</div>
       </section>
       <section className="intel-panel">
         <div className="engine-heading"><div><span>HYPE GAP & STRATEGIC SURPRISE</span><h3>Attention and evidence are tracked separately</h3></div></div>
-        <div className="engine-surprise-grid mt-5">{items.slice(0,12).map(item=>{const hype=item.attentionScore-item.evidenceStrengthScore;const surprise=Math.round((item.noveltyScore/100)*(item.importanceScore/100)*((100-item.attentionScore)/100)*100);return <div key={item.id}><span>{item.company}</span><strong>{item.topic}</strong><p>Hype gap <b className={hype>10?'text-amber-400':'text-neutral-400'}>{hype>0?'+':''}{hype}</b></p><p>Strategic surprise <b>{surprise}</b></p></div>})}</div>
+        <div className="engine-surprise-grid mt-5">{items.slice(0,12).map(item=>{const assessment=assessmentMap.get(item.id)!;const hype=item.attentionScore-assessment.calibratedConfidence;return <div key={item.id}><span>{item.company}</span><strong>{item.topic}</strong><p>Attention-confidence gap <b className={hype>10?'text-amber-400':'text-neutral-400'}>{hype>0?'+':''}{hype}</b></p><p>Hidden-signal score <b>{assessment.hiddenSignalScore}</b></p></div>})}</div>
       </section>
     </div>
   );
@@ -231,7 +246,7 @@ export const EngineWorkspace:React.FC<{view:EngineWorkspaceView}> = ({view}) => 
       <section className="intel-panel">
         <div className="engine-heading"><div><span>DAILY RUN · {dailyRun.id}</span><h3>Observability, quality and failure isolation</h3><p>The production design is idempotent: each run has a unique daily identifier and failed stages can be retried without discarding completed research.</p></div><div className="engine-run-state"><CheckCircle2 className="w-4 h-4"/><strong>{dailyRun.state}</strong></div></div>
         <div className="engine-run-metrics mt-5">{[
-          ['Sources checked',dailyRun.sourceChecks],['Sources changed',dailyRun.changedSources],['Documents',dailyRun.documentsIngested],['Claims extracted',dailyRun.claimsExtracted],['Claims verified',dailyRun.claimsVerified],['Conflicts',dailyRun.conflictsFound],['Signals',dailyRun.signalsGenerated],['Duration',dailyRun.durationMinutes+'m']
+          ['Sources checked',dailyRun.sourceChecks],['Sources changed',dailyRun.changedSources],['Documents',dailyRun.documentsIngested],['Claims extracted',dailyRun.claimsExtracted],['Claims verified',dailyRun.claimsVerified],['Conflicts',dailyRun.conflictsFound],['Evidence reliability',reliabilityProfile.overall+'/100'],['Duration',dailyRun.durationMinutes+'m']
         ].map(([label,value])=><div key={String(label)}><span>{label}</span><strong>{typeof value==='number'?value.toLocaleString():value}</strong></div>)}</div>
       </section>
       <section className="intel-panel overflow-x-auto">
@@ -245,7 +260,7 @@ export const EngineWorkspace:React.FC<{view:EngineWorkspaceView}> = ({view}) => 
         </section>
         <section className="intel-panel">
           <span className="intel-kicker">SOURCE REGISTRY · SAMPLE OF A 1M+ DISCOVERABLE UNIVERSE</span>
-          <div className="engine-source-registry mt-5">{sourceRegistry.sort((a,b)=>b.crawlPriority-a.crawlPriority).slice(0,12).map(source=><div key={source.id}><div><strong>{source.name}</strong><span>{source.domain} · {source.sourceType.replace('_',' ')}</span></div><b>{source.crawlPriority}</b><em>{source.cadence}</em></div>)}</div>
+          <div className="engine-source-registry mt-5">{[...sourceRegistry].sort((a,b)=>b.crawlPriority-a.crawlPriority).slice(0,12).map(source=><div key={source.id}><div><strong>{source.name}</strong><span>{source.domain} · {source.sourceType.replace('_',' ')}</span></div><b>{source.crawlPriority}</b><em>{source.cadence}</em></div>)}</div>
           <p className="intel-demo-note">The registry demonstrates prioritization architecture. It does not claim that this portfolio deployment is currently crawling one million sources.</p>
         </section>
       </div>
@@ -269,9 +284,9 @@ export const EngineWorkspace:React.FC<{view:EngineWorkspaceView}> = ({view}) => 
         <h3 className="text-2xl mt-2">{submittedQuery}</h3>
         <div className="engine-query-answer mt-5">
           <div><span>INTERPRETATION</span><p>{queryResponse.trends[0]?.trend.thesis || 'No matching stored trend was found.'}</p></div>
-          <div><span>TOP DEVELOPMENTS</span>{queryResponse.items.map(({item})=><p key={item.id}><b>{item.company}</b> — {item.summary}</p>)}</div>
+          <div><span>TOP DEVELOPMENTS</span>{queryResponse.items.length?queryResponse.items.map(({item,assessment})=><p key={item.id}><b>{item.company}</b> — {item.summary} <em>· calibrated confidence {assessment.calibratedConfidence}/100</em></p>):<p>No stored intelligence clears the minimum retrieval score for this query.</p>}</div>
           <div><span>VARIABLES TO MONITOR</span>{queryResponse.variables.map(({variable})=><p key={variable.id}><b>{variable.name}</b> · {formatVariableValue(variable)} · confidence {variable.confidence}</p>)}</div>
-          <div><span>UNCERTAINTY</span><p>Results are retrieved from synthetic demo intelligence. Any real-world answer must preserve event dates, publication dates, source independence and counter-evidence.</p></div>
+          <div><span>UNCERTAINTY</span><p>Results are retrieved from synthetic demo intelligence. Reliability is {reliabilityProfile.overall}/100 and deliberately capped in demo mode. A production answer must preserve event dates, publication dates, source independence, contradictory evidence and unresolved unknowns.</p></div>
         </div>
       </section>
     </div>
@@ -301,7 +316,9 @@ export const EngineWorkspace:React.FC<{view:EngineWorkspaceView}> = ({view}) => 
             'Modeled values remain visually distinct from observed evidence',
             'Counter-evidence and unknowns stay attached to every major interpretation',
             'Scenario assumptions never become fabricated probabilities',
-            'Every recommendation exposes evidence, assumptions and monitoring triggers'
+            'Every recommendation exposes evidence, assumptions and monitoring triggers',
+            'Low-confidence, high-impact intelligence routes to TEST or PREPARE instead of masquerading as an ACT NOW conclusion',
+            'Reproducible scenario ranges are assumption stress tests, not fabricated outcome probabilities'
           ].map(x=><div key={x}><ShieldCheck className="w-4 h-4"/><p>{x}</p></div>)}</div>
         </section>
         <section className="intel-panel">
