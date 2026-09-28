@@ -28,6 +28,7 @@ import { NowPage } from './pages/NowPage';
 import { UsesPage } from './pages/UsesPage';
 import { ArchivePage } from './pages/ArchivePage';
 import { ContactPage } from './pages/ContactPage';
+import { InquiryInboxPage } from './pages/InquiryInboxPage';
 import { ChangelogPage } from './pages/ChangelogPage';
 import { AuthProvider, useAuth } from './auth/AuthContext';
 import { ProtectedRoute } from './auth/ProtectedRoute';
@@ -97,6 +98,7 @@ export const AppContent: React.FC = () => {
           <Route path="/uses" element={<UsesPage />} />
           <Route path="/archive" element={<ArchivePage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/inquiries" element={<ProtectedRoute><InquiryInboxPage /></ProtectedRoute>} />
           <Route path="/changelog" element={<ChangelogPage />} />
           <Route path="/studio" element={<ProtectedRoute><StudioPage /></ProtectedRoute>} />
           <Route path="/login" element={<LoginPage />} />
