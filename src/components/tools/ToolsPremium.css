@@ -2326,3 +2326,176 @@
 ){
   overflow-wrap:anywhere;
 }
+
+
+/* --- Marketing Measurement layout polish: 3D hero metrics + aligned controls --- */
+.tools-premium-shell[data-tool="utm-builder"] .mi-hero{
+  grid-template-columns:minmax(0,1.25fr) minmax(420px,.75fr)!important;
+  align-items:end!important;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(124px,1fr))!important;
+  gap:10px!important;
+  min-width:0!important;
+  background:transparent!important;
+  border:0!important;
+  perspective:1000px;
+  transform-style:preserve-3d;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta>div{
+  min-width:0!important;
+  min-height:112px;
+  padding:16px 15px!important;
+  border:1px solid var(--tool-line-strong)!important;
+  border-radius:12px!important;
+  transform:translateZ(0);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 -2px 4px rgba(0,0,0,.12),
+    0 7px 0 rgba(0,0,0,.09),
+    0 14px 24px rgba(0,0,0,.16)!important;
+}
+
+.light .tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta>div{
+  background:linear-gradient(155deg,#ffffff,#edf2f7)!important;
+  border-color:#aeb8c6!important;
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    inset 0 -2px 4px rgba(38,53,72,.08),
+    0 6px 0 #c4ccd6,
+    0 13px 22px rgba(35,49,67,.15)!important;
+}
+
+.dark .tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta>div{
+  background:linear-gradient(155deg,#1b2531,#111821)!important;
+  border-color:#526176!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    inset 0 -2px 5px rgba(0,0,0,.38),
+    0 6px 0 #080d13,
+    0 13px 24px rgba(0,0,0,.34)!important;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta>div span{
+  font-size:.72rem!important;
+  line-height:1.25!important;
+  letter-spacing:.105em!important;
+  white-space:normal!important;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta>div strong{
+  display:block!important;
+  margin-top:10px!important;
+  max-width:100%!important;
+  font-size:clamp(.95rem,1.15vw,1.15rem)!important;
+  line-height:1.28!important;
+  font-weight:650!important;
+  letter-spacing:-.015em!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+  text-wrap:balance;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta button{
+  grid-column:1/-1!important;
+  min-height:42px;
+  margin-top:1px;
+  border-radius:10px!important;
+  border:1px solid var(--tool-line-strong)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -2px 4px rgba(0,0,0,.22),
+    0 5px 0 rgba(0,0,0,.12),
+    0 10px 18px rgba(0,0,0,.16)!important;
+}
+
+/* Keep every primary control track on one horizontal row.
+   Labels sit above; values sit below the track for clean scan alignment. */
+.tools-premium-shell[data-tool="utm-builder"] .mi-control-grid{
+  display:grid!important;
+  grid-template-columns:repeat(7,minmax(112px,1fr))!important;
+  gap:14px!important;
+  align-items:start!important;
+  width:100%;
+  margin-top:24px;
+  padding:2px 2px 12px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:thin;
+  scrollbar-color:var(--tool-line-strong) transparent;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-control-grid .mi-slider{
+  min-width:112px;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-slider{
+  display:grid!important;
+  grid-template-rows:minmax(34px,auto) 20px auto;
+  align-items:end;
+  gap:7px;
+  min-width:0;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-slider-label{
+  display:flex!important;
+  align-items:flex-end;
+  min-height:34px;
+  margin:0!important;
+  color:var(--tool-muted)!important;
+  font-size:.72rem!important;
+  line-height:1.28!important;
+  font-weight:550!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-slider input[type="range"]{
+  display:block;
+  width:100%!important;
+  height:7px!important;
+  margin:0!important;
+  align-self:center;
+}
+
+.tools-premium-shell[data-tool="utm-builder"] .mi-slider-value{
+  display:block!important;
+  min-height:20px;
+  margin:0!important;
+  padding-top:1px;
+  color:var(--tool-text)!important;
+  font-family:var(--font-mono)!important;
+  font-size:.77rem!important;
+  line-height:1.35!important;
+  font-weight:650!important;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+@media(max-width:1180px){
+  .tools-premium-shell[data-tool="utm-builder"] .mi-hero{
+    grid-template-columns:1fr!important;
+  }
+  .tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta{
+    width:100%;
+    grid-template-columns:repeat(3,minmax(150px,1fr))!important;
+  }
+}
+
+@media(max-width:620px){
+  .tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta{
+    grid-template-columns:1fr!important;
+  }
+  .tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta>div{
+    min-height:88px;
+  }
+  .tools-premium-shell[data-tool="utm-builder"] .mi-hero-meta button{
+    grid-column:1!important;
+  }
+}
