@@ -64,19 +64,29 @@ export const toolsData: ToolItem[] = [
     id: 'tool-3',
     slug: 'positioning-analyser',
     name: 'Strategic Positioning & ICP Evaluator',
-    category: 'Strategy & Brand',
+    category: 'Strategy, Brand & Go-to-Market',
     status: 'Live',
-    version: 'v1.2',
-    description: 'Evaluate your value proposition along competitive differentiation and problem urgency to diagnose messaging weakness and pinpoint high-margin positioning.',
-    instructions: 'Answer 5 diagnostic questions regarding your product, target customer alternatives, and buying trigger urgency to plot your quadrant position.',
+    version: 'v2.0',
+    description: 'An evidence-aware positioning diagnostic that evaluates ICP specificity, problem urgency, differentiation, value proposition, buyer clarity, adoption feasibility, message clarity and proof quality—while separating strategic fit from confidence in the evidence.',
+    instructions: 'Answer 10 diagnostic questions across market, buyer, positioning and proof. Use Strategic Fit to understand structural alignment, Evidence Confidence to understand how much of the thesis is externally supported, Evidence-Adjusted Readiness to avoid overrating weakly validated positioning, and the 2x2 matrix to inspect differentiation versus urgency. Treat the output as a hypothesis map until win/loss, buyer research and performance data validate the claims.',
     features: [
-      'Interactive 2x2 Positioning Matrix (Commodity vs Feature Trap vs Luxury Discretionary vs Mission-Critical Powerhouse)',
-      'Concrete remediation recommendations tailored to your resulting quadrant',
-      'Messaging clarity score with actionable rewrite suggestions'
+      '10-question diagnostic across eight weighted dimensions: ICP specificity, urgency, differentiation, value proposition, buyer clarity, adoption feasibility, message clarity and evidence',
+      'Separates strategic-fit quality from evidence confidence so self-reported strength is not mistaken for market validation',
+      'Evidence-adjusted readiness score discounts otherwise strong positioning when proof is weak or answers contradict one another',
+      'Consistency checks detect conflicts such as high claimed differentiation with weak win/loss evidence or high message specificity with poor buyer comprehension',
+      'Heuristic plausible range widens automatically as evidence confidence falls and is explicitly labeled as non-statistical',
+      'Dynamic differentiation-versus-urgency matrix with four commercially interpretable archetypes',
+      'ICP fit score combines segment specificity, buying-center clarity and adoption feasibility instead of treating ICP as firmographics alone',
+      'Weighted constraint analysis identifies the highest-leverage strategic bottleneck and generates a three-step validation plan',
+      'Evidence agenda specifies what must be verified next through win/loss, buyer comprehension, funnel economics and time-to-value data',
+      'Scenario presets for commodity inertia, feature-led novelty and validated urgent positioning',
+      'Deterministic scoring engine with unit tests covering weights, score bounds, archetypes, contradictions, evidence confidence and uncertainty behavior',
+      'Explicit analytical guardrails: self-assessment ≠ market validation, distinctiveness ≠ defensibility and buyer interest ≠ urgency'
     ],
-    technologies: ['React', 'Interactive SVG Matrix', 'Heuristic Scoring Engine'],
+    technologies: ['React 19', 'TypeScript', 'Deterministic Scoring Engine', 'Evidence Calibration', 'Constraint Analysis', 'Consistency Diagnostics', 'Responsive Strategy Matrix'],
     interactiveComponent: 'PositioningMatrixTool',
     changelog: [
+      { version: 'v2.0', date: '2026-09', notes: 'Rebuilt the evaluator around eight strategic dimensions, evidence confidence, contradiction checks, uncertainty discipline, weighted constraint analysis, ICP fit and deterministic tests' },
       { version: 'v1.2', date: '2025-11', notes: 'Added qualitative positioning rubric checklist' }
     ]
   },
