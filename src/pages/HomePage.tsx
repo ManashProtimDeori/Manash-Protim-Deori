@@ -1,6 +1,7 @@
 import React from 'react';
 import { AcademicJourney } from '../components/home/AcademicJourney';
 import { Hero } from '../components/home/Hero';
+import { MarketingDirectorOS } from '../components/home/MarketingDirectorOS';
 import { CurrentSignal } from '../components/home/CurrentSignal';
 import { FeaturedWork } from '../components/home/FeaturedWork';
 import { InteractiveToolsPreview } from '../components/home/InteractiveToolsPreview';
@@ -13,6 +14,7 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-0">
       <Hero />
+      <MarketingDirectorOS />
       <FeaturedWork />
       <InteractiveToolsPreview />
       <ProofOfWork />

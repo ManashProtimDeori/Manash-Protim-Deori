@@ -22,7 +22,7 @@ export const PrimaryNavigation: React.FC<PrimaryNavigationProps> = ({
     location.pathname === href || location.pathname.startsWith(href + '/');
 
   const dropdowns = useMemo<Record<string, PrimaryNavChild[]>>(() => {
-    const workItems: PrimaryNavChild[] = [...projects]
+    const projectItems: PrimaryNavChild[] = [...projects]
       .sort((a, b) => {
         if (a.featured && !b.featured) return -1;
         if (!a.featured && b.featured) return 1;
@@ -35,6 +35,16 @@ export const PrimaryNavigation: React.FC<PrimaryNavigationProps> = ({
         eyebrow: project.year + ' · ' + project.status,
         description: project.categories.slice(0, 3).join(' / '),
       }));
+
+    const workItems: PrimaryNavChild[] = [
+      {
+        href: '/director-os',
+        label: 'Marketing Director Operating System',
+        eyebrow: 'Proof · Decisions · Measurement',
+        description: 'A proof-first view of strategy, analytics and execution',
+      },
+      ...projectItems,
+    ];
 
     const labItems: PrimaryNavChild[] = experiments
       .slice(0, 5)

@@ -51,6 +51,7 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="eyebrow mb-5">Explore</h4>
             <ul className="space-y-3 text-sm">
+              <li><Link to="/director-os" className="text-amber-400 font-medium hover:text-amber-300 transition-colors">Marketing Director OS</Link></li>
               <li><Link to="/work" className="hover:text-amber-400 transition-colors">Selected work</Link></li>
               <li><Link to="/lab" className="hover:text-amber-400 transition-colors">Lab</Link></li>
               <li><Link to="/tools" className="hover:text-amber-400 transition-colors">Tools</Link></li>

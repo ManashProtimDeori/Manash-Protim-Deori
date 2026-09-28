@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, ArrowRight, FileText, Wrench, Compass, BookOpen, User, Sun, Moon, Copy, Check, X } from 'lucide-react';
+import { Search, ArrowRight, FileText, Wrench, Compass, BookOpen, Sun, Moon, Copy, Check, X } from 'lucide-react';
 import { projects } from '../../data/projects';
 import { toolsData } from '../../data/tools';
 import { articles } from '../../data/articles';
@@ -44,6 +44,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     const list: SearchItem[] = [
       // Primary Navigation Pages
       { id: 'page-home', title: 'Home', subtitle: 'Digital headquarters overview', category: 'Pages', type: 'page', url: '/' },
+      { id: 'page-director-os', title: 'Marketing Director Operating System', subtitle: 'Proof ledger, decision room, analytics lab and boardroom briefings', category: 'Pages', type: 'page', url: '/director-os' },
       { id: 'page-work', title: 'Work', subtitle: 'Featured projects & strategic case studies', category: 'Pages', type: 'page', url: '/work' },
       { id: 'page-lab', title: 'Lab / Playground', subtitle: 'Experiments & autonomous prototypes', category: 'Pages', type: 'page', url: '/lab' },
       { id: 'page-tools', title: 'Tools & Mini-Products', subtitle: 'Interactive marketing & strategy utilities', category: 'Pages', type: 'page', url: '/tools' },

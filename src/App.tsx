@@ -20,6 +20,7 @@ import { WritingPage } from './pages/WritingPage';
 import { ArticleDetailPage } from './pages/ArticleDetailPage';
 import { ResearchPage } from './pages/ResearchPage';
 import { ResearchDetailPage } from './pages/ResearchDetailPage';
+import { DirectorOSPage } from './pages/DirectorOSPage';
 import { AboutPage } from './pages/AboutPage';
 import { ExperiencePage } from './pages/ExperiencePage';
 import { ResumePage } from './pages/ResumePage';
@@ -83,6 +84,7 @@ export const AppContent: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<WorkPage />} />
           <Route path="/work/:id" element={<ProjectDetailPage />} />
+          <Route path="/director-os" element={<DirectorOSPage />} />
           <Route path="/lab" element={<LabPage />} />
           <Route path="/tools" element={<ToolsPage />} />
           <Route path="/tools/:tool" element={<ToolDetailPage />} />
