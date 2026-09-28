@@ -24,7 +24,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
 
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b backdrop-blur-md transition-colors duration-200 border-neutral-800/80 bg-neutral-950/85 dark:border-neutral-800/80 dark:bg-neutral-950/85 light:border-neutral-200/90 light:bg-neutral-50/90">
+    <header className="site-header-premium sticky top-0 z-40 w-full border-b backdrop-blur-md transition-colors duration-200 border-neutral-800/80 bg-neutral-950/85 dark:border-neutral-800/80 dark:bg-neutral-950/85 light:border-neutral-200/90 light:bg-neutral-50/90">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
         {/* Zone 1: Single Brand Zone */}
