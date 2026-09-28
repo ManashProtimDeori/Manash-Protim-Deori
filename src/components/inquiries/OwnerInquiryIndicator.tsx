@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 import { supabase } from '../../auth/supabaseClient';
 import { countNewPortfolioInquiries } from '../../lib/inquiries';
+import './InquiryInbox.css';
 
 export const OwnerInquiryIndicator: React.FC = () => {
   const { isOwner } = useAuth();
