@@ -1282,3 +1282,188 @@
 .dark .tools-premium-shell :is(.good,.up,.text-emerald-400){color:#7fc4a9!important}
 .dark .tools-premium-shell :is(.warn,.text-amber-400){color:#d1b77b!important}
 .dark .tools-premium-shell :is(.bad,.down,.text-rose-400){color:#e59ca2!important}
+
+
+/* --- Targeted mixed-surface contrast fixes ------------------------------ */
+/* These components intentionally use premium surfaces that differ from the
+   page theme. Their foreground colors therefore must be bound to the surface,
+   not inherited from the surrounding light/dark theme. */
+
+/* 1. Back to All Tools */
+.light .tools-premium-backbar>a{
+  color:#26384a!important;
+  background:linear-gradient(180deg,#f5f7fa,#e8edf3)!important;
+  border-color:#aeb8c5!important;
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    inset 0 -1px 0 rgba(49,65,85,.08),
+    0 4px 10px rgba(35,49,68,.10)!important;
+  text-shadow:none!important;
+}
+.light .tools-premium-backbar>a svg{
+  color:#536b84!important;
+  stroke:#536b84!important;
+}
+.dark .tools-premium-backbar>a{
+  color:#e5ebf2!important;
+  background:linear-gradient(180deg,#202936,#111820)!important;
+  border-color:#48576a!important;
+  text-shadow:none!important;
+}
+.dark .tools-premium-backbar>a svg{
+  color:#a8b7c8!important;
+  stroke:#a8b7c8!important;
+}
+
+/* 2. Marketing Measurement hero: intentionally dark in both themes.
+   All copy on the dark fascia stays light; the white metadata cards retain
+   their own dark text contract. */
+.light .tools-premium-shell .mi-hero,
+.dark .tools-premium-shell .mi-hero{
+  background:
+    radial-gradient(circle at 82% 8%,rgba(117,138,164,.10),transparent 30%),
+    linear-gradient(155deg,#202a37 0%,#121923 68%,#0e141c 100%)!important;
+  border-color:#344154!important;
+}
+.light .tools-premium-shell .mi-hero>div:first-child h2,
+.light .tools-premium-shell .mi-hero>div:first-child h2 em,
+.dark .tools-premium-shell .mi-hero>div:first-child h2,
+.dark .tools-premium-shell .mi-hero>div:first-child h2 em{
+  color:#f3f6f9!important;
+  -webkit-text-fill-color:#f3f6f9!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.25)!important;
+}
+.light .tools-premium-shell .mi-hero>div:first-child>p,
+.dark .tools-premium-shell .mi-hero>div:first-child>p{
+  color:#c3ceda!important;
+}
+.light .tools-premium-shell .mi-hero .mi-overline,
+.dark .tools-premium-shell .mi-hero .mi-overline{
+  color:#9fb1c5!important;
+}
+.light .tools-premium-shell .mi-hero-meta>div{
+  background:#f7f9fb!important;
+  color:#172236!important;
+  border-color:#c6ced8!important;
+}
+.light .tools-premium-shell .mi-hero-meta>div span{
+  color:#607086!important;
+}
+.light .tools-premium-shell .mi-hero-meta>div strong{
+  color:#1d2938!important;
+}
+.dark .tools-premium-shell .mi-hero-meta>div{
+  background:#161e28!important;
+  color:#eef3f8!important;
+}
+.dark .tools-premium-shell .mi-hero-meta>div span{
+  color:#a9b5c4!important;
+}
+.dark .tools-premium-shell .mi-hero-meta>div strong{
+  color:#f4f7fb!important;
+}
+
+/* 3. Formula strip: light mode gets a light analytical surface with dark
+   tokens; dark mode gets dark tokens with light text. */
+.light .tools-premium-shell .mi-equation{
+  background:linear-gradient(180deg,#edf1f5,#e2e8ef)!important;
+  border-color:#aeb9c7!important;
+  color:#1d2938!important;
+  box-shadow:
+    inset 0 2px 6px rgba(37,52,72,.08),
+    0 5px 14px rgba(37,52,72,.10)!important;
+}
+.light .tools-premium-shell .mi-equation span{
+  background:#ffffff!important;
+  color:#1d2938!important;
+  border-color:#b7c1ce!important;
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 2px 5px rgba(30,44,61,.08);
+  text-shadow:none!important;
+}
+.light .tools-premium-shell .mi-equation b{
+  color:#506780!important;
+  text-shadow:none!important;
+}
+.dark .tools-premium-shell .mi-equation{
+  background:linear-gradient(180deg,#111820,#0b1118)!important;
+  border-color:#435064!important;
+  color:#e7edf4!important;
+}
+.dark .tools-premium-shell .mi-equation span{
+  background:#1c2531!important;
+  color:#eef3f8!important;
+  border-color:#4b596c!important;
+  text-shadow:none!important;
+}
+.dark .tools-premium-shell .mi-equation b{
+  color:#a5b7ca!important;
+}
+
+/* 4. Revenue-decomposition cards: these were being forced dark by the
+   shared chart-stage rule. Light mode now gets true light cards. */
+.light .tools-premium-shell .mi-decomp{
+  background:linear-gradient(155deg,#ffffff,#edf2f6)!important;
+  border-color:#b6c0cc!important;
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 6px 16px rgba(36,51,69,.11)!important;
+}
+.light .tools-premium-shell .mi-decomp>span{
+  color:#516176!important;
+  font-weight:600!important;
+  text-shadow:none!important;
+}
+.light .tools-premium-shell .mi-decomp>strong{
+  color:#1d2938!important;
+  -webkit-text-fill-color:currentColor!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+.light .tools-premium-shell .mi-decomp>strong.mi-positive{
+  color:#2d5f92!important;
+}
+.light .tools-premium-shell .mi-decomp>strong.mi-negative{
+  color:#a64753!important;
+}
+.light .tools-premium-shell .mi-decomp .mi-mini-bar{
+  background:#ccd5df!important;
+  box-shadow:inset 0 1px 3px rgba(36,51,69,.16)!important;
+}
+.light .tools-premium-shell .mi-decomp .mi-mini-bar i{
+  background:#587da4!important;
+}
+.light .tools-premium-shell .mi-decomp .mi-mini-bar i.negative{
+  background:#b75c65!important;
+}
+
+.dark .tools-premium-shell .mi-decomp{
+  background:linear-gradient(155deg,#1a222c,#111820)!important;
+  border-color:#435064!important;
+}
+.dark .tools-premium-shell .mi-decomp>span{
+  color:#b8c3d0!important;
+}
+.dark .tools-premium-shell .mi-decomp>strong{
+  color:#f1f4f7!important;
+  -webkit-text-fill-color:currentColor!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+.dark .tools-premium-shell .mi-decomp>strong.mi-positive{
+  color:#8fb4d8!important;
+}
+.dark .tools-premium-shell .mi-decomp>strong.mi-negative{
+  color:#e59aa1!important;
+}
+
+/* Keep all four targets readable even under browser forced-colors/contrast. */
+@media(forced-colors:active){
+  .tools-premium-backbar>a,
+  .tools-premium-shell .mi-hero,
+  .tools-premium-shell .mi-equation,
+  .tools-premium-shell .mi-decomp{
+    forced-color-adjust:auto;
+  }
+}
