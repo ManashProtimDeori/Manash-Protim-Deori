@@ -9,6 +9,7 @@ import { BriefGenerator } from '../components/tools/BriefGenerator';
 import { MarketSignalOS } from '../components/tools/marketsignal/MarketSignalOS';
 import { HillChainTwin } from '../components/tools/hillchain/HillChainTwin';
 import { EditButton } from '../components/editor/EditButton';
+import '../components/tools/ToolsPremium.css';
 
 export const ToolsPage: React.FC = () => {
   const { tools, isEditMode, openEditor } = useData();
@@ -42,10 +43,10 @@ export const ToolsPage: React.FC = () => {
   };
 
   return (
-    <div className={`py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
+    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
       
       {/* Editorial Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-800/40">
+      <div className="tools-premium-header flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-800/40">
         <div className="max-w-3xl space-y-3">
           <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-medium block">
             Tools / Make a better decision
@@ -70,7 +71,7 @@ export const ToolsPage: React.FC = () => {
       </div>
 
       {/* Tool Navigation Tabs */}
-      <div className="flex items-center gap-2 pb-6 mb-8 border-b border-neutral-800/60 overflow-x-auto">
+      <div className="tools-premium-tabs flex items-center gap-2 pb-6 mb-8 border-b border-neutral-800/60 overflow-x-auto">
         {tools.map(tool => {
           const isSelected = tool.slug === currentTool?.slug;
           return (
@@ -93,13 +94,13 @@ export const ToolsPage: React.FC = () => {
       </div>
 
       {/* Active Tool Showcase Canvas */}
-      <div className="mb-14">
+      <div className="tools-visual-stage mb-14">
         {renderToolComponent()}
       </div>
 
       {/* Tool Specifications & Features Grid */}
       {currentTool && (
-        <div className="p-6 sm:p-8 rounded border border-neutral-800/80 bg-neutral-950/40 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs relative">
+        <div className="tools-premium-spec p-6 sm:p-8 rounded border border-neutral-800/80 bg-neutral-950/40 grid grid-cols-1 md:grid-cols-3 gap-8 text-xs relative">
           <div className="absolute top-4 right-4">
             <EditButton type="tool" item={currentTool} label="Edit Tool Details" />
           </div>
