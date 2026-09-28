@@ -62,6 +62,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
           </button>
 
           )}
+          {isOwner && <OwnerInquiryIndicator />}
           {/* Command Palette Trigger */}
           <button
             onClick={onOpenCommand}
