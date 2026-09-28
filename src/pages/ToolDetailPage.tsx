@@ -10,6 +10,7 @@ import { MarketSignalOS } from '../components/tools/marketsignal/MarketSignalOS'
 import { HillChainTwin } from '../components/tools/hillchain/HillChainTwin';
 import { ArrowLeft } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
+import '../components/tools/ToolsPremium.css';
 
 export const ToolDetailPage: React.FC = () => {
   const { tool } = useParams<{ tool: string }>();
@@ -40,9 +41,9 @@ export const ToolDetailPage: React.FC = () => {
   };
 
   return (
-    <div className={`py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'utm-builder' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
+    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'utm-builder' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
       {/* Back Link & Edit */}
-      <div className="mb-8 flex items-center justify-between">
+      <div className="tools-premium-backbar mb-8 flex items-center justify-between">
         <Link
           to="/tools"
           className="inline-flex items-center gap-1.5 text-xs font-mono text-neutral-400 hover:text-amber-400 transition-colors"
@@ -55,7 +56,7 @@ export const ToolDetailPage: React.FC = () => {
       </div>
 
       {/* Tool Header */}
-      <div className="space-y-4 mb-10 pb-8 border-b border-neutral-800">
+      <div className="tools-premium-header space-y-4 mb-10 pb-8 border-b border-neutral-800">
         <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
           <span className="text-amber-400 font-semibold">{toolItem.category}</span>
           <span>·</span>
@@ -74,12 +75,12 @@ export const ToolDetailPage: React.FC = () => {
       </div>
 
       {/* Render Active Component */}
-      <div className="mb-14">
+      <div className="tools-visual-stage mb-14">
         {renderTool()}
       </div>
 
       {/* Specifications */}
-      <div className="p-6 sm:p-8 rounded border border-neutral-800/80 bg-neutral-950/40 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-sans">
+      <div className="tools-premium-spec p-6 sm:p-8 rounded border border-neutral-800/80 bg-neutral-950/40 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-sans">
         <div>
           <span className="font-mono text-amber-400 font-bold uppercase tracking-wider block mb-2">
             Usage Protocol & Instructions
