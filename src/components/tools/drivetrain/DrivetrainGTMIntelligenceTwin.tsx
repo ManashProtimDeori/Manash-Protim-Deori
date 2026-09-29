@@ -24,10 +24,12 @@ import {
   auditEvidence,
   buildBoardMemo,
   causalCentrality,
+  buildDecisionTriggers,
   contextualDecisionPortfolio,
   contextualReadiness,
   designConversionExperiment,
   evidenceHealth,
+  experimentFeasibility,
   hypothesisRisk,
   optimizeDecisionPortfolio,
   pipelineDriverSensitivity,
@@ -99,6 +101,7 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
   const [allocationBudget,setAllocationBudget]=useState(160);
   const [experimentBaseline,setExperimentBaseline]=useState(20);
   const [experimentLift,setExperimentLift]=useState(15);
+  const [weeklyEligibleTraffic,setWeeklyEligibleTraffic]=useState(900);
 
   const constraints=useMemo(()=>calculateConstraints(inputs),[inputs]);
   const executive=useMemo(()=>calculateExecutiveScores(inputs),[inputs]);
@@ -112,7 +115,9 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
   const stressResults=useMemo(()=>stressScenarios.map(scenario=>applyStressScenario(inputs,scenario)),[inputs]);
   const allocation=useMemo(()=>optimizeDecisionPortfolio(inputs,objective,role,allocationBudget),[inputs,objective,role,allocationBudget]);
   const experiment=useMemo(()=>designConversionExperiment(experimentBaseline,experimentLift,.05,.80),[experimentBaseline,experimentLift]);
+  const experimentPlan=useMemo(()=>experimentFeasibility(experiment,weeklyEligibleTraffic,12),[experiment,weeklyEligibleTraffic]);
   const riskRegister=useMemo(()=>hypothesisRisk(inputs),[inputs]);
+  const decisionTriggers=useMemo(()=>buildDecisionTriggers(inputs,objective,role),[inputs,objective,role]);
   const boardMemo=useMemo(()=>buildBoardMemo(inputs,objective,role),[inputs,objective,role]);
   const rankedContent=useMemo(()=>rankContent(contentOpportunities),[]);
   const primary=constraints[0];
@@ -124,6 +129,39 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
     setInputs(current=>({...current,[key]:value}));
 
   const reset=()=>setInputs({...defaultGtmInputs});
+
+  const downloadBoardMemo=()=>{
+    const payload={
+      generatedAt:new Date().toISOString(),
+      caseStudy:'Drivetrain AI public-source portfolio analysis',
+      decisionLens:role,
+      businessObjective:objective,
+      boardMemo,
+      decisionTriggers,
+      allocation:{
+        budget:allocation.budget,
+        usedBudget:allocation.usedBudget,
+        remainingBudget:allocation.remainingBudget,
+        selected:allocation.selected.map(item=>({
+          title:item.title,
+          route:item.route,
+          score:item.score,
+          counterfactualReadinessGain:allocation.counterfactualGains[item.id],
+        })),
+      },
+      evidenceHealth:evidenceSnapshot,
+      analyticalBoundary:'Modeled decision-support output. Not private Drivetrain performance data and not a guaranteed business outcome.',
+    };
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement('a');
+    link.href=url;
+    link.download='gtm-intelligence-board-memo.json';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
 
   const renderCommand=()=>(
     <div className="dt-stack">
@@ -590,20 +628,24 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
           <div className="dt-pipeline-controls">
             <label><span>Baseline conversion %</span><input type="number" min={1} max={99} step={.1} value={experimentBaseline} onChange={e=>setExperimentBaseline(Math.max(1,Math.min(99,Number(e.target.value))))}/></label>
             <label><span>Minimum detectable lift %</span><input type="number" min={1} max={200} step={1} value={experimentLift} onChange={e=>setExperimentLift(Math.max(1,Number(e.target.value)))}/></label>
+            <label><span>Eligible units / week</span><input type="number" min={1} step={25} value={weeklyEligibleTraffic} onChange={e=>setWeeklyEligibleTraffic(Math.max(1,Number(e.target.value)))}/></label>
           </div>
           <div className="dt-experiment-summary">
             <div><span>Target rate</span><strong>{experiment.targetRatePct.toFixed(2)}%</strong></div>
             <div><span>Sample / arm</span><strong>{experiment.samplePerArm.toLocaleString()}</strong></div>
             <div><span>Total sample</span><strong>{experiment.totalSample.toLocaleString()}</strong></div>
+            <div><span>Estimated duration</span><strong>{experimentPlan.estimatedWeeks.toFixed(1)} weeks</strong></div>
+            <div><span>12-week feasibility</span><strong>{experimentPlan.feasibleWithinWindow?'FEASIBLE':'UNDERPOWERED'}</strong></div>
+            <div><span>Traffic gap</span><strong>{Math.ceil(experimentPlan.trafficGap).toLocaleString()}</strong></div>
           </div>
-          <p className="dt-boundary">{experiment.interpretation}</p>
+          <p className="dt-boundary">{experimentPlan.recommendation} {experiment.interpretation}</p>
         </article>
 
         <article className="dt-panel">
           <SectionHead eyebrow="Resource Allocation Optimizer" title={'Capacity '+allocation.usedBudget+'/'+allocation.budget}/>
           <label className="dt-slider"><div><span>Decision capacity budget</span><strong>{allocationBudget}</strong></div><input type="range" min={60} max={300} step={5} value={allocationBudget} onChange={e=>setAllocationBudget(Number(e.target.value))}/><small>Relative resource units, not currency.</small></label>
           <div className="dt-allocation-list">
-            {allocation.selected.map(item=><div key={item.id}><CheckCircle2/><div><strong>{item.title}</strong><span>{item.route} · score {item.score} · cost {item.cost}</span></div></div>)}
+            {allocation.selected.map(item=><div key={item.id}><CheckCircle2/><div><strong>{item.title}</strong><span>{item.route} · score {item.score} · cost {item.cost} · single-lever readiness gain {allocation.counterfactualGains[item.id]>=0?'+':''}{allocation.counterfactualGains[item.id]?.toFixed(1)}</span></div></div>)}
           </div>
           <p className="dt-boundary">Remaining capacity {allocation.remainingBudget}. Optimizer maximizes evidence-adjusted decision utility under the resource constraint.</p>
         </article>
@@ -629,7 +671,7 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
   const renderBoardRoom=()=>(
     <div className="dt-stack">
       <section className="dt-panel dt-board-hero">
-        <SectionHead eyebrow="Executive Board Room" title={boardMemo.headline} copy={'Decision lens: '+role+' · objective: '+objective}/>
+        <div className="dt-board-headline-row"><SectionHead eyebrow="Executive Board Room" title={boardMemo.headline} copy={'Decision lens: '+role+' · objective: '+objective}/><button className="dt-export-button" onClick={downloadBoardMemo}>Export decision memo</button></div>
         <div className="dt-board-metrics">
           <div><span>Readiness</span><strong>{boardMemo.readiness}/100</strong></div>
           <div><span>Evidence health</span><strong>{boardMemo.evidenceHealth}/100</strong></div>
@@ -641,7 +683,7 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
       <section className="dt-grid-2">
         <article className="dt-panel">
           <SectionHead eyebrow="Recommended Decisions" title="Highest evidence-adjusted actions"/>
-          <div className="dt-board-list">{boardMemo.topDecisions.map((item,index)=><div key={item.title}><b>{index+1}</b><div><strong>{item.title}</strong><span>{item.route} · score {item.score}</span></div></div>)}</div>
+          <div className="dt-board-list">{boardMemo.topDecisions.map((item,index)=><div key={item.title}><b>{index+1}</b><div><strong>{item.title}</strong><span>{item.route} · score {item.score} · counterfactual gain {item.readinessGain>=0?'+':''}{item.readinessGain.toFixed(1)}</span></div></div>)}</div>
         </article>
         <article className="dt-panel">
           <SectionHead eyebrow="Robust Levers" title="Drivers that survive sensitivity"/>
@@ -659,6 +701,17 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
           <div className="dt-board-list">{boardMemo.stressWatch.map((item,index)=><div key={item.name}><b>{index+1}</b><div><strong>{item.name}</strong><span>{item.delta>=0?'+':''}{item.delta} readiness points</span></div></div>)}</div>
           <p className="dt-boundary"><b>Decision falsifier:</b> {boardMemo.falsifier}</p>
         </article>
+      </section>
+      <section className="dt-panel">
+        <SectionHead eyebrow="Decision Trigger Monitor" title="Turn recommendations into governed operating cadence" copy="A decision becomes useful when the team knows what signal to watch, when to revisit it and what threshold changes the action."/>
+        <div className="dt-trigger-grid">
+          {decisionTriggers.map(trigger=><article key={trigger.decisionId} className={'status-'+trigger.status.toLowerCase()}>
+            <div><Tag tone={trigger.status==='TRIGGERED'?'model':trigger.status==='NEAR'?'inference':'fact'}>{trigger.status}</Tag><span>{trigger.cadence}</span></div>
+            <strong>{trigger.title}</strong>
+            <p>{trigger.focusKey.replace(/([A-Z])/g,' $1')} · current {trigger.currentValue} · trigger {trigger.direction.toLowerCase()} {trigger.threshold}</p>
+            <small>{trigger.evidenceToWatch}</small>
+          </article>)}
+        </div>
       </section>
     </div>
   );
