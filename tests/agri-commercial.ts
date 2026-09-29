@@ -68,6 +68,15 @@ const wcStress={...referenceAgriInputs,dsoDays:70,dioDays:85,dpoDays:35};
 const wcOut=calculateCommercialFinancials(wcStress);
 assert.ok(wcOut.workingCapital>baseline.workingCapital);
 
+const energyShock={...referenceAgriInputs,energyIndex:125};
+assert.ok(calculateCommercialFinancials(energyShock).ebit<baseline.ebit);
+
+const packagingShock={...referenceAgriInputs,packagingIndex:125};
+assert.ok(calculateCommercialFinancials(packagingShock).ebit<baseline.ebit);
+
+const broaderNumericDistribution={...referenceAgriInputs,numericDistribution:88};
+assert.ok(calculateCommercialFinancials(broaderNumericDistribution).modeledVolumeMt>baseline.modeledVolumeMt);
+
 for(const step of [5,10,20]){
   const rows=runSensitivity(referenceAgriInputs,step);
   assert.ok(rows.length>=15);
