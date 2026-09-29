@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight, BarChart3, CircleDollarSign, ShieldCheck, Wheat } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ShieldCheck, Wheat } from 'lucide-react';
 import './AgriCaseStudyPage.css';
 
 const sources=[
