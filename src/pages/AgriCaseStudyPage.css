@@ -1,0 +1,273 @@
+.agri-case-page{
+  background:var(--premium-bg,#f5f5f7);
+  color:var(--premium-text,#1d1d1f);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI",sans-serif;
+}
+.agri-case-shell{
+  width:min(100%,1180px);
+  margin-inline:auto;
+  padding:clamp(52px,7vw,96px) clamp(20px,4vw,52px) clamp(86px,8vw,132px);
+}
+.agri-case-back{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:var(--premium-secondary,#6e6e73)!important;
+  font-size:.84rem;
+  text-decoration:none!important;
+}
+.agri-case-back svg{width:15px;height:15px}
+.agri-case-hero{
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(250px,.55fr);
+  gap:28px;
+  align-items:end;
+  margin-top:34px;
+  padding:clamp(30px,5vw,56px);
+  border:1px solid var(--premium-border,rgba(0,0,0,.1));
+  border-radius:32px;
+  background:
+    radial-gradient(circle at 8% 10%,rgba(48,209,88,.09),transparent 30%),
+    radial-gradient(circle at 88% 12%,rgba(255,159,10,.08),transparent 26%),
+    var(--premium-surface,#fff);
+  box-shadow:0 22px 70px rgba(0,0,0,.06);
+}
+.dark .agri-case-hero{box-shadow:0 24px 80px rgba(0,0,0,.38)}
+.agri-case-hero>div:first-child>span,
+.agri-case-heading>span{
+  display:block;
+  color:#5d7f65;
+  font-size:.76rem;
+  line-height:1.25;
+  font-weight:750;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.dark .agri-case-hero>div:first-child>span,
+.dark .agri-case-heading>span{color:#87c596}
+.agri-case-hero h1{
+  max-width:14ch;
+  margin-top:10px;
+  font-size:clamp(2.65rem,5.7vw,5.8rem);
+  line-height:.95;
+  letter-spacing:-.06em;
+}
+.agri-case-hero p{
+  max-width:68ch;
+  margin-top:18px;
+  font-size:clamp(.98rem,1.4vw,1.1rem)!important;
+  line-height:1.58!important;
+}
+.agri-case-badge{
+  padding:20px;
+  border:1px solid var(--premium-border,rgba(0,0,0,.1));
+  border-radius:20px;
+  background:color-mix(in srgb,var(--premium-surface,#fff) 90%,transparent);
+}
+.agri-case-badge svg{width:22px;height:22px;color:#5d7f65}
+.agri-case-badge strong,.agri-case-badge span,.agri-case-badge small{display:block}
+.agri-case-badge strong{margin-top:18px;font-size:1rem}
+.agri-case-badge span{margin-top:5px;font-size:.82rem;color:var(--premium-secondary,#6e6e73)}
+.agri-case-badge small{margin-top:12px;font-size:.74rem;line-height:1.45;color:var(--premium-secondary,#6e6e73)}
+.agri-case-stat-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin-top:18px;
+}
+.agri-case-stat-grid article{
+  min-height:150px;
+  padding:17px;
+  border:1px solid var(--premium-border,rgba(0,0,0,.1));
+  border-radius:18px;
+  background:var(--premium-surface,#fff);
+}
+.agri-case-stat-grid span,.agri-case-stat-grid strong,.agri-case-stat-grid em{display:block}
+.agri-case-stat-grid span{font-size:.76rem;color:var(--premium-secondary,#6e6e73)}
+.agri-case-stat-grid strong{
+  margin-top:16px;
+  font:800 clamp(1.25rem,2.2vw,1.85rem)/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+.agri-case-stat-grid em{
+  margin-top:8px;
+  font-size:.76rem;
+  font-style:normal;
+  color:#5d7f65;
+}
+.agri-case-panel{
+  margin-top:18px;
+  padding:clamp(24px,4vw,40px);
+  border:1px solid var(--premium-border,rgba(0,0,0,.1));
+  border-radius:26px;
+  background:var(--premium-surface,#fff);
+}
+.agri-case-heading h2{
+  max-width:18ch;
+  margin-top:7px;
+  font-size:clamp(2rem,4.2vw,4.25rem);
+  line-height:.99;
+  letter-spacing:-.052em;
+}
+.agri-case-panel>p{
+  max-width:78ch;
+  margin-top:20px;
+  font-size:.95rem!important;
+  line-height:1.65!important;
+}
+.agri-case-problems{
+  display:grid;
+  gap:12px;
+  margin-top:24px;
+}
+.agri-case-problems article{
+  display:grid;
+  grid-template-columns:54px minmax(0,1fr);
+  gap:16px;
+  padding:18px;
+  border:1px solid var(--premium-border,rgba(0,0,0,.1));
+  border-radius:18px;
+  background:color-mix(in srgb,var(--premium-surface,#fff) 96%,#5d7f65 4%);
+}
+.agri-case-number{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  border-radius:12px;
+  background:#5d7f65;
+  color:#fff;
+  font:750 .78rem ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+.dark .agri-case-number{color:#08120b}
+.agri-case-problems h3{font-size:1.08rem;line-height:1.3}
+.agri-case-problems p{
+  margin-top:9px;
+  font-size:.82rem!important;
+  line-height:1.52!important;
+}
+.agri-case-problems p b{
+  display:block;
+  margin-bottom:3px;
+  color:var(--premium-text,#1d1d1f);
+}
+.agri-case-table-wrap{
+  max-width:100%;
+  overflow-x:auto;
+  margin-top:24px;
+  border:1px solid var(--premium-border,rgba(0,0,0,.1));
+  border-radius:18px;
+}
+.agri-case-table-wrap table{
+  width:100%;
+  min-width:920px;
+  border-collapse:collapse;
+  font-variant-numeric:tabular-nums;
+}
+.agri-case-table-wrap th,.agri-case-table-wrap td{
+  padding:13px 14px;
+  border-bottom:1px solid var(--premium-border,rgba(0,0,0,.1));
+  text-align:left;
+  vertical-align:top;
+  font-size:.8rem;
+  line-height:1.5;
+}
+.agri-case-table-wrap th{
+  color:var(--premium-secondary,#6e6e73);
+  background:var(--premium-surface-soft,#fbfbfd);
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.agri-case-boundary{
+  margin-top:14px!important;
+  padding-top:13px;
+  border-top:1px solid var(--premium-border,rgba(0,0,0,.1));
+  color:var(--premium-secondary,#6e6e73)!important;
+  font-size:.78rem!important;
+}
+.agri-case-playbook{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:24px;
+}
+.agri-case-playbook article{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  gap:11px;
+  padding:16px;
+  border:1px solid var(--premium-border,rgba(0,0,0,.1));
+  border-radius:16px;
+  background:var(--premium-surface-soft,#fbfbfd);
+}
+.agri-case-playbook article>b{
+  display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:9px;
+  background:#5d7f65;color:#fff;font-size:.75rem;
+}
+.dark .agri-case-playbook article>b{color:#08120b}
+.agri-case-playbook strong{font-size:.88rem}
+.agri-case-playbook p{margin-top:5px;font-size:.78rem!important;line-height:1.48!important}
+.agri-case-sources{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-top:24px;
+}
+.agri-case-sources a{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:10px;
+  padding:15px;
+  border:1px solid var(--premium-border,rgba(0,0,0,.1));
+  border-radius:15px;
+  color:var(--premium-text,#1d1d1f)!important;
+  background:var(--premium-surface-soft,#fbfbfd);
+  text-decoration:none!important;
+}
+.agri-case-sources a:hover{border-color:#5d7f65}
+.agri-case-sources strong{font-size:.85rem}
+.agri-case-sources p{margin-top:5px;font-size:.74rem!important;line-height:1.45!important}
+.agri-case-sources svg{width:16px;height:16px}
+.agri-case-caution{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:12px;
+  margin-top:18px;
+  padding:18px;
+  border:1px solid color-mix(in srgb,#5d7f65 40%,var(--premium-border,rgba(0,0,0,.1)));
+  border-radius:18px;
+  background:color-mix(in srgb,#5d7f65 7%,var(--premium-surface,#fff));
+}
+.agri-case-caution svg{width:20px;height:20px;color:#5d7f65}
+.agri-case-caution strong{display:block;font-size:.9rem}
+.agri-case-caution p{margin-top:5px;font-size:.78rem!important;line-height:1.5!important}
+.agri-case-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:44px;
+  margin-top:22px;
+  padding:0 16px;
+  border-radius:999px;
+  background:#5d7f65;
+  color:#fff!important;
+  text-decoration:none!important;
+  font-size:.84rem;
+  font-weight:650;
+}
+.dark .agri-case-cta{color:#08120b!important}
+.agri-case-cta svg{width:15px;height:15px}
+
+@media(max-width:900px){
+  .agri-case-hero{grid-template-columns:1fr}
+  .agri-case-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .agri-case-playbook,.agri-case-sources{grid-template-columns:1fr}
+}
+@media(max-width:580px){
+  .agri-case-stat-grid{grid-template-columns:1fr}
+  .agri-case-problems article{grid-template-columns:1fr}
+  .agri-case-hero{padding:24px}
+  .agri-case-panel{padding:20px}
+}
