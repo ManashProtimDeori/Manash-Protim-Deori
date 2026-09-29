@@ -231,7 +231,7 @@ export const toolsData: ToolItem[] = [
     name: 'Agri Commercial Intelligence & Value Creation Engine',
     category: 'Agribusiness Strategy, Marketing, Finance, Supply Chain & Decision Science',
     status: 'Live',
-    version: 'v1.0',
+    version: 'v1.1',
     description: 'A company-neutral agribusiness commercial digital twin connecting demand, pricing, agricultural input risk, FX, channels, portfolio economics, capacity, working capital, capital returns, scenario stress, sensitivity analysis and dynamic executive advisory.',
     instructions: 'Change commercial, macro, supply, pricing, distribution, capacity and balance-sheet variables; compare scenarios; inspect three-scale sensitivity, correlated risk simulation, root-cause decomposition, value-gap allocation and dynamic advisory. Demonstration inputs are public-reference and modeled assumptions; replace them with verified entity data before operational decisions.',
     features: [
@@ -244,6 +244,8 @@ export const toolsData: ToolItem[] = [
       'Twelve compound operating scenarios including FX shock, food inflation, commodity shock, freight disruption, cheap imports, price war, demand recovery, local sourcing and working-capital stress',
       'Three-scale ±5/±10/±20 sensitivity ranking with robust-lever stability across perturbation sizes',
       'Seeded correlated risk simulation using Cholesky decomposition and editable economic dependency assumptions',
+      'Relationship & correlation workspace separating modeled correlation priors from full-variable local impact sensitivities',
+      'Source-backed real-world agribusiness case study with public financial, macro, route-to-market and wheat-supply evidence',
       'Causal-hypothesis network separating public accounting mechanics from modeled commercial mechanisms',
       'Root-cause EBIT driver decomposition with controllability and confidence',
       'Marketing/pricing/channel/supply/finance/external value-gap allocation so marketing is never blamed for the entire economic gap',
@@ -255,6 +257,7 @@ export const toolsData: ToolItem[] = [
     technologies: ['React 19', 'TypeScript', 'Agribusiness Digital Twin', 'Financial Modeling', 'Sensitivity Analysis', 'Correlated Simulation', 'Decision Science', 'Causal Hypotheses', 'Responsive Data UI'],
     interactiveComponent: 'AgriCommercialIntelligenceEngine',
     changelog: [
+      { version: 'v1.1', date: '2026-09', notes: 'Improved premium UI consistency, corrected currency and EBIT/MT display, aligned variable controls, added relationship matrix, full-variable impact table and source-backed real-world case study' },
       { version: 'v1.0', date: '2026-09', notes: 'Initial production release with financial reconciliation, demand and supply engines, working capital, scenario lab, sensitivity, correlated simulation, root-cause analysis and dynamic executive advisory' }
     ]
   }
