@@ -15,11 +15,27 @@ import {
   evidenceRecords,
   pipelineVelocity,
   rankContent,
-  recommendationPortfolio,
   runSensitivitySuite,
   scenarioDelta,
   type GtmInputs,
 } from '../../../lib/drivetrainGtm';
+import {
+  applyStressScenario,
+  auditEvidence,
+  buildBoardMemo,
+  causalCentrality,
+  contextualDecisionPortfolio,
+  contextualReadiness,
+  designConversionExperiment,
+  evidenceHealth,
+  hypothesisRisk,
+  optimizeDecisionPortfolio,
+  pipelineDriverSensitivity,
+  simulateReadinessUncertainty,
+  stressScenarios,
+  type BusinessObjective,
+  type ExecutiveRole,
+} from '../../../lib/gtmAdvanced';
 
 type View =
   | 'Command Center'
@@ -30,12 +46,15 @@ type View =
   | 'GTM Ops'
   | 'Pricing & Experiments'
   | 'Sensitivity Lab'
+  | 'Causality & Stress'
+  | 'Experiment Lab'
   | 'Decision Lab'
+  | 'Board Room'
   | 'Evidence & Roadmap';
 
 const views:View[]=[
   'Command Center','Category','ICP & Buying','Demand','Adoption','GTM Ops',
-  'Pricing & Experiments','Sensitivity Lab','Decision Lab','Evidence & Roadmap'
+  'Pricing & Experiments','Sensitivity Lab','Causality & Stress','Experiment Lab','Decision Lab','Board Room','Evidence & Roadmap'
 ];
 
 const scoreTone=(value:number)=>value>=75?'good':value>=58?'watch':'risk';
@@ -75,15 +94,31 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
   const [winRate,setWinRate]=useState(22);
   const [acv,setAcv]=useState(48000);
   const [salesCycle,setSalesCycle]=useState(78);
+  const [objective,setObjective]=useState<BusinessObjective>('GROWTH');
+  const [role,setRole]=useState<ExecutiveRole>('CMO');
+  const [allocationBudget,setAllocationBudget]=useState(160);
+  const [experimentBaseline,setExperimentBaseline]=useState(20);
+  const [experimentLift,setExperimentLift]=useState(15);
 
   const constraints=useMemo(()=>calculateConstraints(inputs),[inputs]);
   const executive=useMemo(()=>calculateExecutiveScores(inputs),[inputs]);
-  const decisions=useMemo(()=>recommendationPortfolio(inputs),[inputs]);
+  const contextual=useMemo(()=>contextualReadiness(inputs,objective),[inputs,objective]);
+  const decisions=useMemo(()=>contextualDecisionPortfolio(inputs,objective,role),[inputs,objective,role]);
   const sensitivity=useMemo(()=>runSensitivitySuite(inputs,[5,10,20]),[inputs]);
+  const evidenceSnapshot=useMemo(()=>evidenceHealth(),[]);
+  const evidenceAudits=useMemo(()=>auditEvidence(),[]);
+  const centrality=useMemo(()=>causalCentrality(),[]);
+  const uncertainty=useMemo(()=>simulateReadinessUncertainty(inputs,800,20260929),[inputs]);
+  const stressResults=useMemo(()=>stressScenarios.map(scenario=>applyStressScenario(inputs,scenario)),[inputs]);
+  const allocation=useMemo(()=>optimizeDecisionPortfolio(inputs,objective,role,allocationBudget),[inputs,objective,role,allocationBudget]);
+  const experiment=useMemo(()=>designConversionExperiment(experimentBaseline,experimentLift,.05,.80),[experimentBaseline,experimentLift]);
+  const riskRegister=useMemo(()=>hypothesisRisk(inputs),[inputs]);
+  const boardMemo=useMemo(()=>buildBoardMemo(inputs,objective,role),[inputs,objective,role]);
   const rankedContent=useMemo(()=>rankContent(contentOpportunities),[]);
   const primary=constraints[0];
   const delta=useMemo(()=>scenarioDelta(defaultGtmInputs,inputs),[inputs]);
   const velocity=useMemo(()=>pipelineVelocity(opportunities,winRate,acv,salesCycle),[opportunities,winRate,acv,salesCycle]);
+  const velocitySensitivity=useMemo(()=>pipelineDriverSensitivity(opportunities,winRate,acv,salesCycle,10),[opportunities,winRate,acv,salesCycle]);
 
   const update=<K extends keyof GtmInputs>(key:K,value:GtmInputs[K])=>
     setInputs(current=>({...current,[key]:value}));
@@ -127,7 +162,7 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
         </article>
 
         <article className="dt-panel">
-          <SectionHead eyebrow="System Readiness" title={executive.readiness+'/100'} copy={'Weighted '+executive.weightedReadiness+'/100 · coherence '+executive.coherenceReadiness+'/100 · weakest pillar '+executive.weakestPillar+'/100'}/>
+          <SectionHead eyebrow="System Readiness" title={executive.readiness+'/100'} copy={'Objective-adjusted '+contextual.score+'/100 · weighted '+executive.weightedReadiness+'/100 · coherence '+executive.coherenceReadiness+'/100 · weakest pillar '+executive.weakestPillar+'/100'}/>
           <div className="dt-readiness-list">
             {[
               ['Category',executive.category,delta.category],
@@ -495,10 +530,143 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
     </div>
   );
 
+  const renderCausality=()=>(
+    <div className="dt-stack">
+      <section className="dt-grid-2">
+        <article className="dt-panel">
+          <SectionHead eyebrow="Uncertainty Engine" title={'Readiness P10 '+uncertainty.p10.toFixed(1)+' · P50 '+uncertainty.p50.toFixed(1)+' · P90 '+uncertainty.p90.toFixed(1)} copy={uncertainty.assumption}/>
+          <div className="dt-uncertainty-band">
+            <span>P10 {uncertainty.p10.toFixed(1)}</span>
+            <div><i style={{left:Math.max(0,uncertainty.p10)+'%',width:Math.max(2,uncertainty.p90-uncertainty.p10)+'%'}}/><b style={{left:Math.max(0,uncertainty.p50)+'%'}}/></div>
+            <span>P90 {uncertainty.p90.toFixed(1)}</span>
+          </div>
+          <div className="dt-robustness-strip compact">
+            <div><span>Downside &gt;5 pts</span><strong>{uncertainty.downsideProbability.toFixed(1)}%</strong><p>Stress-model frequency below baseline minus five.</p></div>
+            <div><span>Upside &gt;5 pts</span><strong>{uncertainty.upsideProbability.toFixed(1)}%</strong><p>Stress-model frequency above baseline plus five.</p></div>
+            <div><span>Runs</span><strong>{uncertainty.runs}</strong><p>Seeded and reproducible.</p></div>
+          </div>
+        </article>
+        <article className="dt-panel">
+          <SectionHead eyebrow="Primary-Constraint Probability" title="Which bottleneck survives parameter uncertainty?"/>
+          <div className="dt-probability-list">
+            {uncertainty.primaryConstraintProbabilities.slice(0,6).map(row=><div key={row.key}><span>{row.key.replace(/([A-Z])/g,' $1')}</span><div><i style={{width:row.probability+'%'}}/></div><strong>{row.probability.toFixed(1)}%</strong></div>)}
+          </div>
+        </article>
+      </section>
+
+      <section className="dt-panel">
+        <SectionHead eyebrow="Causal Hypothesis Graph" title="Separate mathematical influence from causal claims" copy="Edges are explicitly labeled as modeled mechanisms until validated with observed data or experiments."/>
+        <div className="dt-table-wrap">
+          <table className="dt-table">
+            <thead><tr><th>Driver</th><th>Direct impact</th><th>Second-order</th><th>Centrality</th><th>Outgoing edges</th></tr></thead>
+            <tbody>{centrality.slice(0,10).map(row=><tr key={row.key}>
+              <td><strong>{row.key.replace(/([A-Z])/g,' $1')}</strong></td>
+              <td>{row.directImpact.toFixed(2)}</td><td>{row.secondOrderImpact.toFixed(2)}</td><td><b>{row.centrality.toFixed(2)}</b></td><td>{row.outgoing}</td>
+            </tr>)}</tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="dt-panel">
+        <SectionHead eyebrow="Stress Scenarios" title="Recalculate the GTM system under adverse and upside regimes"/>
+        <div className="dt-stress-grid">
+          {stressResults.map(result=><article key={result.scenario.id}>
+            <span>{result.delta>=0?'UPSIDE / RECOVERY':'DOWNSIDE'}</span>
+            <strong>{result.scenario.name}</strong>
+            <p>{result.scenario.description}</p>
+            <div><b>{result.after.readiness}/100</b><em>{result.delta>=0?'+':''}{result.delta} readiness</em></div>
+            <small>Primary constraint: {result.primaryConstraint.label}</small>
+          </article>)}
+        </div>
+      </section>
+    </div>
+  );
+
+  const renderExperimentLab=()=>(
+    <div className="dt-stack">
+      <section className="dt-grid-2">
+        <article className="dt-panel">
+          <SectionHead eyebrow="Experiment Design" title="Size tests before interpreting noise as learning" copy="Approximate two-proportion design using α=0.05 and 80% power."/>
+          <div className="dt-pipeline-controls">
+            <label><span>Baseline conversion %</span><input type="number" min={1} max={99} step={.1} value={experimentBaseline} onChange={e=>setExperimentBaseline(Math.max(1,Math.min(99,Number(e.target.value))))}/></label>
+            <label><span>Minimum detectable lift %</span><input type="number" min={1} max={200} step={1} value={experimentLift} onChange={e=>setExperimentLift(Math.max(1,Number(e.target.value)))}/></label>
+          </div>
+          <div className="dt-experiment-summary">
+            <div><span>Target rate</span><strong>{experiment.targetRatePct.toFixed(2)}%</strong></div>
+            <div><span>Sample / arm</span><strong>{experiment.samplePerArm.toLocaleString()}</strong></div>
+            <div><span>Total sample</span><strong>{experiment.totalSample.toLocaleString()}</strong></div>
+          </div>
+          <p className="dt-boundary">{experiment.interpretation}</p>
+        </article>
+
+        <article className="dt-panel">
+          <SectionHead eyebrow="Resource Allocation Optimizer" title={'Capacity '+allocation.usedBudget+'/'+allocation.budget}/>
+          <label className="dt-slider"><div><span>Decision capacity budget</span><strong>{allocationBudget}</strong></div><input type="range" min={60} max={300} step={5} value={allocationBudget} onChange={e=>setAllocationBudget(Number(e.target.value))}/><small>Relative resource units, not currency.</small></label>
+          <div className="dt-allocation-list">
+            {allocation.selected.map(item=><div key={item.id}><CheckCircle2/><div><strong>{item.title}</strong><span>{item.route} · score {item.score} · cost {item.cost}</span></div></div>)}
+          </div>
+          <p className="dt-boundary">Remaining capacity {allocation.remainingBudget}. Optimizer maximizes evidence-adjusted decision utility under the resource constraint.</p>
+        </article>
+      </section>
+
+      <section className="dt-panel">
+        <SectionHead eyebrow="Pipeline Driver Sensitivity" title="Exact formula sensitivity before causal interpretation"/>
+        <div className="dt-table-wrap">
+          <table className="dt-table">
+            <thead><tr><th>Driver</th><th>Baseline / day</th><th>+10% driver</th><th>−10% driver</th><th>Upside %</th><th>Downside %</th></tr></thead>
+            <tbody>{velocitySensitivity.map(row=><tr key={row.driver}>
+              <td><strong>{row.driver}</strong></td>
+              <td>{row.baseline.toFixed(0)}</td><td>{row.up.toFixed(0)}</td><td>{row.down.toFixed(0)}</td>
+              <td className="dt-positive">+{row.upsidePct.toFixed(1)}%</td><td className="dt-negative">{row.downsidePct.toFixed(1)}%</td>
+            </tr>)}</tbody>
+          </table>
+        </div>
+        <p className="dt-boundary">Formula sensitivity answers “what changes mathematically if this input changes?” It does not prove that marketing can independently cause the input to change.</p>
+      </section>
+    </div>
+  );
+
+  const renderBoardRoom=()=>(
+    <div className="dt-stack">
+      <section className="dt-panel dt-board-hero">
+        <SectionHead eyebrow="Executive Board Room" title={boardMemo.headline} copy={'Decision lens: '+role+' · objective: '+objective}/>
+        <div className="dt-board-metrics">
+          <div><span>Readiness</span><strong>{boardMemo.readiness}/100</strong></div>
+          <div><span>Evidence health</span><strong>{boardMemo.evidenceHealth}/100</strong></div>
+          <div><span>Uncertainty</span><strong>{boardMemo.uncertainty.p10.toFixed(0)}–{boardMemo.uncertainty.p90.toFixed(0)}</strong></div>
+          <div><span>Primary constraint</span><strong>{boardMemo.primaryConstraint}</strong></div>
+        </div>
+      </section>
+
+      <section className="dt-grid-2">
+        <article className="dt-panel">
+          <SectionHead eyebrow="Recommended Decisions" title="Highest evidence-adjusted actions"/>
+          <div className="dt-board-list">{boardMemo.topDecisions.map((item,index)=><div key={item.title}><b>{index+1}</b><div><strong>{item.title}</strong><span>{item.route} · score {item.score}</span></div></div>)}</div>
+        </article>
+        <article className="dt-panel">
+          <SectionHead eyebrow="Robust Levers" title="Drivers that survive sensitivity"/>
+          <div className="dt-board-list">{boardMemo.robustLevers.map((item,index)=><div key={item}><b>{index+1}</b><div><strong>{item}</strong><span>Stable across multi-scale perturbations</span></div></div>)}</div>
+        </article>
+      </section>
+
+      <section className="dt-grid-2">
+        <article className="dt-panel">
+          <SectionHead eyebrow="Hypothesis Risk Register" title="What could make the strategy wrong?"/>
+          <div className="dt-risk-list">{riskRegister.slice(0,5).map(item=><div key={item.id}><span>{item.risk}</span><div><strong>{item.hypothesis}</strong><p><b>Falsifier:</b> {item.falsifier}</p><p><b>Next test:</b> {item.nextTest}</p></div></div>)}</div>
+        </article>
+        <article className="dt-panel">
+          <SectionHead eyebrow="Stress Watch" title="Most material modeled regime changes"/>
+          <div className="dt-board-list">{boardMemo.stressWatch.map((item,index)=><div key={item.name}><b>{index+1}</b><div><strong>{item.name}</strong><span>{item.delta>=0?'+':''}{item.delta} readiness points</span></div></div>)}</div>
+          <p className="dt-boundary"><b>Decision falsifier:</b> {boardMemo.falsifier}</p>
+        </article>
+      </section>
+    </div>
+  );
+
   const renderDecisions=()=>(
     <div className="dt-stack">
       <section className="dt-panel">
-        <SectionHead eyebrow="Executive Decision Engine" title="Route uncertainty instead of hiding it" copy="Impact, evidence confidence, urgency, reversibility, cost, dependency, downside and value of information determine whether an initiative should be acted on, tested, prepared, watched or ignored."/>
+        <SectionHead eyebrow="Executive Decision Engine" title="Route uncertainty instead of hiding it" copy={'Lens: '+role+' · objective: '+objective+'. Impact, evidence confidence, urgency, reversibility, cost, dependency, downside and value of information determine the route.'}/>
         <div className="dt-decision-columns">
           {(['ACT NOW','TEST','PREPARE','WATCH','IGNORE FOR NOW'] as const).map(route=><div key={route}>
             <h4>{route}</h4>
@@ -524,13 +692,14 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
   const renderEvidence=()=>(
     <div className="dt-stack">
       <section className="dt-panel">
-        <SectionHead eyebrow="Evidence Registry" title="Every material conclusion carries provenance and a boundary"/>
+        <SectionHead eyebrow="Evidence Registry" title="Every material conclusion carries provenance and a boundary" copy={'Evidence health '+evidenceSnapshot.health+'/100 · calibrated confidence '+evidenceSnapshot.calibratedConfidence+'/100 · independent coverage '+evidenceSnapshot.independentCoverage+'%'}/>
         <div className="dt-evidence-list">
           {evidenceRecords.map(record=><article key={record.id} className={activeEvidence===record.id?'active':''} onClick={()=>setActiveEvidence(activeEvidence===record.id?null:record.id)}>
-            <div><Tag tone={record.status.includes('MODELED')?'model':record.status.includes('INFERENCE')?'inference':'fact'}>{record.status}</Tag><strong>{record.claim}</strong><span>Confidence {record.confidence}</span></div>
+            <div><Tag tone={record.status.includes('MODELED')?'model':record.status.includes('INFERENCE')?'inference':'fact'}>{record.status}</Tag><strong>{record.claim}</strong><span>Calibrated {evidenceAudits.find(row=>row.recordId===record.id)?.calibratedConfidence ?? record.confidence}</span></div>
             {activeEvidence===record.id&&<div className="dt-evidence-detail">
               <p><b>Source:</b> {record.source}</p><p><b>Published:</b> {record.published}</p>
               <p><b>Independent:</b> {record.independent?'Yes':'No / company-controlled'}</p><p><b>Boundary:</b> {record.note}</p>
+              <p><b>Calibration:</b> {evidenceAudits.find(row=>row.recordId===record.id)?.limitation}</p>
               {record.url&&<a href={record.url} target="_blank" rel="noreferrer">Open public source ↗</a>}
             </div>}
           </article>)}
@@ -561,7 +730,10 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
     if(view==='GTM Ops')return renderGtmOps();
     if(view==='Pricing & Experiments')return renderPricing();
     if(view==='Sensitivity Lab')return renderSensitivity();
+    if(view==='Causality & Stress')return renderCausality();
+    if(view==='Experiment Lab')return renderExperimentLab();
     if(view==='Decision Lab')return renderDecisions();
+    if(view==='Board Room')return renderBoardRoom();
     return renderEvidence();
   };
 
@@ -585,6 +757,13 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
       <AlertTriangle/>
       <p><strong>Independent analysis.</strong> Not affiliated with or commissioned by Drivetrain. Public-source evidence and clearly labeled modeled assumptions. Scenario outputs are decision aids, not claims about Drivetrain’s private performance.</p>
     </div>
+
+    <section className="dt-context-bar" aria-label="Decision context">
+      <label><span>Decision lens</span><select value={role} onChange={e=>setRole(e.target.value as ExecutiveRole)}>{(['CEO','CMO','CFO','CRO','PRODUCT MARKETING','GROWTH'] as ExecutiveRole[]).map(value=><option key={value} value={value}>{value}</option>)}</select></label>
+      <label><span>Business objective</span><select value={objective} onChange={e=>setObjective(e.target.value as BusinessObjective)}>{(['GROWTH','EFFICIENCY','RETENTION','CATEGORY LEADERSHIP'] as BusinessObjective[]).map(value=><option key={value} value={value}>{value}</option>)}</select></label>
+      <div><span>Objective readiness</span><strong>{contextual.score}/100</strong></div>
+      <div><span>Evidence health</span><strong>{evidenceSnapshot.health}/100</strong></div>
+    </section>
 
     <nav className="dt-tabs" aria-label="GTM Intelligence Engine modules">
       {views.map(item=><button key={item} className={view===item?'active':''} onClick={()=>setView(item)}>{item}</button>)}
