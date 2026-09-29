@@ -18,7 +18,7 @@ export const WritingPage: React.FC = () => {
             Evidence-led essays · industry intelligence
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Writing
+            Ideas for better marketing decisions
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
             Research-backed essays on marketing, AI, strategy and decision systems.
