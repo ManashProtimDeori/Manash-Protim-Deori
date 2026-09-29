@@ -13,6 +13,9 @@ import {
   optimizeDecisionPortfolio,
   hypothesisRisk,
   buildBoardMemo,
+  buildDecisionTriggers,
+  counterfactualActionImpact,
+  experimentFeasibility,
 } from '../src/lib/gtmAdvanced';
 import {
   assessDecision,
@@ -205,4 +208,22 @@ assert.ok(memo.uncertainty.p10<=memo.uncertainty.p50&&memo.uncertainty.p50<=memo
 assert.ok(memo.topDecisions.length>0);
 assert.ok(memo.topRisks.length>0);
 
-console.log('PASS: GTM Intelligence Engine decision-science, experimentation and board-intelligence tests.');
+
+const counterfactual=counterfactualActionImpact(defaultGtmInputs,strongAction,10);
+assert.ok(Number.isFinite(counterfactual.readinessGain));
+assert.ok(counterfactual.counterfactualReadiness>=0&&counterfactual.counterfactualReadiness<=100);
+assert.throws(()=>counterfactualActionImpact(defaultGtmInputs,strongAction,0),/Counterfactual step/);
+
+const feasiblePlan=experimentFeasibility(experiment,100000,12);
+assert.ok(feasiblePlan.estimatedWeeks>0);
+assert.equal(feasiblePlan.feasibleWithinWindow,true);
+const underpoweredPlan=experimentFeasibility(experiment,1,1);
+assert.equal(underpoweredPlan.feasibleWithinWindow,false);
+assert.ok(underpoweredPlan.trafficGap>0);
+
+const triggers=buildDecisionTriggers(defaultGtmInputs,'GROWTH','CMO');
+assert.equal(triggers.length,contextual.length);
+assert.ok(triggers.every(row=>['TRIGGERED','NEAR','CLEAR'].includes(row.status)));
+assert.ok(triggers.every(row=>['WEEKLY','MONTHLY','QUARTERLY'].includes(row.cadence)));
+
+console.log('PASS: GTM Intelligence Engine advanced decision-science, sensitivity, experiments and governance tests.');
