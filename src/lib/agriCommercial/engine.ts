@@ -90,14 +90,17 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
   );
 
   const modeledVolumeMt=baseline.volumeMt*demandFactor;
-  const availabilityFactor=clamp(
+  const rawAvailability=
     .55+
     input.weightedDistribution/100*.22+
     input.onShelfAvailability/100*.18+
-    input.fillRatePct/100*.05,
-    .25,
-    1.05
-  );
+    input.fillRatePct/100*.05;
+  const baselineAvailability=
+    .55+
+    baseline.weightedDistribution/100*.22+
+    baseline.onShelfAvailability/100*.18+
+    baseline.fillRatePct/100*.05;
+  const availabilityFactor=clamp(safe(rawAvailability,baselineAvailability),.55,1.18);
 
   const grossRevenue=modeledVolumeMt*safe(baseline.revenue,baseline.volumeMt)*(input.priceIndex/100)*availabilityFactor;
 
@@ -143,17 +146,31 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
     badDebtCost+
     operatingLeverageAdj;
 
-  const baselineFixed=Math.max(0,baseline.revenue-baseline.ebit-baseline.revenue*.86);
-  const fixedManufacturing=baselineFixed*utilizationPenalty;
+  const baselinePromoEfficiency=clamp(
+    (baseline.promoIncrementalityPct/100)*(1-baseline.cannibalizationPct/100),
+    0,
+    1
+  );
+  const baselineTradeSpend=baseline.revenue*(baseline.tradeSpendPctRevenue/100);
+  const baselineEffectiveTradeCost=baselineTradeSpend*(1-.32*baselinePromoEfficiency);
+  const baselineContribution=
+    baseline.revenue-
+    baseline.revenue*.78-
+    baseline.revenue*.045-
+    baselineEffectiveTradeCost-
+    baseline.revenue*(baseline.marketingSpendPctRevenue/100)-
+    baseline.revenue*(baseline.badDebtPctRevenue/100);
+  const calibratedFixedCost=Math.max(0,baselineContribution-baseline.ebit);
+  const fixedManufacturing=calibratedFixedCost*utilizationPenalty;
   const ebit=contribution-fixedManufacturing;
   const netRevenue=grossRevenue-tradeSpend;
   const ebitMarginPct=safe(ebit,netRevenue)*100;
   const ebitPerMt=safe(ebit,modeledVolumeMt);
 
   const revenueRatio=safe(netRevenue,baseline.revenue);
-  const inventory=baseline.workingCapital*.46*revenueRatio*(input.dioDays/baseline.dioDays);
-  const receivables=baseline.workingCapital*.48*revenueRatio*(input.dsoDays/baseline.dsoDays);
-  const payables=baseline.workingCapital*.28*revenueRatio*(input.dpoDays/baseline.dpoDays);
+  const inventory=baseline.workingCapital*.55*revenueRatio*(input.dioDays/baseline.dioDays);
+  const receivables=baseline.workingCapital*.65*revenueRatio*(input.dsoDays/baseline.dsoDays);
+  const payables=baseline.workingCapital*.20*revenueRatio*(input.dpoDays/baseline.dpoDays);
   const workingCapital=inventory+receivables-payables;
 
   const capacityCapitalPenalty=Math.max(0,input.capacityUtilizationPct-92)*.004*baseline.investedCapital;
