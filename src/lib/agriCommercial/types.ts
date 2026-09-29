@@ -119,7 +119,7 @@ export type EvidenceRecord={
 };
 
 export const referenceAgriInputs:AgriInputs={
-  currency:'S$',
+  currency:'SGD',
   revenue:37397.4,
   volumeMt:53.7,
   ebit:923.5,
