@@ -528,3 +528,82 @@
     animation:none!important;
   }
 }
+
+
+/* v4 operational governance, exports and feasibility */
+.dt-board-headline-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:18px;
+  align-items:start;
+}
+.dt-export-button{
+  min-height:40px;
+  padding:9px 12px;
+  border:1px solid color-mix(in srgb,var(--accent) 58%,var(--dt-line));
+  border-radius:8px;
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  color:var(--dt-text);
+  font:700 var(--dt-font-xs)/1 var(--font-mono);
+  white-space:nowrap;
+}
+.dt-export-button:hover{background:color-mix(in srgb,var(--accent) 15%,transparent)}
+.dt-export-button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dt-trigger-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:18px;
+}
+.dt-trigger-grid article{
+  min-width:0;
+  padding:13px;
+  border:1px solid var(--dt-line);
+  border-radius:9px;
+  background:color-mix(in srgb,var(--bg-primary) 76%,transparent);
+}
+.dt-trigger-grid article.status-triggered{border-color:color-mix(in srgb,#b97827 68%,var(--dt-line))}
+.dt-trigger-grid article.status-near{border-color:color-mix(in srgb,#8a6cbd 54%,var(--dt-line))}
+.dt-trigger-grid article.status-clear{border-color:color-mix(in srgb,#2f8a68 48%,var(--dt-line))}
+.dt-trigger-grid article>div{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
+}
+.dt-trigger-grid article>div>span:last-child{
+  font:700 var(--dt-font-xs)/1 var(--font-mono);
+  color:var(--dt-muted);
+}
+.dt-trigger-grid strong{
+  display:block;
+  margin-top:9px;
+  font-size:var(--dt-font-sm);
+  line-height:1.42;
+}
+.dt-trigger-grid p{
+  margin-top:7px;
+  font-size:var(--dt-font-sm)!important;
+  line-height:1.5!important;
+}
+.dt-trigger-grid small{
+  display:block;
+  margin-top:7px;
+  font-size:var(--dt-font-xs)!important;
+  line-height:1.45!important;
+  color:var(--dt-muted);
+}
+.dt-experiment-summary{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.light .dt-trigger-grid article{background:#fff;border-color:#c4ccd6}
+.dark .dt-trigger-grid article{background:#101820;border-color:#435166}
+@media(max-width:980px){
+  .dt-trigger-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dt-board-headline-row{grid-template-columns:1fr}
+  .dt-export-button{justify-self:start}
+}
+@media(max-width:640px){
+  .dt-trigger-grid{grid-template-columns:1fr}
+  .dt-export-button{width:100%}
+}
