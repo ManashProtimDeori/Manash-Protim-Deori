@@ -9,6 +9,10 @@ import {
   pipelineDriverSensitivity,
   simulateReadinessUncertainty,
   stressScenarios,
+  designConversionExperiment,
+  optimizeDecisionPortfolio,
+  hypothesisRisk,
+  buildBoardMemo,
 } from '../src/lib/gtmAdvanced';
 import {
   assessDecision,
@@ -175,4 +179,30 @@ const pipelineSensitivity=pipelineDriverSensitivity(10,20,50000,50,10);
 assert.equal(pipelineSensitivity.length,4);
 assert.ok(pipelineSensitivity.every(row=>Number.isFinite(row.upsidePct)&&Number.isFinite(row.downsidePct)));
 
-console.log('PASS: GTM Intelligence Engine deterministic, contextual, causal and uncertainty tests.');
+
+const experiment=designConversionExperiment(20,15,.05,.80);
+assert.ok(experiment.samplePerArm>0);
+assert.equal(experiment.totalSample,experiment.samplePerArm*2);
+assert.ok(experiment.targetRatePct>experiment.baselineRatePct);
+assert.throws(()=>designConversionExperiment(0,15),/Baseline rate/);
+
+const allocation=optimizeDecisionPortfolio(defaultGtmInputs,'GROWTH','CMO',160);
+assert.ok(allocation.usedBudget<=allocation.budget);
+assert.equal(allocation.remainingBudget,allocation.budget-allocation.usedBudget);
+assert.ok(allocation.selected.length>0);
+assert.ok(allocation.totalUtility>0);
+assert.throws(()=>optimizeDecisionPortfolio(defaultGtmInputs,'GROWTH','CMO',5),/Budget/);
+
+const risks=hypothesisRisk(defaultGtmInputs);
+assert.ok(risks.length>=5);
+assert.ok(risks.every(row=>row.risk>=0&&row.risk<=100));
+for(let i=1;i<risks.length;i++) assert.ok(risks[i-1].risk>=risks[i].risk);
+
+const memo=buildBoardMemo(defaultGtmInputs,'GROWTH','CEO');
+assert.ok(memo.readiness>=0&&memo.readiness<=100);
+assert.ok(memo.evidenceHealth>=0&&memo.evidenceHealth<=100);
+assert.ok(memo.uncertainty.p10<=memo.uncertainty.p50&&memo.uncertainty.p50<=memo.uncertainty.p90);
+assert.ok(memo.topDecisions.length>0);
+assert.ok(memo.topRisks.length>0);
+
+console.log('PASS: GTM Intelligence Engine decision-science, experimentation and board-intelligence tests.');
