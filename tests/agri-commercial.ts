@@ -28,6 +28,7 @@ import {
   buildBoardState,
   buildDecisionPortfolio,
 } from '../src/lib/agriCommercial/decision';
+import { buildVariableImpactTable } from '../src/lib/agriCommercial/relationships';
 
 const approx=(actual:number,expected:number,tolerance=1e-6)=>{
   assert.ok(Math.abs(actual-expected)<=tolerance,'expected '+expected+', got '+actual);
@@ -130,6 +131,12 @@ assert.ok(decisions.length>=1);
 assert.ok(decisions.every(d=>d.score>=0&&d.score<=100));
 assert.ok(decisions.every(d=>['ACT NOW','TEST','PREPARE','WATCH','NO ACTION'].includes(d.route)));
 
+const relationships=buildVariableImpactTable(referenceAgriInputs);
+assert.equal(relationships.length,Object.keys(referenceAgriInputs).length-1);
+assert.ok(relationships.some(row=>row.key==='fxIndex'&&row.direction!=='REFERENCE ONLY'));
+assert.ok(relationships.some(row=>row.key==='revenue'&&row.direction==='REFERENCE ONLY'));
+assert.ok(relationships.every(row=>Number.isFinite(row.baseline)));
+
 const board=buildBoardState(referenceAgriInputs);
 assert.ok(board.output);
 assert.ok(board.sensitivity.iterations.length===3);
@@ -140,4 +147,4 @@ assert.throws(()=>runSensitivity(referenceAgriInputs,0),/Sensitivity step/);
 assert.throws(()=>runCorrelatedSimulation(referenceAgriInputs,100,42),/Simulation runs/);
 assert.throws(()=>calculateCommercialFinancials({...referenceAgriInputs,localSourcingPct:50}),/sum to approximately 100/);
 
-console.log('PASS: Agri Commercial Intelligence & Value Creation Engine deterministic, scenario, sensitivity, simulation and advisory tests.');
+console.log('PASS: Agri Commercial Intelligence & Value Creation Engine deterministic, relationship, scenario, sensitivity, simulation and advisory tests.');
