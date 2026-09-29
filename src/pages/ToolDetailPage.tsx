@@ -8,6 +8,7 @@ import { PositioningMatrixTool } from '../components/tools/PositioningMatrixTool
 import { BriefGenerator } from '../components/tools/BriefGenerator';
 import { MarketSignalOS } from '../components/tools/marketsignal/MarketSignalOS';
 import { HillChainTwin } from '../components/tools/hillchain/HillChainTwin';
+import { DrivetrainGTMIntelligenceTwin } from '../components/tools/drivetrain/DrivetrainGTMIntelligenceTwin';
 import { ArrowLeft } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 import '../components/tools/ToolsPremium.css';
@@ -35,13 +36,15 @@ export const ToolDetailPage: React.FC = () => {
         return <MarketSignalOS />;
       case 'hillchain-twin':
         return <HillChainTwin />;
+      case 'drivetrain-gtm-intelligence-twin':
+        return <DrivetrainGTMIntelligenceTwin />;
       default:
         return <RoiCalculator />;
     }
   };
 
   return (
-    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'roi-calculator' || toolItem.slug === 'utm-builder' || toolItem.slug === 'positioning-analyser' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
+    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'roi-calculator' || toolItem.slug === 'utm-builder' || toolItem.slug === 'positioning-analyser' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' || toolItem.slug === 'drivetrain-gtm-intelligence-twin' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
       {/* Back Link & Edit */}
       <div className="tools-premium-backbar mb-8 flex items-center justify-between">
         <Link

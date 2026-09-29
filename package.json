@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "npm run test:economics && npm run test:measurement && npm run test:positioning && npm run test:intelligence && vite build",
+    "build": "npm run test:economics && npm run test:measurement && npm run test:positioning && npm run test:intelligence && npm run test:drivetrain && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit && tsc -p api/tsconfig.json --noEmit",
@@ -13,7 +13,8 @@
     "verify": "npm run lint && npm run build",
     "test:measurement": "tsx tests/marketing-measurement.ts",
     "test:positioning": "tsx tests/positioning-icp.ts",
-    "test:intelligence": "tsx tests/intelligence-engine.ts"
+    "test:intelligence": "tsx tests/intelligence-engine.ts",
+    "test:drivetrain": "tsx tests/drivetrain-gtm.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

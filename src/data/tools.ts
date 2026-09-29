@@ -180,5 +180,35 @@ export const toolsData: ToolItem[] = [
     changelog: [
       { version: 'v1.0', date: '2026-09', notes: 'Initial HillChain Twin release with digital-twin network, financial, risk, inventory, tariff, resilience and infrastructure-planning modules' }
     ]
+  },
+  {
+    id: 'tool-7',
+    slug: 'drivetrain-gtm-intelligence-twin',
+    name: 'Drivetrain GTM Intelligence Twin',
+    category: 'B2B SaaS Strategy, Product Marketing & GTM Intelligence',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'An independent evidence-based GTM digital twin for Drivetrain AI that connects category strategy, ICP, demand generation, product adoption, GTM operations, pricing, experimentation and executive decision science without presenting modeled assumptions as private company facts.',
+    instructions: 'Use the command center to stress-test category distinctiveness, ICP precision, proof, organic demand, evaluation friction, adoption depth, pricing confidence and GTM reliability. Explore category, buying committee, demand engine, product adoption, pipeline economics, pricing/experiments, evidence registry and the evidence-adjusted decision portfolio.',
+    features: [
+      'Constraint engine ranking GTM bottlenecks using performance gap × strategic weight × downstream centrality × evidence confidence',
+      'Executive readiness model across category, demand, conversion, lifecycle and operating-system health',
+      'Competitor category-language and message-convergence matrix with explicit modeled-assumption labels',
+      'ICP intelligence separating fit, urgency, adoption feasibility and proof instead of collapsing them into one score',
+      'Buying committee and evaluation-friction architecture for CFO, FP&A, Controller, IT/Security, Procurement and business stakeholders',
+      'Demand creation vs demand capture operating model plus content portfolio prioritization and AI discovery authority logic',
+      'Product adoption and expansion flywheel linking time-to-value, usage depth, proof creation and lifecycle growth',
+      'GTM operations reliability model and interactive pipeline velocity calculator',
+      'Pricing and packaging research architecture with willingness-to-pay dimensions and segment logic',
+      'Experimentation lab for positioning, interactive sandbox, pricing, benchmark research, customer proof and POC redesign',
+      'Evidence-adjusted decision engine routing initiatives into ACT NOW, TEST, PREPARE, WATCH or IGNORE FOR NOW using impact, confidence, urgency, reversibility, cost, dependency, downside and value of information',
+      'Public-source evidence registry with provenance, status, confidence, independence and analytical boundaries',
+      '30 / 90 / 365-day commercial roadmap and deterministic tests for scoring, routing, content ranking and pipeline formulas'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Evidence Modeling', 'Constraint Analysis', 'Decision Science', 'GTM Economics', 'Scenario Modeling', 'Responsive Data UI'],
+    interactiveComponent: 'DrivetrainGTMIntelligenceTwin',
+    changelog: [
+      { version: 'v1.0', date: '2026-09', notes: 'Initial release with GTM constraint engine, category intelligence, ICP, demand, adoption, GTM operations, pricing, experimentation, evidence registry and decision portfolio' }
+    ]
   }
 ];
