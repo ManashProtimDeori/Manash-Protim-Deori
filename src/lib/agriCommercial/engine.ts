@@ -102,7 +102,9 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
     baseline.fillRatePct/100*.05;
   const availabilityFactor=clamp(safe(rawAvailability,baselineAvailability),.55,1.18);
 
-  const grossRevenue=modeledVolumeMt*safe(baseline.revenue,baseline.volumeMt)*(input.priceIndex/100)*availabilityFactor;
+  const targetNetRevenue=modeledVolumeMt*safe(baseline.revenue,baseline.volumeMt)*(input.priceIndex/100)*availabilityFactor;
+  const tradeRate=clamp(input.tradeSpendPctRevenue/100,0,.49);
+  const grossRevenue=safe(targetNetRevenue,1-tradeRate);
 
   const importedInputCostIndex=
     input.importedDeliveredCostIndex*
@@ -123,11 +125,12 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
       ? 1+(input.capacityUtilizationPct-95)*.002
       : 1;
 
-  const variableCost=grossRevenue*clamp(.78*normalizedCostPressure*.82+.78*.18,.35,1.35);
-  const logisticsCost=grossRevenue*clamp(.045*(input.freightIndex/100)*(.85+.15*(100-input.fillRatePct)/100),.01,.18);
-  const tradeSpend=grossRevenue*(input.tradeSpendPctRevenue/100);
-  const marketingSpend=grossRevenue*(input.marketingSpendPctRevenue/100);
-  const badDebtCost=grossRevenue*(input.badDebtPctRevenue/100);
+  const netRevenue=targetNetRevenue;
+  const variableCost=netRevenue*clamp(.78*normalizedCostPressure*.82+.78*.18,.35,1.35);
+  const logisticsCost=netRevenue*clamp(.045*(input.freightIndex/100)*(.85+.15*(100-input.fillRatePct)/100),.01,.18);
+  const tradeSpend=grossRevenue*tradeRate;
+  const marketingSpend=netRevenue*(input.marketingSpendPctRevenue/100);
+  const badDebtCost=netRevenue*(input.badDebtPctRevenue/100);
 
   const promoEfficiency=clamp(
     (input.promoIncrementalityPct/100)*(1-input.cannibalizationPct/100),
@@ -151,10 +154,12 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
     0,
     1
   );
-  const baselineTradeSpend=baseline.revenue*(baseline.tradeSpendPctRevenue/100);
+  const baselineTradeRate=baseline.tradeSpendPctRevenue/100;
+  const baselineGrossRevenue=safe(baseline.revenue,1-baselineTradeRate);
+  const baselineTradeSpend=baselineGrossRevenue*baselineTradeRate;
   const baselineEffectiveTradeCost=baselineTradeSpend*(1-.32*baselinePromoEfficiency);
   const baselineContribution=
-    baseline.revenue-
+    baselineGrossRevenue-
     baseline.revenue*.78-
     baseline.revenue*.045-
     baselineEffectiveTradeCost-
@@ -163,7 +168,6 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
   const calibratedFixedCost=Math.max(0,baselineContribution-baseline.ebit);
   const fixedManufacturing=calibratedFixedCost*utilizationPenalty;
   const ebit=contribution-fixedManufacturing;
-  const netRevenue=grossRevenue-tradeSpend;
   const ebitMarginPct=safe(ebit,netRevenue)*100;
   const ebitPerMt=safe(ebit,modeledVolumeMt);
 
