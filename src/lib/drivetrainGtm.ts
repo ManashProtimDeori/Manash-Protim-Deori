@@ -50,12 +50,52 @@ export type ConstraintRow = {
   constraintImpact:number;
 };
 
+export type GtmInputKey=keyof GtmInputs;
+
+export type SensitivityRow={
+  key:GtmInputKey;
+  label:string;
+  step:number;
+  baselineReadiness:number;
+  improvedReadiness:number;
+  worsenedReadiness:number;
+  upside:number;
+  downside:number;
+  swing:number;
+  effectPerPoint:number;
+  rank:number;
+};
+
+export type SensitivityIteration={
+  step:number;
+  rows:SensitivityRow[];
+};
+
+export type RobustLever={
+  key:GtmInputKey;
+  label:string;
+  averageRank:number;
+  rankSpread:number;
+  averageUpside:number;
+  averageDownside:number;
+  averageEffectPerPoint:number;
+  stability:'HIGH'|'MEDIUM'|'LOW';
+};
+
+export type SensitivitySuite={
+  iterations:SensitivityIteration[];
+  robustLevers:RobustLever[];
+  topDriverConsistency:number;
+  modelRobustness:number;
+};
+
 export type DecisionRoute='ACT NOW'|'TEST'|'PREPARE'|'WATCH'|'IGNORE FOR NOW';
 
 export type DecisionOption = {
   id:string;
   title:string;
   description:string;
+  focusKey:ConstraintKey;
   impact:number;
   confidence:number;
   urgency:number;
@@ -70,6 +110,9 @@ export type DecisionOption = {
 export type DecisionAssessment = DecisionOption & {
   score:number;
   route:DecisionRoute;
+  effectiveImpact:number;
+  calibratedConfidence:number;
+  constraintGap:number;
   downsideRisk:number;
   valueOfInformation:number;
   rationale:string;
@@ -122,6 +165,49 @@ export const defaultGtmInputs:GtmInputs={
 const clamp=(v:number,min=0,max=100)=>Math.min(max,Math.max(min,Number.isFinite(v)?v:min));
 const safe=(n:number,d:number)=>Math.abs(d)<1e-9?0:n/d;
 
+const inputLabels:Record<GtmInputKey,string>={
+  categoryDistinctiveness:'Category distinctiveness',
+  icpPrecision:'ICP precision',
+  problemUrgency:'Problem urgency',
+  proofStrength:'Proof strength',
+  organicDemand:'Organic demand',
+  aiDiscoveryVisibility:'AI discovery visibility',
+  evaluationFriction:'Evaluation friction',
+  adoptionDepth:'Adoption depth',
+  pricingConfidence:'Pricing confidence',
+  gtmReliability:'GTM data reliability',
+  trustStrength:'Trust strength',
+  competitivePressure:'Competitive pressure',
+  messageClarity:'Message clarity',
+  lifecycleMaturity:'Lifecycle maturity',
+  partnerLeverage:'Partner leverage',
+  originalResearchAuthority:'Original research authority',
+};
+
+const beneficialDirection:Record<GtmInputKey,1|-1>={
+  categoryDistinctiveness:1,
+  icpPrecision:1,
+  problemUrgency:1,
+  proofStrength:1,
+  organicDemand:1,
+  aiDiscoveryVisibility:1,
+  evaluationFriction:-1,
+  adoptionDepth:1,
+  pricingConfidence:1,
+  gtmReliability:1,
+  trustStrength:1,
+  competitivePressure:-1,
+  messageClarity:1,
+  lifecycleMaturity:1,
+  partnerLeverage:1,
+  originalResearchAuthority:1,
+};
+
+const harmonicMean=(values:number[])=>{
+  const positive=values.map(value=>Math.max(1,clamp(value)));
+  return positive.length/safe(positive.reduce((sum,value)=>sum+1/value,0),1);
+};
+
 const constraintMeta:Record<ConstraintKey,{label:string;weight:number;centrality:number;evidence:number}> = {
   categoryDistinctiveness:{label:'Category distinctiveness',weight:.15,centrality:.94,evidence:.82},
   icpPrecision:{label:'ICP precision',weight:.12,centrality:.83,evidence:.72},
@@ -167,91 +253,109 @@ export function calculateConstraints(input:GtmInputs):ConstraintRow[]{
 }
 
 export function calculateExecutiveScores(input:GtmInputs){
-  const category=
+  const errors=validateInputs(input);
+  if(errors.length) throw new Error('Invalid GTM inputs: '+errors.join('; '));
+
+  const category=clamp(
     input.categoryDistinctiveness*.40+
     input.messageClarity*.22+
     input.proofStrength*.18+
-    (100-input.competitivePressure)*.20;
+    (100-input.competitivePressure)*.20
+  );
 
-  const demand=
+  const demand=clamp(
     input.organicDemand*.34+
     input.aiDiscoveryVisibility*.20+
     input.originalResearchAuthority*.22+
     input.icpPrecision*.14+
-    input.problemUrgency*.10;
+    input.problemUrgency*.10
+  );
 
-  const conversion=
+  const conversion=clamp(
     input.messageClarity*.20+
     input.proofStrength*.24+
     input.icpPrecision*.18+
     (100-input.evaluationFriction)*.26+
-    input.pricingConfidence*.12;
+    input.pricingConfidence*.12
+  );
 
-  const lifecycle=
+  const lifecycle=clamp(
     input.adoptionDepth*.42+
     input.lifecycleMaturity*.30+
     input.proofStrength*.16+
-    input.partnerLeverage*.12;
+    input.partnerLeverage*.12
+  );
 
-  const operatingSystem=
+  const operatingSystem=clamp(
     input.gtmReliability*.42+
     input.pricingConfidence*.18+
     input.proofStrength*.16+
     input.icpPrecision*.12+
-    input.messageClarity*.12;
+    input.messageClarity*.12
+  );
 
-  const readiness=
+  const weightedReadiness=
     category*.20+demand*.18+conversion*.22+lifecycle*.20+operatingSystem*.20;
+  const coherenceReadiness=harmonicMean([category,demand,conversion,lifecycle,operatingSystem]);
+  const readiness=clamp(weightedReadiness*.74+coherenceReadiness*.26);
+  const weakestPillar=Math.min(category,demand,conversion,lifecycle,operatingSystem);
 
   return {
-    category:Math.round(clamp(category)),
-    demand:Math.round(clamp(demand)),
-    conversion:Math.round(clamp(conversion)),
-    lifecycle:Math.round(clamp(lifecycle)),
-    operatingSystem:Math.round(clamp(operatingSystem)),
-    readiness:Math.round(clamp(readiness)),
+    category:Math.round(category),
+    demand:Math.round(demand),
+    conversion:Math.round(conversion),
+    lifecycle:Math.round(lifecycle),
+    operatingSystem:Math.round(operatingSystem),
+    weightedReadiness:Math.round(clamp(weightedReadiness)),
+    coherenceReadiness:Math.round(clamp(coherenceReadiness)),
+    weakestPillar:Math.round(clamp(weakestPillar)),
+    readiness:Math.round(readiness),
   };
 }
 
-export function assessDecision(option:DecisionOption):DecisionAssessment{
-  const impact=clamp(option.impact);
-  const confidence=clamp(option.confidence);
+export function assessDecision(option:DecisionOption,input:GtmInputs=defaultGtmInputs):DecisionAssessment{
+  const focus=calculateConstraints(input).find(row=>row.key===option.focusKey);
+  const constraintGap=focus?.performanceGap??50;
+  const effectiveImpact=clamp(option.impact+(constraintGap-50)*.22);
+  const calibratedConfidence=clamp(option.confidence*(.82+.18*(input.gtmReliability/100)));
   const urgency=clamp(option.urgency);
   const cost=clamp(option.cost);
   const reversibility=clamp(option.reversibility);
   const dependency=clamp(option.dependency);
 
   const downsideRisk=Math.round(clamp(
-    (100-reversibility)*.36+
-    cost*.26+
-    (100-confidence)*.24+
-    dependency*.14
+    (100-reversibility)*.34+
+    cost*.24+
+    (100-calibratedConfidence)*.25+
+    dependency*.12+
+    Math.max(0,50-input.gtmReliability)*.05
   ));
 
   const valueOfInformation=Math.round(clamp(
-    impact*((100-confidence)/100)*
-    (.40+.35*(reversibility/100)+.25*((100-cost)/100))
+    effectiveImpact*((100-calibratedConfidence)/100)*
+    (.42+.33*(reversibility/100)+.25*((100-cost)/100))
   ));
 
   const score=Math.round(clamp(
-    impact*.30+
-    confidence*.22+
-    urgency*.18+
-    reversibility*.10+
-    (100-cost)*.08+
+    effectiveImpact*.31+
+    calibratedConfidence*.22+
+    urgency*.17+
+    reversibility*.09+
+    (100-cost)*.07+
     (100-dependency)*.05+
-    (100-downsideRisk)*.07
+    (100-downsideRisk)*.05+
+    constraintGap*.04
   ));
 
   let route:DecisionRoute='IGNORE FOR NOW';
-  if(impact>=72&&confidence>=68&&urgency>=58&&downsideRisk<=52) route='ACT NOW';
-  else if(impact>=68&&confidence<68&&reversibility>=62&&valueOfInformation>=18) route='TEST';
-  else if(impact>=62||score>=62) route='PREPARE';
+  if(effectiveImpact>=72&&calibratedConfidence>=68&&urgency>=58&&downsideRisk<=52) route='ACT NOW';
+  else if(effectiveImpact>=68&&calibratedConfidence<68&&reversibility>=62&&valueOfInformation>=18) route='TEST';
+  else if(effectiveImpact>=62||score>=62) route='PREPARE';
   else if(score>=45||urgency>=50) route='WATCH';
 
   const rationale=
     route==='ACT NOW'
-      ? 'Impact, evidence confidence and urgency clear the action threshold while downside remains bounded.'
+      ? 'The current constraint gap, impact, calibrated confidence and urgency clear the action threshold while modeled downside remains bounded.'
       : route==='TEST'
         ? 'Potential value is high but uncertainty is material; a reversible experiment creates information before scaled commitment.'
         : route==='PREPARE'
@@ -260,42 +364,58 @@ export function assessDecision(option:DecisionOption):DecisionAssessment{
             ? 'Maintain explicit trigger conditions because the current evidence-adjusted value does not justify immediate resource commitment.'
             : 'Current evidence-adjusted value is too low for management attention beyond routine monitoring.';
 
-  return {...option,score,route,downsideRisk,valueOfInformation,rationale};
+  return {
+    ...option,
+    score,
+    route,
+    effectiveImpact:Math.round(effectiveImpact),
+    calibratedConfidence:Math.round(calibratedConfidence),
+    constraintGap:Math.round(constraintGap),
+    downsideRisk,
+    valueOfInformation,
+    rationale,
+  };
 }
 
 export const decisionOptions:DecisionOption[]=[
   {
     id:'category-outcome',
+    focusKey:'categoryDistinctiveness',
     title:'Reframe category differentiation around finance decision performance',
     description:'Move the narrative from “AI-native FP&A” alone toward measurable decision outcomes: time-to-answer, reforecast speed, auditability, implementation time and finance-team capacity.',
     impact:92,confidence:82,urgency:88,cost:28,reversibility:84,dependency:32,timeToResultWeeks:8,
   },
   {
     id:'original-research',
+    focusKey:'originalResearchAuthority',
     title:'Build an original CFO benchmark and research engine',
     description:'Create proprietary evidence on planning maturity, forecast accuracy, AI finance workflows, implementation and decision velocity so Drivetrain becomes a source the market cites.',
     impact:84,confidence:66,urgency:70,cost:46,reversibility:80,dependency:38,timeToResultWeeks:14,
   },
   {
     id:'interactive-evaluation',
+    focusKey:'evaluationFriction',
     title:'Create an interactive pre-sales product/value sandbox',
     description:'Let prospects experience modeled finance workflows, connectors, governed AI and time-to-value before a full sales-assisted POC.',
     impact:87,confidence:61,urgency:74,cost:58,reversibility:76,dependency:56,timeToResultWeeks:16,
   },
   {
     id:'adoption-telemetry',
+    focusKey:'adoptionDepth',
     title:'Instrument adoption depth and expansion-leading behaviors',
     description:'Connect integrations, model activity, planning users, scenario frequency and AI-agent usage to retention, expansion and customer-proof creation.',
     impact:90,confidence:78,urgency:80,cost:42,reversibility:88,dependency:44,timeToResultWeeks:10,
   },
   {
     id:'gtm-observability',
+    focusKey:'gtmReliability',
     title:'Build a GTM reliability and funnel observability layer',
     description:'Standardize CRM fields, routing, source quality, stage aging, pipeline coverage and campaign-to-opportunity reconciliation before scaling spend.',
     impact:89,confidence:86,urgency:84,cost:34,reversibility:90,dependency:24,timeToResultWeeks:8,
   },
   {
     id:'pricing-research',
+    focusKey:'pricingConfidence',
     title:'Run willingness-to-pay and packaging research by complexity segment',
     description:'Test packaging against entities, data-source complexity, planning depth, automation intensity and service requirements rather than relying on intuition.',
     impact:78,confidence:72,urgency:64,cost:30,reversibility:86,dependency:35,timeToResultWeeks:9,
@@ -465,13 +585,91 @@ export function scenarioDelta(base:GtmInputs,next:GtmInputs){
   };
 }
 
+export function sensitivityAnalysis(input:GtmInputs,step=10):SensitivityRow[]{
+  if(!Number.isFinite(step)||step<=0||step>40) throw new Error('Sensitivity step must be > 0 and <= 40');
+  const baseline=calculateExecutiveScores(input).readiness;
+  const keys=Object.keys(inputLabels) as GtmInputKey[];
+
+  const rows=keys.map(key=>{
+    const direction=beneficialDirection[key];
+    const base=input[key];
+    const improvedValue=clamp(base+direction*step);
+    const worsenedValue=clamp(base-direction*step);
+    const improved=calculateExecutiveScores({...input,[key]:improvedValue}).readiness;
+    const worsened=calculateExecutiveScores({...input,[key]:worsenedValue}).readiness;
+    const actualSpan=Math.max(1,Math.abs(improvedValue-worsenedValue));
+    const upside=improved-baseline;
+    const downside=baseline-worsened;
+    return {
+      key,
+      label:inputLabels[key],
+      step,
+      baselineReadiness:baseline,
+      improvedReadiness:improved,
+      worsenedReadiness:worsened,
+      upside,
+      downside,
+      swing:improved-worsened,
+      effectPerPoint:(improved-worsened)/actualSpan,
+      rank:0,
+    };
+  }).sort((a,b)=>Math.abs(b.swing)-Math.abs(a.swing));
+
+  return rows.map((row,index)=>({...row,rank:index+1}));
+}
+
+export function runSensitivitySuite(input:GtmInputs,steps=[5,10,20]):SensitivitySuite{
+  const validSteps=[...new Set(steps)].filter(step=>Number.isFinite(step)&&step>0&&step<=40);
+  if(validSteps.length<2) throw new Error('Sensitivity suite requires at least two valid step sizes');
+
+  const iterations=validSteps.map(step=>({step,rows:sensitivityAnalysis(input,step)}));
+  const keys=Object.keys(inputLabels) as GtmInputKey[];
+
+  const robustLevers=keys.map(key=>{
+    const rows=iterations.map(iteration=>iteration.rows.find(row=>row.key===key)!).filter(Boolean);
+    const ranks=rows.map(row=>row.rank);
+    const averageRank=safe(ranks.reduce((sum,value)=>sum+value,0),ranks.length);
+    const rankSpread=Math.max(...ranks)-Math.min(...ranks);
+    const averageUpside=safe(rows.reduce((sum,row)=>sum+row.upside,0),rows.length);
+    const averageDownside=safe(rows.reduce((sum,row)=>sum+row.downside,0),rows.length);
+    const averageEffectPerPoint=safe(rows.reduce((sum,row)=>sum+Math.abs(row.effectPerPoint),0),rows.length);
+    const stability:RobustLever['stability']=rankSpread<=2?'HIGH':rankSpread<=5?'MEDIUM':'LOW';
+    return {
+      key,
+      label:inputLabels[key],
+      averageRank,
+      rankSpread,
+      averageUpside,
+      averageDownside,
+      averageEffectPerPoint,
+      stability,
+    };
+  }).sort((a,b)=>a.averageRank-b.averageRank);
+
+  const topSets=iterations.map(iteration=>new Set(iteration.rows.slice(0,5).map(row=>row.key)));
+  let overlap=0;
+  for(const key of keys){
+    if(topSets.every(set=>set.has(key))) overlap+=1;
+  }
+  const topDriverConsistency=Math.round(overlap/5*100);
+
+  const averageRankSpread=safe(robustLevers.reduce((sum,row)=>sum+row.rankSpread,0),robustLevers.length);
+  const maxEffect=robustLevers[0]?.averageEffectPerPoint??0;
+  const concentration=safe(maxEffect,robustLevers.reduce((sum,row)=>sum+row.averageEffectPerPoint,0));
+  const modelRobustness=Math.round(clamp(
+    100-averageRankSpread*6-Math.max(0,concentration-.30)*80
+  ));
+
+  return {iterations,robustLevers,topDriverConsistency,modelRobustness};
+}
+
 export function pipelineVelocity(opportunities:number,winRatePct:number,acv:number,salesCycleDays:number){
   if(opportunities<0||winRatePct<0||winRatePct>100||acv<0||salesCycleDays<=0) throw new Error('Invalid pipeline inputs');
   return opportunities*(winRatePct/100)*acv/salesCycleDays;
 }
 
-export function recommendationPortfolio(options:DecisionOption[]=decisionOptions){
-  return options.map(assessDecision).sort((a,b)=>b.score-a.score);
+export function recommendationPortfolio(input:GtmInputs=defaultGtmInputs,options:DecisionOption[]=decisionOptions){
+  return options.map(option=>assessDecision(option,input)).sort((a,b)=>b.score-a.score);
 }
 
 export function dependencyNarrative(primary:ConstraintRow){
