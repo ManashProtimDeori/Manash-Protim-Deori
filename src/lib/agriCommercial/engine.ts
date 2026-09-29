@@ -75,7 +75,7 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
   const competitionPenalty=clamp((input.competitorPressure-50)*.0025,-.08,.18);
   const crossBorderPenalty=clamp(Math.max(0,input.crossBorderPriceGapPct)*.004,0,.28);
 
-  const demandFactor=clamp(
+  const rawDemandFactor=
     1+
     priceVolumeEffect-
     affordabilityPressure*.42+
@@ -84,7 +84,19 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
     serviceEffect*.20-
     inflationPenalty-
     competitionPenalty-
-    crossBorderPenalty,
+    crossBorderPenalty;
+
+  const baselineInflationPenalty=clamp(Math.max(0,baseline.foodInflationPct-8)*.004,0,.35);
+  const baselineCompetitionPenalty=clamp((baseline.competitorPressure-50)*.0025,-.08,.18);
+  const baselineCrossBorderPenalty=clamp(Math.max(0,baseline.crossBorderPriceGapPct)*.004,0,.28);
+  const baselineDemandFactor=
+    1-
+    baselineInflationPenalty-
+    baselineCompetitionPenalty-
+    baselineCrossBorderPenalty;
+
+  const demandFactor=clamp(
+    safe(rawDemandFactor,baselineDemandFactor),
     .20,
     1.75
   );
