@@ -175,9 +175,22 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
     .01,
     .18
   );
+  const baselineImportedInputCostIndex=
+    baseline.importedDeliveredCostIndex*
+    (baseline.fxIndex/100)*
+    (baseline.commodityIndex/100)*
+    (.75+.25*(baseline.freightIndex/100));
+  const baselineBlendedInputCostIndex=
+    baseline.localSourcingPct/100*baseline.localDeliveredCostIndex+
+    baseline.importDependencyPct/100*baselineImportedInputCostIndex;
+  const baselineVariableCostRate=clamp(
+    .78*(baselineBlendedInputCostIndex/100)*.82+.78*.18,
+    .35,
+    1.35
+  );
   const baselineContribution=
     baselineGrossRevenue-
-    baseline.revenue*.78-
+    baseline.revenue*baselineVariableCostRate-
     baseline.revenue*baselineLogisticsRate-
     baselineEffectiveTradeCost-
     baseline.revenue*(baseline.marketingSpendPctRevenue/100)-
