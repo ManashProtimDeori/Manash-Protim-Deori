@@ -91,12 +91,12 @@ export function buildBoardState(input:AgriInputs){
     topSensitive,
     headline:
       output.ebitMarginPct<2
-        ? 'Margin is the dominant modeled constraint.'
+        ? 'Margin is the dominant modeled constraint'
         : output.workingCapital>input.workingCapital*1.15
-          ? 'Cash conversion is deteriorating faster than earnings quality.'
+          ? 'Cash conversion is deteriorating faster than earnings quality'
           : profitableShare<55
-            ? 'Volume quality is weaker than headline growth.'
-            : 'Commercial economics are balanced, with selective optimization opportunities.',
+            ? 'Volume quality is weaker than headline growth'
+            : 'Commercial economics are balanced, with selective optimization opportunities',
     primaryDecision:decisions[0]||null,
     primaryAdvisory:advisories[0]||null
   };
