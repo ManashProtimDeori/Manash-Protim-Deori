@@ -224,5 +224,38 @@ export const toolsData: ToolItem[] = [
       { version: 'v2.0', date: '2026-09', notes: 'Renamed to GTM Intelligence Engine and upgraded typography, sensitivity analysis, robustness diagnostics and dynamic decision prioritization' },
       { version: 'v1.0', date: '2026-09', notes: 'Initial release with GTM constraint engine, category intelligence, ICP, demand, adoption, GTM operations, pricing, experimentation, evidence registry and decision portfolio' }
     ]
+  },
+  {
+    id: 'tool-8',
+    slug: 'agri-commercial-intelligence-engine',
+    name: 'Agri Commercial Intelligence & Value Creation Engine',
+    category: 'Agribusiness Strategy, Marketing, Finance, Supply Chain & Decision Science',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A company-neutral agribusiness commercial digital twin connecting demand, pricing, agricultural input risk, FX, channels, portfolio economics, capacity, working capital, capital returns, scenario stress, sensitivity analysis and dynamic executive advisory.',
+    instructions: 'Change commercial, macro, supply, pricing, distribution, capacity and balance-sheet variables; compare scenarios; inspect three-scale sensitivity, correlated risk simulation, root-cause decomposition, value-gap allocation and dynamic advisory. Demonstration inputs are public-reference and modeled assumptions; replace them with verified entity data before operational decisions.',
+    features: [
+      'Integrated demand, pricing, supply-risk, distribution, capacity, working-capital and capital-return model',
+      'Reference-case baseline reconciles net revenue, EBIT, working capital and invested capital before scenario perturbation',
+      'Affordability- and elasticity-sensitive demand with distribution, availability, service, food inflation and competition effects',
+      'Imported input-cost model linking FX, commodity prices, freight and local-versus-imported sourcing mix',
+      'Profitable-share index preventing raw volume or market share from being mistaken for value creation',
+      'Working-capital engine for DSO, DIO, DPO, bad debt, cash conversion and cash-release sensitivity',
+      'Twelve compound operating scenarios including FX shock, food inflation, commodity shock, freight disruption, cheap imports, price war, demand recovery, local sourcing and working-capital stress',
+      'Three-scale ±5/±10/±20 sensitivity ranking with robust-lever stability across perturbation sizes',
+      'Seeded correlated risk simulation using Cholesky decomposition and editable economic dependency assumptions',
+      'Causal-hypothesis network separating public accounting mechanics from modeled commercial mechanisms',
+      'Root-cause EBIT driver decomposition with controllability and confidence',
+      'Marketing/pricing/channel/supply/finance/external value-gap allocation so marketing is never blamed for the entire economic gap',
+      'Dynamic business advisory that changes actions as affordability, FX, distribution, working capital, capacity, price gaps and promotion quality change',
+      'Decision routing across ACT NOW, TEST, PREPARE, WATCH and NO ACTION using impact, confidence, urgency, reversibility and value of information',
+      'Executive Board Room with financial bridge, decision falsifiers, evidence boundaries and scenario-aware priorities',
+      'Deterministic verification suite covering baseline reconciliation, elasticity direction, FX risk, working capital, sensitivity, correlation validity, simulation reproducibility and advisory routing'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Agribusiness Digital Twin', 'Financial Modeling', 'Sensitivity Analysis', 'Correlated Simulation', 'Decision Science', 'Causal Hypotheses', 'Responsive Data UI'],
+    interactiveComponent: 'AgriCommercialIntelligenceEngine',
+    changelog: [
+      { version: 'v1.0', date: '2026-09', notes: 'Initial production release with financial reconciliation, demand and supply engines, working capital, scenario lab, sensitivity, correlated simulation, root-cause analysis and dynamic executive advisory' }
+    ]
   }
 ];
