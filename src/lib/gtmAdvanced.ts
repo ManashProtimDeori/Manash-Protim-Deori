@@ -507,6 +507,7 @@ export type AllocationResult={
   totalUtility:number;
   selected:DecisionAssessment[];
   excluded:DecisionAssessment[];
+  counterfactualGains:Record<string,number>;
 };
 
 export function optimizeDecisionPortfolio(
@@ -517,10 +518,17 @@ export function optimizeDecisionPortfolio(
 ):AllocationResult{
   if(!Number.isInteger(budget)||budget<10||budget>1000) throw new Error('Budget must be an integer between 10 and 1000');
   const portfolio=contextualDecisionPortfolio(input,objective,role);
+  const counterfactualGains=Object.fromEntries(
+    portfolio.map(item=>[item.id,counterfactualActionImpact(input,item,10).readinessGain])
+  );
   const items=portfolio.map(item=>({
     item,
     cost:Math.max(1,Math.round(item.cost)),
-    utility:item.score+item.valueOfInformation*.25+(item.route==='ACT NOW'?8:item.route==='TEST'?5:0),
+    utility:
+      item.score+
+      item.valueOfInformation*.20+
+      Math.max(0,counterfactualGains[item.id]??0)*8+
+      (item.route==='ACT NOW'?8:item.route==='TEST'?5:0),
   }));
   const dp=Array.from({length:items.length+1},()=>Array<number>(budget+1).fill(0));
   for(let i=1;i<=items.length;i++){
@@ -549,7 +557,107 @@ export function optimizeDecisionPortfolio(
     totalUtility:dp[items.length][budget],
     selected,
     excluded,
+    counterfactualGains,
   };
+}
+
+export function counterfactualActionImpact(
+  input:GtmInputs,
+  decision:Pick<DecisionOption,'id'|'focusKey'>,
+  step=10,
+){
+  if(!Number.isFinite(step)||step<=0||step>40) throw new Error('Counterfactual step must be > 0 and <= 40');
+  const baseline=calculateExecutiveScores(input).readiness;
+  const key=decision.focusKey;
+  const inverse=key==='evaluationFriction';
+  const nextValue=clamp(input[key]+(inverse?-step:step));
+  const next={...input,[key]:nextValue};
+  const improved=calculateExecutiveScores(next).readiness;
+  return {
+    decisionId:decision.id,
+    focusKey:key,
+    baselineReadiness:baseline,
+    counterfactualReadiness:improved,
+    readinessGain:improved-baseline,
+    inputBefore:input[key],
+    inputAfter:nextValue,
+    assumption:'Single-lever counterfactual. It does not estimate causal treatment effect or account for implementation interaction unless separately modeled.',
+  };
+}
+
+export function experimentFeasibility(
+  design:ExperimentDesign,
+  weeklyEligibleTraffic:number,
+  maxWeeks=12,
+){
+  if(!Number.isFinite(weeklyEligibleTraffic)||weeklyEligibleTraffic<=0) throw new Error('Weekly eligible traffic must be positive');
+  if(!Number.isFinite(maxWeeks)||maxWeeks<=0) throw new Error('Maximum weeks must be positive');
+  const weeks=design.totalSample/weeklyEligibleTraffic;
+  return {
+    weeklyEligibleTraffic,
+    estimatedWeeks:weeks,
+    maxWeeks,
+    feasibleWithinWindow:weeks<=maxWeeks,
+    trafficGap:Math.max(0,design.totalSample-weeklyEligibleTraffic*maxWeeks),
+    recommendation:
+      weeks<=maxWeeks
+        ? 'The planned detectable effect is traffic-feasible within the selected window.'
+        : 'The design is underpowered for the selected traffic window; increase the detectable effect, extend duration, pool valid units or choose a higher-frequency metric.',
+  };
+}
+
+export type TriggerStatus='TRIGGERED'|'NEAR'|'CLEAR';
+export type DecisionTrigger={
+  decisionId:string;
+  title:string;
+  focusKey:ConstraintKey;
+  currentValue:number;
+  threshold:number;
+  direction:'BELOW'|'ABOVE';
+  status:TriggerStatus;
+  cadence:'WEEKLY'|'MONTHLY'|'QUARTERLY';
+  evidenceToWatch:string;
+};
+
+const triggerSpec:Record<ConstraintKey,{threshold:number;direction:'BELOW'|'ABOVE';evidenceToWatch:string}>={
+  categoryDistinctiveness:{threshold:60,direction:'BELOW',evidenceToWatch:'Buyer message tests, unaided category association, win/loss mentions and competitor language similarity.'},
+  icpPrecision:{threshold:65,direction:'BELOW',evidenceToWatch:'Segment conversion, disqualification reasons, buyer-role consistency and sales-cycle variance.'},
+  proofStrength:{threshold:70,direction:'BELOW',evidenceToWatch:'Case-study consumption, proof objections, reference-call requests and evidence usage in won deals.'},
+  organicDemand:{threshold:60,direction:'BELOW',evidenceToWatch:'Qualified non-paid pipeline, topic authority, branded/non-branded search and AI citation coverage.'},
+  evaluationFriction:{threshold:60,direction:'ABOVE',evidenceToWatch:'POC duration, security/procurement aging, implementation objections and stage drop-off.'},
+  adoptionDepth:{threshold:60,direction:'BELOW',evidenceToWatch:'Connected systems, active models, scenario frequency, user breadth, expansion and retention cohorts.'},
+  pricingConfidence:{threshold:60,direction:'BELOW',evidenceToWatch:'Discounting, willingness-to-pay research, package migration and price-related loss reasons.'},
+  gtmReliability:{threshold:70,direction:'BELOW',evidenceToWatch:'CRM completeness, duplicates, source accuracy, routing latency, stage aging and opportunity reconciliation.'},
+  messageClarity:{threshold:65,direction:'BELOW',evidenceToWatch:'Comprehension research, page-to-demo conversion, sales explanation time and message recall.'},
+  originalResearchAuthority:{threshold:55,direction:'BELOW',evidenceToWatch:'Citation frequency, executive engagement, backlinks, sales usage and assisted pipeline.'},
+};
+
+export function buildDecisionTriggers(
+  input:GtmInputs,
+  objective:BusinessObjective,
+  role:ExecutiveRole,
+):DecisionTrigger[]{
+  const decisions=contextualDecisionPortfolio(input,objective,role);
+  return decisions.map(decision=>{
+    const spec=triggerSpec[decision.focusKey];
+    const current=input[decision.focusKey];
+    const distance=spec.direction==='BELOW'?current-spec.threshold:spec.threshold-current;
+    const triggered=spec.direction==='BELOW'?current<spec.threshold:current>spec.threshold;
+    const near=!triggered&&distance<=8;
+    const status:TriggerStatus=triggered?'TRIGGERED':near?'NEAR':'CLEAR';
+    const cadence=decision.urgency>=80?'WEEKLY':decision.urgency>=60?'MONTHLY':'QUARTERLY';
+    return {
+      decisionId:decision.id,
+      title:decision.title,
+      focusKey:decision.focusKey,
+      currentValue:current,
+      threshold:spec.threshold,
+      direction:spec.direction,
+      status,
+      cadence,
+      evidenceToWatch:spec.evidenceToWatch,
+    };
+  });
 }
 
 export type GtmHypothesis={
@@ -645,7 +753,7 @@ export type BoardMemo={
   uncertainty:{p10:number;p50:number;p90:number};
   primaryConstraint:string;
   robustLevers:string[];
-  topDecisions:{title:string;route:string;score:number}[];
+  topDecisions:{title:string;route:string;score:number;readinessGain:number}[];
   topRisks:{hypothesis:string;risk:number;nextTest:string}[];
   stressWatch:{name:string;delta:number}[];
   falsifier:string;
@@ -676,7 +784,12 @@ export function buildBoardMemo(
     uncertainty:{p10:uncertainty.p10,p50:uncertainty.p50,p90:uncertainty.p90},
     primaryConstraint:constraint.label,
     robustLevers:sensitivity.robustLevers.slice(0,5).map(row=>row.label),
-    topDecisions:decisions.map(item=>({title:item.title,route:item.route,score:item.score})),
+    topDecisions:decisions.map(item=>({
+      title:item.title,
+      route:item.route,
+      score:item.score,
+      readinessGain:counterfactualActionImpact(input,item,10).readinessGain,
+    })),
     topRisks:risks.map(item=>({hypothesis:item.hypothesis,risk:item.risk,nextTest:item.nextTest})),
     stressWatch:stresses.map(item=>({name:item.scenario.name,delta:item.delta})),
     falsifier:'The recommendation set should be revised when observed CRM, buyer-research, product-usage or experiment evidence materially changes the underlying assumptions.',
