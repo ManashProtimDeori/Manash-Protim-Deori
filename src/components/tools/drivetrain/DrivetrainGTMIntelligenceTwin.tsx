@@ -502,8 +502,8 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
   return <div className="dt-shell">
     <header className="dt-hero">
       <div>
-        <span className="dt-overline">Independent strategic portfolio case · Drivetrain AI</span>
-        <div className="dt-title"><Radar/><h2>Drivetrain GTM Intelligence Twin</h2></div>
+        <span className="dt-overline">Independent strategic portfolio case · B2B SaaS GTM</span>
+        <div className="dt-title"><Radar/><h2>GTM Intelligence Engine</h2></div>
         <p>Category Strategy · Demand Intelligence · Product Adoption · Pipeline · Expansion · Decision Science</p>
         <div className="dt-hero-tags">
           <Tag>Public-source evidence</Tag><Tag tone="model">Modeled assumptions</Tag><Tag>Executive decision system</Tag>

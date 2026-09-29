@@ -184,11 +184,11 @@ export const toolsData: ToolItem[] = [
   {
     id: 'tool-7',
     slug: 'drivetrain-gtm-intelligence-twin',
-    name: 'Drivetrain GTM Intelligence Twin',
+    name: 'GTM Intelligence Engine',
     category: 'B2B SaaS Strategy, Product Marketing & GTM Intelligence',
     status: 'Live',
-    version: 'v1.0',
-    description: 'An independent evidence-based GTM digital twin for Drivetrain AI that connects category strategy, ICP, demand generation, product adoption, GTM operations, pricing, experimentation and executive decision science without presenting modeled assumptions as private company facts.',
+    version: 'v2.0',
+    description: 'An independent evidence-based GTM intelligence engine using Drivetrain AI as a public-source case study that connects category strategy, ICP, demand generation, product adoption, GTM operations, pricing, experimentation and executive decision science without presenting modeled assumptions as private company facts.',
     instructions: 'Use the command center to stress-test category distinctiveness, ICP precision, proof, organic demand, evaluation friction, adoption depth, pricing confidence and GTM reliability. Explore category, buying committee, demand engine, product adoption, pipeline economics, pricing/experiments, evidence registry and the evidence-adjusted decision portfolio.',
     features: [
       'Constraint engine ranking GTM bottlenecks using performance gap × strategic weight × downstream centrality × evidence confidence',
@@ -208,6 +208,7 @@ export const toolsData: ToolItem[] = [
     technologies: ['React 19', 'TypeScript', 'Evidence Modeling', 'Constraint Analysis', 'Decision Science', 'GTM Economics', 'Scenario Modeling', 'Responsive Data UI'],
     interactiveComponent: 'DrivetrainGTMIntelligenceTwin',
     changelog: [
+      { version: 'v2.0', date: '2026-09', notes: 'Renamed to GTM Intelligence Engine and upgraded typography, sensitivity analysis, robustness diagnostics and dynamic decision prioritization' },
       { version: 'v1.0', date: '2026-09', notes: 'Initial release with GTM constraint engine, category intelligence, ICP, demand, adoption, GTM operations, pricing, experimentation, evidence registry and decision portfolio' }
     ]
   }

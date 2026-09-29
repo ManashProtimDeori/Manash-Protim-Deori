@@ -41,3 +41,81 @@
 @media(max-width:1200px){.dt-score-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dt-decision-columns{grid-template-columns:repeat(2,minmax(0,1fr))}.dt-adoption-chain{grid-template-columns:repeat(4,minmax(0,1fr))}.dt-ops-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.dt-five-why{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:900px){.dt-hero,.dt-grid-2{grid-template-columns:1fr}.dt-hero-score{justify-self:stretch}.dt-slider-grid,.dt-pipeline-controls,.dt-experiment-grid,.dt-roadmap,.dt-boundary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dt-trust-stack{grid-template-columns:repeat(3,minmax(0,1fr))}.dt-section-head{flex-direction:column}.dt-section-head>p{text-align:left}.dt-ops-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.dt-panel,.dt-hero{padding:16px}.dt-score-grid,.dt-score-grid.four,.dt-slider-grid,.dt-pipeline-controls,.dt-experiment-grid,.dt-roadmap,.dt-boundary-grid,.dt-role-grid,.dt-check-grid,.dt-decision-columns{grid-template-columns:1fr}.dt-adoption-chain,.dt-trust-stack,.dt-ops-grid,.dt-five-why{grid-template-columns:repeat(2,minmax(0,1fr))}.dt-readiness-list>div{grid-template-columns:90px minmax(0,1fr) 34px 30px}.dt-evidence-list article>div:first-child{grid-template-columns:1fr}.dt-evidence-detail{grid-template-columns:1fr}}
+
+
+/* v2 typography contract: readable analytical density without micro-text */
+.dt-shell{
+  --dt-font-xs:clamp(.72rem,.69rem + .08vw,.78rem);
+  --dt-font-sm:clamp(.78rem,.75rem + .09vw,.84rem);
+  --dt-font-md:clamp(.84rem,.80rem + .11vw,.92rem);
+  --dt-font-body:clamp(.88rem,.84rem + .12vw,.98rem);
+  --dt-font-label:clamp(.74rem,.71rem + .08vw,.80rem);
+}
+.dt-shell :is(.dt-overline,.dt-section-head>div>span,.dt-tag,.dt-tabs button,.dt-reset){
+  font-size:var(--dt-font-xs)!important;
+  line-height:1.35!important;
+}
+.dt-shell :is(
+  .dt-score-card span,.dt-readiness-list span,.dt-constraint-score span,
+  .dt-thesis-box span,.dt-chain span,.dt-territories span,.dt-five-why span,
+  .dt-check-grid span,.dt-topic-list span,.dt-role-grid span,.dt-funnel strong,
+  .dt-adoption-chain strong,.dt-flywheel span,.dt-trust-stack strong,
+  .dt-ops-grid span,.dt-pipeline-controls span,.dt-experiment-grid span,
+  .dt-experiment-grid em,.dt-roadmap span,.dt-evidence-list strong,
+  .dt-boundary-grid strong
+){
+  font-size:var(--dt-font-sm)!important;
+  line-height:1.4!important;
+}
+.dt-shell :is(
+  .dt-score-card p,.dt-primary-constraint>p,.dt-thesis-box p,.dt-territories p,
+  .dt-five-why p,.dt-role-grid p,.dt-insight-line p,.dt-velocity p,
+  .dt-decision-columns p,.dt-decision-columns small,.dt-roadmap p,
+  .dt-evidence-detail p,.dt-evidence-detail a,.dt-boundary-grid p,.dt-boundary
+){
+  font-size:var(--dt-font-sm)!important;
+  line-height:1.55!important;
+}
+.dt-shell .dt-section-head>p,
+.dt-shell .dt-disclaimer p,
+.dt-shell .dt-hero>div>p{
+  font-size:var(--dt-font-md)!important;
+  line-height:1.6!important;
+}
+.dt-shell .dt-table{
+  font-size:var(--dt-font-sm)!important;
+}
+.dt-shell .dt-table th{
+  font-size:var(--dt-font-xs)!important;
+  line-height:1.35!important;
+  white-space:normal;
+  vertical-align:bottom;
+}
+.dt-shell .dt-table td{
+  font-size:var(--dt-font-sm)!important;
+  line-height:1.45!important;
+  overflow-wrap:break-word;
+}
+.dt-shell .dt-decision-columns h4,
+.dt-shell .dt-decision-columns article span,
+.dt-shell .dt-evidence-list article>div:first-child>span:last-child,
+.dt-shell .dt-slider span,.dt-shell .dt-slider strong,.dt-shell .dt-slider small,
+.dt-shell .dt-eq,.dt-shell .dt-formula{
+  font-size:var(--dt-font-xs)!important;
+  line-height:1.4!important;
+}
+.dt-shell .dt-decision-columns strong{
+  font-size:var(--dt-font-sm)!important;
+  line-height:1.42!important;
+}
+.dt-shell :is(.dt-score-card,.dt-role-grid>div,.dt-territories>div,.dt-five-why>div,.dt-experiment-grid>div,.dt-decision-columns article){
+  overflow-wrap:break-word;
+  word-break:normal;
+}
+.dt-shell .dt-table-wrap,
+.dt-shell .dt-constraint-table-wrap{
+  scrollbar-width:thin;
+}
+@media(max-width:640px){
+  .dt-shell{--dt-font-xs:.74rem;--dt-font-sm:.80rem;--dt-font-md:.87rem;--dt-font-body:.92rem}
+}
