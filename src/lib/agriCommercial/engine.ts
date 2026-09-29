@@ -158,10 +158,15 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
   const baselineGrossRevenue=safe(baseline.revenue,1-baselineTradeRate);
   const baselineTradeSpend=baselineGrossRevenue*baselineTradeRate;
   const baselineEffectiveTradeCost=baselineTradeSpend*(1-.32*baselinePromoEfficiency);
+  const baselineLogisticsRate=clamp(
+    .045*(baseline.freightIndex/100)*(.85+.15*(100-baseline.fillRatePct)/100),
+    .01,
+    .18
+  );
   const baselineContribution=
     baselineGrossRevenue-
     baseline.revenue*.78-
-    baseline.revenue*.045-
+    baseline.revenue*baselineLogisticsRate-
     baselineEffectiveTradeCost-
     baseline.revenue*(baseline.marketingSpendPctRevenue/100)-
     baseline.revenue*(baseline.badDebtPctRevenue/100);
