@@ -643,7 +643,7 @@ export const AgriCommercialIntelligenceEngine:React.FC=()=>{
   };
 
   return <div className="agri-shell">
-    <header className="agri-hero">
+    <section className="agri-hero">
       <div>
         <span className="agri-overline">Agribusiness strategy · commercial intelligence · decision science</span>
         <h2>Agri Commercial Intelligence & Value Creation Engine</h2>
@@ -658,11 +658,15 @@ export const AgriCommercialIntelligenceEngine:React.FC=()=>{
         </div>
       </div>
       <div className="agri-hero-score">
-        <span>Profitable share</span>
-        <strong>{share}</strong><em>/100</em>
+        <div className="agri-hero-score-topline">
+          <span>Profitable share index</span>
+          <span className="agri-score-status">{share>=70?'Strong':share>=55?'Watch':'Pressure'}</span>
+        </div>
+        <div className="agri-score-value"><strong>{share}</strong><em>/100</em></div>
+        <div className="agri-score-meter" aria-hidden="true"><i style={{width:share+'%'}}/></div>
         <p>{board.headline}</p>
       </div>
-    </header>
+    </section>
 
     <div className="agri-disclaimer">
       <AlertTriangle/>
