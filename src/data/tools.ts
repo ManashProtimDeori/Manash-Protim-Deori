@@ -187,7 +187,7 @@ export const toolsData: ToolItem[] = [
     name: 'GTM Intelligence Engine',
     category: 'B2B SaaS Strategy, Product Marketing & GTM Intelligence',
     status: 'Live',
-    version: 'v2.0',
+    version: 'v3.0',
     description: 'An independent evidence-based GTM intelligence engine using Drivetrain AI as a public-source case study that connects category strategy, ICP, demand generation, product adoption, GTM operations, pricing, experimentation and executive decision science without presenting modeled assumptions as private company facts.',
     instructions: 'Use the command center to stress-test category distinctiveness, ICP precision, proof, organic demand, evaluation friction, adoption depth, pricing confidence and GTM reliability. Explore category, buying committee, demand engine, product adoption, pipeline economics, pricing/experiments, evidence registry and the evidence-adjusted decision portfolio.',
     features: [
@@ -202,14 +202,25 @@ export const toolsData: ToolItem[] = [
       'Pricing and packaging research architecture with willingness-to-pay dimensions and segment logic',
       'Experimentation lab for positioning, interactive sandbox, pricing, benchmark research, customer proof and POC redesign',
       'Evidence-adjusted decision engine routing initiatives into ACT NOW, TEST, PREPARE, WATCH or IGNORE FOR NOW using impact, confidence, urgency, reversibility, cost, dependency, downside and value of information',
-      'Public-source evidence registry with provenance, status, confidence, independence and analytical boundaries',
+      'Public-source evidence registry with provenance, calibrated reliability, source independence, source specificity and analytical boundaries',
       'Three-iteration ±5/±10/±20 sensitivity analysis with rank stability, robust-lever detection and bottleneck-aware system readiness',
-      'Dynamic decision prioritization that recalibrates impact and confidence as GTM constraint gaps and data reliability change',
-      '30 / 90 / 365-day commercial roadmap and deterministic tests for scoring, routing, sensitivity, content ranking and pipeline formulas'
+      'Dynamic decision prioritization that recalibrates impact and confidence as GTM constraint gaps, executive role, business objective and data reliability change',
+      'Evidence-health engine distinguishing verified facts, company claims, customer evidence, inference, modeled assumptions and unknowns',
+      'Seeded uncertainty simulation with P10/P50/P90 readiness ranges and primary-constraint probability under parameter uncertainty',
+      'Causal-hypothesis graph separating mathematical dependency from causal evidence and ranking direct plus second-order centrality',
+      'Five stress regimes for category convergence, evaluation shock, adoption plateau, GTM instrumentation recovery and research-authority breakout',
+      'Statistical experiment-design calculator with minimum detectable lift, approximate sample size, traffic feasibility and underpowered-test warnings',
+      'Resource-allocation optimizer using decision score, value of information, counterfactual readiness gain and constrained capacity',
+      'Hypothesis risk register with falsifiers, next tests, decision owners and risk-if-wrong scoring',
+      'Decision-trigger monitor with thresholds, monitoring cadence and evidence-to-watch for governed execution',
+      'Executive Board Room synthesizing readiness, evidence health, uncertainty, robust levers, decision routes, stress watch and falsifiers',
+      'Exportable JSON decision memo for executive review and auditability',
+      '30 / 90 / 365-day commercial roadmap and deterministic tests for scoring, routing, evidence calibration, uncertainty, experiments, allocation, sensitivity, content ranking and pipeline formulas'
     ],
-    technologies: ['React 19', 'TypeScript', 'Evidence Modeling', 'Constraint Analysis', 'Decision Science', 'GTM Economics', 'Scenario Modeling', 'Responsive Data UI'],
+    technologies: ['React 19', 'TypeScript', 'Evidence Calibration', 'Constraint Analysis', 'Decision Science', 'GTM Economics', 'Sensitivity Analysis', 'Monte Carlo Stress Testing', 'Experiment Design', 'Portfolio Optimization', 'Responsive Data UI'],
     interactiveComponent: 'DrivetrainGTMIntelligenceTwin',
     changelog: [
+      { version: 'v3.0', date: '2026-09', notes: 'Added evidence calibration, executive-role and objective context, uncertainty simulation, causal hypotheses, stress testing, statistical experiment sizing, resource allocation, counterfactual value, decision triggers, hypothesis risk and executive board intelligence' },
       { version: 'v2.0', date: '2026-09', notes: 'Renamed to GTM Intelligence Engine and upgraded typography, sensitivity analysis, robustness diagnostics and dynamic decision prioritization' },
       { version: 'v1.0', date: '2026-09', notes: 'Initial release with GTM constraint engine, category intelligence, ICP, demand, adoption, GTM operations, pricing, experimentation, evidence registry and decision portfolio' }
     ]
