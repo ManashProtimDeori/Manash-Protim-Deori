@@ -61,14 +61,17 @@ const normalizeCurrency=(currency:string)=>/^[A-Z]{3}$/.test(currency)?currency:
 
 const money=(value:number,currency:string)=>{
   const code=normalizeCurrency(currency);
+  const absolute=Math.abs(value);
+  const scale=absolute>=1000?1000:1;
+  const suffix=absolute>=1000?'bn':'m';
   const formatted=new Intl.NumberFormat('en-SG',{
     style:'currency',
     currency:code,
     currencyDisplay:'code',
     minimumFractionDigits:0,
-    maximumFractionDigits:1,
-  }).format(value);
-  return formatted+'m';
+    maximumFractionDigits:absolute>=1000?2:1,
+  }).format(value/scale);
+  return formatted+suffix;
 };
 
 const signedMoney=(value:number,currency:string)=>(value>0?'+':'')+money(value,currency);
