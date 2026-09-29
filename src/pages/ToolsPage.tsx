@@ -8,6 +8,7 @@ import { PositioningMatrixTool } from '../components/tools/PositioningMatrixTool
 import { BriefGenerator } from '../components/tools/BriefGenerator';
 import { MarketSignalOS } from '../components/tools/marketsignal/MarketSignalOS';
 import { HillChainTwin } from '../components/tools/hillchain/HillChainTwin';
+import { DrivetrainGTMIntelligenceTwin } from '../components/tools/drivetrain/DrivetrainGTMIntelligenceTwin';
 import { EditButton } from '../components/editor/EditButton';
 import '../components/tools/ToolsPremium.css';
 
@@ -37,13 +38,15 @@ export const ToolsPage: React.FC = () => {
         return <MarketSignalOS />;
       case 'hillchain-twin':
         return <HillChainTwin />;
+      case 'drivetrain-gtm-intelligence-twin':
+        return <DrivetrainGTMIntelligenceTwin />;
       default:
         return <RoiCalculator />;
     }
   };
 
   return (
-    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell apple-tools-page py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
+    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell apple-tools-page py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' || currentTool?.slug === 'drivetrain-gtm-intelligence-twin' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
       
       {/* Editorial Header */}
       <div className="tools-premium-header flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-800/40">
@@ -78,6 +81,7 @@ export const ToolsPage: React.FC = () => {
             <button
               key={tool.id}
               onClick={() => handleSelectTool(tool.slug)}
+              aria-selected={isSelected}
               className={`px-3.5 py-1.5 text-xs font-mono rounded transition-colors whitespace-nowrap flex items-center gap-2 ${
                 isSelected
                   ? 'bg-neutral-100 text-neutral-950 font-semibold dark:bg-neutral-100 dark:text-neutral-950 light:bg-neutral-900 light:text-neutral-100'

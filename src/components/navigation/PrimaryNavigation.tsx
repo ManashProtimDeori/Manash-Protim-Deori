@@ -53,7 +53,6 @@ export const PrimaryNavigation: React.FC<PrimaryNavigationProps> = ({
       }));
 
     const toolItems: PrimaryNavChild[] = tools
-      .slice(0, 5)
       .map(tool => ({
         href: '/tools/' + tool.slug,
         label: tool.name,

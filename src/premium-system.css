@@ -1,0 +1,487 @@
+/* ==========================================================================
+   UNIVERSAL PREMIUM SYSTEM · final overflow / consistency pass
+   Applied after component styles so every page, tool, table and chart shares
+   the same legibility, containment, light/dark contrast and Apple-inspired
+   material discipline without replacing each tool's analytical semantics.
+   ========================================================================== */
+
+*,*::before,*::after{box-sizing:border-box}
+
+:root{
+  --premium-bg:#f5f5f7;
+  --premium-surface:#ffffff;
+  --premium-surface-soft:#fbfbfd;
+  --premium-text:#1d1d1f;
+  --premium-secondary:#6e6e73;
+  --premium-tertiary:#86868b;
+  --premium-border:rgba(0,0,0,.10);
+  --premium-blue:#0071e3;
+  --premium-radius:20px;
+  --premium-radius-lg:28px;
+  --premium-shadow:0 14px 44px rgba(0,0,0,.045);
+}
+.dark{
+  --premium-bg:#000000;
+  --premium-surface:#1d1d1f;
+  --premium-surface-soft:#101012;
+  --premium-text:#f5f5f7;
+  --premium-secondary:#a1a1a6;
+  --premium-tertiary:#86868b;
+  --premium-border:rgba(255,255,255,.12);
+  --premium-blue:#2997ff;
+  --premium-shadow:0 18px 54px rgba(0,0,0,.34);
+}
+
+html,body,#root,.site-app-shell{
+  background:var(--premium-bg)!important;
+  color:var(--premium-text)!important;
+}
+
+/* --------------------------------------------------------------------------
+   01. Identity visibility and one-line name treatment
+   -------------------------------------------------------------------------- */
+.site-header-premium .site-brand-name,
+.apple-hero h1,
+.about-premium .about-name{
+  color:var(--premium-text)!important;
+  opacity:1!important;
+  visibility:visible!important;
+  text-shadow:none!important;
+  -webkit-text-fill-color:var(--premium-text)!important;
+}
+.light .site-header-premium .site-brand-name,
+.light .apple-hero h1,
+.light .about-premium .about-name{
+  color:#1d1d1f!important;
+  -webkit-text-fill-color:#1d1d1f!important;
+}
+.dark .site-header-premium .site-brand-name,
+.dark .apple-hero h1,
+.dark .about-premium .about-name{
+  color:#f5f5f7!important;
+  -webkit-text-fill-color:#f5f5f7!important;
+}
+.site-header-premium .site-brand-name{
+  white-space:nowrap!important;
+  font-size:15px!important;
+  line-height:1!important;
+  font-weight:650!important;
+  letter-spacing:-.018em!important;
+}
+.apple-hero h1{
+  white-space:nowrap!important;
+  max-width:100%;
+  font-size:clamp(1.72rem,8.1vw,6.75rem)!important;
+  line-height:.94!important;
+  letter-spacing:-.066em!important;
+  font-weight:680!important;
+}
+.about-premium .about-name{
+  white-space:nowrap!important;
+  max-width:100%;
+  font-size:clamp(1.85rem,6.2vw,6rem)!important;
+  line-height:.96!important;
+  letter-spacing:-.058em!important;
+  font-weight:650!important;
+}
+
+/* --------------------------------------------------------------------------
+   02. All tools are readable in navigation, including future additions
+   -------------------------------------------------------------------------- */
+.site-header-premium .primary-nav-dropdown{
+  width:min(430px,calc(100vw - 24px))!important;
+}
+.site-header-premium .primary-nav-dropdown-list{
+  max-height:min(70vh,590px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scrollbar-width:thin;
+  overscroll-behavior:contain;
+}
+.site-header-premium .primary-nav-dropdown-item{
+  min-width:0!important;
+  max-width:100%!important;
+}
+.site-header-premium .primary-nav-dropdown-item>div{
+  min-width:0!important;
+}
+.site-header-premium .primary-nav-dropdown-item strong{
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+  line-height:1.28!important;
+}
+.primary-nav-mobile-submenu{
+  max-height:52vh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+.primary-nav-mobile-child>div{min-width:0}
+.primary-nav-mobile-child strong{
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+
+/* --------------------------------------------------------------------------
+   03. Universal containment: no text or number may escape its allocated box
+   -------------------------------------------------------------------------- */
+#main-content :where(
+  section,article,aside,figure,figcaption,form,fieldset,
+  [class*="-panel"],[class*="-card"],[class*="-tile"],[class*="-box"],
+  [class*="-grid"],[class*="-row"],[class*="-column"],[class*="-col"],
+  [class*="-metric"],[class*="-stat"],[class*="-score"],[class*="-value"],
+  [class*="-summary"],[class*="-drawer"],[class*="-control"],[class*="-item"]
+){
+  min-width:0;
+  max-width:100%;
+}
+#main-content :where(
+  p,li,dd,dt,strong,b,em,small,label,legend,
+  h1,h2,h3,h4,h5,h6,button,a,code,kbd,td,th
+){
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+#main-content :where(input,textarea,select,button){
+  max-width:100%;
+}
+#main-content :where(pre,code){
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+#main-content :where([class*="-metric"],[class*="-stat"],[class*="-score"],[class*="-value"]){
+  font-variant-numeric:tabular-nums;
+}
+#main-content :where([class*="-metric"],[class*="-stat"],[class*="-score"],[class*="-value"]) :where(strong,b){
+  max-width:100%;
+  line-height:1.08!important;
+  overflow-wrap:anywhere;
+}
+
+/* Flex/grid children must be shrinkable instead of pushing outside cards. */
+#main-content :where(
+  [class*="flex"],[class*="grid"],[class*="-grid"],[class*="-row"],
+  [class*="-layout"],[class*="-split"],[class*="-columns"]
+)>*{
+  min-width:0;
+}
+
+/* --------------------------------------------------------------------------
+   04. Apple-like global surface language across ALL pages
+   -------------------------------------------------------------------------- */
+#main-content :where(
+  [class*="-panel"],[class*="-card"],[class*="-tile"],
+  [class*="-summary"],[class*="-drawer"]
+){
+  border-color:var(--premium-border)!important;
+  background-clip:padding-box;
+}
+#main-content :where(
+  [class*="-panel"],[class*="-card"],[class*="-tile"]
+){
+  border-radius:var(--premium-radius)!important;
+}
+#main-content :where(figure,[class*="-figure"]){
+  border-radius:var(--premium-radius)!important;
+}
+.light #main-content :where(
+  [class*="-panel"],[class*="-card"],[class*="-tile"]
+){
+  box-shadow:0 1px 0 rgba(255,255,255,.75) inset;
+}
+.dark #main-content :where(
+  [class*="-panel"],[class*="-card"],[class*="-tile"]
+){
+  box-shadow:0 1px 0 rgba(255,255,255,.035) inset;
+}
+
+/* Keep intentionally colored alert/semantic backgrounds, but standardize edge treatment. */
+#main-content :where(
+  [class*="-alert"],[class*="-notice"],[class*="-callout"],[class*="-warning"]
+){
+  border-radius:16px!important;
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+
+/* --------------------------------------------------------------------------
+   05. Tables: premium, compact, contained, readable
+   -------------------------------------------------------------------------- */
+#main-content :where([class*="table-wrap"],[class*="table-container"],[class*="-table-shell"]){
+  width:100%;
+  max-width:100%;
+  overflow-x:auto!important;
+  overflow-y:hidden;
+  overscroll-behavior-inline:contain;
+  -webkit-overflow-scrolling:touch;
+  border-radius:16px;
+  scrollbar-width:thin;
+}
+#main-content table{
+  width:100%;
+  max-width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  font-variant-numeric:tabular-nums;
+}
+#main-content table th,
+#main-content table td{
+  min-width:0;
+  max-width:none;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+  vertical-align:top;
+  line-height:1.42!important;
+}
+#main-content table th{
+  color:var(--premium-secondary);
+  font-weight:650;
+}
+#main-content table td{
+  color:var(--premium-text);
+}
+.light #main-content table{
+  border-color:rgba(0,0,0,.10);
+}
+.dark #main-content table{
+  border-color:rgba(255,255,255,.12);
+}
+
+/* Dense analytical tables keep horizontal scroll instead of clipping values. */
+.tools-premium-shell :where(
+  .hc-heatmap,.dt-table,[class*="matrix"],[class*="heatmap"],[class*="scenario-table"]
+){
+  max-width:none!important;
+}
+.tools-premium-shell :where(
+  .hc-heatmap-wrap,.dt-table-wrap,.dt-constraint-table-wrap,
+  [class*="heatmap-wrap"],[class*="matrix-wrap"]
+){
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+}
+
+/* --------------------------------------------------------------------------
+   06. Charts / figures / diagrams: stay inside stage and scale gracefully
+   -------------------------------------------------------------------------- */
+#main-content :where(
+  figure,[class*="-chart"],[class*="chart-"],[class*="-graph"],
+  [class*="-plot"],[class*="-diagram"],[class*="-visual"]
+){
+  max-width:100%;
+  min-width:0;
+}
+#main-content :where(
+  [class*="-chart-wrap"],[class*="-chart-container"],
+  [class*="-graph-wrap"],[class*="-plot-wrap"],[class*="-diagram-wrap"]
+){
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-inline:contain;
+}
+#main-content figure svg,
+#main-content [class*="-chart"] svg,
+#main-content [class*="-graph"] svg,
+#main-content [class*="-diagram"] svg{
+  display:block;
+  max-width:100%;
+  height:auto;
+}
+#main-content :where(figcaption,[class*="-caption"]){
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+
+/* Positioning labels previously used nowrap and could escape the chart edge. */
+.tools-premium-shell[data-tool="positioning-analyser"] .positioning-point span{
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  width:max-content;
+  max-width:min(170px,38vw)!important;
+  white-space:normal!important;
+  text-align:center;
+  line-height:1.25!important;
+  overflow-wrap:anywhere!important;
+}
+.tools-premium-shell[data-tool="positioning-analyser"] .positioning-point{
+  max-width:calc(100% - 16px);
+}
+
+/* --------------------------------------------------------------------------
+   07. Tool shells inherit the same premium material system
+   -------------------------------------------------------------------------- */
+.tools-premium-shell{
+  color:var(--premium-text)!important;
+  font-family:var(--apple-font,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif)!important;
+}
+.tools-premium-shell .tools-premium-header{
+  border-color:var(--premium-border)!important;
+}
+.tools-premium-shell .tools-premium-spec{
+  border:1px solid var(--premium-border)!important;
+  border-radius:var(--premium-radius-lg)!important;
+  background:var(--premium-surface)!important;
+  color:var(--premium-text)!important;
+  box-shadow:var(--premium-shadow)!important;
+  overflow:hidden;
+}
+.tools-premium-shell .tools-premium-spec :where(p,li,span,div){
+  overflow-wrap:anywhere;
+}
+.tools-premium-shell .tools-visual-stage{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+.tools-premium-shell :where(
+  [class*="-panel"],[class*="-card"],[class*="-box"],[class*="-tile"]
+){
+  max-width:100%;
+}
+.light .tools-premium-shell{
+  --tool-text:#1d1d1f;
+  --tool-muted:#6e6e73;
+}
+.dark .tools-premium-shell{
+  --tool-text:#f5f5f7;
+  --tool-muted:#a1a1a6;
+}
+
+/* Tabs may scroll horizontally, but never visually escape the viewport. */
+.tools-premium-shell .tools-premium-tabs,
+.tools-premium-shell :where([class*="-tabs"],[class*="-nav-wrap"]){
+  max-width:100%;
+  overflow-x:auto!important;
+  overflow-y:hidden;
+  overscroll-behavior-inline:contain;
+  scrollbar-width:thin;
+}
+.tools-premium-shell .tools-premium-tabs button{
+  flex:0 0 auto;
+  max-width:min(390px,75vw);
+}
+.tools-premium-shell .tools-premium-tabs button>span:first-child{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* Avoid oversized figures/numbers on compact metric cards. */
+.tools-premium-shell :where(
+  [class*="-metric"],[class*="-stat"],[class*="-score"],[class*="-value"]
+)>:where(strong,b){
+  font-size:clamp(.86rem,1.8vw,1.9rem)!important;
+}
+.tools-premium-shell :where(
+  [class*="-metric"],[class*="-stat"],[class*="-score"],[class*="-value"]
+)>:where(span,small){
+  white-space:normal!important;
+}
+
+/* Export / action labels can wrap instead of leaving their control. */
+.tools-premium-shell :where(button,a){
+  overflow-wrap:anywhere;
+}
+.tools-premium-shell .dt-export-button{
+  white-space:normal!important;
+  text-align:center;
+}
+
+/* --------------------------------------------------------------------------
+   08. Typography consistency across every portfolio route
+   -------------------------------------------------------------------------- */
+#main-content{
+  color:var(--premium-text);
+}
+#main-content h1{font-weight:650;letter-spacing:-.055em}
+#main-content h2{font-weight:640;letter-spacing:-.045em}
+#main-content h3{font-weight:620;letter-spacing:-.035em}
+#main-content p{line-height:1.52}
+#main-content :where(.text-xs,[class*="text-[11px]"],[class*="text-[10px]"],[class*="text-[9px]"],[class*="text-[8px]"],[class*="text-[7px]"]){
+  line-height:1.42!important;
+}
+#main-content :where(.eyebrow,[class*="-eyebrow"],[class*="-overline"],[class*="-kicker"]){
+  letter-spacing:.075em!important;
+}
+
+/* Generic page-width normalization without constraining wide analytical stages. */
+#main-content :where(.max-w-7xl,.max-w-6xl,.max-w-5xl):not(.tools-visual-stage){
+  width:min(100%,1240px);
+}
+
+/* --------------------------------------------------------------------------
+   09. Light / dark contrast guarantees
+   -------------------------------------------------------------------------- */
+.light #main-content{
+  color:#1d1d1f;
+}
+.dark #main-content{
+  color:#f5f5f7;
+}
+.light #main-content :where(h1,h2,h3,h4,h5,h6){
+  color:#1d1d1f!important;
+}
+.dark #main-content :where(h1,h2,h3,h4,h5,h6){
+  color:#f5f5f7!important;
+}
+.light #main-content :where(input,textarea,select){
+  color:#1d1d1f!important;
+  background:#fff!important;
+  border-color:rgba(0,0,0,.14)!important;
+}
+.dark #main-content :where(input,textarea,select){
+  color:#f5f5f7!important;
+  background:#1d1d1f!important;
+  border-color:rgba(255,255,255,.16)!important;
+}
+
+/* --------------------------------------------------------------------------
+   10. Responsive spill-proof fallbacks
+   -------------------------------------------------------------------------- */
+@media(max-width:980px){
+  .site-header-premium .site-brand-name{font-size:14px!important}
+}
+@media(max-width:767px){
+  .apple-hero h1{
+    font-size:clamp(1.72rem,8.2vw,3.6rem)!important;
+    letter-spacing:-.055em!important;
+  }
+  .about-premium .about-name{
+    font-size:clamp(1.8rem,8vw,3.5rem)!important;
+    letter-spacing:-.05em!important;
+  }
+  #main-content table th,
+  #main-content table td{
+    font-size:clamp(.72rem,2.7vw,.84rem)!important;
+    padding-inline:8px!important;
+  }
+  .tools-premium-shell :where(
+    [class*="-metric"],[class*="-stat"],[class*="-score"],[class*="-value"]
+  )>:where(strong,b){
+    font-size:clamp(.86rem,5vw,1.45rem)!important;
+  }
+}
+@media(max-width:420px){
+  .site-header-premium .site-brand-name{font-size:13px!important}
+  .apple-hero h1{font-size:clamp(1.62rem,8vw,2.15rem)!important}
+  .about-premium .about-name{font-size:clamp(1.64rem,7.8vw,2.1rem)!important}
+}
+
+/* Preserve deliberate single-line controls only where horizontal scrolling exists. */
+.tools-premium-shell :where(.dt-tabs button,.tools-premium-tabs button){
+  white-space:nowrap!important;
+}
+
+/* Reduced motion remains respected after final overrides. */
+@media(prefers-reduced-motion:reduce){
+  #main-content *,#main-content *::before,#main-content *::after{
+    transition:none!important;
+    animation:none!important;
+    scroll-behavior:auto!important;
+  }
+}
