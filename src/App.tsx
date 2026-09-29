@@ -16,6 +16,7 @@ import { ProjectDetailPage } from './pages/ProjectDetailPage';
 import { LabPage } from './pages/LabPage';
 import { ToolsPage } from './pages/ToolsPage';
 import { ToolDetailPage } from './pages/ToolDetailPage';
+import { AgriCaseStudyPage } from './pages/AgriCaseStudyPage';
 import { WritingPage } from './pages/WritingPage';
 import { ArticleDetailPage } from './pages/ArticleDetailPage';
 import { ResearchPage } from './pages/ResearchPage';
@@ -86,6 +87,7 @@ export const AppContent: React.FC = () => {
           <Route path="/director-os" element={<DirectorOSPage />} />
           <Route path="/lab" element={<LabPage />} />
           <Route path="/tools" element={<ToolsPage />} />
+          <Route path="/tools/agri-commercial-intelligence-engine/case-study" element={<AgriCaseStudyPage />} />
           <Route path="/tools/:tool" element={<ToolDetailPage />} />
           <Route path="/writing" element={<WritingPage />} />
           <Route path="/writing/:slug" element={<ArticleDetailPage />} />
