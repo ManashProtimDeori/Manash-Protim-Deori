@@ -5,6 +5,7 @@ import { DataProvider, useData } from './context/DataContext';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { CommandPalette } from './components/common/CommandPalette';
+import { BoldPunctuationCleaner } from './components/common/BoldPunctuationCleaner';
 const EditorModal = lazy(() => import('./components/editor/EditorModal').then(m => ({ default: m.EditorModal })));
 import { NotificationToast } from './components/editor/NotificationToast';
 import { GlobalEditBar } from './components/editor/GlobalEditBar';
@@ -73,6 +74,7 @@ export const AppContent: React.FC = () => {
 
   return (
     <div className="site-app-shell min-h-screen flex flex-col transition-colors duration-200">
+      <BoldPunctuationCleaner />
       <a href="#main-content" className="skip-link">Skip to content</a><ScrollToTop />
       
       {/* Top Bar Header */}
