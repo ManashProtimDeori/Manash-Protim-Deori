@@ -5,6 +5,7 @@ import {
   decisionOptions,
   evidenceRecords,
   pipelineVelocity,
+  runSensitivitySuite,
   type ConstraintKey,
   type DecisionAssessment,
   type DecisionOption,
@@ -427,4 +428,257 @@ export function pipelineDriverSensitivity(
     upsidePct:(row.up/baseline-1)*100,
     downsidePct:(row.down/baseline-1)*100,
   }));
+}
+
+
+export type ExperimentDesign={
+  baselineRatePct:number;
+  minimumDetectableLiftPct:number;
+  targetRatePct:number;
+  alpha:number;
+  power:number;
+  samplePerArm:number;
+  totalSample:number;
+  interpretation:string;
+};
+
+function inverseNormalCDF(p:number){
+  if(p<=0||p>=1) throw new Error('Probability must be between 0 and 1');
+  const a=[-39.6968302866538,220.946098424521,-275.928510446969,138.357751867269,-30.6647980661472,2.50662827745924];
+  const b=[-54.4760987982241,161.585836858041,-155.698979859887,66.8013118877197,-13.2806815528857];
+  const c=[-.00778489400243029,-.322396458041136,-2.40075827716184,-2.54973253934373,4.37466414146497,2.93816398269878];
+  const d=[.00778469570904146,.32246712907004,2.445134137143,3.75440866190742];
+  const plow=.02425;
+  const phigh=1-plow;
+  if(p<plow){
+    const q=Math.sqrt(-2*Math.log(p));
+    return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/
+      ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+  if(p>phigh){
+    const q=Math.sqrt(-2*Math.log(1-p));
+    return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/
+      ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+  const q=p-.5;
+  const r=q*q;
+  return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/
+    (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+}
+
+export function designConversionExperiment(
+  baselineRatePct:number,
+  minimumDetectableLiftPct:number,
+  alpha=.05,
+  power=.80,
+):ExperimentDesign{
+  if(baselineRatePct<=0||baselineRatePct>=100) throw new Error('Baseline rate must be between 0 and 100');
+  if(minimumDetectableLiftPct<=0) throw new Error('Minimum detectable lift must be positive');
+  if(alpha<=0||alpha>=.25) throw new Error('Alpha must be > 0 and < 0.25');
+  if(power<=.5||power>=.999) throw new Error('Power must be > 0.5 and < 0.999');
+
+  const p1=baselineRatePct/100;
+  const p2=Math.min(.999,p1*(1+minimumDetectableLiftPct/100));
+  if(Math.abs(p2-p1)<1e-6) throw new Error('Detectable effect is too small');
+  const pooled=(p1+p2)/2;
+  const zAlpha=inverseNormalCDF(1-alpha/2);
+  const zPower=inverseNormalCDF(power);
+  const numerator=
+    zAlpha*Math.sqrt(2*pooled*(1-pooled))+
+    zPower*Math.sqrt(p1*(1-p1)+p2*(1-p2));
+  const n=Math.ceil((numerator*numerator)/((p2-p1)*(p2-p1)));
+
+  return {
+    baselineRatePct,
+    minimumDetectableLiftPct,
+    targetRatePct:p2*100,
+    alpha,
+    power,
+    samplePerArm:n,
+    totalSample:n*2,
+    interpretation:'Approximate two-sided two-proportion design. Validate with the actual experiment unit, allocation, clustering, multiple-testing plan and traffic quality before launch.',
+  };
+}
+
+export type AllocationResult={
+  budget:number;
+  usedBudget:number;
+  remainingBudget:number;
+  totalUtility:number;
+  selected:DecisionAssessment[];
+  excluded:DecisionAssessment[];
+};
+
+export function optimizeDecisionPortfolio(
+  input:GtmInputs,
+  objective:BusinessObjective,
+  role:ExecutiveRole,
+  budget=160,
+):AllocationResult{
+  if(!Number.isInteger(budget)||budget<10||budget>1000) throw new Error('Budget must be an integer between 10 and 1000');
+  const portfolio=contextualDecisionPortfolio(input,objective,role);
+  const items=portfolio.map(item=>({
+    item,
+    cost:Math.max(1,Math.round(item.cost)),
+    utility:item.score+item.valueOfInformation*.25+(item.route==='ACT NOW'?8:item.route==='TEST'?5:0),
+  }));
+  const dp=Array.from({length:items.length+1},()=>Array<number>(budget+1).fill(0));
+  for(let i=1;i<=items.length;i++){
+    const {cost,utility}=items[i-1];
+    for(let b=0;b<=budget;b++){
+      dp[i][b]=dp[i-1][b];
+      if(cost<=b) dp[i][b]=Math.max(dp[i][b],dp[i-1][b-cost]+utility);
+    }
+  }
+  let b=budget;
+  const selected:DecisionAssessment[]=[];
+  for(let i=items.length;i>0;i--){
+    if(dp[i][b]!==dp[i-1][b]){
+      selected.push(items[i-1].item);
+      b-=items[i-1].cost;
+    }
+  }
+  selected.sort((a,b)=>b.score-a.score);
+  const selectedIds=new Set(selected.map(item=>item.id));
+  const excluded=portfolio.filter(item=>!selectedIds.has(item.id));
+  const usedBudget=selected.reduce((sum,item)=>sum+Math.max(1,Math.round(item.cost)),0);
+  return {
+    budget,
+    usedBudget,
+    remainingBudget:budget-usedBudget,
+    totalUtility:dp[items.length][budget],
+    selected,
+    excluded,
+  };
+}
+
+export type GtmHypothesis={
+  id:string;
+  hypothesis:string;
+  linkedKey:GtmInputKey;
+  confidence:number;
+  evidenceBasis:string;
+  falsifier:string;
+  nextTest:string;
+  ownerRole:ExecutiveRole;
+  riskIfWrong:number;
+};
+
+export const hypothesisRegistry:GtmHypothesis[]=[
+  {
+    id:'h-category',
+    hypothesis:'Category-language convergence is reducing the marginal distinctiveness of “AI-native FP&A” messaging.',
+    linkedKey:'categoryDistinctiveness',
+    confidence:76,
+    evidenceBasis:'Public competitor messaging overlap plus Drivetrain positioning.',
+    falsifier:'Independent buyer research shows high unaided uniqueness and materially higher preference for the current category language.',
+    nextTest:'Blind message-comprehension and competitive-distinctiveness research with ICP buyers.',
+    ownerRole:'PRODUCT MARKETING',
+    riskIfWrong:82,
+  },
+  {
+    id:'h-friction',
+    hypothesis:'Evaluation burden is a material conversion constraint in a demo/POC-led buying motion.',
+    linkedKey:'evaluationFriction',
+    confidence:64,
+    evidenceBasis:'Public evaluation model plus enterprise finance-software buying complexity.',
+    falsifier:'Opportunity data shows cycle length and loss reasons are unrelated to implementation, procurement, proof or security burden.',
+    nextTest:'Stage-duration and loss-reason analysis segmented by deal size and implementation complexity.',
+    ownerRole:'CRO',
+    riskIfWrong:75,
+  },
+  {
+    id:'h-adoption',
+    hypothesis:'Post-onboarding adoption depth is a leading indicator of expansion and advocacy.',
+    linkedKey:'adoptionDepth',
+    confidence:62,
+    evidenceBasis:'Product-marketing adoption priority plus modeled lifecycle mechanism.',
+    falsifier:'Cohort data shows no meaningful relationship between workflow depth and retention/expansion after controlling for customer size.',
+    nextTest:'Cohort analysis of integrations, active models, users, scenarios and expansion outcomes.',
+    ownerRole:'PRODUCT MARKETING',
+    riskIfWrong:88,
+  },
+  {
+    id:'h-research',
+    hypothesis:'Original finance research can create more durable category authority than commodity comparison content alone.',
+    linkedKey:'originalResearchAuthority',
+    confidence:70,
+    evidenceBasis:'Content differentiation logic and AI/search citation mechanics.',
+    falsifier:'Original research fails to outperform comparison content on ICP engagement, citations, assisted pipeline or sales usage.',
+    nextTest:'Publish one benchmark with instrumentation against a matched comparison-content cohort.',
+    ownerRole:'CMO',
+    riskIfWrong:58,
+  },
+  {
+    id:'h-observability',
+    hypothesis:'GTM data reliability is a prerequisite for scaling demand efficiently.',
+    linkedKey:'gtmReliability',
+    confidence:86,
+    evidenceBasis:'GTM operations responsibilities and measurement-system logic.',
+    falsifier:'Audited CRM and attribution data already reconcile at high accuracy and resource allocation decisions are stable without further instrumentation.',
+    nextTest:'CRM field-completeness, duplicate, source, stage-aging, routing-latency and opportunity-reconciliation audit.',
+    ownerRole:'CFO',
+    riskIfWrong:66,
+  },
+];
+
+export function hypothesisRisk(input:GtmInputs){
+  return hypothesisRegistry.map(item=>{
+    const current=input[item.linkedKey];
+    const normalizedPerformance=benefitAdjustedValue(item.linkedKey,current);
+    const unresolved=(100-item.confidence)/100;
+    const risk=Math.round(clamp(item.riskIfWrong*.45+(100-normalizedPerformance)*.35+unresolved*100*.20));
+    return {...item,risk};
+  }).sort((a,b)=>b.risk-a.risk);
+}
+
+function benefitAdjustedValue(key:GtmInputKey,value:number){
+  return key==='evaluationFriction'||key==='competitivePressure'?100-value:value;
+}
+
+export type BoardMemo={
+  headline:string;
+  readiness:number;
+  objective:BusinessObjective;
+  role:ExecutiveRole;
+  evidenceHealth:number;
+  uncertainty:{p10:number;p50:number;p90:number};
+  primaryConstraint:string;
+  robustLevers:string[];
+  topDecisions:{title:string;route:string;score:number}[];
+  topRisks:{hypothesis:string;risk:number;nextTest:string}[];
+  stressWatch:{name:string;delta:number}[];
+  falsifier:string;
+};
+
+export function buildBoardMemo(
+  input:GtmInputs,
+  objective:BusinessObjective,
+  role:ExecutiveRole,
+):BoardMemo{
+  const executive=calculateExecutiveScores(input);
+  const constraint=calculateConstraints(input)[0];
+  const sensitivity=runSensitivitySuite(input,[5,10,20]);
+  const evidence=evidenceHealth();
+  const uncertainty=simulateReadinessUncertainty(input,800,20260929);
+  const decisions=contextualDecisionPortfolio(input,objective,role).slice(0,3);
+  const risks=hypothesisRisk(input).slice(0,3);
+  const stresses=stressScenarios
+    .map(scenario=>applyStressScenario(input,scenario))
+    .sort((a,b)=>a.delta-b.delta)
+    .slice(0,3);
+  return {
+    headline:'GTM readiness is '+executive.readiness+'/100; the leading modeled constraint is '+constraint.label+'.',
+    readiness:executive.readiness,
+    objective,
+    role,
+    evidenceHealth:evidence.health,
+    uncertainty:{p10:uncertainty.p10,p50:uncertainty.p50,p90:uncertainty.p90},
+    primaryConstraint:constraint.label,
+    robustLevers:sensitivity.robustLevers.slice(0,5).map(row=>row.label),
+    topDecisions:decisions.map(item=>({title:item.title,route:item.route,score:item.score})),
+    topRisks:risks.map(item=>({hypothesis:item.hypothesis,risk:item.risk,nextTest:item.nextTest})),
+    stressWatch:stresses.map(item=>({name:item.scenario.name,delta:item.delta})),
+    falsifier:'The recommendation set should be revised when observed CRM, buyer-research, product-usage or experiment evidence materially changes the underlying assumptions.',
+  };
 }
