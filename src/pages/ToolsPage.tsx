@@ -43,7 +43,7 @@ export const ToolsPage: React.FC = () => {
   };
 
   return (
-    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
+    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell apple-tools-page py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
       
       {/* Editorial Header */}
       <div className="tools-premium-header flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-800/40">

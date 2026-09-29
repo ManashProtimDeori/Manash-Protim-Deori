@@ -12,7 +12,7 @@ export const AboutPage: React.FC = () => {
     .replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, '');
 
   return (
-    <div className="about-premium">
+    <div className="about-premium portfolio-page">
       <section className="about-hero about-hero-no-media" data-signal="neutral">
         <div className="about-hero-copy">
           <div className="flex items-center justify-between gap-4">

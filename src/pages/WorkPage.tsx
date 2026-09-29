@@ -54,7 +54,7 @@ export const WorkPage: React.FC = () => {
   }, [projects, currentCategory, searchQuery, sortBy]);
 
   return (
-    <div className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="portfolio-page portfolio-work-page py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       {/* Editorial Page Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 pb-6 border-b border-neutral-800/40">
@@ -149,7 +149,7 @@ export const WorkPage: React.FC = () => {
           {filteredProjects.map((project, idx) => (
             <article
               key={project.id}
-              className="space-y-5 pt-6 border-t border-neutral-800/60 flex flex-col justify-between group transition-all"
+              className="work-card-premium space-y-5 pt-6 flex flex-col justify-between group transition-all"
             >
               <div className="space-y-4">
                 

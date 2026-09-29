@@ -9,7 +9,7 @@ export const WritingPage: React.FC = () => {
   const { articles, isEditMode, openEditor } = useData();
 
   return (
-    <div className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="portfolio-page portfolio-writing-page py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 pb-6 border-b border-neutral-800/40">
@@ -18,10 +18,10 @@ export const WritingPage: React.FC = () => {
             Evidence-led essays · industry intelligence
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-100 dark:text-neutral-100 light:text-neutral-900 leading-tight">
-            Writing & Perspectives
+            Writing
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
-            Research-backed essays that turn industry data into decisions — with primary sources, charts, quantitative models, uncomfortable questions and the occasional useful joke.
+            Research-backed essays on marketing, AI, strategy and decision systems.
           </p>
         </div>
 

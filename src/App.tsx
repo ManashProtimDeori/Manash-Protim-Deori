@@ -36,7 +36,6 @@ import { ProtectedRoute } from './auth/ProtectedRoute';
 import { LoginPage } from './pages/LoginPage';
 const StudioPage = lazy(() => import('./pages/StudioPage').then(m => ({ default: m.StudioPage })));
 import { NotFoundPage } from './pages/NotFoundPage';
-import { ContextualArt } from './components/visualizations/ContextualArt';
 
 // Scroll to top automatically upon route navigation
 const ScrollToTop: React.FC = () => {
@@ -72,14 +71,14 @@ export const AppContent: React.FC = () => {
   }, [toggleEditMode]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-neutral-950 text-neutral-100 dark:bg-neutral-950 dark:text-neutral-100 light:bg-neutral-50 light:text-neutral-900 transition-colors duration-200">
+    <div className="site-app-shell min-h-screen flex flex-col transition-colors duration-200">
       <a href="#main-content" className="skip-link">Skip to content</a><ScrollToTop />
       
       {/* Top Bar Header */}
       <Header onOpenCommand={() => setCommandPaletteOpen(true)} />
 
       {/* Main Page Canvas */}
-      <main id="main-content" className="flex-1"><ContextualArt /><Suspense fallback={<p className="p-8">Loading workspace…</p>}>
+      <main id="main-content" className="flex-1"><Suspense fallback={<p className="p-8">Loading workspace…</p>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<WorkPage />} />

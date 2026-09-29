@@ -3,12 +3,46 @@ import { normalizeHeadline } from '../../utils/headline';
 import { Link } from 'react-router-dom';
 import { useData } from '../../context/DataContext';
 import { EditButton } from '../editor/EditButton';
-import { SemanticIcon } from '../common/SemanticIcon';
+
 export const FeaturedWork: React.FC = () => {
- const { projects } = useData();
- return <section className="selected-work wide"><div className="section-heading"><div><span className="eyebrow">Selected work</span><h2>Thinking,<br/><em>put to work</em></h2></div><Link className="text-link" to="/work">All projects ↗</Link><EditButton type="project" isNew/></div>
- {projects.filter(p=>p.featured).map((p,i)=><article className="project-feature" key={p.id}>
-  <Link to={`/work/${p.slug}`} className="project-visual" aria-label={`Explore ${p.title}`}><span className="eyebrow project-category-label"><SemanticIcon label={p.categories.join(' ')} iconOnly />{p.categories.join(' / ')}</span><div className="project-structure" aria-hidden="true">{(p.architectureNodes?.slice(0,4).map(n=>n.title) || p.technologies.slice(0,4)).map((t,j)=><div key={j}><span>0{j+1}</span><SemanticIcon label={t} iconOnly className="project-structure-icon" /><strong>{t}</strong></div>)}</div><span className="visual-caption">System overview / {String(i+1).padStart(2,'0')} <span>↗</span></span></Link>
-  <div className="project-summary"><div className="eyebrow">{p.year} / {p.status}</div><h3><Link to={`/work/${p.slug}`}>{normalizeHeadline(p.title)} ↗</Link></h3><p>{p.subtitle}</p><Link className="text-link" to={`/work/${p.slug}`}>View case study ↗</Link><EditButton type="project" item={p}/></div>
- </article>)}</section>;
+  const { projects } = useData();
+  const featured = projects.filter(project => project.featured).slice(0, 3);
+
+  return (
+    <section className="apple-section apple-work-section">
+      <div className="wide">
+        <div className="apple-section-heading">
+          <div>
+            <span className="apple-kicker">Selected work</span>
+            <h2>Ideas, made useful.</h2>
+            <p>A small selection of strategy, analytics and AI work built around real decisions.</p>
+          </div>
+          <div className="apple-heading-actions">
+            <EditButton type="project" isNew />
+            <Link className="apple-text-link" to="/work">View all work ↗</Link>
+          </div>
+        </div>
+
+        <div className="apple-work-grid">
+          {featured.map((project, index) => (
+            <article className={'apple-project-card apple-tone-' + (index + 1)} key={project.id}>
+              <div className="apple-project-meta">
+                <span>{project.year}</span>
+                <span>{project.categories.slice(0, 2).join(' · ')}</span>
+                <EditButton type="project" item={project} />
+              </div>
+              <div className="apple-project-body">
+                <h3><Link to={'/work/' + project.slug}>{normalizeHeadline(project.title)}</Link></h3>
+                <p>{project.subtitle}</p>
+              </div>
+              <div className="apple-project-footer">
+                <span>{project.status}</span>
+                <Link to={'/work/' + project.slug}>View case study ↗</Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };

@@ -1,82 +1,64 @@
 import React from 'react';
-import { normalizeHeadline } from '../../utils/headline';
 import { Link } from 'react-router-dom';
 import { useData } from '../../context/DataContext';
 import { EditButton } from '../editor/EditButton';
 import { InlineEditable } from '../editor/InlineEditable';
-import { LivingSignal } from '../visualizations/LivingSignal';
+
+const pillars = [
+  { label: 'Strategy', title: 'Direction before scale', copy: 'Positioning, choices and growth priorities.', href: '/work' },
+  { label: 'Marketing', title: 'Markets into momentum', copy: 'Demand, brand and commercial systems.', href: '/work' },
+  { label: 'Analytics', title: 'Evidence into decisions', copy: 'Measurement, economics and decision models.', href: '/tools' },
+  { label: 'AI Systems', title: 'Ideas into working products', copy: 'Intelligence engines, automation and tools.', href: '/lab' },
+];
 
 export const Hero: React.FC = () => {
-  const { siteConfig, updateSiteConfig, aboutData } = useData();
-
-  const rows = [
-    { state: 'strategy', title: 'Find the Direction', text: aboutData.competencies?.[0]?.summary, link: '/work', label: 'Strategy' },
-    { state: 'marketing', title: 'Understand the Market', text: aboutData.competencies?.[0]?.capabilities?.slice(0, 3).join(' · '), link: '/work', label: 'Marketing' },
-    { state: 'analytics', title: 'Follow the Evidence', text: aboutData.competencies?.[1]?.summary, link: '/tools', label: 'Analytics' },
-    { state: 'ai', title: 'Explore the Possible', text: aboutData.competencies?.[2]?.summary, link: '/lab', label: 'AI' },
-    { state: 'build', title: 'Make It Useful', text: 'Research systems, interactive tools and experiments. Ideas made tangible.', link: '/lab', label: 'Build' },
-  ];
+  const { siteConfig, updateSiteConfig } = useData();
 
   return (
-    <section className="signal-story wide" aria-labelledby="home-title">
-      <div className="story-copy">
-        <div className="hero-intro" data-signal="neutral">
-          <div className="hero-edit-anchor">
-            <EditButton type="siteConfig" item={siteConfig} />
-          </div>
+    <section className="apple-hero wide" aria-labelledby="home-title">
+      <div className="apple-hero-glow" aria-hidden="true" />
 
-          <h1 id="home-title" className="hero-name">
-            {siteConfig.name}
-          </h1>
+      <div className="apple-hero-copy">
+        <div className="apple-hero-edit"><EditButton type="siteConfig" item={siteConfig} /></div>
 
-          <InlineEditable
-            as="p"
-            value={siteConfig.positioning}
-            onSave={positioning => updateSiteConfig({ positioning })}
-            className="hero-premise"
-          />
+        <span className="apple-kicker">Marketing · Analytics · AI systems</span>
 
-          <p className="eyebrow disciplines">{siteConfig.tagline}</p>
+        <h1 id="home-title">{siteConfig.name}</h1>
 
-          <div className="hero-links">
-            <a
-              className="marketing-intelligence-cta"
-              href={import.meta.env.VITE_MARKETING_INTELLIGENCE_URL || 'https://marketing-intelligence-engine.vercel.app'}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Open Marketing Intelligence"
-            >
-              <span className="marketing-intelligence-cta__eyebrow">Live intelligence product</span>
-              <span className="marketing-intelligence-cta__label">Open Marketing Intelligence ↗</span>
-            </a>
-            <Link className="text-link" to="/work">Explore work ↗</Link>
-            <Link className="text-link secondary" to="/about">About ↗</Link>
-          </div>
+        <InlineEditable
+          as="p"
+          value={siteConfig.positioning}
+          onSave={positioning => updateSiteConfig({ positioning })}
+          className="apple-hero-premise"
+        />
 
-          <p className="hero-location">{siteConfig.location} / {siteConfig.openStatus}</p>
+        <p className="apple-hero-tagline">{siteConfig.tagline}</p>
+
+        <div className="apple-hero-actions">
+          <Link to="/work" className="apple-button apple-button-primary">Explore work</Link>
+          <a
+            href={import.meta.env.VITE_MARKETING_INTELLIGENCE_URL || 'https://marketing-intelligence-engine.vercel.app'}
+            target="_blank"
+            rel="noreferrer"
+            className="apple-button apple-button-secondary"
+          >
+            Open intelligence ↗
+          </a>
+          <Link to="/about" className="apple-text-link">About</Link>
         </div>
 
-        <div className="personal-thesis" data-signal="strategy">
-          <span className="eyebrow">A working perspective</span>
-          <h2>Clarity before action<br /><em>Direction before scale</em></h2>
-          <p>At the intersection of markets, data and intelligent systems.</p>
-        </div>
-
-        <div className="capability-rows">
-          <span className="eyebrow">Capabilities / From thought to practice</span>
-          {rows.map((row, index) => (
-            <article key={row.state} data-signal={row.state} className="capability-row">
-              <span className="eyebrow">0{index + 1} / {row.label}</span>
-              <h2>{normalizeHeadline(row.title)}</h2>
-              <p>{row.text}</p>
-              <Link className="text-link" to={row.link}>Explore {row.label.toLowerCase()} ↗</Link>
-            </article>
-          ))}
-        </div>
+        <p className="apple-hero-location">{siteConfig.location} · {siteConfig.openStatus}</p>
       </div>
 
-      <div className="signal-stage">
-        <LivingSignal />
+      <div className="apple-capability-grid">
+        {pillars.map((pillar, index) => (
+          <Link to={pillar.href} className={'apple-capability-card apple-tone-' + (index + 1)} key={pillar.label}>
+            <span>{pillar.label}</span>
+            <strong>{pillar.title}</strong>
+            <p>{pillar.copy}</p>
+            <i aria-hidden="true">↗</i>
+          </Link>
+        ))}
       </div>
     </section>
   );
