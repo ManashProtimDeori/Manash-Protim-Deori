@@ -9,6 +9,7 @@ import { BriefGenerator } from '../components/tools/BriefGenerator';
 import { MarketSignalOS } from '../components/tools/marketsignal/MarketSignalOS';
 import { HillChainTwin } from '../components/tools/hillchain/HillChainTwin';
 import { DrivetrainGTMIntelligenceTwin } from '../components/tools/drivetrain/DrivetrainGTMIntelligenceTwin';
+import { AgriCommercialIntelligenceEngine } from '../components/tools/agri/AgriCommercialIntelligenceEngine';
 import { EditButton } from '../components/editor/EditButton';
 import '../components/tools/ToolsPremium.css';
 
@@ -40,13 +41,15 @@ export const ToolsPage: React.FC = () => {
         return <HillChainTwin />;
       case 'drivetrain-gtm-intelligence-twin':
         return <DrivetrainGTMIntelligenceTwin />;
+      case 'agri-commercial-intelligence-engine':
+        return <AgriCommercialIntelligenceEngine />;
       default:
         return <RoiCalculator />;
     }
   };
 
   return (
-    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell apple-tools-page py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' || currentTool?.slug === 'drivetrain-gtm-intelligence-twin' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
+    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell apple-tools-page py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' || currentTool?.slug === 'drivetrain-gtm-intelligence-twin' || currentTool?.slug === 'agri-commercial-intelligence-engine' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
       
       {/* Editorial Header */}
       <div className="tools-premium-header flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-800/40">
