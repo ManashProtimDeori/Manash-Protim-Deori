@@ -65,6 +65,7 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
 
   const affordabilityPressure=clamp((baseline.affordabilityIndex-input.affordabilityIndex)/100,-.5,.75);
   const distributionEffect=clamp((input.weightedDistribution-baseline.weightedDistribution)/100,-.8,.5);
+  const numericDistributionEffect=clamp((input.numericDistribution-baseline.numericDistribution)/100,-.8,.5);
   const availabilityEffect=clamp((input.onShelfAvailability-baseline.onShelfAvailability)/100,-.8,.3);
   const serviceEffect=clamp((input.serviceLevelPct-baseline.serviceLevelPct)/100,-.5,.2);
   const brandElasticityDampener=1-clamp((input.brandEquity-50)/200,-.15,.25);
@@ -74,14 +75,35 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
   const inflationPenalty=clamp(Math.max(0,input.foodInflationPct-8)*.004,0,.35);
   const competitionPenalty=clamp((input.competitorPressure-50)*.0025,-.08,.18);
   const crossBorderPenalty=clamp(Math.max(0,input.crossBorderPriceGapPct)*.004,0,.28);
+  const promoEfficiency=clamp(
+    (input.promoIncrementalityPct/100)*(1-input.cannibalizationPct/100),
+    0,
+    1
+  );
+  const baselinePromoEfficiency=clamp(
+    (baseline.promoIncrementalityPct/100)*(1-baseline.cannibalizationPct/100),
+    0,
+    1
+  );
+  const incrementalTradeSpend=(input.tradeSpendPctRevenue-baseline.tradeSpendPctRevenue)/100;
+  const promotionDemandEffect=clamp(incrementalTradeSpend*promoEfficiency*.85,-.05,.08);
+  const incrementalMarketingSpend=(input.marketingSpendPctRevenue-baseline.marketingSpendPctRevenue)/100;
+  const marketingDemandEffect=clamp(
+    incrementalMarketingSpend*.60*(input.weightedDistribution/100)*(.75+.25*(input.brandEquity/100)),
+    -.05,
+    .08
+  );
 
   const rawDemandFactor=
     1+
     priceVolumeEffect-
     affordabilityPressure*.42+
-    distributionEffect*.55+
-    availabilityEffect*.42+
-    serviceEffect*.20-
+    distributionEffect*.47+
+    numericDistributionEffect*.18+
+    availabilityEffect*.38+
+    serviceEffect*.18+
+    promotionDemandEffect+
+    marketingDemandEffect-
     inflationPenalty-
     competitionPenalty-
     crossBorderPenalty;
@@ -103,13 +125,15 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
 
   const modeledVolumeMt=baseline.volumeMt*demandFactor;
   const rawAvailability=
-    .55+
-    input.weightedDistribution/100*.22+
+    .50+
+    input.numericDistribution/100*.07+
+    input.weightedDistribution/100*.20+
     input.onShelfAvailability/100*.18+
     input.fillRatePct/100*.05;
   const baselineAvailability=
-    .55+
-    baseline.weightedDistribution/100*.22+
+    .50+
+    baseline.numericDistribution/100*.07+
+    baseline.weightedDistribution/100*.20+
     baseline.onShelfAvailability/100*.18+
     baseline.fillRatePct/100*.05;
   const availabilityFactor=clamp(safe(rawAvailability,baselineAvailability),.55,1.18);
@@ -138,17 +162,16 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
       : 1;
 
   const netRevenue=targetNetRevenue;
-  const variableCost=netRevenue*clamp(.78*normalizedCostPressure*.82+.78*.18,.35,1.35);
+  const compositeCostPressure=
+    normalizedCostPressure*.82+
+    energyPressure*.10+
+    packagingPressure*.08;
+  const variableCost=netRevenue*clamp(.78*compositeCostPressure,.35,1.35);
   const logisticsCost=netRevenue*clamp(.045*(input.freightIndex/100)*(.85+.15*(100-input.fillRatePct)/100),.01,.18);
   const tradeSpend=grossRevenue*tradeRate;
   const marketingSpend=netRevenue*(input.marketingSpendPctRevenue/100);
   const badDebtCost=netRevenue*(input.badDebtPctRevenue/100);
 
-  const promoEfficiency=clamp(
-    (input.promoIncrementalityPct/100)*(1-input.cannibalizationPct/100),
-    0,
-    1
-  );
   const effectiveTradeCost=tradeSpend*(1-.32*promoEfficiency);
 
   const operatingLeverageAdj=grossRevenue*.025*(1-utilizationPenalty);
@@ -161,11 +184,6 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
     badDebtCost+
     operatingLeverageAdj;
 
-  const baselinePromoEfficiency=clamp(
-    (baseline.promoIncrementalityPct/100)*(1-baseline.cannibalizationPct/100),
-    0,
-    1
-  );
   const baselineTradeRate=baseline.tradeSpendPctRevenue/100;
   const baselineGrossRevenue=safe(baseline.revenue,1-baselineTradeRate);
   const baselineTradeSpend=baselineGrossRevenue*baselineTradeRate;
@@ -183,8 +201,12 @@ export function calculateCommercialFinancials(input:AgriInputs):AgriFinancialOut
   const baselineBlendedInputCostIndex=
     baseline.localSourcingPct/100*baseline.localDeliveredCostIndex+
     baseline.importDependencyPct/100*baselineImportedInputCostIndex;
+  const baselineCompositeCostPressure=
+    (baselineBlendedInputCostIndex/100)*.82+
+    (baseline.energyIndex/100)*.10+
+    (baseline.packagingIndex/100)*.08;
   const baselineVariableCostRate=clamp(
-    .78*(baselineBlendedInputCostIndex/100)*.82+.78*.18,
+    .78*baselineCompositeCostPressure,
     .35,
     1.35
   );
