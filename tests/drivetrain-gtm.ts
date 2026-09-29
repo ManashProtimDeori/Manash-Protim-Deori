@@ -1,5 +1,16 @@
 import assert from 'node:assert/strict';
 import {
+  applyStressScenario,
+  auditEvidence,
+  causalCentrality,
+  contextualDecisionPortfolio,
+  contextualReadiness,
+  evidenceHealth,
+  pipelineDriverSensitivity,
+  simulateReadinessUncertainty,
+  stressScenarios,
+} from '../src/lib/gtmAdvanced';
+import {
   assessDecision,
   calculateConstraints,
   calculateExecutiveScores,
@@ -122,4 +133,46 @@ assert.ok(highGapCategory.effectiveImpact>lowGapCategory.effectiveImpact);
 assert.throws(()=>sensitivityAnalysis(defaultGtmInputs,0),/Sensitivity step/);
 assert.throws(()=>runSensitivitySuite(defaultGtmInputs,[10]),/at least two/);
 
-console.log('PASS: GTM Intelligence Engine deterministic and three-iteration sensitivity tests.');
+
+const audits=auditEvidence();
+assert.ok(audits.length>=8);
+assert.ok(audits.every(row=>row.calibratedConfidence>=0&&row.calibratedConfidence<=100));
+const evidenceSnapshot=evidenceHealth();
+assert.ok(evidenceSnapshot.health>=0&&evidenceSnapshot.health<=100);
+assert.ok(evidenceSnapshot.sourceIdentifiability>=0&&evidenceSnapshot.sourceIdentifiability<=100);
+
+for(const objective of ['GROWTH','EFFICIENCY','RETENTION','CATEGORY LEADERSHIP'] as const){
+  const result=contextualReadiness(defaultGtmInputs,objective);
+  assert.ok(result.score>=0&&result.score<=100);
+}
+
+const contextual=contextualDecisionPortfolio(defaultGtmInputs,'GROWTH','CMO');
+assert.equal(contextual.length,recommendationPortfolio().length);
+assert.ok(contextual.every(row=>row.calibratedConfidence>=0&&row.calibratedConfidence<=100));
+assert.ok(contextual.every(row=>row.score>=0&&row.score<=100));
+
+const centrality=causalCentrality();
+assert.equal(centrality.length,Object.keys(defaultGtmInputs).length);
+assert.ok(centrality[0].centrality>=centrality[centrality.length-1].centrality);
+
+for(const scenario of stressScenarios){
+  const result=applyStressScenario(defaultGtmInputs,scenario);
+  assert.ok(result.after.readiness>=0&&result.after.readiness<=100);
+  assert.ok(Number.isFinite(result.delta));
+  assert.ok(result.primaryConstraint);
+}
+
+const simA=simulateReadinessUncertainty(defaultGtmInputs,500,42);
+const simB=simulateReadinessUncertainty(defaultGtmInputs,500,42);
+approx(simA.p10,simB.p10);
+approx(simA.p50,simB.p50);
+approx(simA.p90,simB.p90);
+assert.ok(simA.p10<=simA.p50&&simA.p50<=simA.p90);
+assert.ok(simA.primaryConstraintProbabilities.length>0);
+assert.throws(()=>simulateReadinessUncertainty(defaultGtmInputs,50,42),/Simulation runs/);
+
+const pipelineSensitivity=pipelineDriverSensitivity(10,20,50000,50,10);
+assert.equal(pipelineSensitivity.length,4);
+assert.ok(pipelineSensitivity.every(row=>Number.isFinite(row.upsidePct)&&Number.isFinite(row.downsidePct)));
+
+console.log('PASS: GTM Intelligence Engine deterministic, contextual, causal and uncertainty tests.');
