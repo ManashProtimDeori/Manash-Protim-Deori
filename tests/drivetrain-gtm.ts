@@ -8,7 +8,9 @@ import {
   pipelineVelocity,
   rankContent,
   recommendationPortfolio,
+  runSensitivitySuite,
   scenarioDelta,
+  sensitivityAnalysis,
   type DecisionOption,
 } from '../src/lib/drivetrainGtm';
 
@@ -40,6 +42,7 @@ assert.ok(delta.readiness>0);
 
 const reversibleUncertain:DecisionOption={
   id:'test',
+  focusKey:'categoryDistinctiveness',
   title:'Reversible uncertain move',
   description:'test',
   impact:88,
@@ -57,6 +60,7 @@ assert.ok(testDecision.downsideRisk>=0&&testDecision.downsideRisk<=100);
 
 const strongAction:DecisionOption={
   id:'act',
+  focusKey:'gtmReliability',
   title:'Strong action',
   description:'act',
   impact:90,
@@ -85,4 +89,37 @@ approx(pipelineVelocity(10,20,50000,50),2000);
 assert.throws(()=>pipelineVelocity(10,120,50000,50),/Invalid pipeline inputs/);
 assert.throws(()=>calculateConstraints({...defaultGtmInputs,organicDemand:101}),/Invalid GTM inputs/);
 
-console.log('PASS: Drivetrain GTM Intelligence Twin deterministic tests.');
+
+const localSensitivity=sensitivityAnalysis(defaultGtmInputs,5);
+const mediumSensitivity=sensitivityAnalysis(defaultGtmInputs,10);
+const strategicSensitivity=sensitivityAnalysis(defaultGtmInputs,20);
+assert.equal(localSensitivity.length,Object.keys(defaultGtmInputs).length);
+assert.equal(mediumSensitivity.length,localSensitivity.length);
+assert.equal(strategicSensitivity.length,localSensitivity.length);
+for(const rows of [localSensitivity,mediumSensitivity,strategicSensitivity]){
+  assert.ok(rows.every(row=>row.rank>=1));
+  assert.ok(rows.every(row=>Number.isFinite(row.swing)));
+  assert.ok(rows.every(row=>row.improvedReadiness>=0&&row.improvedReadiness<=100));
+  assert.ok(rows.every(row=>row.worsenedReadiness>=0&&row.worsenedReadiness<=100));
+}
+
+const sensitivitySuite=runSensitivitySuite(defaultGtmInputs,[5,10,20]);
+assert.equal(sensitivitySuite.iterations.length,3);
+assert.equal(sensitivitySuite.robustLevers.length,Object.keys(defaultGtmInputs).length);
+assert.ok(sensitivitySuite.modelRobustness>=0&&sensitivitySuite.modelRobustness<=100);
+assert.ok(sensitivitySuite.topDriverConsistency>=0&&sensitivitySuite.topDriverConsistency<=100);
+
+const weakGtmDecision=assessDecision(strongAction,{...defaultGtmInputs,gtmReliability:20});
+const strongGtmDecision=assessDecision(strongAction,{...defaultGtmInputs,gtmReliability:90});
+assert.ok(strongGtmDecision.calibratedConfidence>weakGtmDecision.calibratedConfidence);
+
+const lowGapPortfolio=recommendationPortfolio({...defaultGtmInputs,categoryDistinctiveness:95});
+const highGapPortfolio=recommendationPortfolio({...defaultGtmInputs,categoryDistinctiveness:20});
+const lowGapCategory=lowGapPortfolio.find(item=>item.id==='category-outcome')!;
+const highGapCategory=highGapPortfolio.find(item=>item.id==='category-outcome')!;
+assert.ok(highGapCategory.effectiveImpact>lowGapCategory.effectiveImpact);
+
+assert.throws(()=>sensitivityAnalysis(defaultGtmInputs,0),/Sensitivity step/);
+assert.throws(()=>runSensitivitySuite(defaultGtmInputs,[10]),/at least two/);
+
+console.log('PASS: GTM Intelligence Engine deterministic and three-iteration sensitivity tests.');

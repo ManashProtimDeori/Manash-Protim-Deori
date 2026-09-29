@@ -16,6 +16,7 @@ import {
   pipelineVelocity,
   rankContent,
   recommendationPortfolio,
+  runSensitivitySuite,
   scenarioDelta,
   type GtmInputs,
 } from '../../../lib/drivetrainGtm';
@@ -28,12 +29,13 @@ type View =
   | 'Adoption'
   | 'GTM Ops'
   | 'Pricing & Experiments'
+  | 'Sensitivity Lab'
   | 'Decision Lab'
   | 'Evidence & Roadmap';
 
 const views:View[]=[
   'Command Center','Category','ICP & Buying','Demand','Adoption','GTM Ops',
-  'Pricing & Experiments','Decision Lab','Evidence & Roadmap'
+  'Pricing & Experiments','Sensitivity Lab','Decision Lab','Evidence & Roadmap'
 ];
 
 const scoreTone=(value:number)=>value>=75?'good':value>=58?'watch':'risk';
@@ -76,7 +78,8 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
 
   const constraints=useMemo(()=>calculateConstraints(inputs),[inputs]);
   const executive=useMemo(()=>calculateExecutiveScores(inputs),[inputs]);
-  const decisions=useMemo(()=>recommendationPortfolio(),[]);
+  const decisions=useMemo(()=>recommendationPortfolio(inputs),[inputs]);
+  const sensitivity=useMemo(()=>runSensitivitySuite(inputs,[5,10,20]),[inputs]);
   const rankedContent=useMemo(()=>rankContent(contentOpportunities),[]);
   const primary=constraints[0];
   const delta=useMemo(()=>scenarioDelta(defaultGtmInputs,inputs),[inputs]);
@@ -124,7 +127,7 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
         </article>
 
         <article className="dt-panel">
-          <SectionHead eyebrow="System Readiness" title={executive.readiness+'/100'}/>
+          <SectionHead eyebrow="System Readiness" title={executive.readiness+'/100'} copy={'Weighted '+executive.weightedReadiness+'/100 · coherence '+executive.coherenceReadiness+'/100 · weakest pillar '+executive.weakestPillar+'/100'}/>
           <div className="dt-readiness-list">
             {[
               ['Category',executive.category,delta.category],
@@ -430,6 +433,68 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
     </div>
   );
 
+  const renderSensitivity=()=>(
+    <div className="dt-stack">
+      <section className="dt-panel">
+        <SectionHead
+          eyebrow="Three-Iteration Sensitivity Lab"
+          title="Which GTM levers remain important as the perturbation grows?"
+          copy="The engine runs symmetric beneficial/worsening perturbations at ±5, ±10 and ±20 points. Evaluation friction and competitive pressure are direction-inverted because lower is better."
+        />
+        <div className="dt-robustness-strip">
+          <div><span>Model robustness</span><strong>{sensitivity.modelRobustness}/100</strong><p>Penalizes unstable driver ranks and excessive single-driver concentration.</p></div>
+          <div><span>Top-driver consistency</span><strong>{sensitivity.topDriverConsistency}%</strong><p>Share of top-five drivers that remain top-five across all three perturbation scales.</p></div>
+          <div><span>Readiness</span><strong>{executive.readiness}/100</strong><p>Bottleneck-aware blend of weighted and harmonic pillar readiness.</p></div>
+        </div>
+      </section>
+
+      <section className="dt-panel">
+        <SectionHead eyebrow="Robust Levers" title="Drivers that survive all three sensitivity iterations"/>
+        <div className="dt-table-wrap">
+          <table className="dt-table">
+            <thead><tr><th>Driver</th><th>Avg rank</th><th>Rank spread</th><th>Avg upside</th><th>Avg downside</th><th>Effect / point</th><th>Stability</th></tr></thead>
+            <tbody>{sensitivity.robustLevers.slice(0,10).map(row=><tr key={row.key}>
+              <td><strong>{row.label}</strong></td>
+              <td>{row.averageRank.toFixed(1)}</td>
+              <td>{row.rankSpread}</td>
+              <td className="dt-positive">+{row.averageUpside.toFixed(2)}</td>
+              <td className="dt-negative">−{row.averageDownside.toFixed(2)}</td>
+              <td>{row.averageEffectPerPoint.toFixed(3)}</td>
+              <td><Tag tone={row.stability==='HIGH'?'fact':row.stability==='MEDIUM'?'model':'inference'}>{row.stability}</Tag></td>
+            </tr>)}</tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="dt-sensitivity-grid">
+        {sensitivity.iterations.map(iteration=><article className="dt-panel" key={iteration.step}>
+          <SectionHead eyebrow={'Iteration · ±'+iteration.step+' points'} title="Readiness sensitivity"/>
+          <div className="dt-sensitivity-bars">
+            {iteration.rows.slice(0,8).map(row=><div key={row.key}>
+              <div><span>{row.label}</span><strong>{row.swing>=0?'+':''}{row.swing.toFixed(1)}</strong></div>
+              <div className="dt-sensitivity-track"><i style={{width:Math.min(100,Math.abs(row.swing)*8+4)+'%'}}/></div>
+              <small>Upside +{row.upside.toFixed(1)} · downside −{row.downside.toFixed(1)} · rank {row.rank}</small>
+            </div>)}
+          </div>
+        </article>)}
+      </section>
+
+      <section className="dt-panel">
+        <SectionHead eyebrow="Sensitivity Interpretation" title="Continuous improvement rules"/>
+        <div className="dt-boundary-grid">
+          {[
+            ['Stable high-rank lever','Prioritize when it remains influential at 5, 10 and 20-point perturbations and the evidence base is credible.'],
+            ['Large upside + large downside','Treat as a high-leverage variable that deserves measurement and guardrails before scaling.'],
+            ['Rank instability','Avoid overconfident prioritization; the decision depends materially on assumption size or threshold effects.'],
+            ['Low effect / point','Do not over-invest merely because the variable sounds strategically important.'],
+            ['Coherence gap','If weighted readiness exceeds harmonic readiness, weak pillars are being masked by stronger ones.'],
+            ['Sensitivity ≠ causality','A model lever can be mathematically influential without being independently controllable in the real market.'],
+          ].map(([a,b])=><div key={a}><Gauge/><strong>{a}</strong><p>{b}</p></div>)}
+        </div>
+      </section>
+    </div>
+  );
+
   const renderDecisions=()=>(
     <div className="dt-stack">
       <section className="dt-panel">
@@ -439,7 +504,7 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
             <h4>{route}</h4>
             {decisions.filter(d=>d.route===route).map(d=><article key={d.id}>
               <strong>{d.title}</strong><p>{d.description}</p>
-              <div><span>Score {d.score}</span><span>Confidence {d.confidence}</span><span>Downside {d.downsideRisk}</span><span>VOI {d.valueOfInformation}</span></div>
+              <div><span>Score {d.score}</span><span>Effective impact {d.effectiveImpact}</span><span>Calibrated confidence {d.calibratedConfidence}</span><span>Constraint gap {d.constraintGap}</span><span>Downside {d.downsideRisk}</span><span>VOI {d.valueOfInformation}</span></div>
               <small>{d.rationale}</small>
             </article>)}
           </div>)}
@@ -495,6 +560,7 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
     if(view==='Adoption')return renderAdoption();
     if(view==='GTM Ops')return renderGtmOps();
     if(view==='Pricing & Experiments')return renderPricing();
+    if(view==='Sensitivity Lab')return renderSensitivity();
     if(view==='Decision Lab')return renderDecisions();
     return renderEvidence();
   };
@@ -520,7 +586,7 @@ export const DrivetrainGTMIntelligenceTwin:React.FC=()=>{
       <p><strong>Independent analysis.</strong> Not affiliated with or commissioned by Drivetrain. Public-source evidence and clearly labeled modeled assumptions. Scenario outputs are decision aids, not claims about Drivetrain’s private performance.</p>
     </div>
 
-    <nav className="dt-tabs" aria-label="Drivetrain GTM Intelligence Twin modules">
+    <nav className="dt-tabs" aria-label="GTM Intelligence Engine modules">
       {views.map(item=><button key={item} className={view===item?'active':''} onClick={()=>setView(item)}>{item}</button>)}
     </nav>
 

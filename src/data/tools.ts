@@ -203,7 +203,9 @@ export const toolsData: ToolItem[] = [
       'Experimentation lab for positioning, interactive sandbox, pricing, benchmark research, customer proof and POC redesign',
       'Evidence-adjusted decision engine routing initiatives into ACT NOW, TEST, PREPARE, WATCH or IGNORE FOR NOW using impact, confidence, urgency, reversibility, cost, dependency, downside and value of information',
       'Public-source evidence registry with provenance, status, confidence, independence and analytical boundaries',
-      '30 / 90 / 365-day commercial roadmap and deterministic tests for scoring, routing, content ranking and pipeline formulas'
+      'Three-iteration ±5/±10/±20 sensitivity analysis with rank stability, robust-lever detection and bottleneck-aware system readiness',
+      'Dynamic decision prioritization that recalibrates impact and confidence as GTM constraint gaps and data reliability change',
+      '30 / 90 / 365-day commercial roadmap and deterministic tests for scoring, routing, sensitivity, content ranking and pipeline formulas'
     ],
     technologies: ['React 19', 'TypeScript', 'Evidence Modeling', 'Constraint Analysis', 'Decision Science', 'GTM Economics', 'Scenario Modeling', 'Responsive Data UI'],
     interactiveComponent: 'DrivetrainGTMIntelligenceTwin',

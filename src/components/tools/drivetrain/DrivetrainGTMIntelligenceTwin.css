@@ -119,3 +119,86 @@
 @media(max-width:640px){
   .dt-shell{--dt-font-xs:.74rem;--dt-font-sm:.80rem;--dt-font-md:.87rem;--dt-font-body:.92rem}
 }
+
+
+/* v2 sensitivity and robustness workspace */
+.dt-robustness-strip{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:18px;
+}
+.dt-robustness-strip>div{
+  padding:14px;
+  border:1px solid var(--dt-line);
+  border-radius:10px;
+  background:color-mix(in srgb,var(--bg-primary) 76%,transparent);
+}
+.dt-robustness-strip span{
+  display:block;
+  font:700 var(--dt-font-xs)/1.35 var(--font-mono);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--dt-muted);
+}
+.dt-robustness-strip strong{
+  display:block;
+  margin-top:8px;
+  font:800 1.55rem/1.1 var(--font-mono);
+}
+.dt-robustness-strip p{
+  margin-top:7px;
+  font-size:var(--dt-font-sm)!important;
+  line-height:1.5!important;
+}
+.dt-sensitivity-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.dt-sensitivity-bars{
+  display:grid;
+  gap:12px;
+  margin-top:18px;
+}
+.dt-sensitivity-bars>div>div:first-child{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+}
+.dt-sensitivity-bars span{
+  font-size:var(--dt-font-sm)!important;
+  font-weight:650;
+}
+.dt-sensitivity-bars strong{
+  font:750 var(--dt-font-xs)/1 var(--font-mono);
+}
+.dt-sensitivity-track{
+  height:7px;
+  margin-top:7px;
+  overflow:hidden;
+  border-radius:999px;
+  background:color-mix(in srgb,var(--dt-line) 84%,transparent);
+}
+.dt-sensitivity-track i{
+  display:block;
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#8ea0b8));
+}
+.dt-sensitivity-bars small{
+  display:block;
+  margin-top:5px;
+  color:var(--dt-muted);
+  font-size:var(--dt-font-xs)!important;
+  line-height:1.4!important;
+}
+.dt-positive{color:#2f8a68!important}.dt-negative{color:#a85159!important}
+.dark .dt-positive{color:#79c4a5!important}.dark .dt-negative{color:#e19098!important}
+@media(max-width:1000px){
+  .dt-sensitivity-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .dt-robustness-strip{grid-template-columns:1fr}
+}
