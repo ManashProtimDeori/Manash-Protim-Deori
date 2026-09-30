@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   AlertTriangle,
-  BarChart3,
   BrainCircuit,
   Check,
   Copy,
@@ -9,15 +8,12 @@ import {
   Download,
   ExternalLink,
   FileDown,
-  Leaf,
   LockKeyhole,
-  Network,
   Pencil,
   RotateCcw,
   ShieldCheck,
   SlidersHorizontal,
   Target,
-  TrendingUp,
 } from 'lucide-react';
 import { useAuth } from '../auth/AuthContext';
 import {
@@ -58,7 +54,7 @@ type DeckSlide = {
   kind: string;
 };
 
-type SlideOverride = { title?: string; decision?: string; narrative?: string };
+type SlideOverride = { title?: string; decision?: string; narrative?: string; bullets?: string[] };
 type OwnerOverrides = Record<string, SlideOverride>;
 
 const palette: Record<Tone, string> = {
@@ -292,6 +288,47 @@ export const CanonicalStrategyLabPage: React.FC = () => {
   const tco = useMemo(() => calculateCustomerTco(tcoInputs), [tcoInputs]);
   const breakEvenReinvestment = useMemo(() => scenarioBreakEvenReinvestmentPct(scenario), [scenario]);
 
+  const dynamicInsights = useMemo(() => {
+    const items: string[] = [];
+    if (scenario.retentionPct < 95) {
+      items.push('Priority shifts to retention: protect the paid base before scaling acquisition or migration demand.');
+    } else if (scenario.retentionPct >= 98) {
+      items.push('High modeled retention increases the value of attach and expansion because new ARR compounds on a stable paid base.');
+    }
+
+    if (metrics.operatingMarginPct < 5) {
+      items.push('The active growth plan is margin-destructive at this reinvestment/contribution mix; stage spending behind leading indicators.');
+    } else if (metrics.operatingMarginPct >= 10) {
+      items.push('The active scenario preserves double-digit operating leverage; expansion and partner motions can be scaled more aggressively if leading indicators hold.');
+    }
+
+    if (tco.paybackMonths === null) {
+      items.push('The customer TCO case does not pay back under the current assumptions; do not lead with migration savings for this account.');
+    } else if (tco.paybackMonths > 30) {
+      items.push('Migration payback is slow; prioritize risk reduction, lifecycle or sovereignty value rather than a pure cost-savings claim.');
+    } else if (tco.paybackMonths <= 18) {
+      items.push('The customer economics support a strong migration motion: lead with quantified payback and operational proof.');
+    }
+
+    if (metrics.subscriptionMixPct < 80 || scenario.servicePullThroughPct > 30) {
+      items.push('Services intensity is becoming a strategic constraint; standardize delivery before generating more migration demand.');
+    }
+
+    if (scenario.partnerARR >= scenario.vmwareARR + scenario.aiARR) {
+      items.push('Partner distribution is the largest modeled strategic wedge; concentrate enablement on marketplace/OEM/SI attach economics.');
+    } else if (scenario.aiARR > scenario.vmwareARR) {
+      items.push('AI infrastructure is the larger modeled wedge; prioritize hardware readiness, private/sovereign AI references and partner-led workload attach.');
+    } else {
+      items.push('Private-cloud migration is the larger modeled wedge; prioritize factory repeatability, customer TCO proof and post-migration expansion.');
+    }
+
+    if (distribution.operatingProfit.p10 < 0) {
+      items.push('Downside modeled operating profit falls below zero; leadership should reduce uncertainty or stage capital before approving the full plan.');
+    }
+
+    return items.slice(0, 5);
+  }, [scenario, metrics, tco, distribution]);
+
   const actualRevenueGrowth = ((CANONICAL_BASE_2025.revenue / CANONICAL_BASE_2025.priorRevenue) - 1) * 100;
   const actualSubscriptionGrowth = ((CANONICAL_BASE_2025.subscriptionRevenue / CANONICAL_BASE_2025.priorSubscriptionRevenue) - 1) * 100;
   const actualSubscriptionMix = (CANONICAL_BASE_2025.subscriptionRevenue / CANONICAL_BASE_2025.revenue) * 100;
@@ -326,11 +363,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         { label: 'Operating margin', value: pct(metrics.operatingMarginPct), detail: moneyM(metrics.projectedOperatingProfit) + ' operating profit', tone: 'violet' },
         { label: 'P10 → P90 revenue', value: moneyM(distribution.revenue.p10) + ' → ' + moneyM(distribution.revenue.p90), detail: 'Deterministic uncertainty simulation', tone: 'gold' },
       ],
-      bullets: [
-        'Enterprise assurance monetizes risk after Ubuntu is already in production.',
-        'Migration turns private-cloud disruption into a repeatable landing-zone motion.',
-        'AI infrastructure monetizes portability, hardware readiness and sovereign/private deployment.',
-      ],
+      bullets: dynamicInsights.slice(0, 3),
       sourceIds: ['canonical-2025-accounts', 'canonical-ai', 'canonical-gtc-2026'],
       kind: 'cockpit',
     },
@@ -719,7 +752,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
   const setTcoValue = (key: keyof CustomerTcoInputs, value: number) =>
     setTcoInputs((prev) => ({ ...prev, [key]: value }));
 
-  const updateOverride = (field: keyof SlideOverride, value: string) => {
+  const updateOverride = (field: keyof SlideOverride, value: string | string[]) => {
     setOverrides((prev) => ({
       ...prev,
       [editingSlideId]: { ...(prev[editingSlideId] || {}), [field]: value },
@@ -1215,6 +1248,18 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                   <div className="text-[10px] uppercase tracking-wide text-white/35">Narrative</div>
                   <textarea value={editingSlide.narrative} onChange={(e) => updateOverride('narrative', e.target.value)} rows={6} className="mt-1 w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-xs leading-relaxed text-white outline-none focus:border-orange-400/60" />
                 </label>
+                <label className="block mt-4">
+                  <div className="text-[10px] uppercase tracking-wide text-white/35">Decision logic — one bullet per line</div>
+                  <textarea
+                    value={editingSlide.bullets.join('\n')}
+                    onChange={(e) => updateOverride('bullets', e.target.value.split('\n').map((line) => line.trim()).filter(Boolean))}
+                    rows={8}
+                    className="mt-1 w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-xs leading-relaxed text-white outline-none focus:border-orange-400/60"
+                  />
+                </label>
+                <div className="mt-3 rounded-md border border-amber-400/15 bg-amber-400/[0.04] p-3 text-[10px] leading-relaxed text-amber-100/55">
+                  Financial formulas, reported base metrics and source links remain code-controlled so narrative editing cannot silently change the model evidence.
+                </div>
                 <div className="grid gap-2 mt-4">
                   <button onClick={copyGithubPrompt} className="inline-flex items-center justify-center gap-2 rounded-md bg-white/[0.06] border border-white/10 px-3 py-2.5 text-xs text-white hover:border-orange-400/50">
                     {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
