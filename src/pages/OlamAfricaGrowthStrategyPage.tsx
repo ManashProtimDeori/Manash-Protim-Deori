@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Download, ExternalLink, FileDown, Leaf, Network, Route, Sparkles, Target, TrendingUp } from 'lucide-react';
+import { Download, ExternalLink, FileDown, Leaf, Network, Target, TrendingUp } from 'lucide-react';
 import { OLAM_REVIEW_ITERATIONS, OLAM_SLIDES, OLAM_SOURCES } from '../data/olamAfricaStrategy';
 import type { OlamMetric, OlamSlide, OlamTone } from '../data/olamAfricaStrategy';
 
