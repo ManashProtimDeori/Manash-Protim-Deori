@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { OLAM_REVIEW_ITERATIONS, OLAM_SLIDES, OLAM_SOURCES } from '../src/data/olamAfricaStrategy';
 
 assert.equal(OLAM_REVIEW_ITERATIONS.length, 20, 'Olam strategy must retain exactly 20 meaningful review iterations');
+assert.ok(OLAM_REVIEW_ITERATIONS[2][3].includes('US$28.666bn'), 'financial-base audit should resolve the annual-report revenue rounding discrepancy');
+assert.ok(OLAM_REVIEW_ITERATIONS[2][3].includes('CEO narrative'), 'financial-base audit should disclose the internal annual-report inconsistency');
 assert.equal(OLAM_SLIDES.length, 28, 'Olam executive deck should contain 28 slides');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'candidate').length, 2, 'deck must include exactly two candidate-contribution slides');
 assert.equal(new Set(OLAM_SOURCES.map(source => source.id)).size, OLAM_SOURCES.length, 'source IDs must be unique');
