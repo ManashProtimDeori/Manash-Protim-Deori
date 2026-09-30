@@ -1463,7 +1463,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
     if (slide.kind === 'candidate') {
       return (
-        <div className="canonical-candidate-visual grid lg:grid-cols-[.9fr_1.1fr] gap-4">
+        <div className={'canonical-candidate-visual grid lg:grid-cols-[.9fr_1.1fr] gap-4 ' + (slide.id === 'candidate-fit' ? 'mx-2 mb-5 p-2' : '')}>
           <div className="grid sm:grid-cols-2 gap-2.5">
             {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
           </div>
@@ -1479,19 +1479,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                 </div>
               ))}
             </div>
-            {slide.id === 'candidate-fit' && (
-              <div className="mt-3 flex flex-wrap gap-2">
-                <a href="https://linkedin.com/in/manash-protim-deori" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/90 hover:border-orange-400/40">
-                  <ExternalLink className="h-3.5 w-3.5" /> LinkedIn
-                </a>
-                <a href="/resume" className="inline-flex items-center gap-1.5 rounded-md border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/90 hover:border-orange-400/40">
-                  <ExternalLink className="h-3.5 w-3.5" /> Resume
-                </a>
-                <a href="https://manash-protim-deori.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/90 hover:border-orange-400/40">
-                  <ExternalLink className="h-3.5 w-3.5" /> Portfolio
-                </a>
-              </div>
-            )}
+
           </div>
         </div>
       );
