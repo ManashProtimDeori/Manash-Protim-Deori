@@ -48,7 +48,7 @@ export const OLAM_SOURCES: OlamSource[] = [
     url: 'https://www.olamagri.com/content/dam/olam-agri/assets/webp/au/ar/annual-report-pdf/2025/annual-report-2025.pdf',
     date: '2026',
     authority: 'primary',
-    note: 'Primary source for FY2025 scale, revenue, EBIT, volume, customer/farmer footprint, strategic priorities, Africa operating assets, digital transformation and food-security positioning. The CFO table reports US$28.666bn revenue (displayed as US$28.7bn); an earlier CEO narrative says US$28.6bn, so the deck uses the CFO financial summary.',
+    note: 'Primary source for FY2025 scale, revenue, EBIT, volume, customer/farmer footprint, strategic priorities, Africa operating assets, digital transformation and food-security positioning. The CFO table reports $28.666bn revenue (displayed as $28.7bn); an earlier CEO narrative says $28.6bn, so the deck uses the CFO financial summary.',
   },
   {
     id: 'S02',
@@ -72,7 +72,7 @@ export const OLAM_SOURCES: OlamSource[] = [
     url: 'https://www.olamagri.com/news/press-release/olam-agri-launches-baking-brighter-futures-and-commits-usd-2-million-to-support-20000-bakers-across-africa',
     date: '2025',
     authority: 'primary',
-    note: 'Primary evidence for baker and food-entrepreneur training scale, geographic reach and the planned US$2m programme through 2030.',
+    note: 'Primary evidence for baker and food-entrepreneur training scale, geographic reach and the planned $2m programme through 2030.',
   },
   {
     id: 'S05',
@@ -191,7 +191,7 @@ export const OLAM_SOURCES: OlamSource[] = [
 export const OLAM_REVIEW_ITERATIONS = [
   ['01', 'Entity perimeter', 'Is the deck about Olam Group, Olam Agri, or a Nigeria-only operating company?', 'Locked the strategy to Olam Agri with Nigeria as the first-wave commercial laboratory; group-level ownership is used only as strategic context.'],
   ['02', 'Ownership freshness', 'Does the deck still reflect the 2025 ownership structure?', 'Updated the strategic context to the post-transaction 2026 structure: 81.81% SALIC / 18.19% Olam Group, using Olam Group’s completion announcement.'],
-  ['03', 'Financial-base integrity', 'Are scale, revenue, volume and EBIT figures contemporaneous and internally consistent?', 'Rebuilt the fact base from the FY2025 CFO financial summary: US$28.666bn revenue (displayed as US$28.7bn), 53.7m MT sales volume and US$703.7m EBIT. The CEO narrative says US$28.6bn; the deck resolves that internal rounding inconsistency in favour of the detailed CFO table.'],
+  ['03', 'Financial-base integrity', 'Are scale, revenue, volume and EBIT figures contemporaneous and internally consistent?', 'Rebuilt the fact base from the FY2025 CFO financial summary: $28.666bn revenue (displayed as $28.7bn), 53.7m MT sales volume and $703.7m EBIT. The CEO narrative says $28.6bn; the deck resolves that internal rounding inconsistency in favour of the detailed CFO table.'],
   ['04', 'Growth-quality test', 'Does revenue growth automatically imply better economics?', 'No. FY2025 revenue rose 15.4% while EBIT fell 8.0%; the deck therefore shifts from volume-led growth to contribution, mix, service economics and cash productivity.'],
   ['05', 'Original-model audit', 'Can the NGN2.5bn Y3 EBIT, 2.27-year payback and NGN0.31bn NPV be verified externally?', 'No. They are retained only as scenario outputs from the uploaded deck because the underlying eligible-sales definition, cash-flow schedule and discount-rate assumptions were not supplied.'],
   ['06', 'Price-pack audit', 'Are the 250g/500g/1kg prices and modeled margins observed market facts?', 'No. They are treated as illustrative architecture from the uploaded deck, not quoted shelf prices or Olam-reported margins.'],
@@ -230,9 +230,9 @@ export const OLAM_SLIDES: OlamSlide[] = [
     narrative: 'FY2025 establishes the paradox that should govern the strategy: Olam Agri grew volume and revenue strongly while EBIT declined. Growth quality therefore matters more than growth quantity.',
     insight: 'Marketing should be managed as a commercial operating system connecting contribution, availability, service adoption, repeat behavior and route economics — not as a communications layer around tonnage.',
     metrics: [
-      { label: 'FY2025 revenue', value: 'US$28.7bn', detail: '+15.4% year over year', tone: 'green' },
+      { label: 'FY2025 revenue', value: '$28.7bn', detail: '+15.4% year over year', tone: 'green' },
       { label: 'Sales volume', value: '53.7m MT', detail: '+19.1% year over year', tone: 'cyan' },
-      { label: 'FY2025 EBIT', value: 'US$703.7m', detail: '−8.0% year over year', tone: 'orange' },
+      { label: 'FY2025 EBIT', value: '$703.7m', detail: '−8.0% year over year', tone: 'orange' },
       { label: 'Calculated EBIT margin', value: '~2.45%', detail: 'Inference from reported revenue and EBIT; down from ~3.08% in 2024', tone: 'gold' },
     ],
     bullets: [
@@ -337,7 +337,7 @@ export const OLAM_SLIDES: OlamSlide[] = [
     insight: 'When product quality is translated into flour yield, reject reduction, loaf consistency, labour time and contribution per bag, service becomes evidence of value rather than a relationship cost.',
     metrics: [
       { label: 'Training ambition', value: '20,000+', detail: 'Bakers and food entrepreneurs targeted through 2030', tone: 'green' },
-      { label: 'Programme funding', value: 'US$2m', detail: 'Planned Baking Brighter Futures commitment', tone: 'gold' },
+      { label: 'Programme funding', value: '$2m', detail: 'Planned Baking Brighter Futures commitment', tone: 'gold' },
       { label: 'Already trained', value: '10,000+', detail: 'Bakers since 2019, according to Olam', tone: 'cyan' },
       { label: 'Digital layer', value: 'Bakewell', detail: 'Orders, complaints, feedback, tips and profitability support', tone: 'violet' },
     ],
@@ -453,7 +453,7 @@ export const OLAM_SLIDES: OlamSlide[] = [
     narrative: 'World Bank research points to the growth of marketing, transport, storage, processing, retail and food-service layers as central to agribusiness jobs and investment.',
     insight: 'The strategic prize is downstream and midstream productivity: turning fragmented demand into reliable, processed, distributed and service-supported consumption systems.',
     metrics: [
-      { label: 'Food market', value: '~US$1tn', detail: 'World Bank projection toward 2030; macro context, not Olam revenue forecast', tone: 'green' },
+      { label: 'Food market', value: '~$1tn', detail: 'World Bank projection toward 2030; macro context, not Olam revenue forecast', tone: 'green' },
       { label: 'Value creation', value: 'Mid/downstream', detail: 'Processing, logistics, marketing, retail and food service', tone: 'cyan' },
       { label: 'Integration', value: 'AfCFTA', detail: 'Potential structural tailwind for intra-African agrifood flows', tone: 'gold' },
     ],
@@ -571,21 +571,6 @@ export const OLAM_SLIDES: OlamSlide[] = [
     kind: 'risk',
   },
   {
-    id: 'iterations',
-    section: '20-pass executive review',
-    title: 'Twenty heavy iterations changed the deck from a funding narrative into a measurable growth operating system',
-    narrative: 'Each pass either corrected a fact, separated a model from evidence, strengthened comparability or made the growth logic more falsifiable.',
-    insight: 'The final conclusion survives the review because it depends on mechanisms already visible in Olam’s operating model: integrated supply chains, local processing, customer service, logistics, digital data and disciplined adjacency.',
-    metrics: [
-      { label: 'Iterations', value: '20', detail: 'Entity, evidence, economics, market, service, route, digital and capital tests', tone: 'green' },
-      { label: 'Primary emphasis', value: 'Fact → mechanism', detail: 'Reported facts are separated from modeled outputs', tone: 'cyan' },
-      { label: 'Executive standard', value: 'Falsifiable', detail: 'Every major growth thesis has evidence gates', tone: 'gold' },
-    ],
-    bullets: OLAM_REVIEW_ITERATIONS.map((row) => row[0] + ' · ' + row[2]),
-    sourceIds: ['S01', 'S02', 'S12', 'S13', 'S14'],
-    kind: 'iterations',
-  },
-  {
     id: 'candidate-1',
     section: 'How I can help Olam · 01',
     title: 'I can turn this strategy into a measurable marketing operating cadence across categories and markets',
@@ -669,5 +654,20 @@ export const OLAM_SLIDES: OlamSlide[] = [
     bullets: OLAM_SOURCES.slice(9).map((source) => source.id + ' · ' + source.label + ' — ' + source.note),
     sourceIds: OLAM_SOURCES.slice(9).map((source) => source.id),
     kind: 'sources',
+  },  {
+    id: 'iterations',
+    section: '20-pass executive review',
+    title: 'Twenty heavy iterations changed the deck from a funding narrative into a measurable growth operating system',
+    narrative: 'Each pass either corrected a fact, separated a model from evidence, strengthened comparability or made the growth logic more falsifiable.',
+    insight: 'The final conclusion survives the review because it depends on mechanisms already visible in Olam’s operating model: integrated supply chains, local processing, customer service, logistics, digital data and disciplined adjacency.',
+    metrics: [
+      { label: 'Iterations', value: '20', detail: 'Entity, evidence, economics, market, service, route, digital and capital tests', tone: 'green' },
+      { label: 'Primary emphasis', value: 'Fact → mechanism', detail: 'Reported facts are separated from modeled outputs', tone: 'cyan' },
+      { label: 'Executive standard', value: 'Falsifiable', detail: 'Every major growth thesis has evidence gates', tone: 'gold' },
+    ],
+    bullets: OLAM_REVIEW_ITERATIONS.map((row) => row[0] + ' · ' + row[2]),
+    sourceIds: ['S01', 'S02', 'S12', 'S13', 'S14'],
+    kind: 'iterations',
   },
+
 ];
