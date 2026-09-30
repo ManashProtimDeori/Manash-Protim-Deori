@@ -30,7 +30,6 @@ const pagePath = fileURLToPath(new URL('../src/pages/CanonicalStrategyLabPage.ts
 const pageSource = readFileSync(pagePath, 'utf8');
 
 assert.ok(pageSource.includes('Leadership insight'), 'web deck should label the box Leadership insight');
-assert.ok(pageSource.includes('LEADERSHIP INSIGHT'), 'PPTX deck should label the box LEADERSHIP INSIGHT');
 assert.ok(!pageSource.includes('Leadership decision'), 'old directive label must be absent');
 assert.ok(!pageSource.includes('LEADERSHIP DECISION'), 'old directive PPTX label must be absent');
 
@@ -43,8 +42,11 @@ for (const opening of imperativeOpenings) {
 }
 
 assert.ok(pageSource.includes("kind: 'appendix'"));
-assert.ok(pageSource.includes('const evidenceRows = VERIFIED_EVIDENCE'));
 assert.ok(pageSource.includes("kind: 'fundamentals'"));
+assert.ok(pageSource.includes('captureRenderedSlides'), 'PPTX and PDF should use rendered website slides');
+assert.ok(pageSource.includes('domtoimage.toJpeg'), 'rendered-slide export should use the DOM capture pipeline');
+assert.ok(pageSource.includes("title: 'Canonical Growth & Market Strategy'"), 'minimal cover should use the deck title');
+assert.ok(pageSource.includes('metrics: []'), 'minimal cover should not contain metric boxes');
 assert.ok(pageSource.includes("kind: 'intro'"), 'deck should open with a dedicated introduction slide');
 assert.ok(pageSource.includes("kind: 'candidate'"), 'deck should include dedicated candidate-impact slides');
 assert.ok(pageSource.includes('Manash Protim Deori'), 'introduction should name the candidate');
