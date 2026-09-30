@@ -4947,3 +4947,45 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
 .canonical-strategy-lab .canonical-leadership-box{
   margin-right:0!important;
 }
+
+
+/* Olam Africa Strategy Lab */
+.light #main-content .olam-strategy-lab,
+.dark #main-content .olam-strategy-lab{
+  color-scheme:dark!important;
+  color:#f7fbf9!important;
+  background:#050b0e!important;
+}
+.light #main-content .olam-strategy-lab h1,
+.light #main-content .olam-strategy-lab h2,
+.light #main-content .olam-strategy-lab h3,
+.dark #main-content .olam-strategy-lab h1,
+.dark #main-content .olam-strategy-lab h2,
+.dark #main-content .olam-strategy-lab h3{
+  color:#f7fbf9!important;
+}
+.olam-strategy-lab .olam-deck-slide{
+  width:100%;
+  aspect-ratio:16 / 9;
+  min-height:0!important;
+  height:auto!important;
+}
+.olam-strategy-lab .olam-deck-slide > .relative{
+  height:100%;
+}
+.olam-strategy-lab .olam-local-header{
+  background:#091216!important;
+}
+.olam-exporting .olam-strategy-lab *,
+.olam-exporting .olam-strategy-lab *::before,
+.olam-exporting .olam-strategy-lab *::after{
+  animation:none!important;
+  transition:none!important;
+  outline:none!important;
+}
+@media (max-width:900px){
+  .olam-strategy-lab .olam-deck-slide{
+    aspect-ratio:auto;
+    min-height:720px!important;
+  }
+}
