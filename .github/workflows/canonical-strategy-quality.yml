@@ -1,0 +1,31 @@
+name: Canonical Strategy Quality
+
+on:
+  pull_request:
+    paths:
+      - 'src/pages/CanonicalStrategyLabPage.tsx'
+      - 'src/data/canonicalStrategyDeck.ts'
+      - 'src/lib/canonicalStrategyModel.ts'
+      - 'tests/canonical-strategy.ts'
+      - 'tsconfig.canonical.json'
+      - 'package.json'
+      - '.github/workflows/canonical-strategy-quality.yml'
+  workflow_dispatch:
+
+jobs:
+  canonical-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Type-check Canonical strategy
+        run: npm run lint:canonical
+      - name: Test Canonical strategy model
+        run: npm run test:canonical

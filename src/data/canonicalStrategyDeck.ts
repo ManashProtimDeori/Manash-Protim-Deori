@@ -1,0 +1,262 @@
+export type Confidence = 'high' | 'medium' | 'assumption';
+
+export interface SourceRef {
+  id: string;
+  label: string;
+  url: string;
+  date: string;
+  confidence: Confidence;
+  note: string;
+}
+
+export interface CanonicalScenario {
+  retentionPct: number;
+  paidAttachPct: number;
+  enterpriseConversionPct: number;
+  priceRealizationPct: number;
+  partnerARR: number;
+  vmwareARR: number;
+  aiARR: number;
+  servicePullThroughPct: number;
+  subscriptionContributionMarginPct: number;
+  servicesContributionMarginPct: number;
+  growthReinvestmentPct: number;
+  uncertaintyPct: number;
+}
+
+export interface CustomerTcoInputs {
+  nodes: number;
+  competitorSupportPerNode: number;
+  ubuntuProPerNode: number;
+  migrationCostPerNode: number;
+  annualOpsCostPerNode: number;
+  opsEfficiencyPct: number;
+  annualEnergyCostPerNode: number;
+  energyEfficiencyPct: number;
+  annualKwhPerNode: number;
+  carbonIntensityKgPerKwh: number;
+}
+
+export const CANONICAL_BASE_2025 = {
+  revenue: 344.6,
+  subscriptionRevenue: 287.0,
+  servicesRevenue: 57.6,
+  operatingProfit: 26.9,
+  netIncome: 22.8,
+  priorRevenue: 291.5,
+  priorSubscriptionRevenue: 235.4,
+  priorServicesRevenue: 56.1,
+  priorOperatingProfit: 15.5,
+};
+
+export const DEFAULT_CANONICAL_SCENARIO: CanonicalScenario = {
+  retentionPct: 97.5,
+  paidAttachPct: 7.0,
+  enterpriseConversionPct: 5.0,
+  priceRealizationPct: 2.0,
+  partnerARR: 12,
+  vmwareARR: 18,
+  aiARR: 15,
+  servicePullThroughPct: 18,
+  subscriptionContributionMarginPct: 78,
+  servicesContributionMarginPct: 28,
+  growthReinvestmentPct: 35,
+  uncertaintyPct: 22,
+};
+
+export const DEFAULT_CUSTOMER_TCO: CustomerTcoInputs = {
+  nodes: 1000,
+  competitorSupportPerNode: 900,
+  ubuntuProPerNode: 500,
+  migrationCostPerNode: 650,
+  annualOpsCostPerNode: 450,
+  opsEfficiencyPct: 12,
+  annualEnergyCostPerNode: 280,
+  energyEfficiencyPct: 5,
+  annualKwhPerNode: 6500,
+  carbonIntensityKgPerKwh: 0.4,
+};
+
+export const SOURCES: SourceRef[] = [
+  {
+    id: 'canonical-2025-accounts',
+    label: 'Canonical Group Limited — 2025 group accounts filing',
+    url: 'https://find-and-update.company-information.service.gov.uk/company/06870835/filing-history',
+    date: '2026-06-05',
+    confidence: 'high',
+    note: 'Primary statutory filing exists for year ended 31 Dec 2025. Financial figures in the model are tied to that filing and a cross-checked extraction.',
+  },
+  {
+    id: 'canonical-15-year',
+    label: 'Canonical — Ubuntu LTS coverage expanded to 15 years',
+    url: 'https://canonical.com/blog/canonical-expands-total-coverage-for-ubuntu-lts-releases-to-15-years-with-legacy-add-on',
+    date: '2025-11',
+    confidence: 'high',
+    note: 'Current lifecycle positioning. Supersedes the earlier 12-year message used in the first deck.',
+  },
+  {
+    id: 'canonical-pro',
+    label: 'Canonical — What is Ubuntu Pro?',
+    url: 'https://canonical.com/knowledge/security-and-compliance/what-is-ubuntu-pro',
+    date: 'current',
+    confidence: 'high',
+    note: 'Public description and typical server pricing reference for the customer TCO model.',
+  },
+  {
+    id: 'canonical-ai',
+    label: 'Canonical — AI infrastructure',
+    url: 'https://canonical.com/solutions/ai/infrastructure',
+    date: 'current',
+    confidence: 'high',
+    note: 'Supports neutral hybrid/multi-cloud AI infrastructure positioning and NVIDIA collaboration.',
+  },
+  {
+    id: 'canonical-gtc-2026',
+    label: 'Canonical — NVIDIA GTC 2026',
+    url: 'https://canonical.com/blog/nvidia-gtc-2026',
+    date: '2026-03-16',
+    confidence: 'high',
+    note: 'Evidence of Ubuntu 26.04 readiness for NVIDIA CUDA, Vera Rubin NVL72 and other AI hardware.',
+  },
+  {
+    id: 'canonical-sustainability',
+    label: 'Canonical — Sustainability',
+    url: 'https://canonical.com/careers/company-culture/sustainability',
+    date: 'current',
+    confidence: 'high',
+    note: 'Supports sustainability governance and energy-efficiency engineering direction; does not justify a fixed customer emissions claim.',
+  },
+  {
+    id: 'ibm-2026-q2',
+    label: 'IBM — Q2 2026 results',
+    url: 'https://newsroom.ibm.com/2026-07-22-IBM-RELEASES-SECOND-QUARTER-RESULTS',
+    date: '2026-07-22',
+    confidence: 'high',
+    note: 'Hybrid Cloud (Red Hat) grew 11% year over year in Q2 2026.',
+  },
+  {
+    id: 'ibm-hybrid-cloud-2024',
+    label: 'IBM — recast 2024 software categories',
+    url: 'https://www.ibm.com/investor/news/ibm-provides-historical-data-as-a-result-of-update-to-revenue-categories',
+    date: '2025-03-12',
+    confidence: 'high',
+    note: '2024 Hybrid Cloud, previously reported as Red Hat, was $6.5bn.',
+  },
+  {
+    id: 'redhat-lifecycle-2026',
+    label: 'Red Hat — RHEL lifecycle policy',
+    url: 'https://access.redhat.com/support/policy/updates/errata',
+    date: 'current',
+    confidence: 'high',
+    note: 'RHEL major releases have a 10-year base lifecycle, with ELCP and renewable long-life extensions beyond 14 years.',
+  },
+  {
+    id: 'microsoft-fy26',
+    label: 'Microsoft — FY2026 investor metrics',
+    url: 'https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/metrics',
+    date: '2026-07',
+    confidence: 'high',
+    note: 'FY2026 Microsoft Cloud revenue $214.4bn; Azure and other cloud services revenue growth 41%.',
+  },
+  {
+    id: 'oracle-fy26',
+    label: 'Oracle — FY2026 results',
+    url: 'https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/',
+    date: '2026-06-10',
+    confidence: 'high',
+    note: 'FY2026 cloud revenue $34.0bn (+39%); IaaS revenue $18.1bn (+77%).',
+  },
+  {
+    id: 'broadcom-fy25',
+    label: 'Broadcom — FY2025 Form 10-K',
+    url: 'https://investors.broadcom.com/static-files/752e631c-b5f3-46af-9d67-bdeb658f5fa2',
+    date: '2025-12',
+    confidence: 'high',
+    note: 'Infrastructure software revenue $27.029bn, +26%; segment includes VMware and other software assets.',
+  },
+];
+
+export const PEER_MOMENTUM = [
+  {
+    name: 'Canonical',
+    metric: '$344.6m',
+    detail: 'FY2025 revenue; subscription revenue $287.0m',
+    momentum: '+18.2% revenue',
+    sourceId: 'canonical-2025-accounts',
+  },
+  {
+    name: 'Red Hat / IBM',
+    metric: '$6.5bn',
+    detail: '2024 IBM Hybrid Cloud revenue (previously Red Hat)',
+    momentum: '+11% Q2 2026',
+    sourceId: 'ibm-2026-q2',
+  },
+  {
+    name: 'Microsoft',
+    metric: '$214.4bn',
+    detail: 'FY2026 Microsoft Cloud revenue',
+    momentum: 'Azure +41%',
+    sourceId: 'microsoft-fy26',
+  },
+  {
+    name: 'Oracle',
+    metric: '$34.0bn',
+    detail: 'FY2026 cloud revenue; IaaS $18.1bn',
+    momentum: 'IaaS +77%',
+    sourceId: 'oracle-fy26',
+  },
+  {
+    name: 'Broadcom',
+    metric: '$27.0bn',
+    detail: 'FY2025 Infrastructure Software revenue',
+    momentum: '+26%',
+    sourceId: 'broadcom-fy25',
+  },
+];
+
+export const REVIEW_LENSES = [
+  ['Investor', 'Can Canonical accelerate recurring growth without giving back operating leverage?', 'Model incremental contribution and reinvestment explicitly; show P10/P50/P90 rather than a single-point promise.'],
+  ['Investor', 'Is growth quality improving, or is professional services masking weak software economics?', 'Track subscription mix, retention, attach and services pull-through separately.'],
+  ['Board', 'Which three bets deserve disproportionate capital?', 'Prioritize enterprise assurance, VMware/private-cloud migration and neutral AI infrastructure.'],
+  ['Finance', 'What is the break-even reinvestment rate?', 'Expose reinvestment as a share of incremental revenue and calculate incremental operating profit.'],
+  ['Finance', 'How fragile is the plan to retention erosion?', 'Retention is a first-class variable and is stressed in Monte Carlo ranges.'],
+  ['CIO', 'Why migrate instead of renewing the incumbent platform?', 'Add a customer TCO/payback model with editable support, migration, operations and energy assumptions.'],
+  ['CISO', 'Does lifecycle/security still differentiate versus RHEL?', 'Update Canonical to 15-year coverage and acknowledge RHEL 14+ years; reposition differentiation around simplicity, breadth and neutrality.'],
+  ['Developer', 'Will monetization damage the free-adoption engine?', 'Charge for assurance/accountability, not basic access; preserve free adoption as the acquisition layer.'],
+  ['Cloud partner', 'Does Canonical complement or disintermediate hyperscalers?', 'Frame Canonical as portable infrastructure and workload assurance that increases cloud workload durability.'],
+  ['OEM / SI partner', 'Is there enough economic value for the channel?', 'Make partner-sourced ARR explicit and measure attach at workload creation.'],
+  ['Product', 'Is the “platform” real or just bundleware?', 'Tie each component to one operating outcome and a measurable expansion path.'],
+  ['AI leader', 'Where does Canonical add value when cloud providers already sell AI stacks?', 'Own the neutral operating layer: Ubuntu, Kubernetes, private/sovereign deployment and hardware enablement.'],
+  ['Infrastructure leader', 'Can Canonical stay current with fast AI hardware cycles?', 'Use 2026 NVIDIA readiness as proof and track day-zero/day-one hardware enablement as a KPI.'],
+  ['Sovereign-cloud buyer', 'Can the stack operate under data-sovereignty constraints?', 'Prioritize portable private/hybrid architectures and evidence local-control deployment patterns.'],
+  ['Sustainability leader', 'Can Canonical quantify carbon impact without greenwashing?', 'Model only instrumented energy/workload savings; require user-supplied energy and carbon-intensity inputs.'],
+  ['Sales', 'Which accounts should be targeted first?', 'Score regulated, VMware-heavy, AI-infrastructure and high-Ubuntu-footprint accounts highest.'],
+  ['Marketing', 'What replaces generic reach metrics?', 'Use net-new recurring revenue per 1,000 active production Ubuntu workloads as the north-star.'],
+  ['Competitive strategy', 'What if peers copy lifecycle and openness messages?', 'Make the moat the combination of installed-base reach, neutrality, partner distribution and lower-friction operations.'],
+  ['Operations', 'Can delivery scale without turning Canonical into a services-heavy company?', 'Constrain services pull-through and keep the recurring-revenue mix visible in every scenario.'],
+  ['Model governance', 'How will leadership know the model is wrong?', 'Keep a source register, assumption register, confidence labels, deterministic tests and scenario invalidation triggers.'],
+] as const;
+
+export const STRATEGIC_BETS = [
+  {
+    id: 'assurance',
+    name: 'Enterprise assurance',
+    thesis: 'Monetize production risk: security, compliance, lifecycle and accountable support.',
+    primaryMetric: 'Paid attach / 1,000 production Ubuntu workloads',
+    falsifier: 'Attach growth stalls even where security/compliance triggers are present.',
+  },
+  {
+    id: 'migration',
+    name: 'Private-cloud migration',
+    thesis: 'Turn VMware reevaluation into a productized migration + modernization factory.',
+    primaryMetric: 'Migration ARR + time-to-production + expansion ARR',
+    falsifier: 'Delivery lead time or migration risk erases customer TCO advantage.',
+  },
+  {
+    id: 'ai',
+    name: 'Neutral AI infrastructure',
+    thesis: 'Own the supported operating layer beneath AI workloads across public, private and sovereign environments.',
+    primaryMetric: 'AI workload attach + partner-sourced ARR + expansion ARR',
+    falsifier: 'Hyperscaler-native stacks eliminate portability value for target customers.',
+  },
+];
