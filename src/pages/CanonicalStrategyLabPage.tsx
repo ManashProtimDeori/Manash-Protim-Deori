@@ -225,7 +225,7 @@ const FigureGlyph: React.FC<{ kind: FigureKind }> = ({ kind }) => {
     case 'pnl':
       glyph = <><rect x="36" y="22" width="58" height="72" rx="8" fill={O} fillOpacity=".88"/><rect x="94" y="37" width="54" height="57" rx="8" fill={A}/><rect x="148" y="52" width="56" height="42" rx="8" fill={T}/><path d="M65 19 C103 6 150 14 180 38" fill="none" stroke="#fff" strokeOpacity=".3" strokeWidth="3"/></>; break;
     case 'tornado':
-      glyph = <>{[[38,202,54],[55,185,67],[72,168,80],[89,151,93]].map(([x2,x1,y],i)=><g key={i}><rect x={120-(x1-120)} y={y} width={x1-120} height="8" rx="4" fill={i%2?A:O}/><rect x="120" y={y} width={x2-120} height="8" rx="4" fill={T}/></g>)}</>; break;
+      glyph = <>{[[44,196,42],[59,181,58],[73,167,74],[88,152,90]].map(([left,right,y],i)=><g key={i}><rect x={left} y={y} width={120-left} height="8" rx="4" fill={i%2?A:O}/><rect x="120" y={y} width={right-120} height="8" rx="4" fill={T}/></g>)}</>; break;
     case 'signal':
       glyph = <><circle cx="120" cy="60" r="45" fill="none" stroke="#fff" strokeOpacity=".12"/><circle cx="120" cy="60" r="27" fill="none" stroke={A} strokeOpacity=".65"/><circle cx="120" cy="60" r="8" fill={O}/><path d="M120 60 L178 27" stroke={T} strokeWidth="5"/><circle cx="178" cy="27" r="8" fill={T}/></>; break;
     case 'constellation':
@@ -268,7 +268,7 @@ const SlideRepresentativeFigure: React.FC<{ slide: DeckSlide }> = ({ slide }) =>
       </div>
       <div className="absolute inset-x-3 bottom-2 grid grid-cols-3 gap-1">
         {spec.labels.map((label, idx) => (
-          <div key={label} className={'truncate text-center text-[7px] font-mono uppercase tracking-[0.1em] ' + (idx === 0 ? 'text-orange-300' : idx === 1 ? 'text-fuchsia-300' : 'text-teal-300')}>
+          <div key={label} className={'whitespace-nowrap text-center text-[6px] leading-none font-mono uppercase tracking-[0.04em] ' + (idx === 0 ? 'text-orange-300' : idx === 1 ? 'text-fuchsia-300' : 'text-teal-300')}>
             {label}
           </div>
         ))}
@@ -464,7 +464,7 @@ const SlideShell: React.FC<{
             <div className="pointer-events-none absolute -left-10 bottom-[-38px] h-24 w-28 -rotate-12 rounded-3xl border border-fuchsia-300/15 bg-fuchsia-400/[0.05]" />
             <div className="relative">
               <div className="mb-2 text-[8px] font-mono uppercase tracking-[0.17em] text-orange-200/70">Strategic thesis</div>
-              <h2 className={'max-w-full text-white font-semibold tracking-[-0.035em] ' + (
+              <h2 className={'max-w-full break-words text-white font-semibold tracking-[-0.035em] ' + (
                 slide.title.length > 105
                   ? 'text-[1.35rem] md:text-[1.45rem] lg:text-[1.5rem] leading-[1.06]'
                   : slide.title.length > 78
@@ -480,7 +480,7 @@ const SlideShell: React.FC<{
 
           <SlideRepresentativeFigure slide={slide} />
 
-          <div className="canonical-leadership-box relative overflow-hidden rounded-[20px] border border-orange-300/18 bg-[linear-gradient(145deg,rgba(233,84,32,.085),rgba(20,14,19,.95)_48%,rgba(119,33,111,.07))] p-4.5 shadow-[inset_0_1px_0_rgba(255,255,255,.035),0_18px_44px_rgba(0,0,0,.22)]">
+          <div className="canonical-leadership-box relative overflow-hidden rounded-[20px] border border-orange-300/18 bg-[linear-gradient(145deg,rgba(233,84,32,.085),rgba(20,14,19,.95)_48%,rgba(119,33,111,.07))] p-[18px] shadow-[inset_0_1px_0_rgba(255,255,255,.035),0_18px_44px_rgba(0,0,0,.22)]">
             <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-[#E95420] via-[#B94B37] to-[#77216F]" />
             <div className="pl-2">
               <div className="text-[8px] font-mono uppercase tracking-[0.18em] text-orange-300/78">Leadership insight</div>
