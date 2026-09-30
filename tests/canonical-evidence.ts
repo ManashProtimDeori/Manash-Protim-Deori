@@ -89,6 +89,10 @@ assert.ok(pageSource.includes("slide.title.length > 88"), 'headline sizing shoul
 assert.ok(pageSource.includes("slide.title.length > 58"), 'headline sizing should include a medium proportional tier');
 assert.ok(!pageSource.includes('The attached WIN guidance is applied directly here'), 'internal WIN-guidance wording should not appear in the presentation');
 assert.ok(!pageSource.includes('Candidate evidence is stated conservatively'), 'candidate-evidence caveat paragraph should not appear in the presentation');
+assert.ok(!pageSource.includes('linkedin.com/in/manash-protim-deori'), 'candidate slide should not render a LinkedIn button');
+assert.ok(!pageSource.includes('<ExternalLink className="h-3.5 w-3.5" /> Resume'), 'candidate slide should not render a Resume button');
+assert.ok(!pageSource.includes('<ExternalLink className="h-3.5 w-3.5" /> Portfolio'), 'candidate slide should not render a Portfolio button');
+assert.ok(pageSource.includes("slide.id === 'candidate-fit' ? 'mx-2 mb-5 p-2'"), 'candidate-fit content should keep an inset safe area from slide boundaries');
 assert.ok(pageSource.includes("Leadership operating model: turn technical credibility into durable market power"), 'CMO slide should use leadership-ready framing');
 assert.ok(pageSource.includes("decision: '',\n      narrative: '',\n      metrics: [\n        { label: 'Experience'"), 'candidate-fit slide should omit the leadership insight and narrative blocks');
 assert.ok(pageSource.includes("positioning: { kind: 'cube', labels: ['CONTROL', 'PORTABLE', 'REACH']"), 'positioning figure should reflect the positioning logic');
