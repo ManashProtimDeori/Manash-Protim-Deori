@@ -685,9 +685,9 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       decision: 'Strategic discipline is strengthened when invalidation triggers are defined in advance for attach, migration payback, services load, partner economics, AI differentiation and community trust.',
       narrative: 'The most dangerous error is to let a strategy survive because the narrative still sounds plausible after the economics have changed.',
       metrics: [
-        { label: 'Retention guardrail', value: '<95%', detail: 'Escalate if paid-base retention falls materially', tone: 'orange' },
+        { label: 'Retention guardrail', value: '<95%', detail: 'Illustrative model threshold; not a reported Canonical KPI', tone: 'orange' },
         { label: 'TCO guardrail', value: 'No payback', detail: 'Do not sell migration economics when annual savings are negative', tone: 'gold' },
-        { label: 'Mix guardrail', value: '<80% sub mix', detail: 'Investigate services-heavy growth', tone: 'violet' },
+        { label: 'Mix guardrail', value: '<80% sub mix', detail: 'Illustrative model threshold; not company guidance', tone: 'violet' },
         { label: 'Partner guardrail', value: 'Low expansion', detail: 'Partner-sourced pipeline without recurring expansion is not leverage', tone: 'teal' },
       ],
       bullets: [
@@ -747,7 +747,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       metrics: [
         { label: 'Security cadence', value: 'Weekly publication', detail: 'Unified rapid two-week kernel SRU cycle', tone: 'orange' },
         { label: 'Device lifecycle', value: 'Up to 15 years', detail: 'Zephyr 26.04 LTS for MCU-grade devices', tone: 'teal' },
-        { label: 'Agentic PC', value: '80 TOPS NPU', detail: 'Snapdragon X2 Ubuntu support targeted for 2027', tone: 'violet' },
+        { label: 'Agentic PC', value: '80 TOPS NPU', detail: 'Snapdragon X2 Ubuntu support announced', tone: 'violet' },
         { label: 'AI control', value: 'Open + sovereign', detail: 'Secure agents, governed data and multi-environment infrastructure', tone: 'gold' },
       ],
       bullets: [
