@@ -1,3 +1,4 @@
+// Canonical Strategy Lab v5 candidate-track-record CI validation
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
