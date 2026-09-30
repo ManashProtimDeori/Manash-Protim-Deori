@@ -107,7 +107,8 @@ export function calculateBrandDecisionModel(
 
   const reachIndex = clamp(100 + investSignal * 0.65 + partner * 0.28 + community * 0.12 + authority * 0.08 + clarity * 0.07, 65, 145);
   const awarenessIndex = clamp(100 + investSignal * 0.5 + clarity * 0.22 + partner * 0.14 + authority * 0.20 + community * 0.08, 65, 145);
-  const strengthIndex = clamp(100 + clarity * 0.25 + community * 0.24 + authority * 0.16 + retention * 1.25 + Math.min(scenario.priceRealizationPct, 4) * 0.35, 65, 145);
+  const priceSignal = Math.min(scenario.priceRealizationPct, 4) - Math.min(DEFAULT_CANONICAL_SCENARIO.priceRealizationPct, 4);
+  const strengthIndex = clamp(100 + clarity * 0.25 + community * 0.24 + authority * 0.16 + retention * 1.25 + priceSignal * 0.35, 65, 145);
 
   const marketingInvestment = metrics.growthInvestment * (clamp(scenario.marketingShareOfReinvestmentPct, 0, 100) / 100);
   const marketingInfluencedARR = metrics.netNewSubscriptionARR * (clamp(scenario.marketingInfluencePct, 0, 100) / 100);
