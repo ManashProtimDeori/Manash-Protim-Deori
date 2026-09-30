@@ -763,7 +763,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
   };
 
   const downloadPptx = async () => {
-    const PptxGenJS = (window as any).PptxGenJS;
+    const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
     if (!PptxGenJS) {
       alert('The PowerPoint generator has not loaded yet. Refresh once and try again.');
       return;
@@ -977,16 +977,23 @@ export const CanonicalStrategyLabPage: React.FC = () => {
             <div className="absolute inset-y-8 left-1/2 w-px bg-white/15" />
             <div className="absolute left-4 top-3 text-[9px] font-mono text-white/30">HIGH NEUTRALITY / CONTROL</div>
             <div className="absolute right-4 bottom-3 text-[9px] font-mono text-white/30">HIGH DISTRIBUTION REACH</div>
-            {[
+            {([
               ['Canonical', 72, 28, 'orange'],
               ['SUSE', 80, 62, 'teal'],
               ['Red Hat', 56, 42, 'violet'],
               ['Microsoft', 24, 16, 'cyan'],
               ['Oracle', 38, 32, 'gold'],
               ['Broadcom', 35, 56, 'slate'],
-            ].map(([name, left, top, tone]) => (
-              <div key={String(name)} className="absolute -translate-x-1/2 -translate-y-1/2">
-                <div className="rounded-lg border px-3 py-2 text-xs font-semibold shadow-xl" style={{ left: left + '%', top: top + '%', position: 'absolute', color: palette[tone as Tone], borderColor: palette[tone as Tone] + '55', background: '#0B0D12E8' }}>
+            ] as Array<[string, number, number, Tone]>).map(([name, left, top, tone]) => (
+              <div
+                key={name}
+                className="absolute -translate-x-1/2 -translate-y-1/2"
+                style={{ left: left + '%', top: top + '%' }}
+              >
+                <div
+                  className="rounded-lg border px-3 py-2 text-xs font-semibold shadow-xl whitespace-nowrap"
+                  style={{ color: palette[tone], borderColor: palette[tone] + '55', background: '#0B0D12E8' }}
+                >
                   {name}
                 </div>
               </div>
