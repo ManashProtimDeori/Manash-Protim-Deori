@@ -256,22 +256,18 @@ const FigureGlyph: React.FC<{ kind: FigureKind }> = ({ kind }) => {
 };
 
 const SlideRepresentativeFigure: React.FC<{ slide: DeckSlide }> = ({ slide }) => {
-  const spec = FIGURE_SPECS[slide.id] || { kind: 'engine' as FigureKind, labels: ['SIGNAL','SYSTEM','OUTCOME'] as [string,string,string], caption: 'Decision mechanism' };
+  const spec = FIGURE_SPECS[slide.id] || { kind: 'engine' as FigureKind, labels: ['','',''] as [string,string,string], caption: '' };
+  const halo = slide.id.length % 3;
+
   return (
-    <div className="canonical-representative-figure relative min-h-[154px] overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_80%_12%,rgba(233,84,32,.18),transparent_36%),radial-gradient(circle_at_18%_88%,rgba(119,33,111,.22),transparent_40%),linear-gradient(145deg,#11141B,#090C11)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_18px_45px_rgba(0,0,0,.32)]">
-      <div className="absolute inset-x-3 top-2 text-[7px] font-mono uppercase tracking-[0.14em] text-white/48">
-        {spec.caption}
-      </div>
-      <div className="absolute inset-x-3 top-7 bottom-7">
+    <div className="canonical-representative-figure relative h-[205px] overflow-hidden rounded-[26px] border border-white/12 bg-[linear-gradient(145deg,#11151E_0%,#080B10_52%,#140C14_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,.07),0_26px_60px_rgba(0,0,0,.36)] [perspective:1100px]">
+      <div className={'absolute h-36 w-36 rounded-full blur-2xl ' + (halo === 0 ? 'right-[-28px] top-[-34px] bg-orange-500/16' : halo === 1 ? 'left-[-28px] top-[-34px] bg-fuchsia-500/15' : 'right-[-28px] bottom-[-34px] bg-teal-400/14')} />
+      <div className="absolute left-5 top-5 h-12 w-12 rotate-12 rounded-xl border border-orange-300/15 bg-orange-400/[0.055] shadow-[12px_16px_30px_rgba(0,0,0,.28)]" />
+      <div className="absolute right-6 bottom-5 h-10 w-10 -rotate-12 rounded-xl border border-fuchsia-300/12 bg-fuchsia-400/[0.045]" />
+      <div className="absolute inset-x-5 top-4 bottom-4 [transform:rotateX(2deg)_rotateY(-2deg)] [transform-style:preserve-3d]">
         <FigureGlyph kind={spec.kind} />
       </div>
-      <div className="absolute inset-x-3 bottom-2 grid grid-cols-3 gap-1">
-        {spec.labels.map((label, idx) => (
-          <div key={label} className={'whitespace-nowrap text-center text-[6px] leading-none font-mono uppercase tracking-[0.04em] ' + (idx === 0 ? 'text-orange-300' : idx === 1 ? 'text-fuchsia-300' : 'text-teal-300')}>
-            {label}
-          </div>
-        ))}
-      </div>
+      <div className="absolute inset-x-5 bottom-0 h-px bg-gradient-to-r from-orange-400/55 via-fuchsia-400/35 to-teal-300/45" />
     </div>
   );
 };
@@ -317,12 +313,11 @@ const PrismBar: React.FC<{
 };
 
 const SourceFooter: React.FC<{ sourceIds: string[] }> = ({ sourceIds }) => {
-  const visible = sourceIds.slice(0, 4);
-  if (!visible.length) return <div className="h-2" />;
+  if (!sourceIds.length) return <div className="h-2" />;
   return (
-    <div className="canonical-source-footer mt-3 rounded-xl border border-white/8 bg-black/20 px-3 py-2">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-1.5">
-        {visible.map((id) => {
+    <div className="canonical-source-footer mt-3 border-t border-white/8 pt-2.5">
+      <div className="flex flex-wrap gap-x-3 gap-y-1">
+        {sourceIds.map((id) => {
           const source = sourceMap[id];
           if (!source) return null;
           return (
@@ -331,8 +326,7 @@ const SourceFooter: React.FC<{ sourceIds: string[] }> = ({ sourceIds }) => {
               href={source.url}
               target="_blank"
               rel="noreferrer"
-              title={source.label}
-              className="min-w-0 truncate text-[7.5px] font-mono text-white/52 hover:text-orange-300 transition-colors"
+              className="text-[7px] leading-[1.3] font-mono text-white/48 hover:text-orange-300 transition-colors whitespace-normal break-words"
             >
               {source.label}
             </a>
@@ -457,38 +451,39 @@ const SlideShell: React.FC<{
           )}
         </div>
 
-        <div className="mt-4 grid lg:grid-cols-[1.05fr_.62fr_.83fr] gap-4 items-stretch">
-          <div className="canonical-title-card relative min-w-0 overflow-hidden rounded-[20px] border border-white/12 bg-[radial-gradient(circle_at_0%_0%,rgba(233,84,32,.24),transparent_36%),radial-gradient(circle_at_100%_100%,rgba(119,33,111,.24),transparent_40%),linear-gradient(145deg,#151018,#0B0D12_58%,#101923)] p-5 shadow-[0_22px_55px_rgba(0,0,0,.34)] [perspective:900px]">
-            <div className="pointer-events-none absolute -right-7 -top-7 h-20 w-20 rotate-12 rounded-2xl border border-orange-300/20 bg-orange-400/[0.07] shadow-[18px_18px_35px_rgba(0,0,0,.24)]" />
-            <div className="pointer-events-none absolute -left-10 bottom-[-38px] h-24 w-28 -rotate-12 rounded-3xl border border-fuchsia-300/15 bg-fuchsia-400/[0.05]" />
-            <div className="relative">
-              <div className="mb-2 text-[8px] font-mono uppercase tracking-[0.17em] text-orange-200/70">Strategic thesis</div>
+        <div className="mt-5 grid lg:grid-cols-[1.18fr_.82fr] gap-5 items-stretch">
+          <div className="canonical-title-card relative min-w-0 overflow-hidden rounded-[28px] border border-white/12 bg-[radial-gradient(circle_at_8%_5%,rgba(233,84,32,.30),transparent_34%),radial-gradient(circle_at_92%_96%,rgba(119,33,111,.30),transparent_42%),linear-gradient(145deg,#1C1118_0%,#0B0D12_52%,#101823_100%)] p-6 shadow-[0_28px_70px_rgba(0,0,0,.38)] [perspective:1000px]">
+            <div className="pointer-events-none absolute right-[-28px] top-[-28px] h-28 w-28 rotate-12 rounded-[30px] border border-orange-300/18 bg-orange-400/[0.065] shadow-[20px_24px_46px_rgba(0,0,0,.30)]" />
+            <div className="pointer-events-none absolute -left-10 bottom-[-48px] h-28 w-36 -rotate-12 rounded-[36px] border border-fuchsia-300/14 bg-fuchsia-400/[0.055]" />
+            <div className="pointer-events-none absolute left-[38%] top-[-38px] h-24 w-24 rotate-45 rounded-2xl border border-teal-200/9 bg-teal-300/[0.03]" />
+            <div className="relative z-10">
               <h2 className={'max-w-full break-words text-white font-semibold tracking-[-0.035em] ' + (
-                slide.title.length > 105
-                  ? 'text-[1.35rem] md:text-[1.45rem] lg:text-[1.5rem] leading-[1.06]'
-                  : slide.title.length > 78
-                    ? 'text-[1.48rem] md:text-[1.58rem] lg:text-[1.65rem] leading-[1.06]'
-                    : 'text-[1.6rem] md:text-[1.72rem] lg:text-[1.8rem] leading-[1.05]'
+                slide.title.length > 120
+                  ? 'text-[1.8rem] md:text-[2rem] lg:text-[2.12rem] leading-[1.07]'
+                  : slide.title.length > 88
+                    ? 'text-[2rem] md:text-[2.18rem] lg:text-[2.3rem] leading-[1.06]'
+                    : 'text-[2.2rem] md:text-[2.42rem] lg:text-[2.55rem] leading-[1.05]'
               )}>
                 {slide.title}
               </h2>
-              <p className="mt-3 max-w-full text-[10.5px] md:text-[11px] leading-[1.48] text-white/72">{slide.narrative}</p>
+              <p className="mt-4 max-w-[95%] text-[11px] md:text-[12px] leading-[1.55] text-white/75">{slide.narrative}</p>
             </div>
-            <div className="pointer-events-none absolute inset-x-5 bottom-0 h-px bg-gradient-to-r from-orange-400/50 via-fuchsia-400/35 to-teal-300/40" />
+            <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-orange-300/65 via-fuchsia-300/40 to-teal-200/45" />
           </div>
 
-          <SlideRepresentativeFigure slide={slide} />
-
-          <div className="canonical-leadership-box relative overflow-hidden rounded-[20px] border border-orange-300/18 bg-[linear-gradient(145deg,rgba(233,84,32,.085),rgba(20,14,19,.95)_48%,rgba(119,33,111,.07))] p-[18px] shadow-[inset_0_1px_0_rgba(255,255,255,.035),0_18px_44px_rgba(0,0,0,.22)]">
-            <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-[#E95420] via-[#B94B37] to-[#77216F]" />
-            <div className="pl-2">
-              <div className="text-[8px] font-mono uppercase tracking-[0.18em] text-orange-300/78">Leadership insight</div>
-              <p className="mt-2 text-[10.5px] md:text-[11.5px] leading-[1.5] text-white/82">{slide.decision}</p>
+          <div className="grid grid-rows-[205px_1fr] gap-4 min-w-0">
+            <SlideRepresentativeFigure slide={slide} />
+            <div className="canonical-leadership-box relative overflow-hidden rounded-[24px] border border-orange-300/18 bg-[radial-gradient(circle_at_100%_0%,rgba(233,84,32,.10),transparent_36%),linear-gradient(145deg,rgba(20,15,18,.98),rgba(10,13,18,.98))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_20px_48px_rgba(0,0,0,.24)]">
+              <div className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-[#E95420] via-[#B34243] to-[#77216F]" />
+              <div className="pl-2.5">
+                <div className="text-[8px] font-mono uppercase tracking-[0.18em] text-orange-300/80">Leadership insight</div>
+                <p className="mt-2.5 text-[11px] md:text-[12px] leading-[1.52] text-white/84">{slide.decision}</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-5 flex-1 min-h-0">{children}</div>
+        <div className="mt-6 flex-1 min-h-0">{children}</div>
         <SourceFooter sourceIds={slide.sourceIds} />
       </div>
     </section>
@@ -1377,7 +1372,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         const geometries = getSlideGeometries();
         if (!geometries.length) throw new Error('No strategy slides were found for export.');
 
-        const targetRatio = 2 / 3;
+        const targetRatio = 3 / 2;
         const geometryDrift = Math.max(...geometries.map((geometry) => Math.abs(geometry.ratio - targetRatio)));
         if (!Number.isFinite(geometryDrift) || geometryDrift > 0.035) {
           throw new Error('The website slide geometry is not presentation-safe yet.');
@@ -1385,8 +1380,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
         const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
         const pptx = new PptxGenJS();
-        const slideWidth = 12;
-        const slideHeight = 8;
+        const slideWidth = 10;
+        const slideHeight = 15;
 
         pptx.defineLayout({ name: 'PORTFOLIO_EXACT', width: slideWidth, height: slideHeight });
         pptx.layout = 'PORTFOLIO_EXACT';
@@ -1428,16 +1423,16 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         if (!geometries.length) throw new Error('No strategy slides were found for export.');
 
         const JsPdf = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
-        const targetRatio = 2 / 3;
+        const targetRatio = 3 / 2;
         const geometryDrift = Math.max(...geometries.map((geometry) => Math.abs(geometry.ratio - targetRatio)));
         if (!Number.isFinite(geometryDrift) || geometryDrift > 0.035) {
           throw new Error('The website slide geometry is not presentation-safe yet.');
         }
 
-        const pageWidth = 1200;
-        const pageHeight = 800;
+        const pageWidth = 1000;
+        const pageHeight = 1500;
         const pdf = new JsPdf({
-          orientation: 'landscape',
+          orientation: 'portrait',
           unit: 'pt',
           format: [pageWidth, pageHeight],
           compress: true,
@@ -1448,7 +1443,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
           const geometry = geometries[index];
           const imageData = await captureRenderedSlide(geometry);
           if (index > 0) {
-            pdf.addPage([pageWidth, pageHeight], 'landscape');
+            pdf.addPage([pageWidth, pageHeight], 'portrait');
           }
           pdf.setFillColor(11, 13, 18);
           pdf.rect(0, 0, pageWidth, pageHeight, 'F');
