@@ -110,6 +110,34 @@ const MetricTile: React.FC<{ metric: Metric }> = ({ metric }) => {
   );
 };
 
+const CanonicalIdentityMark: React.FC = () => (
+  <div className="relative overflow-hidden rounded-[24px] border border-orange-400/25 bg-gradient-to-br from-orange-500/[0.13] via-white/[0.035] to-violet-500/[0.08] p-6 md:p-7">
+    <div className="absolute -right-14 -top-14 h-40 w-40 rounded-full border border-orange-400/15" />
+    <div className="absolute -right-5 -top-5 h-24 w-24 rounded-full border border-violet-400/15" />
+    <div className="flex items-center gap-5">
+      <div className="relative h-20 w-20 shrink-0">
+        <svg viewBox="0 0 120 120" className="h-full w-full" role="img" aria-label="Canonical strategy identity">
+          <defs>
+            <linearGradient id="canonicalStrategyGradient" x1="15%" y1="10%" x2="85%" y2="90%">
+              <stop offset="0%" stopColor="#F47B4A" />
+              <stop offset="55%" stopColor="#E95420" />
+              <stop offset="100%" stopColor="#B93412" />
+            </linearGradient>
+          </defs>
+          <circle cx="60" cy="60" r="43" fill="none" stroke="url(#canonicalStrategyGradient)" strokeWidth="13" strokeLinecap="round" strokeDasharray="205 70" transform="rotate(-38 60 60)" />
+          <circle cx="89" cy="29" r="7" fill="#E95420" />
+          <circle cx="31" cy="83" r="7" fill="#E95420" />
+          <circle cx="60" cy="60" r="8" fill="#F6F7F9" opacity="0.96" />
+        </svg>
+      </div>
+      <div>
+        <div className="text-3xl md:text-4xl font-semibold tracking-[-0.045em] text-white">canonical</div>
+        <div className="mt-2 text-[10px] font-mono uppercase tracking-[0.24em] text-orange-200/85">Open infrastructure · strategy lab</div>
+      </div>
+    </div>
+  </div>
+);
+
 const PrismBar: React.FC<{
   label: string;
   value: number;
@@ -244,6 +272,7 @@ const SlideShell: React.FC<{
         </div>
         {isOwner && ownerStudio && (
           <button
+            data-export-hide="true"
             onClick={onEdit}
             className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-2.5 py-1.5 text-[10px] font-mono text-white/84 hover:text-white hover:border-orange-400/60"
           >
@@ -252,20 +281,44 @@ const SlideShell: React.FC<{
         )}
       </div>
 
-      <div className="mt-6 grid lg:grid-cols-[1.1fr_.9fr] gap-7 items-start">
-        <div>
-          <h2 className="text-3xl md:text-4xl lg:text-[2.7rem] leading-[1.02] tracking-tight text-white font-semibold max-w-4xl">
-            {slide.title}
-          </h2>
-          <p className="mt-4 max-w-3xl text-sm md:text-base leading-relaxed text-white/84">{slide.narrative}</p>
+      {slide.kind === 'intro' ? (
+        <div className="mt-8 flex-1 grid lg:grid-cols-[1.02fr_.98fr] gap-10 items-center">
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-orange-300">Prepared for Canonical</div>
+            <h2 className="mt-4 text-4xl md:text-5xl lg:text-[3.5rem] leading-[0.98] tracking-tight text-white font-semibold max-w-4xl">
+              {slide.title}
+            </h2>
+            <p className="mt-5 max-w-3xl text-base md:text-lg leading-relaxed text-white/84">{slide.narrative}</p>
+            <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.035] p-5">
+              <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/66">Prepared by</div>
+              <div className="mt-2 text-2xl font-semibold text-white">Manash Protim Deori</div>
+              <div className="mt-1 text-sm text-white/74">MBA, IIM Shillong · B.Tech, Chemical Engineering · Marketing, analytics & strategy</div>
+            </div>
+            <div className="mt-4 rounded-2xl border border-orange-400/25 bg-orange-400/[0.055] p-5">
+              <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/85">Candidate positioning</div>
+              <p className="mt-2 text-sm md:text-base leading-relaxed text-white/88">{slide.decision}</p>
+            </div>
+          </div>
+          <div>{children}</div>
         </div>
-        <div className="rounded-xl border border-orange-400/20 bg-orange-400/[0.055] p-4">
-          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/75">Leadership insight</div>
-          <p className="mt-2 text-sm md:text-base leading-relaxed text-white/84">{slide.decision}</p>
-        </div>
-      </div>
+      ) : (
+        <>
+          <div className="mt-6 grid lg:grid-cols-[1.1fr_.9fr] gap-7 items-start">
+            <div>
+              <h2 className="text-3xl md:text-4xl lg:text-[2.7rem] leading-[1.02] tracking-tight text-white font-semibold max-w-4xl">
+                {slide.title}
+              </h2>
+              <p className="mt-4 max-w-3xl text-sm md:text-base leading-relaxed text-white/84">{slide.narrative}</p>
+            </div>
+            <div className="rounded-xl border border-orange-400/20 bg-orange-400/[0.055] p-4">
+              <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/75">Leadership insight</div>
+              <p className="mt-2 text-sm md:text-base leading-relaxed text-white/84">{slide.decision}</p>
+            </div>
+          </div>
 
-      <div className="mt-8 flex-1">{children}</div>
+          <div className="mt-8 flex-1">{children}</div>
+        </>
+      )}
       <SourceFooter sourceIds={slide.sourceIds} />
     </div>
   </section>
@@ -281,6 +334,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
   const [editingSlideId, setEditingSlideId] = useState<string>('executive');
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
+  const [pdfDownloading, setPdfDownloading] = useState(false);
   const [ownerDraftLoaded, setOwnerDraftLoaded] = useState(false);
   const [activeVariable, setActiveVariable] = useState<
     { scope: 'scenario'; key: ScenarioVariableKey } | { scope: 'tco'; key: TcoVariableKey }
@@ -366,20 +420,19 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
   const baseSlides = useMemo<DeckSlide[]>(() => [
     {
-      id: 'cover',
-      section: 'Strategy system',
-      title: 'Canonical: turn open adoption into enterprise control, assurance and recurring value',
-      decision: 'Greater commercial value is expected to be created when Canonical is framed beyond “Linux”, with enterprise assurance, private-cloud migration and neutral AI infrastructure treated as the principal value wedges.',
-      narrative: 'A living, model-driven strategy deck. Reported facts are separated from assumptions; every scenario can be stressed, edited by the owner and exported as an editable PowerPoint.',
+      id: 'intro',
+      section: 'Introduction',
+      title: 'Canonical Strategy Lab — from open adoption to measurable enterprise growth',
+      decision: 'I combine analytics-led campaign execution, senior-stakeholder management and quantitative strategy to turn complex market signals into measurable go-to-market action.',
+      narrative: 'An evidence-first strategy system built around three memorable ideas: enterprise assurance, productized private-cloud migration and neutral AI infrastructure. The work below separates reported facts from modeled outputs, ties every recommendation to a measurable path, and makes the candidate-to-role fit explicit rather than implied.',
       metrics: [
-        { label: 'FY2025 revenue', value: moneyM(CANONICAL_BASE_2025.revenue), detail: pct(actualRevenueGrowth) + ' YoY', tone: 'orange' },
-        { label: 'Subscription mix', value: pct(actualSubscriptionMix), detail: moneyM(CANONICAL_BASE_2025.subscriptionRevenue) + ' recurring-like subscription revenue', tone: 'teal' },
-        { label: 'Operating margin', value: pct(actualOperatingMargin), detail: moneyM(CANONICAL_BASE_2025.operatingProfit) + ' operating profit', tone: 'violet' },
-        { label: 'Model governance', value: '40 review passes', detail: '20 stakeholder lenses + 20 refinement iterations', tone: 'gold' },
+        { label: 'Idea 01', value: 'Assurance', detail: 'Security, compliance, lifecycle and accountable support as enterprise triggers', tone: 'orange' },
+        { label: 'Idea 02', value: 'Migration', detail: 'Repeatable private-cloud transition, quantified payback and post-migration expansion', tone: 'teal' },
+        { label: 'Idea 03', value: 'Neutral AI', detail: 'Portable, secure and silicon-ready AI infrastructure across environments', tone: 'violet' },
       ],
       bullets: STRATEGIC_BETS.map((b) => b.name + ' — ' + b.thesis),
-      sourceIds: ['canonical-2025-accounts', 'canonical-15-year', 'canonical-ai'],
-      kind: 'cover',
+      sourceIds: ['canonical-marketing-2026', 'canonical-marketing-manager-2026', 'canonical-campaign-manager-2026'],
+      kind: 'intro',
     },
     {
       id: 'executive',
@@ -773,11 +826,56 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         { label: 'Primary audience', value: 'Developer → CIO', detail: 'One truth, different decision frames', tone: 'orange' },
         { label: 'Distribution', value: 'Community + partners', detail: 'Owned, earned and borrowed reach', tone: 'teal' },
         { label: 'Decision system', value: 'P&L + brand', detail: 'Every narrative has a commercial path and falsifier', tone: 'violet' },
-        { label: 'Refinement', value: '20 iterations', detail: 'Two hardening rounds across evidence, readability, finance, AI, psychology and execution', tone: 'gold' },
+        { label: 'Refinement', value: '30 iterations', detail: 'Three hardening rounds across evidence, readability, finance, AI, psychology, candidate fit and execution', tone: 'gold' },
       ],
-      bullets: REVIEW_ITERATIONS_2026.slice(10, 20).map((row) => row[0] + ' · ' + row[2]),
+      bullets: REVIEW_ITERATIONS_2026.slice(20, 30).map((row) => row[0] + ' · ' + row[2]),
       sourceIds: ['canonical-marketing-2026'],
       kind: 'cmo',
+    },
+    {
+      id: 'candidate-impact',
+      section: 'How I can help Canonical · 01',
+      title: 'Turn the three strategic bets into a measurable campaign operating system',
+      decision: 'The highest-value contribution would be created by translating enterprise assurance, private-cloud migration and neutral AI infrastructure into trigger-based GTM programs governed by one shared evidence loop.',
+      narrative: 'The attached WIN guidance is applied directly here: research is converted into a small number of actionable ideas, each idea is expressed as a step-by-step operating motion, and success is judged by business evidence rather than generic campaign activity.',
+      metrics: [
+        { label: 'Assurance motion', value: 'Trigger-led demand', detail: 'Security, compliance and lifecycle events routed to paid-attach and expansion journeys', tone: 'orange' },
+        { label: 'Migration motion', value: 'Evidence factory', detail: 'TCO, reference architecture, migration proof and time-to-production used to reduce switching risk', tone: 'teal' },
+        { label: 'AI motion', value: 'Partner leverage', detail: 'Silicon, cloud and ISV proof converted into secure, sovereign and hardware-ready workload stories', tone: 'violet' },
+        { label: 'Operating loop', value: 'Learn → scale', detail: 'Research, hypothesis, experiment, measurement, iteration and stage-gated budget release', tone: 'gold' },
+      ],
+      bullets: [
+        'Research would combine campaign performance, search intent, social and brand listening, customer and partner feedback, competitor moves and win/loss evidence before channel selection.',
+        'Enterprise assurance would be activated around identifiable risk triggers and measured through paid attach, account expansion and recurring revenue efficiency.',
+        'Private-cloud migration would be marketed through quantified payback, delivery repeatability and proof density rather than generic incumbent displacement messaging.',
+        'AI infrastructure would be packaged around secure agents, sovereign control, silicon readiness and portability, with partner-sourced workload attach as a core distribution signal.',
+        'Budget would be scaled only when qualified account penetration, attach, partner contribution or expansion evidence improves; weak signals would trigger diagnosis before amplification.',
+      ],
+      sourceIds: ['canonical-marketing-manager-2026', 'canonical-campaign-manager-2026', 'canonical-ai', 'canonical-pro'],
+      kind: 'candidate',
+    },
+    {
+      id: 'candidate-fit',
+      section: 'How I can help Canonical · 02',
+      title: 'My strongest fit is where Canonical asks marketing to combine ownership, analytics, storytelling and cross-functional execution',
+      decision: 'The closest alignment is found in end-to-end campaign ownership, data-led optimization, stakeholder coordination, communication and hands-on execution; direct enterprise-technology marketing experience remains the principal gap and is not overstated.',
+      narrative: 'Candidate evidence is stated conservatively. Responsibilities, education and operating context are used as proof; quantified business outcomes are not invented where they are unavailable. The objective is credibility first, then a clear transfer path into Canonical’s technical marketing environment.',
+      metrics: [
+        { label: 'Experience', value: '16+ months', detail: 'Analytics-heavy, client-facing campaign and stakeholder-management work', tone: 'orange' },
+        { label: 'Execution', value: 'End-to-end', detail: 'Digital and offline campaign management under tight deadlines', tone: 'teal' },
+        { label: 'Foundation', value: 'B.Tech + MBA', detail: 'Engineering training plus MBA from IIM Shillong', tone: 'violet' },
+        { label: 'Operating context', value: 'High-stakes', detail: 'Senior-stakeholder coordination, relationship management and decision-ready communication', tone: 'gold' },
+      ],
+      bullets: [
+        'Canonical asks for GTM and campaign ownership; my transferable evidence is end-to-end digital and offline campaign management from planning through analytics and delivery.',
+        'Canonical emphasizes data-driven optimization; my work has been analytics-heavy and client-facing, requiring performance interpretation and recommendation under deadline pressure.',
+        'Canonical values cross-functional collaboration and trusted relationships; my track record includes coordinating demanding senior stakeholders while keeping execution moving.',
+        'Canonical needs technical-to-business storytelling; my engineering foundation, MBA training and portfolio work are used to translate complex analytical systems into concise executive narratives.',
+        'Case-study transfer: high-stakes campaigns required execution, analysis and stakeholder management to operate as one loop; the same discipline maps directly to Canonical’s experiment-measure-iterate culture.',
+        'Gap acknowledged: direct SaaS and enterprise-IT marketing tenure is not claimed. A first-90-day learning plan would prioritize product fluency, customer language, martech instrumentation and open-source community norms.',
+      ],
+      sourceIds: ['canonical-marketing-manager-2026', 'canonical-campaign-manager-2026', 'canonical-marketing-2026'],
+      kind: 'candidate',
     },
     {
       id: 'fundamentals',
@@ -845,15 +943,15 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     },
     {
       id: 'grill',
-      section: '20-pass leadership review',
-      title: 'The deck has been pressure-tested through 20 stakeholder lenses and 20 refinement iterations',
+      section: '50-pass leadership review',
+      title: 'The deck has been pressure-tested through 20 stakeholder lenses and 30 refinement iterations',
       decision: 'Governance is strengthened when review questions are maintained as a standing checklist and each strategy change is accompanied by the stakeholder problem being addressed and the evidence that would invalidate the thesis.',
-      narrative: 'The original 20 stakeholder lenses are now supplemented by twenty refinement iterations covering theme integrity, P&L discipline, sensitivity, brand causality, competition, 2026 developments, buyer psychology, evidence triangulation, passive insight language, legibility and executive quote safety.',
+      narrative: 'The original 20 stakeholder lenses are now supplemented by thirty refinement iterations covering theme integrity, P&L discipline, sensitivity, brand causality, competition, 2026 developments, buyer psychology, evidence triangulation, passive insight language, legibility and executive quote safety.',
       metrics: [
         { label: 'Investor / finance', value: '5 lenses', detail: 'Growth quality · margin · retention · capital allocation', tone: 'violet' },
         { label: 'Customer / security', value: '4 lenses', detail: 'TCO · lifecycle · trust · sovereignty', tone: 'orange' },
         { label: 'Partner / product', value: '5 lenses', detail: 'Cloud · OEM/SI · platform coherence · AI · infrastructure', tone: 'teal' },
-        { label: 'Execution / governance', value: '6 + 20', detail: 'Original governance lenses + two refinement rounds', tone: 'gold' },
+        { label: 'Execution / governance', value: '6 + 30', detail: 'Original governance lenses + three refinement rounds', tone: 'gold' },
       ],
       bullets: REVIEW_LENSES.slice(0, 4).map((q) => q[0] + ': ' + q[1]),
       sourceIds: ['canonical-2025-accounts', 'canonical-ai', 'redhat-lifecycle-2026'],
@@ -869,7 +967,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         { label: 'Primary sources', value: String(SOURCES.filter((s) => s.confidence === 'high').length), detail: 'Statutory filings + official vendor/investor sources', tone: 'green' },
         { label: 'Model tests', value: 'Automated', detail: 'Identities · monotonicity · uncertainty ordering · TCO guards', tone: 'cyan' },
         { label: 'Owner control', value: 'Local draft + GitHub', detail: 'Public cannot overwrite canonical source', tone: 'orange' },
-        { label: 'Download', value: 'Editable PPTX', detail: 'Generated from the active scenario and slide edits', tone: 'violet' },
+        { label: 'Download', value: 'PPTX + PDF', detail: 'Editable PowerPoint plus direct multi-page PDF from the active deck', tone: 'violet' },
       ],
       bullets: [
         'Fact: trace to a source and date.',
@@ -989,6 +1087,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         rect: 'rect',
         roundRect: 'roundRect',
         line: 'line',
+        ellipse: 'ellipse',
       };
       const colors = {
         bg: '0B0D12',
@@ -1007,6 +1106,71 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         const s = pptx.addSlide();
         s.background = { color: colors.bg };
         s.addShape(ShapeType.rect, { x: 0, y: 0, w: 13.333, h: 0.055, fill: { color: colors.orange }, line: { color: colors.orange } });
+
+        if (deckSlide.kind === 'intro') {
+          s.addText('01 · INTRODUCTION', {
+            x: 0.55, y: 0.28, w: 3.0, h: 0.2, fontSize: 8.5, bold: true, color: 'F0A081', charSpacing: 1.2, margin: 0,
+          });
+          s.addText(deckSlide.title, {
+            x: 0.55, y: 0.82, w: 6.3, h: 1.42, fontFace: 'Aptos Display', fontSize: 29, bold: true, color: colors.white, margin: 0,
+          });
+          s.addText(deckSlide.narrative, {
+            x: 0.55, y: 2.38, w: 6.1, h: 1.02, fontSize: 11.2, color: 'C8CDD6', margin: 0, valign: 'top',
+          });
+          s.addText('PREPARED BY', {
+            x: 0.55, y: 3.82, w: 1.6, h: 0.18, fontSize: 7.6, bold: true, color: '7F8898', charSpacing: 1.1, margin: 0,
+          });
+          s.addText('Manash Protim Deori', {
+            x: 0.55, y: 4.08, w: 4.6, h: 0.36, fontSize: 20, bold: true, color: colors.white, margin: 0,
+          });
+          s.addText('MBA, IIM Shillong · B.Tech, Chemical Engineering · Marketing, analytics & strategy', {
+            x: 0.55, y: 4.48, w: 5.8, h: 0.32, fontSize: 9.2, color: '9AA3B2', margin: 0,
+          });
+          s.addShape(ShapeType.roundRect, {
+            x: 0.55, y: 5.15, w: 6.15, h: 1.22,
+            fill: { color: '181419' }, line: { color: '5D2E1D', transparency: 10, width: 0.8 },
+          });
+          s.addText('CANDIDATE POSITIONING', {
+            x: 0.8, y: 5.38, w: 2.0, h: 0.18, fontSize: 7.4, bold: true, color: 'F0A081', charSpacing: 1.0, margin: 0,
+          });
+          s.addText(deckSlide.decision, {
+            x: 0.8, y: 5.69, w: 5.55, h: 0.48, fontSize: 10.4, color: 'E7E9ED', margin: 0, valign: 'mid',
+          });
+
+          s.addShape(ShapeType.roundRect, {
+            x: 7.12, y: 0.72, w: 5.65, h: 5.72,
+            fill: { color: '11141A' }, line: { color: '4A2B21', width: 0.9 },
+          });
+          s.addShape(ShapeType.ellipse, {
+            x: 7.62, y: 1.18, w: 0.92, h: 0.92,
+            fill: { color: colors.orange }, line: { color: colors.orange },
+          });
+          s.addText('c', {
+            x: 7.83, y: 1.28, w: 0.50, h: 0.47, fontFace: 'Aptos Display', fontSize: 25, bold: true, color: colors.white, margin: 0, align: 'center',
+          });
+          s.addText('canonical', {
+            x: 8.72, y: 1.28, w: 3.35, h: 0.50, fontFace: 'Aptos Display', fontSize: 27, bold: true, color: colors.white, margin: 0,
+          });
+          s.addText('OPEN INFRASTRUCTURE · STRATEGY LAB', {
+            x: 7.62, y: 2.27, w: 4.8, h: 0.18, fontSize: 7.3, bold: true, color: 'F0A081', charSpacing: 1.25, margin: 0,
+          });
+          deckSlide.metrics.slice(0, 3).forEach((m, i) => {
+            const y = 2.78 + i * 0.98;
+            const toneHex = (palette[m.tone || 'slate'] || '#8993A4').replace('#', '');
+            s.addShape(ShapeType.roundRect, {
+              x: 7.62, y, w: 4.62, h: 0.78,
+              fill: { color: '151921' }, line: { color: toneHex, transparency: 60, width: 0.75 },
+            });
+            s.addText(m.label.toUpperCase(), { x: 7.86, y: y + 0.12, w: 1.05, h: 0.13, fontSize: 6.5, bold: true, color: toneHex, charSpacing: 0.8, margin: 0 });
+            s.addText(m.value, { x: 8.86, y: y + 0.09, w: 1.25, h: 0.20, fontSize: 12.8, bold: true, color: colors.white, margin: 0 });
+            s.addText(m.detail, { x: 7.86, y: y + 0.38, w: 4.0, h: 0.23, fontSize: 7.1, color: 'A6AFBC', margin: 0 });
+          });
+          const introSourceLabels = deckSlide.sourceIds.map((id) => sourceMap[id]?.label).filter(Boolean).join(' · ');
+          s.addText(introSourceLabels, { x: 0.55, y: 7.08, w: 11.9, h: 0.16, fontSize: 5.6, color: '586171', margin: 0 });
+          s.addText('CANONICAL STRATEGY LAB · prepared by Manash Protim Deori', { x: 8.0, y: 7.28, w: 4.75, h: 0.13, fontSize: 5.8, color: '6A7280', align: 'right', margin: 0 });
+          return;
+        }
+
         s.addText(String(idx + 1).padStart(2, '0') + ' · ' + deckSlide.section.toUpperCase(), {
           x: 0.55, y: 0.26, w: 5.7, h: 0.24, fontFace: 'Aptos', fontSize: 8.5, color: '7F8898', charSpacing: 1.2, bold: true,
         });
@@ -1135,7 +1299,107 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     }
   };
 
+  const downloadPdf = async () => {
+    const html2canvas = (window as any).html2canvas;
+    const JsPdf = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
+    if (!html2canvas || !JsPdf) {
+      alert('The PDF generator has not loaded yet. Refresh once and try again.');
+      return;
+    }
+
+    setPdfDownloading(true);
+    const hiddenForExport = Array.from(document.querySelectorAll<HTMLElement>('[data-export-hide="true"]'));
+    const previousDisplays = hiddenForExport.map((node) => node.style.display);
+    hiddenForExport.forEach((node) => { node.style.display = 'none'; });
+
+    try {
+      if ((document as any).fonts?.ready) await (document as any).fonts.ready;
+      const pageWidth = 960;
+      const pageHeight = 540;
+      const pdf = new JsPdf({ orientation: 'landscape', unit: 'pt', format: [pageWidth, pageHeight], compress: true });
+
+      for (let i = 0; i < slides.length; i += 1) {
+        const element = document.getElementById('canonical-slide-' + slides[i].id);
+        if (!element) continue;
+        const canvas = await html2canvas(element, {
+          backgroundColor: '#0B0D12',
+          scale: Math.min(1.7, Math.max(1.2, window.devicePixelRatio || 1.25)),
+          useCORS: true,
+          logging: false,
+          scrollX: 0,
+          scrollY: -window.scrollY,
+        });
+
+        const image = canvas.toDataURL('image/jpeg', 0.94);
+        if (i > 0) pdf.addPage([pageWidth, pageHeight], 'landscape');
+        pdf.setFillColor(11, 13, 18);
+        pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+        const scale = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+        const width = canvas.width * scale;
+        const height = canvas.height * scale;
+        const x = (pageWidth - width) / 2;
+        const y = (pageHeight - height) / 2;
+        pdf.addImage(image, 'JPEG', x, y, width, height, undefined, 'FAST');
+      }
+
+      pdf.save('Canonical_Strategy_Lab_Manash_Protim_Deori_' + new Date().toISOString().slice(0, 10) + '.pdf');
+    } catch (error) {
+      console.error(error);
+      alert('PDF generation failed. The web deck is unchanged; please refresh and retry.');
+    } finally {
+      hiddenForExport.forEach((node, index) => { node.style.display = previousDisplays[index]; });
+      setPdfDownloading(false);
+    }
+  };
+
   const renderVisual = (slide: DeckSlide) => {
+    if (slide.kind === 'intro') {
+      return (
+        <div className="space-y-5">
+          <CanonicalIdentityMark />
+          <div className="grid sm:grid-cols-3 gap-3">
+            {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/66">The three-ideas framework</div>
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs md:text-sm text-white/84">
+              <span className="rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-2">Open adoption</span>
+              <span className="text-white/44">→</span>
+              <span className="rounded-full border border-violet-400/30 bg-violet-400/10 px-3 py-2">Risk trigger</span>
+              <span className="text-white/44">→</span>
+              <span className="rounded-full border border-teal-400/30 bg-teal-400/10 px-3 py-2">Enterprise proof</span>
+              <span className="text-white/44">→</span>
+              <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-2">Recurring value</span>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (slide.kind === 'candidate') {
+      return (
+        <div className="grid lg:grid-cols-[.92fr_1.08fr] gap-5">
+          <div className="grid sm:grid-cols-2 gap-3">
+            {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/85">Evidence → transfer → measurable action</div>
+            <div className="mt-4 grid gap-3">
+              {slide.bullets.slice(0, 6).map((bullet, idx) => (
+                <div key={idx} className="grid grid-cols-[28px_1fr] gap-3 items-start rounded-xl border border-white/8 bg-black/20 p-3">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[10px] font-mono text-orange-300">
+                    {String(idx + 1).padStart(2, '0')}
+                  </div>
+                  <p className="text-[12px] leading-relaxed text-white/82">{bullet}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     if (slide.kind === 'cover' || slide.kind === 'cockpit') {
       return (
         <div className="grid lg:grid-cols-[1fr_.95fr] gap-6">
@@ -1391,7 +1655,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <header className="canonical-local-header pb-8 border-b border-neutral-800/70">
         <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-100">
-          <span className="text-orange-300">Canonical Strategy System</span><span>·</span><span>2025 reported base</span><span>·</span><span>2026 live signals</span><span>·</span><span>20 lenses + 20 refinements</span>
+          <span className="text-orange-300">Canonical Strategy System</span><span>·</span><span>2025 reported base</span><span>·</span><span>2026 live signals</span><span>·</span><span>20 lenses + 30 refinements</span>
         </div>
         <div className="mt-5 grid lg:grid-cols-[1.25fr_.75fr] gap-8 items-end">
           <div>
@@ -1399,12 +1663,15 @@ export const CanonicalStrategyLabPage: React.FC = () => {
               A living executive deck, not a static presentation
             </h1>
             <p className="mt-5 max-w-3xl text-base md:text-lg leading-relaxed text-neutral-200">
-              Scroll the deck, change commercial, brand, partner and customer-economics assumptions, see the directional Canonical/competitor/marketing consequence immediately, inspect uncertainty and sensitivity, and download the active version as an editable PowerPoint.
+              Scroll the deck, change commercial, brand, partner and customer-economics assumptions, see the directional Canonical/competitor/marketing consequence immediately, inspect uncertainty and sensitivity, and download the active version as an editable PowerPoint or presentation-ready PDF.
             </p>
           </div>
           <div className="flex flex-wrap lg:justify-end gap-2">
             <button onClick={downloadPptx} disabled={downloading} className="inline-flex items-center gap-2 rounded-md bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-400 disabled:opacity-50">
               <FileDown className="w-4 h-4" /> {downloading ? 'Generating…' : 'Download live PPTX'}
+            </button>
+            <button onClick={downloadPdf} disabled={pdfDownloading} className="inline-flex items-center gap-2 rounded-md border border-orange-400/35 bg-orange-400/10 px-4 py-2.5 text-sm font-semibold text-orange-100 hover:bg-orange-400/15 disabled:opacity-50">
+              <Download className="w-4 h-4" /> {pdfDownloading ? 'Rendering PDF…' : 'Download PDF'}
             </button>
             <a href={ARCHIVE_DECK_VIEW_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-neutral-700 px-4 py-2.5 text-sm text-neutral-100 hover:text-white hover:border-neutral-500">
               <ExternalLink className="w-4 h-4" /> Archive deck
