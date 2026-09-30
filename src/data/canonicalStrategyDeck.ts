@@ -266,6 +266,22 @@ export const SOURCES: SourceRef[] = [
     confidence: 'high',
     note: 'Canonical describes marketing as feedback, measurement, iteration and improvement, aiming to engineer growth in engagement, awareness, consumption and commerce.',
   },
+  {
+    id: 'canonical-marketing-manager-2026',
+    label: 'Canonical — Marketing Manager role',
+    url: 'https://canonical.com/careers/6110691',
+    date: 'current',
+    confidence: 'high',
+    note: 'Official role description emphasizes end-to-end GTM and campaign ownership, cross-functional integrated execution, data-driven optimization, strategy plus hands-on delivery, and storytelling for technical and business audiences.',
+  },
+  {
+    id: 'canonical-campaign-manager-2026',
+    label: 'Canonical — Junior Campaign Manager role',
+    url: 'https://canonical.com/careers/6492597',
+    date: 'current',
+    confidence: 'high',
+    note: 'Official role description emphasizes campaign tracking and analytics, A/B testing, lead generation, automation and AI, trusted cross-functional relationships, prioritization and deadline quality.',
+  },
 ];
 
 export const PEER_MOMENTUM = [
