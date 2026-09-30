@@ -77,7 +77,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S05',
     label: 'Olam Agri — Bakewell customer app',
-    url: 'https://www.olamagri.com/news/press-releases/olam-launches-bakewell-app-to-support-bakers-and-grow-flour-business-in-nigeria.html',
+    url: 'https://www.olamagri.com/locations/nigeria',
     date: 'current',
     authority: 'primary',
     note: 'Evidence for Olam’s digital baker relationship layer: ordering, complaints, feedback, profitability support, new-product information and customer insight.',
@@ -85,7 +85,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S06',
     label: 'Olam Agri — Wheat milling',
-    url: 'https://www.olamagri.com/products-services/wheat-milling.html',
+    url: 'https://www.olamagri.com/products-services/wheat-milling-and-pasta',
     date: 'current',
     authority: 'primary',
     note: 'Primary evidence for flour and pasta footprint across Nigeria, Ghana, Senegal and Cameroon and relationships with artisanal bakers, industrial users and consumers.',
@@ -173,7 +173,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S17',
     label: 'Olam Agri + AGRA — Food and feed value-chain MOU',
-    url: 'https://www.olamagri.com/news/press-releases/olam-agri-and-agra-sign-mou-to-strengthen-food-and-feed-value-chains-in-africa.html',
+    url: 'https://www.olamagri.com/news/press-release/signing-of-mou-with-agra-to-strengthen-food-and-feed-value-chains-in-africa',
     date: 'current',
     authority: 'primary',
     note: 'Evidence for value-chain programmes in Nigeria and Ghana with scope for wider African replication across crops, poultry, aquaculture and baker ecosystems.',
@@ -181,7 +181,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S18',
     label: 'Olam Agri — Animal feed and protein',
-    url: 'https://www.olamagri.com/products-services/animal-feed-protein.html',
+    url: 'https://www.olamagri.com/products-services/animal-feed-and-protein',
     date: 'current',
     authority: 'primary',
     note: 'Primary source for feed, poultry and aquaculture customer ecosystems in Nigeria and other African markets.',
