@@ -35,6 +35,20 @@ import {
   scenarioBreakEvenReinvestmentPct,
   simulateCanonicalScenario,
 } from '../lib/canonicalStrategyModel';
+import {
+  buildScenarioVariableInsight,
+  buildTcoVariableInsight,
+  calculateBrandDecisionModel,
+  topScenarioSensitivities,
+} from '../lib/canonicalMarketingModel';
+import type { ScenarioVariableKey, TcoVariableKey } from '../data/canonicalMarketingDecision';
+import { REVIEW_ITERATIONS_2026 } from '../data/canonicalMarketingDecision';
+import {
+  DirectionalImpactBox,
+  ExecutiveOperatingLens,
+  LatestDevelopmentRadar,
+  PnLBrandCube,
+} from '../components/canonical/CanonicalDecisionVisuals';
 
 const ARCHIVE_DECK_FILE_ID = '1w7hRsHwGY1m6J7BelVbYmtN1z2jyk7wO';
 const ARCHIVE_DECK_VIEW_URL = 'https://drive.google.com/file/d/' + ARCHIVE_DECK_FILE_ID + '/view';
@@ -265,6 +279,9 @@ export const CanonicalStrategyLabPage: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [ownerDraftLoaded, setOwnerDraftLoaded] = useState(false);
+  const [activeVariable, setActiveVariable] = useState<
+    { scope: 'scenario'; key: ScenarioVariableKey } | { scope: 'tco'; key: TcoVariableKey }
+  >({ scope: 'scenario', key: 'retentionPct' });
 
   useEffect(() => {
     if (!isOwner || ownerDraftLoaded) return;
@@ -289,6 +306,14 @@ export const CanonicalStrategyLabPage: React.FC = () => {
   const distribution = useMemo(() => simulateCanonicalScenario(scenario, 1400), [scenario]);
   const tco = useMemo(() => calculateCustomerTco(tcoInputs), [tcoInputs]);
   const breakEvenReinvestment = useMemo(() => scenarioBreakEvenReinvestmentPct(scenario), [scenario]);
+  const brandModel = useMemo(() => calculateBrandDecisionModel(scenario, metrics), [scenario, metrics]);
+  const sensitivities = useMemo(() => topScenarioSensitivities(scenario), [scenario]);
+  const activeImpact = useMemo(
+    () => activeVariable.scope === 'scenario'
+      ? buildScenarioVariableInsight(activeVariable.key, scenario)
+      : buildTcoVariableInsight(activeVariable.key, tcoInputs),
+    [activeVariable, scenario, tcoInputs],
+  );
 
   const dynamicInsights = useMemo(() => {
     const items: string[] = [];
@@ -671,6 +696,87 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       kind: 'downside',
     },
     {
+      id: 'pnl-brand',
+      section: 'CMO P&L bridge',
+      title: 'Marketing should be accountable to the P&L without pretending every influenced dollar is incremental revenue',
+      decision: 'Use one connected bridge: recurring revenue drivers → contribution → reinvestment → marketing allocation → influenced ARR → reach, awareness and brand strength diagnostics.',
+      narrative: 'The financial model remains the accounting source of truth. Marketing-influenced ARR is a non-additive diagnostic, while the brand indices are rebased scenario indicators (100 = default), not audited brand-equity measures.',
+      metrics: [
+        { label: 'Projected revenue', value: moneyM(metrics.projectedRevenue), detail: pct(metrics.revenueGrowthPct) + ' vs FY2025 base', tone: 'orange' },
+        { label: 'Marketing allocation', value: moneyM(brandModel.marketingInvestment), detail: pct(scenario.marketingShareOfReinvestmentPct) + ' of modeled growth reinvestment', tone: 'violet' },
+        { label: 'Marketing-influenced ARR', value: moneyM(brandModel.marketingInfluencedARR), detail: 'Non-additive share of modeled new subscription ARR', tone: 'teal' },
+        { label: 'Brand strength index', value: brandModel.strengthIndex.toFixed(0), detail: 'Directional index · 100 = default scenario', tone: 'gold' },
+      ],
+      bullets: [
+        'Revenue is never increased merely because marketing influence rises.',
+        'Marketing investment is an allocation of existing modeled reinvestment, avoiding a second cost line.',
+        'Reach and awareness can move faster than brand strength; strength requires trust, clarity and proof.',
+        'The executive test is not “did marketing touch the deal?” but “did the market system become more efficient and more defensible?”',
+      ],
+      sourceIds: ['canonical-2025-accounts', 'canonical-marketing-2026'],
+      kind: 'pnl3d',
+    },
+    {
+      id: 'sensitivity',
+      section: 'Sensitivity control tower',
+      title: 'Not every assumption deserves equal executive attention',
+      decision: 'Manage the highest-sensitivity levers with the strongest evidence, tighter ranges and faster feedback loops; do not spend equal meeting time on low-impact variables.',
+      narrative: 'The ranking uses a local one-step change in each active assumption and combines its modeled revenue, operating-profit and directional brand-index movement. It is a prioritization aid, not a causal estimate.',
+      metrics: sensitivities.slice(0, 4).map((row, idx) => ({
+        label: row.label,
+        value: row.sensitivity.toUpperCase(),
+        detail: row.stepLabel + ' step · Δ revenue ' + moneyM(row.revenueDelta) + ' · Δ op profit ' + moneyM(row.profitDelta),
+        tone: (['orange','violet','teal','gold'][idx] as Tone),
+      })),
+      bullets: sensitivities.slice(0, 6).map((row) =>
+        row.label + ': ' + row.sensitivity + ' sensitivity; one-step revenue impact ' + moneyM(row.revenueDelta) +
+        ', operating-profit impact ' + moneyM(row.profitDelta) + '.'
+      ),
+      sourceIds: ['canonical-2025-accounts'],
+      kind: 'sensitivity',
+    },
+    {
+      id: 'latest-2026',
+      section: '2026 change radar',
+      title: 'Canonical’s marketing opportunity has changed materially in the last six months',
+      decision: 'Reframe the portfolio around secure agentic infrastructure, rapid security response, sovereign control, silicon readiness and lifecycle assurance — then map each narrative to a measurable commercial trigger.',
+      narrative: 'This slide brings current 2026 product, security, silicon, AI, regulation and data-platform developments into the strategy system so the deck does not fossilize around an older cloud-and-Linux narrative.',
+      metrics: [
+        { label: 'Security cadence', value: 'Weekly publication', detail: 'Unified rapid two-week kernel SRU cycle', tone: 'orange' },
+        { label: 'Device lifecycle', value: 'Up to 15 years', detail: 'Zephyr 26.04 LTS for MCU-grade devices', tone: 'teal' },
+        { label: 'Agentic PC', value: '80 TOPS NPU', detail: 'Snapdragon X2 Ubuntu support targeted for 2027', tone: 'violet' },
+        { label: 'AI control', value: 'Open + sovereign', detail: 'Secure agents, governed data and multi-environment infrastructure', tone: 'gold' },
+      ],
+      bullets: [
+        'Security: faster CVE remediation becomes a measurable risk-reduction story.',
+        'AI: shift from “Ubuntu runs AI” to secure, portable, silicon-ready and sovereign AI operations.',
+        'IoT: Zephyr extends lifecycle assurance into MCU fleets and CRA-sensitive device makers.',
+        'Data: governed analytics/data-lake positioning broadens the buying group beyond infrastructure teams.',
+        'Desktop/edge: Snapdragon and Qualcomm relationships create a local-agentic-AI and physical-AI route to market.',
+      ],
+      sourceIds: [
+        'canonical-kernel-sru-2026','canonical-snapdragon-x2','canonical-zephyr-2026','canonical-data-lake-2026',
+        'canonical-open-secure-ai','canonical-dragonwing-2026','ubuntu-2604-security','canonical-sovereign-cloud'
+      ],
+      kind: 'latest',
+    },
+    {
+      id: 'cmo-lens',
+      section: 'Executive marketing operating lens',
+      title: 'The deck is optimized for a technically fluent, community-and-partner-led marketing leader',
+      decision: 'Use technical credibility, developer/community trust and partner ecosystems as compounding distribution assets — then translate them into a small number of executive-level category narratives.',
+      narrative: 'The operating lens emphasizes developer ecosystems, channel/partner leverage, open-source trust, B2B cloud, technical storytelling and public leadership — the capabilities most useful for turning Canonical’s portfolio breadth into market power.',
+      metrics: [
+        { label: 'Primary audience', value: 'Developer → CIO', detail: 'One truth, different decision frames', tone: 'orange' },
+        { label: 'Distribution', value: 'Community + partners', detail: 'Owned, earned and borrowed reach', tone: 'teal' },
+        { label: 'Decision system', value: 'P&L + brand', detail: 'Every narrative has a commercial path and falsifier', tone: 'violet' },
+        { label: 'Refinement', value: '10 iterations', detail: 'Theme · finance · sensitivity · AI · security · psychology · execution', tone: 'gold' },
+      ],
+      bullets: REVIEW_ITERATIONS_2026.slice(5, 10).map((row) => row[0] + ' · ' + row[2]),
+      sourceIds: ['canonical-marketing-2026'],
+      kind: 'cmo',
+    },
+    {
       id: 'roadmap',
       section: '12-quarter roadmap',
       title: 'Sequence the strategy so evidence arrives before scale spending',
@@ -694,14 +800,14 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     {
       id: 'grill',
       section: '20-pass leadership review',
-      title: 'The deck has been pressure-tested from 20 stakeholder and model-risk lenses',
+      title: 'The deck has been pressure-tested through 20 stakeholder lenses and 10 additional refinement iterations',
       decision: 'Keep the review questions as a standing governance checklist; every future strategy change must state which stakeholder problem it solves and what evidence would invalidate it.',
-      narrative: 'The review register is stored in the repository. The answers are reflected throughout the deck rather than buried in an appendix.',
+      narrative: 'The original 20 stakeholder lenses are now supplemented by ten iterations covering light-mode integrity, P&L discipline, variable sensitivity, brand causality, competition, 2026 security/regulation, agentic AI, partner leverage, buyer psychology and executive usability.',
       metrics: [
         { label: 'Investor / finance', value: '5 lenses', detail: 'Growth quality · margin · retention · capital allocation', tone: 'violet' },
         { label: 'Customer / security', value: '4 lenses', detail: 'TCO · lifecycle · trust · sovereignty', tone: 'orange' },
         { label: 'Partner / product', value: '5 lenses', detail: 'Cloud · OEM/SI · platform coherence · AI · infrastructure', tone: 'teal' },
-        { label: 'Execution / governance', value: '6 lenses', detail: 'Sustainability · sales · marketing · competition · operations · model risk', tone: 'gold' },
+        { label: 'Execution / governance', value: '6 + 10', detail: 'Original governance lenses + v3 refinement iterations', tone: 'gold' },
       ],
       bullets: REVIEW_LENSES.slice(0, 4).map((q) => q[0] + ': ' + q[1]),
       sourceIds: ['canonical-2025-accounts', 'canonical-ai', 'redhat-lifecycle-2026'],
@@ -739,6 +845,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     actualSubscriptionGrowth,
     actualSubscriptionMix,
     actualOperatingMargin,
+    brandModel,
+    sensitivities,
   ]);
 
   const slides = useMemo(
@@ -748,11 +856,15 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
   const editingSlide = slides.find((s) => s.id === editingSlideId) || slides[0];
 
-  const setScenarioValue = (key: keyof CanonicalScenario, value: number) =>
+  const setScenarioValue = (key: keyof CanonicalScenario, value: number) => {
+    setActiveVariable({ scope: 'scenario', key });
     setScenario((prev) => ({ ...prev, [key]: value }));
+  };
 
-  const setTcoValue = (key: keyof CustomerTcoInputs, value: number) =>
+  const setTcoValue = (key: keyof CustomerTcoInputs, value: number) => {
+    setActiveVariable({ scope: 'tco', key });
     setTcoInputs((prev) => ({ ...prev, [key]: value }));
+  };
 
   const updateOverride = (field: keyof SlideOverride, value: string | string[]) => {
     setOverrides((prev) => {
@@ -787,7 +899,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
   const copyGithubPrompt = async () => {
     const prompt = [
       '[$github] Update my portfolio repository ManashProtimDeori/Manash-Protim-Deori.',
-      'Target the Canonical strategy system in src/data/canonicalStrategyDeck.ts and src/pages/CanonicalStrategyLabPage.tsx.',
+      'Target the Canonical strategy system in src/data/canonicalStrategyDeck.ts, src/data/canonicalMarketingDecision.ts, src/lib/canonicalMarketingModel.ts and src/pages/CanonicalStrategyLabPage.tsx.',
       'Promote the following owner-approved portfolio draft into the canonical GitHub source. Preserve public read-only behavior, the calculation tests, source labels, and the downloadable PPTX generator. Do not change reported-source facts unless independently verified.',
       '',
       'SCENARIO:',
@@ -1111,6 +1223,41 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       );
     }
 
+    if (slide.kind === 'pnl3d') {
+      return <PnLBrandCube metrics={metrics} brand={brandModel} />;
+    }
+
+    if (slide.kind === 'latest') {
+      return <LatestDevelopmentRadar />;
+    }
+
+    if (slide.kind === 'cmo') {
+      return <ExecutiveOperatingLens />;
+    }
+
+    if (slide.kind === 'sensitivity') {
+      return (
+        <div className="grid md:grid-cols-2 gap-3">
+          {sensitivities.slice(0, 10).map((row, idx) => (
+            <div key={row.key} className="rounded-xl border border-white/10 bg-white/[0.025] p-4">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="text-[9px] font-mono text-white/30">0{idx + 1}</div>
+                  <div className="mt-2 text-sm font-semibold text-white">{row.label}</div>
+                </div>
+                <span className="rounded border border-orange-400/20 bg-orange-400/[0.04] px-2 py-1 text-[8px] font-mono uppercase text-orange-300">{row.sensitivity}</span>
+              </div>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-[9px]">
+                <div><span className="block text-white/30">Step</span><strong className="text-white">{row.stepLabel}</strong></div>
+                <div><span className="block text-white/30">Revenue</span><strong className="text-white">{moneyM(row.revenueDelta)}</strong></div>
+                <div><span className="block text-white/30">Op profit</span><strong className="text-white">{moneyM(row.profitDelta)}</strong></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    }
+
     if (slide.kind === 'ai' || slide.kind === 'security' || slide.kind === 'measurement' || slide.kind === 'segments' || slide.kind === 'sustainability' || slide.kind === 'downside' || slide.kind === 'capital' || slide.kind === 'grill' || slide.kind === 'governance') {
       return (
         <div className="grid lg:grid-cols-[1fr_.85fr] gap-6">
@@ -1134,10 +1281,11 @@ export const CanonicalStrategyLabPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-      <header className="pb-8 border-b border-neutral-800/70">
+    <div className="canonical-strategy-lab">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <header className="canonical-local-header pb-8 border-b border-neutral-800/70">
         <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
-          <span className="text-orange-400">Canonical Strategy System</span><span>·</span><span>2025 reported base</span><span>·</span><span>2026 competitor signals</span><span>·</span><span>20-pass review</span>
+          <span className="text-orange-400">Canonical Strategy System</span><span>·</span><span>2025 reported base</span><span>·</span><span>2026 live signals</span><span>·</span><span>20 lenses + 10 iterations</span>
         </div>
         <div className="mt-5 grid lg:grid-cols-[1.25fr_.75fr] gap-8 items-end">
           <div>
@@ -1145,7 +1293,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
               A living executive deck, not a static presentation
             </h1>
             <p className="mt-5 max-w-3xl text-base md:text-lg leading-relaxed text-neutral-400">
-              Scroll the deck, change the commercial and customer-economics assumptions, inspect uncertainty, and download the active version as an editable PowerPoint. Owner edits are saved locally and can be promoted into GitHub through a generated ChatGPT prompt.
+              Scroll the deck, change commercial, brand, partner and customer-economics assumptions, see the directional Canonical/competitor/marketing consequence immediately, inspect uncertainty and sensitivity, and download the active version as an editable PowerPoint.
             </p>
           </div>
           <div className="flex flex-wrap lg:justify-end gap-2">
@@ -1198,6 +1346,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                   </div>
                   <button onClick={resetPublicScenario} className="p-2 rounded border border-white/8 text-white/40 hover:text-white"><RotateCcw className="w-3.5 h-3.5" /></button>
                 </div>
+                <DirectionalImpactBox impact={activeImpact} />
                 <RangeControl label="Paid-base retention" value={scenario.retentionPct} min={90} max={100} step={0.1} description="Retention applied to reported 2025 subscription revenue." onChange={(v) => setScenarioValue('retentionPct', v)} />
                 <RangeControl label="Paid attach uplift" value={scenario.paidAttachPct} min={0} max={20} step={0.5} description="Modeled ARR uplift from installed-base attach." onChange={(v) => setScenarioValue('paidAttachPct', v)} />
                 <RangeControl label="Enterprise conversion uplift" value={scenario.enterpriseConversionPct} min={0} max={20} step={0.5} description="Modeled free/developer-to-enterprise ARR uplift." onChange={(v) => setScenarioValue('enterpriseConversionPct', v)} />
@@ -1210,6 +1359,13 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                 <RangeControl label="Services contribution margin" value={scenario.servicesContributionMarginPct} min={0} max={60} step={1} description="Assumption applied only to incremental services." onChange={(v) => setScenarioValue('servicesContributionMarginPct', v)} />
                 <RangeControl label="Growth reinvestment" value={scenario.growthReinvestmentPct} min={0} max={100} step={1} description="Share of positive incremental revenue reinvested in GTM/product capacity." onChange={(v) => setScenarioValue('growthReinvestmentPct', v)} />
                 <RangeControl label="Assumption uncertainty" value={scenario.uncertaintyPct} min={0} max={50} step={1} description="Width applied to scenario drivers in deterministic Monte Carlo ranges." onChange={(v) => setScenarioValue('uncertaintyPct', v)} />
+                <div className="mt-5 mb-1 text-[9px] font-mono uppercase tracking-[0.16em] text-orange-300/75">CMO market-system levers</div>
+                <RangeControl label="Marketing share of reinvestment" value={scenario.marketingShareOfReinvestmentPct} min={5} max={70} step={1} description="Allocation of existing modeled growth investment; not an additional P&L cost." onChange={(v) => setScenarioValue('marketingShareOfReinvestmentPct', v)} />
+                <RangeControl label="Message clarity" value={scenario.messageClarityPct} min={30} max={100} step={1} description="Directional planning score for comprehension and retellability across technical and executive audiences." onChange={(v) => setScenarioValue('messageClarityPct', v)} />
+                <RangeControl label="Partner amplification quality" value={scenario.partnerAmplificationPct} min={20} max={100} step={1} description="Directional score for audience transfer, joint proof and partner-led distribution quality." onChange={(v) => setScenarioValue('partnerAmplificationPct', v)} />
+                <RangeControl label="Community advocacy / trust" value={scenario.communityAdvocacyPct} min={30} max={100} step={1} description="Directional score for developer advocacy and trust in Canonical’s open-source relationship." onChange={(v) => setScenarioValue('communityAdvocacyPct', v)} />
+                <RangeControl label="Analyst / technical authority" value={scenario.analystAuthorityPct} min={20} max={100} step={1} description="Directional score for independent enterprise validation and technical authority." onChange={(v) => setScenarioValue('analystAuthorityPct', v)} />
+                <RangeControl label="Marketing influence on new ARR" value={scenario.marketingInfluencePct} min={0} max={80} step={1} description="Non-additive share of modeled new ARR with measurable marketing influence; never booked as extra revenue." onChange={(v) => setScenarioValue('marketingInfluencePct', v)} />
               </>
             )}
 
@@ -1219,6 +1375,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                   <div className="text-sm font-semibold text-white">Customer TCO + sustainability</div>
                   <div className="text-[10px] text-white/35 mt-1">Replace defaults with customer evidence before using externally.</div>
                 </div>
+                <DirectionalImpactBox impact={activeImpact} />
                 <NumberControl label="Nodes" value={tcoInputs.nodes} step={100} description="Modeled server/node estate." onChange={(v) => setTcoValue('nodes', v)} />
                 <NumberControl label="Current support / node / year" value={tcoInputs.competitorSupportPerNode} step={50} prefix="$" description="Customer-supplied incumbent support cost assumption." onChange={(v) => setTcoValue('competitorSupportPerNode', v)} />
                 <NumberControl label="Ubuntu Pro / node / year" value={tcoInputs.ubuntuProPerNode} step={25} prefix="$" description="Default anchored to Canonical public typical server pricing; edit for actual quote." onChange={(v) => setTcoValue('ubuntuProPerNode', v)} />
@@ -1316,6 +1473,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
             </div>
           </section>
         </main>
+      </div>
       </div>
     </div>
   );
