@@ -2,6 +2,35 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'project-canonical-strategy',
+    slug: 'canonical-competitive-strategy',
+    title: 'Canonical Competitive Strategy Lab',
+    subtitle: 'Executive competitor intelligence deck with a live scenario model for enterprise monetisation, migration and AI infrastructure',
+    excerpt: 'A five-year, source-first comparison of Canonical against Red Hat/IBM, SUSE, Microsoft, Oracle and VMware/Broadcom — paired with a public sensitivity engine that turns strategic assumptions into changing revenue, mix, margin and insight outputs.',
+    status: 'Live',
+    year: '2026',
+    categories: ['Marketing', 'Strategy', 'Analytics'],
+    tags: ['Competitive Intelligence', 'Enterprise Linux', 'Scenario Modeling', 'Executive Strategy'],
+    skills: ['Competitive Strategy', 'Financial Modeling', 'B2B Marketing', 'Primary-Source Research'],
+    technologies: ['React', 'TypeScript', 'Public Disclosures', 'Dynamic Sensitivity Model'],
+    role: 'Strategist & Analyst',
+    problem: 'Static competitor decks become obsolete the moment assumptions change. Leadership needs both a defensible fact base and a way to stress-test strategic choices without rewriting the analysis from scratch.',
+    context: 'The research tracks Canonical and five major strategic peers across revenue quality, cloud and subscription mix, product positioning, ecosystem strategy, channel economics, private cloud, AI infrastructure and enterprise support.',
+    insight: 'Canonical’s structural advantage is not simply Ubuntu adoption; it is the ability to convert an enormous low-friction installed base into recurring enterprise assurance while remaining cloud-neutral.',
+    strategy: 'Combine an executive-grade competitor deck with a transparent scenario engine. Keep the source deck owner-controlled, while allowing public users to manipulate non-destructive assumptions and observe the resulting strategic economics.',
+    solution: 'Built a dedicated portfolio experience with public deck access, dynamic variables for paid attach, enterprise conversion, pricing, partner-sourced growth, VMware migration capture, AI infrastructure capture and reinvestment, plus generated strategic insights.',
+    process: 'The scenario engine begins from the researched FY2025 Canonical revenue, subscription mix and operating margin base, applies explicit sensitivity coefficients, and clearly labels all outputs as illustrative rather than management guidance.',
+    results: 'Produces an interactive strategy case study where changes to the underlying commercial assumptions instantly change revenue, subscription mix, operating profit and strategic recommendations.',
+    lessons: [
+      'A competitive deck becomes materially more useful when its assumptions are inspectable and stress-testable.',
+      'The highest-quality Canonical growth levers are those that monetise existing adoption or use partners as distribution rather than requiring proportional customer-acquisition spend.',
+      'VMware migration, enterprise assurance and neutral AI infrastructure are more coherent strategic wedges when modelled as one monetisation system rather than three unrelated campaigns.'
+    ],
+    nextSteps: 'Add source-refresh automation and a versioned benchmark layer so new annual disclosures can update the scenario base without changing the public interaction model.',
+    featured: true,
+    accentColor: '#f59e0b',
+  },
+  {
     id: 'project-1',
     slug: 'marketing-intelligence-engine',
     title: 'Marketing Intelligence Engine',
