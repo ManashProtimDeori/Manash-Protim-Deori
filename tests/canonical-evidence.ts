@@ -29,6 +29,17 @@ assert.ok(NUMERIC_EVIDENCE_RULES.some((rule) => rule.includes('modeled')));
 const pagePath = fileURLToPath(new URL('../src/pages/CanonicalStrategyLabPage.tsx', import.meta.url));
 const pageSource = readFileSync(pagePath, 'utf8');
 
+const contentStart = pageSource.indexOf("  const baseSlides = useMemo<DeckSlide[]>(() => [");
+const contentEnd = pageSource.indexOf("\n\n  const slides = useMemo", contentStart);
+assert.ok(contentStart >= 0 && contentEnd > contentStart, 'canonical slide content block must remain discoverable');
+const lockedSlideContent = pageSource.slice(contentStart, contentEnd);
+let contentHash = 0x811c9dc5;
+for (let i = 0; i < lockedSlideContent.length; i += 1) {
+  contentHash ^= lockedSlideContent.charCodeAt(i);
+  contentHash = Math.imul(contentHash, 0x01000193) >>> 0;
+}
+assert.equal(contentHash.toString(16).padStart(8, '0'), 'c198f9be', 'uploaded Canonical deck content must remain unchanged; design changes belong outside baseSlides');
+
 assert.ok(pageSource.includes('Leadership insight'), 'web deck should label the box Leadership insight');
 assert.ok(!pageSource.includes('Leadership decision'), 'old directive label must be absent');
 assert.ok(!pageSource.includes('LEADERSHIP DECISION'), 'old directive PPTX label must be absent');
@@ -69,8 +80,9 @@ assert.ok(pageSource.includes("roadmap: { kind: 'staircase'"), 'roadmap slide sh
 assert.ok(pageSource.includes('canonical-title-card'), 'main slide text should be contained inside the 3D thesis card');
 assert.ok(pageSource.includes('canonical-leadership-box'), 'leadership insight should use a bounded dedicated card');
 assert.ok(pageSource.includes('canonical-source-footer'), 'source labels should use a bounded non-overlapping footer');
+assert.ok(pageSource.includes("slide.title.length > 120"), 'headline sizing should adapt to long titles without changing their content');
 assert.ok(pageSource.includes("positioning: { kind: 'cube', labels: ['CONTROL', 'PORTABLE', 'REACH']"), 'positioning figure should reflect the positioning logic');
-assert.ok(pageSource.includes('const targetRatio = 2 / 3'), 'PPTX/PDF export should use the same fixed 3:2 slide geometry as the website');
+assert.ok(pageSource.includes('const targetRatio = 3 / 2'), 'PPTX/PDF export should use the same fixed 2:3 portrait slide geometry as the website');
 assert.ok(pageSource.includes('slide.addImage({ data: imageData, x: 0, y: 0, w: slideWidth, h: slideHeight })'), 'PPTX export should fill the slide canvas edge-to-edge');
 assert.ok(pageSource.includes("max-w-[58%]"), 'positioning inference note should be constrained to avoid axis-label overlap');
 assert.ok(!pageSource.includes("label: 'Model governance'"), 'opening model-governance metric should be removed');
