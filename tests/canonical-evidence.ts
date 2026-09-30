@@ -43,8 +43,10 @@ for (const opening of imperativeOpenings) {
 
 assert.ok(pageSource.includes("kind: 'appendix'"));
 assert.ok(pageSource.includes("kind: 'fundamentals'"));
-assert.ok(pageSource.includes('captureRenderedSlides'), 'PPTX and PDF should use rendered website slides');
+assert.ok(pageSource.includes('captureRenderedSlide'), 'PPTX and PDF should use rendered website slides');
 assert.ok(pageSource.includes('html2canvas(element'), 'rendered-slide export should use the browser-rendered slide surface');
+assert.ok(pageSource.includes('html2canvas-pro@2.4.2'), 'export runtime should use the modern CSS-compatible renderer');
+assert.ok(pageSource.includes('withExportMode'), 'export should wait for fonts and stable export styling before capture');
 assert.ok(pageSource.includes("canvas.toDataURL('image/png')"), 'exports should use lossless PNG captures');
 assert.ok(!pageSource.includes('domtoimage.toJpeg'), 'artifact-prone DOM-to-image JPEG capture must remain removed');
 assert.ok(pageSource.includes("id: 'evidence-appendix-1'"));
