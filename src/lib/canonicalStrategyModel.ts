@@ -1,8 +1,5 @@
-import {
-  CANONICAL_BASE_2025,
-  CanonicalScenario,
-  CustomerTcoInputs,
-} from '../data/canonicalStrategyDeck';
+import { CANONICAL_BASE_2025 } from '../data/canonicalStrategyDeck';
+import type { CanonicalScenario, CustomerTcoInputs } from '../data/canonicalStrategyDeck';
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 
