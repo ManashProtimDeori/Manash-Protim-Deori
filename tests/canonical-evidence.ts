@@ -61,7 +61,15 @@ assert.ok(pageSource.includes('downloadPdf'), 'deck should expose direct PDF gen
 assert.ok(pageSource.includes('Download high-res PDF'), 'deck should render a visible high-resolution PDF download button');
 assert.ok(pageSource.includes('Download exact PPTX'), 'deck should render a visible exact-render PPTX download button');
 assert.ok(pageSource.includes('SlideRepresentativeFigure'), 'every strategy slide should pair the headline with a representative 3D figure');
-assert.ok(pageSource.includes("positioning: ['CONTROL', 'PORTABILITY', 'REACH']"), 'positioning figure should reflect the positioning logic');
+assert.ok(pageSource.includes('FIGURE_SPECS'), 'slide figures should be explicitly mapped to slide meaning');
+assert.ok(pageSource.includes("executive: { kind: 'flywheel'"), 'executive slide should use a compounding-loop figure');
+assert.ok(pageSource.includes("tco: { kind: 'bridge'"), 'TCO slide should use a payback-bridge figure');
+assert.ok(pageSource.includes("ai: { kind: 'stack'"), 'AI slide should use an infrastructure-stack figure');
+assert.ok(pageSource.includes("roadmap: { kind: 'staircase'"), 'roadmap slide should use an evidence-before-scale staircase');
+assert.ok(pageSource.includes('canonical-title-card'), 'main slide text should be contained inside the 3D thesis card');
+assert.ok(pageSource.includes('canonical-leadership-box'), 'leadership insight should use a bounded dedicated card');
+assert.ok(pageSource.includes('canonical-source-footer'), 'source labels should use a bounded non-overlapping footer');
+assert.ok(pageSource.includes("positioning: { kind: 'cube', labels: ['CONTROL', 'PORTABLE', 'REACH']"), 'positioning figure should reflect the positioning logic');
 assert.ok(pageSource.includes('const targetRatio = 2 / 3'), 'PPTX/PDF export should use the same fixed 3:2 slide geometry as the website');
 assert.ok(pageSource.includes('slide.addImage({ data: imageData, x: 0, y: 0, w: slideWidth, h: slideHeight })'), 'PPTX export should fill the slide canvas edge-to-edge');
 assert.ok(pageSource.includes("max-w-[58%]"), 'positioning inference note should be constrained to avoid axis-label overlap');
