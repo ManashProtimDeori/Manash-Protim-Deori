@@ -5,6 +5,7 @@ import {
   NUMERIC_EVIDENCE_RULES,
   VERIFIED_EVIDENCE,
 } from '../src/data/canonicalVerifiedEvidence';
+import { REVIEW_ITERATIONS_2026 } from '../src/data/canonicalMarketingDecision';
 
 assert.ok(VERIFIED_EVIDENCE.length >= 13, 'evidence appendix should retain a broad verified set');
 assert.equal(new Set(VERIFIED_EVIDENCE.map((row) => row.id)).size, VERIFIED_EVIDENCE.length, 'evidence IDs must be unique');
@@ -44,6 +45,13 @@ for (const opening of imperativeOpenings) {
 assert.ok(pageSource.includes("kind: 'appendix'"));
 assert.ok(pageSource.includes('const evidenceRows = VERIFIED_EVIDENCE'));
 assert.ok(pageSource.includes("kind: 'fundamentals'"));
+assert.ok(pageSource.includes("kind: 'intro'"), 'deck should open with a dedicated introduction slide');
+assert.ok(pageSource.includes("kind: 'candidate'"), 'deck should include dedicated candidate-impact slides');
+assert.ok(pageSource.includes('Manash Protim Deori'), 'introduction should name the candidate');
+assert.ok(pageSource.includes('downloadPdf'), 'deck should expose direct PDF generation');
+assert.ok(pageSource.includes('Download PDF'), 'deck should render a visible PDF download button');
+assert.ok(!pageSource.includes("label: 'Model governance'"), 'opening model-governance metric should be removed');
+assert.equal(REVIEW_ITERATIONS_2026.length, 30, 'three refinement rounds should total 30 iterations');
 
 console.log('Canonical evidence and leadership-language checks passed', {
   verifiedRows: VERIFIED_EVIDENCE.length,
