@@ -4849,4 +4849,5 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   animation:none!important;
   transition:none!important;
   caret-color:transparent!important;
+  outline:none!important;
 }
