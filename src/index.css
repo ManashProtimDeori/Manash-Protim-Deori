@@ -4754,3 +4754,55 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
     transform:none!important;
   }
 }
+
+
+/* Canonical v4 readability hardening: legibility is treated as decision quality. */
+.canonical-strategy-lab{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.canonical-strategy-lab section{
+  border-color:rgba(255,255,255,.16)!important;
+}
+.canonical-strategy-lab p,
+.canonical-strategy-lab li{
+  color:#dce2ea;
+}
+.canonical-strategy-lab .canonical-impact-box,
+.canonical-strategy-lab .canonical-pnl-cube{
+  border-color:rgba(255,255,255,.18)!important;
+  background-color:#0d1118!important;
+}
+.canonical-strategy-lab aside{
+  border-color:rgba(255,255,255,.17)!important;
+  background:#090c11!important;
+}
+.canonical-strategy-lab aside input,
+.canonical-strategy-lab aside textarea,
+.canonical-strategy-lab aside select{
+  background:#0e131a!important;
+  color:#f8fafc!important;
+  border-color:rgba(255,255,255,.20)!important;
+}
+.canonical-strategy-lab aside input::placeholder,
+.canonical-strategy-lab aside textarea::placeholder{
+  color:#9aa6b5!important;
+}
+.canonical-strategy-lab a{
+  text-underline-offset:3px;
+}
+.canonical-strategy-lab .font-mono{
+  letter-spacing:.04em;
+}
+.canonical-strategy-lab [class*="text-white/"],
+.canonical-strategy-lab [class*="text-neutral-"]{
+  text-shadow:0 0 1px rgba(255,255,255,.05);
+}
+.canonical-strategy-lab .canonical-local-header p{
+  color:#cfd6df!important;
+}
+@media(max-width:767px){
+  .canonical-strategy-lab{
+    font-size:15px;
+  }
+}
