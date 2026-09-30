@@ -51,6 +51,7 @@ import {
   PnLBrandCube,
   VerifiedEvidenceAppendix,
 } from '../components/canonical/CanonicalDecisionVisuals';
+import { VERIFIED_EVIDENCE } from '../data/canonicalVerifiedEvidence';
 
 const ARCHIVE_DECK_FILE_ID = '1w7hRsHwGY1m6J7BelVbYmtN1z2jyk7wO';
 const ARCHIVE_DECK_VIEW_URL = 'https://drive.google.com/file/d/' + ARCHIVE_DECK_FILE_ID + '/view';
@@ -1019,12 +1020,62 @@ export const CanonicalStrategyLabPage: React.FC = () => {
           x: 8.15, y: 0.68, w: 4.62, h: 1.68, rectRadius: 0.08,
           fill: { color: '181419', transparency: 0 }, line: { color: '5D2E1D', transparency: 15, width: 0.8 },
         });
-        s.addText('LEADERSHIP DECISION', {
+        s.addText('LEADERSHIP INSIGHT', {
           x: 8.42, y: 0.92, w: 2.3, h: 0.22, fontSize: 7.8, bold: true, color: 'F0A081', charSpacing: 1.1, margin: 0,
         });
         s.addText(deckSlide.decision, {
           x: 8.42, y: 1.22, w: 4.03, h: 0.87, fontSize: 10.5, color: 'E7E9ED', margin: 0, valign: 'mid',
         });
+
+        if (deckSlide.kind === 'appendix') {
+          s.addText('VERIFIED REPORTED FIGURES · PRIMARY + CROSS-CHECK', {
+            x: 0.55, y: 2.64, w: 7.2, h: 0.2, fontSize: 8.2, bold: true, color: colors.teal, charSpacing: 0.9, margin: 0,
+          });
+
+          VERIFIED_EVIDENCE.slice(0, 10).forEach((row, evidenceIdx) => {
+            const col = evidenceIdx < 5 ? 0 : 1;
+            const rowIdx = evidenceIdx % 5;
+            const x = col === 0 ? 0.55 : 6.76;
+            const y = 2.95 + rowIdx * 0.77;
+            const w = 5.98;
+
+            s.addShape(ShapeType.roundRect, {
+              x, y, w, h: 0.66,
+              fill: { color: '11141A' },
+              line: { color: '303642', width: 0.55 },
+            });
+            s.addText(String(evidenceIdx + 1).padStart(2, '0') + ' · ' + row.subject, {
+              x: x + 0.13, y: y + 0.07, w: w - 0.26, h: 0.13,
+              fontSize: 6.7, bold: true, color: colors.white, margin: 0,
+            });
+            s.addText(row.retainedClaim, {
+              x: x + 0.13, y: y + 0.22, w: w - 0.26, h: 0.17,
+              fontSize: 5.8, color: 'D0D5DE', margin: 0, breakLine: false,
+            });
+            s.addText(row.primaryLabel, {
+              x: x + 0.13, y: y + 0.42, w: (w - 0.34) * 0.54, h: 0.12,
+              fontSize: 5.2, color: 'F1A282', underline: { color: 'F1A282' },
+              hyperlink: { url: row.primaryUrl }, margin: 0,
+            });
+            s.addText(row.crossCheckLabel, {
+              x: x + 0.13 + (w - 0.34) * 0.56, y: y + 0.42, w: (w - 0.34) * 0.42, h: 0.12,
+              fontSize: 5.2, color: 'B6A8FF', underline: { color: 'B6A8FF' },
+              hyperlink: { url: row.crossCheckUrl }, margin: 0,
+            });
+            s.addText(row.primaryPage, {
+              x: x + 0.13, y: y + 0.55, w: w - 0.26, h: 0.08,
+              fontSize: 4.7, color: '8F98A7', margin: 0,
+            });
+          });
+
+          s.addText('Reported facts only. Scenario, TCO, sensitivity and brand-index values are modeled outputs and are excluded from this evidence register.', {
+            x: 0.55, y: 6.91, w: 9.65, h: 0.18, fontSize: 5.8, color: '8F98A7', margin: 0,
+          });
+          s.addText('Links are clickable · PDF page numbers are shown only when verified', {
+            x: 9.15, y: 6.91, w: 3.62, h: 0.18, fontSize: 5.8, color: '8F98A7', align: 'right', margin: 0,
+          });
+          return;
+        }
 
         const metricCount = Math.min(4, deckSlide.metrics.length);
         for (let i = 0; i < metricCount; i += 1) {
