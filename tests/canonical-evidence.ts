@@ -6,13 +6,14 @@ import {
   VERIFIED_EVIDENCE,
 } from '../src/data/canonicalVerifiedEvidence';
 
-assert.ok(VERIFIED_EVIDENCE.length >= 10, 'evidence appendix should retain a broad verified set');
+assert.ok(VERIFIED_EVIDENCE.length >= 13, 'evidence appendix should retain a broad verified set');
 assert.equal(new Set(VERIFIED_EVIDENCE.map((row) => row.id)).size, VERIFIED_EVIDENCE.length, 'evidence IDs must be unique');
 
 for (const row of VERIFIED_EVIDENCE) {
   assert.equal(row.consistency, 'consistent');
   assert.match(row.primaryUrl, /^https:\/\//);
   assert.match(row.crossCheckUrl, /^https:\/\//);
+  assert.notEqual(row.primaryUrl, row.crossCheckUrl, 'primary and cross-check references must be distinct');
   assert.ok(row.retainedClaim.length > 12);
   assert.ok(row.primaryLabel.length > 8);
   assert.ok(row.crossCheckLabel.length > 8);
@@ -41,7 +42,7 @@ for (const opening of imperativeOpenings) {
 }
 
 assert.ok(pageSource.includes("kind: 'appendix'"));
-assert.ok(pageSource.includes('VERIFIED_EVIDENCE.slice(0, 10)'));
+assert.ok(pageSource.includes('const evidenceRows = VERIFIED_EVIDENCE'));
 assert.ok(pageSource.includes("kind: 'fundamentals'"));
 
 console.log('Canonical evidence and leadership-language checks passed', {
