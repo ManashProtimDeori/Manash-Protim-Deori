@@ -108,11 +108,11 @@ export const SOURCES: SourceRef[] = [
   },
   {
     id: 'canonical-pro',
-    label: 'Canonical — What is Ubuntu Pro?',
-    url: 'https://canonical.com/knowledge/security-and-compliance/what-is-ubuntu-pro',
+    label: 'Ubuntu — Ubuntu Pro plans and pricing',
+    url: 'https://ubuntu.com/pricing/pro',
     date: 'current',
     confidence: 'high',
-    note: 'Public description and typical server pricing reference for the customer TCO model.',
+    note: 'Primary current pricing source. Ubuntu Pro Enterprise self-support is listed at $500 per server per year; support tiers cost more. The TCO input remains editable and must be replaced with a customer quote for external use.',
   },
   {
     id: 'canonical-ai',
@@ -129,6 +129,14 @@ export const SOURCES: SourceRef[] = [
     date: '2026-03-16',
     confidence: 'high',
     note: 'Evidence of Ubuntu 26.04 readiness for NVIDIA CUDA, Vera Rubin NVL72 and other AI hardware.',
+  },
+  {
+    id: 'ubuntu-2604-release',
+    label: 'Canonical — Ubuntu 26.04 LTS release',
+    url: 'https://canonical.com/blog/canonical-releases-ubuntu-26-04-lts-resolute-raccoon',
+    date: '2026-04-23',
+    confidence: 'high',
+    note: 'Confirms Ubuntu 26.04 LTS general availability and native support for AI/ML toolkits including NVIDIA CUDA and AMD ROCm. Vera Rubin NVL72 readiness was separately announced at GTC 2026.',
   },
   {
     id: 'canonical-sustainability',
@@ -160,7 +168,7 @@ export const SOURCES: SourceRef[] = [
     url: 'https://access.redhat.com/support/policy/updates/errata',
     date: 'current',
     confidence: 'high',
-    note: 'RHEL major releases have a 10-year base lifecycle, with ELCP and renewable long-life extensions beyond 14 years.',
+    note: 'Current Red Hat terminology is Extended Life Cycle (ELC). RHEL 8, 9 and 10 have a 10-year lifecycle, with ELC and renewable Long-Life add-on terms providing errata coverage up to 14 years and beyond on eligible minor releases.',
   },
   {
     id: 'microsoft-fy26',
@@ -192,7 +200,7 @@ export const SOURCES: SourceRef[] = [
     url: 'https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial',
     date: '2026-09-02',
     confidence: 'high',
-    note: 'Q3 FY2026 total revenue was $29.6bn, up 86% year over year. Used only as a scale and investment signal, not as VMware-only revenue.',
+    note: 'Q3 FY2026 infrastructure software revenue was $8.752bn, up 29% year over year; total company revenue was $29.591bn. The peer view now uses the infrastructure-software segment because it is more relevant to Canonical than Broadcom total-company revenue and is still not VMware-only revenue.',
   },
   {
     id: 'canonical-kernel-sru-2026',
@@ -315,9 +323,9 @@ export const PEER_MOMENTUM = [
   },
   {
     name: 'Broadcom',
-    metric: '$29.6bn',
-    detail: 'Q3 FY2026 total company revenue; not VMware-only',
-    momentum: '+86% YoY',
+    metric: '$8.8bn',
+    detail: 'Q3 FY2026 infrastructure software revenue; not VMware-only',
+    momentum: '+29% YoY',
     sourceId: 'broadcom-q3-2026',
   },
 ];
