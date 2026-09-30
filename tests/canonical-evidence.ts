@@ -42,7 +42,7 @@ for (let i = 0; i < lockedSlideContent.length; i += 1) {
   contentHash ^= lockedSlideContent.charCodeAt(i);
   contentHash = Math.imul(contentHash, 0x01000193) >>> 0;
 }
-assert.equal(contentHash.toString(16).padStart(8, '0'), '6e3d8594', 'audited Canonical deck content changed unexpectedly after the 10-pass source correction round');
+assert.equal(contentHash.toString(16).padStart(8, '0'), 'eaf3ef7e', 'Canonical deck content changed unexpectedly after the leadership-copy and overlap correction round');
 
 assert.ok(pageSource.includes('Leadership insight'), 'web deck should label the box Leadership insight');
 assert.ok(!pageSource.includes('Leadership decision'), 'old directive label must be absent');
@@ -83,8 +83,14 @@ assert.ok(pageSource.includes("ai: { kind: 'stack'"), 'AI slide should use an in
 assert.ok(pageSource.includes("roadmap: { kind: 'staircase'"), 'roadmap slide should use an evidence-before-scale staircase');
 assert.ok(pageSource.includes('canonical-title-card'), 'main slide text should be contained inside the 3D thesis card');
 assert.ok(pageSource.includes('canonical-leadership-box'), 'leadership insight should use a bounded dedicated card');
-assert.ok(pageSource.includes('canonical-source-footer'), 'source labels should use a bounded non-overlapping footer');
-assert.ok(pageSource.includes("slide.title.length > 120"), 'headline sizing should adapt to long titles without changing their content');
+assert.ok(!pageSource.includes('<SourceFooter sourceIds={slide.sourceIds} />'), 'visible source footers must remain off slide canvases to prevent overlap; source IDs remain in the data and appendix');
+assert.ok(pageSource.includes("slide.title.length > 120"), 'headline sizing should adapt to long titles');
+assert.ok(pageSource.includes("slide.title.length > 88"), 'headline sizing should include a medium-long proportional tier');
+assert.ok(pageSource.includes("slide.title.length > 58"), 'headline sizing should include a medium proportional tier');
+assert.ok(!pageSource.includes('The attached WIN guidance is applied directly here'), 'internal WIN-guidance wording should not appear in the presentation');
+assert.ok(!pageSource.includes('Candidate evidence is stated conservatively'), 'candidate-evidence caveat paragraph should not appear in the presentation');
+assert.ok(pageSource.includes("Leadership operating model: turn technical credibility into durable market power"), 'CMO slide should use leadership-ready framing');
+assert.ok(pageSource.includes("decision: '',\n      narrative: '',\n      metrics: [\n        { label: 'Experience'"), 'candidate-fit slide should omit the leadership insight and narrative blocks');
 assert.ok(pageSource.includes("positioning: { kind: 'cube', labels: ['CONTROL', 'PORTABLE', 'REACH']"), 'positioning figure should reflect the positioning logic');
 assert.ok(pageSource.includes('const slideWidth = 10') && pageSource.includes('const slideHeight = 15'), 'PPTX export should use fixed 2:3 portrait geometry');
 assert.ok(pageSource.includes('const pageWidth = 1000') && pageSource.includes('const pageHeight = 1500'), 'PDF export should use fixed 2:3 portrait geometry');
