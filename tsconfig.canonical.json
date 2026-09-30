@@ -18,6 +18,8 @@
     "src/lib/canonicalMarketingModel.ts",
     "src/components/canonical/CanonicalDecisionVisuals.tsx",
     "tests/canonical-strategy.ts",
-    "tests/canonical-marketing-decision.ts"
+    "tests/canonical-marketing-decision.ts",
+    "src/data/canonicalVerifiedEvidence.ts",
+    "tests/canonical-evidence.ts"
   ]
 }

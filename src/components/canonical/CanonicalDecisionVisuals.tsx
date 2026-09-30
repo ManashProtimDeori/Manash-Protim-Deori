@@ -2,6 +2,11 @@ import React from 'react';
 import type { DirectionalImpact, BrandDecisionModel } from '../../lib/canonicalMarketingModel';
 import type { CanonicalScenarioOutputs } from '../../lib/canonicalStrategyModel';
 import { CMO_OPERATING_LENS, LATEST_DEVELOPMENTS_2026 } from '../../data/canonicalMarketingDecision';
+import {
+  FUNDAMENTAL_MARKETING_INSIGHTS,
+  NUMERIC_EVIDENCE_RULES,
+  VERIFIED_EVIDENCE,
+} from '../../data/canonicalVerifiedEvidence';
 
 const money = (v: number) => '$' + v.toFixed(1) + 'm';
 const signedMoney = (v: number) => (v >= 0 ? '+' : '') + money(v);
@@ -17,23 +22,23 @@ export const DirectionalImpactBox: React.FC<{ impact: DirectionalImpact }> = ({ 
     <div className="canonical-impact-box rounded-xl border border-white/10 bg-white/[0.025] p-4 mb-4">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="text-[9px] font-mono uppercase tracking-[0.16em] text-white/38">Directional consequence</div>
+          <div className="text-[9px] font-mono uppercase tracking-[0.16em] text-white/90">Directional consequence</div>
           <div className="mt-1 text-sm font-semibold text-white">{impact.label}</div>
         </div>
         <span className={'rounded border px-2 py-1 text-[8px] font-mono uppercase ' + sensitivityClass}>{impact.sensitivity} sensitivity</span>
       </div>
       <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-        <div className="rounded-md border border-white/8 p-2"><span className="block text-[8px] text-white/35">Revenue</span><strong className="text-[10px] font-mono text-white">{signedMoney(impact.revenueDelta)}</strong></div>
-        <div className="rounded-md border border-white/8 p-2"><span className="block text-[8px] text-white/35">Op profit</span><strong className="text-[10px] font-mono text-white">{signedMoney(impact.operatingProfitDelta)}</strong></div>
-        <div className="rounded-md border border-white/8 p-2"><span className="block text-[8px] text-white/35">Margin</span><strong className="text-[10px] font-mono text-white">{signed(impact.marginDeltaBps, 0)} bps</strong></div>
+        <div className="rounded-md border border-white/8 p-2"><span className="block text-[8px] text-white/68">Revenue</span><strong className="text-[10px] font-mono text-white">{signedMoney(impact.revenueDelta)}</strong></div>
+        <div className="rounded-md border border-white/8 p-2"><span className="block text-[8px] text-white/68">Op profit</span><strong className="text-[10px] font-mono text-white">{signedMoney(impact.operatingProfitDelta)}</strong></div>
+        <div className="rounded-md border border-white/8 p-2"><span className="block text-[8px] text-white/68">Margin</span><strong className="text-[10px] font-mono text-white">{signed(impact.marginDeltaBps, 0)} bps</strong></div>
       </div>
       <div className="mt-3 space-y-3 text-[10px] leading-relaxed">
-        <div><span className="text-orange-300 font-mono uppercase text-[8px]">Canonical</span><p className="mt-1 text-white/65">{impact.canonical}</p></div>
-        <div><span className="text-violet-300 font-mono uppercase text-[8px]">Competitors</span><p className="mt-1 text-white/65">{impact.competitors}</p></div>
-        <div className="rounded-md border border-emerald-400/15 bg-emerald-400/[0.035] p-3"><span className="text-emerald-300 font-mono uppercase text-[8px]">Marketing rescue / acceleration</span><p className="mt-1 text-white/72">{impact.marketingResponse}</p></div>
-        <div><span className="text-cyan-300 font-mono uppercase text-[8px]">P&L path</span><p className="mt-1 text-white/55">{impact.pnlPath}</p></div>
-        <div><span className="text-fuchsia-300 font-mono uppercase text-[8px]">Brand path</span><p className="mt-1 text-white/55">{impact.brandPath}</p></div>
-        <div className="border-t border-white/8 pt-2 text-white/38"><strong className="text-white/55">Falsifier:</strong> {impact.falsifier}</div>
+        <div><span className="text-orange-300 font-mono uppercase text-[8px]">Canonical</span><p className="mt-1 text-white/88">{impact.canonical}</p></div>
+        <div><span className="text-violet-300 font-mono uppercase text-[8px]">Competitors</span><p className="mt-1 text-white/88">{impact.competitors}</p></div>
+        <div className="rounded-md border border-emerald-400/25 bg-emerald-400/[0.06] p-3"><span className="text-emerald-200 font-mono uppercase text-[9px]">Marketing response</span><p className="mt-1 text-[11px] text-white/90">{impact.marketingResponse}</p></div>
+        <div><span className="text-cyan-300 font-mono uppercase text-[8px]">P&L path</span><p className="mt-1 text-white/78">{impact.pnlPath}</p></div>
+        <div><span className="text-fuchsia-300 font-mono uppercase text-[8px]">Brand path</span><p className="mt-1 text-white/78">{impact.brandPath}</p></div>
+        <div className="border-t border-white/8 pt-2 text-white/90"><strong className="text-white/78">Falsifier:</strong> {impact.falsifier}</div>
       </div>
     </div>
   );
@@ -46,7 +51,7 @@ export const PnLBrandCube: React.FC<{ metrics: CanonicalScenarioOutputs; brand: 
       <div className="absolute left-4 right-[-12px] -bottom-3 h-3 bg-gradient-to-r from-orange-400/18 to-cyan-400/10 [transform:skewX(-50deg)]" />
       <div className="grid lg:grid-cols-[1.2fr_.8fr] gap-5">
         <div className="space-y-3">
-          <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/38">3D P&L decision bridge</div>
+          <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/90">3D P&L decision bridge</div>
           {[
             ['Revenue engine', money(metrics.projectedRevenue), money(metrics.incrementalRevenue) + ' incremental', 'border-orange-400/30'],
             ['Recurring quality', money(metrics.projectedSubscriptionRevenue), metrics.subscriptionMixPct.toFixed(1) + '% subscription mix', 'border-cyan-400/30'],
@@ -54,13 +59,13 @@ export const PnLBrandCube: React.FC<{ metrics: CanonicalScenarioOutputs; brand: 
             ['Operating outcome', money(metrics.projectedOperatingProfit), metrics.operatingMarginPct.toFixed(1) + '% operating margin', 'border-emerald-400/30'],
           ].map(([label, value, detail, border]) => (
             <div key={label} className={'grid grid-cols-[1fr_auto] gap-4 rounded-lg border bg-white/[0.025] p-3 ' + border}>
-              <div><div className="text-[9px] uppercase tracking-wide text-white/38">{label}</div><div className="mt-1 text-[10px] text-white/45">{detail}</div></div>
+              <div><div className="text-[9px] uppercase tracking-wide text-white/90">{label}</div><div className="mt-1 text-[10px] text-white/74">{detail}</div></div>
               <strong className="text-lg text-white">{value}</strong>
             </div>
           ))}
         </div>
         <div className="rounded-xl border border-white/10 bg-black/20 p-4">
-          <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/38">Marketing + brand layer</div>
+          <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-white/90">Marketing + brand layer</div>
           <div className="mt-4 grid grid-cols-3 gap-2">
             {[
               ['Reach', brand.reachIndex],
@@ -68,17 +73,17 @@ export const PnLBrandCube: React.FC<{ metrics: CanonicalScenarioOutputs; brand: 
               ['Strength', brand.strengthIndex],
             ].map(([label, value]) => (
               <div key={String(label)} className="rounded-md border border-white/8 p-3 text-center">
-                <div className="text-[8px] uppercase text-white/35">{label}</div>
+                <div className="text-[8px] uppercase text-white/68">{label}</div>
                 <div className="mt-2 text-xl font-semibold text-white">{Number(value).toFixed(0)}</div>
-                <div className="text-[8px] text-white/28">100 = default</div>
+                <div className="text-[8px] text-white/58">100 = default</div>
               </div>
             ))}
           </div>
           <div className="mt-4 space-y-2 text-[10px]">
-            <div className="flex justify-between gap-3 border-t border-white/8 pt-2"><span className="text-white/42">Marketing-influenced ARR</span><strong className="text-white">{money(brand.marketingInfluencedARR)}</strong></div>
-            <div className="flex justify-between gap-3 border-t border-white/8 pt-2"><span className="text-white/42">Influence / marketing investment</span><strong className="text-white">{brand.marketingInfluenceMultiple === null ? 'N/A' : brand.marketingInfluenceMultiple.toFixed(2) + '×'}</strong></div>
+            <div className="flex justify-between gap-3 border-t border-white/8 pt-2"><span className="text-white/72">Marketing-influenced ARR</span><strong className="text-white">{money(brand.marketingInfluencedARR)}</strong></div>
+            <div className="flex justify-between gap-3 border-t border-white/8 pt-2"><span className="text-white/72">Influence / marketing investment</span><strong className="text-white">{brand.marketingInfluenceMultiple === null ? 'N/A' : brand.marketingInfluenceMultiple.toFixed(2) + '×'}</strong></div>
           </div>
-          <p className="mt-4 text-[9px] leading-relaxed text-white/30">{brand.note}</p>
+          <p className="mt-4 text-[9px] leading-relaxed text-white/62">{brand.note}</p>
         </div>
       </div>
     </div>
@@ -89,9 +94,9 @@ export const LatestDevelopmentRadar: React.FC = () => (
   <div className="grid md:grid-cols-2 gap-3">
     {LATEST_DEVELOPMENTS_2026.map((item) => (
       <div key={item.title} className="rounded-xl border border-white/10 bg-white/[0.025] p-4">
-        <div className="flex justify-between gap-3 text-[8px] font-mono uppercase tracking-wide"><span className="text-orange-300">{item.theme}</span><span className="text-white/30">{item.date}</span></div>
+        <div className="flex justify-between gap-3 text-[8px] font-mono uppercase tracking-wide"><span className="text-orange-300">{item.theme}</span><span className="text-white/62">{item.date}</span></div>
         <div className="mt-3 text-sm font-semibold text-white">{item.title}</div>
-        <p className="mt-2 text-[11px] leading-relaxed text-white/52">{item.implication}</p>
+        <p className="mt-2 text-[11px] leading-relaxed text-white/80">{item.implication}</p>
       </div>
     ))}
   </div>
@@ -103,8 +108,65 @@ export const ExecutiveOperatingLens: React.FC = () => (
       <div key={item.title} className="rounded-xl border border-white/10 bg-white/[0.025] p-4">
         <div className="text-[9px] font-mono text-orange-300">0{idx + 1}</div>
         <div className="mt-3 text-sm font-semibold text-white">{item.title}</div>
-        <p className="mt-2 text-[10px] leading-relaxed text-white/48">{item.reason}</p>
+        <p className="mt-2 text-[10px] leading-relaxed text-white/78">{item.reason}</p>
       </div>
     ))}
+  </div>
+);
+
+
+export const FundamentalInsightGrid: React.FC = () => (
+  <div className="grid md:grid-cols-2 gap-3">
+    {FUNDAMENTAL_MARKETING_INSIGHTS.map((item, idx) => (
+      <article key={item.title} className="rounded-xl border border-white/15 bg-white/[0.035] p-5">
+        <div className="text-[10px] font-mono text-orange-300">LAW {String(idx + 1).padStart(2, '0')}</div>
+        <h3 className="mt-3 text-base font-semibold text-white">{item.title}</h3>
+        <p className="mt-3 text-[12px] leading-[1.75] text-white/84">{item.insight}</p>
+      </article>
+    ))}
+  </div>
+);
+
+export const VerifiedEvidenceAppendix: React.FC = () => (
+  <div className="space-y-5">
+    <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/[0.04] p-4">
+      <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-cyan-200">Evidence rule</div>
+      <div className="mt-3 grid md:grid-cols-2 gap-3">
+        {NUMERIC_EVIDENCE_RULES.map((rule, idx) => (
+          <div key={rule} className="flex gap-3 text-[11px] leading-relaxed text-white/82">
+            <span className="font-mono text-cyan-300">{String(idx + 1).padStart(2, '0')}</span>
+            <span>{rule}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div className="space-y-3">
+      {VERIFIED_EVIDENCE.map((row, idx) => (
+        <article key={row.id} className="rounded-xl border border-white/15 bg-white/[0.035] p-5">
+          <div className="grid lg:grid-cols-[110px_1.2fr_1fr_1fr] gap-4 items-start">
+            <div>
+              <div className="text-[10px] font-mono text-orange-300">EVIDENCE {String(idx + 1).padStart(2, '0')}</div>
+              <div className="mt-2 inline-flex rounded border border-emerald-400/25 bg-emerald-400/[0.05] px-2 py-1 text-[9px] font-mono uppercase text-emerald-200">consistent</div>
+            </div>
+            <div>
+              <div className="text-[13px] font-semibold text-white">{row.subject}</div>
+              <p className="mt-2 text-[11px] leading-relaxed text-white/86">{row.retainedClaim}</p>
+              <p className="mt-2 text-[10px] leading-relaxed text-white/66">{row.note}</p>
+            </div>
+            <div>
+              <div className="text-[9px] font-mono uppercase tracking-wide text-white/60">Primary</div>
+              <a href={row.primaryUrl} target="_blank" rel="noreferrer" className="mt-2 block text-[11px] leading-relaxed text-orange-200 hover:text-orange-100 underline decoration-orange-300/40 underline-offset-2">{row.primaryLabel}</a>
+              <div className="mt-2 text-[10px] leading-relaxed text-white/62">{row.primaryPage}</div>
+            </div>
+            <div>
+              <div className="text-[9px] font-mono uppercase tracking-wide text-white/60">Cross-check</div>
+              <a href={row.crossCheckUrl} target="_blank" rel="noreferrer" className="mt-2 block text-[11px] leading-relaxed text-violet-200 hover:text-violet-100 underline decoration-violet-300/40 underline-offset-2">{row.crossCheckLabel}</a>
+              <div className="mt-2 text-[10px] leading-relaxed text-white/62">Independent or separately filed reference used to test consistency.</div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
   </div>
 );
