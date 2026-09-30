@@ -28,6 +28,10 @@ assert.ok(NUMERIC_EVIDENCE_RULES.some((rule) => rule.includes('modeled')));
 
 const pagePath = fileURLToPath(new URL('../src/pages/CanonicalStrategyLabPage.tsx', import.meta.url));
 const pageSource = readFileSync(pagePath, 'utf8');
+const cssPath = fileURLToPath(new URL('../src/index.css', import.meta.url));
+const cssSource = readFileSync(cssPath, 'utf8');
+assert.ok(cssSource.includes('aspect-ratio:2 / 3!important'), 'website slides should use the same 2:3 portrait geometry as PPTX/PDF exports');
+assert.ok(cssSource.includes('Canonical v11: uploaded-deck content lock'), 'uploaded-deck design system should remain active');
 
 const contentStart = pageSource.indexOf("  const baseSlides = useMemo<DeckSlide[]>(() => [");
 const contentEnd = pageSource.indexOf("\n\n  const slides = useMemo", contentStart);
