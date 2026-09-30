@@ -4851,3 +4851,26 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   caret-color:transparent!important;
   outline:none!important;
 }
+
+
+/* Canonical v9: one visual geometry for web, PDF and PPTX. */
+@media (min-width:1024px){
+  .canonical-strategy-lab .canonical-deck-slide{
+    aspect-ratio:3 / 2!important;
+    min-height:0!important;
+    height:auto!important;
+  }
+  .canonical-strategy-lab .canonical-deck-slide .canonical-slide-inner{
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden;
+  }
+}
+.canonical-strategy-lab .canonical-representative-figure{
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 18px 42px rgba(0,0,0,.22);
+}
+.canonical-exporting .canonical-representative-figure{
+  transform:none!important;
+}
