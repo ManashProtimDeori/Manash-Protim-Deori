@@ -53,7 +53,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S02',
     label: 'Olam Group — Re-organisation after CFG acquisition',
-    url: 'https://www.olamgroup.com/news/all-news/press-release/olam-completes-sale-of-additional-stake-in-olam-agri-to-salic.html',
+    url: 'https://www.olamgroup.com/investors/our-re-organisation.html',
     date: '2026-06',
     authority: 'primary',
     note: 'Current ownership context: Olam Agri is 81.81% owned by SALIC and 18.19% by Olam Group after completion of the additional stake transaction.',
@@ -69,7 +69,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S04',
     label: 'Olam Agri — Baking Brighter Futures',
-    url: 'https://www.olamagri.com/news/press-releases/olam-agri-commits-usd2-million-to-upskill-20000-bakers-and-food-entrepreneurs-across-africa-by-2030.html',
+    url: 'https://www.olamagri.com/news/press-release/olam-agri-launches-baking-brighter-futures-and-commits-usd-2-million-to-support-20000-bakers-across-africa',
     date: '2025',
     authority: 'primary',
     note: 'Primary evidence for baker and food-entrepreneur training scale, geographic reach and the planned US$2m programme through 2030.',
@@ -141,7 +141,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S13',
     label: 'USDA FAS — Nigeria Grain and Feed Annual 2026',
-    url: 'https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=Grain%20and%20Feed%20Annual_Lagos_Nigeria_NI2026-0010.pdf',
+    url: 'https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=Grain+and+Feed+Annual_Lagos_Nigeria_NI2026-0003.pdf',
     date: '2026',
     authority: 'regulator',
     note: 'Industry-demand context: MY2026/27 wheat consumption projected at 6.8m MT, with about 60% of wheat flour used by bakeries for bread.',
@@ -149,7 +149,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S14',
     label: 'World Bank — Africa agribusiness opportunity',
-    url: 'https://www.worldbank.org/en/news/feature/2026/07/29/africa-agribusiness-jobs-investment-food-market',
+    url: 'https://blogs.worldbank.org/en/voices/grow-food--create-jobs--africa-s-agribusiness-moment-is-now-',
     date: '2026-07',
     authority: 'multilateral',
     note: 'Macro context for African agribusiness, jobs and the projected scale of the continent’s food market toward 2030.',
@@ -157,7 +157,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S15',
     label: 'World Bank — Food value-chain jobs and productivity',
-    url: 'https://www.worldbank.org/en/news/feature/2026/01/20/africa-food-value-chains-jobs-productivity',
+    url: 'https://blogs.worldbank.org/en/voices/the-hidden-billions-that-could-transform-africa-s-agriculture',
     date: '2026-01',
     authority: 'multilateral',
     note: 'Evidence that marketing, transport, storage, processing, retail and food service are increasingly important employment and value-creation layers.',
@@ -165,7 +165,7 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S16',
     label: 'World Bank — AfCFTA and agrifood trade',
-    url: 'https://www.worldbank.org/en/topic/trade/publication/free-trade-deep-integration-and-economic-development-in-africa',
+    url: 'https://www.worldbank.org/en/events/2023/06/01/africa-agriculture-policy-leadership-dialogue',
     date: '2023',
     authority: 'multilateral',
     note: 'Directional evidence that deeper African trade integration can expand intra-African agrifood flows; used as structural context, not a company forecast.',
