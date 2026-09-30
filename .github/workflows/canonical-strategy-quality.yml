@@ -5,8 +5,13 @@ on:
     paths:
       - 'src/pages/CanonicalStrategyLabPage.tsx'
       - 'src/data/canonicalStrategyDeck.ts'
+      - 'src/data/canonicalMarketingDecision.ts'
       - 'src/lib/canonicalStrategyModel.ts'
+      - 'src/lib/canonicalMarketingModel.ts'
+      - 'src/components/canonical/CanonicalDecisionVisuals.tsx'
+      - 'src/index.css'
       - 'tests/canonical-strategy.ts'
+      - 'tests/canonical-marketing-decision.ts'
       - 'tsconfig.canonical.json'
       - 'package.json'
       - '.github/workflows/canonical-strategy-quality.yml'
@@ -29,3 +34,5 @@ jobs:
         run: npm run lint:canonical
       - name: Test Canonical strategy model
         run: npm run test:canonical
+      - name: Test Canonical marketing decision model
+        run: npm run test:canonical-marketing
