@@ -452,7 +452,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         'Microsoft and Oracle demonstrate how distribution and committed cloud spend compress the need for standalone persuasion.',
         'Broadcom demonstrates the power — and customer risk — of concentrating private-cloud economics into a tighter commercial architecture.',
       ],
-      sourceIds: ['ibm-2026-q2', 'microsoft-fy26', 'oracle-fy26', 'broadcom-fy25'],
+      sourceIds: ['ibm-2026-q2', 'microsoft-fy26', 'oracle-fy26', 'broadcom-q3-2026'],
       kind: 'peers',
     },
     {
