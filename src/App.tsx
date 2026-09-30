@@ -15,6 +15,7 @@ import { HomePage } from './pages/HomePage';
 import { WorkPage } from './pages/WorkPage';
 import { ProjectDetailPage } from './pages/ProjectDetailPage';
 import { CanonicalStrategyLabPage } from './pages/CanonicalStrategyLabPage';
+import { OlamAfricaGrowthStrategyPage } from './pages/OlamAfricaGrowthStrategyPage';
 import { LabPage } from './pages/LabPage';
 import { ToolsPage } from './pages/ToolsPage';
 import { ToolDetailPage } from './pages/ToolDetailPage';
@@ -87,6 +88,7 @@ export const AppContent: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<WorkPage />} />
           <Route path="/work/canonical-competitive-strategy" element={<CanonicalStrategyLabPage />} />
+          <Route path="/work/olam-africa-growth-strategy" element={<OlamAfricaGrowthStrategyPage />} />
           <Route path="/work/:id" element={<ProjectDetailPage />} />
           <Route path="/director-os" element={<DirectorOSPage />} />
           <Route path="/lab" element={<LabPage />} />
