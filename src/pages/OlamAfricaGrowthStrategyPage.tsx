@@ -44,9 +44,9 @@ const MetricCard: React.FC<{ metric: OlamMetric }> = ({ metric }) => {
     <div className="relative min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-3.5 shadow-[0_12px_35px_rgba(0,0,0,.18)]">
       <div className="absolute inset-y-3 left-0 w-[3px] rounded-full" style={{ background: color }} />
       <div className="pl-2">
-        <div className="text-[8px] font-mono uppercase tracking-[0.14em] text-white/54">{metric.label}</div>
-        <div className="mt-1.5 whitespace-nowrap text-[1.35rem] font-semibold tracking-[-0.035em]" style={{ color }}>{metric.value}</div>
-        <div className="mt-1.5 text-[8.75px] leading-[1.42] text-white/72">{metric.detail}</div>
+        <div className="text-[8.5px] font-mono uppercase tracking-[0.14em] text-white/56">{metric.label}</div>
+        <div className="mt-1.5 whitespace-nowrap text-[1.42rem] font-semibold tracking-[-0.035em]" style={{ color }}>{metric.value}</div>
+        <div className="mt-1.5 text-[9.25px] leading-[1.44] text-white/74">{metric.detail}</div>
       </div>
     </div>
   );
@@ -57,9 +57,11 @@ const sourceCodes = (ids: string[]) => ids.map((id) => id).join(' · ');
 const SourceLine: React.FC<{ ids: string[] }> = ({ ids }) => {
   if (!ids.length) return null;
   return (
-    <div className="mt-auto flex items-center justify-between gap-3 border-t border-white/8 pt-2 text-[7px] font-mono uppercase tracking-[0.12em] text-white/36">
-      <span>Evidence</span>
-      <span className="truncate text-right">{sourceCodes(ids)}</span>
+    <div className="mt-3 mb-0.5 shrink-0 rounded-xl border border-white/10 bg-white/[0.025] px-3 py-2.5">
+      <div className="flex items-center justify-between gap-3 text-[8.5px] font-mono uppercase tracking-[0.11em] text-white/48">
+        <span className="shrink-0 text-emerald-200/70">Evidence</span>
+        <span className="min-w-0 truncate text-right text-white/52">{sourceCodes(ids)}</span>
+      </div>
     </div>
   );
 };
@@ -281,9 +283,8 @@ const StrategySlide: React.FC<{ slide: OlamSlide; index: number }> = ({ slide, i
             <h2 className="mt-4 text-[3.35rem] font-semibold leading-[0.98] tracking-[-0.055em] text-white">{slide.title}</h2>
             <p className="mt-5 text-[1rem] leading-relaxed text-white/68">{slide.narrative}</p>
           </div>
-          <div className="flex items-end justify-between">
-            <div className="text-[10px] font-medium text-white/82">Manash Protim Deori</div>
-            <div className="text-[7px] font-mono uppercase tracking-[0.14em] text-white/34">Source-verified · 20-pass review · September 2026</div>
+          <div className="flex items-end">
+            <div className="text-[15px] font-semibold tracking-[-0.02em] text-white/88">Manash Protim Deori</div>
           </div>
         </div>
       </section>
@@ -294,21 +295,21 @@ const StrategySlide: React.FC<{ slide: OlamSlide; index: number }> = ({ slide, i
     <section id={'olam-slide-' + slide.id} className="olam-deck-slide relative overflow-hidden rounded-[28px] border border-white/10 bg-[#071117] shadow-[0_30px_90px_rgba(0,0,0,.34)]">
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#12B981] via-[#57D8C5] to-[#F3C65A]" />
       <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-emerald-400/[0.045] blur-3xl" />
-      <div className="relative flex h-full flex-col p-7">
+      <div className="relative flex h-full flex-col px-8 pt-7 pb-6">
         <div className="flex items-center justify-between gap-4">
-          <div className="text-[7.5px] font-mono uppercase tracking-[0.18em] text-emerald-200/58">{String(index+1).padStart(2,'0')} · {slide.section}</div>
-          <div className="text-[7px] font-mono uppercase tracking-[0.14em] text-white/30">Olam Agri Africa Growth Strategy</div>
+          <div className="text-[8px] font-mono uppercase tracking-[0.17em] text-emerald-200/60">{String(index+1).padStart(2,'0')} · {slide.section}</div>
+          <div className="text-[7.5px] font-mono uppercase tracking-[0.14em] text-white/34">Olam Agri Africa Growth Strategy</div>
         </div>
         <div className="mt-4 grid grid-cols-[1.28fr_.72fr] gap-5">
           <div>
             <h2 className={'max-w-full text-white font-semibold tracking-[-0.04em] ' + (slide.title.length > 105 ? 'text-[1.7rem] leading-[1.05]' : slide.title.length > 75 ? 'text-[1.92rem] leading-[1.04]' : 'text-[2.15rem] leading-[1.02]')}>{slide.title}</h2>
-            <p className="mt-2.5 max-w-[95%] text-[9.5px] leading-[1.5] text-white/62">{slide.narrative}</p>
+            <p className="mt-3 max-w-[96%] text-[11px] leading-[1.5] text-white/68">{slide.narrative}</p>
           </div>
-          <div className="relative overflow-hidden rounded-2xl border border-emerald-300/12 bg-[linear-gradient(145deg,rgba(18,185,129,.07),rgba(255,255,255,.018))] p-3.5">
+          <div className="relative overflow-hidden rounded-2xl border border-emerald-300/14 bg-[linear-gradient(145deg,rgba(18,185,129,.075),rgba(255,255,255,.02))] p-4">
             <div className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full bg-gradient-to-b from-emerald-300 to-amber-300" />
             <div className="pl-2">
-              <div className="text-[7.5px] font-mono uppercase tracking-[0.15em] text-emerald-200/66">Executive insight</div>
-              <p className="mt-1.5 text-[8.8px] leading-[1.45] text-white/75">{slide.insight}</p>
+              <div className="text-[8.5px] font-mono uppercase tracking-[0.15em] text-emerald-200/70">Executive insight</div>
+              <p className="mt-2 text-[12px] font-medium leading-[1.48] text-white/82">{slide.insight}</p>
             </div>
           </div>
         </div>
