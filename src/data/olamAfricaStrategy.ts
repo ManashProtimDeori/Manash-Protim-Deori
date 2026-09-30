@@ -157,10 +157,10 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S15',
     label: 'World Bank — Food value-chain jobs and productivity',
-    url: 'https://blogs.worldbank.org/en/voices/the-hidden-billions-that-could-transform-africa-s-agriculture',
+    url: 'https://blogs.worldbank.org/en/africacan/seizing-opportunities-in-african-agriculture',
     date: '2026-01',
     authority: 'multilateral',
-    note: 'Evidence that marketing, transport, storage, processing, retail and food service are increasingly important employment and value-creation layers.',
+    note: 'Evidence that food marketing, transport, processing, retail and food preparation are fast-growing midstream/downstream employment and value-creation layers.',
   },
   {
     id: 'S16',
