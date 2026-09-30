@@ -190,9 +190,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     getStored(STORAGE_KEYS.SITE_CONFIG, initialSiteConfig)
   );
 
-  const [projects, setProjects] = useState<Project[]>(() => 
-    getStored(STORAGE_KEYS.PROJECTS, initialProjects)
-  );
+  const [projects, setProjects] = useState<Project[]>(() => {
+    const stored = getStored(STORAGE_KEYS.PROJECTS, initialProjects);
+    const requiredPortfolioLabs = initialProjects.filter(project =>
+      project.id === 'project-canonical-strategy' || project.id === 'project-olam-africa-strategy'
+    );
+    const missingRequired = requiredPortfolioLabs.filter(project =>
+      !stored.some(existing => existing.id === project.id || existing.slug === project.slug)
+    );
+    return [...missingRequired, ...stored];
+  });
 
   const [articles, setArticles] = useState<Article[]>(() => 
     getStored(STORAGE_KEYS.ARTICLES, initialArticles)
