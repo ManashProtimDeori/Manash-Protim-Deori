@@ -123,6 +123,98 @@ const CanonicalIdentityMark: React.FC = () => (
   </div>
 );
 
+const REPRESENTATIVE_TOKENS: Record<string, [string, string, string]> = {
+  executive: ['ADOPTION', 'ATTACH', 'EXPAND'],
+  economics: ['REVENUE', 'RECURRING', 'MARGIN'],
+  model: ['RETAIN', 'CONVERT', 'REINVEST'],
+  peers: ['MARKET', 'FOCUS', 'PROOF'],
+  positioning: ['CONTROL', 'PORTABILITY', 'REACH'],
+  investor: ['P10', 'P50', 'P90'],
+  capital: ['EVIDENCE', 'REINVEST', 'SCALE'],
+  tco: ['COST', 'SAVINGS', 'PAYBACK'],
+  vmware: ['DISCOVER', 'MIGRATE', 'EXPAND'],
+  ai: ['SILICON', 'SECURE', 'PORTABLE'],
+  security: ['CVE', 'COMPLY', 'LIFECYCLE'],
+  partners: ['OEM', 'CLOUD', 'SI'],
+  measurement: ['ACQUIRE', 'ATTACH', 'EXPAND'],
+  segments: ['TRIGGER', 'PROOF', 'PRIORITY'],
+  sustainability: ['ENERGY', 'CARBON', 'GOVERN'],
+  downside: ['GUARDRAIL', 'SIGNAL', 'STOP'],
+  'pnl-brand': ['ARR', 'MARGIN', 'BRAND'],
+  sensitivity: ['DRIVER', 'DELTA', 'FOCUS'],
+  'latest-2026': ['SIGNAL', 'IMPACT', 'MOVE'],
+  'cmo-lens': ['TECH', 'COMMUNITY', 'PARTNER'],
+  'candidate-impact': ['RESEARCH', 'TEST', 'SCALE'],
+  'candidate-fit': ['OWN', 'ANALYZE', 'STORY'],
+  fundamentals: ['MECHANISM', 'LAW', 'PROOF'],
+  'evidence-appendix-1': ['PRIMARY', 'CHECK', 'TRACE'],
+  'evidence-appendix-2': ['SOURCE', 'VERIFY', 'RETAIN'],
+  'evidence-appendix-3': ['CURRENT', 'AUDIT', 'TRACE'],
+  roadmap: ['INSTRUMENT', 'PRODUCTIZE', 'SCALE'],
+  grill: ['CHALLENGE', 'FALSIFY', 'HARDEN'],
+  governance: ['FACT', 'MODEL', 'OWNER'],
+};
+
+const numericMetric = (value: string) => {
+  const parsed = Number(String(value).replace(/[^0-9.-]/g, ''));
+  return Number.isFinite(parsed) ? Math.abs(parsed) : 0;
+};
+
+const SlideRepresentativeFigure: React.FC<{ slide: DeckSlide }> = ({ slide }) => {
+  const tokens = REPRESENTATIVE_TOKENS[slide.id] || ['SIGNAL', 'SYSTEM', 'OUTCOME'];
+  const numeric = slide.metrics.slice(0, 3).map((metric) => numericMetric(metric.value));
+  const max = Math.max(...numeric, 1);
+  const heights = [0, 1, 2].map((idx) => {
+    const value = numeric[idx];
+    if (!value) return [54, 78, 66][idx];
+    return Math.max(42, Math.min(96, 42 + (value / max) * 54));
+  });
+  const colors = ['#E95420', '#77216F', '#31C7B5'];
+
+  return (
+    <div className="canonical-representative-figure relative h-[176px] overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_72%_18%,rgba(233,84,32,.15),transparent_38%),linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012))] [perspective:900px]">
+      <div className="absolute inset-x-8 bottom-8 h-[92px] [transform:rotateX(58deg)_rotateZ(-28deg)] [transform-style:preserve-3d]">
+        <div className="absolute inset-0 rounded-[18px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.015))] shadow-[18px_24px_45px_rgba(0,0,0,.28)]" />
+        <div className="absolute inset-3 rounded-[14px] border border-white/7" />
+        <div className="absolute inset-6 rounded-[10px] border border-white/5" />
+      </div>
+
+      <div className="absolute inset-x-0 top-3 bottom-8 flex items-end justify-center gap-4 [transform-style:preserve-3d]">
+        {tokens.map((token, idx) => (
+          <div key={token} className="relative w-[54px] [transform-style:preserve-3d]" style={{ height: heights[idx] }}>
+            <div
+              className="absolute inset-0 rounded-t-md border border-white/15 shadow-[0_18px_30px_rgba(0,0,0,.3)]"
+              style={{
+                background: 'linear-gradient(180deg,' + colors[idx] + 'F0 0%,' + colors[idx] + 'A8 60%,' + colors[idx] + '48 100%)',
+                transform: 'rotateY(-8deg) rotateX(2deg)',
+                transformOrigin: 'bottom',
+              }}
+            />
+            <div
+              className="absolute -right-[8px] top-[5px] bottom-0 w-[8px] border-r border-white/10"
+              style={{ background: colors[idx] + '42', transform: 'skewY(-38deg)', transformOrigin: 'left top' }}
+            />
+            <div
+              className="absolute -top-[8px] left-[5px] right-[-8px] h-[8px] border-t border-white/10"
+              style={{ background: colors[idx] + '70', transform: 'skewX(-48deg)', transformOrigin: 'left bottom' }}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="absolute left-3 right-3 bottom-2 grid grid-cols-3 gap-2">
+        {tokens.map((token, idx) => (
+          <div key={token} className="truncate text-center text-[7px] font-mono uppercase tracking-[0.12em]" style={{ color: colors[idx] }}>
+            {token}
+          </div>
+        ))}
+      </div>
+      <div className="absolute left-3 top-3 text-[7px] font-mono uppercase tracking-[0.18em] text-white/44">Representative decision figure</div>
+    </div>
+  );
+};
+
+
 const PrismBar: React.FC<{
   label: string;
   value: number;
@@ -253,7 +345,7 @@ const SlideShell: React.FC<{
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(233,84,32,.22),transparent_31%),radial-gradient(circle_at_14%_86%,rgba(119,33,111,.26),transparent_34%),linear-gradient(135deg,#0B0D12_0%,#170F1A_52%,#2A1012_100%)]" />
         <div className="absolute right-[-8%] top-[-18%] h-[58%] w-[42%] rounded-full border border-orange-400/20 bg-orange-500/[0.055] blur-[1px]" />
         <div className="absolute -left-20 bottom-[-130px] h-80 w-80 rounded-full border border-fuchsia-300/10 bg-fuchsia-500/[0.04]" />
-        <div className="relative min-h-[680px] p-8 md:p-12 lg:p-14 flex flex-col justify-between">
+        <div className="canonical-slide-inner relative min-h-[680px] p-8 md:p-12 lg:p-14 flex flex-col justify-between">
           <CanonicalIdentityMark />
           <div className="max-w-5xl py-10">
             <h2 className="text-5xl md:text-6xl lg:text-[4.9rem] leading-[0.94] tracking-[-0.055em] font-semibold text-white">
@@ -275,7 +367,7 @@ const SlideShell: React.FC<{
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#E95420] via-[#77216F] to-[#31C7B5]" />
       <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-violet-500/8 blur-3xl" />
       <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-orange-500/7 blur-3xl" />
-      <div className="relative p-6 md:p-9 lg:p-10 min-h-[680px] flex flex-col">
+      <div className="canonical-slide-inner relative p-6 md:p-8 lg:p-9 min-h-[680px] flex flex-col">
         <div className="flex items-start justify-between gap-4">
           <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/74">
             {String(index + 1).padStart(2, '0')} · {slide.section}
@@ -291,28 +383,27 @@ const SlideShell: React.FC<{
           )}
         </div>
 
-        <div className="mt-6 grid lg:grid-cols-[1.1fr_.9fr] gap-7 items-start">
-          <div>
-            <h2 className={'text-3xl md:text-4xl leading-[1.02] tracking-tight text-white font-semibold max-w-4xl ' + (
+        <div className="mt-5 grid lg:grid-cols-[1.08fr_.56fr_.78fr] gap-4 items-stretch">
+          <div className="min-w-0">
+            <h2 className={'leading-[1.02] tracking-[-0.035em] text-white font-semibold max-w-3xl ' + (
               slide.kind === 'candidate' || slide.kind === 'appendix' || slide.kind === 'latest' || slide.kind === 'fundamentals'
-                ? 'lg:text-[2.2rem]'
-                : 'lg:text-[2.7rem]'
+                ? 'text-2xl md:text-[2rem] lg:text-[2.05rem]'
+                : 'text-2xl md:text-[2.1rem] lg:text-[2.2rem]'
             )}>
               {slide.title}
             </h2>
-            <p className={'mt-4 max-w-3xl text-sm leading-relaxed text-white/84 ' + (
-              slide.kind === 'candidate' || slide.kind === 'appendix' || slide.kind === 'latest' || slide.kind === 'fundamentals'
-                ? 'md:text-[13px]'
-                : 'md:text-base'
-            )}>{slide.narrative}</p>
+            <p className="mt-3 max-w-2xl text-[12px] md:text-[13px] leading-[1.55] text-white/80">{slide.narrative}</p>
           </div>
-          <div className="rounded-xl border border-orange-400/20 bg-orange-400/[0.055] p-4">
-            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/75">Leadership insight</div>
-            <p className="mt-2 text-sm md:text-base leading-relaxed text-white/84">{slide.decision}</p>
+
+          <SlideRepresentativeFigure slide={slide} />
+
+          <div className="rounded-2xl border border-orange-400/20 bg-[linear-gradient(145deg,rgba(233,84,32,.08),rgba(119,33,111,.04))] p-4">
+            <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-orange-300/80">Leadership insight</div>
+            <p className="mt-2 text-[12px] md:text-[13px] leading-[1.52] text-white/84">{slide.decision}</p>
           </div>
         </div>
 
-        <div className="mt-8 flex-1">{children}</div>
+        <div className="mt-5 flex-1 min-h-0">{children}</div>
         <SourceFooter sourceIds={slide.sourceIds} />
       </div>
     </section>
@@ -1201,15 +1292,16 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         const geometries = getSlideGeometries();
         if (!geometries.length) throw new Error('No strategy slides were found for export.');
 
-        const maxRatio = Math.max(...geometries.map((geometry) => geometry.ratio));
-        if (!Number.isFinite(maxRatio) || maxRatio <= 0 || maxRatio > 3.2) {
-          throw new Error('One or more slides have an invalid export geometry.');
+        const targetRatio = 2 / 3;
+        const geometryDrift = Math.max(...geometries.map((geometry) => Math.abs(geometry.ratio - targetRatio)));
+        if (!Number.isFinite(geometryDrift) || geometryDrift > 0.035) {
+          throw new Error('The website slide geometry is not presentation-safe yet.');
         }
 
         const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
         const pptx = new PptxGenJS();
-        const slideWidth = 10;
-        const slideHeight = slideWidth * maxRatio;
+        const slideWidth = 12;
+        const slideHeight = 8;
 
         pptx.defineLayout({ name: 'PORTFOLIO_EXACT', width: slideWidth, height: slideHeight });
         pptx.layout = 'PORTFOLIO_EXACT';
@@ -1223,8 +1315,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
           const imageData = await captureRenderedSlide(geometry);
           const slide = pptx.addSlide();
           slide.background = { color: '0B0D12' };
-          const imageHeight = slideWidth * geometry.ratio;
-          slide.addImage({ data: imageData, x: 0, y: 0, w: slideWidth, h: imageHeight });
+          slide.addImage({ data: imageData, x: 0, y: 0, w: slideWidth, h: slideHeight });
           // Yield between pages so Chromium can release the temporary canvas backing store.
           await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
         }
@@ -1252,12 +1343,18 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         if (!geometries.length) throw new Error('No strategy slides were found for export.');
 
         const JsPdf = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
-        const pageWidth = 1000;
-        const firstHeight = pageWidth * geometries[0].ratio;
+        const targetRatio = 2 / 3;
+        const geometryDrift = Math.max(...geometries.map((geometry) => Math.abs(geometry.ratio - targetRatio)));
+        if (!Number.isFinite(geometryDrift) || geometryDrift > 0.035) {
+          throw new Error('The website slide geometry is not presentation-safe yet.');
+        }
+
+        const pageWidth = 1200;
+        const pageHeight = 800;
         const pdf = new JsPdf({
-          orientation: pageWidth >= firstHeight ? 'landscape' : 'portrait',
+          orientation: 'landscape',
           unit: 'pt',
-          format: [pageWidth, firstHeight],
+          format: [pageWidth, pageHeight],
           compress: true,
           putOnlyUsedFonts: true,
         });
@@ -1265,10 +1362,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         for (let index = 0; index < geometries.length; index += 1) {
           const geometry = geometries[index];
           const imageData = await captureRenderedSlide(geometry);
-          const pageHeight = pageWidth * geometry.ratio;
-
           if (index > 0) {
-            pdf.addPage([pageWidth, pageHeight], pageWidth >= pageHeight ? 'landscape' : 'portrait');
+            pdf.addPage([pageWidth, pageHeight], 'landscape');
           }
           pdf.setFillColor(11, 13, 18);
           pdf.rect(0, 0, pageWidth, pageHeight, 'F');
@@ -1442,7 +1537,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                 </div>
               </div>
             ))}
-            <div className="absolute bottom-3 left-4 text-[9px] text-white/25">Directional strategic inference — not a scored market dataset.</div>
+            <div className="absolute bottom-10 left-4 max-w-[58%] rounded-md bg-[#0B0D12]/82 px-2 py-1 text-[8px] leading-relaxed text-white/38">Directional strategic inference — not a scored market dataset.</div>
           </div>
           <div className="grid gap-3">
             {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
@@ -1748,7 +1843,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
         <main className="space-y-8">
           <div className="flex items-center justify-between gap-4 text-xs text-neutral-100 px-1">
-            <span>{slides.length} live slides · scroll vertically</span>
+            <span>{slides.length} live slides · fixed 3:2 presentation geometry</span>
             <span className="hidden sm:inline">Changes to controls update the deck immediately</span>
           </div>
 
