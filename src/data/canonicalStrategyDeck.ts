@@ -299,10 +299,10 @@ export const PEER_MOMENTUM = [
   },
   {
     name: 'Broadcom',
-    metric: '$27.0bn',
-    detail: 'FY2025 Infrastructure Software revenue',
-    momentum: '+26%',
-    sourceId: 'broadcom-fy25',
+    metric: '$29.6bn',
+    detail: 'Q3 FY2026 total company revenue; not VMware-only',
+    momentum: '+86% YoY',
+    sourceId: 'broadcom-q3-2026',
   },
 ];
 
