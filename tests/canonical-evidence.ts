@@ -60,6 +60,11 @@ assert.ok(pageSource.includes('Manash Protim Deori'), 'introduction should name 
 assert.ok(pageSource.includes('downloadPdf'), 'deck should expose direct PDF generation');
 assert.ok(pageSource.includes('Download high-res PDF'), 'deck should render a visible high-resolution PDF download button');
 assert.ok(pageSource.includes('Download exact PPTX'), 'deck should render a visible exact-render PPTX download button');
+assert.ok(pageSource.includes('SlideRepresentativeFigure'), 'every strategy slide should pair the headline with a representative 3D figure');
+assert.ok(pageSource.includes("positioning: ['CONTROL', 'PORTABILITY', 'REACH']"), 'positioning figure should reflect the positioning logic');
+assert.ok(pageSource.includes('const targetRatio = 2 / 3'), 'PPTX/PDF export should use the same fixed 3:2 slide geometry as the website');
+assert.ok(pageSource.includes('slide.addImage({ data: imageData, x: 0, y: 0, w: slideWidth, h: slideHeight })'), 'PPTX export should fill the slide canvas edge-to-edge');
+assert.ok(pageSource.includes("max-w-[58%]"), 'positioning inference note should be constrained to avoid axis-label overlap');
 assert.ok(!pageSource.includes("label: 'Model governance'"), 'opening model-governance metric should be removed');
 assert.equal(REVIEW_ITERATIONS_2026.length, 30, 'three refinement rounds should total 30 iterations');
 
