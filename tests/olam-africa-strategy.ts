@@ -1,3 +1,4 @@
+// Olam Africa final portfolio-build validation
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
