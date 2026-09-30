@@ -101,11 +101,11 @@ const sourceMap = Object.fromEntries(SOURCES.map((source) => [source.id, source]
 const MetricTile: React.FC<{ metric: Metric }> = ({ metric }) => {
   const color = palette[metric.tone || 'slate'];
   return (
-    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] p-4 min-h-[118px]">
+    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] p-3.5 min-h-[102px]">
       <div className="absolute right-0 top-0 h-full w-1" style={{ background: color }} />
       <div className="text-[10px] uppercase tracking-[0.16em] text-white/76 font-mono">{metric.label}</div>
-      <div className="mt-2 text-2xl md:text-3xl font-semibold tracking-tight text-white">{metric.value}</div>
-      <div className="mt-2 text-[11px] leading-relaxed text-white/80">{metric.detail}</div>
+      <div className="mt-1.5 text-xl md:text-2xl font-semibold tracking-tight text-white">{metric.value}</div>
+      <div className="mt-1.5 text-[10px] leading-[1.45] text-white/78">{metric.detail}</div>
     </div>
   );
 };
@@ -123,97 +123,159 @@ const CanonicalIdentityMark: React.FC = () => (
   </div>
 );
 
-const REPRESENTATIVE_TOKENS: Record<string, [string, string, string]> = {
-  executive: ['ADOPTION', 'ATTACH', 'EXPAND'],
-  economics: ['REVENUE', 'RECURRING', 'MARGIN'],
-  model: ['RETAIN', 'CONVERT', 'REINVEST'],
-  peers: ['MARKET', 'FOCUS', 'PROOF'],
-  positioning: ['CONTROL', 'PORTABILITY', 'REACH'],
-  investor: ['P10', 'P50', 'P90'],
-  capital: ['EVIDENCE', 'REINVEST', 'SCALE'],
-  tco: ['COST', 'SAVINGS', 'PAYBACK'],
-  vmware: ['DISCOVER', 'MIGRATE', 'EXPAND'],
-  ai: ['SILICON', 'SECURE', 'PORTABLE'],
-  security: ['CVE', 'COMPLY', 'LIFECYCLE'],
-  partners: ['OEM', 'CLOUD', 'SI'],
-  measurement: ['ACQUIRE', 'ATTACH', 'EXPAND'],
-  segments: ['TRIGGER', 'PROOF', 'PRIORITY'],
-  sustainability: ['ENERGY', 'CARBON', 'GOVERN'],
-  downside: ['GUARDRAIL', 'SIGNAL', 'STOP'],
-  'pnl-brand': ['ARR', 'MARGIN', 'BRAND'],
-  sensitivity: ['DRIVER', 'DELTA', 'FOCUS'],
-  'latest-2026': ['SIGNAL', 'IMPACT', 'MOVE'],
-  'cmo-lens': ['TECH', 'COMMUNITY', 'PARTNER'],
-  'candidate-impact': ['RESEARCH', 'TEST', 'SCALE'],
-  'candidate-fit': ['OWN', 'ANALYZE', 'STORY'],
-  fundamentals: ['MECHANISM', 'LAW', 'PROOF'],
-  'evidence-appendix-1': ['PRIMARY', 'CHECK', 'TRACE'],
-  'evidence-appendix-2': ['SOURCE', 'VERIFY', 'RETAIN'],
-  'evidence-appendix-3': ['CURRENT', 'AUDIT', 'TRACE'],
-  roadmap: ['INSTRUMENT', 'PRODUCTIZE', 'SCALE'],
-  grill: ['CHALLENGE', 'FALSIFY', 'HARDEN'],
-  governance: ['FACT', 'MODEL', 'OWNER'],
+type FigureKind =
+  | 'flywheel' | 'subscription' | 'tree' | 'radar' | 'cube' | 'fan' | 'cascade' | 'bridge'
+  | 'pipeline' | 'stack' | 'shield' | 'network' | 'instrument' | 'pyramid' | 'helix' | 'guardrails'
+  | 'pnl' | 'tornado' | 'signal' | 'constellation' | 'campaign' | 'prism' | 'engine'
+  | 'source-a' | 'source-b' | 'source-c' | 'staircase' | 'lattice' | 'layers';
+
+type FigureSpec = {
+  kind: FigureKind;
+  labels: [string, string, string];
+  caption: string;
 };
 
-const numericMetric = (value: string) => {
-  const parsed = Number(String(value).replace(/[^0-9.-]/g, ''));
-  return Number.isFinite(parsed) ? Math.abs(parsed) : 0;
+const FIGURE_SPECS: Record<string, FigureSpec> = {
+  executive: { kind: 'flywheel', labels: ['ADOPT', 'ATTACH', 'EXPAND'], caption: 'Compounding growth loop' },
+  economics: { kind: 'subscription', labels: ['REVENUE', 'RECURRING', 'MARGIN'], caption: 'Revenue-quality shift' },
+  model: { kind: 'tree', labels: ['RETAIN', 'CONVERT', 'REINVEST'], caption: 'Explicit driver tree' },
+  peers: { kind: 'radar', labels: ['MARKET', 'FOCUS', 'PROOF'], caption: 'Competitive pressure map' },
+  positioning: { kind: 'cube', labels: ['CONTROL', 'PORTABLE', 'REACH'], caption: 'Portable-control position' },
+  investor: { kind: 'fan', labels: ['P10', 'P50', 'P90'], caption: 'Downside-to-upside range' },
+  capital: { kind: 'cascade', labels: ['EVIDENCE', 'CAPITAL', 'SCALE'], caption: 'Stage-gated reinvestment' },
+  tco: { kind: 'bridge', labels: ['COST', 'SAVINGS', 'PAYBACK'], caption: 'Customer payback bridge' },
+  vmware: { kind: 'pipeline', labels: ['DISCOVER', 'MIGRATE', 'EXPAND'], caption: 'Migration product factory' },
+  ai: { kind: 'stack', labels: ['SILICON', 'SECURE', 'PORTABLE'], caption: 'Neutral AI infrastructure stack' },
+  security: { kind: 'shield', labels: ['CVE', 'COMPLY', 'LIFECYCLE'], caption: 'Lifecycle assurance shield' },
+  partners: { kind: 'network', labels: ['OEM', 'CLOUD', 'SI'], caption: 'Upstream distribution network' },
+  measurement: { kind: 'instrument', labels: ['ACQUIRE', 'ATTACH', 'EXPAND'], caption: 'Marketing instrumentation layer' },
+  segments: { kind: 'pyramid', labels: ['TRIGGER', 'PROOF', 'PRIORITY'], caption: 'Trigger-strength segmentation' },
+  sustainability: { kind: 'helix', labels: ['ENERGY', 'CARBON', 'GOVERN'], caption: 'Workload efficiency loop' },
+  downside: { kind: 'guardrails', labels: ['GUARD', 'SIGNAL', 'STOP'], caption: 'Failure-mode guardrails' },
+  'pnl-brand': { kind: 'pnl', labels: ['ARR', 'MARGIN', 'BRAND'], caption: 'P&L-to-brand bridge' },
+  sensitivity: { kind: 'tornado', labels: ['DRIVER', 'DELTA', 'FOCUS'], caption: 'Sensitivity tornado' },
+  'latest-2026': { kind: 'signal', labels: ['SIGNAL', 'IMPACT', 'MOVE'], caption: 'Live-signal radar' },
+  'cmo-lens': { kind: 'constellation', labels: ['TECH', 'COMMUNITY', 'PARTNER'], caption: 'CMO operating constellation' },
+  'candidate-impact': { kind: 'campaign', labels: ['RESEARCH', 'TEST', 'SCALE'], caption: 'Campaign learning loop' },
+  'candidate-fit': { kind: 'prism', labels: ['OWN', 'ANALYZE', 'STORY'], caption: 'Capability transfer prism' },
+  fundamentals: { kind: 'engine', labels: ['MECHANISM', 'LAW', 'PROOF'], caption: 'Strategy mechanism engine' },
+  'evidence-appendix-1': { kind: 'source-a', labels: ['PRIMARY', 'CHECK', 'TRACE'], caption: 'Source-provenance chain I' },
+  'evidence-appendix-2': { kind: 'source-b', labels: ['SOURCE', 'VERIFY', 'RETAIN'], caption: 'Source-provenance chain II' },
+  'evidence-appendix-3': { kind: 'source-c', labels: ['CURRENT', 'AUDIT', 'TRACE'], caption: 'Source-provenance chain III' },
+  roadmap: { kind: 'staircase', labels: ['INSTRUMENT', 'PRODUCTIZE', 'SCALE'], caption: 'Evidence-before-scale staircase' },
+  grill: { kind: 'lattice', labels: ['CHALLENGE', 'FALSIFY', 'HARDEN'], caption: 'Pressure-test lattice' },
+  governance: { kind: 'layers', labels: ['FACT', 'MODEL', 'OWNER'], caption: 'Traceability control layers' },
+};
+
+const FigureGlyph: React.FC<{ kind: FigureKind }> = ({ kind }) => {
+  const common = (
+    <defs>
+      <linearGradient id={'fig-orange-' + kind} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#FF7A33" /><stop offset="100%" stopColor="#E95420" />
+      </linearGradient>
+      <linearGradient id={'fig-aub-' + kind} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#B04A9A" /><stop offset="100%" stopColor="#77216F" />
+      </linearGradient>
+      <linearGradient id={'fig-teal-' + kind} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stopColor="#63F4DF" /><stop offset="100%" stopColor="#31C7B5" />
+      </linearGradient>
+      <filter id={'fig-shadow-' + kind}><feDropShadow dx="6" dy="9" stdDeviation="5" floodOpacity=".42" /></filter>
+    </defs>
+  );
+
+  const O = 'url(#fig-orange-' + kind + ')';
+  const A = 'url(#fig-aub-' + kind + ')';
+  const T = 'url(#fig-teal-' + kind + ')';
+  const S = 'url(#fig-shadow-' + kind + ')';
+
+  let glyph: React.ReactNode;
+  switch (kind) {
+    case 'flywheel':
+      glyph = <><circle cx="120" cy="60" r="34" fill="none" stroke={A} strokeWidth="15" strokeDasharray="78 18" transform="rotate(-35 120 60)" /><path d="M70 67 C82 24 144 11 178 50" fill="none" stroke={O} strokeWidth="8" strokeLinecap="round" /><path d="M170 42 l17 8 -14 12" fill={O} /></>; break;
+    case 'subscription':
+      glyph = <><path d="M48 92 L48 55 L88 55 L88 92 Z" fill={O} filter={S}/><path d="M100 92 L100 37 L140 37 L140 92 Z" fill={A} filter={S}/><path d="M152 92 L152 22 L192 22 L192 92 Z" fill={T} filter={S}/><path d="M44 43 C83 29 135 29 195 13" fill="none" stroke="#fff" strokeOpacity=".35" strokeWidth="2"/></>; break;
+    case 'tree':
+      glyph = <><rect x="96" y="14" width="48" height="24" rx="5" fill={O}/><path d="M120 38 V58 M54 58 H186 M54 58 V76 M120 58 V76 M186 58 V76" stroke="#fff" strokeOpacity=".45" strokeWidth="3"/><rect x="28" y="76" width="52" height="26" rx="5" fill={A}/><rect x="94" y="76" width="52" height="26" rx="5" fill={T}/><rect x="160" y="76" width="52" height="26" rx="5" fill={O}/></>; break;
+    case 'radar':
+      glyph = <><polygon points="120,14 196,58 170,104 70,104 44,58" fill="none" stroke="#fff" strokeOpacity=".18"/><polygon points="120,31 176,57 156,88 83,90 63,58" fill={A} fillOpacity=".34" stroke={A}/><circle cx="120" cy="57" r="10" fill={O}/><circle cx="174" cy="58" r="7" fill={T}/><circle cx="78" cy="84" r="6" fill={T}/></>; break;
+    case 'cube':
+      glyph = <><polygon points="77,34 120,14 164,34 120,54" fill={O}/><polygon points="77,34 120,54 120,102 77,80" fill={A}/><polygon points="120,54 164,34 164,80 120,102" fill={T}/><path d="M120 14 V54" stroke="#fff" strokeOpacity=".35"/></>; break;
+    case 'fan':
+      glyph = <><path d="M42 94 C78 72 106 52 120 24" fill="none" stroke={A} strokeWidth="6"/><path d="M42 94 C92 83 136 56 174 22" fill="none" stroke={O} strokeWidth="8"/><path d="M42 94 C110 93 165 73 208 43" fill="none" stroke={T} strokeWidth="6"/><circle cx="42" cy="94" r="8" fill="#fff" fillOpacity=".75"/></>; break;
+    case 'cascade':
+      glyph = <><rect x="38" y="22" width="58" height="24" rx="5" fill={O}/><rect x="91" y="49" width="58" height="24" rx="5" fill={A}/><rect x="144" y="76" width="58" height="24" rx="5" fill={T}/><path d="M92 42 L106 54 M145 69 L159 81" stroke="#fff" strokeOpacity=".42" strokeWidth="3"/></>; break;
+    case 'bridge':
+      glyph = <><rect x="35" y="70" width="48" height="20" rx="4" fill={O}/><rect x="157" y="70" width="48" height="20" rx="4" fill={T}/><path d="M59 70 Q120 14 181 70" fill="none" stroke={A} strokeWidth="11"/><path d="M59 70 V94 M181 70 V94" stroke="#fff" strokeOpacity=".3" strokeWidth="3"/></>; break;
+    case 'pipeline':
+      glyph = <><path d="M28 60 H212" stroke="#fff" strokeOpacity=".16" strokeWidth="18" strokeLinecap="round"/>{[46,86,126,166,206].map((x,i)=><circle key={x} cx={x} cy="60" r={i===2?16:11} fill={[O,A,T,O,A][i]} filter={S}/>)}</>; break;
+    case 'stack':
+      glyph = <><polygon points="58,82 120,103 182,82 120,61" fill={T} fillOpacity=".78"/><polygon points="58,60 120,81 182,60 120,39" fill={A} fillOpacity=".84"/><polygon points="58,38 120,59 182,38 120,17" fill={O}/></>; break;
+    case 'shield':
+      glyph = <><path d="M120 14 L180 34 V62 C180 87 156 103 120 112 C84 103 60 87 60 62 V34 Z" fill={A} stroke={O} strokeWidth="3"/><path d="M91 63 L112 82 L153 42" fill="none" stroke={T} strokeWidth="9" strokeLinecap="round" strokeLinejoin="round"/></>; break;
+    case 'network':
+      glyph = <><path d="M120 58 L58 30 M120 58 L182 30 M120 58 L58 91 M120 58 L182 91" stroke="#fff" strokeOpacity=".3" strokeWidth="3"/><circle cx="120" cy="58" r="18" fill={O}/>{[[58,30,A],[182,30,T],[58,91,T],[182,91,A]].map(([x,y,c],i)=><circle key={i} cx={Number(x)} cy={Number(y)} r="12" fill={String(c)}/>)}</>; break;
+    case 'instrument':
+      glyph = <><rect x="36" y="24" width="168" height="72" rx="12" fill="#111722" stroke="#ffffff" strokeOpacity=".12"/><path d="M55 78 L86 58 L112 66 L142 38 L178 49" fill="none" stroke={T} strokeWidth="5"/><circle cx="142" cy="38" r="8" fill={O}/><rect x="55" y="32" width="38" height="8" rx="4" fill={A}/></>; break;
+    case 'pyramid':
+      glyph = <><polygon points="120,18 169,47 71,47" fill={O}/><polygon points="71,52 169,52 190,76 50,76" fill={A}/><polygon points="50,81 190,81 211,105 29,105" fill={T}/></>; break;
+    case 'helix':
+      glyph = <><path d="M53 18 C190 38 51 74 187 103" fill="none" stroke={O} strokeWidth="7"/><path d="M187 18 C50 38 189 74 53 103" fill="none" stroke={T} strokeWidth="7"/>{[33,59,85].map(y=><path key={y} d={'M80 '+y+' H160'} stroke="#fff" strokeOpacity=".25" strokeWidth="2"/>)}</>; break;
+    case 'guardrails':
+      glyph = <><path d="M52 101 V27 M188 101 V27" stroke={O} strokeWidth="8"/><path d="M75 91 L105 65 L132 73 L169 39" fill="none" stroke={T} strokeWidth="6"/><rect x="101" y="53" width="34" height="26" rx="4" fill={A}/></>; break;
+    case 'pnl':
+      glyph = <><rect x="36" y="22" width="58" height="72" rx="8" fill={O} fillOpacity=".88"/><rect x="94" y="37" width="54" height="57" rx="8" fill={A}/><rect x="148" y="52" width="56" height="42" rx="8" fill={T}/><path d="M65 19 C103 6 150 14 180 38" fill="none" stroke="#fff" strokeOpacity=".3" strokeWidth="3"/></>; break;
+    case 'tornado':
+      glyph = <>{[[38,202,54],[55,185,67],[72,168,80],[89,151,93]].map(([x2,x1,y],i)=><g key={i}><rect x={120-(x1-120)} y={y} width={x1-120} height="8" rx="4" fill={i%2?A:O}/><rect x="120" y={y} width={x2-120} height="8" rx="4" fill={T}/></g>)}</>; break;
+    case 'signal':
+      glyph = <><circle cx="120" cy="60" r="45" fill="none" stroke="#fff" strokeOpacity=".12"/><circle cx="120" cy="60" r="27" fill="none" stroke={A} strokeOpacity=".65"/><circle cx="120" cy="60" r="8" fill={O}/><path d="M120 60 L178 27" stroke={T} strokeWidth="5"/><circle cx="178" cy="27" r="8" fill={T}/></>; break;
+    case 'constellation':
+      glyph = <><path d="M54 79 L92 37 L126 68 L169 31 L190 82 L126 68 L54 79" fill="none" stroke="#fff" strokeOpacity=".25" strokeWidth="2"/>{[[54,79,O],[92,37,A],[126,68,T],[169,31,O],[190,82,A]].map(([x,y,c],i)=><circle key={i} cx={Number(x)} cy={Number(y)} r={i===2?11:8} fill={String(c)}/>)}</>; break;
+    case 'campaign':
+      glyph = <><circle cx="120" cy="60" r="42" fill="none" stroke={A} strokeWidth="12" strokeDasharray="62 22" transform="rotate(-20 120 60)"/><circle cx="120" cy="60" r="22" fill={T} fillOpacity=".25"/><path d="M152 26 L181 24 L166 48" fill={O}/></>; break;
+    case 'prism':
+      glyph = <><polygon points="74,92 120,18 166,92" fill={A} fillOpacity=".8" stroke={O} strokeWidth="2"/><path d="M120 18 L120 92" stroke="#fff" strokeOpacity=".35"/><path d="M120 57 L191 37" stroke={T} strokeWidth="6"/><path d="M120 63 L191 77" stroke={O} strokeWidth="6"/></>; break;
+    case 'engine':
+      glyph = <><circle cx="120" cy="60" r="34" fill={A}/><circle cx="120" cy="60" r="17" fill="#0B0D12" stroke={T} strokeWidth="5"/>{[0,45,90,135].map(a=><rect key={a} x="115" y="8" width="10" height="24" rx="3" fill={O} transform={'rotate('+a+' 120 60)'}/>)}</>; break;
+    case 'source-a':
+      glyph = <><rect x="28" y="30" width="52" height="54" rx="7" fill={O}/><rect x="94" y="30" width="52" height="54" rx="7" fill={A}/><rect x="160" y="30" width="52" height="54" rx="7" fill={T}/><path d="M80 57 H94 M146 57 H160" stroke="#fff" strokeOpacity=".45" strokeWidth="4"/></>; break;
+    case 'source-b':
+      glyph = <><polygon points="40,28 92,28 92,82 40,82" fill={O}/><polygon points="94,38 146,20 146,74 94,92" fill={A}/><polygon points="148,28 200,28 200,82 148,82" fill={T}/><path d="M92 55 H148" stroke="#fff" strokeOpacity=".4" strokeWidth="3"/></>; break;
+    case 'source-c':
+      glyph = <><circle cx="58" cy="58" r="22" fill={O}/><circle cx="120" cy="58" r="22" fill={A}/><circle cx="182" cy="58" r="22" fill={T}/><path d="M80 58 H98 M142 58 H160" stroke="#fff" strokeOpacity=".42" strokeWidth="5"/><path d="M120 20 V35 M120 81 V98" stroke="#fff" strokeOpacity=".2" strokeWidth="3"/></>; break;
+    case 'staircase':
+      glyph = <><path d="M36 98 H79 V76 H122 V54 H165 V32 H207" fill="none" stroke={O} strokeWidth="12" strokeLinejoin="round"/><circle cx="79" cy="76" r="7" fill={A}/><circle cx="122" cy="54" r="7" fill={T}/><circle cx="165" cy="32" r="7" fill="#fff"/></>; break;
+    case 'lattice':
+      glyph = <>{[52,92,132,172].map(x=><path key={'v'+x} d={'M'+x+' 23 L'+(x+20)+' 99'} stroke={A} strokeOpacity=".65" strokeWidth="5"/>)}{[38,62,86].map(y=><path key={'h'+y} d={'M39 '+y+' H201'} stroke={T} strokeOpacity=".45" strokeWidth="3"/>)}<circle cx="120" cy="60" r="13" fill={O}/></>; break;
+    case 'layers':
+      glyph = <><polygon points="46,78 120,104 194,78 120,52" fill={T} fillOpacity=".72"/><polygon points="46,56 120,82 194,56 120,30" fill={A} fillOpacity=".8"/><polygon points="46,34 120,60 194,34 120,8" fill={O}/><path d="M120 8 V104" stroke="#fff" strokeOpacity=".17"/></>; break;
+    default:
+      glyph = null;
+  }
+
+  return <svg viewBox="0 0 240 120" className="h-full w-full overflow-visible">{common}<g filter={S}>{glyph}</g></svg>;
 };
 
 const SlideRepresentativeFigure: React.FC<{ slide: DeckSlide }> = ({ slide }) => {
-  const tokens = REPRESENTATIVE_TOKENS[slide.id] || ['SIGNAL', 'SYSTEM', 'OUTCOME'];
-  const numeric = slide.metrics.slice(0, 3).map((metric) => numericMetric(metric.value));
-  const max = Math.max(...numeric, 1);
-  const heights = [0, 1, 2].map((idx) => {
-    const value = numeric[idx];
-    if (!value) return [54, 78, 66][idx];
-    return Math.max(42, Math.min(96, 42 + (value / max) * 54));
-  });
-  const colors = ['#E95420', '#77216F', '#31C7B5'];
-
+  const spec = FIGURE_SPECS[slide.id] || { kind: 'engine' as FigureKind, labels: ['SIGNAL','SYSTEM','OUTCOME'] as [string,string,string], caption: 'Decision mechanism' };
   return (
-    <div className="canonical-representative-figure relative h-[176px] overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_72%_18%,rgba(233,84,32,.15),transparent_38%),linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012))] [perspective:900px]">
-      <div className="absolute inset-x-8 bottom-8 h-[92px] [transform:rotateX(58deg)_rotateZ(-28deg)] [transform-style:preserve-3d]">
-        <div className="absolute inset-0 rounded-[18px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.015))] shadow-[18px_24px_45px_rgba(0,0,0,.28)]" />
-        <div className="absolute inset-3 rounded-[14px] border border-white/7" />
-        <div className="absolute inset-6 rounded-[10px] border border-white/5" />
+    <div className="canonical-representative-figure relative min-h-[154px] overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_80%_12%,rgba(233,84,32,.18),transparent_36%),radial-gradient(circle_at_18%_88%,rgba(119,33,111,.22),transparent_40%),linear-gradient(145deg,#11141B,#090C11)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_18px_45px_rgba(0,0,0,.32)]">
+      <div className="absolute inset-x-3 top-2 flex items-center justify-between gap-3 text-[7px] font-mono uppercase tracking-[0.16em]">
+        <span className="text-white/48">{spec.caption}</span>
+        <span className="text-orange-300/75">{slide.section}</span>
       </div>
-
-      <div className="absolute inset-x-0 top-3 bottom-8 flex items-end justify-center gap-4 [transform-style:preserve-3d]">
-        {tokens.map((token, idx) => (
-          <div key={token} className="relative w-[54px] [transform-style:preserve-3d]" style={{ height: heights[idx] }}>
-            <div
-              className="absolute inset-0 rounded-t-md border border-white/15 shadow-[0_18px_30px_rgba(0,0,0,.3)]"
-              style={{
-                background: 'linear-gradient(180deg,' + colors[idx] + 'F0 0%,' + colors[idx] + 'A8 60%,' + colors[idx] + '48 100%)',
-                transform: 'rotateY(-8deg) rotateX(2deg)',
-                transformOrigin: 'bottom',
-              }}
-            />
-            <div
-              className="absolute -right-[8px] top-[5px] bottom-0 w-[8px] border-r border-white/10"
-              style={{ background: colors[idx] + '42', transform: 'skewY(-38deg)', transformOrigin: 'left top' }}
-            />
-            <div
-              className="absolute -top-[8px] left-[5px] right-[-8px] h-[8px] border-t border-white/10"
-              style={{ background: colors[idx] + '70', transform: 'skewX(-48deg)', transformOrigin: 'left bottom' }}
-            />
+      <div className="absolute inset-x-3 top-7 bottom-7">
+        <FigureGlyph kind={spec.kind} />
+      </div>
+      <div className="absolute inset-x-3 bottom-2 grid grid-cols-3 gap-1">
+        {spec.labels.map((label, idx) => (
+          <div key={label} className={'truncate text-center text-[7px] font-mono uppercase tracking-[0.1em] ' + (idx === 0 ? 'text-orange-300' : idx === 1 ? 'text-fuchsia-300' : 'text-teal-300')}>
+            {label}
           </div>
         ))}
       </div>
-
-      <div className="absolute left-3 right-3 bottom-2 grid grid-cols-3 gap-2">
-        {tokens.map((token, idx) => (
-          <div key={token} className="truncate text-center text-[7px] font-mono uppercase tracking-[0.12em]" style={{ color: colors[idx] }}>
-            {token}
-          </div>
-        ))}
-      </div>
-      <div className="absolute left-3 top-3 text-[7px] font-mono uppercase tracking-[0.18em] text-white/44">Representative decision figure</div>
     </div>
   );
 };
-
 
 const PrismBar: React.FC<{
   label: string;
@@ -255,19 +317,32 @@ const PrismBar: React.FC<{
   );
 };
 
-const SourceFooter: React.FC<{ sourceIds: string[] }> = ({ sourceIds }) => (
-  <div className="pt-4 border-t border-white/8 flex flex-wrap gap-x-4 gap-y-1 text-[9px] font-mono text-white/66">
-    {sourceIds.map((id) => {
-      const source = sourceMap[id];
-      if (!source) return null;
-      return (
-        <a key={id} href={source.url} target="_blank" rel="noreferrer" className="hover:text-orange-300 transition-colors">
-          {source.label}
-        </a>
-      );
-    })}
-  </div>
-);
+const SourceFooter: React.FC<{ sourceIds: string[] }> = ({ sourceIds }) => {
+  const visible = sourceIds.slice(0, 4);
+  if (!visible.length) return <div className="h-2" />;
+  return (
+    <div className="canonical-source-footer mt-3 rounded-xl border border-white/8 bg-black/20 px-3 py-2">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-1.5">
+        {visible.map((id) => {
+          const source = sourceMap[id];
+          if (!source) return null;
+          return (
+            <a
+              key={id}
+              href={source.url}
+              target="_blank"
+              rel="noreferrer"
+              title={source.label}
+              className="min-w-0 truncate text-[7.5px] font-mono text-white/52 hover:text-orange-300 transition-colors"
+            >
+              {source.label}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 const RangeControl: React.FC<{
   label: string;
@@ -383,23 +458,34 @@ const SlideShell: React.FC<{
           )}
         </div>
 
-        <div className="mt-5 grid lg:grid-cols-[1.08fr_.56fr_.78fr] gap-4 items-stretch">
-          <div className="min-w-0">
-            <h2 className={'leading-[1.02] tracking-[-0.035em] text-white font-semibold max-w-3xl ' + (
-              slide.kind === 'candidate' || slide.kind === 'appendix' || slide.kind === 'latest' || slide.kind === 'fundamentals'
-                ? 'text-2xl md:text-[2rem] lg:text-[2.05rem]'
-                : 'text-2xl md:text-[2.1rem] lg:text-[2.2rem]'
-            )}>
-              {slide.title}
-            </h2>
-            <p className="mt-3 max-w-2xl text-[12px] md:text-[13px] leading-[1.55] text-white/80">{slide.narrative}</p>
+        <div className="mt-4 grid lg:grid-cols-[1.05fr_.62fr_.83fr] gap-4 items-stretch">
+          <div className="canonical-title-card relative min-w-0 overflow-hidden rounded-[20px] border border-white/12 bg-[radial-gradient(circle_at_0%_0%,rgba(233,84,32,.24),transparent_36%),radial-gradient(circle_at_100%_100%,rgba(119,33,111,.24),transparent_40%),linear-gradient(145deg,#151018,#0B0D12_58%,#101923)] p-5 shadow-[0_22px_55px_rgba(0,0,0,.34)] [perspective:900px]">
+            <div className="pointer-events-none absolute -right-7 -top-7 h-20 w-20 rotate-12 rounded-2xl border border-orange-300/20 bg-orange-400/[0.07] shadow-[18px_18px_35px_rgba(0,0,0,.24)]" />
+            <div className="pointer-events-none absolute -left-10 bottom-[-38px] h-24 w-28 -rotate-12 rounded-3xl border border-fuchsia-300/15 bg-fuchsia-400/[0.05]" />
+            <div className="relative">
+              <div className="mb-2 text-[8px] font-mono uppercase tracking-[0.17em] text-orange-200/70">Strategic thesis</div>
+              <h2 className={'max-w-full text-white font-semibold tracking-[-0.035em] ' + (
+                slide.title.length > 105
+                  ? 'text-[1.35rem] md:text-[1.45rem] lg:text-[1.5rem] leading-[1.06]'
+                  : slide.title.length > 78
+                    ? 'text-[1.48rem] md:text-[1.58rem] lg:text-[1.65rem] leading-[1.06]'
+                    : 'text-[1.6rem] md:text-[1.72rem] lg:text-[1.8rem] leading-[1.05]'
+              )}>
+                {slide.title}
+              </h2>
+              <p className="mt-3 max-w-full text-[10.5px] md:text-[11px] leading-[1.48] text-white/72">{slide.narrative}</p>
+            </div>
+            <div className="pointer-events-none absolute inset-x-5 bottom-0 h-px bg-gradient-to-r from-orange-400/50 via-fuchsia-400/35 to-teal-300/40" />
           </div>
 
           <SlideRepresentativeFigure slide={slide} />
 
-          <div className="rounded-2xl border border-orange-400/20 bg-[linear-gradient(145deg,rgba(233,84,32,.08),rgba(119,33,111,.04))] p-4">
-            <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-orange-300/80">Leadership insight</div>
-            <p className="mt-2 text-[12px] md:text-[13px] leading-[1.52] text-white/84">{slide.decision}</p>
+          <div className="canonical-leadership-box relative overflow-hidden rounded-[20px] border border-orange-300/18 bg-[linear-gradient(145deg,rgba(233,84,32,.085),rgba(20,14,19,.95)_48%,rgba(119,33,111,.07))] p-4.5 shadow-[inset_0_1px_0_rgba(255,255,255,.035),0_18px_44px_rgba(0,0,0,.22)]">
+            <div className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-[#E95420] via-[#B94B37] to-[#77216F]" />
+            <div className="pl-2">
+              <div className="text-[8px] font-mono uppercase tracking-[0.18em] text-orange-300/78">Leadership insight</div>
+              <p className="mt-2 text-[10.5px] md:text-[11.5px] leading-[1.5] text-white/82">{slide.decision}</p>
+            </div>
           </div>
         </div>
 
