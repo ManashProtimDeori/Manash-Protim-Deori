@@ -44,14 +44,20 @@ for (const opening of imperativeOpenings) {
 assert.ok(pageSource.includes("kind: 'appendix'"));
 assert.ok(pageSource.includes("kind: 'fundamentals'"));
 assert.ok(pageSource.includes('captureRenderedSlides'), 'PPTX and PDF should use rendered website slides');
-assert.ok(pageSource.includes('domtoimage.toJpeg'), 'rendered-slide export should use the DOM capture pipeline');
+assert.ok(pageSource.includes('html2canvas(element'), 'rendered-slide export should use the browser-rendered slide surface');
+assert.ok(pageSource.includes("canvas.toDataURL('image/png')"), 'exports should use lossless PNG captures');
+assert.ok(!pageSource.includes('domtoimage.toJpeg'), 'artifact-prone DOM-to-image JPEG capture must remain removed');
+assert.ok(pageSource.includes("id: 'evidence-appendix-1'"));
+assert.ok(pageSource.includes("id: 'evidence-appendix-2'"));
+assert.ok(pageSource.includes("id: 'evidence-appendix-3'"));
 assert.ok(pageSource.includes("title: 'Canonical Growth & Market Strategy'"), 'minimal cover should use the deck title');
 assert.ok(pageSource.includes('metrics: []'), 'minimal cover should not contain metric boxes');
 assert.ok(pageSource.includes("kind: 'intro'"), 'deck should open with a dedicated introduction slide');
 assert.ok(pageSource.includes("kind: 'candidate'"), 'deck should include dedicated candidate-impact slides');
 assert.ok(pageSource.includes('Manash Protim Deori'), 'introduction should name the candidate');
 assert.ok(pageSource.includes('downloadPdf'), 'deck should expose direct PDF generation');
-assert.ok(pageSource.includes('Download PDF'), 'deck should render a visible PDF download button');
+assert.ok(pageSource.includes('Download high-res PDF'), 'deck should render a visible high-resolution PDF download button');
+assert.ok(pageSource.includes('Download exact PPTX'), 'deck should render a visible exact-render PPTX download button');
 assert.ok(!pageSource.includes("label: 'Model governance'"), 'opening model-governance metric should be removed');
 assert.equal(REVIEW_ITERATIONS_2026.length, 30, 'three refinement rounds should total 30 iterations');
 
