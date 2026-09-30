@@ -457,34 +457,39 @@ const SlideShell: React.FC<{
             <div className="pointer-events-none absolute -left-10 bottom-[-48px] h-28 w-36 -rotate-12 rounded-[36px] border border-fuchsia-300/14 bg-fuchsia-400/[0.055]" />
             <div className="pointer-events-none absolute left-[38%] top-[-38px] h-24 w-24 rotate-45 rounded-2xl border border-teal-200/9 bg-teal-300/[0.03]" />
             <div className="relative z-10">
-              <h2 className={'max-w-full break-words text-white font-semibold tracking-[-0.035em] ' + (
+              <h2 className={'max-w-full break-words text-white font-semibold tracking-[-0.028em] ' + (
                 slide.title.length > 120
-                  ? 'text-[1.8rem] md:text-[2rem] lg:text-[2.12rem] leading-[1.07]'
+                  ? 'text-[1.28rem] md:text-[1.38rem] lg:text-[1.48rem] leading-[1.12]'
                   : slide.title.length > 88
-                    ? 'text-[2rem] md:text-[2.18rem] lg:text-[2.3rem] leading-[1.06]'
-                    : 'text-[2.2rem] md:text-[2.42rem] lg:text-[2.55rem] leading-[1.05]'
+                    ? 'text-[1.42rem] md:text-[1.55rem] lg:text-[1.66rem] leading-[1.10]'
+                    : slide.title.length > 58
+                      ? 'text-[1.58rem] md:text-[1.72rem] lg:text-[1.84rem] leading-[1.08]'
+                      : 'text-[1.78rem] md:text-[1.92rem] lg:text-[2.02rem] leading-[1.07]'
               )}>
                 {slide.title}
               </h2>
-              <p className="mt-4 max-w-[95%] text-[11px] md:text-[12px] leading-[1.55] text-white/75">{slide.narrative}</p>
+              {slide.narrative && (
+                <p className="mt-3.5 max-w-[96%] text-[10px] md:text-[11px] leading-[1.5] text-white/74">{slide.narrative}</p>
+              )}
             </div>
             <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-orange-300/65 via-fuchsia-300/40 to-teal-200/45" />
           </div>
 
-          <div className="grid grid-rows-[205px_1fr] gap-4 min-w-0">
+          <div className={'grid min-w-0 ' + (slide.decision ? 'grid-rows-[205px_1fr] gap-4' : 'grid-rows-[205px]')}>
             <SlideRepresentativeFigure slide={slide} />
-            <div className="canonical-leadership-box relative overflow-hidden rounded-[24px] border border-orange-300/18 bg-[radial-gradient(circle_at_100%_0%,rgba(233,84,32,.10),transparent_36%),linear-gradient(145deg,rgba(20,15,18,.98),rgba(10,13,18,.98))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_20px_48px_rgba(0,0,0,.24)]">
-              <div className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-[#E95420] via-[#B34243] to-[#77216F]" />
-              <div className="pl-2.5">
-                <div className="text-[8px] font-mono uppercase tracking-[0.18em] text-orange-300/80">Leadership insight</div>
-                <p className="mt-2.5 text-[11px] md:text-[12px] leading-[1.52] text-white/84">{slide.decision}</p>
+            {slide.decision && (
+              <div className="canonical-leadership-box relative overflow-hidden rounded-[24px] border border-orange-300/18 bg-[radial-gradient(circle_at_100%_0%,rgba(233,84,32,.10),transparent_36%),linear-gradient(145deg,rgba(20,15,18,.98),rgba(10,13,18,.98))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_20px_48px_rgba(0,0,0,.24)]">
+                <div className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-[#E95420] via-[#B34243] to-[#77216F]" />
+                <div className="pl-2.5">
+                  <div className="text-[8px] font-mono uppercase tracking-[0.18em] text-orange-300/80">Leadership insight</div>
+                  <p className="mt-2.5 text-[11px] md:text-[12px] leading-[1.52] text-white/84">{slide.decision}</p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
         <div className="mt-6 flex-1 min-h-0">{children}</div>
-        {slide.id !== 'executive' && <SourceFooter sourceIds={slide.sourceIds} />}
       </div>
     </section>
   );
@@ -981,9 +986,9 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     {
       id: 'cmo-lens',
       section: 'Executive marketing operating lens',
-      title: 'The deck is optimized for a technically fluent, community-and-partner-led marketing leader',
-      decision: 'Compounding distribution can be created when technical credibility, developer and community trust, and partner ecosystems are translated into a small number of executive-level category narratives.',
-      narrative: 'The operating lens emphasizes developer ecosystems, channel/partner leverage, open-source trust, B2B cloud, technical storytelling and public leadership — the capabilities most useful for turning Canonical’s portfolio breadth into market power.',
+      title: 'Leadership operating model: turn technical credibility into durable market power',
+      decision: 'Market leadership is strengthened when technical authority, developer trust and partner distribution are connected to a small number of repeatable commercial narratives with measurable outcomes.',
+      narrative: 'The operating model links community credibility, partner leverage, technical storytelling and enterprise demand creation so portfolio breadth becomes a source of strategic coherence rather than complexity.',
       metrics: [
         { label: 'Primary audience', value: 'Developer → CIO', detail: 'One truth, different decision frames', tone: 'orange' },
         { label: 'Distribution', value: 'Community + partners', detail: 'Owned, earned and borrowed reach', tone: 'teal' },
@@ -999,7 +1004,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       section: 'How I can help Canonical · 01',
       title: 'Turn the three strategic bets into a measurable campaign operating system',
       decision: 'The highest-value contribution would be created by translating enterprise assurance, private-cloud migration and neutral AI infrastructure into trigger-based GTM programs governed by one shared evidence loop.',
-      narrative: 'The attached WIN guidance is applied directly here: research is converted into a small number of actionable ideas, each idea is expressed as a step-by-step operating motion, and success is judged by business evidence rather than generic campaign activity.',
+      narrative: '',
       metrics: [
         { label: 'Assurance motion', value: 'Trigger-led demand', detail: 'Security, compliance and lifecycle events routed to paid-attach and expansion journeys', tone: 'orange' },
         { label: 'Migration motion', value: 'Evidence factory', detail: 'TCO, reference architecture, migration proof and time-to-production used to reduce switching risk', tone: 'teal' },
@@ -1020,8 +1025,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'candidate-fit',
       section: 'How I can help Canonical · 02',
       title: 'My strongest fit is where Canonical asks marketing to combine ownership, analytics, storytelling and cross-functional execution',
-      decision: 'The closest alignment is found in end-to-end campaign ownership, data-led optimization, stakeholder coordination, communication and hands-on execution; direct enterprise-technology marketing experience remains the principal gap and is not overstated.',
-      narrative: 'Candidate evidence is stated conservatively. Responsibilities, education and operating context are used as proof; quantified business outcomes are not invented where they are unavailable. Current Canonical job pages are used as competency references only because opening geography is role-specific. The objective is credibility first, then a clear transfer path into Canonical’s technical marketing environment.',
+      decision: '',
+      narrative: '',
       metrics: [
         { label: 'Experience', value: '1.3+ years', detail: 'Analytics-heavy, client-facing campaign and stakeholder-management work', tone: 'orange' },
         { label: 'Budget managed', value: '₹20M', detail: 'Large-scale campaign budget responsibility documented in the portfolio resume', tone: 'teal' },
