@@ -1561,11 +1561,11 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       return (
         <div className="grid md:grid-cols-5 gap-3">
           {PEER_MOMENTUM.map((peer, idx) => (
-            <div key={peer.name} className="rounded-xl border border-white/10 bg-white/[0.025] p-4">
+            <div key={peer.name} className="min-w-0 rounded-xl border border-white/10 bg-white/[0.025] p-4">
               <div className="text-xs font-semibold text-white">{peer.name}</div>
-              <div className="mt-4 text-2xl font-semibold" style={{ color: palette[( ['orange','violet','cyan','teal','gold'] as Tone[])[idx]] }}>{peer.metric}</div>
+              <div className="mt-4 whitespace-nowrap text-[1.35rem] md:text-[1.45rem] font-semibold tracking-[-0.02em]" style={{ color: palette[( ['orange','violet','cyan','teal','gold'] as Tone[])[idx]] }}>{peer.metric}</div>
               <div className="mt-2 text-[11px] leading-relaxed text-white/74">{peer.detail}</div>
-              <div className="mt-4 border-t border-white/8 pt-3 text-xs font-mono text-white/65">{peer.momentum}</div>
+              <div className="mt-4 whitespace-nowrap border-t border-white/8 pt-3 text-[11px] font-mono text-white/65">{peer.momentum}</div>
             </div>
           ))}
         </div>
