@@ -7,6 +7,7 @@
     "noUnusedParameters": false
   },
   "include": [
+    "src/pages/CanonicalStrategyLabPage.tsx",
     "src/data/canonicalStrategyDeck.ts",
     "src/lib/canonicalStrategyModel.ts"
   ]
