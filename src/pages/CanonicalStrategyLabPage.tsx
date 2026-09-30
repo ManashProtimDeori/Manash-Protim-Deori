@@ -111,21 +111,15 @@ const MetricTile: React.FC<{ metric: Metric }> = ({ metric }) => {
 };
 
 const CanonicalIdentityMark: React.FC = () => (
-  <div className="relative overflow-hidden rounded-[24px] border border-orange-400/25 bg-gradient-to-br from-orange-500/[0.13] via-white/[0.035] to-violet-500/[0.08] p-6 md:p-7">
-    <div className="absolute -right-14 -top-14 h-40 w-40 rounded-full border border-orange-400/15" />
-    <div className="absolute -right-5 -top-5 h-24 w-24 rounded-full border border-violet-400/15" />
-    <div className="relative">
-      <div className="inline-flex items-center rounded-2xl bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,.28)]">
-        <img
-          src="https://assets.ubuntu.com/v1/b3b72cb2-canonical-logo-166.png"
-          crossOrigin="anonymous"
-          alt="Canonical"
-          className="h-12 md:h-14 w-auto object-contain"
-        />
-      </div>
-      <div className="mt-5 text-[10px] font-mono uppercase tracking-[0.24em] text-orange-100/90">Open infrastructure · strategy lab</div>
-      <div className="mt-2 max-w-md text-sm leading-relaxed text-white/72">Official Canonical brand asset presented inside a portfolio-specific strategy lockup; the surrounding visual treatment is intentionally separate from the logo itself.</div>
-    </div>
+  <div className="inline-flex items-center gap-4" aria-label="Canonical">
+    <svg viewBox="0 0 92 92" className="h-16 w-16 md:h-[74px] md:w-[74px] shrink-0" role="img" aria-hidden="true">
+      <circle cx="46" cy="46" r="29" fill="none" stroke="#E95420" strokeWidth="9" />
+      <circle cx="46" cy="12" r="7" fill="#E95420" />
+      <circle cx="17" cy="63" r="7" fill="#E95420" />
+      <circle cx="75" cy="63" r="7" fill="#E95420" />
+      <circle cx="46" cy="46" r="8" fill="#F7F9FC" />
+    </svg>
+    <div className="text-4xl md:text-5xl font-semibold tracking-[-0.055em] text-white">canonical</div>
   </div>
 );
 
@@ -248,72 +242,72 @@ const SlideShell: React.FC<{
   ownerStudio: boolean;
   onEdit: () => void;
   children: React.ReactNode;
-}> = ({ slide, index, isOwner, ownerStudio, onEdit, children }) => (
-  <section
-    id={'canonical-slide-' + slide.id}
-    className="relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0B0D12] shadow-[0_28px_80px_rgba(0,0,0,.35)] scroll-mt-24"
-  >
-    <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#E95420] via-[#7C5CFC] to-[#31C7B5]" />
-    <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-violet-500/8 blur-3xl" />
-    <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-orange-500/7 blur-3xl" />
-    <div className="relative p-6 md:p-9 lg:p-10 min-h-[680px] flex flex-col">
-      <div className="flex items-start justify-between gap-4">
-        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/74">
-          {String(index + 1).padStart(2, '0')} · {slide.section}
-        </div>
-        {isOwner && ownerStudio && (
-          <button
-            data-export-hide="true"
-            onClick={onEdit}
-            className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-2.5 py-1.5 text-[10px] font-mono text-white/84 hover:text-white hover:border-orange-400/60"
-          >
-            <Pencil className="w-3 h-3" /> Edit slide
-          </button>
-        )}
-      </div>
-
-      {slide.kind === 'intro' ? (
-        <div className="mt-8 flex-1 grid lg:grid-cols-[1.02fr_.98fr] gap-10 items-center">
-          <div>
-            <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-orange-300">Prepared for Canonical</div>
-            <h2 className="mt-4 text-4xl md:text-5xl lg:text-[3.5rem] leading-[0.98] tracking-tight text-white font-semibold max-w-4xl">
+}> = ({ slide, index, isOwner, ownerStudio, onEdit, children }) => {
+  if (slide.kind === 'intro') {
+    return (
+      <section
+        id={'canonical-slide-' + slide.id}
+        className="canonical-deck-slide canonical-intro-slide relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0B0D12] shadow-[0_28px_80px_rgba(0,0,0,.35)] scroll-mt-24"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(233,84,32,.22),transparent_31%),radial-gradient(circle_at_14%_86%,rgba(119,33,111,.26),transparent_34%),linear-gradient(135deg,#0B0D12_0%,#170F1A_52%,#2A1012_100%)]" />
+        <div className="absolute right-[-8%] top-[-18%] h-[58%] w-[42%] rounded-full border border-orange-400/20 bg-orange-500/[0.055] blur-[1px]" />
+        <div className="absolute -left-20 bottom-[-130px] h-80 w-80 rounded-full border border-fuchsia-300/10 bg-fuchsia-500/[0.04]" />
+        <div className="relative min-h-[680px] p-8 md:p-12 lg:p-14 flex flex-col justify-between">
+          <CanonicalIdentityMark />
+          <div className="max-w-5xl py-10">
+            <h2 className="text-5xl md:text-6xl lg:text-[4.9rem] leading-[0.94] tracking-[-0.055em] font-semibold text-white">
               {slide.title}
             </h2>
-            <p className="mt-5 max-w-3xl text-base md:text-lg leading-relaxed text-white/84">{slide.narrative}</p>
-            <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.035] p-5">
-              <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/66">Prepared by</div>
-              <div className="mt-2 text-2xl font-semibold text-white">Manash Protim Deori</div>
-              <div className="mt-1 text-sm text-white/74">MBA, IIM Shillong · B.Tech, Chemical Engineering · Marketing, analytics & strategy</div>
-            </div>
-            <div className="mt-4 rounded-2xl border border-orange-400/25 bg-orange-400/[0.055] p-5">
-              <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/85">Candidate positioning</div>
-              <p className="mt-2 text-sm md:text-base leading-relaxed text-white/88">{slide.decision}</p>
-            </div>
           </div>
-          <div>{children}</div>
+          <div className="text-xl md:text-2xl font-medium tracking-tight text-white">Manash Protim Deori</div>
         </div>
-      ) : (
-        <>
-          <div className="mt-6 grid lg:grid-cols-[1.1fr_.9fr] gap-7 items-start">
-            <div>
-              <h2 className="text-3xl md:text-4xl lg:text-[2.7rem] leading-[1.02] tracking-tight text-white font-semibold max-w-4xl">
-                {slide.title}
-              </h2>
-              <p className="mt-4 max-w-3xl text-sm md:text-base leading-relaxed text-white/84">{slide.narrative}</p>
-            </div>
-            <div className="rounded-xl border border-orange-400/20 bg-orange-400/[0.055] p-4">
-              <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/75">Leadership insight</div>
-              <p className="mt-2 text-sm md:text-base leading-relaxed text-white/84">{slide.decision}</p>
-            </div>
-          </div>
+      </section>
+    );
+  }
 
-          <div className="mt-8 flex-1">{children}</div>
-        </>
-      )}
-      <SourceFooter sourceIds={slide.sourceIds} />
-    </div>
-  </section>
-);
+  return (
+    <section
+      id={'canonical-slide-' + slide.id}
+      className="canonical-deck-slide relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0B0D12] shadow-[0_28px_80px_rgba(0,0,0,.35)] scroll-mt-24"
+    >
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#E95420] via-[#77216F] to-[#31C7B5]" />
+      <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-violet-500/8 blur-3xl" />
+      <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-orange-500/7 blur-3xl" />
+      <div className="relative p-6 md:p-9 lg:p-10 min-h-[680px] flex flex-col">
+        <div className="flex items-start justify-between gap-4">
+          <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/74">
+            {String(index + 1).padStart(2, '0')} · {slide.section}
+          </div>
+          {isOwner && ownerStudio && (
+            <button
+              data-export-hide="true"
+              onClick={onEdit}
+              className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-2.5 py-1.5 text-[10px] font-mono text-white/84 hover:text-white hover:border-orange-400/60"
+            >
+              <Pencil className="w-3 h-3" /> Edit slide
+            </button>
+          )}
+        </div>
+
+        <div className="mt-6 grid lg:grid-cols-[1.1fr_.9fr] gap-7 items-start">
+          <div>
+            <h2 className="text-3xl md:text-4xl lg:text-[2.7rem] leading-[1.02] tracking-tight text-white font-semibold max-w-4xl">
+              {slide.title}
+            </h2>
+            <p className="mt-4 max-w-3xl text-sm md:text-base leading-relaxed text-white/84">{slide.narrative}</p>
+          </div>
+          <div className="rounded-xl border border-orange-400/20 bg-orange-400/[0.055] p-4">
+            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/75">Leadership insight</div>
+            <p className="mt-2 text-sm md:text-base leading-relaxed text-white/84">{slide.decision}</p>
+          </div>
+        </div>
+
+        <div className="mt-8 flex-1">{children}</div>
+        <SourceFooter sourceIds={slide.sourceIds} />
+      </div>
+    </section>
+  );
+};
 
 export const CanonicalStrategyLabPage: React.FC = () => {
   const { isOwner } = useAuth();
@@ -413,16 +407,12 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     {
       id: 'intro',
       section: 'Introduction',
-      title: 'Canonical Strategy Lab — from open adoption to measurable enterprise growth',
-      decision: 'I combine analytics-led campaign execution, senior-stakeholder management and quantitative strategy to turn complex market signals into measurable go-to-market action.',
-      narrative: 'An evidence-first strategy system built around three memorable ideas: enterprise assurance, productized private-cloud migration and neutral AI infrastructure. The work below separates reported facts from modeled outputs, ties every recommendation to a measurable path, and makes the candidate-to-role fit explicit rather than implied.',
-      metrics: [
-        { label: 'Idea 01', value: 'Assurance', detail: 'Security, compliance, lifecycle and accountable support as enterprise triggers', tone: 'orange' },
-        { label: 'Idea 02', value: 'Migration', detail: 'Repeatable private-cloud transition, quantified payback and post-migration expansion', tone: 'teal' },
-        { label: 'Idea 03', value: 'Neutral AI', detail: 'Portable, secure and silicon-ready AI infrastructure across environments', tone: 'violet' },
-      ],
-      bullets: STRATEGIC_BETS.map((b) => b.name + ' — ' + b.thesis),
-      sourceIds: ['canonical-marketing-2026', 'canonical-marketing-manager-2026', 'canonical-campaign-manager-2026'],
+      title: 'Canonical Growth & Market Strategy',
+      decision: '',
+      narrative: '',
+      metrics: [],
+      bullets: [],
+      sourceIds: [],
       kind: 'intro',
     },
     {
@@ -1053,320 +1043,182 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     window.setTimeout(() => setCopied(false), 1800);
   };
 
-  const downloadPptx = async () => {
-    const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
-    if (!PptxGenJS) {
-      alert('The PowerPoint generator has not loaded yet. Refresh once and try again.');
+  const loadExportScript = (src: string, ready: () => boolean) => new Promise<void>((resolve, reject) => {
+    if (ready()) {
+      resolve();
       return;
     }
+    const existing = Array.from(document.scripts).find((script) => script.src === src);
+    if (existing) {
+      const poll = window.setInterval(() => {
+        if (ready()) {
+          window.clearInterval(poll);
+          resolve();
+        }
+      }, 80);
+      window.setTimeout(() => {
+        window.clearInterval(poll);
+        if (ready()) resolve();
+        else reject(new Error('Export library did not become ready: ' + src));
+      }, 8000);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.onload = () => ready() ? resolve() : reject(new Error('Export library loaded without expected global: ' + src));
+    script.onerror = () => reject(new Error('Failed to load export library: ' + src));
+    document.head.appendChild(script);
+  });
+
+  const ensureExportRuntime = async (includePdf = false) => {
+    await loadExportScript(
+      'https://cdn.jsdelivr.net/npm/dom-to-image-more@3.5.0/dist/dom-to-image-more.min.js',
+      () => Boolean((window as any).domtoimage),
+    );
+    await loadExportScript(
+      'https://cdn.jsdelivr.net/npm/pptxgenjs@4.0.1/dist/pptxgen.bundle.js',
+      () => Boolean((window as any).PptxGenJS || (window as any).pptxgen),
+    );
+    if (includePdf) {
+      await loadExportScript(
+        'https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js',
+        () => Boolean((window as any).jspdf?.jsPDF || (window as any).jsPDF),
+      );
+    }
+  };
+
+  type CapturedSlide = { data: string; width: number; height: number };
+
+  const captureRenderedSlides = async (): Promise<CapturedSlide[]> => {
+    await ensureExportRuntime(false);
+    if ((document as any).fonts?.ready) await (document as any).fonts.ready;
+
+    const domtoimage = (window as any).domtoimage;
+    const html2canvas = (window as any).html2canvas;
+    const hiddenForExport = Array.from(document.querySelectorAll<HTMLElement>('[data-export-hide="true"]'));
+    const previousDisplays = hiddenForExport.map((node) => node.style.display);
+    hiddenForExport.forEach((node) => { node.style.display = 'none'; });
+
+    document.documentElement.classList.add('canonical-exporting');
+
+    try {
+      const captures: CapturedSlide[] = [];
+      for (const deckSlide of slides) {
+        const element = document.getElementById('canonical-slide-' + deckSlide.id);
+        if (!element) continue;
+
+        const rect = element.getBoundingClientRect();
+        const width = Math.max(1, Math.round(Math.max(rect.width, element.scrollWidth)));
+        const height = Math.max(1, Math.round(Math.max(rect.height, element.scrollHeight)));
+        let data = '';
+
+        try {
+          data = await domtoimage.toJpeg(element, {
+            bgcolor: '#0B0D12',
+            width,
+            height,
+            quality: 0.97,
+            cacheBust: true,
+          });
+        } catch (primaryError) {
+          if (!html2canvas) throw primaryError;
+          const canvas = await html2canvas(element, {
+            backgroundColor: '#0B0D12',
+            scale: Math.min(1.5, Math.max(1, window.devicePixelRatio || 1)),
+            useCORS: true,
+            logging: false,
+          });
+          data = canvas.toDataURL('image/jpeg', 0.97);
+        }
+
+        captures.push({ data, width, height });
+      }
+      if (!captures.length) throw new Error('No strategy slides were found for export.');
+      return captures;
+    } finally {
+      document.documentElement.classList.remove('canonical-exporting');
+      hiddenForExport.forEach((node, index) => { node.style.display = previousDisplays[index]; });
+    }
+  };
+
+  const fitImage = (boxW: number, boxH: number, imageW: number, imageH: number) => {
+    const scale = Math.min(boxW / imageW, boxH / imageH);
+    const w = imageW * scale;
+    const h = imageH * scale;
+    return { x: (boxW - w) / 2, y: (boxH - h) / 2, w, h };
+  };
+
+  const downloadPptx = async () => {
     setDownloading(true);
     try {
+      await ensureExportRuntime(false);
+      const captures = await captureRenderedSlides();
+      const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
       const pptx = new PptxGenJS();
-      pptx.layout = 'LAYOUT_WIDE';
+
+      const slideWidth = 13.333;
+      const slideHeight = slideWidth * (captures[0].height / captures[0].width);
+      pptx.defineLayout({ name: 'PORTFOLIO_RENDER', width: slideWidth, height: slideHeight });
+      pptx.layout = 'PORTFOLIO_RENDER';
       pptx.author = 'Manash Protim Deori';
       pptx.company = 'Portfolio Strategy Lab';
-      pptx.subject = 'Canonical Competitive Strategy';
-      pptx.title = 'Canonical Executive Competitive Strategy — Live Scenario';
+      pptx.subject = 'Canonical Growth & Market Strategy';
+      pptx.title = 'Canonical Growth & Market Strategy';
       pptx.lang = 'en-US';
-      pptx.theme = {
-        headFontFace: 'Aptos Display',
-        bodyFontFace: 'Aptos',
-        lang: 'en-US',
-      };
 
-      const ShapeType = PptxGenJS.ShapeType || (pptx as any).ShapeType || {
-        rect: 'rect',
-        roundRect: 'roundRect',
-        line: 'line',
-        ellipse: 'ellipse',
-      };
-      const colors = {
-        bg: '0B0D12',
-        white: 'F6F7F9',
-        muted: 'A2A9B5',
-        orange: 'E95420',
-        violet: '7C5CFC',
-        teal: '31C7B5',
-        cyan: '4DB9FF',
-        green: '57D68D',
-        gold: 'E9B949',
-        border: '282D36',
-      };
-
-      slides.forEach((deckSlide, idx) => {
-        const s = pptx.addSlide();
-        s.background = { color: colors.bg };
-        s.addShape(ShapeType.rect, { x: 0, y: 0, w: 13.333, h: 0.055, fill: { color: colors.orange }, line: { color: colors.orange } });
-
-        if (deckSlide.kind === 'intro') {
-          s.addText('01 · INTRODUCTION', {
-            x: 0.55, y: 0.28, w: 3.0, h: 0.2, fontSize: 8.5, bold: true, color: 'F0A081', charSpacing: 1.2, margin: 0,
-          });
-          s.addText(deckSlide.title, {
-            x: 0.55, y: 0.82, w: 6.3, h: 1.42, fontFace: 'Aptos Display', fontSize: 29, bold: true, color: colors.white, margin: 0,
-          });
-          s.addText(deckSlide.narrative, {
-            x: 0.55, y: 2.38, w: 6.1, h: 1.02, fontSize: 11.2, color: 'C8CDD6', margin: 0, valign: 'top',
-          });
-          s.addText('PREPARED BY', {
-            x: 0.55, y: 3.82, w: 1.6, h: 0.18, fontSize: 7.6, bold: true, color: '7F8898', charSpacing: 1.1, margin: 0,
-          });
-          s.addText('Manash Protim Deori', {
-            x: 0.55, y: 4.08, w: 4.6, h: 0.36, fontSize: 20, bold: true, color: colors.white, margin: 0,
-          });
-          s.addText('MBA, IIM Shillong · B.Tech, Chemical Engineering · Marketing, analytics & strategy', {
-            x: 0.55, y: 4.48, w: 5.8, h: 0.32, fontSize: 9.2, color: '9AA3B2', margin: 0,
-          });
-          s.addShape(ShapeType.roundRect, {
-            x: 0.55, y: 5.15, w: 6.15, h: 1.22,
-            fill: { color: '181419' }, line: { color: '5D2E1D', transparency: 10, width: 0.8 },
-          });
-          s.addText('CANDIDATE POSITIONING', {
-            x: 0.8, y: 5.38, w: 2.0, h: 0.18, fontSize: 7.4, bold: true, color: 'F0A081', charSpacing: 1.0, margin: 0,
-          });
-          s.addText(deckSlide.decision, {
-            x: 0.8, y: 5.69, w: 5.55, h: 0.48, fontSize: 10.4, color: 'E7E9ED', margin: 0, valign: 'mid',
-          });
-
-          s.addShape(ShapeType.roundRect, {
-            x: 7.12, y: 0.72, w: 5.65, h: 5.72,
-            fill: { color: '11141A' }, line: { color: '4A2B21', width: 0.9 },
-          });
-          s.addShape(ShapeType.ellipse, {
-            x: 7.62, y: 1.18, w: 0.92, h: 0.92,
-            fill: { color: colors.orange }, line: { color: colors.orange },
-          });
-          s.addText('c', {
-            x: 7.83, y: 1.28, w: 0.50, h: 0.47, fontFace: 'Aptos Display', fontSize: 25, bold: true, color: colors.white, margin: 0, align: 'center',
-          });
-          s.addText('canonical', {
-            x: 8.72, y: 1.28, w: 3.35, h: 0.50, fontFace: 'Aptos Display', fontSize: 27, bold: true, color: colors.white, margin: 0,
-          });
-          s.addText('OPEN INFRASTRUCTURE · STRATEGY LAB', {
-            x: 7.62, y: 2.27, w: 4.8, h: 0.18, fontSize: 7.3, bold: true, color: 'F0A081', charSpacing: 1.25, margin: 0,
-          });
-          deckSlide.metrics.slice(0, 3).forEach((m, i) => {
-            const y = 2.78 + i * 0.98;
-            const toneHex = (palette[m.tone || 'slate'] || '#8993A4').replace('#', '');
-            s.addShape(ShapeType.roundRect, {
-              x: 7.62, y, w: 4.62, h: 0.78,
-              fill: { color: '151921' }, line: { color: toneHex, transparency: 60, width: 0.75 },
-            });
-            s.addText(m.label.toUpperCase(), { x: 7.86, y: y + 0.12, w: 1.05, h: 0.13, fontSize: 6.5, bold: true, color: toneHex, charSpacing: 0.8, margin: 0 });
-            s.addText(m.value, { x: 8.86, y: y + 0.09, w: 1.25, h: 0.20, fontSize: 12.8, bold: true, color: colors.white, margin: 0 });
-            s.addText(m.detail, { x: 7.86, y: y + 0.38, w: 4.0, h: 0.23, fontSize: 7.1, color: 'A6AFBC', margin: 0 });
-          });
-          const introSourceLabels = deckSlide.sourceIds.map((id) => sourceMap[id]?.label).filter(Boolean).join(' · ');
-          s.addText(introSourceLabels, { x: 0.55, y: 7.08, w: 11.9, h: 0.16, fontSize: 5.6, color: '586171', margin: 0 });
-          s.addText('CANONICAL STRATEGY LAB · prepared by Manash Protim Deori', { x: 8.0, y: 7.28, w: 4.75, h: 0.13, fontSize: 5.8, color: '6A7280', align: 'right', margin: 0 });
-          return;
-        }
-
-        s.addText(String(idx + 1).padStart(2, '0') + ' · ' + deckSlide.section.toUpperCase(), {
-          x: 0.55, y: 0.26, w: 5.7, h: 0.24, fontFace: 'Aptos', fontSize: 8.5, color: '7F8898', charSpacing: 1.2, bold: true,
-        });
-        s.addText(deckSlide.title, {
-          x: 0.55, y: 0.68, w: 7.35, h: 1.15, fontFace: 'Aptos Display', fontSize: idx === 0 ? 28 : 23, bold: true, color: colors.white, margin: 0, breakLine: false,
-        });
-        s.addText(deckSlide.narrative, {
-          x: 0.55, y: 1.9, w: 7.2, h: 0.72, fontFace: 'Aptos', fontSize: 10.5, color: colors.muted, margin: 0, valign: 'top',
-        });
-        s.addShape(ShapeType.roundRect, {
-          x: 8.15, y: 0.68, w: 4.62, h: 1.68, rectRadius: 0.08,
-          fill: { color: '181419', transparency: 0 }, line: { color: '5D2E1D', transparency: 15, width: 0.8 },
-        });
-        s.addText('LEADERSHIP INSIGHT', {
-          x: 8.42, y: 0.92, w: 2.3, h: 0.22, fontSize: 7.8, bold: true, color: 'F0A081', charSpacing: 1.1, margin: 0,
-        });
-        s.addText(deckSlide.decision, {
-          x: 8.42, y: 1.22, w: 4.03, h: 0.87, fontSize: 10.5, color: 'E7E9ED', margin: 0, valign: 'mid',
-        });
-
-        if (deckSlide.kind === 'appendix') {
-          s.addText('VERIFIED REPORTED FIGURES · PRIMARY + CROSS-CHECK', {
-            x: 0.55, y: 2.64, w: 7.2, h: 0.2, fontSize: 8.2, bold: true, color: colors.teal, charSpacing: 0.9, margin: 0,
-          });
-
-          const evidenceRows = VERIFIED_EVIDENCE;
-          const evidenceRowsPerColumn = Math.ceil(evidenceRows.length / 2);
-          evidenceRows.forEach((row, evidenceIdx) => {
-            const col = evidenceIdx < evidenceRowsPerColumn ? 0 : 1;
-            const rowIdx = evidenceIdx % evidenceRowsPerColumn;
-            const x = col === 0 ? 0.55 : 6.76;
-            const y = 2.95 + rowIdx * 0.54;
-            const w = 5.98;
-
-            s.addShape(ShapeType.roundRect, {
-              x, y, w, h: 0.48,
-              fill: { color: '11141A' },
-              line: { color: '303642', width: 0.55 },
-            });
-            s.addText(String(evidenceIdx + 1).padStart(2, '0') + ' · ' + row.subject, {
-              x: x + 0.13, y: y + 0.05, w: w - 0.26, h: 0.10,
-              fontSize: 6.0, bold: true, color: colors.white, margin: 0,
-            });
-            s.addText(row.retainedClaim, {
-              x: x + 0.13, y: y + 0.16, w: w - 0.26, h: 0.11,
-              fontSize: 5.1, color: 'D0D5DE', margin: 0, breakLine: false,
-            });
-            s.addText(row.primaryLabel, {
-              x: x + 0.13, y: y + 0.30, w: (w - 0.34) * 0.54, h: 0.08,
-              fontSize: 4.7, color: 'F1A282', underline: { color: 'F1A282' },
-              hyperlink: { url: row.primaryUrl }, margin: 0,
-            });
-            s.addText(row.crossCheckLabel, {
-              x: x + 0.13 + (w - 0.34) * 0.56, y: y + 0.30, w: (w - 0.34) * 0.42, h: 0.08,
-              fontSize: 4.7, color: 'B6A8FF', underline: { color: 'B6A8FF' },
-              hyperlink: { url: row.crossCheckUrl }, margin: 0,
-            });
-            s.addText(row.primaryPage, {
-              x: x + 0.13, y: y + 0.40, w: w - 0.26, h: 0.06,
-              fontSize: 4.2, color: '8F98A7', margin: 0,
-            });
-          });
-
-          s.addText('Reported facts only. Scenario, TCO, sensitivity and brand-index values are modeled outputs and are excluded from this evidence register.', {
-            x: 0.55, y: 6.91, w: 9.65, h: 0.18, fontSize: 5.8, color: '8F98A7', margin: 0,
-          });
-          s.addText('Links are clickable · PDF page numbers are shown only when verified', {
-            x: 9.15, y: 6.91, w: 3.62, h: 0.18, fontSize: 5.8, color: '8F98A7', align: 'right', margin: 0,
-          });
-          return;
-        }
-
-        const metricCount = Math.min(4, deckSlide.metrics.length);
-        for (let i = 0; i < metricCount; i += 1) {
-          const m = deckSlide.metrics[i];
-          const x = 0.55 + i * 3.05;
-          const toneHex = (palette[m.tone || 'slate'] || '#8993A4').replace('#', '');
-          s.addShape(ShapeType.roundRect, {
-            x, y: 2.95, w: 2.78, h: 1.36,
-            fill: { color: '11141A' }, line: { color: colors.border, width: 0.65 },
-          });
-          s.addShape(ShapeType.rect, { x: x + 2.69, y: 2.95, w: 0.09, h: 1.36, fill: { color: toneHex }, line: { color: toneHex } });
-          s.addText(m.label.toUpperCase(), { x: x + 0.18, y: 3.13, w: 2.1, h: 0.18, fontSize: 7.2, color: '7F8898', bold: true, charSpacing: 0.8, margin: 0 });
-          s.addText(m.value, { x: x + 0.18, y: 3.41, w: 2.26, h: 0.38, fontSize: 19, color: colors.white, bold: true, margin: 0 });
-          s.addText(m.detail, { x: x + 0.18, y: 3.87, w: 2.3, h: 0.28, fontSize: 7.6, color: '929AA8', margin: 0 });
-        }
-
-        const bullets = deckSlide.bullets.slice(0, 5);
-        s.addText('DECISION LOGIC', { x: 0.55, y: 4.66, w: 1.9, h: 0.22, fontSize: 8, bold: true, color: colors.orange, charSpacing: 1.0, margin: 0 });
-        bullets.forEach((bullet, bIdx) => {
-          s.addShape(ShapeType.rect, { x: 0.6, y: 5.02 + bIdx * 0.39, w: 0.06, h: 0.06, fill: { color: bIdx % 2 === 0 ? colors.orange : colors.teal }, line: { color: bIdx % 2 === 0 ? colors.orange : colors.teal } });
-          s.addText(bullet, { x: 0.78, y: 4.94 + bIdx * 0.39, w: 7.0, h: 0.28, fontSize: 9.0, color: 'D7DBE2', margin: 0 });
-        });
-
-        const maxVal = Math.max(...deckSlide.metrics.slice(0, 4).map((m) => {
-          const parsed = Number(String(m.value).replace(/[^0-9.-]/g, ''));
-          return Number.isFinite(parsed) ? Math.abs(parsed) : 0;
-        }), 1);
-        deckSlide.metrics.slice(0, 4).forEach((m, i) => {
-          const raw = Number(String(m.value).replace(/[^0-9.-]/g, ''));
-          const numeric = Number.isFinite(raw) ? Math.abs(raw) : (i + 1) * 10;
-          const h = 0.55 + (numeric / maxVal) * 1.15;
-          const toneHex = (palette[m.tone || 'slate'] || '#8993A4').replace('#', '');
-          const x = 8.35 + i * 1.02;
-          s.addShape(ShapeType.rect, { x: x + 0.08, y: 6.37 - h + 0.08, w: 0.56, h, fill: { color: '000000', transparency: 65 }, line: { color: '000000', transparency: 100 } });
-          s.addShape(ShapeType.rect, { x, y: 6.37 - h, w: 0.56, h, fill: { color: toneHex, transparency: 8 }, line: { color: toneHex, transparency: 25 } });
-          s.addText(String(i + 1), { x: x + 0.18, y: 6.44, w: 0.2, h: 0.18, fontSize: 6.5, color: '6F7785', margin: 0, align: 'center' });
-        });
-        s.addText('VISUAL INDEX', { x: 8.35, y: 4.75, w: 1.4, h: 0.18, fontSize: 7.5, color: '757E8E', bold: true, charSpacing: 0.8, margin: 0 });
-
-        const sourceLabels = deckSlide.sourceIds
-          .map((id) => sourceMap[id]?.label)
-          .filter(Boolean)
-          .slice(0, 4)
-          .join(' · ');
-        s.addText(sourceLabels, { x: 0.55, y: 7.08, w: 11.9, h: 0.16, fontSize: 5.6, color: '586171', margin: 0 });
-        s.addText('LIVE MODEL · owner-editable · generated from active assumptions', { x: 9.05, y: 7.28, w: 3.7, h: 0.13, fontSize: 5.8, color: '6A7280', align: 'right', margin: 0 });
+      captures.forEach((capture) => {
+        const slide = pptx.addSlide();
+        slide.background = { color: '0B0D12' };
+        const fit = fitImage(slideWidth, slideHeight, capture.width, capture.height);
+        slide.addImage({ data: capture.data, x: fit.x, y: fit.y, w: fit.w, h: fit.h });
       });
 
-      await pptx.writeFile({ fileName: 'Canonical_Executive_Strategy_Live_' + new Date().toISOString().slice(0, 10) + '.pptx' });
+      await pptx.writeFile({ fileName: 'Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pptx' });
     } catch (error) {
       console.error(error);
-      alert('PowerPoint generation failed. The web deck is unchanged; please retry after refreshing.');
+      alert('PowerPoint export could not be completed. Please refresh once and try again.');
     } finally {
       setDownloading(false);
     }
   };
 
   const downloadPdf = async () => {
-    const html2canvas = (window as any).html2canvas;
-    const JsPdf = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
-    if (!html2canvas || !JsPdf) {
-      alert('The PDF generator has not loaded yet. Refresh once and try again.');
-      return;
-    }
-
     setPdfDownloading(true);
-    const hiddenForExport = Array.from(document.querySelectorAll<HTMLElement>('[data-export-hide="true"]'));
-    const previousDisplays = hiddenForExport.map((node) => node.style.display);
-    hiddenForExport.forEach((node) => { node.style.display = 'none'; });
-
     try {
-      if ((document as any).fonts?.ready) await (document as any).fonts.ready;
-      const pageWidth = 960;
-      const pageHeight = 540;
-      const pdf = new JsPdf({ orientation: 'landscape', unit: 'pt', format: [pageWidth, pageHeight], compress: true });
+      await ensureExportRuntime(true);
+      const captures = await captureRenderedSlides();
+      const JsPdf = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
+      const pageWidth = 1000;
+      const firstHeight = pageWidth * (captures[0].height / captures[0].width);
+      const pdf = new JsPdf({
+        orientation: pageWidth >= firstHeight ? 'landscape' : 'portrait',
+        unit: 'pt',
+        format: [pageWidth, firstHeight],
+        compress: true,
+      });
 
-      for (let i = 0; i < slides.length; i += 1) {
-        const element = document.getElementById('canonical-slide-' + slides[i].id);
-        if (!element) continue;
-        const canvas = await html2canvas(element, {
-          backgroundColor: '#0B0D12',
-          scale: Math.min(1.7, Math.max(1.2, window.devicePixelRatio || 1.25)),
-          useCORS: true,
-          logging: false,
-          scrollX: 0,
-          scrollY: -window.scrollY,
-        });
-
-        const image = canvas.toDataURL('image/jpeg', 0.94);
-        if (i > 0) pdf.addPage([pageWidth, pageHeight], 'landscape');
+      captures.forEach((capture, index) => {
+        const pageHeight = pageWidth * (capture.height / capture.width);
+        if (index > 0) {
+          pdf.addPage([pageWidth, pageHeight], pageWidth >= pageHeight ? 'landscape' : 'portrait');
+        }
         pdf.setFillColor(11, 13, 18);
         pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+        pdf.addImage(capture.data, 'JPEG', 0, 0, pageWidth, pageHeight, undefined, 'FAST');
+      });
 
-        const scale = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
-        const width = canvas.width * scale;
-        const height = canvas.height * scale;
-        const x = (pageWidth - width) / 2;
-        const y = (pageHeight - height) / 2;
-        pdf.addImage(image, 'JPEG', x, y, width, height, undefined, 'FAST');
-      }
-
-      pdf.save('Canonical_Strategy_Lab_Manash_Protim_Deori_' + new Date().toISOString().slice(0, 10) + '.pdf');
+      pdf.save('Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pdf');
     } catch (error) {
       console.error(error);
-      alert('PDF generation failed. The web deck is unchanged; please refresh and retry.');
+      alert('PDF export could not be completed. Please refresh once and try again.');
     } finally {
-      hiddenForExport.forEach((node, index) => { node.style.display = previousDisplays[index]; });
       setPdfDownloading(false);
     }
   };
 
   const renderVisual = (slide: DeckSlide) => {
-    if (slide.kind === 'intro') {
-      return (
-        <div className="space-y-5">
-          <CanonicalIdentityMark />
-          <div className="grid sm:grid-cols-3 gap-3">
-            {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/66">The three-ideas framework</div>
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-xs md:text-sm text-white/84">
-              <span className="rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-2">Open adoption</span>
-              <span className="text-white/44">→</span>
-              <span className="rounded-full border border-violet-400/30 bg-violet-400/10 px-3 py-2">Risk trigger</span>
-              <span className="text-white/44">→</span>
-              <span className="rounded-full border border-teal-400/30 bg-teal-400/10 px-3 py-2">Enterprise proof</span>
-              <span className="text-white/44">→</span>
-              <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-2">Recurring value</span>
-            </div>
-          </div>
-        </div>
-      );
-    }
+    if (slide.kind === 'intro') return null;
 
     if (slide.kind === 'candidate') {
       return (
@@ -1387,7 +1239,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
               ))}
             </div>
             {slide.id === 'candidate-fit' && (
-              <div className="mt-5 flex flex-wrap gap-2" data-export-hide="true">
+              <div className="mt-5 flex flex-wrap gap-2">
                 <a href="https://linkedin.com/in/manash-protim-deori" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/90 hover:border-orange-400/40">
                   <ExternalLink className="h-3.5 w-3.5" /> LinkedIn
                 </a>
@@ -1667,7 +1519,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
               A living executive deck, not a static presentation
             </h1>
             <p className="mt-5 max-w-3xl text-base md:text-lg leading-relaxed text-neutral-200">
-              Scroll the deck, change commercial, brand, partner and customer-economics assumptions, see the directional Canonical/competitor/marketing consequence immediately, inspect uncertainty and sensitivity, and download the active version as an editable PowerPoint or presentation-ready PDF.
+              Scroll the deck, change commercial, brand, partner and customer-economics assumptions, see the directional Canonical/competitor/marketing consequence immediately, inspect uncertainty and sensitivity, and download the exact rendered deck you see here as PowerPoint or PDF.
             </p>
           </div>
           <div className="flex flex-wrap lg:justify-end gap-2">
