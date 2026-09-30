@@ -46,8 +46,10 @@ import { REVIEW_ITERATIONS_2026 } from '../data/canonicalMarketingDecision';
 import {
   DirectionalImpactBox,
   ExecutiveOperatingLens,
+  FundamentalInsightGrid,
   LatestDevelopmentRadar,
   PnLBrandCube,
+  VerifiedEvidenceAppendix,
 } from '../components/canonical/CanonicalDecisionVisuals';
 
 const ARCHIVE_DECK_FILE_ID = '1w7hRsHwGY1m6J7BelVbYmtN1z2jyk7wO';
@@ -100,9 +102,9 @@ const MetricTile: React.FC<{ metric: Metric }> = ({ metric }) => {
   return (
     <div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] p-4 min-h-[118px]">
       <div className="absolute right-0 top-0 h-full w-1" style={{ background: color }} />
-      <div className="text-[10px] uppercase tracking-[0.16em] text-white/45 font-mono">{metric.label}</div>
+      <div className="text-[10px] uppercase tracking-[0.16em] text-white/76 font-mono">{metric.label}</div>
       <div className="mt-2 text-2xl md:text-3xl font-semibold tracking-tight text-white">{metric.value}</div>
-      <div className="mt-2 text-[11px] leading-relaxed text-white/48">{metric.detail}</div>
+      <div className="mt-2 text-[11px] leading-relaxed text-white/80">{metric.detail}</div>
     </div>
   );
 };
@@ -141,14 +143,14 @@ const PrismBar: React.FC<{
       </div>
       <div className="text-center mt-3">
         <div className="text-sm font-semibold text-white">{display}</div>
-        <div className="text-[10px] uppercase tracking-wide text-white/42 mt-1">{label}</div>
+        <div className="text-[10px] uppercase tracking-wide text-white/74 mt-1">{label}</div>
       </div>
     </div>
   );
 };
 
 const SourceFooter: React.FC<{ sourceIds: string[] }> = ({ sourceIds }) => (
-  <div className="pt-4 border-t border-white/8 flex flex-wrap gap-x-4 gap-y-1 text-[9px] font-mono text-white/34">
+  <div className="pt-4 border-t border-white/8 flex flex-wrap gap-x-4 gap-y-1 text-[9px] font-mono text-white/66">
     {sourceIds.map((id) => {
       const source = sourceMap[id];
       if (!source) return null;
@@ -175,7 +177,7 @@ const RangeControl: React.FC<{
     <div className="flex items-start justify-between gap-4">
       <div>
         <div className="text-xs font-medium text-white/85">{label}</div>
-        <div className="text-[10px] leading-relaxed text-white/38 mt-1">{description}</div>
+        <div className="text-[11px] leading-relaxed text-white/70 mt-1">{description}</div>
       </div>
       <div className="text-xs font-mono text-orange-300 whitespace-nowrap">{value}{suffix}</div>
     </div>
@@ -203,9 +205,9 @@ const NumberControl: React.FC<{
 }> = ({ label, value, min = 0, step = 1, prefix = '', suffix = '', description, onChange }) => (
   <label className="block py-3 border-b border-white/8">
     <div className="text-xs font-medium text-white/85">{label}</div>
-    <div className="text-[10px] leading-relaxed text-white/38 mt-1">{description}</div>
+    <div className="text-[11px] leading-relaxed text-white/70 mt-1">{description}</div>
     <div className="mt-2 flex items-center gap-2">
-      {prefix && <span className="text-xs text-white/40">{prefix}</span>}
+      {prefix && <span className="text-xs text-white/72">{prefix}</span>}
       <input
         type="number"
         min={min}
@@ -214,7 +216,7 @@ const NumberControl: React.FC<{
         onChange={(e) => onChange(Number(e.target.value))}
         className="w-full rounded-md border border-white/10 bg-black/25 px-3 py-2 text-xs font-mono text-white outline-none focus:border-orange-400/70"
       />
-      {suffix && <span className="text-xs text-white/40">{suffix}</span>}
+      {suffix && <span className="text-xs text-white/72">{suffix}</span>}
     </div>
   </label>
 );
@@ -236,13 +238,13 @@ const SlideShell: React.FC<{
     <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-orange-500/7 blur-3xl" />
     <div className="relative p-6 md:p-9 lg:p-10 min-h-[680px] flex flex-col">
       <div className="flex items-start justify-between gap-4">
-        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/42">
+        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/74">
           {String(index + 1).padStart(2, '0')} · {slide.section}
         </div>
         {isOwner && ownerStudio && (
           <button
             onClick={onEdit}
-            className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-2.5 py-1.5 text-[10px] font-mono text-white/55 hover:text-white hover:border-orange-400/60"
+            className="inline-flex items-center gap-1.5 rounded-md border border-white/10 px-2.5 py-1.5 text-[10px] font-mono text-white/84 hover:text-white hover:border-orange-400/60"
           >
             <Pencil className="w-3 h-3" /> Edit slide
           </button>
@@ -254,10 +256,10 @@ const SlideShell: React.FC<{
           <h2 className="text-3xl md:text-4xl lg:text-[2.7rem] leading-[1.02] tracking-tight text-white font-semibold max-w-4xl">
             {slide.title}
           </h2>
-          <p className="mt-4 max-w-3xl text-sm md:text-base leading-relaxed text-white/56">{slide.narrative}</p>
+          <p className="mt-4 max-w-3xl text-sm md:text-base leading-relaxed text-white/84">{slide.narrative}</p>
         </div>
         <div className="rounded-xl border border-orange-400/20 bg-orange-400/[0.055] p-4">
-          <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-orange-300/75">Leadership decision</div>
+          <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/75">Leadership insight</div>
           <p className="mt-2 text-sm md:text-base leading-relaxed text-white/84">{slide.decision}</p>
         </div>
       </div>
@@ -366,13 +368,13 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'cover',
       section: 'Strategy system',
       title: 'Canonical: turn open adoption into enterprise control, assurance and recurring value',
-      decision: 'Do not compete on “Linux” alone. Build the commercial system around three wedges: enterprise assurance, private-cloud migration and neutral AI infrastructure.',
+      decision: 'Greater commercial value is expected to be created when Canonical is framed beyond “Linux”, with enterprise assurance, private-cloud migration and neutral AI infrastructure treated as the principal value wedges.',
       narrative: 'A living, model-driven strategy deck. Reported facts are separated from assumptions; every scenario can be stressed, edited by the owner and exported as an editable PowerPoint.',
       metrics: [
         { label: 'FY2025 revenue', value: moneyM(CANONICAL_BASE_2025.revenue), detail: pct(actualRevenueGrowth) + ' YoY', tone: 'orange' },
         { label: 'Subscription mix', value: pct(actualSubscriptionMix), detail: moneyM(CANONICAL_BASE_2025.subscriptionRevenue) + ' recurring-like subscription revenue', tone: 'teal' },
         { label: 'Operating margin', value: pct(actualOperatingMargin), detail: moneyM(CANONICAL_BASE_2025.operatingProfit) + ' operating profit', tone: 'violet' },
-        { label: 'Model governance', value: '20 lenses', detail: 'Investor → customer → partner → sustainability → model risk', tone: 'gold' },
+        { label: 'Model governance', value: '40 review passes', detail: '20 stakeholder lenses + 20 refinement iterations', tone: 'gold' },
       ],
       bullets: STRATEGIC_BETS.map((b) => b.name + ' — ' + b.thesis),
       sourceIds: ['canonical-2025-accounts', 'canonical-15-year', 'canonical-ai'],
@@ -382,7 +384,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'executive',
       section: 'Executive cockpit',
       title: 'The leadership question is not “where can Canonical play?” — it is “which growth loops compound without destroying simplicity?”',
-      decision: 'Fund only motions that improve at least one of three outputs: recurring attach, account expansion or partner-distributed ARR — while preserving the free-adoption engine.',
+      decision: 'Investment is best justified when measurable improvement is produced in recurring attach, account expansion or partner-distributed ARR, while the free-adoption engine is preserved.',
       narrative: 'The active scenario translates commercial levers into revenue, subscription mix, operating profit and uncertainty ranges. It is an annualized strategy model, not company guidance.',
       metrics: [
         { label: 'Scenario revenue', value: moneyM(metrics.projectedRevenue), detail: pct(metrics.revenueGrowthPct) + ' vs FY2025 base', tone: 'orange' },
@@ -398,7 +400,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'economics',
       section: 'Economic reality',
       title: 'Canonical’s strongest financial signal is revenue quality: subscription growth materially outpaced services growth',
-      decision: 'Run corporate marketing on recurring attach and expansion economics, not on raw Ubuntu reach.',
+      decision: 'Corporate marketing effectiveness is more credibly assessed through recurring attach and expansion economics than through raw Ubuntu reach.',
       narrative: 'The 2025 base already shows the direction of travel. The strategic task is to increase monetization of the installed base without forcing a high-services or high-sales-intensity model.',
       metrics: [
         { label: 'Revenue growth', value: pct(actualRevenueGrowth), detail: moneyM(CANONICAL_BASE_2025.priorRevenue) + ' → ' + moneyM(CANONICAL_BASE_2025.revenue), tone: 'orange' },
@@ -418,7 +420,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'model',
       section: 'Model architecture',
       title: 'Every strategic claim must reconcile to an explicit driver tree',
-      decision: 'No hidden scoring coefficients. Retention, attach, conversion, pricing, partner ARR, migration ARR, AI ARR, services pull-through and reinvestment are individually visible.',
+      decision: 'Greater decision confidence is created when retention, attach, conversion, pricing, partner ARR, migration ARR, AI ARR, services pull-through and reinvestment are exposed individually rather than compressed into hidden scores.',
       narrative: 'The model deliberately uses an annualized revenue-equivalent framework because Canonical does not publicly disclose workload attach, cohort retention, bookings or product-level ARR. Those gaps are treated as assumptions rather than silently estimated.',
       metrics: [
         { label: 'Retention', value: pct(scenario.retentionPct), detail: 'Applied to the existing subscription base', tone: 'green' },
@@ -439,7 +441,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'peers',
       section: '2026 competitive pressure',
       title: 'The market is moving faster around Canonical — which makes focus more valuable, not less',
-      decision: 'Use peer scale as a distribution lesson, not as a target. Canonical should exploit neutrality and low-friction adoption where hyperscaler or suite economics create lock-in concerns.',
+      decision: 'Peer scale is more usefully interpreted as evidence of distribution power than as a target, while Canonical’s neutrality and low-friction adoption can be valued where hyperscaler or suite economics create lock-in concerns.',
       narrative: '2026 market signals show accelerating cloud and hybrid-cloud investment. These figures are not directly comparable businesses; they indicate the distribution and capital intensity surrounding Canonical’s battlegrounds.',
       metrics: PEER_MOMENTUM.slice(0, 4).map((p, i) => ({
         label: p.name,
@@ -459,7 +461,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'positioning',
       section: 'Competitive positioning',
       title: 'Canonical’s defendable territory is not “open source”; it is portable control with enterprise-grade accountability',
-      decision: 'Position the company around “open infrastructure assurance”: secure, portable and operationally accountable across public cloud, private cloud, sovereign environments and AI.',
+      decision: 'A stronger enterprise category may be formed when Canonical is understood as providing “open infrastructure assurance”: secure, portable and operationally accountable across public cloud, private cloud, sovereign environments and AI.',
       narrative: 'Red Hat has strengthened lifecycle, Microsoft owns distribution, Oracle is scaling infrastructure aggressively and Broadcom owns an installed private-cloud base. Canonical needs a position created by the intersection of neutrality, breadth and low-friction adoption.',
       metrics: [
         { label: 'Canonical lifecycle', value: 'Up to 15 years', detail: 'Ubuntu LTS with Legacy add-on', tone: 'orange' },
@@ -479,7 +481,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'investor',
       section: 'Investor stress test',
       title: 'The strategy is attractive only if recurring growth survives downside retention and reinvestment pressure',
-      decision: 'Use P10/P50/P90 as the decision range and gate spend on leading indicators before the full P&L result arrives.',
+      decision: 'Capital can be staged more responsibly when P10/P50/P90 ranges are used and additional spending is released only after leading indicators are observed.',
       narrative: 'The range below is produced by varying the visible assumptions, not by fitting to undisclosed Canonical data. It is a governance mechanism for decisions under uncertainty.',
       metrics: [
         { label: 'Revenue P10', value: moneyM(distribution.revenue.p10), detail: 'Downside model range', tone: 'slate' },
@@ -499,7 +501,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'capital',
       section: 'Capital allocation',
       title: 'Growth reinvestment should be governed by contribution economics, not by an arbitrary marketing budget percentage',
-      decision: 'Set a reinvestment ceiling from modeled contribution; release spend in tranches when attach, partner and migration indicators clear predefined thresholds.',
+      decision: 'A defensible reinvestment ceiling can be derived from modeled contribution, with spending tranches being released as attach, partner and migration indicators clear predefined thresholds.',
       narrative: 'The break-even reinvestment rate is the percentage of incremental revenue that can be reinvested before the modeled incremental operating-profit contribution reaches zero.',
       metrics: [
         { label: 'Growth reinvestment', value: pct(scenario.growthReinvestmentPct), detail: moneyM(metrics.growthInvestment) + ' in the active scenario', tone: 'orange' },
@@ -519,7 +521,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'tco',
       section: 'Customer economics',
       title: 'The migration story becomes credible only when the customer can see the payback path',
-      decision: 'Sell a customer-specific business case: support run-rate, migration cost, operational effort and measured energy efficiency — with every input editable and auditable.',
+      decision: 'A customer-specific business case is strengthened when support run-rate, migration cost, operational effort and measured energy efficiency are made editable, auditable and explicit.',
       narrative: 'The default TCO case is illustrative. Ubuntu Pro’s public server price anchors one input; competitor support, migration, operations and energy values must be replaced with customer facts before a sales claim is made.',
       metrics: [
         { label: 'Current annual cost', value: moneyCompact(tco.currentAnnualCost), detail: tcoInputs.nodes.toLocaleString() + ' modeled nodes', tone: 'slate' },
@@ -539,7 +541,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'vmware',
       section: 'Private-cloud migration',
       title: 'The VMware opening is only valuable if Canonical turns migration into a repeatable product, not bespoke consulting',
-      decision: 'Build a fixed architecture and delivery system: discover → quantify → migrate → modernize → attach Ubuntu Pro → expand into managed operations.',
+      decision: 'Migration confidence is likely to be increased when a repeatable architecture is institutionalized across discovery, quantification, migration, modernization, Ubuntu Pro attach and managed-operations expansion.',
       narrative: 'The active scenario treats migration ARR as an explicit commercial wedge and makes services pull-through visible so leadership can see when delivery begins to dilute the recurring mix.',
       metrics: [
         { label: 'Migration ARR', value: moneyM(scenario.vmwareARR), detail: 'Editable strategic assumption', tone: 'orange' },
@@ -559,7 +561,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'ai',
       section: 'AI infrastructure',
       title: 'Canonical should not compete for the model layer; it should make AI infrastructure portable, supported and hardware-ready',
-      decision: 'Own the operating substrate under AI: Ubuntu + Kubernetes + hardware enablement + private/sovereign deployment + lifecycle assurance.',
+      decision: 'A differentiated AI position is more likely to be established when Canonical is recognized as the operating substrate spanning Ubuntu, Kubernetes, hardware enablement, private or sovereign deployment and lifecycle assurance.',
       narrative: 'The 2026 NVIDIA relationship is strategically useful because AI hardware cycles are shortening. The product promise should be time-to-production and portability, not generic “AI leadership.”',
       metrics: [
         { label: 'AI ARR wedge', value: moneyM(scenario.aiARR), detail: 'Editable annualized assumption', tone: 'violet' },
@@ -579,7 +581,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'security',
       section: 'Security & lifecycle',
       title: 'Security is still a monetization trigger — but “longest lifecycle” is no longer a sufficient competitive claim',
-      decision: 'Sell lifecycle as part of a broader assurance architecture: CVE coverage, compliance automation, support accountability and fewer disruptive platform transitions.',
+      decision: 'Lifecycle value is more credibly understood when it is embedded within a broader assurance architecture covering CVE response, compliance automation, support accountability and fewer disruptive platform transitions.',
       narrative: 'Canonical’s 15-year option remains strategically useful. Red Hat’s 14-year and renewable extensions mean buyers will increasingly compare operational simplicity and scope, not headline years alone.',
       metrics: [
         { label: 'Ubuntu coverage', value: 'Up to 15 years', detail: 'With Legacy add-on', tone: 'orange' },
@@ -599,7 +601,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'partners',
       section: 'Distribution economics',
       title: 'The most scalable Canonical marketing motion may be upstream distribution, not more downstream lead generation',
-      decision: 'Instrument paid attach at workload creation across clouds, OEMs, SIs and AI partners; reward partners for recurring expansion, not only sourced pipeline.',
+      decision: 'Partner leverage is more accurately measured when paid attach is observed at workload creation across clouds, OEMs, SIs and AI partners, with recurring expansion being valued more than sourced pipeline alone.',
       narrative: 'Microsoft and Oracle illustrate the power of embedded distribution. Canonical has a different asset: Ubuntu is already present at workload creation in many environments.',
       metrics: [
         { label: 'Partner ARR', value: moneyM(scenario.partnerARR), detail: 'Editable active scenario', tone: 'teal' },
@@ -619,7 +621,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'measurement',
       section: 'Marketing operating system',
       title: 'Marketing must become an instrumentation layer for the business model',
-      decision: 'Replace the MQL-centric hierarchy with workload → risk trigger → paid attach → platform expansion → partner-sourced recurring revenue.',
+      decision: 'Marketing measurement is made more economically meaningful when the MQL hierarchy is subordinated to workload creation, risk triggers, paid attach, platform expansion and partner-sourced recurring revenue.',
       narrative: 'Because Canonical already has large organic adoption, the useful question is not “how much awareness did we create?” but “how efficiently did production adoption become recurring enterprise value?”',
       metrics: [
         { label: 'Acquisition', value: 'Production workloads', detail: 'Cloud images · OEM · direct · edge', tone: 'cyan' },
@@ -639,7 +641,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'segments',
       section: 'Portfolio focus',
       title: 'Canonical should rank markets by monetization trigger strength, not by theoretical TAM',
-      decision: 'Put the strongest field resources behind segments where risk, migration or AI infrastructure creates an urgent paid trigger.',
+      decision: 'Field resources are expected to create greater leverage when they are concentrated in segments where risk, migration or AI infrastructure produces an urgent paid trigger.',
       narrative: 'A large market is strategically irrelevant if the buyer can keep using Ubuntu for free without a meaningful risk-transfer, migration or operational-accountability need.',
       metrics: [
         { label: 'Tier 1', value: 'Regulated / long-lived', detail: 'Security + lifecycle + compliance trigger', tone: 'orange' },
@@ -659,7 +661,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'sustainability',
       section: 'Sustainability economics',
       title: 'Sustainability belongs in the decision model only when it is instrumented at workload level',
-      decision: 'Make energy/workload efficiency a measured operational KPI; never convert it into a marketing claim without customer baseline data.',
+      decision: 'Energy and workload efficiency are most credible when they are treated as measured operational KPIs, with external claims being withheld until customer baseline evidence is available.',
       narrative: 'Canonical explicitly frames energy efficiency as part of its sustainability work. The live model therefore requires user-supplied kWh and carbon-intensity assumptions and labels the result as scenario output, not a Canonical emissions claim.',
       metrics: [
         { label: 'Energy efficiency', value: pct(tcoInputs.energyEfficiencyPct), detail: 'User/model assumption', tone: 'green' },
@@ -679,7 +681,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'downside',
       section: 'Failure modes',
       title: 'The strategy should be designed around the ways it could fail',
-      decision: 'Predefine invalidation triggers for attach, migration payback, services load, partner economics, AI differentiation and community trust.',
+      decision: 'Strategic discipline is strengthened when invalidation triggers are defined in advance for attach, migration payback, services load, partner economics, AI differentiation and community trust.',
       narrative: 'The most dangerous error is to let a strategy survive because the narrative still sounds plausible after the economics have changed.',
       metrics: [
         { label: 'Retention guardrail', value: '<95%', detail: 'Escalate if paid-base retention falls materially', tone: 'orange' },
@@ -699,7 +701,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'pnl-brand',
       section: 'CMO P&L bridge',
       title: 'Marketing should be accountable to the P&L without pretending every influenced dollar is incremental revenue',
-      decision: 'Use one connected bridge: recurring revenue drivers → contribution → reinvestment → marketing allocation → influenced ARR → reach, awareness and brand strength diagnostics.',
+      decision: 'Marketing accountability is improved when recurring-revenue drivers, contribution, reinvestment, marketing allocation, influenced ARR and directional brand diagnostics are connected in one non-double-counted bridge.',
       narrative: 'The financial model remains the accounting source of truth. Marketing-influenced ARR is a non-additive diagnostic, while the brand indices are rebased scenario indicators (100 = default), not audited brand-equity measures.',
       metrics: [
         { label: 'Projected revenue', value: moneyM(metrics.projectedRevenue), detail: pct(metrics.revenueGrowthPct) + ' vs FY2025 base', tone: 'orange' },
@@ -720,7 +722,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'sensitivity',
       section: 'Sensitivity control tower',
       title: 'Not every assumption deserves equal executive attention',
-      decision: 'Manage the highest-sensitivity levers with the strongest evidence, tighter ranges and faster feedback loops; do not spend equal meeting time on low-impact variables.',
+      decision: 'Executive attention is better allocated when the highest-sensitivity levers are supported by stronger evidence, tighter ranges and faster feedback loops than low-impact variables.',
       narrative: 'The ranking uses a local one-step change in each active assumption and combines its modeled revenue, operating-profit and directional brand-index movement. It is a prioritization aid, not a causal estimate.',
       metrics: sensitivities.slice(0, 4).map((row, idx) => ({
         label: row.label,
@@ -739,7 +741,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'latest-2026',
       section: '2026 change radar',
       title: 'Canonical’s marketing opportunity has changed materially in the last six months',
-      decision: 'Reframe the portfolio around secure agentic infrastructure, rapid security response, sovereign control, silicon readiness and lifecycle assurance — then map each narrative to a measurable commercial trigger.',
+      decision: 'The portfolio is likely to gain greater coherence when secure agentic infrastructure, rapid security response, sovereign control, silicon readiness and lifecycle assurance are connected to measurable commercial triggers.',
       narrative: 'This slide brings current 2026 product, security, silicon, AI, regulation and data-platform developments into the strategy system so the deck does not fossilize around an older cloud-and-Linux narrative.',
       metrics: [
         { label: 'Security cadence', value: 'Weekly publication', detail: 'Unified rapid two-week kernel SRU cycle', tone: 'orange' },
@@ -764,23 +766,66 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'cmo-lens',
       section: 'Executive marketing operating lens',
       title: 'The deck is optimized for a technically fluent, community-and-partner-led marketing leader',
-      decision: 'Use technical credibility, developer/community trust and partner ecosystems as compounding distribution assets — then translate them into a small number of executive-level category narratives.',
+      decision: 'Compounding distribution can be created when technical credibility, developer and community trust, and partner ecosystems are translated into a small number of executive-level category narratives.',
       narrative: 'The operating lens emphasizes developer ecosystems, channel/partner leverage, open-source trust, B2B cloud, technical storytelling and public leadership — the capabilities most useful for turning Canonical’s portfolio breadth into market power.',
       metrics: [
         { label: 'Primary audience', value: 'Developer → CIO', detail: 'One truth, different decision frames', tone: 'orange' },
         { label: 'Distribution', value: 'Community + partners', detail: 'Owned, earned and borrowed reach', tone: 'teal' },
         { label: 'Decision system', value: 'P&L + brand', detail: 'Every narrative has a commercial path and falsifier', tone: 'violet' },
-        { label: 'Refinement', value: '10 iterations', detail: 'Theme · finance · sensitivity · AI · security · psychology · execution', tone: 'gold' },
+        { label: 'Refinement', value: '20 iterations', detail: 'Two hardening rounds across evidence, readability, finance, AI, psychology and execution', tone: 'gold' },
       ],
-      bullets: REVIEW_ITERATIONS_2026.slice(5, 10).map((row) => row[0] + ' · ' + row[2]),
+      bullets: REVIEW_ITERATIONS_2026.slice(10, 20).map((row) => row[0] + ' · ' + row[2]),
       sourceIds: ['canonical-marketing-2026'],
       kind: 'cmo',
+    },
+    {
+      id: 'fundamentals',
+      section: 'Fundamental marketing mechanics',
+      title: 'The strongest strategy is built from mechanisms that remain true after campaigns and news cycles change',
+      decision: 'Greater strategic durability is expected when open-source adoption is treated as an option pool, enterprise risk is reduced before benefits are amplified, and brand strength is accumulated through repeated agreement between product, community, partners and customer outcomes.',
+      narrative: 'These principles are intended to survive individual launches, competitors and quarterly conditions. They describe why technical infrastructure markets behave as they do, rather than recycling campaign tactics.',
+      metrics: [
+        { label: 'Mechanism 01', value: 'Option pool', detail: 'Usage becomes monetizable when risk or accountability changes', tone: 'orange' },
+        { label: 'Mechanism 02', value: 'Asymmetric risk', detail: 'Downside reduction precedes benefit amplification', tone: 'violet' },
+        { label: 'Mechanism 03', value: 'Evidence stock', detail: 'Brand strength accumulates through repeated proof', tone: 'teal' },
+        { label: 'Mechanism 04', value: 'Compression', detail: 'Simple decision rules reduce portfolio cognitive load', tone: 'gold' },
+      ],
+      bullets: [
+        'Adoption is treated as an option pool rather than a conventional funnel stage.',
+        'Infrastructure buying is modeled as downside-sensitive because failure costs are asymmetric.',
+        'Neutrality is valued only when future switching costs, bargaining dependence or strategic lock-in are reduced.',
+        'Partners become most powerful before defaults are formed, not after a category decision has already been made.',
+        'Marketing is expected to diagnose and de-risk structural friction before amplification is increased.',
+      ],
+      sourceIds: ['canonical-marketing-2026'],
+      kind: 'fundamentals',
+    },
+    {
+      id: 'evidence-appendix',
+      section: 'Appendix · evidence provenance',
+      title: 'Every retained external number is traceable to a primary source and a consistency check',
+      decision: 'Higher quotation confidence is produced when reported facts are separated from modeled outputs, cross-checks are exposed, and PDF page numbers are shown only when they can be verified rather than inferred.',
+      narrative: 'This appendix is the quote-safe layer of the deck. Externally reported company facts are retained only where reliable references are consistent. Scenario values, TCO assumptions, sensitivities and brand indices remain explicitly modeled rather than being presented as company disclosures.',
+      metrics: [
+        { label: 'Evidence rule', value: '2-source consistency', detail: 'Required for retained externally reported figures', tone: 'teal' },
+        { label: 'PDF rule', value: 'No invented pages', detail: 'Pinpoint page numbers are shown only when verifiable', tone: 'orange' },
+        { label: 'Model rule', value: 'Non-reported', detail: 'Scenario/TCO/brand outputs remain labeled as modeled', tone: 'violet' },
+        { label: 'Auditability', value: 'Source links exposed', detail: 'Primary + cross-check are visible in the deck', tone: 'gold' },
+      ],
+      bullets: [
+        'Reported facts and model outputs are not allowed to share the same evidentiary status.',
+        'Rounded peer figures are used only where the underlying official number is preserved.',
+        'Scale comparisons are contextual and are not presented as like-for-like judgments of strategic quality.',
+        'Any unresolved source inconsistency is treated as a reason to remove the number rather than average it.',
+      ],
+      sourceIds: ['canonical-2025-accounts','ibm-2026-q2','microsoft-fy26','oracle-fy26','broadcom-q3-2026'],
+      kind: 'appendix',
     },
     {
       id: 'roadmap',
       section: '12-quarter roadmap',
       title: 'Sequence the strategy so evidence arrives before scale spending',
-      decision: 'Instrument and prove → productize and partner → scale repeatable motions → own the category only after the economics are demonstrated.',
+      decision: 'Category investment is less likely to outrun evidence when instrumentation and proof are established first, productization and partner leverage are added next, and scale is pursued only after repeatable economics are demonstrated.',
       narrative: 'The roadmap is deliberately staged. Each phase has a measurable evidence threshold so leadership can accelerate, redesign or stop a motion before sunk-cost momentum takes over.',
       metrics: [
         { label: 'Q1–Q2', value: 'Instrument', detail: 'Workload graph · attach telemetry · win/loss · TCO baselines', tone: 'cyan' },
@@ -800,14 +845,14 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     {
       id: 'grill',
       section: '20-pass leadership review',
-      title: 'The deck has been pressure-tested through 20 stakeholder lenses and 10 additional refinement iterations',
-      decision: 'Keep the review questions as a standing governance checklist; every future strategy change must state which stakeholder problem it solves and what evidence would invalidate it.',
-      narrative: 'The original 20 stakeholder lenses are now supplemented by ten iterations covering light-mode integrity, P&L discipline, variable sensitivity, brand causality, competition, 2026 security/regulation, agentic AI, partner leverage, buyer psychology and executive usability.',
+      title: 'The deck has been pressure-tested through 20 stakeholder lenses and 20 refinement iterations',
+      decision: 'Governance is strengthened when review questions are maintained as a standing checklist and each strategy change is accompanied by the stakeholder problem being addressed and the evidence that would invalidate the thesis.',
+      narrative: 'The original 20 stakeholder lenses are now supplemented by twenty refinement iterations covering theme integrity, P&L discipline, sensitivity, brand causality, competition, 2026 developments, buyer psychology, evidence triangulation, passive insight language, legibility and executive quote safety.',
       metrics: [
         { label: 'Investor / finance', value: '5 lenses', detail: 'Growth quality · margin · retention · capital allocation', tone: 'violet' },
         { label: 'Customer / security', value: '4 lenses', detail: 'TCO · lifecycle · trust · sovereignty', tone: 'orange' },
         { label: 'Partner / product', value: '5 lenses', detail: 'Cloud · OEM/SI · platform coherence · AI · infrastructure', tone: 'teal' },
-        { label: 'Execution / governance', value: '6 + 10', detail: 'Original governance lenses + v3 refinement iterations', tone: 'gold' },
+        { label: 'Execution / governance', value: '6 + 20', detail: 'Original governance lenses + two refinement rounds', tone: 'gold' },
       ],
       bullets: REVIEW_LENSES.slice(0, 4).map((q) => q[0] + ': ' + q[1]),
       sourceIds: ['canonical-2025-accounts', 'canonical-ai', 'redhat-lifecycle-2026'],
@@ -817,7 +862,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       id: 'governance',
       section: 'Source & model governance',
       title: 'Precision comes from traceability, not from pretending public data can answer every internal question',
-      decision: 'Treat the deck as a living strategy system: primary sources for facts, explicit assumptions for gaps, tests for identities and sensitivities, and owner-controlled publication.',
+      decision: 'Greater reliability is produced when the deck is maintained as a living strategy system in which facts are tied to primary sources, gaps are exposed as assumptions, model identities are tested and publication remains owner-controlled.',
       narrative: 'The model is designed to be falsifiable. It cannot guarantee “100% accuracy” because future outcomes and internal Canonical data are unavailable, but it can prevent silent arithmetic errors, hidden assumptions and stale competitive claims.',
       metrics: [
         { label: 'Primary sources', value: String(SOURCES.filter((s) => s.confidence === 'high').length), detail: 'Statutory filings + official vendor/investor sources', tone: 'green' },
@@ -1053,8 +1098,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-sm font-semibold text-white">{bet.name}</div>
-                    <div className="mt-1 text-xs leading-relaxed text-white/48">{bet.thesis}</div>
-                    <div className="mt-2 text-[9px] font-mono text-white/30">{bet.primaryMetric}</div>
+                    <div className="mt-1 text-xs leading-relaxed text-white/80">{bet.thesis}</div>
+                    <div className="mt-2 text-[9px] font-mono text-white/88">{bet.primaryMetric}</div>
                   </div>
                 </div>
               </div>
@@ -1103,7 +1148,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
               <div className="text-[10px] font-mono" style={{ color: palette[( ['orange','cyan','violet','teal','green','gold'] as Tone[])[idx]] }}>{n}</div>
               <div className="mt-3 text-lg font-semibold text-white">{title}</div>
               <div className="mt-1 text-2xl font-semibold" style={{ color: palette[( ['orange','cyan','violet','teal','green','gold'] as Tone[])[idx]] }}>{value}</div>
-              <div className="mt-2 text-xs leading-relaxed text-white/42">{desc}</div>
+              <div className="mt-2 text-xs leading-relaxed text-white/74">{desc}</div>
             </div>
           ))}
         </div>
@@ -1117,7 +1162,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
             <div key={peer.name} className="rounded-xl border border-white/10 bg-white/[0.025] p-4">
               <div className="text-xs font-semibold text-white">{peer.name}</div>
               <div className="mt-4 text-2xl font-semibold" style={{ color: palette[( ['orange','violet','cyan','teal','gold'] as Tone[])[idx]] }}>{peer.metric}</div>
-              <div className="mt-2 text-[10px] leading-relaxed text-white/42">{peer.detail}</div>
+              <div className="mt-2 text-[11px] leading-relaxed text-white/74">{peer.detail}</div>
               <div className="mt-4 border-t border-white/8 pt-3 text-xs font-mono text-white/65">{peer.momentum}</div>
             </div>
           ))}
@@ -1131,8 +1176,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
           <div className="relative rounded-xl border border-white/10 bg-white/[0.02] h-[330px] overflow-hidden">
             <div className="absolute inset-x-8 top-1/2 h-px bg-white/15" />
             <div className="absolute inset-y-8 left-1/2 w-px bg-white/15" />
-            <div className="absolute left-4 top-3 text-[9px] font-mono text-white/30">HIGH NEUTRALITY / CONTROL</div>
-            <div className="absolute right-4 bottom-3 text-[9px] font-mono text-white/30">HIGH DISTRIBUTION REACH</div>
+            <div className="absolute left-4 top-3 text-[9px] font-mono text-white/88">HIGH NEUTRALITY / CONTROL</div>
+            <div className="absolute right-4 bottom-3 text-[9px] font-mono text-white/88">HIGH DISTRIBUTION REACH</div>
             {([
               ['Canonical', 72, 28, 'orange'],
               ['SUSE', 80, 62, 'teal'],
@@ -1168,7 +1213,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       return (
         <div className="grid lg:grid-cols-[1.15fr_.85fr] gap-6">
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-6">
-            <div className="text-xs font-mono text-white/35 mb-4">REVENUE UNCERTAINTY RANGE</div>
+            <div className="text-xs font-mono text-white/68 mb-4">REVENUE UNCERTAINTY RANGE</div>
             <div className="flex items-end gap-5">
               <PrismBar label="P10" value={distribution.revenue.p10} max={rangeMax} display={moneyM(distribution.revenue.p10)} tone="slate" />
               <PrismBar label="P50" value={distribution.revenue.p50} max={rangeMax} display={moneyM(distribution.revenue.p50)} tone="orange" />
@@ -1190,8 +1235,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
               <PrismBar label="Canonical case" value={tco.canonicalAnnualCost} max={max} display={moneyCompact(tco.canonicalAnnualCost)} tone="orange" />
             </div>
             <div className="mt-5 grid grid-cols-2 gap-3 text-xs">
-              <div className="rounded-lg border border-white/8 p-3"><span className="text-white/35">3-year net savings</span><div className="mt-1 text-lg font-semibold text-white">{moneyCompact(tco.threeYearNetSavings)}</div></div>
-              <div className="rounded-lg border border-white/8 p-3"><span className="text-white/35">Migration investment</span><div className="mt-1 text-lg font-semibold text-white">{moneyCompact(tco.oneTimeMigrationCost)}</div></div>
+              <div className="rounded-lg border border-white/8 p-3"><span className="text-white/68">3-year net savings</span><div className="mt-1 text-lg font-semibold text-white">{moneyCompact(tco.threeYearNetSavings)}</div></div>
+              <div className="rounded-lg border border-white/8 p-3"><span className="text-white/68">Migration investment</span><div className="mt-1 text-lg font-semibold text-white">{moneyCompact(tco.oneTimeMigrationCost)}</div></div>
             </div>
           </div>
           <div className="grid gap-3">{slide.metrics.map((m) => <MetricTile key={m.label} metric={m} />)}</div>
@@ -1211,7 +1256,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
             {steps.map((step, idx) => (
               <React.Fragment key={step}>
                 <div className="flex-1 rounded-xl border border-white/10 bg-white/[0.025] p-4 min-h-[100px]">
-                  <div className="text-[9px] font-mono text-white/28">0{idx + 1}</div>
+                  <div className="text-[9px] font-mono text-white/60">0{idx + 1}</div>
                   <div className="mt-3 text-sm font-semibold text-white">{step}</div>
                 </div>
                 {idx < steps.length - 1 && <div className="hidden md:flex items-center text-white/20">→</div>}
@@ -1221,6 +1266,14 @@ export const CanonicalStrategyLabPage: React.FC = () => {
           <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">{slide.metrics.map((m) => <MetricTile key={m.label} metric={m} />)}</div>
         </div>
       );
+    }
+
+    if (slide.kind === 'fundamentals') {
+      return <FundamentalInsightGrid />;
+    }
+
+    if (slide.kind === 'appendix') {
+      return <VerifiedEvidenceAppendix />;
     }
 
     if (slide.kind === 'pnl3d') {
@@ -1242,15 +1295,15 @@ export const CanonicalStrategyLabPage: React.FC = () => {
             <div key={row.key} className="rounded-xl border border-white/10 bg-white/[0.025] p-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <div className="text-[9px] font-mono text-white/30">0{idx + 1}</div>
+                  <div className="text-[9px] font-mono text-white/88">0{idx + 1}</div>
                   <div className="mt-2 text-sm font-semibold text-white">{row.label}</div>
                 </div>
                 <span className="rounded border border-orange-400/20 bg-orange-400/[0.04] px-2 py-1 text-[8px] font-mono uppercase text-orange-300">{row.sensitivity}</span>
               </div>
               <div className="mt-3 grid grid-cols-3 gap-2 text-[9px]">
-                <div><span className="block text-white/30">Step</span><strong className="text-white">{row.stepLabel}</strong></div>
-                <div><span className="block text-white/30">Revenue</span><strong className="text-white">{moneyM(row.revenueDelta)}</strong></div>
-                <div><span className="block text-white/30">Op profit</span><strong className="text-white">{moneyM(row.profitDelta)}</strong></div>
+                <div><span className="block text-white/88">Step</span><strong className="text-white">{row.stepLabel}</strong></div>
+                <div><span className="block text-white/88">Revenue</span><strong className="text-white">{moneyM(row.revenueDelta)}</strong></div>
+                <div><span className="block text-white/88">Op profit</span><strong className="text-white">{moneyM(row.profitDelta)}</strong></div>
               </div>
             </div>
           ))}
@@ -1263,10 +1316,10 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         <div className="grid lg:grid-cols-[1fr_.85fr] gap-6">
           <div className="grid sm:grid-cols-2 gap-3">{slide.metrics.map((m) => <MetricTile key={m.label} metric={m} />)}</div>
           <div className="rounded-xl border border-white/10 bg-white/[0.02] p-5">
-            <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/34 mb-4">Decision logic</div>
+            <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/66 mb-4">Decision logic</div>
             <div className="space-y-3">
               {slide.bullets.slice(0, 5).map((bullet, idx) => (
-                <div key={idx} className="flex gap-3 text-sm leading-relaxed text-white/62">
+                <div key={idx} className="flex gap-3 text-sm leading-relaxed text-white/88">
                   <span className="font-mono text-orange-300/80">{String(idx + 1).padStart(2, '0')}</span>
                   <span>{bullet}</span>
                 </div>
@@ -1284,15 +1337,15 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     <div className="canonical-strategy-lab">
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <header className="canonical-local-header pb-8 border-b border-neutral-800/70">
-        <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-500">
-          <span className="text-orange-400">Canonical Strategy System</span><span>·</span><span>2025 reported base</span><span>·</span><span>2026 live signals</span><span>·</span><span>20 lenses + 10 iterations</span>
+        <div className="flex flex-wrap items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-100">
+          <span className="text-orange-300">Canonical Strategy System</span><span>·</span><span>2025 reported base</span><span>·</span><span>2026 live signals</span><span>·</span><span>20 lenses + 20 refinements</span>
         </div>
         <div className="mt-5 grid lg:grid-cols-[1.25fr_.75fr] gap-8 items-end">
           <div>
             <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.02] text-neutral-100">
               A living executive deck, not a static presentation
             </h1>
-            <p className="mt-5 max-w-3xl text-base md:text-lg leading-relaxed text-neutral-400">
+            <p className="mt-5 max-w-3xl text-base md:text-lg leading-relaxed text-neutral-200">
               Scroll the deck, change commercial, brand, partner and customer-economics assumptions, see the directional Canonical/competitor/marketing consequence immediately, inspect uncertainty and sensitivity, and download the active version as an editable PowerPoint.
             </p>
           </div>
@@ -1300,7 +1353,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
             <button onClick={downloadPptx} disabled={downloading} className="inline-flex items-center gap-2 rounded-md bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-400 disabled:opacity-50">
               <FileDown className="w-4 h-4" /> {downloading ? 'Generating…' : 'Download live PPTX'}
             </button>
-            <a href={ARCHIVE_DECK_VIEW_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-neutral-700 px-4 py-2.5 text-sm text-neutral-300 hover:text-white hover:border-neutral-500">
+            <a href={ARCHIVE_DECK_VIEW_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-neutral-700 px-4 py-2.5 text-sm text-neutral-100 hover:text-white hover:border-neutral-500">
               <ExternalLink className="w-4 h-4" /> Archive deck
             </a>
             {isOwner && (
@@ -1310,7 +1363,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
             )}
           </div>
         </div>
-        <div className="mt-5 flex flex-wrap gap-4 text-[11px] text-neutral-500">
+        <div className="mt-5 flex flex-wrap gap-4 text-[11px] text-neutral-100">
           <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Public changes are non-destructive</span>
           <span className="inline-flex items-center gap-1.5"><Database className="w-3.5 h-3.5 text-cyan-400" /> Reported facts separated from assumptions</span>
           <span className="inline-flex items-center gap-1.5"><BrainCircuit className="w-3.5 h-3.5 text-violet-400" /> P10/P50/P90 uncertainty model</span>
@@ -1329,7 +1382,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                 key={id}
                 onClick={() => setPanel(id)}
                 disabled={id === 'owner' && !isOwner}
-                className={'flex items-center justify-center gap-1.5 px-2 py-3 text-[10px] font-mono uppercase tracking-wide transition-colors ' + (panel === id ? 'bg-white/[0.055] text-white' : 'text-neutral-500 hover:text-neutral-300') + (id === 'owner' && !isOwner ? ' opacity-30 cursor-not-allowed' : '')}
+                className={'flex items-center justify-center gap-1.5 px-2 py-3 text-[10px] font-mono uppercase tracking-wide transition-colors ' + (panel === id ? 'bg-white/[0.055] text-white' : 'text-neutral-100 hover:text-neutral-100') + (id === 'owner' && !isOwner ? ' opacity-30 cursor-not-allowed' : '')}
               >
                 <Icon className="w-3.5 h-3.5" /> {label}
               </button>
@@ -1342,9 +1395,9 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                 <div className="flex items-center justify-between mb-2">
                   <div>
                     <div className="text-sm font-semibold text-white">Growth model</div>
-                    <div className="text-[10px] text-white/35 mt-1">Public sandbox · annualized revenue-equivalent view</div>
+                    <div className="text-[10px] text-white/68 mt-1">Public sandbox · annualized revenue-equivalent view</div>
                   </div>
-                  <button onClick={resetPublicScenario} className="p-2 rounded border border-white/8 text-white/40 hover:text-white"><RotateCcw className="w-3.5 h-3.5" /></button>
+                  <button onClick={resetPublicScenario} className="p-2 rounded border border-white/8 text-white/72 hover:text-white"><RotateCcw className="w-3.5 h-3.5" /></button>
                 </div>
                 <DirectionalImpactBox impact={activeImpact} />
                 <RangeControl label="Paid-base retention" value={scenario.retentionPct} min={90} max={100} step={0.1} description="Retention applied to reported 2025 subscription revenue." onChange={(v) => setScenarioValue('retentionPct', v)} />
@@ -1359,7 +1412,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                 <RangeControl label="Services contribution margin" value={scenario.servicesContributionMarginPct} min={0} max={60} step={1} description="Assumption applied only to incremental services." onChange={(v) => setScenarioValue('servicesContributionMarginPct', v)} />
                 <RangeControl label="Growth reinvestment" value={scenario.growthReinvestmentPct} min={0} max={100} step={1} description="Share of positive incremental revenue reinvested in GTM/product capacity." onChange={(v) => setScenarioValue('growthReinvestmentPct', v)} />
                 <RangeControl label="Assumption uncertainty" value={scenario.uncertaintyPct} min={0} max={50} step={1} description="Width applied to scenario drivers in deterministic Monte Carlo ranges." onChange={(v) => setScenarioValue('uncertaintyPct', v)} />
-                <div className="mt-5 mb-1 text-[9px] font-mono uppercase tracking-[0.16em] text-orange-300/75">CMO market-system levers</div>
+                <div className="mt-5 mb-1 text-[10px] font-mono uppercase tracking-[0.16em] text-orange-300/75">CMO market-system levers</div>
                 <RangeControl label="Marketing share of reinvestment" value={scenario.marketingShareOfReinvestmentPct} min={5} max={70} step={1} description="Allocation of existing modeled growth investment; not an additional P&L cost." onChange={(v) => setScenarioValue('marketingShareOfReinvestmentPct', v)} />
                 <RangeControl label="Message clarity" value={scenario.messageClarityPct} min={30} max={100} step={1} description="Directional planning score for comprehension and retellability across technical and executive audiences." onChange={(v) => setScenarioValue('messageClarityPct', v)} />
                 <RangeControl label="Partner amplification quality" value={scenario.partnerAmplificationPct} min={20} max={100} step={1} description="Directional score for audience transfer, joint proof and partner-led distribution quality." onChange={(v) => setScenarioValue('partnerAmplificationPct', v)} />
@@ -1373,7 +1426,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
               <>
                 <div className="mb-2">
                   <div className="text-sm font-semibold text-white">Customer TCO + sustainability</div>
-                  <div className="text-[10px] text-white/35 mt-1">Replace defaults with customer evidence before using externally.</div>
+                  <div className="text-[10px] text-white/68 mt-1">Replace defaults with customer evidence before using externally.</div>
                 </div>
                 <DirectionalImpactBox impact={activeImpact} />
                 <NumberControl label="Nodes" value={tcoInputs.nodes} step={100} description="Modeled server/node estate." onChange={(v) => setTcoValue('nodes', v)} />
@@ -1399,25 +1452,25 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                   <button onClick={() => setOwnerStudio(true)} className="text-[10px] font-mono text-orange-300">Edit mode</button>
                 </div>
                 <label className="block mt-4">
-                  <div className="text-[10px] uppercase tracking-wide text-white/35">Slide</div>
+                  <div className="text-[10px] uppercase tracking-wide text-white/68">Slide</div>
                   <select value={editingSlideId} onChange={(e) => setEditingSlideId(e.target.value)} className="mt-1 w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-xs text-white">
                     {slides.map((slide, idx) => <option key={slide.id} value={slide.id}>{String(idx + 1).padStart(2, '0')} · {slide.section}</option>)}
                   </select>
                 </label>
                 <label className="block mt-4">
-                  <div className="text-[10px] uppercase tracking-wide text-white/35">Title</div>
+                  <div className="text-[10px] uppercase tracking-wide text-white/68">Title</div>
                   <textarea value={editingSlide.title} onChange={(e) => updateOverride('title', e.target.value)} rows={4} className="mt-1 w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-xs leading-relaxed text-white outline-none focus:border-orange-400/60" />
                 </label>
                 <label className="block mt-4">
-                  <div className="text-[10px] uppercase tracking-wide text-white/35">Leadership decision</div>
+                  <div className="text-[10px] uppercase tracking-wide text-white/68">Leadership insight</div>
                   <textarea value={editingSlide.decision} onChange={(e) => updateOverride('decision', e.target.value)} rows={5} className="mt-1 w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-xs leading-relaxed text-white outline-none focus:border-orange-400/60" />
                 </label>
                 <label className="block mt-4">
-                  <div className="text-[10px] uppercase tracking-wide text-white/35">Narrative</div>
+                  <div className="text-[10px] uppercase tracking-wide text-white/68">Narrative</div>
                   <textarea value={editingSlide.narrative} onChange={(e) => updateOverride('narrative', e.target.value)} rows={6} className="mt-1 w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-xs leading-relaxed text-white outline-none focus:border-orange-400/60" />
                 </label>
                 <label className="block mt-4">
-                  <div className="text-[10px] uppercase tracking-wide text-white/35">Decision logic — one bullet per line</div>
+                  <div className="text-[10px] uppercase tracking-wide text-white/68">Decision logic — one bullet per line</div>
                   <textarea
                     value={editingSlide.bullets.join('\n')}
                     onChange={(e) => updateOverride('bullets', e.target.value.split('\n').map((line) => line.trim()).filter(Boolean))}
@@ -1425,7 +1478,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                     className="mt-1 w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-xs leading-relaxed text-white outline-none focus:border-orange-400/60"
                   />
                 </label>
-                <div className="mt-3 rounded-md border border-amber-400/15 bg-amber-400/[0.04] p-3 text-[10px] leading-relaxed text-amber-100/55">
+                <div className="mt-3 rounded-md border border-amber-400/15 bg-amber-400/[0.04] p-3 text-[11px] leading-relaxed text-amber-100/55">
                   Financial formulas, reported base metrics and source links remain code-controlled so narrative editing cannot silently change the model evidence.
                 </div>
                 <div className="grid gap-2 mt-4">
@@ -1446,7 +1499,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         </aside>
 
         <main className="space-y-8">
-          <div className="flex items-center justify-between gap-4 text-xs text-neutral-500 px-1">
+          <div className="flex items-center justify-between gap-4 text-xs text-neutral-100 px-1">
             <span>{slides.length} live slides · scroll vertically</span>
             <span className="hidden sm:inline">Changes to controls update the deck immediately</span>
           </div>
@@ -1467,8 +1520,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
           <section className="rounded-xl border border-neutral-800 bg-neutral-950/60 p-5">
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
-              <div className="text-xs leading-relaxed text-neutral-500">
-                <strong className="text-neutral-300">Accuracy boundary.</strong> Reported Canonical and competitor facts are source-labelled. The strategy model cannot be guaranteed 100% accurate because Canonical does not publicly disclose workload attach, cohort retention, product-level ARR, customer migration economics or future outcomes. Those gaps are deliberately exposed as editable assumptions, bounded with uncertainty and tested for arithmetic consistency.
+              <div className="text-xs leading-relaxed text-neutral-100">
+                <strong className="text-neutral-100">Accuracy boundary.</strong> Reported Canonical and competitor facts are source-labelled. The strategy model cannot be guaranteed 100% accurate because Canonical does not publicly disclose workload attach, cohort retention, product-level ARR, customer migration economics or future outcomes. Those gaps are deliberately exposed as editable assumptions, bounded with uncertainty and tested for arithmetic consistency.
               </div>
             </div>
           </section>
