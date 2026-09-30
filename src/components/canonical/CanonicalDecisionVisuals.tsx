@@ -116,12 +116,12 @@ export const ExecutiveOperatingLens: React.FC = () => (
 
 
 export const FundamentalInsightGrid: React.FC = () => (
-  <div className="grid md:grid-cols-2 gap-2">
+  <div className="grid md:grid-cols-2 gap-3">
     {FUNDAMENTAL_MARKETING_INSIGHTS.map((item, idx) => (
-      <article key={item.title} className="rounded-xl border border-white/15 bg-white/[0.035] p-3">
-        <div className="text-[8px] font-mono text-orange-300">LAW {String(idx + 1).padStart(2, '0')}</div>
-        <h3 className="mt-1.5 text-[11.5px] leading-[1.3] font-semibold text-white">{item.title}</h3>
-        <p className="mt-1.5 text-[8.75px] leading-[1.42] text-white/82">{item.insight}</p>
+      <article key={item.title} className="rounded-xl border border-white/15 bg-white/[0.035] p-4">
+        <div className="text-[8.5px] font-mono tracking-wide text-orange-300">LAW {String(idx + 1).padStart(2, '0')}</div>
+        <h3 className="mt-2 text-[13px] leading-[1.32] font-semibold text-white">{item.title}</h3>
+        <p className="mt-2 text-[10px] leading-[1.5] text-white/82">{item.insight}</p>
       </article>
     ))}
   </div>
@@ -134,14 +134,14 @@ export const VerifiedEvidenceAppendix: React.FC<{
 }> = ({ start = 0, end = VERIFIED_EVIDENCE.length, showRules = true }) => {
   const rows = VERIFIED_EVIDENCE.slice(start, end);
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       {showRules && (
-        <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/[0.04] p-2.5">
+        <div className="rounded-xl border border-cyan-400/20 bg-cyan-400/[0.04] p-3.5">
           <div className="text-[9px] font-mono uppercase tracking-[0.16em] text-cyan-200">Evidence rule</div>
-          <div className="mt-2 grid md:grid-cols-2 gap-2">
+          <div className="mt-2.5 grid md:grid-cols-2 gap-2.5">
             {NUMERIC_EVIDENCE_RULES.map((rule, idx) => (
-              <div key={rule} className="flex gap-2 text-[8.5px] leading-[1.38] text-white/80">
-                <span className="font-mono text-cyan-300">{String(idx + 1).padStart(2, '0')}</span>
+              <div key={rule} className="flex gap-2.5 text-[9.5px] leading-[1.45] text-white/80">
+                <span className="shrink-0 font-mono text-cyan-300">{String(idx + 1).padStart(2, '0')}</span>
                 <span>{rule}</span>
               </div>
             ))}
@@ -149,30 +149,30 @@ export const VerifiedEvidenceAppendix: React.FC<{
         </div>
       )}
 
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         {rows.map((row, localIdx) => {
           const idx = start + localIdx;
           return (
-            <article key={row.id} className="rounded-xl border border-white/15 bg-white/[0.035] p-2.5">
-              <div className="grid lg:grid-cols-[74px_1.18fr_.9fr_.9fr] gap-2.5 items-start">
+            <article key={row.id} className="rounded-xl border border-white/15 bg-white/[0.035] p-3.5">
+              <div className="grid lg:grid-cols-[82px_1.22fr_.9fr_.9fr] gap-3 items-start">
                 <div>
-                  <div className="text-[8px] font-mono text-orange-300">EVIDENCE {String(idx + 1).padStart(2, '0')}</div>
-                  <div className="mt-1 inline-flex rounded border border-emerald-400/25 bg-emerald-400/[0.05] px-1.5 py-0.5 text-[7px] font-mono uppercase text-emerald-200">consistent</div>
+                  <div className="text-[8.5px] font-mono text-orange-300">EVIDENCE {String(idx + 1).padStart(2, '0')}</div>
+                  <div className="mt-1.5 inline-flex rounded border border-emerald-400/25 bg-emerald-400/[0.05] px-1.5 py-0.5 text-[7.5px] font-mono uppercase text-emerald-200">consistent</div>
                 </div>
                 <div>
-                  <div className="text-[9.5px] leading-[1.25] font-semibold text-white">{row.subject}</div>
-                  <p className="mt-1 text-[8px] leading-[1.34] text-white/84">{row.retainedClaim}</p>
-                  <p className="mt-1 text-[7.25px] leading-[1.3] text-white/64">{row.note}</p>
+                  <div className="text-[11px] leading-[1.3] font-semibold text-white">{row.subject}</div>
+                  <p className="mt-1.5 text-[9.5px] leading-[1.42] text-white/84">{row.retainedClaim}</p>
+                  <p className="mt-1.5 text-[8px] leading-[1.35] text-white/64">{row.note}</p>
                 </div>
                 <div>
-                  <div className="text-[7px] font-mono uppercase tracking-wide text-white/58">Primary</div>
-                  <a href={row.primaryUrl} target="_blank" rel="noreferrer" className="mt-1 block text-[7.75px] leading-[1.3] text-orange-200 hover:text-orange-100 underline decoration-orange-300/40 underline-offset-2 break-words">{row.primaryLabel}</a>
-                  <div className="mt-1 text-[7px] leading-[1.28] text-white/60">{row.primaryPage}</div>
+                  <div className="text-[8px] font-mono uppercase tracking-wide text-white/58">Primary</div>
+                  <a href={row.primaryUrl} target="_blank" rel="noreferrer" className="mt-1.5 block break-words text-[8.5px] leading-[1.35] text-orange-200 hover:text-orange-100 underline decoration-orange-300/40 underline-offset-2">{row.primaryLabel}</a>
+                  <div className="mt-1.5 text-[8px] leading-[1.35] text-white/60">{row.primaryPage}</div>
                 </div>
                 <div>
-                  <div className="text-[8px] font-mono uppercase tracking-wide text-white/60">Cross-check</div>
-                  <a href={row.crossCheckUrl} target="_blank" rel="noreferrer" className="mt-1 block text-[7.75px] leading-[1.3] text-violet-200 hover:text-violet-100 underline decoration-violet-300/40 underline-offset-2 break-words">{row.crossCheckLabel}</a>
-                  <div className="mt-1.5 text-[8.5px] leading-[1.35] text-white/62">Independent or separately filed reference used to test consistency.</div>
+                  <div className="text-[8px] font-mono uppercase tracking-wide text-white/58">Cross-check</div>
+                  <a href={row.crossCheckUrl} target="_blank" rel="noreferrer" className="mt-1.5 block break-words text-[8.5px] leading-[1.35] text-violet-200 hover:text-violet-100 underline decoration-violet-300/40 underline-offset-2">{row.crossCheckLabel}</a>
+                  <div className="mt-1.5 text-[8px] leading-[1.35] text-white/60">Independent or separately filed reference used to test consistency.</div>
                 </div>
               </div>
             </article>
