@@ -17,7 +17,7 @@ export const SelectedWriting: React.FC = () => {
         <div className="apple-section-heading">
           <div>
             <span className="apple-kicker">Writing</span>
-            <h2>Clear thinking, in public.</h2>
+            <h2>Ideas for better marketing decisions</h2>
             <p>Research-backed notes on marketing, AI, strategy and decision systems.</p>
           </div>
           <div className="apple-heading-actions">
