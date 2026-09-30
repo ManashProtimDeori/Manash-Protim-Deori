@@ -1,0 +1,478 @@
+import React, { useMemo, useState } from 'react';
+import { Download, ExternalLink, FileDown, Leaf, Network, Route, Sparkles, Target, TrendingUp } from 'lucide-react';
+import { OLAM_REVIEW_ITERATIONS, OLAM_SLIDES, OLAM_SOURCES } from '../data/olamAfricaStrategy';
+import type { OlamMetric, OlamSlide, OlamTone } from '../data/olamAfricaStrategy';
+
+const palette: Record<OlamTone, string> = {
+  green: '#12B981',
+  lime: '#A5D65B',
+  cyan: '#57D8C5',
+  orange: '#F28B32',
+  gold: '#F3C65A',
+  violet: '#9B7CFF',
+  slate: '#91A0AE',
+};
+
+const sourceMap = Object.fromEntries(OLAM_SOURCES.map((source) => [source.id, source]));
+
+const OlamIdentity: React.FC = () => (
+  <div className="inline-flex items-center gap-3" aria-label="Olam Agri strategy">
+    <div className="relative h-12 w-12 shrink-0">
+      <svg viewBox="0 0 64 64" className="h-full w-full" aria-hidden="true">
+        <defs>
+          <linearGradient id="olamLeaf" x1="8" y1="6" x2="56" y2="58">
+            <stop offset="0%" stopColor="#63E0B4" />
+            <stop offset="55%" stopColor="#12B981" />
+            <stop offset="100%" stopColor="#087A63" />
+          </linearGradient>
+        </defs>
+        <path d="M53 9C34 10 17 20 12 36c-4 13 3 20 14 17 17-5 25-22 27-44Z" fill="url(#olamLeaf)" />
+        <path d="M17 48C28 37 37 29 49 18" fill="none" stroke="#E9FFF7" strokeWidth="3" strokeLinecap="round" opacity=".9" />
+        <path d="M30 37c2-8 2-14 0-21M34 33c7 0 12 1 16 3" fill="none" stroke="#E9FFF7" strokeWidth="2" strokeLinecap="round" opacity=".62" />
+      </svg>
+    </div>
+    <div>
+      <div className="text-2xl font-semibold tracking-[-0.045em] text-white">olam agri</div>
+      <div className="mt-0.5 text-[8px] font-mono uppercase tracking-[0.18em] text-emerald-200/70">Africa growth strategy · portfolio case study</div>
+    </div>
+  </div>
+);
+
+const MetricCard: React.FC<{ metric: OlamMetric }> = ({ metric }) => {
+  const color = palette[metric.tone || 'slate'];
+  return (
+    <div className="relative min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-3.5 shadow-[0_12px_35px_rgba(0,0,0,.18)]">
+      <div className="absolute inset-y-3 left-0 w-[3px] rounded-full" style={{ background: color }} />
+      <div className="pl-2">
+        <div className="text-[8px] font-mono uppercase tracking-[0.14em] text-white/54">{metric.label}</div>
+        <div className="mt-1.5 whitespace-nowrap text-[1.35rem] font-semibold tracking-[-0.035em]" style={{ color }}>{metric.value}</div>
+        <div className="mt-1.5 text-[8.75px] leading-[1.42] text-white/72">{metric.detail}</div>
+      </div>
+    </div>
+  );
+};
+
+const sourceCodes = (ids: string[]) => ids.map((id) => id).join(' · ');
+
+const SourceLine: React.FC<{ ids: string[] }> = ({ ids }) => {
+  if (!ids.length) return null;
+  return (
+    <div className="mt-auto flex items-center justify-between gap-3 border-t border-white/8 pt-2 text-[7px] font-mono uppercase tracking-[0.12em] text-white/36">
+      <span>Evidence</span>
+      <span className="truncate text-right">{sourceCodes(ids)}</span>
+    </div>
+  );
+};
+
+const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
+  const id = slide.id;
+  const isNetwork = ['availability', 'west-africa', 'southern-africa', 'portfolio-flywheel'].includes(id);
+  const isGate = ['capital-gates', 'next-90-days'].includes(id);
+  const isData = ['customer-data-loop', 'marketing-os', 'scorecard'].includes(id);
+  const isMarket = ['affordability', 'africa-runway', 'wheat-baker-demand'].includes(id);
+  const isRisk = id === 'risk';
+  const isCandidate = slide.kind === 'candidate';
+
+  if (isNetwork) {
+    const nodes = ['Supply', 'Process', 'Route', 'Customer'];
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_80%_14%,rgba(18,185,129,.15),transparent_34%),linear-gradient(145deg,#101B1B,#081013)] p-4 [perspective:900px]">
+        <div className="absolute left-[14%] right-[14%] top-1/2 h-px bg-gradient-to-r from-emerald-400/20 via-emerald-300/65 to-amber-300/35" />
+        <div className="absolute inset-x-5 top-[31%] flex justify-between">
+          {nodes.map((node, idx) => (
+            <div key={node} className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/12 bg-[#0C1617] shadow-[12px_18px_32px_rgba(0,0,0,.28)] [transform:rotateX(8deg)_rotateY(-8deg)]">
+              <div className="absolute -right-1.5 top-1.5 bottom-[-4px] w-1.5 rounded-r bg-emerald-400/10" />
+              <span className="text-[8px] font-mono uppercase tracking-wide" style={{ color: [palette.green,palette.cyan,palette.gold,palette.orange][idx] }}>{node}</span>
+            </div>
+          ))}
+        </div>
+        <div className="absolute inset-x-6 bottom-4 text-[8px] leading-relaxed text-white/46">The advantage compounds only when the physical flow and the customer-value flow are measured together.</div>
+      </div>
+    );
+  }
+
+  if (isGate) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(145deg,#11191A,#0A0E13)] p-5">
+        <div className="absolute left-6 right-6 bottom-10 flex items-end gap-2">
+          {[38,62,86,112].map((height, idx) => (
+            <div key={height} className="relative flex-1 rounded-t-xl border border-white/10 bg-gradient-to-b from-emerald-400/35 to-emerald-400/[0.04]" style={{ height }}>
+              <div className="absolute -top-5 left-0 text-[7px] font-mono text-white/48">0{idx+1}</div>
+            </div>
+          ))}
+        </div>
+        <div className="absolute left-6 top-5 text-[9px] font-mono uppercase tracking-[0.15em] text-emerald-200/70">Evidence before scale</div>
+      </div>
+    );
+  }
+
+  if (isData) {
+    const points = [[24,62],[42,37],[59,54],[75,26],[87,47]] as const;
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_76%_20%,rgba(87,216,197,.14),transparent_35%),#0A1115]">
+        <svg viewBox="0 0 240 150" className="absolute inset-0 h-full w-full">
+          <path d="M30 108 C65 85 80 47 111 74 S162 33 210 54" fill="none" stroke="#57D8C5" strokeWidth="4" />
+          <path d="M30 118 C75 112 115 99 210 81" fill="none" stroke="#F3C65A" strokeOpacity=".55" strokeWidth="2" />
+          {points.map(([x,y],i)=><circle key={i} cx={x*2.35} cy={y*1.7} r={i===3?7:4.5} fill={i===3?'#F28B32':'#12B981'} />)}
+        </svg>
+        <div className="absolute left-4 top-4 text-[8px] font-mono uppercase tracking-[0.14em] text-white/46">Sense → diagnose → intervene → learn</div>
+      </div>
+    );
+  }
+
+  if (isMarket) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(145deg,#16150E,#091013)] p-5">
+        <div className="absolute left-5 right-5 bottom-8 flex items-end gap-3">
+          {[54,98,72,122,88].map((h, idx) => (
+            <div key={idx} className="flex-1 rounded-t-lg" style={{ height:h, background:['#12B981','#F3C65A','#57D8C5','#F28B32','#9B7CFF'][idx]+'B8' }} />
+          ))}
+        </div>
+        <div className="absolute left-5 top-4 text-[8px] font-mono uppercase tracking-[0.14em] text-white/48">Demand quality ≠ demand volume</div>
+      </div>
+    );
+  }
+
+  if (isRisk) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[#0B1114] p-5">
+        <div className="absolute left-[18%] top-[20%] h-[60%] w-[2px] bg-orange-400/50" />
+        <div className="absolute right-[18%] top-[20%] h-[60%] w-[2px] bg-orange-400/50" />
+        <div className="absolute left-[18%] right-[18%] top-1/2 h-px bg-white/12" />
+        <div className="absolute left-[30%] top-[30%] h-14 w-14 rounded-full border border-emerald-300/35 bg-emerald-400/10" />
+        <div className="absolute right-[28%] bottom-[25%] h-10 w-10 rounded-xl border border-orange-300/35 bg-orange-400/10 rotate-12" />
+        <div className="absolute left-5 top-4 text-[8px] font-mono uppercase tracking-[0.14em] text-orange-200/70">Predefined falsifiers</div>
+      </div>
+    );
+  }
+
+  if (isCandidate) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_15%_20%,rgba(155,124,255,.14),transparent_36%),radial-gradient(circle_at_82%_80%,rgba(18,185,129,.14),transparent_34%),#0A1015] p-5">
+        <div className="absolute inset-x-7 top-[38%] flex items-center justify-between">
+          {[Target, TrendingUp, Network].map((Icon, idx) => (
+            <div key={idx} className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.035] shadow-[0_18px_34px_rgba(0,0,0,.28)]">
+              <Icon className="h-6 w-6" style={{ color:[palette.cyan,palette.green,palette.gold][idx] }} />
+            </div>
+          ))}
+        </div>
+        <div className="absolute left-5 top-4 text-[8px] font-mono uppercase tracking-[0.14em] text-violet-200/70">Intelligence → experiments → replication</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_74%_17%,rgba(18,185,129,.16),transparent_36%),radial-gradient(circle_at_18%_84%,rgba(242,139,50,.10),transparent_32%),#0A1114]">
+      <div className="absolute left-[18%] top-[22%] h-[58%] w-[64%] [perspective:900px]">
+        <div className="absolute inset-0 rotate-[-8deg] rounded-[28px] border border-emerald-300/15 bg-emerald-400/[0.045] shadow-[22px_28px_50px_rgba(0,0,0,.32)]" />
+        <div className="absolute inset-5 rotate-[5deg] rounded-[22px] border border-amber-300/15 bg-amber-300/[0.035]" />
+        <div className="absolute inset-10 rounded-[18px] border border-white/10 bg-white/[0.025]" />
+      </div>
+      <Leaf className="absolute left-1/2 top-1/2 h-12 w-12 -translate-x-1/2 -translate-y-1/2 text-emerald-300/70" />
+    </div>
+  );
+};
+
+const AuditBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
+  <div className="grid grid-cols-[1fr_.82fr] gap-4">
+    <div className="grid grid-cols-2 gap-3">
+      {slide.metrics.map((metric) => <MetricCard key={metric.label} metric={metric} />)}
+    </div>
+    <div className="rounded-2xl border border-orange-300/15 bg-orange-400/[0.045] p-4">
+      <div className="text-[8px] font-mono uppercase tracking-[0.14em] text-orange-200/70">What the executive model still needs</div>
+      <div className="mt-3 space-y-2">
+        {slide.bullets.map((bullet, idx) => (
+          <div key={bullet} className="grid grid-cols-[22px_1fr] gap-2 text-[9px] leading-[1.4] text-white/76">
+            <span className="font-mono text-orange-300">0{idx+1}</span><span>{bullet}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
+  if (slide.kind === 'audit') return <AuditBody slide={slide} />;
+
+  if (slide.kind === 'iterations') {
+    return (
+      <div className="grid grid-cols-2 gap-x-5 gap-y-1.5">
+        {OLAM_REVIEW_ITERATIONS.map((row) => (
+          <div key={row[0]} className="grid grid-cols-[26px_1fr] gap-2 border-t border-white/8 py-1.5">
+            <div className="text-[7px] font-mono text-emerald-300">{row[0]}</div>
+            <div>
+              <div className="text-[8px] font-medium text-white/84">{row[1]}</div>
+              <div className="mt-0.5 text-[7.2px] leading-[1.32] text-white/50">{row[3]}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (slide.kind === 'sources') {
+    return (
+      <div className="grid grid-cols-2 gap-2.5">
+        {slide.bullets.map((bullet) => {
+          const id = bullet.split(' · ')[0];
+          const source = sourceMap[id];
+          return (
+            <a key={id} href={source?.url} target="_blank" rel="noreferrer" className="group min-w-0 rounded-xl border border-white/10 bg-white/[0.025] p-3 hover:border-emerald-300/30">
+              <div className="flex items-start gap-2">
+                <span className="shrink-0 text-[7px] font-mono text-emerald-300">{id}</span>
+                <div className="min-w-0">
+                  <div className="text-[8.5px] font-semibold leading-[1.25] text-white/82 group-hover:text-emerald-200">{source?.label}</div>
+                  <div className="mt-1 text-[7.2px] leading-[1.35] text-white/48">{source?.note}</div>
+                </div>
+                <ExternalLink className="ml-auto h-3 w-3 shrink-0 text-white/24" />
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-[1.05fr_.95fr] gap-4">
+      <div className="grid content-start gap-3">
+        {slide.metrics.length > 0 && (
+          <div className={'grid gap-2.5 ' + (slide.metrics.length >= 4 ? 'grid-cols-2' : slide.metrics.length === 3 ? 'grid-cols-3' : 'grid-cols-2')}>
+            {slide.metrics.map((metric) => <MetricCard key={metric.label} metric={metric} />)}
+          </div>
+        )}
+        {slide.bullets.length > 0 && (
+          <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-3.5">
+            <div className="space-y-2">
+              {slide.bullets.slice(0, 7).map((bullet, idx) => (
+                <div key={bullet} className="grid grid-cols-[22px_1fr] gap-2 text-[8.5px] leading-[1.4] text-white/72">
+                  <span className="font-mono text-emerald-300">{String(idx+1).padStart(2,'0')}</span>
+                  <span>{bullet}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+      <DecisionGraphic slide={slide} />
+    </div>
+  );
+};
+
+const StrategySlide: React.FC<{ slide: OlamSlide; index: number }> = ({ slide, index }) => {
+  if (slide.kind === 'cover') {
+    return (
+      <section id={'olam-slide-' + slide.id} className="olam-deck-slide relative overflow-hidden rounded-[28px] border border-white/10 bg-[#071117] shadow-[0_30px_90px_rgba(0,0,0,.38)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(18,185,129,.20),transparent_32%),radial-gradient(circle_at_14%_88%,rgba(242,139,50,.13),transparent_31%),linear-gradient(140deg,#061018_0%,#08161B_58%,#0F1712_100%)]" />
+        <div className="absolute right-[-5%] top-[12%] h-[72%] w-[50%] [perspective:1100px]">
+          <div className="absolute inset-0 rotate-[8deg] rounded-[42px] border border-emerald-300/15 bg-emerald-300/[0.04] shadow-[25px_35px_70px_rgba(0,0,0,.35)]" />
+          <div className="absolute inset-10 rotate-[-5deg] rounded-[34px] border border-amber-300/12 bg-amber-300/[0.035]" />
+          <svg viewBox="0 0 400 300" className="absolute inset-10 h-[calc(100%-5rem)] w-[calc(100%-5rem)] opacity-80">
+            <path d="M25 225 C90 185 125 75 205 122 S305 52 377 84" fill="none" stroke="#57D8C5" strokeWidth="6"/>
+            <path d="M25 247 C95 224 175 210 377 152" fill="none" stroke="#F3C65A" strokeOpacity=".55" strokeWidth="3"/>
+            <circle cx="205" cy="122" r="13" fill="#F28B32"/>
+            <circle cx="307" cy="83" r="10" fill="#12B981"/>
+          </svg>
+        </div>
+        <div className="relative z-10 flex h-full flex-col justify-between p-10">
+          <OlamIdentity />
+          <div className="max-w-[60%]">
+            <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-emerald-200/65">Executive growth strategy · Africa</div>
+            <h2 className="mt-4 text-[3.35rem] font-semibold leading-[0.98] tracking-[-0.055em] text-white">{slide.title}</h2>
+            <p className="mt-5 text-[1rem] leading-relaxed text-white/68">{slide.narrative}</p>
+          </div>
+          <div className="flex items-end justify-between">
+            <div className="text-[10px] font-medium text-white/82">Manash Protim Deori</div>
+            <div className="text-[7px] font-mono uppercase tracking-[0.14em] text-white/34">Source-verified · 20-pass review · September 2026</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id={'olam-slide-' + slide.id} className="olam-deck-slide relative overflow-hidden rounded-[28px] border border-white/10 bg-[#071117] shadow-[0_30px_90px_rgba(0,0,0,.34)]">
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#12B981] via-[#57D8C5] to-[#F3C65A]" />
+      <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-emerald-400/[0.045] blur-3xl" />
+      <div className="relative flex h-full flex-col p-7">
+        <div className="flex items-center justify-between gap-4">
+          <div className="text-[7.5px] font-mono uppercase tracking-[0.18em] text-emerald-200/58">{String(index+1).padStart(2,'0')} · {slide.section}</div>
+          <div className="text-[7px] font-mono uppercase tracking-[0.14em] text-white/30">Olam Agri Africa Growth Strategy</div>
+        </div>
+        <div className="mt-4 grid grid-cols-[1.28fr_.72fr] gap-5">
+          <div>
+            <h2 className={'max-w-full text-white font-semibold tracking-[-0.04em] ' + (slide.title.length > 105 ? 'text-[1.7rem] leading-[1.05]' : slide.title.length > 75 ? 'text-[1.92rem] leading-[1.04]' : 'text-[2.15rem] leading-[1.02]')}>{slide.title}</h2>
+            <p className="mt-2.5 max-w-[95%] text-[9.5px] leading-[1.5] text-white/62">{slide.narrative}</p>
+          </div>
+          <div className="relative overflow-hidden rounded-2xl border border-emerald-300/12 bg-[linear-gradient(145deg,rgba(18,185,129,.07),rgba(255,255,255,.018))] p-3.5">
+            <div className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full bg-gradient-to-b from-emerald-300 to-amber-300" />
+            <div className="pl-2">
+              <div className="text-[7.5px] font-mono uppercase tracking-[0.15em] text-emerald-200/66">Executive insight</div>
+              <p className="mt-1.5 text-[8.8px] leading-[1.45] text-white/75">{slide.insight}</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-4 min-h-0 flex-1">
+          <SlideBody slide={slide} />
+        </div>
+        <SourceLine ids={slide.sourceIds} />
+      </div>
+    </section>
+  );
+};
+
+export const OlamAfricaGrowthStrategyPage: React.FC = () => {
+  const slides = useMemo(() => OLAM_SLIDES, []);
+  const [pptBusy, setPptBusy] = useState(false);
+  const [pdfBusy, setPdfBusy] = useState(false);
+
+  const loadScript = (src: string, ready: () => boolean) => new Promise<void>((resolve, reject) => {
+    if (ready()) return resolve();
+    const existing = Array.from(document.scripts).find((script) => script.src === src);
+    if (existing) {
+      const started = Date.now();
+      const timer = window.setInterval(() => {
+        if (ready()) {
+          window.clearInterval(timer);
+          resolve();
+        } else if (Date.now() - started > 10000) {
+          window.clearInterval(timer);
+          reject(new Error('Export library did not become ready.'));
+        }
+      }, 80);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = true;
+    script.onload = () => ready() ? resolve() : reject(new Error('Export library loaded without expected global.'));
+    script.onerror = () => reject(new Error('Could not load export library.'));
+    document.head.appendChild(script);
+  });
+
+  const ensureRuntime = async (pdf = false) => {
+    await loadScript('https://cdn.jsdelivr.net/npm/html2canvas-pro@2.4.2/dist/html2canvas-pro.min.js', () => Boolean((window as any).html2canvas));
+    await loadScript('https://cdn.jsdelivr.net/npm/pptxgenjs@4.0.1/dist/pptxgen.bundle.js', () => Boolean((window as any).PptxGenJS || (window as any).pptxgen));
+    if (pdf) await loadScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js', () => Boolean((window as any).jspdf?.jsPDF || (window as any).jsPDF));
+  };
+
+  const captureSlide = async (slide: OlamSlide) => {
+    const html2canvas = (window as any).html2canvas;
+    const element = document.getElementById('olam-slide-' + slide.id);
+    if (!element) throw new Error('Slide not found: ' + slide.id);
+    const rect = element.getBoundingClientRect();
+    const width = Math.round(rect.width);
+    const height = Math.round(rect.height);
+    const scale = Math.max(1.7, Math.min(2.35, 2200 / Math.max(width, 1)));
+    const canvas = await html2canvas(element, {
+      backgroundColor: '#071117',
+      scale,
+      useCORS: true,
+      allowTaint: false,
+      logging: false,
+      imageTimeout: 15000,
+      width,
+      height,
+      windowWidth: Math.max(document.documentElement.clientWidth, width),
+      windowHeight: Math.max(document.documentElement.clientHeight, height),
+      onclone: (doc: Document) => doc.documentElement.classList.add('olam-exporting'),
+    });
+    return canvas.toDataURL('image/png');
+  };
+
+  const withExportMode = async <T,>(fn: () => Promise<T>) => {
+    document.documentElement.classList.add('olam-exporting');
+    try {
+      if ((document as any).fonts?.ready) await (document as any).fonts.ready;
+      await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+      return await fn();
+    } finally {
+      document.documentElement.classList.remove('olam-exporting');
+    }
+  };
+
+  const downloadPptx = async () => {
+    setPptBusy(true);
+    try {
+      await ensureRuntime(false);
+      await withExportMode(async () => {
+        const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
+        const pptx = new PptxGenJS();
+        pptx.layout = 'LAYOUT_WIDE';
+        pptx.author = 'Manash Protim Deori';
+        pptx.company = 'Portfolio Strategy Lab';
+        pptx.subject = 'Olam Agri Africa Growth Strategy';
+        pptx.title = 'Building the Next African Growth Engine';
+        for (const slideData of slides) {
+          const imageData = await captureSlide(slideData);
+          const slide = pptx.addSlide();
+          slide.background = { color: '071117' };
+          slide.addImage({ data: imageData, x: 0, y: 0, w: 13.333, h: 7.5 });
+          await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
+        }
+        await pptx.writeFile({ fileName: 'Olam_Africa_Growth_Strategy_' + new Date().toISOString().slice(0,10) + '.pptx' });
+      });
+    } catch (error) {
+      console.error(error);
+      alert('PowerPoint export failed: ' + (error instanceof Error ? error.message : 'Unknown error'));
+    } finally {
+      setPptBusy(false);
+    }
+  };
+
+  const downloadPdf = async () => {
+    setPdfBusy(true);
+    try {
+      await ensureRuntime(true);
+      await withExportMode(async () => {
+        const JsPdf = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
+        const pdf = new JsPdf({ orientation: 'landscape', unit: 'pt', format: [1200, 675], compress: true });
+        for (let i=0; i<slides.length; i+=1) {
+          const imageData = await captureSlide(slides[i]);
+          if (i > 0) pdf.addPage([1200, 675], 'landscape');
+          pdf.addImage(imageData, 'PNG', 0, 0, 1200, 675, undefined, 'SLOW');
+          await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
+        }
+        pdf.save('Olam_Africa_Growth_Strategy_' + new Date().toISOString().slice(0,10) + '.pdf');
+      });
+    } catch (error) {
+      console.error(error);
+      alert('PDF export failed: ' + (error instanceof Error ? error.message : 'Unknown error'));
+    } finally {
+      setPdfBusy(false);
+    }
+  };
+
+  return (
+    <div className="olam-strategy-lab min-h-screen bg-[#050B0E] text-white">
+      <div className="mx-auto max-w-[1340px] px-5 py-12 md:px-8">
+        <header className="olam-local-header mb-8 rounded-[24px] border border-white/10 bg-white/[0.025] p-6 md:p-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <OlamIdentity />
+              <h1 className="mt-6 text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-white">Olam Agri Africa Growth Strategy Lab</h1>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A 20-pass, primary-source-first strategy deck that stress-tests the uploaded Africa growth case and reframes expansion around customer profit, reliable availability, service intelligence and evidence-gated capital.</p>
+            </div>
+            <div className="flex flex-wrap gap-2" data-export-hide="true">
+              <button onClick={downloadPptx} disabled={pptBusy} className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-[#04100D] hover:bg-emerald-400 disabled:opacity-50">
+                <FileDown className="h-4 w-4" /> {pptBusy ? 'Rendering exact PPTX…' : 'Download exact PPTX'}
+              </button>
+              <button onClick={downloadPdf} disabled={pdfBusy} className="inline-flex items-center gap-2 rounded-lg border border-emerald-300/25 bg-emerald-300/[0.07] px-4 py-2.5 text-sm font-semibold text-emerald-100 hover:bg-emerald-300/[0.12] disabled:opacity-50">
+                <Download className="h-4 w-4" /> {pdfBusy ? 'Rendering high-res PDF…' : 'Download high-res PDF'}
+              </button>
+            </div>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-[9px] font-mono uppercase tracking-[0.12em] text-white/40">
+            <span>{slides.length} slides</span><span>20 heavy review iterations</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
+          </div>
+        </header>
+
+        <div className="space-y-8">
+          {slides.map((slide, index) => <StrategySlide key={slide.id} slide={slide} index={index} />)}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OlamAfricaGrowthStrategyPage;
