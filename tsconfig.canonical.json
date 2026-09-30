@@ -5,12 +5,19 @@
     "skipLibCheck": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "types": ["vite/client", "node"]
+    "types": [
+      "vite/client",
+      "node"
+    ]
   },
   "include": [
     "src/pages/CanonicalStrategyLabPage.tsx",
     "src/data/canonicalStrategyDeck.ts",
+    "src/data/canonicalMarketingDecision.ts",
     "src/lib/canonicalStrategyModel.ts",
-    "tests/canonical-strategy.ts"
+    "src/lib/canonicalMarketingModel.ts",
+    "src/components/canonical/CanonicalDecisionVisuals.tsx",
+    "tests/canonical-strategy.ts",
+    "tests/canonical-marketing-decision.ts"
   ]
 }
