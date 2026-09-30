@@ -22,6 +22,12 @@ export interface CanonicalScenario {
   servicesContributionMarginPct: number;
   growthReinvestmentPct: number;
   uncertaintyPct: number;
+  marketingShareOfReinvestmentPct: number;
+  messageClarityPct: number;
+  partnerAmplificationPct: number;
+  communityAdvocacyPct: number;
+  analystAuthorityPct: number;
+  marketingInfluencePct: number;
 }
 
 export interface CustomerTcoInputs {
@@ -62,6 +68,12 @@ export const DEFAULT_CANONICAL_SCENARIO: CanonicalScenario = {
   servicesContributionMarginPct: 28,
   growthReinvestmentPct: 35,
   uncertaintyPct: 22,
+  marketingShareOfReinvestmentPct: 30,
+  messageClarityPct: 78,
+  partnerAmplificationPct: 65,
+  communityAdvocacyPct: 75,
+  analystAuthorityPct: 55,
+  marketingInfluencePct: 35,
 };
 
 export const DEFAULT_CUSTOMER_TCO: CustomerTcoInputs = {
@@ -174,6 +186,86 @@ export const SOURCES: SourceRef[] = [
     confidence: 'high',
     note: 'Infrastructure software revenue $27.029bn, +26%; segment includes VMware and other software assets.',
   },
+  {
+    id: 'broadcom-q3-2026',
+    label: 'Broadcom — Q3 FY2026 results',
+    url: 'https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial',
+    date: '2026-09-02',
+    confidence: 'high',
+    note: 'Q3 FY2026 total revenue was $29.6bn, up 86% year over year. Used only as a scale and investment signal, not as VMware-only revenue.',
+  },
+  {
+    id: 'canonical-kernel-sru-2026',
+    label: 'Canonical — accelerated kernel SRU strategy',
+    url: 'https://canonical.com/blog/accelerating-delivery-of-cve-fixes-with-a-new-kernel-release-strategy',
+    date: '2026-09-23',
+    confidence: 'high',
+    note: 'Canonical outlined a move to a unified rapid two-week kernel SRU cycle, published weekly, in response to the expanding CVE burden.',
+  },
+  {
+    id: 'canonical-snapdragon-x2',
+    label: 'Canonical — Ubuntu support for Snapdragon X2 Series',
+    url: 'https://canonical.com/blog/ubuntu-coming-soon-to-qualcomm-snapdragon-x2-series-platforms',
+    date: '2026-09-23',
+    confidence: 'high',
+    note: 'Upcoming 2027 Ubuntu support on Snapdragon X2 Series targets local agentic AI with 80 TOPS NPU acceleration.',
+  },
+  {
+    id: 'canonical-zephyr-2026',
+    label: 'Canonical — Zephyr 26.04 LTS',
+    url: 'https://canonical.com/blog/zephyr-lts-announcement',
+    date: '2026-09-21',
+    confidence: 'high',
+    note: 'Zephyr 26.04 LTS extends Canonical lifecycle support to MCU-grade devices with up to 15 years of maintenance and CRA-oriented lifecycle capabilities.',
+  },
+  {
+    id: 'canonical-data-lake-2026',
+    label: 'Canonical — next-generation AI analytics data lake stack',
+    url: 'https://canonical.com/blog/inside-our-next-gen-ai-analytics-data-lake-stack',
+    date: '2026-09-18',
+    confidence: 'high',
+    note: 'Canonical describes an enterprise data lake stack focused on advanced analytics and AI while retaining infrastructure, data and technology control.',
+  },
+  {
+    id: 'canonical-open-secure-ai',
+    label: 'Canonical — Open Secure AI Alliance',
+    url: 'https://canonical.com/blog/open-secure-ai-alliance',
+    date: '2026-08-28',
+    confidence: 'high',
+    note: 'Canonical joined the NVIDIA-announced Open Secure AI Alliance focused on open technologies and tools for securing AI and agent systems.',
+  },
+  {
+    id: 'canonical-dragonwing-2026',
+    label: 'Canonical — Ubuntu certified on Qualcomm Dragonwing IQ-8275',
+    url: 'https://canonical.com/blog/ubuntu-now-certified-on-qualcomm-dragonwing-iq-8275',
+    date: '2026-09-08',
+    confidence: 'high',
+    note: 'Certified Ubuntu 24.04 LTS images target production edge-AI use cases including robotics, manufacturing, machine vision and physical AI.',
+  },
+  {
+    id: 'ubuntu-2604-security',
+    label: 'Canonical — Ubuntu 26.04 LTS security updates',
+    url: 'https://canonical.com/blog/ubuntu-26-04-lts-security-updates',
+    date: '2026-04-10',
+    confidence: 'high',
+    note: 'Ubuntu 26.04 LTS adds TPM-backed encryption, post-quantum-aware defaults, confidential-computing support and additional memory-safe components.',
+  },
+  {
+    id: 'canonical-sovereign-cloud',
+    label: 'Canonical — sovereign cloud',
+    url: 'https://canonical.com/solutions/infrastructure/sovereign-cloud',
+    date: 'current',
+    confidence: 'high',
+    note: 'Canonical positions sovereign cloud around control of data, systems and processing amid regulatory, geopolitical and AI-related security pressures.',
+  },
+  {
+    id: 'canonical-marketing-2026',
+    label: 'Canonical — Marketing careers and operating philosophy',
+    url: 'https://canonical.com/careers/marketing',
+    date: 'current',
+    confidence: 'high',
+    note: 'Canonical describes marketing as feedback, measurement, iteration and improvement, aiming to engineer growth in engagement, awareness, consumption and commerce.',
+  },
 ];
 
 export const PEER_MOMENTUM = [
@@ -207,10 +299,10 @@ export const PEER_MOMENTUM = [
   },
   {
     name: 'Broadcom',
-    metric: '$27.0bn',
-    detail: 'FY2025 Infrastructure Software revenue',
-    momentum: '+26%',
-    sourceId: 'broadcom-fy25',
+    metric: '$29.6bn',
+    detail: 'Q3 FY2026 total company revenue; not VMware-only',
+    momentum: '+86% YoY',
+    sourceId: 'broadcom-q3-2026',
   },
 ];
 

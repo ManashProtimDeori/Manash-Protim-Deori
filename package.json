@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "npm run lint:canonical && npm run test:economics && npm run test:measurement && npm run test:positioning && npm run test:intelligence && npm run test:drivetrain && npm run test:agri && npm run test:canonical && vite build",
+    "build": "npm run lint:canonical && npm run test:economics && npm run test:measurement && npm run test:positioning && npm run test:intelligence && npm run test:drivetrain && npm run test:agri && npm run test:canonical && npm run test:canonical-marketing && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit && tsc -p api/tsconfig.json --noEmit",
@@ -17,7 +17,8 @@
     "test:drivetrain": "tsx tests/drivetrain-gtm.ts",
     "test:agri": "tsx tests/agri-commercial.ts",
     "test:canonical": "tsx tests/canonical-strategy.ts",
-    "lint:canonical": "tsc -p tsconfig.canonical.json --noEmit"
+    "lint:canonical": "tsc -p tsconfig.canonical.json --noEmit",
+    "test:canonical-marketing": "tsx tests/canonical-marketing-decision.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
