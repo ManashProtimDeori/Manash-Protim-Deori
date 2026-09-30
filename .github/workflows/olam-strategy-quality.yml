@@ -1,0 +1,34 @@
+name: Olam Africa Strategy Quality
+
+on:
+  pull_request:
+    paths:
+      - 'src/pages/OlamAfricaGrowthStrategyPage.tsx'
+      - 'src/data/olamAfricaStrategy.ts'
+      - 'src/data/projects.ts'
+      - 'src/context/DataContext.tsx'
+      - 'src/App.tsx'
+      - 'src/index.css'
+      - 'tests/olam-africa-strategy.ts'
+      - 'tsconfig.olam.json'
+      - 'package.json'
+      - '.github/workflows/olam-strategy-quality.yml'
+  workflow_dispatch:
+
+jobs:
+  olam-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Type-check Olam strategy
+        run: npm run lint:olam
+      - name: Test Olam strategy evidence and portfolio integration
+        run: npm run test:olam
