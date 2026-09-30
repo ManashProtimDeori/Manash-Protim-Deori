@@ -43,7 +43,7 @@ assert.ok(candidateOne?.metrics.some(metric => metric.value === '₹20M'));
 assert.ok(candidateOne?.metrics.some(metric => metric.value === '−57% CPM'));
 assert.ok(candidateTwo?.metrics.some(metric => metric.value === 'B.Tech + MBA'));
 
-const auditNames = OLAM_REVIEW_ITERATIONS.map(row => row[1]);
+const auditNames: string[] = OLAM_REVIEW_ITERATIONS.map(row => String(row[1]));
 for (const required of ['Entity perimeter','Growth-quality test','Original-model audit','Customer-service moat','Route-to-market reframing','Digital measurement','Capital discipline','Executive synthesis']) {
   assert.ok(auditNames.includes(required), 'missing heavy audit dimension: ' + required);
 }
