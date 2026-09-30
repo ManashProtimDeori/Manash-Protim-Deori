@@ -4874,3 +4874,41 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
 .canonical-exporting .canonical-representative-figure{
   transform:none!important;
 }
+
+
+/* Canonical v10: balanced executive composition and protected safe areas. */
+@media (min-width:1024px){
+  .canonical-strategy-lab .canonical-deck-slide{
+    padding:0!important;
+  }
+  .canonical-strategy-lab .canonical-slide-inner{
+    padding:28px 30px 24px!important;
+  }
+  .canonical-strategy-lab .canonical-title-card,
+  .canonical-strategy-lab .canonical-leadership-box,
+  .canonical-strategy-lab .canonical-representative-figure{
+    min-width:0;
+  }
+  .canonical-strategy-lab .canonical-source-footer{
+    flex:0 0 auto;
+    max-height:44px;
+    overflow:hidden;
+  }
+}
+.canonical-strategy-lab .canonical-title-card{
+  transform:translateZ(0);
+  backface-visibility:hidden;
+}
+.canonical-strategy-lab .canonical-leadership-box{
+  margin-right:2px;
+}
+.canonical-strategy-lab .canonical-source-footer a{
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+}
+.canonical-exporting .canonical-title-card,
+.canonical-exporting .canonical-leadership-box,
+.canonical-exporting .canonical-representative-figure{
+  transform:none!important;
+}
