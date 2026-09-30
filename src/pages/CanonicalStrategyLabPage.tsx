@@ -247,6 +247,7 @@ const SlideShell: React.FC<{
     return (
       <section
         id={'canonical-slide-' + slide.id}
+        data-slide-id={slide.id}
         className="canonical-deck-slide canonical-intro-slide relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0B0D12] shadow-[0_28px_80px_rgba(0,0,0,.35)] scroll-mt-24"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(233,84,32,.22),transparent_31%),radial-gradient(circle_at_14%_86%,rgba(119,33,111,.26),transparent_34%),linear-gradient(135deg,#0B0D12_0%,#170F1A_52%,#2A1012_100%)]" />
@@ -268,6 +269,7 @@ const SlideShell: React.FC<{
   return (
     <section
       id={'canonical-slide-' + slide.id}
+      data-slide-id={slide.id}
       className="canonical-deck-slide relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0B0D12] shadow-[0_28px_80px_rgba(0,0,0,.35)] scroll-mt-24"
     >
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#E95420] via-[#77216F] to-[#31C7B5]" />
@@ -291,10 +293,18 @@ const SlideShell: React.FC<{
 
         <div className="mt-6 grid lg:grid-cols-[1.1fr_.9fr] gap-7 items-start">
           <div>
-            <h2 className="text-3xl md:text-4xl lg:text-[2.7rem] leading-[1.02] tracking-tight text-white font-semibold max-w-4xl">
+            <h2 className={'text-3xl md:text-4xl leading-[1.02] tracking-tight text-white font-semibold max-w-4xl ' + (
+              slide.kind === 'candidate' || slide.kind === 'appendix' || slide.kind === 'latest' || slide.kind === 'fundamentals'
+                ? 'lg:text-[2.2rem]'
+                : 'lg:text-[2.7rem]'
+            )}>
               {slide.title}
             </h2>
-            <p className="mt-4 max-w-3xl text-sm md:text-base leading-relaxed text-white/84">{slide.narrative}</p>
+            <p className={'mt-4 max-w-3xl text-sm leading-relaxed text-white/84 ' + (
+              slide.kind === 'candidate' || slide.kind === 'appendix' || slide.kind === 'latest' || slide.kind === 'fundamentals'
+                ? 'md:text-[13px]'
+                : 'md:text-base'
+            )}>{slide.narrative}</p>
           </div>
           <div className="rounded-xl border border-orange-400/20 bg-orange-400/[0.055] p-4">
             <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/75">Leadership insight</div>
@@ -881,24 +891,36 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       kind: 'fundamentals',
     },
     {
-      id: 'evidence-appendix',
-      section: 'Appendix · evidence provenance',
+      id: 'evidence-appendix-1',
+      section: 'Appendix · evidence provenance 1/3',
       title: 'Every retained external number is traceable to a primary source and a consistency check',
       decision: 'Higher quotation confidence is produced when reported facts are separated from modeled outputs, cross-checks are exposed, and PDF page numbers are shown only when they can be verified rather than inferred.',
-      narrative: 'This appendix is the quote-safe layer of the deck. Externally reported company facts are retained only where reliable references are consistent. Scenario values, TCO assumptions, sensitivities and brand indices remain explicitly modeled rather than being presented as company disclosures.',
-      metrics: [
-        { label: 'Evidence rule', value: '2-source consistency', detail: 'Required for retained externally reported figures', tone: 'teal' },
-        { label: 'PDF rule', value: 'No invented pages', detail: 'Pinpoint page numbers are shown only when verifiable', tone: 'orange' },
-        { label: 'Model rule', value: 'Non-reported', detail: 'Scenario/TCO/brand outputs remain labeled as modeled', tone: 'violet' },
-        { label: 'Auditability', value: 'Source links exposed', detail: 'Primary + cross-check are visible in the deck', tone: 'gold' },
-      ],
-      bullets: [
-        'Reported facts and model outputs are not allowed to share the same evidentiary status.',
-        'Rounded peer figures are used only where the underlying official number is preserved.',
-        'Scale comparisons are contextual and are not presented as like-for-like judgments of strategic quality.',
-        'Any unresolved source inconsistency is treated as a reason to remove the number rather than average it.',
-      ],
+      narrative: 'Part one of the quote-safe evidence layer. Reported facts, verification rules and the first source set are shown without compressing the entire register into one oversized slide.',
+      metrics: [],
+      bullets: [],
       sourceIds: ['canonical-2025-accounts','ibm-2026-q2','microsoft-fy26','oracle-fy26','broadcom-q3-2026'],
+      kind: 'appendix',
+    },
+    {
+      id: 'evidence-appendix-2',
+      section: 'Appendix · evidence provenance 2/3',
+      title: 'Independent cross-checks keep competitive and market figures quote-safe',
+      decision: 'Market context is made more reliable when every retained figure is tied to a primary reference and a distinct consistency check instead of being visually compressed into an unreadable source wall.',
+      narrative: 'Part two continues the same evidence register at presentation scale. No evidentiary status changes: reported facts remain separate from modeled scenarios and directional indices.',
+      metrics: [],
+      bullets: [],
+      sourceIds: ['ibm-2026-q2','microsoft-fy26','oracle-fy26','broadcom-q3-2026'],
+      kind: 'appendix',
+    },
+    {
+      id: 'evidence-appendix-3',
+      section: 'Appendix · evidence provenance 3/3',
+      title: 'Current product, security and infrastructure signals remain individually auditable',
+      decision: 'Current-development claims are more defensible when each source remains readable at presentation scale and no page is reduced merely to keep the appendix on a single slide.',
+      narrative: 'Part three completes the verified register. Scenario values, TCO assumptions, sensitivities and brand indices remain explicitly modeled rather than being presented as company disclosures.',
+      metrics: [],
+      bullets: [],
+      sourceIds: ['canonical-ai','canonical-gtc-2026','canonical-kernel-sru-2026','ubuntu-2604-security','canonical-sovereign-cloud'],
       kind: 'appendix',
     },
     {
@@ -1060,7 +1082,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         window.clearInterval(poll);
         if (ready()) resolve();
         else reject(new Error('Export library did not become ready: ' + src));
-      }, 8000);
+      }, 10000);
       return;
     }
     const script = document.createElement('script');
@@ -1073,8 +1095,8 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
   const ensureExportRuntime = async (includePdf = false) => {
     await loadExportScript(
-      'https://cdn.jsdelivr.net/npm/dom-to-image-more@3.5.0/dist/dom-to-image-more.min.js',
-      () => Boolean((window as any).domtoimage),
+      'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
+      () => Boolean((window as any).html2canvas),
     );
     await loadExportScript(
       'https://cdn.jsdelivr.net/npm/pptxgenjs@4.0.1/dist/pptxgen.bundle.js',
@@ -1088,18 +1110,23 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     }
   };
 
-  type CapturedSlide = { data: string; width: number; height: number };
+  type CapturedSlide = {
+    id: string;
+    data: string;
+    width: number;
+    height: number;
+    pixelWidth: number;
+    pixelHeight: number;
+  };
 
   const captureRenderedSlides = async (): Promise<CapturedSlide[]> => {
     await ensureExportRuntime(false);
     if ((document as any).fonts?.ready) await (document as any).fonts.ready;
 
-    const domtoimage = (window as any).domtoimage;
     const html2canvas = (window as any).html2canvas;
     const hiddenForExport = Array.from(document.querySelectorAll<HTMLElement>('[data-export-hide="true"]'));
     const previousDisplays = hiddenForExport.map((node) => node.style.display);
     hiddenForExport.forEach((node) => { node.style.display = 'none'; });
-
     document.documentElement.classList.add('canonical-exporting');
 
     try {
@@ -1109,44 +1136,57 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         if (!element) continue;
 
         const rect = element.getBoundingClientRect();
-        const width = Math.max(1, Math.round(Math.max(rect.width, element.scrollWidth)));
-        const height = Math.max(1, Math.round(Math.max(rect.height, element.scrollHeight)));
-        let data = '';
+        const width = Math.max(1, Math.round(rect.width));
+        const height = Math.max(1, Math.round(element.scrollHeight || rect.height));
+        const targetWidth = 2400;
+        const scale = Math.max(2, Math.min(3, targetWidth / width));
 
-        try {
-          data = await domtoimage.toJpeg(element, {
-            bgcolor: '#0B0D12',
-            width,
-            height,
-            quality: 0.97,
-            cacheBust: true,
-          });
-        } catch (primaryError) {
-          if (!html2canvas) throw primaryError;
-          const canvas = await html2canvas(element, {
-            backgroundColor: '#0B0D12',
-            scale: Math.min(1.5, Math.max(1, window.devicePixelRatio || 1)),
-            useCORS: true,
-            logging: false,
-          });
-          data = canvas.toDataURL('image/jpeg', 0.97);
+        const canvas = await html2canvas(element, {
+          backgroundColor: '#0B0D12',
+          scale,
+          useCORS: true,
+          allowTaint: false,
+          logging: false,
+          removeContainer: true,
+          imageTimeout: 15000,
+          foreignObjectRendering: false,
+          width,
+          height,
+          windowWidth: Math.max(document.documentElement.clientWidth, width),
+          windowHeight: Math.max(document.documentElement.clientHeight, height),
+          onclone: (doc: Document) => {
+            doc.documentElement.classList.add('canonical-exporting');
+            const cloned = doc.getElementById('canonical-slide-' + deckSlide.id) as HTMLElement | null;
+            if (cloned) {
+              cloned.style.margin = '0';
+              cloned.style.transform = 'none';
+              cloned.style.translate = 'none';
+            }
+          },
+        });
+
+        const context = canvas.getContext('2d');
+        if (context) {
+          context.imageSmoothingEnabled = true;
+          context.imageSmoothingQuality = 'high';
         }
 
-        captures.push({ data, width, height });
+        captures.push({
+          id: deckSlide.id,
+          data: canvas.toDataURL('image/png'),
+          width,
+          height,
+          pixelWidth: canvas.width,
+          pixelHeight: canvas.height,
+        });
       }
+
       if (!captures.length) throw new Error('No strategy slides were found for export.');
       return captures;
     } finally {
       document.documentElement.classList.remove('canonical-exporting');
       hiddenForExport.forEach((node, index) => { node.style.display = previousDisplays[index]; });
     }
-  };
-
-  const fitImage = (boxW: number, boxH: number, imageW: number, imageH: number) => {
-    const scale = Math.min(boxW / imageW, boxH / imageH);
-    const w = imageW * scale;
-    const h = imageH * scale;
-    return { x: (boxW - w) / 2, y: (boxH - h) / 2, w, h };
   };
 
   const downloadPptx = async () => {
@@ -1157,10 +1197,18 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
       const pptx = new PptxGenJS();
 
-      const slideWidth = 13.333;
-      const slideHeight = slideWidth * (captures[0].height / captures[0].width);
-      pptx.defineLayout({ name: 'PORTFOLIO_RENDER', width: slideWidth, height: slideHeight });
-      pptx.layout = 'PORTFOLIO_RENDER';
+      // PowerPoint uses one page size for the entire file. Use the tallest real website
+      // slide as the page height, then place every capture at full width with no down-scaling.
+      // This prevents the "tiny slide inside a large canvas" effect from the previous exporter.
+      const maxRatio = Math.max(...captures.map((capture) => capture.height / capture.width));
+      if (!Number.isFinite(maxRatio) || maxRatio <= 0 || maxRatio > 2.4) {
+        throw new Error('A slide is unexpectedly tall. Export stopped rather than shrinking or clipping it.');
+      }
+
+      const slideWidth = 10;
+      const slideHeight = slideWidth * maxRatio;
+      pptx.defineLayout({ name: 'PORTFOLIO_EXACT', width: slideWidth, height: slideHeight });
+      pptx.layout = 'PORTFOLIO_EXACT';
       pptx.author = 'Manash Protim Deori';
       pptx.company = 'Portfolio Strategy Lab';
       pptx.subject = 'Canonical Growth & Market Strategy';
@@ -1170,14 +1218,16 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       captures.forEach((capture) => {
         const slide = pptx.addSlide();
         slide.background = { color: '0B0D12' };
-        const fit = fitImage(slideWidth, slideHeight, capture.width, capture.height);
-        slide.addImage({ data: capture.data, x: fit.x, y: fit.y, w: fit.w, h: fit.h });
+        const imageHeight = slideWidth * (capture.height / capture.width);
+        slide.addImage({ data: capture.data, x: 0, y: 0, w: slideWidth, h: imageHeight });
       });
 
-      await pptx.writeFile({ fileName: 'Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pptx' });
+      await pptx.writeFile({
+        fileName: 'Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pptx',
+      });
     } catch (error) {
       console.error(error);
-      alert('PowerPoint export could not be completed. Please refresh once and try again.');
+      alert('PowerPoint export could not be completed without changing the visible slide geometry. Please refresh once and try again.');
     } finally {
       setDownloading(false);
     }
@@ -1196,6 +1246,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         unit: 'pt',
         format: [pageWidth, firstHeight],
         compress: true,
+        putOnlyUsedFonts: true,
       });
 
       captures.forEach((capture, index) => {
@@ -1205,13 +1256,13 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         }
         pdf.setFillColor(11, 13, 18);
         pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-        pdf.addImage(capture.data, 'JPEG', 0, 0, pageWidth, pageHeight, undefined, 'FAST');
+        pdf.addImage(capture.data, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'SLOW');
       });
 
       pdf.save('Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pdf');
     } catch (error) {
       console.error(error);
-      alert('PDF export could not be completed. Please refresh once and try again.');
+      alert('PDF export could not be completed at full visual fidelity. Please refresh once and try again.');
     } finally {
       setPdfDownloading(false);
     }
@@ -1222,24 +1273,24 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
     if (slide.kind === 'candidate') {
       return (
-        <div className="grid lg:grid-cols-[.92fr_1.08fr] gap-5">
-          <div className="grid sm:grid-cols-2 gap-3">
+        <div className="canonical-candidate-visual grid lg:grid-cols-[.9fr_1.1fr] gap-4">
+          <div className="grid sm:grid-cols-2 gap-2.5">
             {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-orange-300/85">Evidence → transfer → measurable action</div>
-            <div className="mt-4 grid gap-3">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+            <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-orange-300/85">Evidence → transfer → measurable action</div>
+            <div className="mt-3 grid gap-2">
               {slide.bullets.slice(0, 6).map((bullet, idx) => (
-                <div key={idx} className="grid grid-cols-[28px_1fr] gap-3 items-start rounded-xl border border-white/8 bg-black/20 p-3">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[10px] font-mono text-orange-300">
+                <div key={idx} className="grid grid-cols-[24px_1fr] gap-2.5 items-start rounded-xl border border-white/8 bg-black/20 p-2.5">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-[9px] font-mono text-orange-300">
                     {String(idx + 1).padStart(2, '0')}
                   </div>
-                  <p className="text-[12px] leading-relaxed text-white/82">{bullet}</p>
+                  <p className="text-[10.5px] leading-[1.48] text-white/82">{bullet}</p>
                 </div>
               ))}
             </div>
             {slide.id === 'candidate-fit' && (
-              <div className="mt-5 flex flex-wrap gap-2">
+              <div className="mt-3 flex flex-wrap gap-2">
                 <a href="https://linkedin.com/in/manash-protim-deori" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/90 hover:border-orange-400/40">
                   <ExternalLink className="h-3.5 w-3.5" /> LinkedIn
                 </a>
@@ -1446,7 +1497,9 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     }
 
     if (slide.kind === 'appendix') {
-      return <VerifiedEvidenceAppendix />;
+      if (slide.id === 'evidence-appendix-1') return <VerifiedEvidenceAppendix start={0} end={4} showRules />;
+      if (slide.id === 'evidence-appendix-2') return <VerifiedEvidenceAppendix start={4} end={9} showRules={false} />;
+      return <VerifiedEvidenceAppendix start={9} end={13} showRules={false} />;
     }
 
     if (slide.kind === 'pnl3d') {
@@ -1524,10 +1577,10 @@ export const CanonicalStrategyLabPage: React.FC = () => {
           </div>
           <div className="flex flex-wrap lg:justify-end gap-2">
             <button onClick={downloadPptx} disabled={downloading} className="inline-flex items-center gap-2 rounded-md bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-orange-400 disabled:opacity-50">
-              <FileDown className="w-4 h-4" /> {downloading ? 'Generating…' : 'Download live PPTX'}
+              <FileDown className="w-4 h-4" /> {downloading ? 'Rendering exact PPTX…' : 'Download exact PPTX'}
             </button>
             <button onClick={downloadPdf} disabled={pdfDownloading} className="inline-flex items-center gap-2 rounded-md border border-orange-400/35 bg-orange-400/10 px-4 py-2.5 text-sm font-semibold text-orange-100 hover:bg-orange-400/15 disabled:opacity-50">
-              <Download className="w-4 h-4" /> {pdfDownloading ? 'Rendering PDF…' : 'Download PDF'}
+              <Download className="w-4 h-4" /> {pdfDownloading ? 'Rendering high-res PDF…' : 'Download high-res PDF'}
             </button>
             <a href={ARCHIVE_DECK_VIEW_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-neutral-700 px-4 py-2.5 text-sm text-neutral-100 hover:text-white hover:border-neutral-500">
               <ExternalLink className="w-4 h-4" /> Archive deck
