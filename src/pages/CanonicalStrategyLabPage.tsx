@@ -5,6 +5,7 @@ import { useAuth } from '../auth/AuthContext';
 const DECK_FILE_ID = '1w7hRsHwGY1m6J7BelVbYmtN1z2jyk7wO';
 const DECK_VIEW_URL = 'https://drive.google.com/file/d/' + DECK_FILE_ID + '/view';
 const DECK_DOWNLOAD_URL = 'https://drive.google.com/uc?export=download&id=' + DECK_FILE_ID;
+const DECK_EMBED_URL = 'https://docs.google.com/presentation/d/' + DECK_FILE_ID + '/preview?rm=minimal';
 
 type Scenario = {
   attachLift: number;
@@ -272,6 +273,27 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         </aside>
 
         <div className="space-y-8">
+          <section className="rounded-xl border border-neutral-800 overflow-hidden bg-neutral-950/60">
+            <div className="flex items-center justify-between gap-4 px-5 py-4 border-b border-neutral-800">
+              <div>
+                <div className="text-sm font-semibold text-neutral-100">Executive strategy deck</div>
+                <div className="text-xs text-neutral-500 mt-1">17 slides · use the controls inside the viewer to navigate.</div>
+              </div>
+              <div className="text-[10px] font-mono uppercase tracking-wider text-neutral-600">Read-only public view</div>
+            </div>
+            <div className="relative w-full bg-neutral-950" style={{ paddingTop: '56.25%' }}>
+              <iframe
+                title="Canonical Executive Competitive Strategy Deck"
+                src={DECK_EMBED_URL}
+                className="absolute inset-0 w-full h-full border-0"
+                allowFullScreen
+              />
+            </div>
+            <div className="px-5 py-3 border-t border-neutral-800 text-[11px] text-neutral-600">
+              If the viewer asks for access, the Drive file still needs the one-time “Anyone with the link → Viewer” permission. That setting preserves edit rights with the owner while enabling public viewing and download.
+            </div>
+          </section>
+
           <section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
               ['Scenario revenue', money(metrics.projectedRevenue), pct(metrics.revenueGrowth) + ' vs 2025'],
