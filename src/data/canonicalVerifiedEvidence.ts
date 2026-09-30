@@ -103,10 +103,10 @@ export const VERIFIED_EVIDENCE: VerifiedEvidenceRow[] = [
     primaryLabel: 'Canonical — accelerated kernel release strategy',
     primaryUrl: 'https://canonical.com/blog/accelerating-delivery-of-cve-fixes-with-a-new-kernel-release-strategy',
     primaryPage: 'N/A — HTML engineering announcement',
-    crossCheckLabel: 'Canonical article body — release-cycle explanation',
-    crossCheckUrl: 'https://canonical.com/blog/accelerating-delivery-of-cve-fixes-with-a-new-kernel-release-strategy',
+    crossCheckLabel: 'Ubuntu Discourse — kernel team transition notice',
+    crossCheckUrl: 'https://discourse.ubuntu.com/t/going-from-4-to-2-accelerating-the-linux-kernel-release-process/88248',
     consistency: 'consistent',
-    note: 'The headline cadence and the body explanation are internally consistent; no additional numeric claim is inferred.',
+    note: 'The Canonical announcement and the Ubuntu kernel-team transition notice both describe the move to a unified recurring two-week SRU cycle; the weekly publication cadence is retained only from the Canonical announcement.',
   },
   {
     id: 'snapdragon-x2',
