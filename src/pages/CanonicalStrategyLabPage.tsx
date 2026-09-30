@@ -24,6 +24,8 @@ import {
   REVIEW_LENSES,
   SOURCES,
   STRATEGIC_BETS,
+} from '../data/canonicalStrategyDeck';
+import type {
   CanonicalScenario,
   CustomerTcoInputs,
 } from '../data/canonicalStrategyDeck';
@@ -753,10 +755,19 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     setTcoInputs((prev) => ({ ...prev, [key]: value }));
 
   const updateOverride = (field: keyof SlideOverride, value: string | string[]) => {
-    setOverrides((prev) => ({
-      ...prev,
-      [editingSlideId]: { ...(prev[editingSlideId] || {}), [field]: value },
-    }));
+    setOverrides((prev) => {
+      const next: SlideOverride = { ...(prev[editingSlideId] || {}) };
+      if (field === 'bullets') {
+        next.bullets = Array.isArray(value) ? value : [value];
+      } else if (field === 'title') {
+        next.title = String(value);
+      } else if (field === 'decision') {
+        next.decision = String(value);
+      } else if (field === 'narrative') {
+        next.narrative = String(value);
+      }
+      return { ...prev, [editingSlideId]: next };
+    });
   };
 
   const resetPublicScenario = () => {
