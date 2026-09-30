@@ -1032,39 +1032,41 @@ export const CanonicalStrategyLabPage: React.FC = () => {
             x: 0.55, y: 2.64, w: 7.2, h: 0.2, fontSize: 8.2, bold: true, color: colors.teal, charSpacing: 0.9, margin: 0,
           });
 
-          VERIFIED_EVIDENCE.slice(0, 10).forEach((row, evidenceIdx) => {
-            const col = evidenceIdx < 5 ? 0 : 1;
-            const rowIdx = evidenceIdx % 5;
+          const evidenceRows = VERIFIED_EVIDENCE;
+          const evidenceRowsPerColumn = Math.ceil(evidenceRows.length / 2);
+          evidenceRows.forEach((row, evidenceIdx) => {
+            const col = evidenceIdx < evidenceRowsPerColumn ? 0 : 1;
+            const rowIdx = evidenceIdx % evidenceRowsPerColumn;
             const x = col === 0 ? 0.55 : 6.76;
-            const y = 2.95 + rowIdx * 0.77;
+            const y = 2.95 + rowIdx * 0.54;
             const w = 5.98;
 
             s.addShape(ShapeType.roundRect, {
-              x, y, w, h: 0.66,
+              x, y, w, h: 0.48,
               fill: { color: '11141A' },
               line: { color: '303642', width: 0.55 },
             });
             s.addText(String(evidenceIdx + 1).padStart(2, '0') + ' · ' + row.subject, {
-              x: x + 0.13, y: y + 0.07, w: w - 0.26, h: 0.13,
-              fontSize: 6.7, bold: true, color: colors.white, margin: 0,
+              x: x + 0.13, y: y + 0.05, w: w - 0.26, h: 0.10,
+              fontSize: 6.0, bold: true, color: colors.white, margin: 0,
             });
             s.addText(row.retainedClaim, {
-              x: x + 0.13, y: y + 0.22, w: w - 0.26, h: 0.17,
-              fontSize: 5.8, color: 'D0D5DE', margin: 0, breakLine: false,
+              x: x + 0.13, y: y + 0.16, w: w - 0.26, h: 0.11,
+              fontSize: 5.1, color: 'D0D5DE', margin: 0, breakLine: false,
             });
             s.addText(row.primaryLabel, {
-              x: x + 0.13, y: y + 0.42, w: (w - 0.34) * 0.54, h: 0.12,
-              fontSize: 5.2, color: 'F1A282', underline: { color: 'F1A282' },
+              x: x + 0.13, y: y + 0.30, w: (w - 0.34) * 0.54, h: 0.08,
+              fontSize: 4.7, color: 'F1A282', underline: { color: 'F1A282' },
               hyperlink: { url: row.primaryUrl }, margin: 0,
             });
             s.addText(row.crossCheckLabel, {
-              x: x + 0.13 + (w - 0.34) * 0.56, y: y + 0.42, w: (w - 0.34) * 0.42, h: 0.12,
-              fontSize: 5.2, color: 'B6A8FF', underline: { color: 'B6A8FF' },
+              x: x + 0.13 + (w - 0.34) * 0.56, y: y + 0.30, w: (w - 0.34) * 0.42, h: 0.08,
+              fontSize: 4.7, color: 'B6A8FF', underline: { color: 'B6A8FF' },
               hyperlink: { url: row.crossCheckUrl }, margin: 0,
             });
             s.addText(row.primaryPage, {
-              x: x + 0.13, y: y + 0.55, w: w - 0.26, h: 0.08,
-              fontSize: 4.7, color: '8F98A7', margin: 0,
+              x: x + 0.13, y: y + 0.40, w: w - 0.26, h: 0.06,
+              fontSize: 4.2, color: '8F98A7', margin: 0,
             });
           });
 
