@@ -32,3 +32,5 @@ jobs:
         run: npm run lint:olam
       - name: Test Olam strategy evidence and portfolio integration
         run: npm run test:olam
+      - name: Build portfolio with Olam strategy route
+        run: npm run build
