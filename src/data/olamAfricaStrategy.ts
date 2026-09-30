@@ -48,7 +48,7 @@ export const OLAM_SOURCES: OlamSource[] = [
     url: 'https://www.olamagri.com/content/dam/olam-agri/assets/webp/au/ar/annual-report-pdf/2025/annual-report-2025.pdf',
     date: '2026',
     authority: 'primary',
-    note: 'Primary source for FY2025 scale, revenue, EBIT, volume, customer/farmer footprint, strategic priorities, Africa operating assets, digital transformation and food-security positioning.',
+    note: 'Primary source for FY2025 scale, revenue, EBIT, volume, customer/farmer footprint, strategic priorities, Africa operating assets, digital transformation and food-security positioning. The CFO table reports US$28.666bn revenue (displayed as US$28.7bn); an earlier CEO narrative says US$28.6bn, so the deck uses the CFO financial summary.',
   },
   {
     id: 'S02',
@@ -191,7 +191,7 @@ export const OLAM_SOURCES: OlamSource[] = [
 export const OLAM_REVIEW_ITERATIONS = [
   ['01', 'Entity perimeter', 'Is the deck about Olam Group, Olam Agri, or a Nigeria-only operating company?', 'Locked the strategy to Olam Agri with Nigeria as the first-wave commercial laboratory; group-level ownership is used only as strategic context.'],
   ['02', 'Ownership freshness', 'Does the deck still reflect the 2025 ownership structure?', 'Updated the strategic context to the post-transaction 2026 structure: 81.81% SALIC / 18.19% Olam Group, using Olam Group’s completion announcement.'],
-  ['03', 'Financial-base integrity', 'Are scale, revenue, volume and EBIT figures contemporaneous and internally consistent?', 'Rebuilt the fact base from the FY2025 annual report: US$28.7bn revenue, 53.7m MT sales volume and US$703.7m EBIT.'],
+  ['03', 'Financial-base integrity', 'Are scale, revenue, volume and EBIT figures contemporaneous and internally consistent?', 'Rebuilt the fact base from the FY2025 CFO financial summary: US$28.666bn revenue (displayed as US$28.7bn), 53.7m MT sales volume and US$703.7m EBIT. The CEO narrative says US$28.6bn; the deck resolves that internal rounding inconsistency in favour of the detailed CFO table.'],
   ['04', 'Growth-quality test', 'Does revenue growth automatically imply better economics?', 'No. FY2025 revenue rose 15.4% while EBIT fell 8.0%; the deck therefore shifts from volume-led growth to contribution, mix, service economics and cash productivity.'],
   ['05', 'Original-model audit', 'Can the NGN2.5bn Y3 EBIT, 2.27-year payback and NGN0.31bn NPV be verified externally?', 'No. They are retained only as scenario outputs from the uploaded deck because the underlying eligible-sales definition, cash-flow schedule and discount-rate assumptions were not supplied.'],
   ['06', 'Price-pack audit', 'Are the 250g/500g/1kg prices and modeled margins observed market facts?', 'No. They are treated as illustrative architecture from the uploaded deck, not quoted shelf prices or Olam-reported margins.'],
