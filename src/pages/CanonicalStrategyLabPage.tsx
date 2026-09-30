@@ -259,9 +259,8 @@ const SlideRepresentativeFigure: React.FC<{ slide: DeckSlide }> = ({ slide }) =>
   const spec = FIGURE_SPECS[slide.id] || { kind: 'engine' as FigureKind, labels: ['SIGNAL','SYSTEM','OUTCOME'] as [string,string,string], caption: 'Decision mechanism' };
   return (
     <div className="canonical-representative-figure relative min-h-[154px] overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_80%_12%,rgba(233,84,32,.18),transparent_36%),radial-gradient(circle_at_18%_88%,rgba(119,33,111,.22),transparent_40%),linear-gradient(145deg,#11141B,#090C11)] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.06),0_18px_45px_rgba(0,0,0,.32)]">
-      <div className="absolute inset-x-3 top-2 flex items-center justify-between gap-3 text-[7px] font-mono uppercase tracking-[0.16em]">
-        <span className="text-white/48">{spec.caption}</span>
-        <span className="text-orange-300/75">{slide.section}</span>
+      <div className="absolute inset-x-3 top-2 text-[7px] font-mono uppercase tracking-[0.14em] text-white/48">
+        {spec.caption}
       </div>
       <div className="absolute inset-x-3 top-7 bottom-7">
         <FigureGlyph kind={spec.kind} />
