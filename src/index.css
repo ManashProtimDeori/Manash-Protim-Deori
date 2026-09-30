@@ -4806,3 +4806,47 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
     font-size:15px;
   }
 }
+
+
+/* Canonical Strategy Lab v6: hard theme isolation and export fidelity. */
+.light #main-content .canonical-strategy-lab,
+.dark #main-content .canonical-strategy-lab{
+  color-scheme:dark!important;
+  color:#f7f9fc!important;
+  background:
+    radial-gradient(circle at 88% 6%,rgba(119,33,111,.11),transparent 28%),
+    radial-gradient(circle at 6% 96%,rgba(233,84,32,.08),transparent 30%),
+    #080b10!important;
+}
+.light #main-content .canonical-strategy-lab :is(h1,h2,h3,h4,h5,h6),
+.dark #main-content .canonical-strategy-lab :is(h1,h2,h3,h4,h5,h6){
+  color:#f7f9fc!important;
+}
+.light #main-content .canonical-strategy-lab :is(.text-neutral-100,.text-neutral-200,.text-neutral-300,.text-neutral-400,.text-neutral-500),
+.dark #main-content .canonical-strategy-lab :is(.text-neutral-100,.text-neutral-200,.text-neutral-300,.text-neutral-400,.text-neutral-500){
+  color:#f4f7fb!important;
+}
+.light #main-content .canonical-strategy-lab .text-white,
+.dark #main-content .canonical-strategy-lab .text-white{
+  color:#ffffff!important;
+}
+.light #main-content .canonical-strategy-lab [class*="text-white/"],
+.dark #main-content .canonical-strategy-lab [class*="text-white/"]{
+  color:rgba(247,249,252,.90)!important;
+}
+.light #main-content .canonical-strategy-lab .canonical-local-header p,
+.dark #main-content .canonical-strategy-lab .canonical-local-header p{
+  color:#e4e9f0!important;
+}
+.light #main-content .canonical-strategy-lab .canonical-deck-slide,
+.dark #main-content .canonical-strategy-lab .canonical-deck-slide{
+  background-color:#0b0d12!important;
+  border-color:rgba(255,255,255,.16)!important;
+}
+.canonical-exporting .canonical-strategy-lab *,
+.canonical-exporting .canonical-strategy-lab *::before,
+.canonical-exporting .canonical-strategy-lab *::after{
+  animation:none!important;
+  transition:none!important;
+  caret-color:transparent!important;
+}
