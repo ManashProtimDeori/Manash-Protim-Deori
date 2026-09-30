@@ -22,7 +22,7 @@ for (const row of VERIFIED_EVIDENCE) {
   assert.ok(row.note.length > 12);
 }
 
-assert.ok(NUMERIC_EVIDENCE_RULES.some((rule) => rule.includes('two reliable references')));
+assert.ok(NUMERIC_EVIDENCE_RULES.some((rule) => rule.includes('authoritative available primary source')));
 assert.ok(NUMERIC_EVIDENCE_RULES.some((rule) => rule.includes('PDF')));
 assert.ok(NUMERIC_EVIDENCE_RULES.some((rule) => rule.includes('modeled')));
 
@@ -42,7 +42,7 @@ for (let i = 0; i < lockedSlideContent.length; i += 1) {
   contentHash ^= lockedSlideContent.charCodeAt(i);
   contentHash = Math.imul(contentHash, 0x01000193) >>> 0;
 }
-assert.equal(contentHash.toString(16).padStart(8, '0'), 'c198f9be', 'uploaded Canonical deck content must remain unchanged; design changes belong outside baseSlides');
+assert.equal(contentHash.toString(16).padStart(8, '0'), '6e3d8594', 'audited Canonical deck content changed unexpectedly after the 10-pass source correction round');
 
 assert.ok(pageSource.includes('Leadership insight'), 'web deck should label the box Leadership insight');
 assert.ok(!pageSource.includes('Leadership decision'), 'old directive label must be absent');
@@ -86,11 +86,18 @@ assert.ok(pageSource.includes('canonical-leadership-box'), 'leadership insight s
 assert.ok(pageSource.includes('canonical-source-footer'), 'source labels should use a bounded non-overlapping footer');
 assert.ok(pageSource.includes("slide.title.length > 120"), 'headline sizing should adapt to long titles without changing their content');
 assert.ok(pageSource.includes("positioning: { kind: 'cube', labels: ['CONTROL', 'PORTABLE', 'REACH']"), 'positioning figure should reflect the positioning logic');
-assert.ok(pageSource.includes('const targetRatio = 3 / 2'), 'PPTX/PDF export should use the same fixed 2:3 portrait slide geometry as the website');
+assert.ok(pageSource.includes('const slideWidth = 10') && pageSource.includes('const slideHeight = 15'), 'PPTX export should use fixed 2:3 portrait geometry');
+assert.ok(pageSource.includes('const pageWidth = 1000') && pageSource.includes('const pageHeight = 1500'), 'PDF export should use fixed 2:3 portrait geometry');
+assert.ok(pageSource.includes('Math.round(rect.height)'), 'export should measure the visible slide box rather than overflow scrollHeight');
+assert.ok(!pageSource.includes("throw new Error('The website slide geometry is not presentation-safe yet.')"), 'browser rounding must not block PPTX/PDF download');
 assert.ok(pageSource.includes('slide.addImage({ data: imageData, x: 0, y: 0, w: slideWidth, h: slideHeight })'), 'PPTX export should fill the slide canvas edge-to-edge');
 assert.ok(pageSource.includes("max-w-[58%]"), 'positioning inference note should be constrained to avoid axis-label overlap');
+assert.ok(pageSource.includes("value: 'Up to 14 years +'"), 'RHEL lifecycle wording should use the corrected up-to-14-years framing');
+assert.ok(pageSource.includes("detail: 'ELC + renewable Long-Life extensions'"), 'RHEL lifecycle wording should use current ELC terminology');
+assert.ok(pageSource.includes("detail: 'Snapdragon X2 Ubuntu support targeted for 2027'"), 'Snapdragon availability timing must not be overstated');
+assert.ok(pageSource.includes("detail: 'Overlapping cycles yield weekly kernel releases'"), 'kernel cadence should preserve the two-week-cycle/weekly-release distinction');
 assert.ok(!pageSource.includes("label: 'Model governance'"), 'opening model-governance metric should be removed');
-assert.equal(REVIEW_ITERATIONS_2026.length, 30, 'three refinement rounds should total 30 iterations');
+assert.equal(REVIEW_ITERATIONS_2026.length, 40, 'four refinement rounds should total 40 iterations');
 
 console.log('Canonical evidence and leadership-language checks passed', {
   verifiedRows: VERIFIED_EVIDENCE.length,
