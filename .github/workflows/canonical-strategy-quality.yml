@@ -38,4 +38,5 @@ jobs:
         run: npm run test:canonical
       - name: Test Canonical marketing decision model
         run: npm run test:canonical-marketing
-      - name: Test Canonical evidence governance\n        run: npm run test:canonical-evidence\n
+      - name: Test Canonical evidence governance
+        run: npm run test:canonical-evidence
