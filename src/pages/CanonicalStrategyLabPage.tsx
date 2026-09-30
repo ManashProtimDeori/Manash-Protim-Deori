@@ -852,17 +852,17 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       decision: 'The closest alignment is found in end-to-end campaign ownership, data-led optimization, stakeholder coordination, communication and hands-on execution; direct enterprise-technology marketing experience remains the principal gap and is not overstated.',
       narrative: 'Candidate evidence is stated conservatively. Responsibilities, education and operating context are used as proof; quantified business outcomes are not invented where they are unavailable. The objective is credibility first, then a clear transfer path into Canonical’s technical marketing environment.',
       metrics: [
-        { label: 'Experience', value: '16+ months', detail: 'Analytics-heavy, client-facing campaign and stakeholder-management work', tone: 'orange' },
-        { label: 'Execution', value: 'End-to-end', detail: 'Digital and offline campaign management under tight deadlines', tone: 'teal' },
+        { label: 'Experience', value: '1.3+ years', detail: 'Analytics-heavy, client-facing campaign and stakeholder-management work', tone: 'orange' },
+        { label: 'Budget managed', value: '₹20M', detail: 'Large-scale campaign budget responsibility documented in the portfolio resume', tone: 'teal' },
+        { label: 'Optimization', value: '−57% CPM', detail: '₹35.8 → ₹15.5 through data-led allocation and campaign optimization', tone: 'green' },
         { label: 'Foundation', value: 'B.Tech + MBA', detail: 'Engineering training plus MBA from IIM Shillong', tone: 'violet' },
-        { label: 'Operating context', value: 'High-stakes', detail: 'Senior-stakeholder coordination, relationship management and decision-ready communication', tone: 'gold' },
       ],
       bullets: [
         'Canonical asks for GTM and campaign ownership; my transferable evidence is end-to-end digital and offline campaign management from planning through analytics and delivery.',
-        'Canonical emphasizes data-driven optimization; my work has been analytics-heavy and client-facing, requiring performance interpretation and recommendation under deadline pressure.',
-        'Canonical values cross-functional collaboration and trusted relationships; my track record includes coordinating demanding senior stakeholders while keeping execution moving.',
+        'Data-led optimization is demonstrated in my portfolio resume by management of a ₹20M campaign budget and a 57% CPM reduction, from ₹35.8 to ₹15.5, through allocation and campaign optimization.',
+        'Canonical values cross-functional collaboration and trusted relationships; my track record includes coordinating demanding senior stakeholders while keeping execution moving under tight deadlines.',
         'Canonical needs technical-to-business storytelling; my engineering foundation, MBA training and portfolio work are used to translate complex analytical systems into concise executive narratives.',
-        'Case-study transfer: high-stakes campaigns required execution, analysis and stakeholder management to operate as one loop; the same discipline maps directly to Canonical’s experiment-measure-iterate culture.',
+        'Case-study transfer: high-stakes campaigns required execution, analysis, budget discipline and stakeholder management to operate as one loop; the same discipline maps directly to Canonical’s experiment-measure-iterate culture.',
         'Gap acknowledged: direct SaaS and enterprise-IT marketing tenure is not claimed. A first-90-day learning plan would prioritize product fluency, customer language, martech instrumentation and open-source community norms.',
       ],
       sourceIds: ['canonical-marketing-manager-2026', 'canonical-campaign-manager-2026', 'canonical-marketing-2026'],
@@ -1386,6 +1386,19 @@ export const CanonicalStrategyLabPage: React.FC = () => {
                 </div>
               ))}
             </div>
+            {slide.id === 'candidate-fit' && (
+              <div className="mt-5 flex flex-wrap gap-2" data-export-hide="true">
+                <a href="https://linkedin.com/in/manash-protim-deori" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/90 hover:border-orange-400/40">
+                  <ExternalLink className="h-3.5 w-3.5" /> LinkedIn
+                </a>
+                <a href="/resume" className="inline-flex items-center gap-1.5 rounded-md border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/90 hover:border-orange-400/40">
+                  <ExternalLink className="h-3.5 w-3.5" /> Resume
+                </a>
+                <a href="https://manash-protim-deori.vercel.app" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-white/12 bg-white/[0.04] px-3 py-2 text-xs font-medium text-white/90 hover:border-orange-400/40">
+                  <ExternalLink className="h-3.5 w-3.5" /> Portfolio
+                </a>
+              </div>
+            )}
           </div>
         </div>
       );
