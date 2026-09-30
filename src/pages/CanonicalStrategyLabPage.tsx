@@ -1095,7 +1095,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
   const ensureExportRuntime = async (includePdf = false) => {
     await loadExportScript(
-      'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
+      'https://cdn.jsdelivr.net/npm/html2canvas-pro@2.4.2/dist/html2canvas-pro.min.js',
       () => Boolean((window as any).html2canvas),
     );
     await loadExportScript(
@@ -1110,79 +1110,82 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     }
   };
 
-  type CapturedSlide = {
+  type SlideGeometry = {
     id: string;
-    data: string;
     width: number;
     height: number;
-    pixelWidth: number;
-    pixelHeight: number;
+    ratio: number;
   };
 
-  const captureRenderedSlides = async (): Promise<CapturedSlide[]> => {
-    await ensureExportRuntime(false);
-    if ((document as any).fonts?.ready) await (document as any).fonts.ready;
+  const getSlideGeometries = (): SlideGeometry[] => {
+    return slides.map((deckSlide) => {
+      const element = document.getElementById('canonical-slide-' + deckSlide.id);
+      if (!element) throw new Error('Slide element not found: ' + deckSlide.id);
+      const rect = element.getBoundingClientRect();
+      const width = Math.max(1, Math.round(rect.width));
+      const height = Math.max(1, Math.round(element.scrollHeight || rect.height));
+      return { id: deckSlide.id, width, height, ratio: height / width };
+    });
+  };
 
+  const captureRenderedSlide = async (geometry: SlideGeometry): Promise<string> => {
     const html2canvas = (window as any).html2canvas;
+    const element = document.getElementById('canonical-slide-' + geometry.id);
+    if (!element) throw new Error('Slide element not found during capture: ' + geometry.id);
+
+    // ~2K source width gives sharp text in both PDF and PowerPoint without forcing
+    // the browser to retain thirty 4K canvases at once.
+    const targetPixelWidth = 2048;
+    const scale = Math.max(1.5, Math.min(2.35, targetPixelWidth / geometry.width));
+
+    try {
+      const canvas = await html2canvas(element, {
+        backgroundColor: '#0B0D12',
+        scale,
+        useCORS: true,
+        allowTaint: false,
+        logging: false,
+        removeContainer: true,
+        imageTimeout: 20000,
+        foreignObjectRendering: false,
+        width: geometry.width,
+        height: geometry.height,
+        windowWidth: Math.max(document.documentElement.clientWidth, geometry.width),
+        windowHeight: Math.max(document.documentElement.clientHeight, geometry.height),
+        onclone: (doc: Document) => {
+          doc.documentElement.classList.add('canonical-exporting');
+          const cloned = doc.getElementById('canonical-slide-' + geometry.id) as HTMLElement | null;
+          if (cloned) {
+            cloned.style.margin = '0';
+            cloned.style.transform = 'none';
+            cloned.style.translate = 'none';
+          }
+        },
+      });
+
+      const context = canvas.getContext('2d');
+      if (context) {
+        context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = 'high';
+      }
+      return canvas.toDataURL('image/png');
+    } catch (error) {
+      console.error('Canonical export capture failed for slide', geometry.id, error);
+      throw new Error('Could not render slide "' + geometry.id + '" for export.');
+    }
+  };
+
+  const withExportMode = async <T,>(work: () => Promise<T>): Promise<T> => {
     const hiddenForExport = Array.from(document.querySelectorAll<HTMLElement>('[data-export-hide="true"]'));
     const previousDisplays = hiddenForExport.map((node) => node.style.display);
     hiddenForExport.forEach((node) => { node.style.display = 'none'; });
     document.documentElement.classList.add('canonical-exporting');
 
     try {
-      const captures: CapturedSlide[] = [];
-      for (const deckSlide of slides) {
-        const element = document.getElementById('canonical-slide-' + deckSlide.id);
-        if (!element) continue;
-
-        const rect = element.getBoundingClientRect();
-        const width = Math.max(1, Math.round(rect.width));
-        const height = Math.max(1, Math.round(element.scrollHeight || rect.height));
-        const targetWidth = 2400;
-        const scale = Math.max(2, Math.min(3, targetWidth / width));
-
-        const canvas = await html2canvas(element, {
-          backgroundColor: '#0B0D12',
-          scale,
-          useCORS: true,
-          allowTaint: false,
-          logging: false,
-          removeContainer: true,
-          imageTimeout: 15000,
-          foreignObjectRendering: false,
-          width,
-          height,
-          windowWidth: Math.max(document.documentElement.clientWidth, width),
-          windowHeight: Math.max(document.documentElement.clientHeight, height),
-          onclone: (doc: Document) => {
-            doc.documentElement.classList.add('canonical-exporting');
-            const cloned = doc.getElementById('canonical-slide-' + deckSlide.id) as HTMLElement | null;
-            if (cloned) {
-              cloned.style.margin = '0';
-              cloned.style.transform = 'none';
-              cloned.style.translate = 'none';
-            }
-          },
-        });
-
-        const context = canvas.getContext('2d');
-        if (context) {
-          context.imageSmoothingEnabled = true;
-          context.imageSmoothingQuality = 'high';
-        }
-
-        captures.push({
-          id: deckSlide.id,
-          data: canvas.toDataURL('image/png'),
-          width,
-          height,
-          pixelWidth: canvas.width,
-          pixelHeight: canvas.height,
-        });
-      }
-
-      if (!captures.length) throw new Error('No strategy slides were found for export.');
-      return captures;
+      if ((document as any).fonts?.ready) await (document as any).fonts.ready;
+      // Give the browser one frame after fonts/export styles settle before measuring.
+      await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+      return await work();
     } finally {
       document.documentElement.classList.remove('canonical-exporting');
       hiddenForExport.forEach((node, index) => { node.style.display = previousDisplays[index]; });
@@ -1193,41 +1196,47 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     setDownloading(true);
     try {
       await ensureExportRuntime(false);
-      const captures = await captureRenderedSlides();
-      const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
-      const pptx = new PptxGenJS();
 
-      // PowerPoint uses one page size for the entire file. Use the tallest real website
-      // slide as the page height, then place every capture at full width with no down-scaling.
-      // This prevents the "tiny slide inside a large canvas" effect from the previous exporter.
-      const maxRatio = Math.max(...captures.map((capture) => capture.height / capture.width));
-      if (!Number.isFinite(maxRatio) || maxRatio <= 0 || maxRatio > 2.4) {
-        throw new Error('A slide is unexpectedly tall. Export stopped rather than shrinking or clipping it.');
-      }
+      await withExportMode(async () => {
+        const geometries = getSlideGeometries();
+        if (!geometries.length) throw new Error('No strategy slides were found for export.');
 
-      const slideWidth = 10;
-      const slideHeight = slideWidth * maxRatio;
-      pptx.defineLayout({ name: 'PORTFOLIO_EXACT', width: slideWidth, height: slideHeight });
-      pptx.layout = 'PORTFOLIO_EXACT';
-      pptx.author = 'Manash Protim Deori';
-      pptx.company = 'Portfolio Strategy Lab';
-      pptx.subject = 'Canonical Growth & Market Strategy';
-      pptx.title = 'Canonical Growth & Market Strategy';
-      pptx.lang = 'en-US';
+        const maxRatio = Math.max(...geometries.map((geometry) => geometry.ratio));
+        if (!Number.isFinite(maxRatio) || maxRatio <= 0 || maxRatio > 3.2) {
+          throw new Error('One or more slides have an invalid export geometry.');
+        }
 
-      captures.forEach((capture) => {
-        const slide = pptx.addSlide();
-        slide.background = { color: '0B0D12' };
-        const imageHeight = slideWidth * (capture.height / capture.width);
-        slide.addImage({ data: capture.data, x: 0, y: 0, w: slideWidth, h: imageHeight });
-      });
+        const PptxGenJS = (window as any).PptxGenJS || (window as any).pptxgen;
+        const pptx = new PptxGenJS();
+        const slideWidth = 10;
+        const slideHeight = slideWidth * maxRatio;
 
-      await pptx.writeFile({
-        fileName: 'Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pptx',
+        pptx.defineLayout({ name: 'PORTFOLIO_EXACT', width: slideWidth, height: slideHeight });
+        pptx.layout = 'PORTFOLIO_EXACT';
+        pptx.author = 'Manash Protim Deori';
+        pptx.company = 'Portfolio Strategy Lab';
+        pptx.subject = 'Canonical Growth & Market Strategy';
+        pptx.title = 'Canonical Growth & Market Strategy';
+        pptx.lang = 'en-US';
+
+        for (const geometry of geometries) {
+          const imageData = await captureRenderedSlide(geometry);
+          const slide = pptx.addSlide();
+          slide.background = { color: '0B0D12' };
+          const imageHeight = slideWidth * geometry.ratio;
+          slide.addImage({ data: imageData, x: 0, y: 0, w: slideWidth, h: imageHeight });
+          // Yield between pages so Chromium can release the temporary canvas backing store.
+          await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
+        }
+
+        await pptx.writeFile({
+          fileName: 'Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pptx',
+        });
       });
     } catch (error) {
-      console.error(error);
-      alert('PowerPoint export could not be completed without changing the visible slide geometry. Please refresh once and try again.');
+      console.error('Canonical PowerPoint export failed', error);
+      const message = error instanceof Error ? error.message : 'Unknown export error';
+      alert('PowerPoint export failed: ' + message + ' Please refresh once and try again.');
     } finally {
       setDownloading(false);
     }
@@ -1237,32 +1246,42 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     setPdfDownloading(true);
     try {
       await ensureExportRuntime(true);
-      const captures = await captureRenderedSlides();
-      const JsPdf = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
-      const pageWidth = 1000;
-      const firstHeight = pageWidth * (captures[0].height / captures[0].width);
-      const pdf = new JsPdf({
-        orientation: pageWidth >= firstHeight ? 'landscape' : 'portrait',
-        unit: 'pt',
-        format: [pageWidth, firstHeight],
-        compress: true,
-        putOnlyUsedFonts: true,
-      });
 
-      captures.forEach((capture, index) => {
-        const pageHeight = pageWidth * (capture.height / capture.width);
-        if (index > 0) {
-          pdf.addPage([pageWidth, pageHeight], pageWidth >= pageHeight ? 'landscape' : 'portrait');
+      await withExportMode(async () => {
+        const geometries = getSlideGeometries();
+        if (!geometries.length) throw new Error('No strategy slides were found for export.');
+
+        const JsPdf = (window as any).jspdf?.jsPDF || (window as any).jsPDF;
+        const pageWidth = 1000;
+        const firstHeight = pageWidth * geometries[0].ratio;
+        const pdf = new JsPdf({
+          orientation: pageWidth >= firstHeight ? 'landscape' : 'portrait',
+          unit: 'pt',
+          format: [pageWidth, firstHeight],
+          compress: true,
+          putOnlyUsedFonts: true,
+        });
+
+        for (let index = 0; index < geometries.length; index += 1) {
+          const geometry = geometries[index];
+          const imageData = await captureRenderedSlide(geometry);
+          const pageHeight = pageWidth * geometry.ratio;
+
+          if (index > 0) {
+            pdf.addPage([pageWidth, pageHeight], pageWidth >= pageHeight ? 'landscape' : 'portrait');
+          }
+          pdf.setFillColor(11, 13, 18);
+          pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+          pdf.addImage(imageData, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'SLOW');
+          await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
         }
-        pdf.setFillColor(11, 13, 18);
-        pdf.rect(0, 0, pageWidth, pageHeight, 'F');
-        pdf.addImage(capture.data, 'PNG', 0, 0, pageWidth, pageHeight, undefined, 'SLOW');
-      });
 
-      pdf.save('Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pdf');
+        pdf.save('Canonical_Growth_Market_Strategy_' + new Date().toISOString().slice(0, 10) + '.pdf');
+      });
     } catch (error) {
-      console.error(error);
-      alert('PDF export could not be completed at full visual fidelity. Please refresh once and try again.');
+      console.error('Canonical PDF export failed', error);
+      const message = error instanceof Error ? error.message : 'Unknown export error';
+      alert('PDF export failed: ' + message + ' Please refresh once and try again.');
     } finally {
       setPdfDownloading(false);
     }
