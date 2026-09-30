@@ -114,26 +114,17 @@ const CanonicalIdentityMark: React.FC = () => (
   <div className="relative overflow-hidden rounded-[24px] border border-orange-400/25 bg-gradient-to-br from-orange-500/[0.13] via-white/[0.035] to-violet-500/[0.08] p-6 md:p-7">
     <div className="absolute -right-14 -top-14 h-40 w-40 rounded-full border border-orange-400/15" />
     <div className="absolute -right-5 -top-5 h-24 w-24 rounded-full border border-violet-400/15" />
-    <div className="flex items-center gap-5">
-      <div className="relative h-20 w-20 shrink-0">
-        <svg viewBox="0 0 120 120" className="h-full w-full" role="img" aria-label="Canonical strategy identity">
-          <defs>
-            <linearGradient id="canonicalStrategyGradient" x1="15%" y1="10%" x2="85%" y2="90%">
-              <stop offset="0%" stopColor="#F47B4A" />
-              <stop offset="55%" stopColor="#E95420" />
-              <stop offset="100%" stopColor="#B93412" />
-            </linearGradient>
-          </defs>
-          <circle cx="60" cy="60" r="43" fill="none" stroke="url(#canonicalStrategyGradient)" strokeWidth="13" strokeLinecap="round" strokeDasharray="205 70" transform="rotate(-38 60 60)" />
-          <circle cx="89" cy="29" r="7" fill="#E95420" />
-          <circle cx="31" cy="83" r="7" fill="#E95420" />
-          <circle cx="60" cy="60" r="8" fill="#F6F7F9" opacity="0.96" />
-        </svg>
+    <div className="relative">
+      <div className="inline-flex items-center rounded-2xl bg-white px-5 py-4 shadow-[0_18px_60px_rgba(0,0,0,.28)]">
+        <img
+          src="https://assets.ubuntu.com/v1/b3b72cb2-canonical-logo-166.png"
+          crossOrigin="anonymous"
+          alt="Canonical"
+          className="h-12 md:h-14 w-auto object-contain"
+        />
       </div>
-      <div>
-        <div className="text-3xl md:text-4xl font-semibold tracking-[-0.045em] text-white">canonical</div>
-        <div className="mt-2 text-[10px] font-mono uppercase tracking-[0.24em] text-orange-200/85">Open infrastructure · strategy lab</div>
-      </div>
+      <div className="mt-5 text-[10px] font-mono uppercase tracking-[0.24em] text-orange-100/90">Open infrastructure · strategy lab</div>
+      <div className="mt-2 max-w-md text-sm leading-relaxed text-white/72">Official Canonical brand asset presented inside a portfolio-specific strategy lockup; the surrounding visual treatment is intentionally separate from the logo itself.</div>
     </div>
   </div>
 );
