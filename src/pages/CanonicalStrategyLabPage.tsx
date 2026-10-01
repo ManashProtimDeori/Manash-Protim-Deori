@@ -459,7 +459,7 @@ const SlideShell: React.FC<{
         </div>
 
         <div className={'grid lg:grid-cols-[1.18fr_.82fr] items-stretch ' + (denseSlide ? 'mt-3 gap-3.5' : 'mt-5 gap-5')}>
-          <div className={'canonical-title-card relative min-w-0 overflow-hidden rounded-[28px] border border-white/12 bg-[radial-gradient(circle_at_8%_5%,rgba(233,84,32,.30),transparent_34%),radial-gradient(circle_at_92%_96%,rgba(119,33,111,.30),transparent_42%),linear-gradient(145deg,#1C1118_0%,#0B0D12_52%,#101823_100%)] shadow-[0_28px_70px_rgba(0,0,0,.38)] [perspective:1000px] ' + (denseSlide ? 'p-4.5' : 'p-6')}>
+          <div className={'canonical-title-card relative min-w-0 overflow-hidden rounded-[28px] border border-white/12 bg-[radial-gradient(circle_at_8%_5%,rgba(233,84,32,.30),transparent_34%),radial-gradient(circle_at_92%_96%,rgba(119,33,111,.30),transparent_42%),linear-gradient(145deg,#1C1118_0%,#0B0D12_52%,#101823_100%)] shadow-[0_28px_70px_rgba(0,0,0,.38)] [perspective:1000px] ' + (denseSlide ? 'p-4' : 'p-6')}>
             <div className="pointer-events-none absolute right-[-28px] top-[-28px] h-28 w-28 rotate-12 rounded-[30px] border border-orange-300/18 bg-orange-400/[0.065] shadow-[20px_24px_46px_rgba(0,0,0,.30)]" />
             <div className="pointer-events-none absolute -left-10 bottom-[-48px] h-28 w-36 -rotate-12 rounded-[36px] border border-fuchsia-300/14 bg-fuchsia-400/[0.055]" />
             <div className="pointer-events-none absolute left-[38%] top-[-38px] h-24 w-24 rotate-45 rounded-2xl border border-teal-200/9 bg-teal-300/[0.03]" />
