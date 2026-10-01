@@ -260,5 +260,90 @@ export const toolsData: ToolItem[] = [
       { version: 'v1.1', date: '2026-09', notes: 'Improved premium UI consistency, corrected currency and EBIT/MT display, aligned variable controls, added relationship matrix, full-variable impact table and source-backed real-world case study' },
       { version: 'v1.0', date: '2026-09', notes: 'Initial production release with financial reconciliation, demand and supply engines, working capital, scenario lab, sensitivity, correlated simulation, root-cause analysis and dynamic executive advisory' }
     ]
-  }
+  }  {
+    id: 'tool-9',
+    slug: 'mortgage-manufacturing-automation-os',
+    name: 'Mortgage Manufacturing Automation OS',
+    category: 'Mortgage Operations, Workflow Automation & Decision Intelligence',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A company-neutral mortgage workflow decision twin that connects intake, document readiness, configurable product-fit rules, underwriting support, exception routing, borrower orchestration, pricing, compliance controls, closing dependencies, synthetic capital-market fit and operations economics in one auditable state machine.',
+    instructions: 'Use the Command Center to inspect automation readiness, then move through intake, policy sandbox, underwriting graph, exception routing, borrower orchestration, payment scenarios, compliance controls, closing and synthetic capital-market matching. All thresholds are configurable demo policy inputs, not lender, agency or investor guidelines. The system never issues a real credit decision and routes ambiguous or regulated judgment to human review.',
+    features: [
+      'End-to-end mortgage state machine spanning point of sale, documents, product fit, pricing, underwriting support, borrower coordination, compliance controls, quality control, closing and capital markets',
+      'Deterministic mortgage payment, DTI, LTV, reserve coverage and cash-to-close calculations with explicit formula inputs',
+      'Configurable policy sandbox with visible DTI, LTV, credit, reserve, document, fraud-signal and exception thresholds rather than opaque eligibility scoring',
+      'Rule-by-rule explainability showing actual value, configured threshold, status, owner and rationale for every workflow gate',
+      'Automation routing to AUTO-CANDIDATE, HUMAN REVIEW or BLOCKED while preserving external licensed decision authority',
+      'Document-intake and verification orchestration that requests only unresolved evidence and distinguishes automatic, assisted and human-required work',
+      'Exception router that converts failed or ambiguous rules into a finite reviewer work queue instead of hidden model overrides',
+      'Borrower orchestration layer for precise next-best actions with consent and anti-proxy safeguards',
+      'Pricing and payment sensitivity simulator across loan amount, rate and term',
+      'Compliance-control workspace covering consent, identity, risk-routing and disclosure workflow state without claiming legal sufficiency',
+      'Closing dependency graph for appraisal, title, insurance and disclosure acknowledgement',
+      'Synthetic capital-markets matching sandbox that demonstrates investor-fit architecture without representing private or real investor guidelines',
+      'Operations-capacity model estimating auto-candidate volume, hours released and loaded-cost capacity value under explicit assumptions',
+      'Scenario twin for clean digital files, documentation gaps, high-DTI cases, closing bottlenecks and fraud-risk review',
+      'Governance guardrails: no protected-class attributes, no automated adverse action, no automatic exception waivers and no fabricated policy sources',
+      'Human-readable audit trail suitable for rule versioning, reviewer accountability and future source-provenance integration'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Deterministic Mortgage Formula Engine', 'Workflow State Machine', 'Decision Routing', 'Scenario Twin', 'Auditability', 'Responsive Data UI'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial release with 13 mortgage automation modules, deterministic calculations, configurable rule engine, human-review routing, closing controls, synthetic capital markets and operations economics' }
+    ]
+  },
+  {
+    id: 'tool-10',
+    slug: 'underwriting-decision-exception-router',
+    name: 'Underwriting Decision & Exception Router',
+    category: 'Mortgage Underwriting Support, Rules & Human-in-the-Loop Automation',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A transparent underwriting-support layer that turns borrower-file facts into inspectable rule outcomes, exception queues, reviewer packets and what-if scenarios without making or disguising a real credit decision.',
+    instructions: 'Start with the Underwriting Graph, inspect each calculation and rule state, then use Product Fit, Exception Router and Scenario Twin to understand exactly which configured demo condition changes the workflow route. Any exception or ambiguity remains human-controlled.',
+    features: [
+      'Inspectable DTI, LTV, payment and reserve calculations',
+      'Configurable threshold engine with no hidden approval score',
+      'Rule graph with PASS, REVIEW and BLOCK states',
+      'Exception work queue with reviewer ownership and rationale',
+      'Licensed-review boundary for ambiguous or policy-sensitive conditions',
+      'Data-confidence score driven by document and verification readiness',
+      'What-if scenario twin for debt, income, leverage, credit, reserves and exceptions',
+      'Audit trail linking every route to visible inputs and thresholds',
+      'No protected-class variables and no adverse-action automation'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Rule Engine', 'Mortgage Math', 'Human-in-the-Loop Routing', 'Explainability'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial specialist workspace built on the Mortgage Manufacturing Automation OS engine' }
+    ]
+  },
+  {
+    id: 'tool-11',
+    slug: 'mortgage-compliance-closing-control-tower',
+    name: 'Mortgage Compliance & Closing Control Tower',
+    category: 'Mortgage Compliance Controls, Closing Readiness & Operational Risk',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A workflow control tower for consent, identity, secure risk review, disclosure status, appraisal, title, insurance, closing dependencies and governed human escalation—designed to make operational state visible without pretending to provide legal advice.',
+    instructions: 'Use Compliance and Closing views to inspect hard workflow gates, pending dependencies and the critical path to close. The module checks configured operational controls only; it does not determine legal compliance with federal, state, investor or agency requirements.',
+    features: [
+      'Consent and identity hard gates before automated workflow execution',
+      'Secure risk-signal routing without automated accusation',
+      'Disclosure acknowledgement state tracking',
+      'Appraisal, title and insurance closing dependency graph',
+      'Critical-path visibility for unresolved closing work',
+      'Human-review controls for regulated judgment',
+      'Complete rule and task audit trail',
+      'Explicit boundary between workflow control and legal compliance determination',
+      'Scenario twin for late-stage closing bottlenecks'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Workflow Controls', 'Closing Readiness Graph', 'Audit Trail', 'Human Review'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial specialist workspace built on the Mortgage Manufacturing Automation OS engine' }
+    ]
+  },
+
 ];
