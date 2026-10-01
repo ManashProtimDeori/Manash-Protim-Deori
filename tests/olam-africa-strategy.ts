@@ -71,6 +71,15 @@ assert.ok(pageSource.includes('olam-insight-card'), 'Olam slides should use a de
 assert.ok(pageSource.includes('olam-slide-inner'), 'Olam slides should use a protected safe-area inner container');
 assert.ok(pageSource.includes('olam-metric-value'), 'metric typography should use the proportional presentation scale');
 assert.ok(!/text-\[(?:7|7\.\d+|8|8\.\d+|9|9\.\d+)px\]/.test(pageSource), 'presentation slides must not contain sub-10px fixed text classes');
+assert.ok(pageSource.includes("grid grid-cols-4 gap-x-3.5"), '20-pass review should use a four-column layout to avoid vertical spillover');
+assert.ok(pageSource.includes("grid grid-cols-3 gap-3"), 'source appendix should use a three-column layout to avoid vertical spillover');
+
+const cssPath = fileURLToPath(new URL('../src/index.css', import.meta.url));
+const cssSource = readFileSync(cssPath, 'utf8');
+assert.ok(cssSource.includes('--olam-body:clamp(12.5px,1vw,14.5px)'), 'Olam body copy should use presentation-scale typography');
+assert.ok(cssSource.includes('--olam-insight:clamp(14px,1.12vw,16.5px)'), 'executive insights should be larger than body copy');
+assert.ok(cssSource.includes('padding:30px 38px 30px!important'), 'Olam slide safe area should protect all four boundaries');
+assert.ok(cssSource.includes('overflow:hidden!important'), 'Olam slide canvas should clip decorative layers inside slide geometry');
 
 const appPath = fileURLToPath(new URL('../src/App.tsx', import.meta.url));
 const appSource = readFileSync(appPath, 'utf8');
