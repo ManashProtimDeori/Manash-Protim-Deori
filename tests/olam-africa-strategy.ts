@@ -61,9 +61,9 @@ assert.ok(pageSource.includes("slide.addImage({ data: imageData, x: 0, y: 0, w: 
 assert.ok(pageSource.includes("pdf.addImage(imageData, 'PNG', 0, 0, 1200, 675"));
 assert.ok(!pageSource.includes('website slide geometry is not presentation-safe'), 'Olam exporter must not inherit Canonical geometry-blocker failures');
 assert.ok(!pageSource.includes('Source-verified · 20-pass review · September 2026'), 'cover should not show the removed verification/date strapline');
-assert.ok(pageSource.includes('text-[15px] font-semibold'), 'cover name should be more prominent');
-assert.ok(pageSource.includes('text-[12px] font-medium'), 'executive insight copy should be proportionally larger');
-assert.ok(pageSource.includes('text-[11px] leading-[1.5]'), 'narrative text beneath slide headlines should be proportionally larger');
+assert.ok(pageSource.includes('text-[clamp(15px,1.25vw,19px)] font-semibold'), 'cover name should be more prominent');
+assert.ok(pageSource.includes('olam-insight-copy'), 'executive insight copy should use the proportional presentation scale');
+assert.ok(pageSource.includes('olam-narrative'), 'narrative text beneath slide headlines should use the proportional presentation scale');
 assert.ok(!pageSource.includes('const SourceLine'), 'on-slide evidence footers should be removed; evidence remains in the appendix');
 assert.ok(!pageSource.includes('<SourceLine'), 'no slide should render a bottom evidence box that can collide with the page margin');
 assert.ok(pageSource.includes('olam-title-card'), 'Olam slides should use a Canonical-like thesis card hierarchy');
