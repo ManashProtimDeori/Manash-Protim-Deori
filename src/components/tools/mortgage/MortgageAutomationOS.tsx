@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Activity, AlertTriangle, BadgeCheck, Banknote, Bot, Building2, Calculator,
   CheckCircle2, ChevronRight, CircleDollarSign, ClipboardCheck, Clock3,
@@ -102,6 +102,8 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
   const [policy,setPolicy]=useState<MortgagePolicy>({...defaultMortgagePolicy});
   const [ops,setOps]=useState<OperationsAssumptions>({...defaultOperationsAssumptions});
   const [scenario,setScenario]=useState('clean');
+
+  useEffect(()=>setView(defaultView),[defaultView]);
 
   const output=useMemo(()=>evaluateMortgageCase(input,policy,ops),[input,policy,ops]);
   const cleanOutput=useMemo(()=>evaluateMortgageCase(referenceMortgageCase,defaultMortgagePolicy,defaultOperationsAssumptions),[]);
