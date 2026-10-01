@@ -64,7 +64,13 @@ assert.ok(!pageSource.includes('Source-verified · 20-pass review · September 2
 assert.ok(pageSource.includes('text-[15px] font-semibold'), 'cover name should be more prominent');
 assert.ok(pageSource.includes('text-[12px] font-medium'), 'executive insight copy should be proportionally larger');
 assert.ok(pageSource.includes('text-[11px] leading-[1.5]'), 'narrative text beneath slide headlines should be proportionally larger');
-assert.ok(pageSource.includes('rounded-xl border border-white/10 bg-white/[0.025] px-3 py-2.5'), 'evidence row should use an inset safe-area box');
+assert.ok(!pageSource.includes('const SourceLine'), 'on-slide evidence footers should be removed; evidence remains in the appendix');
+assert.ok(!pageSource.includes('<SourceLine'), 'no slide should render a bottom evidence box that can collide with the page margin');
+assert.ok(pageSource.includes('olam-title-card'), 'Olam slides should use a Canonical-like thesis card hierarchy');
+assert.ok(pageSource.includes('olam-insight-card'), 'Olam slides should use a dedicated executive insight card');
+assert.ok(pageSource.includes('olam-slide-inner'), 'Olam slides should use a protected safe-area inner container');
+assert.ok(pageSource.includes('olam-metric-value'), 'metric typography should use the proportional presentation scale');
+assert.ok(!/text-\[(?:7|7\.\d+|8|8\.\d+|9|9\.\d+)px\]/.test(pageSource), 'presentation slides must not contain sub-10px fixed text classes');
 
 const appPath = fileURLToPath(new URL('../src/App.tsx', import.meta.url));
 const appSource = readFileSync(appPath, 'utf8');
