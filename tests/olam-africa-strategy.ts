@@ -19,7 +19,7 @@ import {
 const closeTo = (actual: number, expected: number, tolerance = 0.005) =>
   Math.abs(actual - expected) <= tolerance;
 
-assert.equal(OLAM_REVIEW_ITERATIONS.length, 20, 'Olam strategy must retain exactly 20 meaningful review iterations');
+assert.equal(OLAM_REVIEW_ITERATIONS.length, 30, 'Olam strategy must retain exactly 30 meaningful review iterations');
 assert.equal(OLAM_POLICY_GATES.length, 8, 'Nigeria policy constitution must contain exactly eight sequential gates');
 assert.equal(OLAM_MODEL_ASSUMPTIONS.length, 16, 'normalized decision model must expose every default assumption');
 assert.equal(OLAM_SLIDES.length, 38, 'Olam executive deck should contain 38 slides after policy/sensitivity expansion');
@@ -28,7 +28,7 @@ assert.ok(!JSON.stringify(OLAM_SLIDES).includes('US' + String.fromCharCode(36)),
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'candidate').length, 2, 'deck must include exactly two candidate-contribution slides');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'sources').length, 3, 'expanded evidence appendix should use three readable source slides');
 assert.equal(new Set(OLAM_SOURCES.map(source => source.id)).size, OLAM_SOURCES.length, 'source IDs must be unique');
-assert.equal(OLAM_SOURCES.length, 25, 'evidence registry should include the expanded cross-check sources');
+assert.equal(OLAM_SOURCES.length, 30, 'evidence registry should include the expanded cross-check sources');
 
 const sourceIds = new Set(OLAM_SOURCES.map(source => source.id));
 for (const slide of OLAM_SLIDES) {
@@ -36,7 +36,7 @@ for (const slide of OLAM_SLIDES) {
     assert.ok(sourceIds.has(sourceId), 'unknown source ID on slide ' + slide.id + ': ' + sourceId);
   }
 }
-for (const requiredSource of ['S19','S20','S21','S22','S23','S24','S25']) {
+for (const requiredSource of ['S19','S20','S21','S22','S23','S24','S25','S26','S27','S28','S29','S30']) {
   assert.ok(sourceIds.has(requiredSource), 'missing expanded evidence source: ' + requiredSource);
 }
 
@@ -68,6 +68,34 @@ const ownership = OLAM_SLIDES.find(slide => slide.id === 'salic');
 assert.ok(ownership?.metrics.some(metric => metric.value === '81.81%'));
 assert.ok(ownership?.metrics.some(metric => metric.value === '18.19%'));
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S02')?.note.includes('81.11%'), 'ownership-source conflict should remain visible');
+const categoryThesis = OLAM_SLIDES.find(slide => slide.id === 'customer-profit');
+assert.ok(categoryThesis?.title.includes('Semolina and edible oils'));
+assert.ok(categoryThesis?.insight.includes('measurement spine'));
+
+const semolinaDemand = OLAM_SLIDES.find(slide => slide.id === 'wheat-baker-demand');
+assert.ok(semolinaDemand?.title.includes('semolina growth'));
+assert.ok(semolinaDemand?.metrics.some(metric => metric.value === '6.8m MT'));
+
+const edibleOilPolicy = OLAM_SLIDES.find(slide => slide.id === 'west-africa');
+assert.ok(edibleOilPolicy?.title.includes('crude-versus-refined'));
+assert.ok(edibleOilPolicy?.metrics.some(metric => metric.value === 'Importable'));
+assert.ok(edibleOilPolicy?.sourceIds.includes('S27'));
+
+const tradeCapital = OLAM_SLIDES.find(slide => slide.id === 'southern-africa');
+assert.ok(tradeCapital?.metrics.some(metric => metric.value === '~1.9%'));
+assert.ok(tradeCapital?.title.includes('hidden marketing tax'));
+
+const regionalPrices = OLAM_SLIDES.find(slide => slide.id === 'africa-runway');
+assert.ok(regionalPrices?.metrics.some(metric => metric.value === '73 markets'));
+assert.ok(regionalPrices?.sourceIds.includes('S29'));
+
+const romi = OLAM_SLIDES.find(slide => slide.id === 'marketing-os');
+assert.ok(romi?.title.includes('incremental contribution'));
+assert.ok(romi?.insight.includes('Incremental Contribution ROMI'));
+
+const controlTower = OLAM_SLIDES.find(slide => slide.id === 'scorecard');
+assert.ok(controlTower?.title.includes('causal forecast'));
+assert.ok(controlTower?.bullets.some(b => b.includes('forecast error by cause')));
 
 const policy = OLAM_SLIDES.find(slide => slide.id === 'policy-constitution');
 assert.ok(policy);
@@ -128,13 +156,19 @@ const auditNames: string[] = OLAM_REVIEW_ITERATIONS.map(row => String(row[1]));
 for (const required of [
   'Entity perimeter',
   'Ownership reconciliation',
-  'Cross-currency financial integrity',
-  'Capital-efficiency test',
-  'Forecast-version test',
-  'FX pass-through test',
+  'Cross-currency integrity',
+  'Capital-efficiency',
+  'Forecast-version discipline',
+  'FX pass-through',
+  'Category mechanism separation',
+  'Trade-capital test',
+  'Crude/refined policy wedge',
+  'ROMI reconstruction',
+  'S&OP explainability',
   'Sensitivity hierarchy',
   'Joint-stress test',
-  'Policy synthesis',
+  'Executive usability',
+  'Export-fidelity audit',
 ]) {
   assert.ok(auditNames.includes(required), 'missing heavy audit dimension: ' + required);
 }
@@ -143,6 +177,13 @@ const pagePath = fileURLToPath(new URL('../src/pages/OlamAfricaGrowthStrategyPag
 const pageSource = readFileSync(pagePath, 'utf8');
 assert.ok(pageSource.includes('Download exact PPTX'));
 assert.ok(pageSource.includes('Download high-res PDF'));
+assert.ok(pageSource.includes('const EXPORT_WIDTH = 1200'));
+assert.ok(pageSource.includes('const EXPORT_HEIGHT = 675'));
+assert.ok(pageSource.includes("host.className = 'olam-strategy-lab olam-export-host'"));
+assert.ok(pageSource.includes("clone.classList.add('olam-export-slide')"));
+assert.ok(pageSource.includes("windowWidth: 1440"));
+assert.ok(pageSource.includes("Olam_Nigeria_Category_Growth_Strategy_"));
+
 assert.ok(pageSource.includes("html2canvas-pro@2.4.2"));
 assert.ok(pageSource.includes("slide.addImage({ data: imageData, x: 0, y: 0, w: 13.333, h: 7.5 })"));
 assert.ok(pageSource.includes("pdf.addImage(imageData, 'PNG', 0, 0, 1200, 675"));
@@ -161,7 +202,7 @@ assert.ok(pageSource.includes("slide.kind === 'policy'"), 'policy gate renderer 
 assert.ok(pageSource.includes("slide.kind === 'sensitivity'"), 'sensitivity renderer must remain explicit');
 assert.ok(pageSource.includes("slide.kind === 'assumptions'"), 'assumption-ledger renderer must remain explicit');
 assert.ok(!/text-[(?:7|7.d+|8|8.d+|9|9.d+)px]/.test(pageSource), 'presentation slides must not contain sub-10px fixed text classes');
-assert.ok(pageSource.includes("grid grid-cols-4 gap-x-3.5"), '20-pass review should use a four-column layout to avoid vertical spillover');
+assert.ok(pageSource.includes("grid grid-cols-5 gap-x-2.5"), '30-pass review should use a five-column layout to avoid vertical spillover');
 assert.ok(pageSource.includes("grid grid-cols-3 gap-3"), 'source appendix should use a three-column layout to avoid vertical spillover');
 
 const cssPath = fileURLToPath(new URL('../src/index.css', import.meta.url));
@@ -170,6 +211,12 @@ assert.ok(cssSource.includes('--olam-body:clamp(12.5px,1vw,14.5px)'), 'Olam body
 assert.ok(cssSource.includes('--olam-insight:clamp(14px,1.12vw,16.5px)'), 'executive insights should be larger than body copy');
 assert.ok(cssSource.includes('padding:30px 38px 30px!important'), 'Olam slide safe area should protect all four boundaries');
 assert.ok(cssSource.includes('overflow:hidden!important'), 'Olam slide canvas should clip decorative layers inside slide geometry');
+assert.ok(cssSource.includes('.olam-export-host{'), 'fixed-size off-screen export host must exist');
+assert.ok(cssSource.includes('width:1200px!important'), 'export host must use deterministic 1200px width');
+assert.ok(cssSource.includes('height:675px!important'), 'export host must use deterministic 675px height');
+assert.ok(cssSource.includes('.olam-exporting .olam-export-host .olam-metric-card'), 'metric cards need explicit export-safe styling');
+assert.ok(cssSource.includes('box-shadow:none!important'), 'export mode must suppress shadow raster artifacts');
+
 
 const appPath = fileURLToPath(new URL('../src/App.tsx', import.meta.url));
 const appSource = readFileSync(appPath, 'utf8');
@@ -184,6 +231,7 @@ console.log('Olam Africa strategy quality checks passed', {
   slides: OLAM_SLIDES.length,
   sources: OLAM_SOURCES.length,
   iterations: OLAM_REVIEW_ITERATIONS.length,
+  recipientFocus: 'Nigeria semolina + edible oils',
   policyGates: OLAM_POLICY_GATES.length,
   assumptions: OLAM_MODEL_ASSUMPTIONS.length,
   baseNpv: base.threeYearNpvNgnBn,
