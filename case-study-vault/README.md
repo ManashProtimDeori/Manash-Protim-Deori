@@ -1,3 +1,4 @@
+// Verification branch: build-only validation.
 # Manash — Case Study Vault
 
 A standalone Cloudflare Pages website for strategy decks, case studies, models and research.
