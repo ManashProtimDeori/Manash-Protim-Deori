@@ -39,7 +39,7 @@ const OlamIdentity: React.FC = () => (
     </div>
     <div>
       <div className="text-2xl font-semibold tracking-[-0.045em] text-white">olam agri</div>
-      <div className="mt-1 text-[10.5px] font-mono uppercase tracking-[0.17em] text-emerald-200/72">Africa growth strategy · portfolio case study</div>
+      <div className="mt-1 text-[10.5px] font-mono uppercase tracking-[0.17em] text-emerald-200/72">Nigeria category growth system · semolina × edible oils</div>
     </div>
   </div>
 );
@@ -62,10 +62,10 @@ const MetricCard: React.FC<{ metric: OlamMetric }> = ({ metric }) => {
 
 const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
   const id = slide.id;
-  const isNetwork = ['availability', 'west-africa', 'southern-africa', 'portfolio-flywheel'].includes(id);
+  const isNetwork = ['availability', 'portfolio-flywheel'].includes(id);
   const isGate = ['capital-gates', 'capital-boundary', 'next-90-days'].includes(id);
-  const isData = ['customer-data-loop', 'marketing-os', 'scorecard'].includes(id);
-  const isMarket = ['affordability', 'africa-runway', 'wheat-baker-demand'].includes(id);
+  const isData = ['customer-data-loop', 'marketing-os', 'scorecard', 'southern-africa'].includes(id);
+  const isMarket = ['affordability', 'africa-runway', 'wheat-baker-demand', 'west-africa'].includes(id);
   const isRisk = id === 'risk';
   const isCandidate = slide.kind === 'candidate';
   const isPolicy = slide.kind === 'policy';
@@ -424,7 +424,7 @@ const StrategySlide: React.FC<{ slide: OlamSlide; index: number }> = ({ slide, i
         <div className="olam-cover-inner relative z-10 flex h-full flex-col justify-between">
           <OlamIdentity />
           <div className="max-w-[58%]">
-            <div className="olam-card-kicker font-mono uppercase tracking-[0.18em] text-emerald-200/70">Executive growth strategy · Africa</div>
+            <div className="olam-card-kicker font-mono uppercase tracking-[0.18em] text-emerald-200/70">Executive category strategy · Nigeria</div>
             <h2 className="mt-4 text-[clamp(2.7rem,4.2vw,4.1rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-white">{slide.title}</h2>
             <p className="olam-cover-copy mt-5 max-w-[92%] leading-[1.55] text-white/72">{slide.narrative}</p>
           </div>
@@ -449,7 +449,7 @@ const StrategySlide: React.FC<{ slide: OlamSlide; index: number }> = ({ slide, i
       <div className="olam-slide-inner relative flex h-full flex-col">
         <div className="flex items-center justify-between gap-4">
           <div className="olam-slide-meta font-mono uppercase tracking-[0.16em] text-emerald-200/64">{String(index+1).padStart(2,'0')} · {slide.section}</div>
-          <div className="olam-slide-meta font-mono uppercase tracking-[0.13em] text-white/36">Olam Agri Africa Growth Strategy</div>
+          <div className="olam-slide-meta font-mono uppercase tracking-[0.13em] text-white/36">Olam Agri Nigeria Category Growth System</div>
         </div>
 
         <div className="mt-4 grid grid-cols-[1.16fr_.84fr] gap-5 items-stretch">
@@ -515,28 +515,52 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
     if (pdf) await loadScript('https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js', () => Boolean((window as any).jspdf?.jsPDF || (window as any).jsPDF));
   };
 
+  const EXPORT_WIDTH = 1200;
+  const EXPORT_HEIGHT = 675;
+
   const captureSlide = async (slide: OlamSlide) => {
     const html2canvas = (window as any).html2canvas;
-    const element = document.getElementById('olam-slide-' + slide.id);
-    if (!element) throw new Error('Slide not found: ' + slide.id);
-    const rect = element.getBoundingClientRect();
-    const width = Math.round(rect.width);
-    const height = Math.round(rect.height);
-    const scale = Math.max(1.7, Math.min(2.35, 2200 / Math.max(width, 1)));
-    const canvas = await html2canvas(element, {
-      backgroundColor: '#071117',
-      scale,
-      useCORS: true,
-      allowTaint: false,
-      logging: false,
-      imageTimeout: 15000,
-      width,
-      height,
-      windowWidth: Math.max(document.documentElement.clientWidth, width),
-      windowHeight: Math.max(document.documentElement.clientHeight, height),
-      onclone: (doc: Document) => doc.documentElement.classList.add('olam-exporting'),
-    });
-    return canvas.toDataURL('image/png');
+    const source = document.getElementById('olam-slide-' + slide.id);
+    if (!source) throw new Error('Slide not found: ' + slide.id);
+
+    // Export from a fixed-size off-screen clone. This prevents browser width,
+    // light/dark theme and responsive breakpoints from changing the captured slide.
+    const host = document.createElement('div');
+    host.className = 'olam-strategy-lab olam-export-host';
+    host.setAttribute('aria-hidden', 'true');
+
+    const exportId = 'olam-export-' + slide.id;
+    const clone = source.cloneNode(true) as HTMLElement;
+    clone.id = exportId;
+    clone.classList.add('olam-export-slide');
+    host.appendChild(clone);
+    document.body.appendChild(host);
+
+    try {
+      await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+      const canvas = await html2canvas(clone, {
+        backgroundColor: '#071117',
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        logging: false,
+        imageTimeout: 15000,
+        width: EXPORT_WIDTH,
+        height: EXPORT_HEIGHT,
+        windowWidth: 1440,
+        windowHeight: 900,
+        scrollX: 0,
+        scrollY: 0,
+        onclone: (doc: Document) => {
+          doc.documentElement.classList.add('olam-exporting');
+          const clonedSlide = doc.getElementById(exportId);
+          clonedSlide?.classList.add('olam-export-slide');
+        },
+      });
+      return canvas.toDataURL('image/png');
+    } finally {
+      host.remove();
+    }
   };
 
   const withExportMode = async <T,>(fn: () => Promise<T>) => {
@@ -560,8 +584,8 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
         pptx.layout = 'LAYOUT_WIDE';
         pptx.author = 'Manash Protim Deori';
         pptx.company = 'Portfolio Strategy Lab';
-        pptx.subject = 'Olam Agri Africa Growth Strategy';
-        pptx.title = 'Building the Next African Growth Engine';
+        pptx.subject = 'Olam Agri Nigeria Category Growth Strategy';
+        pptx.title = 'Building Nigeria’s Next Category Growth Engine';
         for (const slideData of slides) {
           const imageData = await captureSlide(slideData);
           const slide = pptx.addSlide();
@@ -569,7 +593,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
           slide.addImage({ data: imageData, x: 0, y: 0, w: 13.333, h: 7.5 });
           await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
         }
-        await pptx.writeFile({ fileName: 'Olam_Africa_Growth_Strategy_' + new Date().toISOString().slice(0,10) + '.pptx' });
+        await pptx.writeFile({ fileName: 'Olam_Nigeria_Category_Growth_Strategy_' + new Date().toISOString().slice(0,10) + '.pptx' });
       });
     } catch (error) {
       console.error(error);
@@ -609,8 +633,8 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <OlamIdentity />
-              <h1 className="mt-6 text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-white">Olam Agri Africa Growth Strategy Lab</h1>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A cross-verified, 20-pass executive decision system for Olam Nigeria: eight sequential policy gates, normalized unit economics, ranked sensitivity, a reproducible 5,000-run uncertainty test, explicit assumption governance and evidence-gated African replication.</p>
+              <h1 className="mt-6 text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-white">Olam Agri Nigeria Category Growth Strategy Lab</h1>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A cross-verified, 30-pass decision system for semolina and edible oils in Nigeria: category economics, trade-capital velocity, causal ROMI, regional affordability, S&OP explainability, policy-aware refining logic, eight sequential capital gates and a reproducible 5,000-run uncertainty test.</p>
             </div>
             <div className="flex flex-wrap gap-2" data-export-hide="true">
               <button onClick={downloadPptx} disabled={pptBusy} className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-[#04100D] hover:bg-emerald-400 disabled:opacity-50">
@@ -622,7 +646,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
             </div>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-[10.5px] font-mono uppercase tracking-[0.12em] text-white/44">
-            <span>{slides.length} slides</span><span>20 heavy review iterations</span><span>8 policy gates</span><span>5,000-run sensitivity simulation</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
+            <span>{slides.length} slides</span><span>30 heavy review iterations</span><span>8 policy gates</span><span>5,000-run sensitivity simulation</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
           </div>
         </header>
 
