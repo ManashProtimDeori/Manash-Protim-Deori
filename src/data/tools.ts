@@ -260,7 +260,8 @@ export const toolsData: ToolItem[] = [
       { version: 'v1.1', date: '2026-09', notes: 'Improved premium UI consistency, corrected currency and EBIT/MT display, aligned variable controls, added relationship matrix, full-variable impact table and source-backed real-world case study' },
       { version: 'v1.0', date: '2026-09', notes: 'Initial production release with financial reconciliation, demand and supply engines, working capital, scenario lab, sensitivity, correlated simulation, root-cause analysis and dynamic executive advisory' }
     ]
-  }  {
+  },
+  {
     id: 'tool-9',
     slug: 'mortgage-manufacturing-automation-os',
     name: 'Mortgage Manufacturing Automation OS',
