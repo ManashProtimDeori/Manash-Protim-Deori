@@ -5072,6 +5072,79 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   transform:none!important;
 }
 
+/* Deterministic Olam PDF/PPTX export surface.
+   html2canvas is intentionally fed a fixed 1200×675 clone so browser theme,
+   viewport width, translucent Tailwind colors and shadow rasterization cannot
+   create the white-card / white-bar artifacts seen in downloaded files. */
+.olam-export-host{
+  position:fixed!important;
+  left:-20000px!important;
+  top:0!important;
+  width:1200px!important;
+  height:675px!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+  z-index:-9999!important;
+  background:#071117!important;
+  color-scheme:dark!important;
+}
+.olam-export-host .olam-export-slide{
+  width:1200px!important;
+  height:675px!important;
+  min-height:675px!important;
+  max-height:675px!important;
+  aspect-ratio:16 / 9!important;
+  margin:0!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+  background:#071117!important;
+  color:#f7fbf9!important;
+  box-shadow:none!important;
+}
+.olam-exporting .olam-export-host .olam-deck-slide{
+  background:#071117!important;
+  color:#f7fbf9!important;
+  box-shadow:none!important;
+}
+.olam-exporting .olam-export-host .olam-title-card{
+  background:#0d1c1a!important;
+  border-color:#24423b!important;
+  box-shadow:none!important;
+}
+.olam-exporting .olam-export-host .olam-insight-card{
+  background:#0a1517!important;
+  border-color:#205046!important;
+  box-shadow:none!important;
+}
+.olam-exporting .olam-export-host .olam-metric-card{
+  background:#0e181c!important;
+  border-color:#26383e!important;
+  box-shadow:none!important;
+}
+.olam-exporting .olam-export-host [class*="bg-white/"]{
+  background-color:#0d171a!important;
+}
+.olam-exporting .olam-export-host [class*="shadow-"]{
+  box-shadow:none!important;
+}
+.olam-exporting .olam-export-host [class*="blur-"]{
+  filter:none!important;
+}
+.olam-exporting .olam-export-host .olam-narrative,
+.olam-exporting .olam-export-host .olam-cover-copy{color:#cbd5d3!important}
+.olam-exporting .olam-export-host .olam-insight-copy{color:#e7eceb!important}
+.olam-exporting .olam-export-host .olam-metric-label{color:#aebdbb!important}
+.olam-exporting .olam-export-host .olam-metric-detail{color:#d1d9d8!important}
+.olam-exporting .olam-export-host .olam-bullet-copy{color:#d0d9d7!important}
+.olam-exporting .olam-export-host .olam-dense-copy{color:#b8c5c3!important}
+.olam-exporting .olam-export-host .olam-dense-title{color:#e2e8e7!important}
+.olam-exporting .olam-export-host .olam-slide-meta{color:#91a39f!important}
+.olam-exporting .olam-export-host .olam-card-kicker{color:#8fe2ca!important}
+.olam-exporting .olam-export-host svg{shape-rendering:geometricPrecision}
+
+
 @media (max-width:1100px) and (min-width:901px){
   .olam-strategy-lab .olam-slide-inner{padding:24px 28px 24px!important}
   .olam-strategy-lab .olam-cover-inner{padding:30px 34px 28px!important}
