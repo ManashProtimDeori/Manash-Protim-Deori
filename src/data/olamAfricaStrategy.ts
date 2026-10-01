@@ -401,6 +401,26 @@ export const OLAM_SLIDES: OlamSlide[] = [
     kind: 'thesis',
   },
   {
+    id: 'processing-economics',
+    section: 'Economic signal',
+    title: 'Nigeria-relevant processing economics improved while group-level volume growth diluted overall return quality',
+    narrative: 'Olam Group’s FY2025 cross-check shows the Food & Feed Processing & Value-added segment improving EBIT and EBIT per tonne even as total Olam Agri EBIT fell and invested capital rose. This is the clearest public signal that value-added processing, customer economics and cash discipline should dominate the Nigeria decision agenda.',
+    insight: 'The policy implication is not “grow processing at any cost.” It is “prefer growth mechanisms that raise contribution per tonne and preserve capital productivity, then prove that the Nigeria customer/route system can reproduce those economics.”',
+    metrics: [
+      { label: 'Processing EBIT', value: 'S$611m', detail: '+1.6% in FY2025', tone: 'green' },
+      { label: 'Processing EBIT / MT', value: 'S$127', detail: 'Up from S$115 in 2024', tone: 'cyan' },
+      { label: 'Processing invested capital', value: 'S$2.41bn', detail: '−4.0% year over year', tone: 'gold' },
+      { label: 'Group invested capital', value: 'S$7.5bn', detail: '+11.0%, mainly working-capital growth', tone: 'orange' },
+    ],
+    bullets: [
+      'Nigeria wheat milling was explicitly cited as benefiting from a stable naira and improved customer/input-cost conditions.',
+      'Nigeria rice farming and milling was hurt by lower local rice prices and cross-border flows — a reminder that local processing does not remove market risk.',
+      'The policy framework therefore rewards contribution/tonne, capital productivity and cash conversion rather than assuming all value-added capacity is equally attractive.',
+    ],
+    sourceIds: ['S19', 'S20'],
+    kind: 'metrics',
+  },
+  {
     id: 'customer-profit',
     section: 'Strategic foundation',
     title: 'Customer profit is the most defensible unit of repeatable growth',
