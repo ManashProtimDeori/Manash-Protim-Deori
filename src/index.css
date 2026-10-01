@@ -4948,6 +4948,27 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   margin-right:0!important;
 }
 
+/* Canonical v12: dense-slide overflow safeguards.
+   Evidence, methodology and appendix slides keep every text row inside
+   the fixed portrait frame on web and during PDF/PPTX capture. */
+@media (min-width:1024px){
+  .canonical-strategy-lab .canonical-dense-slide .canonical-slide-inner{
+    padding:22px 24px 18px!important;
+  }
+  .canonical-strategy-lab .canonical-dense-slide .canonical-title-card{
+    padding:16px!important;
+  }
+  .canonical-strategy-lab .canonical-dense-slide .canonical-representative-figure{
+    height:148px!important;
+  }
+  .canonical-strategy-lab .canonical-dense-slide .canonical-leadership-box{
+    padding:14px!important;
+  }
+  .canonical-strategy-lab .canonical-dense-slide .canonical-evidence-register{
+    row-gap:8px!important;
+  }
+}
+
 
 /* Olam Africa Strategy Lab */
 .light #main-content .olam-strategy-lab,
