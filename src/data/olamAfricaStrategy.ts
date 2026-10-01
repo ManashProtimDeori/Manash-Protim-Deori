@@ -427,6 +427,185 @@ export const OLAM_MODEL_ASSUMPTIONS = [
   ['A16', 'Benefit ramp', '50% / 80% / 100%', 'Screening realization schedule only. Investment-grade DCF must add Finance-owned timing, tax, depreciation, capex phasing, working-capital reversal and residual/terminal-value conventions.'],
 ] as const;
 
+export const OLAM_CANDIDATE_CPM_BEFORE = 35.8;
+export const OLAM_CANDIDATE_CPM_AFTER = 15.5;
+export const OLAM_CANDIDATE_CPM_REDUCTION_PCT =
+  ((OLAM_CANDIDATE_CPM_BEFORE - OLAM_CANDIDATE_CPM_AFTER) / OLAM_CANDIDATE_CPM_BEFORE) * 100;
+
+export type OlamCandidateContributionSystem = {
+  id: string;
+  label: string;
+  need: string;
+  gap: string;
+  build: string;
+  decision: string;
+  beneficiaries: string;
+  proof: string;
+  falsifier: string;
+  gates: string;
+};
+
+export const OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS: OlamCandidateContributionSystem[] = [
+  {
+    id: 'C1',
+    label: 'Category intelligence',
+    need: 'Know what changed, why it changed and how certain the explanation is before a P&L variance becomes the first warning.',
+    gap: 'Commodity, FX, local prices, pack, availability, route, campaign, inventory and policy signals often arrive in different clocks and formats.',
+    build: 'A weekly causal category brief: signal → competing causes → evidence/confidence → economic consequence → smallest next test.',
+    decision: 'Where to change pack, price, route, promotion or investigation priority—and where not to react yet.',
+    beneficiaries: 'Category · Marketing · Sales · Supply Chain · S&OP',
+    proof: 'More major movements receive an evidence-backed cause; signal-to-diagnosis time falls without increasing false attribution.',
+    falsifier: 'The brief adds reporting volume but does not change a decision, shorten diagnosis or improve causal clarity.',
+    gates: 'G0 · G3 · G4',
+  },
+  {
+    id: 'C2',
+    label: 'Causal ROMI',
+    need: 'Separate genuine incremental demand from shipment timing, availability recovery, discounting and channel inventory.',
+    gap: 'Sell-in or campaign-period sales can over-credit marketing when offtake, trade stock, route cost, cannibalization and repeat are not reconciled.',
+    build: 'Counterfactual → verified offtake → gross-to-net → route/service → inventory carry → cannibalization → washout repeat → incremental contribution.',
+    decision: 'Which interventions deserve the next marketing/trade naira and which apparent wins should stop.',
+    beneficiaries: 'Marketing · Category · Finance · Sales',
+    proof: 'Campaign reviews reconcile sell-in versus offtake and produce finance-reconcilable incremental contribution after washout.',
+    falsifier: 'The result disappears after inventory normalization, cannibalization or post-support repeat is measured.',
+    gates: 'G2 · G5 · G6',
+  },
+  {
+    id: 'C3',
+    label: 'Demand sensing',
+    need: 'Detect affordability or route stress before national volume aggregates make the cause obvious.',
+    gap: 'A sales decline can be household cash pressure, category-specific commodity pressure, stockout, distribution or substitution.',
+    build: 'Semolina × oil divergence monitor using pack migration, cash ticket, realization, reorder cadence, sell-out, fill, stockouts and regional price pressure.',
+    decision: 'Generate the right hypothesis before choosing price-pack, route, promotion or supply response.',
+    beneficiaries: 'Category · Marketing · Sales · S&OP',
+    proof: 'Early signals predict or explain later movements after availability and seasonality normalization.',
+    falsifier: 'Cross-category signals produce repeated false positives or add no explanatory power beyond existing category views.',
+    gates: 'G0 · G1 · G3',
+  },
+  {
+    id: 'C4',
+    label: 'S&OP explainability',
+    need: 'Give S&OP a causal demand range rather than one unexplained marketing number.',
+    gap: 'Forecast misses are less learnable when baseline, price/mix, availability, campaign, NPD, seasonality, distribution and cannibalization are blended.',
+    build: 'Cause-of-movement bridge with confidence bands plus forecast-error-by-cause history.',
+    decision: 'Which assumption to change in the next demand plan—and whether the miss was demand, route, price, promotion or model error.',
+    beneficiaries: 'S&OP · Category · Marketing · Finance · Supply Chain',
+    proof: 'Forecast-error causes become classified, recurrent causes shrink and confidence ranges calibrate over time.',
+    falsifier: 'The decomposition cannot reconcile to actual demand or does not improve the next planning cycle.',
+    gates: 'G0 · G3 · G5',
+  },
+  {
+    id: 'C5',
+    label: 'Experiment design',
+    need: 'Convert attractive strategy ideas into evidence before they consume rollout capital.',
+    gap: 'Tests without counterfactuals, failure rules or washout periods can turn noise into “proof.”',
+    build: 'Pre-register hypothesis, cohort/control, mechanism, primary/economic KPI, failure threshold, washout and scale rule.',
+    decision: 'Scale, redesign or stop based on evidence—not enthusiasm.',
+    beneficiaries: 'Category · Marketing · Finance · Sales',
+    proof: 'Every material pilot has a counterfactual and explicit stop/scale rule; rejected hypotheses are retained as reusable learning.',
+    falsifier: 'Tests cannot distinguish intervention effect from seasonality, route or selection bias.',
+    gates: 'G0 · G2 · G6 · G7',
+  },
+  {
+    id: 'C6',
+    label: 'Executive synthesis',
+    need: 'Reduce the time between signal detection and a cross-functional decision.',
+    gap: 'Marketing, Sales, Finance and S&OP can each hold a valid but partial explanation of the same commercial event.',
+    build: 'One-page decision memo: signal → cause → confidence → economic impact → owner → decision → next test.',
+    decision: 'Align the organization on what is known, unknown, economically material and owned next.',
+    beneficiaries: 'Category leadership · Finance · Sales · S&OP',
+    proof: 'Fewer unresolved metric conflicts and shorter decision latency on recurring category issues.',
+    falsifier: 'The memo becomes another meeting artifact rather than changing ownership, timing or evidence quality.',
+    gates: 'G0 · G5 · G7',
+  },
+];
+
+export const OLAM_CANDIDATE_90_DAY_PHASES = [
+  {
+    window: '0–30',
+    label: 'Instrument',
+    objective: 'Establish a causal baseline and common measurement dictionary.',
+    output: 'Market/category cohorts + cause tree + reconciled sell-in/offtake/stock/price/route fields.',
+    measure: 'Coverage · reconciliation rate · missing-data rate · metric-definition agreement.',
+  },
+  {
+    window: '31–60',
+    label: 'Test',
+    objective: 'Run small controlled category experiments rather than a broad national intervention.',
+    output: 'Semolina affordability test + edible-oil availability/trade-capital test in 2–3 comparable cohorts.',
+    measure: 'Incremental contribution after marketing, route and inventory cost + repeat after washout.',
+  },
+  {
+    window: '61–90',
+    label: 'Reconcile',
+    objective: 'Build a category control tower that explains movement rather than decorating it.',
+    output: 'Demand + economics + trade + marketing + supply + forecast reconciliation.',
+    measure: 'Signal-to-diagnosis latency · cause attribution · forecast error by cause · incremental ROMI.',
+  },
+  {
+    window: '90+',
+    label: 'Codify',
+    objective: 'Turn only surviving mechanisms into reusable operating knowledge.',
+    output: 'Second-route/market replication protocol + category playbook + decision memory.',
+    measure: 'Mechanisms replicated · false positives prevented · value of information.',
+  },
+] as const;
+
+export const OLAM_CANDIDATE_SCORECARD = [
+  ['Data quality', 'Reconciled sell-in + offtake coverage · predefined baselines · data latency · metric consistency'],
+  ['Decision quality', 'Cause-attribution rate · signal→diagnosis time · forecast error by cause · explicit stop/scale criteria'],
+  ['Economic quality', 'Incremental contribution/marketing naira · contribution velocity · stock days · net realization · repeat after washout'],
+  ['Learning', 'Hypotheses resolved/rejected · time-to-learning · mechanisms replicated · false positives prevented · value of information'],
+] as const;
+
+export const OLAM_CANDIDATE_MODEL_OWNERSHIP = [
+  ['Eligible sales', 'Finance / Category', 'Build reconciliation'],
+  ['Contribution margin', 'Finance', 'Build analytical bridge'],
+  ['Availability recovery', 'Sales / Supply', 'Design cohort measurement'],
+  ['Repeat uplift', 'Marketing / Category', 'Build reorder cohorts'],
+  ['Price / mix', 'Category / Finance', 'Decompose realization + pack'],
+  ['Route efficiency', 'Sales / Supply Chain', 'Build route cohorts'],
+  ['Service investment', 'Marketing / Finance', 'Measure intervention cost'],
+  ['FX exposure', 'Treasury / Procurement', 'Integrate only'],
+  ['Commodity exposure', 'Procurement', 'Integrate only'],
+  ['Working capital', 'Finance', 'Integrate only'],
+  ['Hurdle rate', 'Treasury / Finance', 'No candidate ownership'],
+] as const;
+
+export const OLAM_CANDIDATE_PROPOSED_STANDARDS = [
+  ['100%', 'Material pilots pre-register hypothesis + counterfactual + failure rule'],
+  ['100%', 'Campaign reviews separate sell-in from verified offtake where data exist'],
+  ['100%', 'Model inputs have named internal owners before capital use'],
+  ['1', 'Shared weekly causal category view across Marketing + Sales + Finance + S&OP'],
+  ['2', 'Category-specific controlled experiments'],
+  ['2–3', 'Comparable market / route cohorts'],
+  ['1', 'Standard incremental-contribution ROMI bridge'],
+  ['1', 'Cause-of-forecast-error framework + second-market replication protocol'],
+] as const;
+
+export const OLAM_CANDIDATE_QA_PASSES = [
+  ['01', 'Personal factual accuracy', 'Verified ₹20M, ₹35.8 and ₹15.5 against the portfolio resume source; no unsupported personal outcome added.'],
+  ['02', 'Olam factual accuracy', 'Candidate slides reuse the already-audited Olam decision architecture without adding new company claims.'],
+  ['03', 'Evidence separation', 'Historical candidate evidence is explicitly separated from Olam decision-framework metrics and future operating standards.'],
+  ['04', 'Quantitative arithmetic', 'CPM reduction is calculated programmatically from 35.8 and 15.5, then displayed to one decimal with the rounded-resume equivalent explained.'],
+  ['05', 'Formula logic', 'Value equations are labeled management frameworks; no unsupported Olam result is generated.'],
+  ['06', 'Finance boundary', 'Contribution, NWC, hurdle rate and final investment reconciliation remain Finance/Treasury-owned.'],
+  ['07', 'Marketing boundary', 'Candidate role is measurement/decision enablement, not unilateral category or campaign ownership.'],
+  ['08', 'Supply-chain boundary', 'Availability and route execution remain Sales/Supply Chain owned; candidate support is analytical.'],
+  ['09', 'Causal inference', 'Counterfactuals, matched cohorts, confidence and alternative causes are explicit.'],
+  ['10', 'Incrementality', 'Sell-in is never sufficient proof; verified offtake and incremental contribution govern credit.'],
+  ['11', 'Cannibalization', 'ROMI bridge explicitly charges cannibalization before marketing gets credit.'],
+  ['12', 'Working capital', 'Promotions and availability interventions are evaluated with stock days/carry rather than volume alone.'],
+  ['13', 'S&OP relevance', 'Demand is decomposed by cause and forecast error becomes reusable learning data.'],
+  ['14', 'Category specificity', 'Semolina affordability and edible-oil trade-capital examples remain distinct inside one measurement spine.'],
+  ['15', 'Executive usefulness', 'Every system ends in a decision, proof criterion and falsifier rather than a dashboard feature.'],
+  ['16', 'Senior-leader humility', 'Copy states that category expertise and confidential economics remain with Olam.'],
+  ['17', 'Candidate differentiation', 'Positioning centers on measurable learning velocity, causal ROMI and value of information—not generic “data skills.”'],
+  ['18', 'Slide density', 'Content is rendered through structured matrices and compact executive cards rather than résumé paragraphs.'],
+  ['19', 'Export fidelity', 'Candidate layouts use the same fixed 1200×675 export surface and deterministic dark cards as the rest of the deck.'],
+  ['20', 'Conversation test', 'The closing proposition is a falsifiable 90-day operating offer designed to invite a serious category-leadership discussion.'],
+] as const;
+
 const OLAM_BASE_CASE = calculateOlamNigeriaCase(OLAM_NIGERIA_DEFAULT_MODEL);
 const OLAM_SCENARIO_RESULTS = OLAM_NIGERIA_SCENARIOS.map((scenario) => ({
   ...scenario,
@@ -1015,42 +1194,46 @@ export const OLAM_SLIDES: OlamSlide[] = [
   },
   {
     id: 'candidate-1',
-    section: 'How I can add leverage · 01',
-    title: 'I would not try to replace category expertise — I would build the intelligence layer that makes it faster to act on',
-    narrative: 'A senior category team already knows the market in ways public data cannot. My strongest contribution is to turn that tacit knowledge, market evidence and campaign data into repeatable decision infrastructure.',
-    insight: 'The useful role is connective: market intelligence → causal experiment → ROMI bridge → S&OP explanation → executive decision. That makes each campaign or market movement teach the next one.',
+    section: 'How I could add leverage · 01',
+    title: 'I would not try to replace category expertise — I would build the intelligence layer that helps it move faster',
+    narrative: 'Olam already owns the category knowledge, customer relationships, route experience and confidential economics that public analysis cannot reproduce. My credible role is to make that knowledge more measurable, connected, testable and reusable across decisions.',
+    insight: 'My contribution should not be another reporting layer. It should be a measurement-and-experimentation layer that lets Marketing, Sales, Finance and S&OP learn from the same commercial event — while category leadership keeps ownership of the decision.',
     metrics: [
-      { label: 'Campaign execution', value: 'End-to-end', detail: 'Digital/offline planning, delivery, analysis and optimization', tone: 'green' },
-      { label: 'Budget discipline', value: '₹20M', detail: 'Portfolio-documented campaign budget responsibility', tone: 'gold' },
-      { label: 'Optimization proof', value: '−57% CPM', detail: '₹35.8 → ₹15.5 through allocation and campaign optimization', tone: 'cyan' },
-      { label: 'Working style', value: 'Analytics + stakeholders', detail: 'Decision synthesis across high-pressure, multi-stakeholder work', tone: 'violet' },
+      { label: 'Historical evidence · budget', value: '₹20M', detail: 'Verified portfolio/resume campaign-budget responsibility; not an Olam outcome forecast', tone: 'gold' },
+      { label: 'Historical evidence · CPM', value: '−' + OLAM_CANDIDATE_CPM_REDUCTION_PCT.toFixed(1) + '%', detail: '₹' + OLAM_CANDIDATE_CPM_BEFORE.toFixed(1) + ' → ₹' + OLAM_CANDIDATE_CPM_AFTER.toFixed(1) + ' CPM; ≈57% when rounded', tone: 'cyan' },
+      { label: 'Transferable method', value: 'Measure → validate', detail: 'Diagnose → reallocate → validate; the method transfers, not the media metric', tone: 'green' },
+      { label: 'Role boundary', value: 'Enable, not own', detail: 'Decision intelligence around Olam category expertise, P&L ownership and operating execution', tone: 'violet' },
     ],
     bullets: [
-      'Build a weekly category intelligence brief: what moved, why it moved, what evidence supports the cause and what should be tested next.',
-      'Create incremental-ROMI measurement that separates sell-in, offtake, trade inventory, route cost and cannibalization.',
-      'Connect campaign hypotheses to demand-planning assumptions so Marketing and S&OP learn from the same evidence.',
-      'Turn successful Nigeria experiments into reusable templates without pretending local execution should be copied unchanged.',
+      'Category intelligence — convert fragmented commodity, price, route, campaign and inventory signals into causal hypotheses and next tests.',
+      'Causal ROMI — separate sell-in from verified offtake, working capital, cannibalization and post-support repeat.',
+      'Demand sensing — use semolina/oil divergence as hypothesis generation, not deterministic causality.',
+      'S&OP explainability — decompose forecast movement by price, availability, campaign, NPD, seasonality, distribution and cannibalization.',
+      'Experiment design — pre-register counterfactual, economic KPI, failure threshold, washout and scale rule.',
+      'Executive synthesis — shorten signal→diagnosis→decision latency without pretending analysis owns the commercial decision.',
     ],
     sourceIds: [],
     kind: 'candidate',
   },
   {
     id: 'candidate-2',
-    section: 'How I can add leverage · 02',
-    title: 'My first objective would be to make the category team’s existing judgement more measurable — not to add another reporting layer',
-    narrative: 'The practical deliverable is a lightweight decision system that answers four questions every week: what changed, what caused it, what is the economic consequence and what is the smallest test that reduces uncertainty next.',
-    insight: 'The best outcome is a category organization that becomes harder to surprise: price pressure is detected earlier, route problems are not mistaken for demand weakness, campaign lift is not confused with inventory loading and NPD learns before it scales.',
+    section: 'How I could add leverage · 02',
+    title: 'My value should be measured by how fast uncertainty becomes evidence — and how well the next naira is allocated',
+    narrative: 'The 90-day proposition is deliberately falsifiable: instrument the commercial baseline, run controlled category tests, reconcile demand with economics and codify only mechanisms that survive cash, repeat and replication tests.',
+    insight: 'The existing NGN100bn model defines the economic evidence a pilot must eventually produce; it does not promise my impact. I can help measure availability recovery, repeat, price/mix, route cost and learning while Finance, Category, Sales, Supply Chain, Procurement and Treasury retain ownership of their inputs and decisions.',
     metrics: [
-      { label: '30 days', value: 'Instrument', detail: 'Semolina/oil market cohorts, pack, price, offtake, inventory and route baselines', tone: 'cyan' },
-      { label: '60 days', value: 'Test', detail: 'Affordability + availability + ROMI experiments with counterfactuals', tone: 'green' },
-      { label: '90 days', value: 'Control tower', detail: 'Cause-of-movement review linked to S&OP and category P&L', tone: 'gold' },
-      { label: 'Then', value: 'Codify', detail: 'Only repeat mechanisms that survive second-market falsification', tone: 'violet' },
+      { label: '0–30 days', value: 'Instrument', detail: 'Common data dictionary + market/category cohorts + cause-of-movement baseline', tone: 'cyan' },
+      { label: '31–60 days', value: 'Test', detail: 'Semolina affordability + edible-oil availability/trade-capital experiments with counterfactuals', tone: 'green' },
+      { label: '61–90 days', value: 'Reconcile', detail: 'Category control tower: demand + economics + trade + marketing + supply + forecast', tone: 'gold' },
+      { label: '90+ days', value: 'Codify', detail: 'Repeat only mechanisms that survive economic + cash + repeat + second-route/market tests', tone: 'violet' },
     ],
     bullets: [
-      'External intelligence: commodity, FX, policy, food-price and competitor signals translated into category implications.',
-      'Commercial analytics: customer/route cohorts, contribution velocity, pack migration and repeat.',
-      'Decision design: pre-registered hypotheses, failure conditions and scale gates.',
-      'Executive communication: one-page synthesis that keeps facts, assumptions, inference and decisions visibly separate.',
+      'Economic value architecture = incremental contribution + availability/price-mix/route benefits + avoided waste + working-capital benefit − service/trade/marketing/cannibalization/execution cost.',
+      'Value of information ≈ expected loss avoided + upside captured earlier − evidence cost; a test can create value by preventing the wrong rollout.',
+      'Contribution velocity = net contribution / inventory-naira-days; Finance should validate the exact implementation.',
+      'Learning velocity = decision-relevant hypotheses resolved / time × experimentation cost; management concept, not GAAP economics.',
+      'Proposed operating standard: every material pilot has a hypothesis, counterfactual, failure rule, named input owner and post-support washout.',
+      'Evaluate me on outcomes/economics—not dashboards: causal clarity, decision latency, incremental ROMI, repeat, stock days, forecast error and reusable learning.',
     ],
     sourceIds: [],
     kind: 'candidate',
