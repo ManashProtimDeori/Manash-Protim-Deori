@@ -5,6 +5,7 @@ on:
     paths:
       - 'src/pages/OlamAfricaGrowthStrategyPage.tsx'
       - 'src/data/olamAfricaStrategy.ts'
+      - 'src/lib/olamNigeriaDecisionModel.ts'
       - 'src/data/projects.ts'
       - 'src/context/DataContext.tsx'
       - 'src/App.tsx'
