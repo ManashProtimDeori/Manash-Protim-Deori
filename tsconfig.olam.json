@@ -10,6 +10,7 @@
   "include": [
     "src/pages/OlamAfricaGrowthStrategyPage.tsx",
     "src/data/olamAfricaStrategy.ts",
+    "src/lib/olamNigeriaDecisionModel.ts",
     "src/data/projects.ts",
     "tests/olam-africa-strategy.ts"
   ]
