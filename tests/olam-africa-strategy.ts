@@ -19,11 +19,11 @@ import {
 const closeTo = (actual: number, expected: number, tolerance = 0.005) =>
   Math.abs(actual - expected) <= tolerance;
 
-assert.equal(OLAM_REVIEW_ITERATIONS.length, 30, 'Olam strategy must retain exactly 30 meaningful review iterations');
+assert.equal(OLAM_REVIEW_ITERATIONS.length, 50, 'Olam strategy must retain exactly 50 meaningful review iterations after the final 20 forensic passes');
 assert.equal(OLAM_POLICY_GATES.length, 8, 'Nigeria policy constitution must contain exactly eight sequential gates');
 assert.equal(OLAM_MODEL_ASSUMPTIONS.length, 16, 'normalized decision model must expose every default assumption');
 assert.equal(OLAM_SLIDES.length, 38, 'Olam executive deck should contain 38 slides after policy/sensitivity expansion');
-assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '20-pass review slide should remain the final slide');
+assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '50-pass review slide should remain the final slide');
 assert.ok(!JSON.stringify(OLAM_SLIDES).includes('US' + String.fromCharCode(36)), 'deck-facing dollar notation should use $ without redundant US prefix');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'candidate').length, 2, 'deck must include exactly two candidate-contribution slides');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'sources').length, 3, 'expanded evidence appendix should use three readable source slides');
@@ -51,7 +51,7 @@ const processing = OLAM_SLIDES.find(slide => slide.id === 'processing-economics'
 assert.ok(processing);
 assert.ok(processing.metrics.some(metric => metric.value === 'S$611m'));
 assert.ok(processing.metrics.some(metric => metric.value === 'S$127'));
-assert.ok(processing.metrics.some(metric => metric.value === 'S$7.5bn'));
+assert.ok(processing.metrics.some(metric => metric.value === 'S$7.5bn' && metric.label === 'Olam Agri invested capital'));
 
 const modelAudit = OLAM_SLIDES.find(slide => slide.id === 'model-audit');
 assert.ok(modelAudit?.narrative.includes('NGN2.5bn'));
@@ -70,6 +70,8 @@ const ownership = OLAM_SLIDES.find(slide => slide.id === 'salic');
 assert.ok(ownership?.metrics.some(metric => metric.value === '81.81%'));
 assert.ok(ownership?.metrics.some(metric => metric.value === '18.19%'));
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S02')?.note.includes('81.11%'), 'ownership-source conflict should remain visible');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S16')?.note.includes('81.11%'), 'second primary ownership source should surface the stale 81.11% conflict');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S16')?.note.includes('81.81%'), 'second primary ownership source should support the transaction-specific 81.81% figure');
 const categoryThesis = OLAM_SLIDES.find(slide => slide.id === 'customer-profit');
 assert.ok(categoryThesis?.title.includes('Semolina and edible oils'));
 assert.ok(categoryThesis?.narrative.includes('measurement spine'));
@@ -80,7 +82,9 @@ assert.ok(semolinaDemand?.metrics.some(metric => metric.value === '6.8m MT'));
 
 const edibleOilPolicy = OLAM_SLIDES.find(slide => slide.id === 'west-africa');
 assert.ok(edibleOilPolicy?.title.includes('crude-versus-refined'));
-assert.ok(edibleOilPolicy?.metrics.some(metric => metric.value === 'Importable'));
+assert.ok(edibleOilPolicy?.metrics.some(metric => metric.value === 'Not prohibited'));
+assert.ok(!edibleOilPolicy?.metrics.some(metric => metric.value === 'Importable'), 'policy status must not be overstated as unrestricted importability');
+assert.ok(edibleOilPolicy?.narrative.includes('not proof of unrestricted or duty-free importability'));
 assert.ok(edibleOilPolicy?.sourceIds.includes('S27'));
 
 const tradeCapital = OLAM_SLIDES.find(slide => slide.id === 'southern-africa');
@@ -89,7 +93,10 @@ assert.ok(tradeCapital?.title.includes('hidden marketing tax'));
 
 const regionalPrices = OLAM_SLIDES.find(slide => slide.id === 'africa-runway');
 assert.ok(regionalPrices?.metrics.some(metric => metric.value === '73 markets'));
+assert.ok(regionalPrices?.metrics.some(metric => metric.value === '2026-08-24'));
+assert.ok(regionalPrices?.narrative.includes('machine-learning estimates'), 'regional price slide must disclose modeled/missing-price estimation');
 assert.ok(regionalPrices?.sourceIds.includes('S29'));
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S29')?.note.includes('continually revised'), 'World Bank RTFP revision caveat must remain visible');
 
 const romi = OLAM_SLIDES.find(slide => slide.id === 'marketing-os');
 assert.ok(romi?.title.includes('incremental contribution'));
@@ -134,14 +141,20 @@ assert.deepEqual(simulationA, simulationB, 'seeded uncertainty simulation must b
 assert.ok(simulationA.p10NpvNgnBn <= simulationA.p50NpvNgnBn);
 assert.ok(simulationA.p50NpvNgnBn <= simulationA.p90NpvNgnBn);
 assert.ok(simulationA.positiveNpvFrequencyPct >= 0 && simulationA.positiveNpvFrequencyPct <= 100);
-assert.ok(simulationA.note.includes('not a forecast probability'));
+assert.ok(simulationA.note.includes('independent uniform assumption ranges'));
+assert.ok(simulationA.note.includes('not a calibrated forecast probability'));
 
 const normalizedSlide = OLAM_SLIDES.find(slide => slide.id === 'normalized-economics');
 assert.ok(normalizedSlide?.narrative.includes('NGN100bn'));
 assert.ok(normalizedSlide?.insight.includes('HOLD'));
+assert.ok(normalizedSlide?.bullets.some(bullet => bullet.includes('de-overlap')), 'screening model must warn about FX/commodity exposure overlap');
+assert.ok(normalizedSlide?.bullets.some(bullet => bullet.includes('screening NPV')), 'screening NPV must not masquerade as an investment-grade DCF');
+assert.ok(normalizedSlide?.bullets.some(bullet => bullet.includes('inventory + receivables')), 'working-capital release must be labeled as a sales-day proxy');
 
 const capitalBoundary = OLAM_SLIDES.find(slide => slide.id === 'capital-boundary');
 assert.ok(capitalBoundary?.metrics.some(metric => metric.value.startsWith('NGN1.99')));
+assert.ok(capitalBoundary?.title.includes('screening model'));
+assert.ok(capitalBoundary?.bullets.some(bullet => bullet.includes('MPR is not WACC')));
 assert.ok(capitalBoundary?.insight.includes('measurable threshold'));
 
 const assumptionSlides = OLAM_SLIDES.filter(slide => slide.kind === 'assumptions');
@@ -172,6 +185,25 @@ for (const required of [
   'Joint-stress test',
   'Executive usability',
   'Export-fidelity audit',
+  'Metric-definition reconciliation',
+  'Revenue-precision reconciliation',
+  'Ownership cross-source reconciliation',
+  'Period-perimeter separation',
+  'CPI-base discipline',
+  'Rate-source freshness',
+  'Real-time-price epistemics',
+  'Forecast-versus-realized demand',
+  'HS-code scope audit',
+  'Policy-to-economics bridge',
+  'Working-capital proxy audit',
+  'FX-commodity overlap audit',
+  'Hurdle-rate convention audit',
+  'DCF-completeness audit',
+  'Simulation-semantics audit',
+  'Incrementality-cannibalization audit',
+  'Causality-seasonality audit',
+  'Recommendation-sequencing audit',
+  'Executive-traceability audit',
 ]) {
   assert.ok(auditNames.includes(required), 'missing heavy audit dimension: ' + required);
 }
@@ -186,6 +218,8 @@ assert.ok(pageSource.includes("host.className = 'olam-strategy-lab olam-export-h
 assert.ok(pageSource.includes("clone.classList.add('olam-export-slide')"));
 assert.ok(pageSource.includes("windowWidth: 1440"));
 assert.ok(pageSource.includes("Olam_Nigeria_Category_Growth_Strategy_"));
+assert.ok(pageSource.includes('A cross-verified, 50-pass decision system'));
+assert.ok(pageSource.includes('50 review iterations · 20 final forensic passes'));
 
 assert.ok(pageSource.includes("html2canvas-pro@2.4.2"));
 assert.ok(pageSource.includes("slide.addImage({ data: imageData, x: 0, y: 0, w: 13.333, h: 7.5 })"));
@@ -205,7 +239,7 @@ assert.ok(pageSource.includes("slide.kind === 'policy'"), 'policy gate renderer 
 assert.ok(pageSource.includes("slide.kind === 'sensitivity'"), 'sensitivity renderer must remain explicit');
 assert.ok(pageSource.includes("slide.kind === 'assumptions'"), 'assumption-ledger renderer must remain explicit');
 assert.ok(!/text-[(?:7|7.d+|8|8.d+|9|9.d+)px]/.test(pageSource), 'presentation slides must not contain sub-10px fixed text classes');
-assert.ok(pageSource.includes("grid grid-cols-5 gap-x-2.5"), '30-pass review should use a five-column layout to avoid vertical spillover');
+assert.ok(pageSource.includes("grid grid-cols-5 gap-x-2.5"), 'final 20 forensic passes should use a five-column layout to avoid vertical spillover');
 assert.ok(pageSource.includes("grid grid-cols-3 gap-3"), 'source appendix should use a three-column layout to avoid vertical spillover');
 
 const cssPath = fileURLToPath(new URL('../src/index.css', import.meta.url));
@@ -220,6 +254,15 @@ assert.ok(cssSource.includes('height:675px!important'), 'export host must use de
 assert.ok(cssSource.includes('.olam-exporting .olam-export-host .olam-metric-card'), 'metric cards need explicit export-safe styling');
 assert.ok(cssSource.includes('box-shadow:none!important'), 'export mode must suppress shadow raster artifacts');
 
+
+const reviewSlide = OLAM_SLIDES.find(slide => slide.id === 'iterations');
+assert.ok(reviewSlide);
+assert.equal(reviewSlide.bullets.length, 20, 'final review slide should show only passes 31–50 to remain presentation-safe');
+assert.ok(reviewSlide.metrics.some(metric => metric.value === '50'));
+assert.ok(reviewSlide.metrics.some(metric => metric.value === '20'));
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('can lag'), 'CBN key-rates lag caveat must remain explicit');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S27')?.note.includes('duty-free or unrestricted'), 'trade-policy caveat must distinguish prohibition status from import economics');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S01')?.note.includes('49.474m MT handled'), 'annual-report metric definitions must distinguish handled tonnes from sales volume');
 
 const appPath = fileURLToPath(new URL('../src/App.tsx', import.meta.url));
 const appSource = readFileSync(appPath, 'utf8');
