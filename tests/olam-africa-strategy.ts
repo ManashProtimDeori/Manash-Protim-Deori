@@ -73,7 +73,7 @@ assert.ok(ownership?.metrics.some(metric => metric.value === '18.19%'));
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S02')?.note.includes('81.11%'), 'ownership-source conflict should remain visible');
 const categoryThesis = OLAM_SLIDES.find(slide => slide.id === 'customer-profit');
 assert.ok(categoryThesis?.title.includes('Semolina and edible oils'));
-assert.ok(categoryThesis?.insight.includes('measurement spine'));
+assert.ok(categoryThesis?.narrative.includes('measurement spine'));
 
 const semolinaDemand = OLAM_SLIDES.find(slide => slide.id === 'wheat-baker-demand');
 assert.ok(semolinaDemand?.title.includes('semolina growth'));
