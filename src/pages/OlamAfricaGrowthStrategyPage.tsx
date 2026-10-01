@@ -33,7 +33,7 @@ const OlamIdentity: React.FC = () => (
     </div>
     <div>
       <div className="text-2xl font-semibold tracking-[-0.045em] text-white">olam agri</div>
-      <div className="mt-0.5 text-[8px] font-mono uppercase tracking-[0.18em] text-emerald-200/70">Africa growth strategy · portfolio case study</div>
+      <div className="mt-1 text-[10.5px] font-mono uppercase tracking-[0.17em] text-emerald-200/72">Africa growth strategy · portfolio case study</div>
     </div>
   </div>
 );
@@ -76,7 +76,7 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
             </div>
           ))}
         </div>
-        <div className="absolute inset-x-6 bottom-4 text-[8px] leading-relaxed text-white/46">The advantage compounds only when the physical flow and the customer-value flow are measured together.</div>
+        <div className="olam-graphic-label absolute inset-x-6 bottom-4 leading-[1.4] text-white/50">The advantage compounds only when the physical flow and the customer-value flow are measured together.</div>
       </div>
     );
   }
@@ -467,7 +467,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
               </button>
             </div>
           </div>
-          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-[9px] font-mono uppercase tracking-[0.12em] text-white/40">
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-[10.5px] font-mono uppercase tracking-[0.12em] text-white/44">
             <span>{slides.length} slides</span><span>20 heavy review iterations</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
           </div>
         </header>
