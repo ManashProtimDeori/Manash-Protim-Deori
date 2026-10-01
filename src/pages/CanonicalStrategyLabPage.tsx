@@ -260,12 +260,12 @@ const FigureGlyph: React.FC<{ kind: FigureKind }> = ({ kind }) => {
   return <svg viewBox="0 0 240 120" className="h-full w-full overflow-visible">{common}<g filter={S}>{glyph}</g></svg>;
 };
 
-const SlideRepresentativeFigure: React.FC<{ slide: DeckSlide }> = ({ slide }) => {
+const SlideRepresentativeFigure: React.FC<{ slide: DeckSlide; compact?: boolean }> = ({ slide, compact = false }) => {
   const spec = FIGURE_SPECS[slide.id] || { kind: 'engine' as FigureKind, labels: ['','',''] as [string,string,string], caption: '' };
   const halo = slide.id.length % 3;
 
   return (
-    <div className="canonical-representative-figure relative h-[205px] overflow-hidden rounded-[26px] border border-white/12 bg-[linear-gradient(145deg,#11151E_0%,#080B10_52%,#140C14_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,.07),0_26px_60px_rgba(0,0,0,.36)] [perspective:1100px]">
+    <div className={'canonical-representative-figure relative overflow-hidden rounded-[26px] border border-white/12 bg-[linear-gradient(145deg,#11151E_0%,#080B10_52%,#140C14_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,.07),0_26px_60px_rgba(0,0,0,.36)] [perspective:1100px] ' + (compact ? 'h-[148px]' : 'h-[205px]')}>
       <div className={'absolute h-36 w-36 rounded-full blur-2xl ' + (halo === 0 ? 'right-[-28px] top-[-34px] bg-orange-500/16' : halo === 1 ? 'left-[-28px] top-[-34px] bg-fuchsia-500/15' : 'right-[-28px] bottom-[-34px] bg-teal-400/14')} />
       <div className="absolute left-5 top-5 h-12 w-12 rotate-12 rounded-xl border border-orange-300/15 bg-orange-400/[0.055] shadow-[12px_16px_30px_rgba(0,0,0,.28)]" />
       <div className="absolute right-6 bottom-5 h-10 w-10 -rotate-12 rounded-xl border border-fuchsia-300/12 bg-fuchsia-400/[0.045]" />
@@ -408,6 +408,8 @@ const SlideShell: React.FC<{
   onEdit: () => void;
   children: React.ReactNode;
 }> = ({ slide, index, isOwner, ownerStudio, onEdit, children }) => {
+  const denseSlide = ['appendix', 'fundamentals', 'calc-audit', 'assumption-register', 'calc-standard'].includes(slide.kind);
+
   if (slide.kind === 'intro') {
     return (
       <section
@@ -435,12 +437,12 @@ const SlideShell: React.FC<{
     <section
       id={'canonical-slide-' + slide.id}
       data-slide-id={slide.id}
-      className="canonical-deck-slide relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0B0D12] shadow-[0_28px_80px_rgba(0,0,0,.35)] scroll-mt-24"
+      className={'canonical-deck-slide relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0B0D12] shadow-[0_28px_80px_rgba(0,0,0,.35)] scroll-mt-24 ' + (denseSlide ? 'canonical-dense-slide' : '')}
     >
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#E95420] via-[#77216F] to-[#31C7B5]" />
       <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-violet-500/8 blur-3xl" />
       <div className="absolute -left-24 bottom-[-120px] h-72 w-72 rounded-full bg-orange-500/7 blur-3xl" />
-      <div className="canonical-slide-inner relative p-6 md:p-8 lg:p-9 min-h-[680px] flex flex-col">
+      <div className={'canonical-slide-inner relative min-h-[680px] flex flex-col ' + (denseSlide ? 'p-5 md:p-6 lg:p-7' : 'p-6 md:p-8 lg:p-9')}>
         <div className="flex items-start justify-between gap-4">
           <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/74">
             {String(index + 1).padStart(2, '0')} · {slide.section}
@@ -456,8 +458,8 @@ const SlideShell: React.FC<{
           )}
         </div>
 
-        <div className="mt-5 grid lg:grid-cols-[1.18fr_.82fr] gap-5 items-stretch">
-          <div className="canonical-title-card relative min-w-0 overflow-hidden rounded-[28px] border border-white/12 bg-[radial-gradient(circle_at_8%_5%,rgba(233,84,32,.30),transparent_34%),radial-gradient(circle_at_92%_96%,rgba(119,33,111,.30),transparent_42%),linear-gradient(145deg,#1C1118_0%,#0B0D12_52%,#101823_100%)] p-6 shadow-[0_28px_70px_rgba(0,0,0,.38)] [perspective:1000px]">
+        <div className={'grid lg:grid-cols-[1.18fr_.82fr] items-stretch ' + (denseSlide ? 'mt-3 gap-3.5' : 'mt-5 gap-5')}>
+          <div className={'canonical-title-card relative min-w-0 overflow-hidden rounded-[28px] border border-white/12 bg-[radial-gradient(circle_at_8%_5%,rgba(233,84,32,.30),transparent_34%),radial-gradient(circle_at_92%_96%,rgba(119,33,111,.30),transparent_42%),linear-gradient(145deg,#1C1118_0%,#0B0D12_52%,#101823_100%)] shadow-[0_28px_70px_rgba(0,0,0,.38)] [perspective:1000px] ' + (denseSlide ? 'p-4.5' : 'p-6')}>
             <div className="pointer-events-none absolute right-[-28px] top-[-28px] h-28 w-28 rotate-12 rounded-[30px] border border-orange-300/18 bg-orange-400/[0.065] shadow-[20px_24px_46px_rgba(0,0,0,.30)]" />
             <div className="pointer-events-none absolute -left-10 bottom-[-48px] h-28 w-36 -rotate-12 rounded-[36px] border border-fuchsia-300/14 bg-fuchsia-400/[0.055]" />
             <div className="pointer-events-none absolute left-[38%] top-[-38px] h-24 w-24 rotate-45 rounded-2xl border border-teal-200/9 bg-teal-300/[0.03]" />
@@ -474,27 +476,27 @@ const SlideShell: React.FC<{
                 {slide.title}
               </h2>
               {slide.narrative && (
-                <p className="mt-3.5 max-w-[96%] text-[10px] md:text-[11px] leading-[1.5] text-white/74">{slide.narrative}</p>
+                <p className={(denseSlide ? 'mt-2.5 text-[9px] md:text-[10px] leading-[1.4]' : 'mt-3.5 text-[10px] md:text-[11px] leading-[1.5]') + ' max-w-[96%] text-white/74'}>{slide.narrative}</p>
               )}
             </div>
             <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-orange-300/65 via-fuchsia-300/40 to-teal-200/45" />
           </div>
 
-          <div className={'grid min-w-0 ' + (slide.decision ? 'grid-rows-[205px_1fr] gap-4' : 'grid-rows-[205px]')}>
-            <SlideRepresentativeFigure slide={slide} />
+          <div className={'grid min-w-0 ' + (slide.decision ? (denseSlide ? 'grid-rows-[148px_1fr] gap-3' : 'grid-rows-[205px_1fr] gap-4') : (denseSlide ? 'grid-rows-[148px]' : 'grid-rows-[205px]'))}>
+            <SlideRepresentativeFigure slide={slide} compact={denseSlide} />
             {slide.decision && (
-              <div className="canonical-leadership-box relative overflow-hidden rounded-[24px] border border-orange-300/18 bg-[radial-gradient(circle_at_100%_0%,rgba(233,84,32,.10),transparent_36%),linear-gradient(145deg,rgba(20,15,18,.98),rgba(10,13,18,.98))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_20px_48px_rgba(0,0,0,.24)]">
+              <div className={'canonical-leadership-box relative overflow-hidden rounded-[24px] border border-orange-300/18 bg-[radial-gradient(circle_at_100%_0%,rgba(233,84,32,.10),transparent_36%),linear-gradient(145deg,rgba(20,15,18,.98),rgba(10,13,18,.98))] shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_20px_48px_rgba(0,0,0,.24)] ' + (denseSlide ? 'p-3.5' : 'p-5')}>
                 <div className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-[#E95420] via-[#B34243] to-[#77216F]" />
                 <div className="pl-2.5">
                   <div className="text-[8px] font-mono uppercase tracking-[0.18em] text-orange-300/80">Leadership insight</div>
-                  <p className="mt-2.5 text-[11px] md:text-[12px] leading-[1.52] text-white/84">{slide.decision}</p>
+                  <p className={(denseSlide ? 'mt-1.5 text-[9.5px] md:text-[10.5px] leading-[1.4]' : 'mt-2.5 text-[11px] md:text-[12px] leading-[1.52]') + ' text-white/84'}>{slide.decision}</p>
                 </div>
               </div>
             )}
           </div>
         </div>
 
-        <div className="mt-6 flex-1 min-h-0">{children}</div>
+        <div className={(denseSlide ? 'mt-3' : 'mt-6') + ' flex-1 min-h-0'}>{children}</div>
       </div>
     </section>
   );
