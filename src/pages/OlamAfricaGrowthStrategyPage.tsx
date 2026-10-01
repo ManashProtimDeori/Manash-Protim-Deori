@@ -1,6 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { Download, ExternalLink, FileDown, Leaf, Network, Target, TrendingUp } from 'lucide-react';
 import {
+  OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS,
+  OLAM_CANDIDATE_MODEL_OWNERSHIP,
+  OLAM_CANDIDATE_PROPOSED_STANDARDS,
+  OLAM_CANDIDATE_90_DAY_PHASES,
+  OLAM_CANDIDATE_SCORECARD,
   OLAM_MODEL_ASSUMPTIONS,
   OLAM_POLICY_GATES,
   OLAM_REVIEW_ITERATIONS,
@@ -140,8 +145,8 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
         <div className="absolute inset-x-7 top-[31%] grid grid-cols-[1fr_42px_1fr] items-center gap-3">
           <div className="rounded-2xl border border-emerald-300/22 bg-emerald-300/[0.055] p-4 text-center">
             <div className="olam-dense-meta font-mono text-emerald-200">CRUDE PALM OIL</div>
-            <div className="olam-dense-title mt-2 font-semibold text-white">Importable</div>
-            <div className="olam-dense-copy mt-1 text-white/55">policy snapshot</div>
+            <div className="olam-dense-title mt-2 font-semibold text-white">NOT PROHIBITED</div>
+            <div className="olam-dense-copy mt-1 text-white/55">HS-policy status · not duty-free shorthand</div>
           </div>
           <div className="text-center text-2xl text-emerald-300">→</div>
           <div className="rounded-2xl border border-cyan-300/22 bg-cyan-300/[0.055] p-4 text-center">
@@ -151,8 +156,8 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
           </div>
         </div>
         <div className="absolute inset-x-7 bottom-5 flex items-center justify-between rounded-xl border border-orange-300/18 bg-orange-300/[0.04] px-4 py-3">
-          <span className="olam-dense-meta font-mono text-orange-200">REFINED RETAIL IMPORT</span>
-          <span className="olam-dense-title font-semibold text-orange-200">RESTRICTED ×</span>
+          <span className="olam-dense-meta font-mono text-orange-200">LISTED REFINED PALM-OIL HS LINES</span>
+          <span className="olam-dense-title font-semibold text-orange-200">PROHIBITED ×</span>
         </div>
       </div>
     );
@@ -404,7 +409,175 @@ const AuditBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
   </div>
 );
 
+const CandidateOneBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
+  <div className="grid h-full grid-cols-[1.42fr_.58fr] gap-3.5">
+    <div className="grid min-w-0 grid-cols-2 gap-2.5">
+      {OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS.map((system) => (
+        <article key={system.id} className="min-w-0 rounded-[16px] border border-white/9 bg-white/[0.026] p-2.5">
+          <div className="flex items-center justify-between gap-2">
+            <span className="olam-dense-meta font-mono text-emerald-300">{system.id} · {system.label}</span>
+            <span className="olam-dense-meta shrink-0 font-mono text-cyan-200/72">{system.gates}</span>
+          </div>
+          <div className="mt-1.5 grid grid-cols-[.78fr_1.22fr] gap-2">
+            <div>
+              <div className="olam-dense-meta font-mono text-white/38">CATEGORY NEED</div>
+              <p className="olam-dense-copy mt-0.5 leading-[1.28] text-white/64">{system.need}</p>
+            </div>
+            <div>
+              <div className="olam-dense-meta font-mono text-emerald-200/70">WHAT I COULD BUILD</div>
+              <p className="olam-dense-copy mt-0.5 leading-[1.28] text-white/72">{system.build}</p>
+            </div>
+          </div>
+          <div className="mt-1.5 border-t border-white/7 pt-1.5">
+            <div className="olam-dense-copy leading-[1.27] text-amber-100/68"><span className="font-mono text-amber-200/72">DECISION · </span>{system.decision}</div>
+            <div className="olam-dense-copy mt-0.5 leading-[1.25] text-white/48"><span className="font-mono text-cyan-200/58">PROVE / FALSIFY · </span>{system.proof} / {system.falsifier}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <aside className="grid min-w-0 grid-rows-[auto_auto_1fr] gap-2.5">
+      <div className="rounded-[17px] border border-amber-300/16 bg-amber-300/[0.035] p-3">
+        <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-amber-200/78">Transferable proof · historical</div>
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          {slide.metrics.map((metric) => (
+            <div key={metric.label} className="rounded-xl border border-white/8 bg-black/10 p-2">
+              <div className="olam-dense-meta font-mono text-white/42">{metric.label}</div>
+              <div className="olam-dense-title mt-1 font-semibold" style={{color:palette[metric.tone || 'slate']}}>{metric.value}</div>
+              <div className="olam-dense-copy mt-1 leading-[1.26] text-white/52">{metric.detail}</div>
+            </div>
+          ))}
+        </div>
+        <p className="olam-dense-copy mt-2 leading-[1.28] text-white/57">
+          The CPM example does not prove FMCG category expertise. It proves a transferable habit: decompose performance → reallocate resources → measure the result.
+        </p>
+      </div>
+
+      <div className="rounded-[17px] border border-emerald-300/14 bg-emerald-300/[0.03] p-3">
+        <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-emerald-200/76">Role boundary</div>
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          <div>
+            <div className="olam-dense-meta font-mono text-emerald-200/68">I COULD ENABLE</div>
+            <div className="olam-dense-copy mt-1 leading-[1.3] text-white/58">intelligence · experiments · causal decomposition · ROMI · cohorts · decision memos</div>
+          </div>
+          <div>
+            <div className="olam-dense-meta font-mono text-orange-200/68">OLAM OWNS</div>
+            <div className="olam-dense-copy mt-1 leading-[1.3] text-white/58">P&L · customer terms · route execution · NWC · procurement · Treasury hurdle · final decisions</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-[17px] border border-violet-300/14 bg-violet-300/[0.025] p-3">
+        <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-violet-200/74">Operating proposition</div>
+        <p className="olam-dense-copy mt-2 leading-[1.34] text-white/67">
+          DATA → DIAGNOSIS → HYPOTHESIS → EXPERIMENT → ECONOMIC MEASUREMENT → DECISION → ORGANIZATIONAL LEARNING
+        </p>
+        <p className="olam-dense-copy mt-2 leading-[1.32] text-white/50">
+          I would measure usefulness by whether Olam reaches more evidence-rich category decisions faster—not by the number of analyses produced.
+        </p>
+      </div>
+    </aside>
+  </div>
+);
+
+const CandidateTwoBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
+  <div className="grid h-full grid-rows-[.88fr_1.12fr] gap-3">
+    <div className="grid grid-cols-4 gap-2.5">
+      {OLAM_CANDIDATE_90_DAY_PHASES.map((phase, idx) => (
+        <article key={phase.window} className="relative min-w-0 overflow-hidden rounded-[16px] border border-white/9 bg-white/[0.026] p-2.5">
+          <div className="absolute inset-x-0 top-0 h-[2px]" style={{background:[palette.cyan,palette.green,palette.gold,palette.violet][idx]}} />
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="olam-dense-meta font-mono" style={{color:[palette.cyan,palette.green,palette.gold,palette.violet][idx]}}>{phase.window} DAYS</span>
+            <span className="olam-dense-title font-semibold text-white/88">{phase.label.toUpperCase()}</span>
+          </div>
+          <p className="olam-dense-copy mt-1.5 leading-[1.28] text-white/66">{phase.objective}</p>
+          <div className="mt-1.5 border-t border-white/7 pt-1.5">
+            <div className="olam-dense-meta font-mono text-white/36">OUTPUT</div>
+            <p className="olam-dense-copy mt-0.5 leading-[1.24] text-white/56">{phase.output}</p>
+            <div className="olam-dense-meta mt-1 font-mono text-emerald-200/58">MEASURE</div>
+            <p className="olam-dense-copy mt-0.5 leading-[1.24] text-white/52">{phase.measure}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div className="grid min-h-0 grid-cols-[1.04fr_.96fr_1fr] gap-2.5">
+      <section className="min-w-0 rounded-[17px] border border-emerald-300/14 bg-emerald-300/[0.025] p-3">
+        <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-emerald-200/76">Economic evidence architecture</div>
+        <div className="olam-dense-copy mt-2 leading-[1.34] text-white/68">
+          <span className="font-mono text-emerald-200">VALUE = </span>
+          incremental contribution + availability recovery + price/mix flow-through + route savings + avoided waste + NWC benefit
+          <span className="text-orange-100/72"> − service − trade − marketing − cannibalization − execution cost</span>
+        </div>
+        <div className="mt-2 rounded-xl border border-amber-300/13 bg-amber-300/[0.025] p-2">
+          <div className="olam-dense-meta font-mono text-amber-200/72">VALUE OF INFORMATION</div>
+          <div className="olam-dense-copy mt-1 leading-[1.28] text-white/58">expected loss avoided + upside captured earlier − cost of obtaining evidence</div>
+          <div className="olam-dense-copy mt-1 leading-[1.28] text-white/46">A pilot can create value by preventing a wrong rollout even if the pilot itself is small.</div>
+        </div>
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          <div className="rounded-xl border border-white/7 bg-black/10 p-2">
+            <div className="olam-dense-meta font-mono text-cyan-200/68">CONTRIBUTION VELOCITY</div>
+            <div className="olam-dense-copy mt-1 leading-[1.24] text-white/55">net contribution / inventory-naira-days · exact denominator Finance-owned</div>
+          </div>
+          <div className="rounded-xl border border-white/7 bg-black/10 p-2">
+            <div className="olam-dense-meta font-mono text-violet-200/68">LEARNING VELOCITY</div>
+            <div className="olam-dense-copy mt-1 leading-[1.24] text-white/55">decision-relevant hypotheses resolved / time × test cost · management concept</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="min-w-0 rounded-[17px] border border-cyan-300/14 bg-cyan-300/[0.025] p-3">
+        <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-cyan-200/76">Candidate-impact scorecard</div>
+        <div className="mt-2 space-y-1.5">
+          {OLAM_CANDIDATE_SCORECARD.map(([layer, measures], idx) => (
+            <div key={layer} className="border-t border-white/7 pt-1.5 first:border-0 first:pt-0">
+              <div className="olam-dense-meta font-mono" style={{color:[palette.cyan,palette.green,palette.gold,palette.violet][idx]}}>{layer.toUpperCase()}</div>
+              <div className="olam-dense-copy mt-0.5 leading-[1.25] text-white/55">{measures}</div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 rounded-xl border border-white/8 bg-black/10 p-2">
+          <div className="olam-dense-meta font-mono text-white/42">LEVERAGE EQUATION</div>
+          <div className="olam-dense-copy mt-1 leading-[1.28] text-white/62">decision frequency × economic value/decision × decision-quality improvement × learning reusability</div>
+        </div>
+      </section>
+
+      <section className="min-w-0 rounded-[17px] border border-violet-300/14 bg-violet-300/[0.025] p-3">
+        <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-violet-200/76">Ownership + proposed standard</div>
+        <div className="mt-2 grid grid-cols-[.78fr_.95fr_.8fr] gap-x-1.5 border-b border-white/8 pb-1">
+          {['INPUT','PRIMARY OWNER','MY SUPPORT'].map((x)=><span key={x} className="olam-dense-meta font-mono text-white/38">{x}</span>)}
+        </div>
+        <div className="mt-1 space-y-1">
+          {OLAM_CANDIDATE_MODEL_OWNERSHIP.slice(0,7).map(([input,owner,support]) => (
+            <div key={input} className="grid grid-cols-[.78fr_.95fr_.8fr] gap-x-1.5">
+              <span className="olam-dense-copy leading-[1.2] text-white/58">{input}</span>
+              <span className="olam-dense-copy leading-[1.2] text-white/48">{owner}</span>
+              <span className="olam-dense-copy leading-[1.2] text-emerald-100/56">{support}</span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 border-t border-white/8 pt-2">
+          <div className="olam-dense-meta font-mono text-amber-200/70">PROPOSED OPERATING STANDARD · NOT ACHIEVED RESULTS</div>
+          <div className="mt-1 grid grid-cols-2 gap-x-2 gap-y-1">
+            {OLAM_CANDIDATE_PROPOSED_STANDARDS.slice(0,6).map(([value,label]) => (
+              <div key={value+label} className="grid grid-cols-[34px_1fr] gap-1.5">
+                <span className="olam-dense-title font-semibold text-amber-200">{value}</span>
+                <span className="olam-dense-copy leading-[1.18] text-white/46">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-2 olam-dense-copy leading-[1.25] text-orange-100/52">
+          Any financial impact here is a measurement framework or scenario—not a promise of Olam performance.
+        </div>
+      </section>
+    </div>
+  </div>
+);
+
 const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
+  if (slide.id === 'candidate-1') return <CandidateOneBody slide={slide} />;
+  if (slide.id === 'candidate-2') return <CandidateTwoBody slide={slide} />;
   if (slide.kind === 'audit') return <AuditBody slide={slide} />;
 
   if (slide.kind === 'policy') {
