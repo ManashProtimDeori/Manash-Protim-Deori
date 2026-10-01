@@ -1,6 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { Download, ExternalLink, FileDown, Leaf, Network, Target, TrendingUp } from 'lucide-react';
-import { OLAM_REVIEW_ITERATIONS, OLAM_SLIDES, OLAM_SOURCES } from '../data/olamAfricaStrategy';
+import {
+  OLAM_MODEL_ASSUMPTIONS,
+  OLAM_POLICY_GATES,
+  OLAM_REVIEW_ITERATIONS,
+  OLAM_SLIDES,
+  OLAM_SOURCES,
+} from '../data/olamAfricaStrategy';
 import type { OlamMetric, OlamSlide, OlamTone } from '../data/olamAfricaStrategy';
 
 const palette: Record<OlamTone, string> = {
@@ -62,6 +68,10 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
   const isMarket = ['affordability', 'africa-runway', 'wheat-baker-demand'].includes(id);
   const isRisk = id === 'risk';
   const isCandidate = slide.kind === 'candidate';
+  const isPolicy = slide.kind === 'policy';
+  const isSensitivity = slide.kind === 'sensitivity';
+  const isScenario = slide.kind === 'scenario';
+  const isAssumptions = slide.kind === 'assumptions';
 
   if (isNetwork) {
     const nodes = ['Supply', 'Process', 'Route', 'Customer'];
@@ -136,6 +146,87 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
     );
   }
 
+  if (isPolicy) {
+    const rings = [86, 68, 50, 32];
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_50%_48%,rgba(18,185,129,.16),transparent_40%),linear-gradient(145deg,#091718,#071014)] p-5">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-emerald-200/70">Sequential policy gates</div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          {rings.map((size, idx) => (
+            <div key={size} className="absolute rounded-full border" style={{
+              width: size + '%',
+              height: size + '%',
+              borderColor: [palette.green,palette.cyan,palette.gold,palette.orange][idx] + '55',
+              background: [palette.green,palette.cyan,palette.gold,palette.orange][idx] + '08',
+            }} />
+          ))}
+          <div className="relative z-10 rounded-xl border border-white/12 bg-[#0B1517] px-4 py-3 text-center shadow-[0_18px_32px_rgba(0,0,0,.28)]">
+            <div className="olam-dense-title font-semibold text-white">G0 → G7</div>
+            <div className="olam-dense-copy mt-1 text-white/58">No skipped gate</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isSensitivity) {
+    const widths = [92, 78, 65, 52, 40, 30];
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(145deg,#15120B,#081015)] p-5">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-amber-200/72">NPV sensitivity / uncertainty</div>
+        <div className="absolute inset-x-7 bottom-7 top-12 flex flex-col justify-center gap-2.5">
+          {widths.map((width, idx) => (
+            <div key={width} className="relative h-4">
+              <div className="absolute left-1/2 top-0 h-full -translate-x-1/2 rounded-full" style={{
+                width: width + '%',
+                background: idx % 2 === 0
+                  ? 'linear-gradient(90deg, rgba(242,139,50,.52), rgba(18,185,129,.60))'
+                  : 'linear-gradient(90deg, rgba(155,124,255,.45), rgba(87,216,197,.56))',
+              }} />
+              <div className="absolute left-1/2 top-[-2px] h-5 w-px bg-white/45" />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (isScenario) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_75%_18%,rgba(155,124,255,.13),transparent_35%),linear-gradient(145deg,#0D1417,#081014)] p-5 [perspective:1000px]">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-cyan-200/72">Normalized decision engine</div>
+        <div className="absolute inset-x-9 bottom-7 top-12 flex items-center justify-center gap-3">
+          {[
+            ['INPUTS', palette.cyan],
+            ['ECONOMICS', palette.green],
+            ['CASH', palette.gold],
+            ['GATE', palette.orange],
+          ].map(([label,color], idx) => (
+            <div key={String(label)} className="relative flex h-20 flex-1 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.035] shadow-[10px_16px_30px_rgba(0,0,0,.28)]" style={{ transform:'translateY('+(idx%2===0?-6:6)+'px) rotateY(-5deg)' }}>
+              <div className="absolute inset-y-2 left-0 w-[3px] rounded-full" style={{ background:String(color) }} />
+              <span className="olam-graphic-label font-mono tracking-wide" style={{ color:String(color) }}>{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (isAssumptions) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(145deg,#0D1513,#0A0E13)] p-5">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-emerald-200/70">Assumption → evidence ledger</div>
+        <div className="absolute inset-x-6 bottom-6 top-12 grid grid-cols-4 gap-2">
+          {Array.from({length:16},(_,idx) => (
+            <div key={idx} className="rounded-lg border border-white/8 bg-white/[0.025]" style={{
+              boxShadow: idx % 5 === 0 ? 'inset 0 0 0 1px rgba(18,185,129,.18)' : undefined,
+            }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (isCandidate) {
     return (
       <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_15%_20%,rgba(155,124,255,.14),transparent_36%),radial-gradient(circle_at_82%_80%,rgba(18,185,129,.14),transparent_34%),#0A1015] p-5">
@@ -184,6 +275,69 @@ const AuditBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
 
 const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
   if (slide.kind === 'audit') return <AuditBody slide={slide} />;
+
+  if (slide.kind === 'policy') {
+    return (
+      <div className="grid h-full grid-cols-4 gap-2.5">
+        {OLAM_POLICY_GATES.map((gate, idx) => (
+          <article key={gate.id} className="relative min-w-0 overflow-hidden rounded-[18px] border border-white/10 bg-white/[0.028] p-3">
+            <div className="absolute inset-y-3 left-0 w-[3px] rounded-full" style={{ background:[palette.green,palette.cyan,palette.gold,palette.orange,palette.violet,palette.lime,palette.cyan,palette.green][idx] }} />
+            <div className="pl-2">
+              <div className="olam-dense-meta font-mono text-emerald-300">{gate.id}</div>
+              <div className="olam-dense-title mt-1 font-semibold leading-[1.22] text-white/90">{gate.title}</div>
+              <p className="olam-dense-copy mt-1.5 leading-[1.34] text-white/64">{gate.rule}</p>
+              <p className="olam-dense-copy mt-1.5 leading-[1.32] text-emerald-100/60"><span className="font-mono">PASS · </span>{gate.pass}</p>
+              <p className="olam-dense-copy mt-1.5 leading-[1.32] text-orange-100/55"><span className="font-mono">FAIL · </span>{gate.falsifier}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    );
+  }
+
+  if (slide.kind === 'assumptions') {
+    const rows = slide.id === 'assumptions-1' ? OLAM_MODEL_ASSUMPTIONS.slice(0,8) : OLAM_MODEL_ASSUMPTIONS.slice(8);
+    return (
+      <div className="grid h-full grid-cols-[.82fr_1.18fr] gap-4">
+        <div className="grid content-start grid-cols-1 gap-2.5">
+          {slide.metrics.map((metric) => <MetricCard key={metric.label} metric={metric} />)}
+        </div>
+        <div className="grid grid-cols-2 content-start gap-2">
+          {rows.map((row) => (
+            <div key={row[0]} className="min-w-0 rounded-xl border border-white/9 bg-white/[0.025] p-2.5">
+              <div className="flex items-start justify-between gap-2">
+                <span className="olam-dense-meta font-mono text-emerald-300">{row[0]}</span>
+                <span className="olam-dense-meta shrink-0 font-mono text-amber-200/78">{row[2]}</span>
+              </div>
+              <div className="olam-dense-title mt-1 font-semibold leading-[1.24] text-white/86">{row[1]}</div>
+              <div className="olam-dense-copy mt-1 leading-[1.33] text-white/58">{row[3]}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (slide.kind === 'sensitivity') {
+    return (
+      <div className="grid h-full grid-cols-[.92fr_1.08fr] gap-4">
+        <div className="grid content-start grid-cols-2 gap-2.5">
+          {slide.metrics.map((metric) => <MetricCard key={metric.label} metric={metric} />)}
+        </div>
+        <div className="rounded-[22px] border border-white/10 bg-white/[0.025] p-3.5">
+          <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-amber-200/72">{slide.id === 'sensitivity' ? 'Ranked decision exposure' : 'Uncertainty interpretation'}</div>
+          <div className="mt-2.5 grid grid-cols-2 gap-x-3 gap-y-1.5">
+            {slide.bullets.slice(0,8).map((bullet, idx) => (
+              <div key={bullet} className="grid grid-cols-[22px_1fr] gap-2 border-t border-white/7 pt-1.5">
+                <span className="olam-dense-meta font-mono text-emerald-300">{String(idx+1).padStart(2,'0')}</span>
+                <span className="olam-dense-copy leading-[1.32] text-white/62">{bullet}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (slide.kind === 'iterations') {
     return (
