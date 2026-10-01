@@ -1876,6 +1876,128 @@ export const CanonicalStrategyLabPage: React.FC = () => {
       );
     }
 
+    if (slide.kind === 'calc-audit') {
+      const auditId = slide.id.replace('appendix-', '');
+      const audit = CANONICAL_CALCULATION_AUDITS.find((item) => item.id === auditId);
+      if (!audit) return null;
+      return (
+        <div className="canonical-calc-audit grid gap-4">
+          <div className="grid sm:grid-cols-3 gap-3">
+            {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
+          </div>
+
+          <div className="grid lg:grid-cols-[1.08fr_.92fr] gap-4">
+            <div className="relative overflow-hidden rounded-[22px] border border-orange-300/18 bg-[radial-gradient(circle_at_8%_10%,rgba(233,84,32,.13),transparent_34%),linear-gradient(145deg,rgba(27,16,22,.98),rgba(9,13,18,.98))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,.05),12px_18px_42px_rgba(0,0,0,.24)] [perspective:900px]">
+              <div className="absolute right-[-18px] top-[-18px] h-20 w-20 rotate-12 rounded-2xl border border-orange-300/14 bg-orange-400/[0.045]" />
+              <div className="text-[9px] font-mono uppercase tracking-[0.16em] text-orange-300/82">Auditable formula</div>
+              <div className="mt-2.5 rounded-xl border border-white/9 bg-black/25 p-3 text-[12px] font-mono leading-[1.48] text-white/90 shadow-[8px_10px_22px_rgba(0,0,0,.24)]">{audit.formula}</div>
+              <div className="mt-3 text-[9px] font-mono uppercase tracking-[0.14em] text-white/55">Dependencies</div>
+              <div className="mt-2 grid gap-1.5">
+                {audit.dependencies.map((dep, idx) => (
+                  <div key={dep} className="grid grid-cols-[22px_1fr] items-start gap-2 rounded-lg border border-white/8 bg-white/[0.025] px-2.5 py-2">
+                    <span className="text-[8px] font-mono text-teal-300">{String(idx + 1).padStart(2, '0')}</span>
+                    <span className="text-[10px] leading-[1.4] text-white/78">{dep}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-[22px] border border-fuchsia-300/14 bg-[radial-gradient(circle_at_90%_8%,rgba(119,33,111,.18),transparent_38%),linear-gradient(145deg,rgba(20,12,22,.98),rgba(8,12,17,.98))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,.05),12px_18px_42px_rgba(0,0,0,.22)]">
+              <div className="text-[9px] font-mono uppercase tracking-[0.16em] text-fuchsia-200/80">Evidence boundary</div>
+              <p className="mt-2 text-[10.5px] leading-[1.5] text-white/82">{audit.sourceBoundary}</p>
+              <div className="mt-3 text-[9px] font-mono uppercase tracking-[0.16em] text-amber-200/80">Practical caveat</div>
+              <p className="mt-2 text-[10.5px] leading-[1.5] text-white/78">{audit.caveat}</p>
+              <div className="mt-3 border-t border-white/8 pt-3">
+                <div className="text-[9px] font-mono uppercase tracking-[0.14em] text-white/52">Source anchors</div>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {slide.sourceIds.map((id) => {
+                    const source = sourceMap[id];
+                    return source ? (
+                      <a key={id} href={source.url} target="_blank" rel="noreferrer" className="rounded-md border border-white/10 bg-white/[0.03] px-2 py-1.5 text-[8.5px] leading-[1.3] text-orange-200 hover:text-orange-100">
+                        {source.label}
+                      </a>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-[22px] border border-white/10 bg-white/[0.022] p-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="text-[9px] font-mono uppercase tracking-[0.17em] text-teal-200/78">10-pass validation record</div>
+              <div className="rounded-full border border-emerald-300/20 bg-emerald-300/[0.05] px-2.5 py-1 text-[8px] font-mono text-emerald-200">10 / 10 documented</div>
+            </div>
+            <div className="mt-3 grid md:grid-cols-2 gap-2">
+              {audit.validation10.map((pass, idx) => (
+                <div key={pass} className="relative overflow-hidden rounded-xl border border-white/8 bg-[linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012))] px-3 py-2.5 shadow-[5px_7px_16px_rgba(0,0,0,.16)]">
+                  <div className="absolute right-0 top-0 h-full w-[2px]" style={{ background: palette[( ['orange','teal','violet','cyan','green','gold','orange','teal','violet','green'] as Tone[])[idx]] }} />
+                  <p className="pr-1 text-[9.5px] leading-[1.42] text-white/78">{pass}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (slide.kind === 'assumption-register') {
+      const assumptions = slide.bullets
+        .map((id) => CANONICAL_ASSUMPTION_REGISTER.find((item) => item.id === id))
+        .filter(Boolean) as typeof CANONICAL_ASSUMPTION_REGISTER;
+      return (
+        <div className="canonical-assumption-register grid gap-4">
+          <div className="grid sm:grid-cols-3 gap-3">
+            {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
+          </div>
+          <div className="grid md:grid-cols-2 gap-3">
+            {assumptions.map((item, idx) => (
+              <article key={item.id} className="relative overflow-hidden rounded-[20px] border border-white/10 bg-[radial-gradient(circle_at_100%_0%,rgba(233,84,32,.07),transparent_34%),linear-gradient(145deg,rgba(18,16,22,.98),rgba(8,12,17,.98))] p-3.5 shadow-[8px_12px_28px_rgba(0,0,0,.20)] [perspective:800px]">
+                <div className="absolute -right-5 -top-5 h-14 w-14 rotate-12 rounded-xl border border-white/8 bg-white/[0.02]" />
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <div className="text-[8px] font-mono uppercase tracking-[0.14em] text-orange-300">{item.id} · {item.classification}</div>
+                    <h3 className="mt-1.5 text-[12px] font-semibold leading-[1.25] text-white">{item.label}</h3>
+                  </div>
+                  <div className="shrink-0 rounded-lg border border-teal-300/16 bg-teal-300/[0.045] px-2.5 py-1.5 text-[11px] font-semibold text-teal-200">{item.defaultValue}</div>
+                </div>
+                <div className="mt-2.5 grid gap-2 text-[9px] leading-[1.4]">
+                  <p className="text-white/78"><span className="font-mono text-white/48">LOGIC · </span>{item.logic}</p>
+                  <p className="text-white/70"><span className="font-mono text-white/48">WHY NOT FACT · </span>{item.whyNotFact}</p>
+                  <p className="text-white/76"><span className="font-mono text-emerald-300/70">REPLACE WITH · </span>{item.replacementEvidence}</p>
+                  <p className="text-white/68"><span className="font-mono text-amber-300/70">RISK IF WRONG · </span>{item.riskIfWrong}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (slide.kind === 'calc-standard') {
+      return (
+        <div className="grid gap-4">
+          <div className="grid sm:grid-cols-3 gap-3">
+            {slide.metrics.map((metric) => <MetricTile key={metric.label} metric={metric} />)}
+          </div>
+          <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_14%_12%,rgba(49,199,181,.10),transparent_34%),radial-gradient(circle_at_86%_88%,rgba(233,84,32,.08),transparent_36%),linear-gradient(145deg,#0D141A,#0A0C12)] p-4 shadow-[0_22px_54px_rgba(0,0,0,.30)]">
+            <div className="grid md:grid-cols-2 gap-2.5">
+              {CALCULATION_APPENDIX_STANDARD.map((pass, idx) => (
+                <div key={pass} className="grid grid-cols-[30px_1fr] gap-2.5 rounded-xl border border-white/9 bg-white/[0.025] p-3 shadow-[5px_7px_16px_rgba(0,0,0,.16)]">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-white/10 bg-black/20 text-[9px] font-mono" style={{ color: palette[( ['orange','teal','violet','cyan','green','gold','orange','teal','violet','green'] as Tone[])[idx]] }}>{String(idx + 1).padStart(2, '0')}</div>
+                  <p className="text-[10px] leading-[1.44] text-white/80">{pass.replace(/^Pass \d+ — /, '')}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-[20px] border border-amber-300/16 bg-amber-300/[0.035] p-4">
+            <div className="text-[9px] font-mono uppercase tracking-[0.15em] text-amber-200/78">Accuracy boundary</div>
+            <p className="mt-2 text-[11px] leading-[1.5] text-white/82">The appendix is engineered for complete arithmetic traceability, reproducible model behavior and explicit replacement evidence. It cannot make future commercial outcomes 100% certain because internal Canonical cohorts, pipeline, pricing, cost allocation and customer migration data are not public.</p>
+          </div>
+        </div>
+      );
+    }
+
     if (slide.kind === 'fundamentals') {
       return <FundamentalInsightGrid />;
     }
