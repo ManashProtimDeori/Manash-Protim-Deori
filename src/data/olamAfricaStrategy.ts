@@ -228,7 +228,7 @@ export const OLAM_SOURCES: OlamSource[] = [
     url: 'https://www.cbn.gov.ng/IntOps/KeyRates.html',
     date: '2026-09',
     authority: 'regulator',
-    note: 'Official market context for Nigeria funding and FX: the CBN page showed NOFR near 20% and NFEM around NGN1,329.51/US$ on September 25, 2026. These are volatile market references, not fixed model inputs.',
+    note: 'Official market context for Nigeria funding and FX: the CBN page showed NOFR near 20% and NFEM around NGN1,329.51 per USD on September 25, 2026. These are volatile market references, not fixed model inputs.',
   },
   {
     id: 'S23',
