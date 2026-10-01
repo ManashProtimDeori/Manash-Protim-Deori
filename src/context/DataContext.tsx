@@ -208,7 +208,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [tools, setTools] = useState<ToolItem[]>(() => {
     const stored = getStored(STORAGE_KEYS.TOOLS, initialTools);
     const requiredMortgageTools = initialTools.filter(tool =>
-      tool.id === 'tool-9' || tool.id === 'tool-10' || tool.id === 'tool-11'
+      ['tool-9','tool-10','tool-11','tool-12','tool-13','tool-14','tool-15','tool-16','tool-17'].includes(tool.id)
     );
     const missingRequired = requiredMortgageTools.filter(tool =>
       !stored.some(existing => existing.id === tool.id || existing.slug === tool.slug)
