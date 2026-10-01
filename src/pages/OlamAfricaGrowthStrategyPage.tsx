@@ -187,7 +187,7 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
 
   if (slide.kind === 'iterations') {
     return (
-      <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+      <div className="grid grid-cols-4 gap-x-3.5 gap-y-1">
         {OLAM_REVIEW_ITERATIONS.map((row) => (
           <div key={row[0]} className="grid grid-cols-[32px_1fr] gap-2.5 border-t border-white/8 py-2">
             <div className="olam-dense-meta font-mono text-emerald-300">{row[0]}</div>
@@ -203,7 +203,7 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
 
   if (slide.kind === 'sources') {
     return (
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-3 gap-3">
         {slide.bullets.map((bullet) => {
           const id = bullet.split(' · ')[0];
           const source = sourceMap[id];
