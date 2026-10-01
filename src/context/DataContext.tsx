@@ -205,9 +205,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     getStored(STORAGE_KEYS.ARTICLES, initialArticles)
   );
 
-  const [tools, setTools] = useState<ToolItem[]>(() => 
-    getStored(STORAGE_KEYS.TOOLS, initialTools)
-  );
+  const [tools, setTools] = useState<ToolItem[]>(() => {
+    const stored = getStored(STORAGE_KEYS.TOOLS, initialTools);
+    const requiredMortgageTools = initialTools.filter(tool =>
+      tool.id === 'tool-9' || tool.id === 'tool-10' || tool.id === 'tool-11'
+    );
+    const missingRequired = requiredMortgageTools.filter(tool =>
+      !stored.some(existing => existing.id === tool.id || existing.slug === tool.slug)
+    );
+    return [...stored, ...missingRequired];
+  });
 
   const [experiments, setExperiments] = useState<ExperimentItem[]>(() => 
     getStored(STORAGE_KEYS.EXPERIMENTS, initialExperiments)
