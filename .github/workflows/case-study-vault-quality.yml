@@ -1,0 +1,25 @@
+name: Case Study Vault Quality
+
+on:
+  pull_request:
+    paths:
+      - 'case-study-vault/**'
+      - '.github/workflows/case-study-vault-quality.yml'
+  workflow_dispatch:
+
+jobs:
+  build-vault:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install
+        working-directory: case-study-vault
+        run: npm install
+      - name: Type-check and build
+        working-directory: case-study-vault
+        run: npm run build
