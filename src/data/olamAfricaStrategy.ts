@@ -279,6 +279,95 @@ export const OLAM_REVIEW_ITERATIONS = [
   ['20', 'Policy synthesis', 'What decision framework survives all prior checks?', 'A Nigeria growth decision should pass eight gates in order: evidence integrity → customer economics → contribution quality → route reliability → resilience → cash conversion → second-market repeatability → capital release. Any failed gate sends the proposal back for redesign rather than allowing volume or narrative to override economics.'],
 ] as const;
 
+export const OLAM_POLICY_GATES = [
+  {
+    id: 'G0',
+    title: 'Evidence integrity',
+    rule: 'No decision-critical number enters an investment case without an evidence class, date and owner.',
+    pass: 'Reported, regulator/multilateral, or explicitly modeled with a replacement-data requirement.',
+    falsifier: 'Source conflict, stale forecast, mixed currencies or an untraceable modeled value.',
+  },
+  {
+    id: 'G1',
+    title: 'Customer economics',
+    rule: 'No growth intervention scales unless the customer earns more, loses less or carries less operating risk.',
+    pass: 'Matched-cohort yield, reject, cash-ticket, repeat or profitability evidence improves.',
+    falsifier: 'Engagement rises while customer economics and repeat remain unchanged.',
+  },
+  {
+    id: 'G2',
+    title: 'Contribution quality',
+    rule: 'No volume target is accepted without a contribution floor after discounts, service and variable route cost.',
+    pass: 'Incremental contribution is positive and resilient under agreed price/mix normalization.',
+    falsifier: 'Tonnage rises while contribution per customer, bag, tonne or route deteriorates.',
+  },
+  {
+    id: 'G3',
+    title: 'Route reliability',
+    rule: 'No availability expansion is approved without cost-to-serve, fill-rate, OTIF and stock-turn economics.',
+    pass: 'Recovered sales exceed incremental logistics, inventory, returns and service cost.',
+    falsifier: 'Availability improves only by creating uneconomic inventory or delivery intensity.',
+  },
+  {
+    id: 'G4',
+    title: 'Resilience',
+    rule: 'No imported-input case is approved without explicit FX, commodity, pass-through and substitution bands.',
+    pass: 'Downside remains within the agreed contribution and cash guardrails under stress.',
+    falsifier: 'The case depends on one stable FX, commodity or pass-through point estimate.',
+  },
+  {
+    id: 'G5',
+    title: 'Cash conversion',
+    rule: 'No EBIT story overrides working-capital deterioration.',
+    pass: 'Inventory, receivables and cash conversion improve or remain inside pre-agreed limits.',
+    falsifier: 'Growth requires structurally more cash than the operating return justifies.',
+  },
+  {
+    id: 'G6',
+    title: 'Repeatability',
+    rule: 'No Nigeria win becomes an Africa playbook until the mechanism reproduces in a second route or market.',
+    pass: 'The same economic mechanism survives localization of price, pack, channel and operating conditions.',
+    falsifier: 'The second market requires materially different economics to appear successful.',
+  },
+  {
+    id: 'G7',
+    title: 'Capital release',
+    rule: 'No rollout capital is released because a pilot is exciting; it is released only because the evidence clears the hurdle.',
+    pass: 'Pre-registered NPV, run-rate operating uplift, cash and risk thresholds are all met.',
+    falsifier: 'A failed gate is waived because the narrative, market size or volume opportunity is attractive.',
+  },
+] as const;
+
+export const OLAM_MODEL_ASSUMPTIONS = [
+  ['A01', 'Eligible sales base', 'NGN100bn', 'Normalized decision unit only; replace with audited eligible Nigeria sales perimeter.'],
+  ['A02', 'Contribution margin', '8%', 'Replace with customer/category gross-to-net contribution after variable route and service cost.'],
+  ['A03', 'Availability recovery', '2%', 'Replace with measured incremental sales from stockout/availability interventions versus control routes.'],
+  ['A04', 'Repeat uplift', '2%', 'Replace with matched-cohort reorder lift attributable to the intervention.'],
+  ['A05', 'Net price / mix', '1%', 'Replace with observed net realization after discount, pack mix and cannibalization.'],
+  ['A06', 'Price/mix flow-through', '70%', 'Replace with finance-validated conversion of net price/mix into operating contribution.'],
+  ['A07', 'Route efficiency', '0.6% of sales', 'Replace with route-level logistics, stock, returns and service cost delta.'],
+  ['A08', 'Service investment', '0.4% of sales', 'Replace with actual Bakewell/training/technical-service variable and fixed cost.'],
+  ['A09', 'Imported-input exposure', '45%', 'Replace with procurement bill-of-material and landed-cost exposure by category.'],
+  ['A10', 'FX shock', '5%', 'Stress input, not a forecast; replace with treasury scenario bands and hedge policy.'],
+  ['A11', 'Commodity exposure / shock', '30% / 5%', 'Replace with commodity-specific procurement exposure and approved stress bands.'],
+  ['A12', 'Cost pass-through', '80%', 'Replace with observed price-lag, elasticity and contractual pass-through by customer segment.'],
+  ['A13', 'Working-capital improvement', '7 days', 'Replace with finance-owned inventory/receivable baseline and pilot delta.'],
+  ['A14', 'Capital envelope', 'NGN0.6bn + NGN3.6bn', 'Inherited from uploaded case as a scenario envelope; not represented as Olam management guidance.'],
+  ['A15', 'Hurdle rate', '28%', '23% Sep-2026 CBN MPR public anchor + 5pp explicit model risk premium; replace with Olam treasury hurdle.'],
+  ['A16', 'Benefit ramp', '50% / 80% / 100%', 'Conservative three-year realization schedule used only to avoid day-one full-benefit assumptions.'],
+] as const;
+
+const OLAM_BASE_CASE = calculateOlamNigeriaCase(OLAM_NIGERIA_DEFAULT_MODEL);
+const OLAM_SCENARIO_RESULTS = OLAM_NIGERIA_SCENARIOS.map((scenario) => ({
+  ...scenario,
+  outputs: calculateOlamNigeriaCase(scenario.inputs),
+}));
+const OLAM_SENSITIVITY = buildOlamNigeriaSensitivity(OLAM_NIGERIA_DEFAULT_MODEL);
+const OLAM_SIMULATION = simulateOlamNigeriaCase(OLAM_NIGERIA_DEFAULT_MODEL, 5000, 20261001);
+
+const ngn = (value: number) => 'NGN' + (value < 0 ? '−' : '') + Math.abs(value).toFixed(2) + 'bn';
+const pct1 = (value: number) => value.toFixed(1) + '%';
+
 export const OLAM_SLIDES: OlamSlide[] = [
   {
     id: 'cover',
