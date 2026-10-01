@@ -767,7 +767,7 @@ export const OLAM_SLIDES: OlamSlide[] = [
     id: 'normalized-economics',
     section: 'Normalized economics engine',
     title: 'A normalized NGN100bn decision unit exposes the economics without pretending public data reveal Olam Nigeria’s internal P&L',
-    narrative: 'Every output below is produced by an explicit, replaceable assumption set. The purpose is not to forecast Olam Nigeria; it is to identify the minimum evidence a pilot must generate before the uploaded NGN4.2bn scenario envelope can become investment-grade.',
+    narrative: 'Every output below uses a normalized NGN100bn eligible-sales decision unit and is produced by an explicit, replaceable assumption set. The purpose is not to forecast Olam Nigeria; it is to identify the minimum evidence a pilot must generate before the uploaded NGN4.2bn scenario envelope can become investment-grade.',
     insight: 'Under the evidence-base assumptions, the normalized case produces only ' + ngn(OLAM_BASE_CASE.runRateOperatingImpactNgnBn) + ' of run-rate operating uplift and a ' + ngn(OLAM_BASE_CASE.threeYearNpvNgnBn) + ' three-year NPV. That is a HOLD signal, not a funding recommendation.',
     metrics: [
       { label: 'Run-rate operating impact', value: ngn(OLAM_BASE_CASE.runRateOperatingImpactNgnBn), detail: pct1(OLAM_BASE_CASE.runRateOperatingImpactPct) + ' of normalized eligible sales', tone: OLAM_BASE_CASE.runRateOperatingImpactNgnBn >= 0 ? 'green' : 'orange' },
