@@ -1323,12 +1323,16 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
     const scenarioIds = CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'scenario').map((item) => item.id);
     const tcoIds = CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'tco').map((item) => item.id);
+    const methodologyIds = CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'methodology').map((item) => item.id);
     const assumptionGroups = [
       { id:'scenario-assumptions-1', title:'Scenario assumptions A01–A06: retention, attach, conversion, price and distribution', ids:scenarioIds.slice(0,6) },
       { id:'scenario-assumptions-2', title:'Scenario assumptions A07–A12: AI, services economics, reinvestment and uncertainty', ids:scenarioIds.slice(6,12) },
       { id:'scenario-assumptions-3', title:'Scenario assumptions A13–A18: marketing allocation, brand proxies and influence', ids:scenarioIds.slice(12,18) },
       { id:'tco-assumptions-1', title:'Customer TCO assumptions T01–T05: scale, support, Ubuntu Pro, migration and operations', ids:tcoIds.slice(0,5) },
       { id:'tco-assumptions-2', title:'Customer TCO assumptions T06–T10: efficiency, energy and carbon', ids:tcoIds.slice(5,10) },
+      { id:'method-assumptions-1', title:'Methodology assumptions M01–M06: seed, run count, distribution shape and core uncertainty ranges', ids:methodologyIds.slice(0,6) },
+      { id:'method-assumptions-2', title:'Methodology assumptions M07–M12: service, margin, reinvestment and reach-index mechanics', ids:methodologyIds.slice(6,12) },
+      { id:'method-assumptions-3', title:'Methodology assumptions M13–M18: brand weights, sensitivity scoring and TCO horizon', ids:methodologyIds.slice(12,18) },
     ];
 
     const assumptionSlides: DeckSlide[] = assumptionGroups.map((group, idx) => ({
