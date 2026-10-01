@@ -41,30 +41,18 @@ const OlamIdentity: React.FC = () => (
 const MetricCard: React.FC<{ metric: OlamMetric }> = ({ metric }) => {
   const color = palette[metric.tone || 'slate'];
   return (
-    <div className="relative min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-3.5 shadow-[0_12px_35px_rgba(0,0,0,.18)]">
-      <div className="absolute inset-y-3 left-0 w-[3px] rounded-full" style={{ background: color }} />
-      <div className="pl-2">
-        <div className="text-[8.5px] font-mono uppercase tracking-[0.14em] text-white/56">{metric.label}</div>
-        <div className="mt-1.5 whitespace-nowrap text-[1.42rem] font-semibold tracking-[-0.035em]" style={{ color }}>{metric.value}</div>
-        <div className="mt-1.5 text-[9.25px] leading-[1.44] text-white/74">{metric.detail}</div>
+    <div className="olam-metric-card relative min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-4 shadow-[0_12px_35px_rgba(0,0,0,.18)]">
+      <div className="absolute inset-y-4 left-0 w-[3px] rounded-full" style={{ background: color }} />
+      <div className="pl-2.5">
+        <div className="olam-metric-label font-mono uppercase tracking-[0.12em] text-white/58">{metric.label}</div>
+        <div className="olam-metric-value mt-2 whitespace-nowrap font-semibold tracking-[-0.035em]" style={{ color }}>{metric.value}</div>
+        <div className="olam-metric-detail mt-2 leading-[1.42] text-white/76">{metric.detail}</div>
       </div>
     </div>
   );
 };
 
-const sourceCodes = (ids: string[]) => ids.map((id) => id).join(' · ');
 
-const SourceLine: React.FC<{ ids: string[] }> = ({ ids }) => {
-  if (!ids.length) return null;
-  return (
-    <div className="mt-3 mb-0.5 shrink-0 rounded-xl border border-white/10 bg-white/[0.025] px-3 py-2.5">
-      <div className="flex items-center justify-between gap-3 text-[8.5px] font-mono uppercase tracking-[0.11em] text-white/48">
-        <span className="shrink-0 text-emerald-200/70">Evidence</span>
-        <span className="min-w-0 truncate text-right text-white/52">{sourceCodes(ids)}</span>
-      </div>
-    </div>
-  );
-};
 
 const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
   const id = slide.id;
@@ -84,7 +72,7 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
           {nodes.map((node, idx) => (
             <div key={node} className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-white/12 bg-[#0C1617] shadow-[12px_18px_32px_rgba(0,0,0,.28)] [transform:rotateX(8deg)_rotateY(-8deg)]">
               <div className="absolute -right-1.5 top-1.5 bottom-[-4px] w-1.5 rounded-r bg-emerald-400/10" />
-              <span className="text-[8px] font-mono uppercase tracking-wide" style={{ color: [palette.green,palette.cyan,palette.gold,palette.orange][idx] }}>{node}</span>
+              <span className="olam-graphic-label font-mono uppercase tracking-wide" style={{ color: [palette.green,palette.cyan,palette.gold,palette.orange][idx] }}>{node}</span>
             </div>
           ))}
         </div>
@@ -99,11 +87,11 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
         <div className="absolute left-6 right-6 bottom-10 flex items-end gap-2">
           {[38,62,86,112].map((height, idx) => (
             <div key={height} className="relative flex-1 rounded-t-xl border border-white/10 bg-gradient-to-b from-emerald-400/35 to-emerald-400/[0.04]" style={{ height }}>
-              <div className="absolute -top-5 left-0 text-[7px] font-mono text-white/48">0{idx+1}</div>
+              <div className="absolute -top-5 left-0 olam-graphic-label font-mono text-white/48">0{idx+1}</div>
             </div>
           ))}
         </div>
-        <div className="absolute left-6 top-5 text-[9px] font-mono uppercase tracking-[0.15em] text-emerald-200/70">Evidence before scale</div>
+        <div className="absolute left-6 top-5 olam-graphic-label font-mono uppercase tracking-[0.15em] text-emerald-200/70">Evidence before scale</div>
       </div>
     );
   }
@@ -117,7 +105,7 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
           <path d="M30 118 C75 112 115 99 210 81" fill="none" stroke="#F3C65A" strokeOpacity=".55" strokeWidth="2" />
           {points.map(([x,y],i)=><circle key={i} cx={x*2.35} cy={y*1.7} r={i===3?7:4.5} fill={i===3?'#F28B32':'#12B981'} />)}
         </svg>
-        <div className="absolute left-4 top-4 text-[8px] font-mono uppercase tracking-[0.14em] text-white/46">Sense → diagnose → intervene → learn</div>
+        <div className="absolute left-4 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-white/46">Sense → diagnose → intervene → learn</div>
       </div>
     );
   }
@@ -130,7 +118,7 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
             <div key={idx} className="flex-1 rounded-t-lg" style={{ height:h, background:['#12B981','#F3C65A','#57D8C5','#F28B32','#9B7CFF'][idx]+'B8' }} />
           ))}
         </div>
-        <div className="absolute left-5 top-4 text-[8px] font-mono uppercase tracking-[0.14em] text-white/48">Demand quality ≠ demand volume</div>
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-white/48">Demand quality ≠ demand volume</div>
       </div>
     );
   }
@@ -143,7 +131,7 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
         <div className="absolute left-[18%] right-[18%] top-1/2 h-px bg-white/12" />
         <div className="absolute left-[30%] top-[30%] h-14 w-14 rounded-full border border-emerald-300/35 bg-emerald-400/10" />
         <div className="absolute right-[28%] bottom-[25%] h-10 w-10 rounded-xl border border-orange-300/35 bg-orange-400/10 rotate-12" />
-        <div className="absolute left-5 top-4 text-[8px] font-mono uppercase tracking-[0.14em] text-orange-200/70">Predefined falsifiers</div>
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-orange-200/70">Predefined falsifiers</div>
       </div>
     );
   }
@@ -158,7 +146,7 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
             </div>
           ))}
         </div>
-        <div className="absolute left-5 top-4 text-[8px] font-mono uppercase tracking-[0.14em] text-violet-200/70">Intelligence → experiments → replication</div>
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-violet-200/70">Intelligence → experiments → replication</div>
       </div>
     );
   }
@@ -176,16 +164,17 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
 };
 
 const AuditBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
-  <div className="grid grid-cols-[1fr_.82fr] gap-4">
-    <div className="grid grid-cols-2 gap-3">
+  <div className="grid h-full grid-cols-[1.02fr_.98fr] gap-5">
+    <div className="grid grid-cols-2 content-start gap-3.5">
       {slide.metrics.map((metric) => <MetricCard key={metric.label} metric={metric} />)}
     </div>
-    <div className="rounded-2xl border border-orange-300/15 bg-orange-400/[0.045] p-4">
-      <div className="text-[8px] font-mono uppercase tracking-[0.14em] text-orange-200/70">What the executive model still needs</div>
-      <div className="mt-3 space-y-2">
+    <div className="min-w-0 rounded-[22px] border border-orange-300/16 bg-[linear-gradient(145deg,rgba(242,139,50,.07),rgba(255,255,255,.02))] p-5">
+      <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-orange-200/76">What the executive model still needs</div>
+      <div className="mt-4 space-y-3">
         {slide.bullets.map((bullet, idx) => (
-          <div key={bullet} className="grid grid-cols-[22px_1fr] gap-2 text-[9px] leading-[1.4] text-white/76">
-            <span className="font-mono text-orange-300">0{idx+1}</span><span>{bullet}</span>
+          <div key={bullet} className="grid grid-cols-[28px_1fr] gap-2.5 text-white/80">
+            <span className="olam-bullet-copy font-mono text-orange-300">{String(idx+1).padStart(2,'0')}</span>
+            <span className="olam-bullet-copy leading-[1.45]">{bullet}</span>
           </div>
         ))}
       </div>
@@ -198,13 +187,13 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
 
   if (slide.kind === 'iterations') {
     return (
-      <div className="grid grid-cols-2 gap-x-5 gap-y-1.5">
+      <div className="grid grid-cols-2 gap-x-6 gap-y-1">
         {OLAM_REVIEW_ITERATIONS.map((row) => (
-          <div key={row[0]} className="grid grid-cols-[26px_1fr] gap-2 border-t border-white/8 py-1.5">
-            <div className="text-[7px] font-mono text-emerald-300">{row[0]}</div>
-            <div>
-              <div className="text-[8px] font-medium text-white/84">{row[1]}</div>
-              <div className="mt-0.5 text-[7.2px] leading-[1.32] text-white/50">{row[3]}</div>
+          <div key={row[0]} className="grid grid-cols-[32px_1fr] gap-2.5 border-t border-white/8 py-2">
+            <div className="olam-dense-meta font-mono text-emerald-300">{row[0]}</div>
+            <div className="min-w-0">
+              <div className="olam-dense-title font-semibold leading-[1.25] text-white/86">{row[1]}</div>
+              <div className="olam-dense-copy mt-1 leading-[1.36] text-white/58">{row[3]}</div>
             </div>
           </div>
         ))}
@@ -214,19 +203,19 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
 
   if (slide.kind === 'sources') {
     return (
-      <div className="grid grid-cols-2 gap-2.5">
+      <div className="grid grid-cols-2 gap-3">
         {slide.bullets.map((bullet) => {
           const id = bullet.split(' · ')[0];
           const source = sourceMap[id];
           return (
-            <a key={id} href={source?.url} target="_blank" rel="noreferrer" className="group min-w-0 rounded-xl border border-white/10 bg-white/[0.025] p-3 hover:border-emerald-300/30">
-              <div className="flex items-start gap-2">
-                <span className="shrink-0 text-[7px] font-mono text-emerald-300">{id}</span>
+            <a key={id} href={source?.url} target="_blank" rel="noreferrer" className="group min-w-0 rounded-xl border border-white/10 bg-white/[0.028] p-3.5 hover:border-emerald-300/30">
+              <div className="flex items-start gap-2.5">
+                <span className="olam-dense-meta shrink-0 font-mono text-emerald-300">{id}</span>
                 <div className="min-w-0">
-                  <div className="text-[8.5px] font-semibold leading-[1.25] text-white/82 group-hover:text-emerald-200">{source?.label}</div>
-                  <div className="mt-1 text-[7.2px] leading-[1.35] text-white/48">{source?.note}</div>
+                  <div className="olam-dense-title font-semibold leading-[1.28] text-white/84 group-hover:text-emerald-200">{source?.label}</div>
+                  <div className="olam-dense-copy mt-1.5 leading-[1.38] text-white/56">{source?.note}</div>
                 </div>
-                <ExternalLink className="ml-auto h-3 w-3 shrink-0 text-white/24" />
+                <ExternalLink className="ml-auto h-3.5 w-3.5 shrink-0 text-white/28" />
               </div>
             </a>
           );
@@ -235,21 +224,23 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
     );
   }
 
+  const metricCols = slide.metrics.length >= 4 ? 'grid-cols-2' : slide.metrics.length === 3 ? 'grid-cols-3' : 'grid-cols-2';
+
   return (
-    <div className="grid grid-cols-[1.05fr_.95fr] gap-4">
-      <div className="grid content-start gap-3">
+    <div className="grid h-full grid-cols-[1.08fr_.92fr] gap-5">
+      <div className="grid min-w-0 content-start gap-3.5">
         {slide.metrics.length > 0 && (
-          <div className={'grid gap-2.5 ' + (slide.metrics.length >= 4 ? 'grid-cols-2' : slide.metrics.length === 3 ? 'grid-cols-3' : 'grid-cols-2')}>
+          <div className={'grid gap-3 ' + metricCols}>
             {slide.metrics.map((metric) => <MetricCard key={metric.label} metric={metric} />)}
           </div>
         )}
         {slide.bullets.length > 0 && (
-          <div className="rounded-2xl border border-white/10 bg-white/[0.025] p-3.5">
-            <div className="space-y-2">
+          <div className="rounded-[22px] border border-white/10 bg-white/[0.028] p-4">
+            <div className="space-y-2.5">
               {slide.bullets.slice(0, 7).map((bullet, idx) => (
-                <div key={bullet} className="grid grid-cols-[22px_1fr] gap-2 text-[8.5px] leading-[1.4] text-white/72">
-                  <span className="font-mono text-emerald-300">{String(idx+1).padStart(2,'0')}</span>
-                  <span>{bullet}</span>
+                <div key={bullet} className="grid grid-cols-[28px_1fr] gap-2.5 text-white/78">
+                  <span className="olam-bullet-copy font-mono text-emerald-300">{String(idx+1).padStart(2,'0')}</span>
+                  <span className="olam-bullet-copy leading-[1.44]">{bullet}</span>
                 </div>
               ))}
             </div>
@@ -264,10 +255,10 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
 const StrategySlide: React.FC<{ slide: OlamSlide; index: number }> = ({ slide, index }) => {
   if (slide.kind === 'cover') {
     return (
-      <section id={'olam-slide-' + slide.id} className="olam-deck-slide relative overflow-hidden rounded-[28px] border border-white/10 bg-[#071117] shadow-[0_30px_90px_rgba(0,0,0,.38)]">
+      <section id={'olam-slide-' + slide.id} className="olam-deck-slide relative overflow-hidden rounded-[30px] border border-white/10 bg-[#071117] shadow-[0_30px_90px_rgba(0,0,0,.38)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_16%,rgba(18,185,129,.20),transparent_32%),radial-gradient(circle_at_14%_88%,rgba(242,139,50,.13),transparent_31%),linear-gradient(140deg,#061018_0%,#08161B_58%,#0F1712_100%)]" />
-        <div className="absolute right-[-5%] top-[12%] h-[72%] w-[50%] [perspective:1100px]">
-          <div className="absolute inset-0 rotate-[8deg] rounded-[42px] border border-emerald-300/15 bg-emerald-300/[0.04] shadow-[25px_35px_70px_rgba(0,0,0,.35)]" />
+        <div className="absolute right-[3%] top-[13%] h-[67%] w-[43%] [perspective:1100px]">
+          <div className="absolute inset-0 rotate-[7deg] rounded-[42px] border border-emerald-300/15 bg-emerald-300/[0.04] shadow-[25px_35px_70px_rgba(0,0,0,.35)]" />
           <div className="absolute inset-10 rotate-[-5deg] rounded-[34px] border border-amber-300/12 bg-amber-300/[0.035]" />
           <svg viewBox="0 0 400 300" className="absolute inset-10 h-[calc(100%-5rem)] w-[calc(100%-5rem)] opacity-80">
             <path d="M25 225 C90 185 125 75 205 122 S305 52 377 84" fill="none" stroke="#57D8C5" strokeWidth="6"/>
@@ -276,47 +267,60 @@ const StrategySlide: React.FC<{ slide: OlamSlide; index: number }> = ({ slide, i
             <circle cx="307" cy="83" r="10" fill="#12B981"/>
           </svg>
         </div>
-        <div className="relative z-10 flex h-full flex-col justify-between p-10">
+        <div className="olam-cover-inner relative z-10 flex h-full flex-col justify-between">
           <OlamIdentity />
-          <div className="max-w-[60%]">
-            <div className="text-[9px] font-mono uppercase tracking-[0.18em] text-emerald-200/65">Executive growth strategy · Africa</div>
-            <h2 className="mt-4 text-[3.35rem] font-semibold leading-[0.98] tracking-[-0.055em] text-white">{slide.title}</h2>
-            <p className="mt-5 text-[1rem] leading-relaxed text-white/68">{slide.narrative}</p>
+          <div className="max-w-[58%]">
+            <div className="olam-card-kicker font-mono uppercase tracking-[0.18em] text-emerald-200/70">Executive growth strategy · Africa</div>
+            <h2 className="mt-4 text-[clamp(2.7rem,4.2vw,4.1rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-white">{slide.title}</h2>
+            <p className="olam-cover-copy mt-5 max-w-[92%] leading-[1.55] text-white/72">{slide.narrative}</p>
           </div>
-          <div className="flex items-end">
-            <div className="text-[15px] font-semibold tracking-[-0.02em] text-white/88">Manash Protim Deori</div>
-          </div>
+          <div className="text-[clamp(15px,1.25vw,19px)] font-semibold tracking-[-0.02em] text-white/90">Manash Protim Deori</div>
         </div>
       </section>
     );
   }
 
+  const titleSize =
+    slide.title.length > 110 ? 'olam-title-sm' :
+    slide.title.length > 78 ? 'olam-title-md' :
+    slide.title.length > 52 ? 'olam-title-lg' :
+    'olam-title-xl';
+
   return (
-    <section id={'olam-slide-' + slide.id} className="olam-deck-slide relative overflow-hidden rounded-[28px] border border-white/10 bg-[#071117] shadow-[0_30px_90px_rgba(0,0,0,.34)]">
+    <section id={'olam-slide-' + slide.id} className="olam-deck-slide relative overflow-hidden rounded-[30px] border border-white/10 bg-[#071117] shadow-[0_30px_90px_rgba(0,0,0,.34)]">
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#12B981] via-[#57D8C5] to-[#F3C65A]" />
       <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-emerald-400/[0.045] blur-3xl" />
-      <div className="relative flex h-full flex-col px-8 pt-7 pb-6">
+      <div className="absolute -left-20 bottom-[-110px] h-64 w-64 rounded-full bg-amber-400/[0.035] blur-3xl" />
+
+      <div className="olam-slide-inner relative flex h-full flex-col">
         <div className="flex items-center justify-between gap-4">
-          <div className="text-[8px] font-mono uppercase tracking-[0.17em] text-emerald-200/60">{String(index+1).padStart(2,'0')} · {slide.section}</div>
-          <div className="text-[7.5px] font-mono uppercase tracking-[0.14em] text-white/34">Olam Agri Africa Growth Strategy</div>
+          <div className="olam-slide-meta font-mono uppercase tracking-[0.16em] text-emerald-200/64">{String(index+1).padStart(2,'0')} · {slide.section}</div>
+          <div className="olam-slide-meta font-mono uppercase tracking-[0.13em] text-white/36">Olam Agri Africa Growth Strategy</div>
         </div>
-        <div className="mt-4 grid grid-cols-[1.28fr_.72fr] gap-5">
-          <div>
-            <h2 className={'max-w-full text-white font-semibold tracking-[-0.04em] ' + (slide.title.length > 105 ? 'text-[1.7rem] leading-[1.05]' : slide.title.length > 75 ? 'text-[1.92rem] leading-[1.04]' : 'text-[2.15rem] leading-[1.02]')}>{slide.title}</h2>
-            <p className="mt-3 max-w-[96%] text-[11px] leading-[1.5] text-white/68">{slide.narrative}</p>
+
+        <div className="mt-4 grid grid-cols-[1.16fr_.84fr] gap-5 items-stretch">
+          <div className="olam-title-card relative min-w-0 overflow-hidden rounded-[26px] border border-white/12 bg-[radial-gradient(circle_at_8%_5%,rgba(18,185,129,.24),transparent_34%),radial-gradient(circle_at_92%_96%,rgba(87,216,197,.13),transparent_40%),linear-gradient(145deg,#10201D_0%,#081014_54%,#17140C_100%)] p-5 shadow-[0_24px_64px_rgba(0,0,0,.34)]">
+            <div className="pointer-events-none absolute right-[-26px] top-[-26px] h-24 w-24 rotate-12 rounded-[28px] border border-emerald-300/16 bg-emerald-400/[0.055]" />
+            <div className="pointer-events-none absolute -left-8 bottom-[-42px] h-24 w-32 -rotate-12 rounded-[30px] border border-amber-300/12 bg-amber-300/[0.04]" />
+            <div className="relative z-10">
+              <h2 className={titleSize + ' max-w-full break-words font-semibold tracking-[-0.035em] text-white'}>{slide.title}</h2>
+              {slide.narrative && <p className="olam-narrative mt-3 max-w-[97%] leading-[1.5] text-white/74">{slide.narrative}</p>}
+            </div>
+            <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-emerald-300/55 via-cyan-300/36 to-amber-300/46" />
           </div>
-          <div className="relative overflow-hidden rounded-2xl border border-emerald-300/14 bg-[linear-gradient(145deg,rgba(18,185,129,.075),rgba(255,255,255,.02))] p-4">
-            <div className="absolute left-0 top-3 bottom-3 w-[3px] rounded-full bg-gradient-to-b from-emerald-300 to-amber-300" />
-            <div className="pl-2">
-              <div className="text-[8.5px] font-mono uppercase tracking-[0.15em] text-emerald-200/70">Executive insight</div>
-              <p className="mt-2 text-[12px] font-medium leading-[1.48] text-white/82">{slide.insight}</p>
+
+          <div className="olam-insight-card relative min-w-0 overflow-hidden rounded-[24px] border border-emerald-300/16 bg-[radial-gradient(circle_at_100%_0%,rgba(18,185,129,.10),transparent_36%),linear-gradient(145deg,rgba(11,22,20,.98),rgba(8,13,17,.98))] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,.04),0_18px_46px_rgba(0,0,0,.24)]">
+            <div className="absolute left-0 top-5 bottom-5 w-[3px] rounded-full bg-gradient-to-b from-[#12B981] via-[#57D8C5] to-[#F3C65A]" />
+            <div className="pl-2.5">
+              <div className="olam-card-kicker font-mono uppercase tracking-[0.16em] text-emerald-200/74">Executive insight</div>
+              <p className="olam-insight-copy mt-2.5 font-medium leading-[1.5] text-white/86">{slide.insight}</p>
             </div>
           </div>
         </div>
-        <div className="mt-4 min-h-0 flex-1">
+
+        <div className="mt-5 min-h-0 flex-1 overflow-hidden">
           <SlideBody slide={slide} />
         </div>
-        <SourceLine ids={slide.sourceIds} />
       </div>
     </section>
   );
