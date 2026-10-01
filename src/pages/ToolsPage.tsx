@@ -62,13 +62,15 @@ export const ToolsPage: React.FC = () => {
         return <MortgageAutomationOS defaultView="Capital Markets" specialization="Synthetic capital-markets matching architecture with explicit governance" />;
       case 'mortgage-operations-economics-twin':
         return <MortgageAutomationOS defaultView="Operations Economics" specialization="Stage-level capacity economics, cycle-time risk and bottleneck intelligence" />;
+      case 'fintech-enterprise-workflow-autonomy-os':
+        return <MortgageAutomationOS defaultView="Enterprise Ops" specialization="Governed ITSM, knowledge, support, access and finance workflow automation" />;
       default:
         return <RoiCalculator />;
     }
   };
 
   return (
-    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell apple-tools-page py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' || currentTool?.slug === 'drivetrain-gtm-intelligence-twin' || currentTool?.slug === 'agri-commercial-intelligence-engine' || currentTool?.slug === 'mortgage-manufacturing-automation-os' || currentTool?.slug === 'underwriting-decision-exception-router' || currentTool?.slug === 'mortgage-compliance-closing-control-tower' || currentTool?.slug === 'mortgage-document-intelligence-reconciliation-engine' || currentTool?.slug === 'mortgage-product-pricing-scenario-orchestrator' || currentTool?.slug === 'borrower-voice-next-best-action-orchestrator' || currentTool?.slug === 'mortgage-quality-control-assurance-engine' || currentTool?.slug === 'mortgage-capital-markets-matching-sandbox' || currentTool?.slug === 'mortgage-operations-economics-twin' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
+    <div data-tool={currentTool?.slug || 'roi-calculator'} className={`tools-premium-shell apple-tools-page py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${currentTool?.slug === 'utm-builder' || currentTool?.slug === 'marketing-brief-generator' || currentTool?.slug === 'marketsignal-os' || currentTool?.slug === 'hillchain-twin' || currentTool?.slug === 'drivetrain-gtm-intelligence-twin' || currentTool?.slug === 'agri-commercial-intelligence-engine' || currentTool?.slug === 'mortgage-manufacturing-automation-os' || currentTool?.slug === 'underwriting-decision-exception-router' || currentTool?.slug === 'mortgage-compliance-closing-control-tower' || currentTool?.slug === 'mortgage-document-intelligence-reconciliation-engine' || currentTool?.slug === 'mortgage-product-pricing-scenario-orchestrator' || currentTool?.slug === 'borrower-voice-next-best-action-orchestrator' || currentTool?.slug === 'mortgage-quality-control-assurance-engine' || currentTool?.slug === 'mortgage-capital-markets-matching-sandbox' || currentTool?.slug === 'mortgage-operations-economics-twin' || currentTool?.slug === 'fintech-enterprise-workflow-autonomy-os' ? 'max-w-[1600px]' : 'max-w-7xl'}`}>
       
       {/* Editorial Header */}
       <div className="tools-premium-header flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pb-6 border-b border-neutral-800/40">
