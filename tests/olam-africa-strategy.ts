@@ -1,3 +1,4 @@
+// Verification-only branch for the two-slide candidate contribution module.
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
