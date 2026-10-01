@@ -765,7 +765,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
             <div className="max-w-3xl">
               <OlamIdentity />
               <h1 className="mt-6 text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-white">Olam Agri Nigeria Category Growth Strategy Lab</h1>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A cross-verified, 30-pass decision system for semolina and edible oils in Nigeria: category economics, trade-capital velocity, causal ROMI, regional affordability, S&OP explainability, policy-aware refining logic, eight sequential capital gates and a reproducible 5,000-run uncertainty test.</p>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A cross-verified, 50-pass decision system for semolina and edible oils in Nigeria: 30 structural reviews plus 20 final forensic audits across metric definitions, evidence freshness, category economics, trade-capital velocity, causal ROMI, regional affordability, policy scope, model boundaries, eight sequential capital gates and a reproducible 5,000-run stress simulation.</p>
             </div>
             <div className="flex flex-wrap gap-2" data-export-hide="true">
               <button onClick={downloadPptx} disabled={pptBusy} className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-[#04100D] hover:bg-emerald-400 disabled:opacity-50">
@@ -777,7 +777,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
             </div>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-[10.5px] font-mono uppercase tracking-[0.12em] text-white/44">
-            <span>{slides.length} slides</span><span>30 heavy review iterations</span><span>8 policy gates</span><span>5,000-run sensitivity simulation</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
+            <span>{slides.length} slides</span><span>50 review iterations · 20 final forensic passes</span><span>8 policy gates</span><span>5,000-run sensitivity simulation</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
           </div>
         </header>
 
