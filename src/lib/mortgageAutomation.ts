@@ -179,7 +179,7 @@ const rule = (
 const statusFromBoolean = (value:boolean,block=false):GateStatus => value ? 'PASS' : block ? 'BLOCK' : 'REVIEW';
 
 const scoreStage = (stage:string,checks:GateStatus[],note:string):StageScore => {
-  const weights = checks.map(status=>status==='PASS'?1:status==='REVIEW'?.55:0);
+  const weights = checks.map(status=>status==='PASS'?1:status==='REVIEW' ? .55 : 0);
   const score = Math.round((weights.reduce((sum,x)=>sum+x,0) / Math.max(checks.length,1))*100);
   const status:GateStatus = checks.includes('BLOCK') ? 'BLOCK' : checks.includes('REVIEW') ? 'REVIEW' : 'PASS';
   return {stage,score,status,note};
