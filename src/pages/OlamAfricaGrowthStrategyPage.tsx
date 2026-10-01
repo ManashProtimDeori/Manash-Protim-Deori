@@ -341,9 +341,9 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
 
   if (slide.kind === 'iterations') {
     return (
-      <div className="grid grid-cols-4 gap-x-3.5 gap-y-1">
+      <div className="grid grid-cols-5 gap-x-2.5 gap-y-1">
         {OLAM_REVIEW_ITERATIONS.map((row) => (
-          <div key={row[0]} className="grid grid-cols-[32px_1fr] gap-2.5 border-t border-white/8 py-2">
+          <div key={row[0]} className="grid grid-cols-[28px_1fr] gap-2 border-t border-white/8 py-1.5">
             <div className="olam-dense-meta font-mono text-emerald-300">{row[0]}</div>
             <div className="min-w-0">
               <div className="olam-dense-title font-semibold leading-[1.25] text-white/86">{row[1]}</div>
