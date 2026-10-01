@@ -6,6 +6,11 @@ import {
   VERIFIED_EVIDENCE,
 } from '../src/data/canonicalVerifiedEvidence';
 import { REVIEW_ITERATIONS_2026 } from '../src/data/canonicalMarketingDecision';
+import {
+  CALCULATION_APPENDIX_STANDARD,
+  CANONICAL_ASSUMPTION_REGISTER,
+  CANONICAL_CALCULATION_AUDITS,
+} from '../src/data/canonicalCalculationAppendix';
 
 assert.ok(VERIFIED_EVIDENCE.length >= 13, 'evidence appendix should retain a broad verified set');
 assert.equal(new Set(VERIFIED_EVIDENCE.map((row) => row.id)).size, VERIFIED_EVIDENCE.length, 'evidence IDs must be unique');
@@ -34,7 +39,7 @@ assert.ok(cssSource.includes('aspect-ratio:2 / 3!important'), 'website slides sh
 assert.ok(cssSource.includes('Canonical v11: uploaded-deck content lock'), 'uploaded-deck design system should remain active');
 
 const contentStart = pageSource.indexOf("  const baseSlides = useMemo<DeckSlide[]>(() => [");
-const contentEnd = pageSource.indexOf("\n\n  const slides = useMemo", contentStart);
+const contentEnd = pageSource.indexOf("\n\n  const calculationResult", contentStart);
 assert.ok(contentStart >= 0 && contentEnd > contentStart, 'canonical slide content block must remain discoverable');
 const lockedSlideContent = pageSource.slice(contentStart, contentEnd);
 let contentHash = 0x811c9dc5;
@@ -42,7 +47,7 @@ for (let i = 0; i < lockedSlideContent.length; i += 1) {
   contentHash ^= lockedSlideContent.charCodeAt(i);
   contentHash = Math.imul(contentHash, 0x01000193) >>> 0;
 }
-assert.equal(contentHash.toString(16).padStart(8, '0'), 'eaf3ef7e', 'Canonical deck content changed unexpectedly after the leadership-copy and overlap correction round');
+assert.equal(contentHash.toString(16).padStart(8, '0'), 'c3ed6f0b', 'Canonical core deck changed unexpectedly after the calculation-appendix integration round');
 
 assert.ok(pageSource.includes('Leadership insight'), 'web deck should label the box Leadership insight');
 assert.ok(!pageSource.includes('Leadership decision'), 'old directive label must be absent');
@@ -108,6 +113,36 @@ assert.ok(pageSource.includes("detail: 'Snapdragon X2 Ubuntu support targeted fo
 assert.ok(pageSource.includes("detail: 'Overlapping cycles yield weekly kernel releases'"), 'kernel cadence should preserve the two-week-cycle/weekly-release distinction');
 assert.ok(!pageSource.includes("label: 'Model governance'"), 'opening model-governance metric should be removed');
 assert.equal(REVIEW_ITERATIONS_2026.length, 40, 'four refinement rounds should total 40 iterations');
+
+assert.equal(CANONICAL_CALCULATION_AUDITS.length, 19, 'calculation appendix should document every calculation family used by the deck');
+assert.equal(CALCULATION_APPENDIX_STANDARD.length, 10, 'validation protocol must retain exactly ten passes');
+assert.equal(CANONICAL_ASSUMPTION_REGISTER.length, 28, 'scenario and TCO assumption register should enumerate all 28 defaults');
+assert.equal(CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'scenario').length, 18, 'all 18 scenario defaults must be registered');
+assert.equal(CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'tco').length, 10, 'all 10 TCO defaults must be registered');
+for (const audit of CANONICAL_CALCULATION_AUDITS) {
+  assert.equal(audit.validation10.length, 10, audit.id + ' must document all ten validation passes');
+  assert.ok(audit.formula.length > 12, audit.id + ' must disclose its auditable formula');
+  assert.ok(audit.sourceBoundary.length > 25, audit.id + ' must state its source/assumption boundary');
+  assert.ok(audit.caveat.length > 20, audit.id + ' must state a practical caveat');
+}
+for (const assumption of CANONICAL_ASSUMPTION_REGISTER) {
+  assert.ok(assumption.logic.length > 20, assumption.id + ' must explain the logic behind the default');
+  assert.ok(assumption.whyNotFact.length > 15, assumption.id + ' must explain why the default is not a reported fact');
+  assert.ok(assumption.replacementEvidence.length > 15, assumption.id + ' must specify replacement evidence');
+  assert.ok(assumption.riskIfWrong.length > 15, assumption.id + ' must explain the consequence of error');
+}
+
+assert.ok(pageSource.includes("kind: 'calc-audit'"), 'deck should render dedicated calculation-audit slides');
+assert.ok(pageSource.includes("kind: 'assumption-register'"), 'deck should render dedicated assumption-register slides');
+assert.ok(pageSource.includes("kind: 'calc-standard'"), 'deck should end the appendix with the ten-pass validation standard');
+assert.ok(pageSource.includes("section: 'Calculation appendix · Page '"), 'calculation slides should carry explicit page numbers');
+assert.ok(pageSource.includes("section: 'Assumption register · Page '"), 'assumption slides should carry explicit page numbers');
+assert.ok(pageSource.includes('10 / 10 documented'), 'each calculation page should visibly state the ten-pass audit record');
+assert.ok(pageSource.includes('Seeded reproducible simulation · 1,600 runs'), 'simulation wording should disclose reproducibility and the actual run count');
+assert.ok(!pageSource.includes('Deterministic uncertainty simulation'), 'misleading deterministic-uncertainty wording should be removed');
+assert.ok(pageSource.includes('Rendered PowerPoint plus direct multi-page PDF'), 'governance should describe the actual image-rendered PPTX export accurately');
+assert.ok(pageSource.includes('100% arithmetic reproducibility'), 'appendix should distinguish reproducible arithmetic from impossible forecast certainty');
+assert.ok(pageSource.includes('fixed 2:3 portrait presentation geometry'), 'deck UI should describe its actual portrait geometry');
 
 console.log('Canonical evidence and leadership-language checks passed', {
   verifiedRows: VERIFIED_EVIDENCE.length,
