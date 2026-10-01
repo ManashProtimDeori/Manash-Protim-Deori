@@ -196,3 +196,10 @@
   .mort-comm{grid-template-columns:70px 1fr}
   .mort-comm>.mort-rule-badge{grid-column:2}
 }
+
+
+.mort-enterprise-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.mort-enterprise-map>article{min-width:0;border:1px solid var(--mort-border);border-radius:14px;background:linear-gradient(145deg,rgba(255,255,255,.03),rgba(255,255,255,.012));padding:14px}
+.mort-enterprise-map svg{width:22px;height:22px}.mort-enterprise-map strong{display:block;margin-top:10px;font-size:12px}.mort-enterprise-map p{margin:6px 0 0;font-size:9px;line-height:1.42;color:#8fa0a9}
+@media(max-width:1100px){.mort-enterprise-map{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.mort-enterprise-map{grid-template-columns:1fr}}
