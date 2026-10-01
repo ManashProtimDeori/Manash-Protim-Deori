@@ -35,6 +35,8 @@ assert.equal(OLAM_SLIDES.length, 38, 'Olam executive deck should contain 38 slid
 assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '50-pass review slide should remain the final slide');
 assert.ok(!JSON.stringify(OLAM_SLIDES).includes('US' + String.fromCharCode(36)), 'deck-facing dollar notation should use $ without redundant US prefix');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'candidate').length, 2, 'deck must include exactly two candidate-contribution slides');
+const candidateIndexes = OLAM_SLIDES.map(slide => slide.id).filter(id => id.startsWith('candidate-')).map(id => OLAM_SLIDES.findIndex(slide => slide.id === id));
+assert.deepEqual(candidateIndexes, [32,33], 'candidate slides must remain adjacent after the 90-day operating slide and before the evidence appendix');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'sources').length, 3, 'expanded evidence appendix should use three readable source slides');
 assert.equal(new Set(OLAM_SOURCES.map(source => source.id)).size, OLAM_SOURCES.length, 'source IDs must be unique');
 assert.equal(OLAM_SOURCES.length, 30, 'evidence registry should include the expanded cross-check sources');
@@ -178,6 +180,8 @@ assert.equal(OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS.length, 6, 'qualitative slide s
 assert.equal(OLAM_CANDIDATE_90_DAY_PHASES.length, 4, 'quantitative slide should retain four execution phases');
 assert.equal(OLAM_CANDIDATE_SCORECARD.length, 4, 'candidate scorecard should separate data, decision, economic and learning quality');
 assert.equal(OLAM_CANDIDATE_MODEL_OWNERSHIP.length, 11, 'model-input ownership matrix should retain all material input boundaries');
+assert.ok(OLAM_CANDIDATE_MODEL_OWNERSHIP.some(([input,owner,support]) => input === 'Hurdle rate' && owner.includes('Treasury') && support === 'No candidate ownership'));
+assert.ok(OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS.every(system => system.gap && system.beneficiaries && system.proof && system.falsifier), 'every qualitative contribution system must include gap, users, proof and falsifier');
 assert.equal(OLAM_CANDIDATE_QA_PASSES.length, 20, 'candidate module must receive the requested final 20-pass QA review');
 assert.ok(OLAM_CANDIDATE_PROPOSED_STANDARDS.some(([value]) => value === '100%'), 'proposed process standards should remain explicit');
 assert.ok(candidateOne.metrics.some(metric => metric.value === '₹20M' && metric.label.includes('Historical evidence')));
@@ -286,6 +290,13 @@ assert.ok(pageSource.includes('VALUE OF INFORMATION'), 'candidate value architec
 assert.ok(pageSource.includes('CONTRIBUTION VELOCITY'), 'candidate quantitative slide should include contribution velocity');
 assert.ok(pageSource.includes('LEARNING VELOCITY'), 'candidate quantitative slide should include learning velocity');
 assert.ok(pageSource.includes('PROPOSED OPERATING STANDARD · NOT ACHIEVED RESULTS'), 'future process thresholds must be visibly labeled as proposed, not achieved');
+assert.ok(pageSource.includes('Decision examples · system value, not heroics'), 'candidate slide should include concrete semolina/oil/S&OP/NPD examples');
+assert.ok(pageSource.includes('sell-in +12% ≠ win'), 'edible-oil promotion example must remain explicitly illustrative and non-celebratory');
+assert.ok(pageSource.includes('LEARNING FLYWHEEL'), 'candidate quantitative slide should show the reusable learning loop');
+assert.ok(pageSource.includes('OUTPUT ≠ OUTCOME ≠ ECONOMIC VALUE'), 'candidate impact should be evaluated beyond artifact production');
+assert.ok(pageSource.includes('system.beneficiaries'), 'qualitative candidate renderer must show cross-functional beneficiaries');
+assert.ok(pageSource.includes('system.gap'), 'qualitative candidate renderer must show the information/organizational gap');
+assert.ok(pageSource.includes('OLAM_CANDIDATE_MODEL_OWNERSHIP.map'), 'full model-input ownership matrix must be rendered');
 assert.ok(pageSource.includes('Any financial impact here is a measurement framework or scenario—not a promise of Olam performance.'), 'candidate slide must carry an explicit non-promise guardrail');
 assert.ok(pageSource.includes('NOT PROHIBITED'), 'edible-oil visual must align with the audited HS-policy wording');
 assert.ok(!pageSource.includes('>Importable</div>'), 'edible-oil visual must not overstate not-prohibited status as unrestricted importability');
