@@ -38,6 +38,7 @@ export type MortgageAutomationView =
   | 'Closing'
   | 'Capital Markets'
   | 'Operations Economics'
+  | 'Enterprise Ops'
   | 'Audit & Governance'
   | 'Scenario Twin';
 
@@ -45,7 +46,7 @@ const views:MortgageAutomationView[] = [
   'Command Center','Architecture','Intake & Documents','Document Intelligence','Product Fit',
   'Pricing & Payment','Underwriting Graph','Exception Router','Borrower Orchestration',
   'Voice & Communications','Compliance','Quality Control','Closing','Capital Markets',
-  'Operations Economics','Audit & Governance','Scenario Twin'
+  'Operations Economics','Enterprise Ops','Audit & Governance','Scenario Twin'
 ];
 
 const money=(value:number)=>new Intl.NumberFormat('en-US',{
@@ -611,6 +612,65 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
     </div>
   );
 
+  const renderEnterpriseOps=()=>(
+    <div className="mort-stack">
+      <section className="mort-panel">
+        <SectionHead
+          eyebrow="Enterprise Workflow Automation"
+          title="Connect service desk, knowledge, customer support and finance into one governed event fabric"
+          copy="This company-neutral operating layer mirrors the internal workflow categories a scaled fintech can automate across ITSM, knowledge, support and ERP systems without granting an AI agent unrestricted authority."
+        />
+        <div className="mort-enterprise-map">
+          {[
+            ['ITSM / Jira','Tickets, incidents, access and engineering work',Workflow,'#59d4e8'],
+            ['Knowledge / Confluence','Policy, runbooks, ownership and reusable resolution context',FileSearch,'#a88cff'],
+            ['Support / Intercom','Customer issue intake, triage, response and escalation',UsersRound,'#36d39a'],
+            ['Finance / ERP','Vendor, invoice, close and reconciliation workflow',Landmark,'#f3c35a'],
+          ].map(([title,copy,Icon,color]:any)=><article key={title}>
+            <Icon style={{color}}/><strong>{title}</strong><p>{copy}</p>
+          </article>)}
+        </div>
+      </section>
+
+      <section className="mort-grid-2">
+        <article className="mort-panel">
+          <SectionHead eyebrow="Automation Queue" title="High-volume coordination work, not unrestricted system access"/>
+          <div className="mort-task-table">
+            <div className="head"><span>Workflow</span><span>Trigger</span><span>Automation</span><span>Control</span></div>
+            {[
+              ['Duplicate ticket collapse','Semantic duplicate + same service','automatic','full audit'],
+              ['Knowledge suggestion','Known issue + approved article','assisted','human publish'],
+              ['Support triage','Intent + urgency + account state','automatic','escalation rules'],
+              ['Access request packet','Role + manager approval state','assisted','authorized approver'],
+              ['Invoice exception packet','Mismatch or missing evidence','assisted','finance approval'],
+              ['Month-end evidence chase','Open reconciliation dependency','automatic','owner + deadline'],
+              ['Incident summary','Resolved timeline + source events','assisted','human final'],
+              ['Cross-system case link','Shared ID / deterministic relation','automatic','reversible'],
+            ].map(([name,trigger,automation,control])=><div key={name}><span>{name}</span><span>{trigger}</span><span>{automation}</span><span>{control}</span></div>)}
+          </div>
+        </article>
+
+        <article className="mort-panel">
+          <SectionHead eyebrow="Authority Model" title="AI proposes; systems enforce role boundaries"/>
+          <div className="mort-policy-list">
+            <div><strong>01</strong><span>Read context broadly only when the user/system identity is authorized for that source.</span></div>
+            <div><strong>02</strong><span>Write actions are narrow, reversible and tied to an explicit workflow state.</span></div>
+            <div><strong>03</strong><span>Money movement, access grants, production changes and destructive actions require an authorized human or pre-approved deterministic policy.</span></div>
+            <div><strong>04</strong><span>Every cross-system action retains source IDs, timestamps, actor identity and before/after state.</span></div>
+            <div><strong>05</strong><span>Automation quality is measured by resolution time, reopen rate, escalation accuracy, defect rate and control violations—not ticket closure volume alone.</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section className="mort-metrics-grid">
+        <Metric label="Workflow principle" value="Event-driven" note="State changes trigger deterministic work"/>
+        <Metric label="Knowledge principle" value="Source-cited" note="Approved content + provenance before reuse"/>
+        <Metric label="Write principle" value="Least privilege" note="Minimal, reversible system mutations"/>
+        <Metric label="Control principle" value="Human-gated" note="Sensitive financial, access and production authority"/>
+      </section>
+    </div>
+  );
+
   const renderAudit=()=>(
     <div className="mort-stack">
       <section className="mort-grid-2">
@@ -687,6 +747,7 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
       case 'Closing': return renderClosing();
       case 'Capital Markets': return renderCapital();
       case 'Operations Economics': return renderOperationsEconomics();
+      case 'Enterprise Ops': return renderEnterpriseOps();
       case 'Audit & Governance': return renderAudit();
       case 'Scenario Twin': return renderScenario();
       default: return <div className="mort-stack">{renderSummary()}</div>;
