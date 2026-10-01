@@ -26,21 +26,26 @@ export type MortgageAutomationView =
   | 'Command Center'
   | 'Architecture'
   | 'Intake & Documents'
+  | 'Document Intelligence'
   | 'Product Fit'
+  | 'Pricing & Payment'
   | 'Underwriting Graph'
   | 'Exception Router'
   | 'Borrower Orchestration'
-  | 'Pricing & Payment'
+  | 'Voice & Communications'
   | 'Compliance'
+  | 'Quality Control'
   | 'Closing'
   | 'Capital Markets'
+  | 'Operations Economics'
   | 'Audit & Governance'
   | 'Scenario Twin';
 
 const views:MortgageAutomationView[] = [
-  'Command Center','Architecture','Intake & Documents','Product Fit','Underwriting Graph',
-  'Exception Router','Borrower Orchestration','Pricing & Payment','Compliance','Closing',
-  'Capital Markets','Audit & Governance','Scenario Twin'
+  'Command Center','Architecture','Intake & Documents','Document Intelligence','Product Fit',
+  'Pricing & Payment','Underwriting Graph','Exception Router','Borrower Orchestration',
+  'Voice & Communications','Compliance','Quality Control','Closing','Capital Markets',
+  'Operations Economics','Audit & Governance','Scenario Twin'
 ];
 
 const money=(value:number)=>new Intl.NumberFormat('en-US',{
@@ -243,6 +248,51 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
     </div>
   );
 
+  const renderDocumentIntelligence=()=>(
+    <div className="mort-stack">
+      <section className="mort-panel">
+        <SectionHead
+          eyebrow="Document Intelligence & Reconciliation"
+          title="Score the evidence before trusting the extraction"
+          copy="Every evidence object carries completeness, verification, confidence, freshness and provenance. Contradictions never get silently averaged away; they become review work."
+        />
+        <div className="mort-doc-grid">
+          {output.documentEvidence.map(doc=><article className={'mort-doc-card '+(doc.verified&&!doc.conflict?'good':doc.conflict?'risk':'watch')} key={doc.id}>
+            <div className="mort-doc-top"><span>{doc.id}</span><RuleBadge status={doc.conflict?'BLOCK':doc.verified?'PASS':'REVIEW'}/></div>
+            <strong>{doc.label}</strong>
+            <div className="mort-doc-bars">
+              <div><span>Completeness</span><b>{doc.completenessPct}%</b><i><em style={{width:doc.completenessPct+'%'}}/></i></div>
+              <div><span>Confidence</span><b>{doc.confidencePct}%</b><i><em style={{width:doc.confidencePct+'%'}}/></i></div>
+            </div>
+            <p>{doc.provenance}</p>
+            <small>{doc.freshnessDays>0?'Freshness '+doc.freshnessDays+' day(s)':'Freshness pending'} · {doc.verified?'verified':'verification pending'}</small>
+          </article>)}
+        </div>
+      </section>
+
+      <section className="mort-grid-2">
+        <article className="mort-panel">
+          <SectionHead eyebrow="Contradiction Engine" title="Never resolve conflicting facts by guess"/>
+          <div className="mort-message-stack">
+            {output.contradictions.length===0
+              ? <div><BadgeCheck/><div><strong>No configured contradiction detected</strong><p>Current structured evidence is internally consistent under the demo checks.</p></div></div>
+              : output.contradictions.map((item,idx)=><div key={item}><AlertTriangle/><div><strong>Conflict {String(idx+1).padStart(2,'0')}</strong><p>{item}</p><small>Route: governed human reconciliation</small></div></div>)}
+          </div>
+        </article>
+        <article className="mort-panel">
+          <SectionHead eyebrow="Evidence Contract" title="Five fields every production extractor should retain"/>
+          <div className="mort-policy-list">
+            <div><strong>01</strong><span>Source document ID and source-system provenance.</span></div>
+            <div><strong>02</strong><span>Field-level extraction confidence, never only a document-level score.</span></div>
+            <div><strong>03</strong><span>Verification status separated from extraction confidence.</span></div>
+            <div><strong>04</strong><span>Freshness/age so stale evidence cannot masquerade as current evidence.</span></div>
+            <div><strong>05</strong><span>Contradiction state and explicit reviewer resolution when two sources disagree.</span></div>
+          </div>
+        </article>
+      </section>
+    </div>
+  );
+
   const renderProductFit=()=>(
     <div className="mort-stack">
       <section className="mort-panel">
@@ -341,6 +391,52 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
     </div>
   );
 
+  const renderVoice=()=>(
+    <div className="mort-stack">
+      <section className="mort-grid-2">
+        <article className="mort-panel">
+          <SectionHead
+            eyebrow="Borrower Voice & Communications"
+            title="Every message should resolve a specific state transition"
+            copy="The communication layer is driven by case state, consent and owner authority. It does not generate generic pressure, duplicate requests or regulated decisions."
+          />
+          <div className="mort-comms-list">
+            {output.communications.map(action=><div key={action.id} className={'mort-comm '+action.state}>
+              <div><span>{action.id}</span><strong>{action.channel.toUpperCase()}</strong></div>
+              <div><b>{action.trigger}</b><p>{action.rationale}</p><small>Owner {action.owner} · consent {action.consentRequired?'required':'not required for this escalation'}</small></div>
+              <RuleBadge status={action.state==='ready'?'PASS':action.state==='hold'?'BLOCK':'REVIEW'}/>
+            </div>)}
+            {output.communications.length===0&&<div className="mort-comm ready"><div><BadgeCheck/></div><div><b>No communication action required</b><p>The current file has no borrower-owned or escalation message in the work queue.</p></div><RuleBadge status="PASS"/></div>}
+          </div>
+        </article>
+
+        <article className="mort-panel">
+          <SectionHead eyebrow="Conversation Governance" title="Automate coordination without automating coercion"/>
+          <div className="mort-policy-list">
+            <div><strong>01</strong><span>Authenticate before exposing file-specific information in voice or messaging channels.</span></div>
+            <div><strong>02</strong><span>Use the minimum necessary context; never infer or expose protected characteristics.</span></div>
+            <div><strong>03</strong><span>Generated status explanations must cite the exact workflow fact that triggered them.</span></div>
+            <div><strong>04</strong><span>Rate locks, credit pulls, adverse action, exception waivers and other regulated actions stay role- and consent-gated.</span></div>
+            <div><strong>05</strong><span>Escalate uncertainty to humans rather than hallucinating an answer from incomplete policy context.</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section className="mort-panel">
+        <SectionHead eyebrow="Channel Orchestration" title="Match channel intensity to workflow need"/>
+        <div className="mort-rate-grid">
+          {[
+            ['Portal','Structured requests','Best for document/task completion'],
+            ['Email','Durable explanation','Best for non-urgent state updates'],
+            ['SMS','Short reminder','Use only when consent and channel policy allow'],
+            ['Voice','Interactive resolution','Use for authenticated clarification and escalation'],
+            ['Human','Regulated judgment','Required for policy-sensitive or ambiguous decisions'],
+          ].map(([channel,role,note])=><div key={channel}><span>{channel}</span><strong>{role}</strong><small>{note}</small></div>)}
+        </div>
+      </section>
+    </div>
+  );
+
   const renderPricing=()=>(
     <div className="mort-stack">
       <section className="mort-grid-2">
@@ -396,6 +492,46 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
     </div>
   );
 
+  const renderQualityControl=()=>(
+    <div className="mort-stack">
+      <section className="mort-grid-2">
+        <article className="mort-panel">
+          <SectionHead eyebrow="Quality Control" title="Automation needs an error budget, not blind trust"/>
+          <div className="mort-big-metrics">
+            <div><span>Risk-weighted sample rate</span><strong>{output.qcSampleRatePct}%</strong><small>Illustrative production sampling policy derived from confidence, exceptions and route state</small></div>
+            <div><span>Cycle-time risk</span><strong className={output.cycleTimeRisk==='low'?'good':output.cycleTimeRisk==='medium'?'watch':'risk'}>{output.cycleTimeRisk.toUpperCase()}</strong></div>
+            <div><span>Contradictions</span><strong>{output.contradictions.length}</strong><small>Signals requiring reconciliation, never silent overwrite</small></div>
+            <div><span>Data confidence</span><strong>{output.dataConfidence}/100</strong></div>
+          </div>
+        </article>
+        <article className="mort-panel">
+          <SectionHead eyebrow="Assurance Logic" title="Deterministic checks + governed human sampling"/>
+          <div className="mort-qc-list">
+            {output.qualityChecks.map(check=><div key={check.id}>
+              <span>{check.id}</span>
+              <div><strong>{check.label}</strong><p>{check.rationale}</p><small>{check.mode}</small></div>
+              <RuleBadge status={check.status}/>
+            </div>)}
+          </div>
+        </article>
+      </section>
+
+      <section className="mort-panel">
+        <SectionHead eyebrow="Production Accuracy Contract" title="What should be measured before claiming automation quality"/>
+        <div className="mort-grid-3">
+          {[
+            ['Extraction accuracy','Field-level precision/recall against labeled documents; stratify by document type and edge case.'],
+            ['Decision-support reproducibility','Same versioned inputs + rules must reproduce the same deterministic output.'],
+            ['Exception escape rate','Track policy-sensitive cases incorrectly routed past human review.'],
+            ['Communication correctness','Measure whether each generated message matches the actual file state and approved template/policy.'],
+            ['Closing defect rate','Track preventable late-stage defects by root cause, owner and automation version.'],
+            ['Drift','Monitor source mix, confidence, cycle time and override patterns for distribution shift.'],
+          ].map(([title,copy])=><article className="mort-panel mort-principle" key={title}><ClipboardCheck/><strong>{title}</strong><p>{copy}</p></article>)}
+        </div>
+      </section>
+    </div>
+  );
+
   const renderClosing=()=>(
     <div className="mort-stack">
       <section className="mort-grid-2">
@@ -429,6 +565,47 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
           {output.capitalMatches.map(match=><article key={match.id} className={'mort-capital-card '+match.status}>
             <span>{match.id}</span><strong>{match.name}</strong><div className="mort-fit"><b>{match.fit}</b><small>/100 fit</small></div><p>{match.rationale}</p><RuleBadge status={match.status==='candidate'?'PASS':match.status==='review'?'REVIEW':'BLOCK'}/>
           </article>)}
+        </div>
+      </section>
+    </div>
+  );
+
+  const renderOperationsEconomics=()=>(
+    <div className="mort-stack">
+      <section className="mort-grid-2">
+        <article className="mort-panel">
+          <SectionHead eyebrow="Mortgage Operations Economics" title="Find the highest-value manual handoff"/>
+          <div className="mort-stage-capacity">
+            {output.stageCapacity.map(stage=><div key={stage.stage} className={stage.bottleneck?'bottleneck':''}>
+              <div><span>{stage.stage}</span>{stage.bottleneck&&<b>Largest addressable pool</b>}</div>
+              <strong>{stage.monthlyHoursAddressable.toLocaleString()} h/mo</strong>
+              <p>{stage.manualHoursPerFile.toFixed(1)} manual h/file · {stage.automatableSharePct}% modeled addressable</p>
+              <i><em style={{width:Math.min(100,stage.automatableSharePct)+'%'}}/></i>
+            </div>)}
+          </div>
+        </article>
+        <article className="mort-panel">
+          <SectionHead eyebrow="Capacity Model" title="Separate automation potential from guaranteed savings"/>
+          <Slider label="Monthly applications" value={ops.monthlyApplications} min={100} max={20000} step={100} onChange={v=>updateOps('monthlyApplications',v)}/>
+          <Slider label="Manual hours / file" value={ops.manualHoursPerFile} min={1} max={20} step={.5} unit="h" onChange={v=>updateOps('manualHoursPerFile',v)}/>
+          <Slider label="Loaded hourly cost" value={ops.loadedHourlyCost} min={15} max={120} step={1} unit="" onChange={v=>updateOps('loadedHourlyCost',v)}/>
+          <div className="mort-big-metrics compact">
+            <div><span>Modeled auto-candidates</span><strong>{output.filesAutoCandidateMonthly.toLocaleString()}</strong></div>
+            <div><span>Modeled hours released</span><strong>{Math.round(output.hoursSavedMonthly).toLocaleString()}</strong></div>
+            <div><span>Modeled capacity value</span><strong>{money(output.capacityValueMonthly)}</strong></div>
+            <div><span>Primary bottleneck</span><strong>{output.bottleneckStage}</strong></div>
+          </div>
+        </article>
+      </section>
+
+      <section className="mort-panel">
+        <SectionHead eyebrow="Transformation Sequence" title="Automate the constraint, then remeasure"/>
+        <div className="mort-policy-list">
+          <div><strong>01</strong><span>Measure task time and defect rate by workflow stage before automating.</span></div>
+          <div><strong>02</strong><span>Automate only deterministic work with explicit inputs, outputs and rollback conditions.</span></div>
+          <div><strong>03</strong><span>Keep exception authority with qualified humans and record every override.</span></div>
+          <div><strong>04</strong><span>Recalculate capacity after each deployment because the bottleneck will move.</span></div>
+          <div><strong>05</strong><span>Do not convert modeled hours into headcount savings without observing utilization and redeployment.</span></div>
         </div>
       </section>
     </div>
@@ -498,14 +675,18 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
       case 'Command Center': return <div className="mort-stack">{renderSummary()}</div>;
       case 'Architecture': return renderArchitecture();
       case 'Intake & Documents': return renderIntake();
+      case 'Document Intelligence': return renderDocumentIntelligence();
       case 'Product Fit': return renderProductFit();
+      case 'Pricing & Payment': return renderPricing();
       case 'Underwriting Graph': return renderUnderwriting();
       case 'Exception Router': return renderExceptions();
       case 'Borrower Orchestration': return renderBorrower();
-      case 'Pricing & Payment': return renderPricing();
+      case 'Voice & Communications': return renderVoice();
       case 'Compliance': return renderCompliance();
+      case 'Quality Control': return renderQualityControl();
       case 'Closing': return renderClosing();
       case 'Capital Markets': return renderCapital();
+      case 'Operations Economics': return renderOperationsEconomics();
       case 'Audit & Governance': return renderAudit();
       case 'Scenario Twin': return renderScenario();
       default: return <div className="mort-stack">{renderSummary()}</div>;
@@ -518,7 +699,7 @@ export const MortgageAutomationOS:React.FC<{defaultView?:MortgageAutomationView;
         <div>
           <span>Mortgage Automation / Decision Twin</span>
           <h2>Mortgage Manufacturing Automation OS</h2>
-          <p>{specialization}. Built as a transparent portfolio-grade automation sandbox for the workflow problems modern mortgage platforms are attacking.</p>
+          <p>{specialization}. Built as a transparent, deterministic and human-governed automation laboratory for the workflow problems modern mortgage platforms are attacking—without pretending demo rules are real lender, agency or investor policy.</p>
         </div>
         <div className="mort-hero-actions">
           <div><Activity/><span>Case</span><strong>{input.caseId}</strong></div>
