@@ -1145,6 +1145,6 @@ const OLAM_SLIDE_ORDER = [
   'iterations',
 ] as const;
 
-const olamSlideRank = new Map(OLAM_SLIDE_ORDER.map((id, index) => [id, index]));
+const olamSlideRank = new Map<string, number>(OLAM_SLIDE_ORDER.map((id, index) => [id, index] as [string, number]));
 OLAM_SLIDES.sort((a, b) => (olamSlideRank.get(a.id) ?? 999) - (olamSlideRank.get(b.id) ?? 999));
 
