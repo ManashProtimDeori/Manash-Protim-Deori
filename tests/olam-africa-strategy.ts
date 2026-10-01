@@ -1,3 +1,4 @@
+// Verification branch: exercises the Olam strategy quality workflow against the current decision model.
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
