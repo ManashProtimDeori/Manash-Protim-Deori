@@ -116,12 +116,12 @@ export const ExecutiveOperatingLens: React.FC = () => (
 
 
 export const FundamentalInsightGrid: React.FC = () => (
-  <div className="grid md:grid-cols-2 gap-3">
+  <div className="canonical-fundamental-grid grid md:grid-cols-2 gap-2">
     {FUNDAMENTAL_MARKETING_INSIGHTS.map((item, idx) => (
-      <article key={item.title} className="rounded-xl border border-white/15 bg-white/[0.035] p-4">
-        <div className="text-[8.5px] font-mono tracking-wide text-orange-300">LAW {String(idx + 1).padStart(2, '0')}</div>
-        <h3 className="mt-2 text-[13px] leading-[1.32] font-semibold text-white">{item.title}</h3>
-        <p className="mt-2 text-[10px] leading-[1.5] text-white/82">{item.insight}</p>
+      <article key={item.title} className="rounded-xl border border-white/15 bg-white/[0.035] p-3">
+        <div className="text-[8px] font-mono tracking-wide text-orange-300">LAW {String(idx + 1).padStart(2, '0')}</div>
+        <h3 className="mt-1.5 text-[11.5px] leading-[1.3] font-semibold text-white">{item.title}</h3>
+        <p className="mt-1.5 text-[8.75px] leading-[1.42] text-white/82">{item.insight}</p>
       </article>
     ))}
   </div>
