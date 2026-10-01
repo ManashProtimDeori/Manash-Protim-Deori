@@ -13,10 +13,6 @@
   "include": [
     "src/lib/mortgageAutomation.ts",
     "src/components/tools/mortgage/MortgageAutomationOS.tsx",
-    "src/data/tools.ts",
-    "src/pages/ToolsPage.tsx",
-    "src/pages/ToolDetailPage.tsx",
-    "src/context/DataContext.tsx",
     "tests/mortgage-automation.ts"
   ]
 }
