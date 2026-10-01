@@ -72,6 +72,137 @@ const DecisionGraphic: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
   const isSensitivity = slide.kind === 'sensitivity';
   const isScenario = slide.kind === 'scenario';
   const isAssumptions = slide.kind === 'assumptions';
+  const isExecutive = id === 'executive-thesis';
+  const isDualCategory = id === 'customer-profit';
+  const isRefiningPolicy = id === 'west-africa';
+  const isTradeCapital = id === 'southern-africa';
+  const isRegionalPrices = id === 'africa-runway';
+
+  if (isExecutive) {
+    const signals = [
+      ['VOLUME', '+19.1%', palette.cyan, 92],
+      ['REVENUE', '+15.4%', palette.green, 78],
+      ['EBIT', '−8.0%', palette.orange, 42],
+    ] as const;
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(145deg,#0B1718,#081014)] p-5">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-emerald-200/70">Growth-quality divergence</div>
+        <div className="absolute inset-x-6 top-12 bottom-12 flex items-end gap-4">
+          {signals.map(([label,value,color,height]) => (
+            <div key={label} className="flex h-full flex-1 flex-col justify-end">
+              <div className="mb-2 text-center">
+                <div className="olam-dense-title font-semibold" style={{color}}>{value}</div>
+                <div className="olam-dense-meta mt-1 font-mono text-white/45">{label}</div>
+              </div>
+              <div className="rounded-t-2xl border border-white/10" style={{height:height+'%',background:'linear-gradient(180deg,'+color+'88,'+color+'12)'}} />
+            </div>
+          ))}
+        </div>
+        <div className="absolute inset-x-6 bottom-4 flex items-center justify-between rounded-lg border border-amber-300/15 bg-amber-300/[0.035] px-3 py-2">
+          <span className="olam-graphic-label font-mono text-white/48">CALC. EBIT MARGIN</span>
+          <span className="olam-dense-title font-semibold text-amber-200">~3.08% → ~2.45%</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (isDualCategory) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_20%_50%,rgba(243,198,90,.13),transparent_34%),radial-gradient(circle_at_80%_50%,rgba(87,216,197,.14),transparent_34%),#091114] p-5">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-white/50">Two categories · one decision spine</div>
+        <div className="absolute inset-x-7 top-[31%] flex items-center justify-between gap-4">
+          <div className="flex h-24 flex-1 flex-col items-center justify-center rounded-[22px] border border-amber-300/20 bg-amber-300/[0.045]">
+            <div className="olam-dense-title font-semibold text-amber-200">SEMOLINA</div>
+            <div className="olam-dense-copy mt-1 text-white/55">meal · pack · wheat</div>
+          </div>
+          <div className="relative flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-emerald-300/25 bg-emerald-300/[0.06]">
+            <div className="text-center">
+              <div className="olam-dense-meta font-mono text-emerald-200">SHARED</div>
+              <div className="olam-dense-copy mt-1 text-white/62">decision<br/>spine</div>
+            </div>
+          </div>
+          <div className="flex h-24 flex-1 flex-col items-center justify-center rounded-[22px] border border-cyan-300/20 bg-cyan-300/[0.045]">
+            <div className="olam-dense-title font-semibold text-cyan-200">EDIBLE OILS</div>
+            <div className="olam-dense-copy mt-1 text-white/55">use · refine · crude</div>
+          </div>
+        </div>
+        <div className="absolute inset-x-8 bottom-5 grid grid-cols-4 gap-2 text-center">
+          {['Contribution','Repeat','Stock turns','ROMI'].map((x)=><div key={x} className="rounded-lg border border-white/8 bg-white/[0.025] px-2 py-2 olam-dense-meta font-mono text-white/55">{x}</div>)}
+        </div>
+      </div>
+    );
+  }
+
+  if (isRefiningPolicy) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(145deg,#0E1711,#101009)] p-5">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-amber-200/72">2026 crude → refine policy wedge</div>
+        <div className="absolute inset-x-7 top-[31%] grid grid-cols-[1fr_42px_1fr] items-center gap-3">
+          <div className="rounded-2xl border border-emerald-300/22 bg-emerald-300/[0.055] p-4 text-center">
+            <div className="olam-dense-meta font-mono text-emerald-200">CRUDE PALM OIL</div>
+            <div className="olam-dense-title mt-2 font-semibold text-white">Importable</div>
+            <div className="olam-dense-copy mt-1 text-white/55">policy snapshot</div>
+          </div>
+          <div className="text-center text-2xl text-emerald-300">→</div>
+          <div className="rounded-2xl border border-cyan-300/22 bg-cyan-300/[0.055] p-4 text-center">
+            <div className="olam-dense-meta font-mono text-cyan-200">LOCAL REFINING</div>
+            <div className="olam-dense-title mt-2 font-semibold text-white">Value-add</div>
+            <div className="olam-dense-copy mt-1 text-white/55">Olam Nigeria capability</div>
+          </div>
+        </div>
+        <div className="absolute inset-x-7 bottom-5 flex items-center justify-between rounded-xl border border-orange-300/18 bg-orange-300/[0.04] px-4 py-3">
+          <span className="olam-dense-meta font-mono text-orange-200">REFINED RETAIL IMPORT</span>
+          <span className="olam-dense-title font-semibold text-orange-200">RESTRICTED ×</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (isTradeCapital) {
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[radial-gradient(circle_at_50%_50%,rgba(242,139,50,.12),transparent_38%),#0A1115] p-5">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-orange-200/72">Inventory carry clock</div>
+        <div className="absolute left-[12%] top-[26%] flex h-32 w-32 items-center justify-center rounded-full border-[10px] border-orange-300/15">
+          <div className="absolute inset-2 rounded-full border border-orange-300/30" />
+          <div className="text-center">
+            <div className="olam-dense-title font-semibold text-orange-200">30 DAYS</div>
+            <div className="olam-dense-copy mt-1 text-white/55">extra stock</div>
+          </div>
+        </div>
+        <div className="absolute right-[10%] top-[26%] w-[45%] space-y-2">
+          <div className="rounded-xl border border-white/9 bg-white/[0.025] p-3">
+            <div className="olam-dense-meta font-mono text-white/45">PUBLIC RATE ANCHOR</div>
+            <div className="olam-dense-title mt-1 font-semibold text-orange-200">23% MPR</div>
+          </div>
+          <div className="rounded-xl border border-white/9 bg-white/[0.025] p-3">
+            <div className="olam-dense-meta font-mono text-white/45">SIMPLE 30-DAY CARRY PROXY</div>
+            <div className="olam-dense-title mt-1 font-semibold text-amber-200">~1.9% of inventory</div>
+          </div>
+        </div>
+        <div className="absolute inset-x-6 bottom-4 olam-dense-copy text-white/50">Sell-in can rise while channel economics deteriorate. Stock days belong inside ROMI.</div>
+      </div>
+    );
+  }
+
+  if (isRegionalPrices) {
+    const cells = [1,3,2,4,2, 3,5,4,2,1, 2,4,5,3,2, 1,2,4,5,3, 3,4,2,1,5, 4,2,3,5,1];
+    const fills = ['#12B98133','#57D8C544','#F3C65A55','#F28B3266','#9B7CFF66'];
+    return (
+      <div className="relative h-full min-h-[190px] overflow-hidden rounded-[24px] border border-white/10 bg-[#091115] p-5">
+        <div className="absolute left-5 top-4 olam-graphic-label font-mono uppercase tracking-[0.14em] text-cyan-200/72">Regional affordability pressure map</div>
+        <div className="absolute left-7 right-[38%] top-12 bottom-7 grid grid-cols-5 gap-1.5">
+          {cells.map((v,idx)=><div key={idx} className="rounded-md border border-white/6" style={{background:fills[v-1]}} />)}
+        </div>
+        <div className="absolute right-7 top-[30%] w-[30%]">
+          <div className="olam-dense-title font-semibold text-white">73 markets</div>
+          <div className="olam-dense-copy mt-1.5 leading-[1.35] text-white/56">External food-price grid through Aug 2026</div>
+          <div className="mt-4 h-px bg-white/10" />
+          <div className="olam-dense-meta mt-3 font-mono text-emerald-200">OVERLAY</div>
+          <div className="olam-dense-copy mt-1 text-white/56">sell-out · pack mix · fill rate · route cost</div>
+        </div>
+      </div>
+    );
+  }
 
   if (isNetwork) {
     const nodes = ['Supply', 'Process', 'Route', 'Customer'];
