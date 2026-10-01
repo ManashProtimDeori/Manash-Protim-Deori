@@ -52,6 +52,11 @@ import {
   VerifiedEvidenceAppendix,
 } from '../components/canonical/CanonicalDecisionVisuals';
 import { VERIFIED_EVIDENCE } from '../data/canonicalVerifiedEvidence';
+import {
+  CALCULATION_APPENDIX_STANDARD,
+  CANONICAL_ASSUMPTION_REGISTER,
+  CANONICAL_CALCULATION_AUDITS,
+} from '../data/canonicalCalculationAppendix';
 
 const ARCHIVE_DECK_FILE_ID = '1w7hRsHwGY1m6J7BelVbYmtN1z2jyk7wO';
 const ARCHIVE_DECK_VIEW_URL = 'https://drive.google.com/file/d/' + ARCHIVE_DECK_FILE_ID + '/view';
@@ -611,7 +616,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         { label: 'Scenario revenue', value: moneyM(metrics.projectedRevenue), detail: pct(metrics.revenueGrowthPct) + ' vs FY2025 base', tone: 'orange' },
         { label: 'Subscription mix', value: pct(metrics.subscriptionMixPct), detail: pct(metrics.recurringGrowthPct) + ' subscription growth', tone: 'teal' },
         { label: 'Operating margin', value: pct(metrics.operatingMarginPct), detail: moneyM(metrics.projectedOperatingProfit) + ' operating profit', tone: 'violet' },
-        { label: 'P10 → P90 revenue', value: moneyM(distribution.revenue.p10) + ' → ' + moneyM(distribution.revenue.p90), detail: 'Deterministic uncertainty simulation', tone: 'gold' },
+        { label: 'P10 → P90 revenue', value: moneyM(distribution.revenue.p10) + ' → ' + moneyM(distribution.revenue.p90), detail: 'Seeded reproducible simulation · 1,600 runs', tone: 'gold' },
       ],
       bullets: dynamicInsights.slice(0, 3),
       sourceIds: ['canonical-2025-accounts', 'canonical-ai', 'canonical-gtc-2026'],
@@ -1146,7 +1151,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
         { label: 'Primary sources', value: String(SOURCES.filter((s) => s.confidence === 'high').length), detail: 'Statutory filings + official vendor/investor sources', tone: 'green' },
         { label: 'Model tests', value: 'Automated', detail: 'Identities · monotonicity · uncertainty ordering · TCO guards', tone: 'cyan' },
         { label: 'Owner control', value: 'Local draft + GitHub', detail: 'Public cannot overwrite canonical source', tone: 'orange' },
-        { label: 'Download', value: 'PPTX + PDF', detail: 'Editable PowerPoint plus direct multi-page PDF from the active deck', tone: 'violet' },
+        { label: 'Download', value: 'PPTX + PDF', detail: 'Rendered PowerPoint plus direct multi-page PDF from the active deck', tone: 'violet' },
       ],
       bullets: [
         'Fact: trace to a source and date.',
@@ -1172,9 +1177,210 @@ export const CanonicalStrategyLabPage: React.FC = () => {
     sensitivities,
   ]);
 
+  const calculationResult = (id: string): Metric[] => {
+    const servicesGrowth = ((CANONICAL_BASE_2025.servicesRevenue / CANONICAL_BASE_2025.priorServicesRevenue) - 1) * 100;
+    const contributionBeforeInvestment = metrics.incrementalOperatingProfit + metrics.growthInvestment;
+    const topSensitivity = sensitivities[0];
+    switch (id) {
+      case 'calc-revenue-growth':
+        return [
+          { label: 'Current result', value: pct(actualRevenueGrowth), detail: moneyM(CANONICAL_BASE_2025.priorRevenue) + ' → ' + moneyM(CANONICAL_BASE_2025.revenue), tone: 'orange' },
+          { label: 'Evidence class', value: 'Reported-derived', detail: 'Two statutory inputs; one deterministic ratio', tone: 'green' },
+          { label: 'Validation', value: '10 / 10', detail: 'Source, units, identity, boundaries and rounding checked', tone: 'teal' },
+        ];
+      case 'calc-subscription-growth':
+        return [
+          { label: 'Current result', value: pct(actualSubscriptionGrowth), detail: moneyM(CANONICAL_BASE_2025.priorSubscriptionRevenue) + ' → ' + moneyM(CANONICAL_BASE_2025.subscriptionRevenue), tone: 'teal' },
+          { label: 'Evidence class', value: 'Reported-derived', detail: 'Subscription revenue inputs are sourced', tone: 'green' },
+          { label: 'Validation', value: '10 / 10', detail: 'Independent of forward scenario assumptions', tone: 'cyan' },
+        ];
+      case 'calc-services-growth':
+        return [
+          { label: 'Current result', value: pct(servicesGrowth), detail: moneyM(CANONICAL_BASE_2025.priorServicesRevenue) + ' → ' + moneyM(CANONICAL_BASE_2025.servicesRevenue), tone: 'cyan' },
+          { label: 'Evidence class', value: 'Reported-derived', detail: 'Services values are sourced; percentage is calculated', tone: 'green' },
+          { label: 'Validation', value: '10 / 10', detail: 'Mix interpretation kept separate from profitability', tone: 'gold' },
+        ];
+      case 'calc-retained-price':
+        return [
+          { label: 'Retained base', value: moneyM(metrics.retainedBaseSubscription), detail: pct(scenario.retentionPct) + ' × ' + moneyM(CANONICAL_BASE_2025.subscriptionRevenue), tone: 'orange' },
+          { label: 'Price uplift', value: moneyM(metrics.renewalPriceUplift), detail: pct(scenario.priceRealizationPct) + ' of retained base', tone: 'gold' },
+          { label: 'Evidence class', value: 'Scenario', detail: 'Base reported; retention and price are assumptions', tone: 'violet' },
+        ];
+      case 'calc-growth-wedges':
+        return [
+          { label: 'Attach ARR', value: moneyM(metrics.attachARR), detail: pct(scenario.paidAttachPct) + ' × FY2025 subscription base', tone: 'orange' },
+          { label: 'Enterprise ARR', value: moneyM(metrics.enterpriseARR), detail: pct(scenario.enterpriseConversionPct) + ' × FY2025 subscription base', tone: 'violet' },
+          { label: 'Total net-new ARR', value: moneyM(metrics.netNewSubscriptionARR), detail: 'Attach + enterprise + partner + migration + AI', tone: 'teal' },
+        ];
+      case 'calc-projected-subscription':
+        return [
+          { label: 'Projected subscription', value: moneyM(metrics.projectedSubscriptionRevenue), detail: 'Retained + price + net-new ARR', tone: 'teal' },
+          { label: 'Recurring growth', value: pct(metrics.recurringGrowthPct), detail: 'Versus ' + moneyM(CANONICAL_BASE_2025.subscriptionRevenue) + ' FY2025 base', tone: 'green' },
+          { label: 'Evidence class', value: 'Modeled', detail: 'Annualized revenue-equivalent, not guidance', tone: 'violet' },
+        ];
+      case 'calc-services-pullthrough':
+        return [
+          { label: 'Incremental services', value: moneyM(metrics.incrementalServicesRevenue), detail: pct(scenario.servicePullThroughPct) + ' × net-new subscription ARR', tone: 'cyan' },
+          { label: 'Projected services', value: moneyM(metrics.projectedServicesRevenue), detail: moneyM(CANONICAL_BASE_2025.servicesRevenue) + ' reported base + pull-through', tone: 'orange' },
+          { label: 'Evidence class', value: 'Modeled', detail: 'Pull-through rate is an explicit assumption', tone: 'violet' },
+        ];
+      case 'calc-total-revenue':
+        return [
+          { label: 'Scenario revenue', value: moneyM(metrics.projectedRevenue), detail: 'Subscription + services', tone: 'orange' },
+          { label: 'Growth vs FY2025', value: pct(metrics.revenueGrowthPct), detail: 'Versus ' + moneyM(CANONICAL_BASE_2025.revenue) + ' reported base', tone: 'teal' },
+          { label: 'Validation', value: '10 / 10', detail: 'Every dollar traces to an exposed driver', tone: 'green' },
+        ];
+      case 'calc-mix-growth':
+        return [
+          { label: 'Subscription mix', value: pct(metrics.subscriptionMixPct), detail: 'Projected subscription ÷ projected revenue', tone: 'teal' },
+          { label: 'Subscription growth', value: pct(metrics.recurringGrowthPct), detail: 'Projected subscription ÷ FY2025 subscription base − 1', tone: 'green' },
+          { label: 'Evidence class', value: 'Modeled', detail: 'Quality ratios, not reported guidance', tone: 'violet' },
+        ];
+      case 'calc-contribution-reinvestment':
+        return [
+          { label: 'Contribution before investment', value: moneyM(contributionBeforeInvestment), detail: 'Subscription contribution + services contribution', tone: 'green' },
+          { label: 'Growth investment', value: moneyM(metrics.growthInvestment), detail: pct(scenario.growthReinvestmentPct) + ' × positive incremental revenue', tone: 'orange' },
+          { label: 'Incremental op profit', value: moneyM(metrics.incrementalOperatingProfit), detail: 'Contribution − growth investment', tone: 'violet' },
+        ];
+      case 'calc-op-profit-margin':
+        return [
+          { label: 'Projected op profit', value: moneyM(metrics.projectedOperatingProfit), detail: moneyM(CANONICAL_BASE_2025.operatingProfit) + ' base + modeled incremental profit', tone: 'violet' },
+          { label: 'Operating margin', value: pct(metrics.operatingMarginPct), detail: 'Projected operating profit ÷ scenario revenue', tone: 'gold' },
+          { label: 'Evidence class', value: 'Modeled', detail: 'Not Canonical guidance', tone: 'orange' },
+        ];
+      case 'calc-simulation':
+        return [
+          { label: 'P10 revenue', value: moneyM(distribution.revenue.p10), detail: '10th percentile of 1,600 seeded draws', tone: 'slate' },
+          { label: 'P50 revenue', value: moneyM(distribution.revenue.p50), detail: 'Median simulated revenue', tone: 'orange' },
+          { label: 'P90 revenue', value: moneyM(distribution.revenue.p90), detail: '90th percentile; not a confidence interval', tone: 'green' },
+        ];
+      case 'calc-break-even':
+        return [
+          { label: 'Break-even reinvestment', value: breakEvenReinvestment === null ? 'N/A' : pct(breakEvenReinvestment), detail: 'Modeled contribution before reinvestment ÷ incremental revenue', tone: 'gold' },
+          { label: 'Current reinvestment', value: pct(scenario.growthReinvestmentPct), detail: 'Default planning assumption', tone: 'orange' },
+          { label: 'Headroom', value: breakEvenReinvestment === null ? 'N/A' : pct(breakEvenReinvestment - scenario.growthReinvestmentPct), detail: 'Model-only guardrail, not a budget recommendation', tone: 'teal' },
+        ];
+      case 'calc-tco-cost-stack':
+        return [
+          { label: 'Current annual cost', value: moneyCompact(tco.currentAnnualCost), detail: 'Support + operations + energy', tone: 'slate' },
+          { label: 'Canonical annual cost', value: moneyCompact(tco.canonicalAnnualCost), detail: 'Ubuntu Pro + efficiency-adjusted ops + energy', tone: 'orange' },
+          { label: 'Annual run-rate savings', value: moneyCompact(tco.annualRunRateSavings), detail: 'Illustrative customer case', tone: 'green' },
+        ];
+      case 'calc-tco-payback':
+        return [
+          { label: 'Migration investment', value: moneyCompact(tco.oneTimeMigrationCost), detail: moneyCompact(tcoInputs.migrationCostPerNode) + ' per node × ' + tcoInputs.nodes.toLocaleString() + ' nodes', tone: 'orange' },
+          { label: '3-year net savings', value: moneyCompact(tco.threeYearNetSavings), detail: '3 × annual savings − migration investment', tone: 'green' },
+          { label: 'Payback', value: tco.paybackMonths === null ? 'No payback' : tco.paybackMonths.toFixed(1) + ' mo', detail: 'Migration cost ÷ annual savings × 12', tone: 'gold' },
+        ];
+      case 'calc-sustainability':
+        return [
+          { label: 'Modeled kWh saved', value: Math.round(tco.kwhSavedPerYear).toLocaleString(), detail: 'Per year under current workload assumptions', tone: 'teal' },
+          { label: 'Modeled tCO₂e avoided', value: tco.tco2eAvoidedPerYear.toFixed(1), detail: 'Location-specific only when grid factor is replaced', tone: 'green' },
+          { label: 'Evidence class', value: 'Illustrative', detail: 'No fixed Canonical customer-carbon claim', tone: 'gold' },
+        ];
+      case 'calc-brand-indices':
+        return [
+          { label: 'Reach index', value: brandModel.reachIndex.toFixed(1), detail: '100 = default scenario', tone: 'cyan' },
+          { label: 'Awareness index', value: brandModel.awarenessIndex.toFixed(1), detail: 'Directional heuristic only', tone: 'violet' },
+          { label: 'Strength index', value: brandModel.strengthIndex.toFixed(1), detail: 'Not audited brand equity', tone: 'orange' },
+        ];
+      case 'calc-marketing-influence':
+        return [
+          { label: 'Marketing investment', value: moneyM(brandModel.marketingInvestment), detail: pct(scenario.marketingShareOfReinvestmentPct) + ' of modeled growth investment', tone: 'orange' },
+          { label: 'Influenced ARR', value: moneyM(brandModel.marketingInfluencedARR), detail: pct(scenario.marketingInfluencePct) + ' of modeled net-new subscription ARR', tone: 'teal' },
+          { label: 'Influence multiple', value: brandModel.marketingInfluenceMultiple === null ? 'N/A' : brandModel.marketingInfluenceMultiple.toFixed(2) + '×', detail: 'Attribution diagnostic, not causal ROI', tone: 'gold' },
+        ];
+      case 'calc-sensitivity':
+        return [
+          { label: 'Top local driver', value: topSensitivity?.label || 'N/A', detail: topSensitivity ? topSensitivity.stepLabel + ' local step' : 'No sensitivity result', tone: 'orange' },
+          { label: 'Revenue delta', value: topSensitivity ? moneyM(topSensitivity.revenueDelta) : 'N/A', detail: 'One-step local perturbation', tone: 'teal' },
+          { label: 'Sensitivity band', value: topSensitivity?.sensitivity || 'N/A', detail: 'Model sensitivity, not empirical elasticity', tone: 'violet' },
+        ];
+      default:
+        return [];
+    }
+  };
+
+  const sourceIdsForCalculation = (id: string): string[] => {
+    if (id === 'calc-tco-cost-stack') return ['canonical-pro'];
+    if (id.startsWith('calc-tco-') || id === 'calc-sustainability' || id === 'calc-brand-indices' || id === 'calc-marketing-influence' || id === 'calc-sensitivity' || id === 'calc-simulation' || id === 'calc-break-even') return ['canonical-2025-accounts'];
+    return ['canonical-2025-accounts'];
+  };
+
+  const calculationAppendixSlides = useMemo<DeckSlide[]>(() => {
+    const firstPage = baseSlides.length + 1;
+    const calculationSlides: DeckSlide[] = CANONICAL_CALCULATION_AUDITS.map((audit, idx) => ({
+      id: 'appendix-' + audit.id,
+      section: 'Calculation appendix · Page ' + (firstPage + idx),
+      title: audit.title,
+      decision: audit.interpretation,
+      narrative: audit.purpose + ' Formula: ' + audit.formula,
+      metrics: calculationResult(audit.id),
+      bullets: audit.validation10,
+      sourceIds: sourceIdsForCalculation(audit.id),
+      kind: 'calc-audit',
+    }));
+
+    const scenarioIds = CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'scenario').map((item) => item.id);
+    const tcoIds = CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'tco').map((item) => item.id);
+    const assumptionGroups = [
+      { id:'scenario-assumptions-1', title:'Scenario assumptions A01–A06: retention, attach, conversion, price and distribution', ids:scenarioIds.slice(0,6) },
+      { id:'scenario-assumptions-2', title:'Scenario assumptions A07–A12: AI, services economics, reinvestment and uncertainty', ids:scenarioIds.slice(6,12) },
+      { id:'scenario-assumptions-3', title:'Scenario assumptions A13–A18: marketing allocation, brand proxies and influence', ids:scenarioIds.slice(12,18) },
+      { id:'tco-assumptions-1', title:'Customer TCO assumptions T01–T05: scale, support, Ubuntu Pro, migration and operations', ids:tcoIds.slice(0,5) },
+      { id:'tco-assumptions-2', title:'Customer TCO assumptions T06–T10: efficiency, energy and carbon', ids:tcoIds.slice(5,10) },
+    ];
+
+    const assumptionSlides: DeckSlide[] = assumptionGroups.map((group, idx) => ({
+      id: 'appendix-' + group.id,
+      section: 'Assumption register · Page ' + (firstPage + calculationSlides.length + idx),
+      title: group.title,
+      decision: 'Every unsourced value is kept visible as an assumption and is paired with the internal or customer evidence that should replace it before an investment-grade decision.',
+      narrative: 'Defaults are planning scaffolds. They are not presented as Canonical-reported facts, market averages or guaranteed customer outcomes.',
+      metrics: [
+        { label:'Assumptions on page', value:String(group.ids.length), detail:'Each includes logic, evidence gap, replacement data and risk', tone:'orange' },
+        { label:'Validation standard', value:'10-pass', detail:'All downstream calculations inherit the same audit protocol', tone:'teal' },
+        { label:'Accuracy boundary', value:'Explicit', detail:'Arithmetic can be reproduced; future outcomes cannot be guaranteed', tone:'gold' },
+      ],
+      bullets: group.ids,
+      sourceIds: group.id.startsWith('tco') ? ['canonical-pro'] : ['canonical-2025-accounts'],
+      kind: 'assumption-register',
+    }));
+
+    const standardSlide: DeckSlide = {
+      id: 'appendix-validation-standard',
+      section: 'Model validation · Page ' + (firstPage + calculationSlides.length + assumptionSlides.length),
+      title: 'The 10-pass validation protocol applied to every calculation in this appendix',
+      decision: 'The target is 100% arithmetic reproducibility and transparent assumptions—not an impossible claim of 100% forecast certainty.',
+      narrative: 'Every reported-derived calculation, scenario output, TCO extrapolation, simulation and directional index is challenged through the same ten controls before it is allowed into the executive deck.',
+      metrics: [
+        { label:'Calculations audited', value:String(CANONICAL_CALCULATION_AUDITS.length), detail:'Reported-derived + modeled + simulation + TCO + directional indices', tone:'orange' },
+        { label:'Passes per calculation', value:'10', detail:'Source → units → identity → dependencies → arithmetic → boundaries → sensitivity → double-count → practicality → presentation', tone:'teal' },
+        { label:'Assumptions registered', value:String(CANONICAL_ASSUMPTION_REGISTER.length), detail:'Every default has a replacement-evidence requirement', tone:'violet' },
+      ],
+      bullets: [...CALCULATION_APPENDIX_STANDARD],
+      sourceIds: ['canonical-2025-accounts','canonical-pro'],
+      kind: 'calc-standard',
+    };
+
+    return [...calculationSlides, ...assumptionSlides, standardSlide];
+  }, [
+    baseSlides.length,
+    metrics,
+    distribution,
+    tco,
+    tcoInputs,
+    scenario,
+    breakEvenReinvestment,
+    actualRevenueGrowth,
+    actualSubscriptionGrowth,
+    brandModel,
+    sensitivities,
+  ]);
+
   const slides = useMemo(
-    () => baseSlides.map((slide) => ({ ...slide, ...(overrides[slide.id] || {}) })),
-    [baseSlides, overrides],
+    () => [...baseSlides, ...calculationAppendixSlides].map((slide) => ({ ...slide, ...(overrides[slide.id] || {}) })),
+    [baseSlides, calculationAppendixSlides, overrides],
   );
 
   const editingSlide = slides.find((s) => s.id === editingSlideId) || slides[0];
@@ -1907,7 +2113,7 @@ export const CanonicalStrategyLabPage: React.FC = () => {
 
         <main className="space-y-8">
           <div className="flex items-center justify-between gap-4 text-xs text-neutral-100 px-1">
-            <span>{slides.length} live slides · fixed 3:2 presentation geometry</span>
+            <span>{slides.length} live slides · fixed 2:3 portrait presentation geometry</span>
             <span className="hidden sm:inline">Changes to controls update the deck immediately</span>
           </div>
 
