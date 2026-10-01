@@ -152,7 +152,8 @@ const candidateOne = OLAM_SLIDES.find(slide => slide.id === 'candidate-1');
 const candidateTwo = OLAM_SLIDES.find(slide => slide.id === 'candidate-2');
 assert.ok(candidateOne?.metrics.some(metric => metric.value === '₹20M'));
 assert.ok(candidateOne?.metrics.some(metric => metric.value === '−57% CPM'));
-assert.ok(candidateTwo?.metrics.some(metric => metric.value === 'B.Tech + MBA'));
+assert.ok(candidateTwo?.metrics.some(metric => metric.value === 'Control tower'));
+assert.ok(candidateTwo?.insight.includes('harder to surprise'));
 
 const auditNames: string[] = OLAM_REVIEW_ITERATIONS.map(row => String(row[1]));
 for (const required of [
