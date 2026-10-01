@@ -1,3 +1,4 @@
+// Verification round 3 after normalized-unit clarity update.
 // Verification round 2 after source-notation normalization.
 // Verification branch: exercises the Olam strategy quality workflow against the current decision model.
 import assert from 'node:assert/strict';
