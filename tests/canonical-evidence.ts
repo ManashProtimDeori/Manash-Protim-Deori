@@ -116,9 +116,10 @@ assert.equal(REVIEW_ITERATIONS_2026.length, 40, 'four refinement rounds should t
 
 assert.equal(CANONICAL_CALCULATION_AUDITS.length, 19, 'calculation appendix should document every calculation family used by the deck');
 assert.equal(CALCULATION_APPENDIX_STANDARD.length, 10, 'validation protocol must retain exactly ten passes');
-assert.equal(CANONICAL_ASSUMPTION_REGISTER.length, 28, 'scenario and TCO assumption register should enumerate all 28 defaults');
+assert.equal(CANONICAL_ASSUMPTION_REGISTER.length, 46, 'scenario, TCO and methodology assumption register should enumerate all 46 explicit defaults and model-governance choices');
 assert.equal(CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'scenario').length, 18, 'all 18 scenario defaults must be registered');
 assert.equal(CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'tco').length, 10, 'all 10 TCO defaults must be registered');
+assert.equal(CANONICAL_ASSUMPTION_REGISTER.filter((item) => item.family === 'methodology').length, 18, 'all 18 simulation, brand, sensitivity and TCO-methodology choices must be registered');
 for (const audit of CANONICAL_CALCULATION_AUDITS) {
   assert.equal(audit.validation10.length, 10, audit.id + ' must document all ten validation passes');
   assert.ok(audit.formula.length > 12, audit.id + ' must disclose its auditable formula');
@@ -137,6 +138,7 @@ assert.ok(pageSource.includes("kind: 'assumption-register'"), 'deck should rende
 assert.ok(pageSource.includes("kind: 'calc-standard'"), 'deck should end the appendix with the ten-pass validation standard');
 assert.ok(pageSource.includes("section: 'Calculation appendix · Page '"), 'calculation slides should carry explicit page numbers');
 assert.ok(pageSource.includes("section: 'Assumption register · Page '"), 'assumption slides should carry explicit page numbers');
+assert.ok(pageSource.includes("id:'method-assumptions-3'"), 'methodology assumption register should cover brand weights, sensitivity scoring and TCO horizon');
 assert.ok(pageSource.includes('10 / 10 documented'), 'each calculation page should visibly state the ten-pass audit record');
 assert.ok(pageSource.includes('Seeded reproducible simulation · 1,600 runs'), 'simulation wording should disclose reproducibility and the actual run count');
 assert.ok(!pageSource.includes('Deterministic uncertainty simulation'), 'misleading deterministic-uncertainty wording should be removed');
