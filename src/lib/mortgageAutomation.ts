@@ -87,6 +87,44 @@ export type CapitalMatch = {
   synthetic: true;
 };
 
+export type DocumentEvidence = {
+  id: string;
+  kind: 'identity' | 'income' | 'assets' | 'employment' | 'property' | 'title' | 'insurance' | 'disclosure';
+  label: string;
+  completenessPct: number;
+  confidencePct: number;
+  verified: boolean;
+  conflict: boolean;
+  freshnessDays: number;
+  provenance: string;
+};
+
+export type CommunicationAction = {
+  id: string;
+  trigger: string;
+  channel: 'portal' | 'email' | 'sms' | 'voice' | 'human';
+  state: 'ready' | 'hold' | 'escalate';
+  owner: 'system' | 'borrower' | 'operations' | 'licensed-review';
+  consentRequired: boolean;
+  rationale: string;
+};
+
+export type QualityCheck = {
+  id: string;
+  label: string;
+  status: GateStatus;
+  mode: 'deterministic' | 'sampled-human';
+  rationale: string;
+};
+
+export type StageCapacity = {
+  stage: string;
+  manualHoursPerFile: number;
+  automatableSharePct: number;
+  monthlyHoursAddressable: number;
+  bottleneck: boolean;
+};
+
 export type MortgageDecisionState = {
   monthlyPrincipalInterest: number;
   totalHousingPayment: number;
@@ -104,6 +142,14 @@ export type MortgageDecisionState = {
   hoursSavedMonthly: number;
   capacityValueMonthly: number;
   filesAutoCandidateMonthly: number;
+  documentEvidence: DocumentEvidence[];
+  contradictions: string[];
+  communications: CommunicationAction[];
+  qcSampleRatePct: number;
+  qualityChecks: QualityCheck[];
+  cycleTimeRisk: 'low' | 'medium' | 'high';
+  bottleneckStage: string;
+  stageCapacity: StageCapacity[];
   blockers: string[];
   reviewReasons: string[];
 };
@@ -277,6 +323,82 @@ export const evaluateMortgageCase = (
   const hoursSavedMonthly = filesAutoCandidateMonthly*ops.manualHoursPerFile;
   const capacityValueMonthly = hoursSavedMonthly*ops.loadedHourlyCost;
 
+  const documentEvidence:DocumentEvidence[] = [
+    {id:'DOC-ID',kind:'identity',label:'Identity evidence',completenessPct:input.identityVerified?100:55,confidencePct:input.identityVerified?99:62,verified:input.identityVerified,conflict:false,freshnessDays:2,provenance:'Identity verification provider / borrower file'},
+    {id:'DOC-INC',kind:'income',label:'Income evidence',completenessPct:input.incomeVerified?100:Math.min(88,input.documentsCompletePct),confidencePct:input.incomeVerified?96:68,verified:input.incomeVerified,conflict:input.incomeVerified && input.documentsCompletePct<80,freshnessDays:14,provenance:'Income documents / verification response'},
+    {id:'DOC-AST',kind:'assets',label:'Asset evidence',completenessPct:input.assetsVerified?100:Math.min(85,input.documentsCompletePct),confidencePct:input.assetsVerified?95:66,verified:input.assetsVerified,conflict:input.assetsVerified && input.liquidAssets<=0,freshnessDays:12,provenance:'Asset statements / verification response'},
+    {id:'DOC-EMP',kind:'employment',label:'Employment evidence',completenessPct:input.employmentVerified?100:Math.min(82,input.documentsCompletePct),confidencePct:input.employmentVerified?94:64,verified:input.employmentVerified,conflict:false,freshnessDays:21,provenance:'Employment verification / borrower file'},
+    {id:'DOC-APP',kind:'property',label:'Collateral evidence',completenessPct:input.appraisalStatus==='pending'?50:100,confidencePct:input.appraisalStatus==='pending'?58:95,verified:input.appraisalStatus!=='pending',conflict:false,freshnessDays:input.appraisalStatus==='pending'?0:7,provenance:'Appraisal or documented waiver'},
+    {id:'DOC-TTL',kind:'title',label:'Title evidence',completenessPct:input.titleClear?100:60,confidencePct:input.titleClear?96:65,verified:input.titleClear,conflict:false,freshnessDays:input.titleClear?5:0,provenance:'Title workflow status'},
+    {id:'DOC-INS',kind:'insurance',label:'Insurance evidence',completenessPct:input.insuranceBound?100:55,confidencePct:input.insuranceBound?95:60,verified:input.insuranceBound,conflict:false,freshnessDays:input.insuranceBound?3:0,provenance:'Insurance binder workflow state'},
+    {id:'DOC-CD',kind:'disclosure',label:'Disclosure acknowledgement',completenessPct:input.closingDisclosureAcknowledged?100:65,confidencePct:input.closingDisclosureAcknowledged?99:72,verified:input.closingDisclosureAcknowledged,conflict:false,freshnessDays:input.closingDisclosureAcknowledged?1:0,provenance:'Borrower acknowledgement event'},
+  ];
+
+  const contradictions = documentEvidence.filter(item=>item.conflict).map(item=>item.label+' contains an internal consistency signal requiring review');
+  if (input.loanAmount>input.purchasePrice) contradictions.push('Loan amount exceeds purchase price in the scenario input');
+  if (input.requiredReservesMonths>0 && input.liquidAssets<=0) contradictions.push('Required reserves are positive but liquid assets are zero');
+
+  const communications:CommunicationAction[] = [
+    ...tasks.filter(task=>task.owner==='borrower').map((task,index)=>({
+      id:'COM-'+String(index+1).padStart(2,'0'),
+      trigger:task.title,
+      channel:(task.priority==='high'?'portal':task.priority==='medium'?'email':'sms') as CommunicationAction['channel'],
+      state:(input.consentCaptured?'ready':'hold') as CommunicationAction['state'],
+      owner:'borrower' as const,
+      consentRequired:true,
+      rationale:task.rationale,
+    })),
+    ...(tasks.some(task=>task.owner==='licensed-review') ? [{
+      id:'COM-ESC',
+      trigger:'Licensed review escalation',
+      channel:'human' as const,
+      state:'escalate' as const,
+      owner:'licensed-review' as const,
+      consentRequired:false,
+      rationale:'Policy-sensitive or ambiguous conditions are routed to authorized human review rather than automated borrower messaging.',
+    }] : []),
+  ];
+
+  const qcSampleRatePct = Math.round(clamp(
+    5 + (100-dataConfidence)*.22 + input.exceptionCount*5 + (route==='HUMAN_REVIEW'?8:0) + (route==='BLOCKED'?15:0),
+    5,
+    45,
+  ));
+
+  const qualityChecks:QualityCheck[] = [
+    {id:'QC-01',label:'Calculation reproducibility',status:Number.isFinite(dtiPct)&&Number.isFinite(ltvPct)?'PASS':'BLOCK',mode:'deterministic',rationale:'Core payment, DTI and LTV calculations must reproduce from stored inputs.'},
+    {id:'QC-02',label:'Document contradiction scan',status:contradictions.length===0?'PASS':'REVIEW',mode:'deterministic',rationale:contradictions.length===0?'No configured internal contradiction detected.':contradictions.length+' contradiction signal(s) require review.'},
+    {id:'QC-03',label:'Consent and identity trace',status:input.consentCaptured&&input.identityVerified?'PASS':'BLOCK',mode:'deterministic',rationale:'Automation must retain authorization and verified identity state.'},
+    {id:'QC-04',label:'Rule/version human sample',status:'REVIEW',mode:'sampled-human',rationale:'A production system should sample '+qcSampleRatePct+'% of comparable files using a documented QC plan.'},
+    {id:'QC-05',label:'Adverse-action boundary',status:'PASS',mode:'deterministic',rationale:'This engine does not generate or execute an adverse-action lending decision.'},
+  ];
+
+  const cycleTimeRisk:'low'|'medium'|'high' = input.daysInProcess>25 || input.borrowerResponseHours>48
+    ? 'high'
+    : input.daysInProcess>14 || input.borrowerResponseHours>24
+      ? 'medium'
+      : 'low';
+
+  const capacityBlueprint = [
+    ['Intake & documents',1.6,88],
+    ['Verification',1.5,74],
+    ['Underwriting support',1.8,58],
+    ['Borrower coordination',1.0,82],
+    ['Closing preparation',1.1,64],
+    ['Quality control',0.5,Math.max(20,100-qcSampleRatePct)],
+  ] as const;
+
+  const stageCapacity:StageCapacity[] = capacityBlueprint.map(([stage,hours,share])=>({
+    stage,
+    manualHoursPerFile:hours,
+    automatableSharePct:share,
+    monthlyHoursAddressable:Math.round(ops.monthlyApplications*hours*(share/100)),
+    bottleneck:false,
+  }));
+  const bottleneck = [...stageCapacity].sort((a,b)=>b.monthlyHoursAddressable-a.monthlyHoursAddressable)[0];
+  const bottleneckStage = bottleneck?.stage || 'Unresolved';
+  stageCapacity.forEach(item=>{ item.bottleneck = item.stage===bottleneckStage; });
+
   return {
     monthlyPrincipalInterest,
     totalHousingPayment,
@@ -294,6 +416,14 @@ export const evaluateMortgageCase = (
     hoursSavedMonthly,
     capacityValueMonthly,
     filesAutoCandidateMonthly,
+    documentEvidence,
+    contradictions,
+    communications,
+    qcSampleRatePct,
+    qualityChecks,
+    cycleTimeRisk,
+    bottleneckStage,
+    stageCapacity,
     blockers:blocks.map(item=>item.label),
     reviewReasons:reviews.map(item=>item.label),
   };
@@ -309,13 +439,15 @@ export const scenarioCases:Record<string,MortgageCase> = {
 
 export const workflowArchitecture = [
   ['01','Point of sale / intake','Consent, identity, application and document collection'],
-  ['02','Document intelligence','Classify, extract, reconcile and identify missing evidence'],
-  ['03','Eligibility / product fit','Run transparent configurable policy scenarios'],
-  ['04','Pricing & payment','Compute payment and compare scenario economics'],
-  ['05','Underwriting support','Evaluate rule graph and package exceptions for licensed review'],
-  ['06','Borrower orchestration','Generate precise next actions and status communications'],
-  ['07','Compliance controls','Enforce consent, auditability, manual-review and adverse-action boundaries'],
-  ['08','Quality control','Sample auto-candidate files and preserve a complete decision trace'],
-  ['09','Closing readiness','Track appraisal, title, insurance and disclosure dependencies'],
-  ['10','Capital markets sandbox','Compare synthetic investor-fit profiles without representing real guidelines'],
+  ['02','Document intelligence','Classify, extract, reconcile, score confidence and identify missing or contradictory evidence'],
+  ['03','Eligibility / product fit','Run transparent configurable policy scenarios without hidden approval logic'],
+  ['04','Pricing & payment','Compute payment sensitivity and compare scenario economics'],
+  ['05','Underwriting support','Evaluate a rule graph and package exceptions for licensed review'],
+  ['06','Borrower orchestration','Generate precise next actions from case state instead of generic chasing'],
+  ['07','Voice & communications','Route portal, email, SMS, voice and human escalation behind consent and role controls'],
+  ['08','Compliance controls','Enforce consent, auditability, manual-review and adverse-action boundaries'],
+  ['09','Quality control','Use deterministic checks plus risk-weighted human sampling and complete traceability'],
+  ['10','Closing readiness','Track appraisal, title, insurance and disclosure dependencies as a critical path'],
+  ['11','Capital markets sandbox','Compare synthetic investor-fit profiles without representing real private guidelines'],
+  ['12','Operations telemetry','Model stage capacity, cycle-time risk and economic value under explicit assumptions'],
 ] as const;
