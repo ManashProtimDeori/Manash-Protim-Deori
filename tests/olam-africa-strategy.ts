@@ -2,6 +2,15 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
+  OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS,
+  OLAM_CANDIDATE_CPM_AFTER,
+  OLAM_CANDIDATE_CPM_BEFORE,
+  OLAM_CANDIDATE_CPM_REDUCTION_PCT,
+  OLAM_CANDIDATE_MODEL_OWNERSHIP,
+  OLAM_CANDIDATE_PROPOSED_STANDARDS,
+  OLAM_CANDIDATE_QA_PASSES,
+  OLAM_CANDIDATE_90_DAY_PHASES,
+  OLAM_CANDIDATE_SCORECARD,
   OLAM_MODEL_ASSUMPTIONS,
   OLAM_POLICY_GATES,
   OLAM_REVIEW_ITERATIONS,
@@ -163,10 +172,45 @@ assert.ok(assumptionSlides.every(slide => slide.narrative.toLowerCase().includes
 
 const candidateOne = OLAM_SLIDES.find(slide => slide.id === 'candidate-1');
 const candidateTwo = OLAM_SLIDES.find(slide => slide.id === 'candidate-2');
-assert.ok(candidateOne?.metrics.some(metric => metric.value === '₹20M'));
-assert.ok(candidateOne?.metrics.some(metric => metric.value === '−57% CPM'));
-assert.ok(candidateTwo?.metrics.some(metric => metric.value === 'Control tower'));
-assert.ok(candidateTwo?.insight.includes('harder to surprise'));
+assert.ok(candidateOne && candidateTwo);
+assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'candidate').length, 2, 'exactly two candidate slides should remain');
+assert.equal(OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS.length, 6, 'qualitative slide should map six operating contribution systems');
+assert.equal(OLAM_CANDIDATE_90_DAY_PHASES.length, 4, 'quantitative slide should retain four execution phases');
+assert.equal(OLAM_CANDIDATE_SCORECARD.length, 4, 'candidate scorecard should separate data, decision, economic and learning quality');
+assert.equal(OLAM_CANDIDATE_MODEL_OWNERSHIP.length, 11, 'model-input ownership matrix should retain all material input boundaries');
+assert.equal(OLAM_CANDIDATE_QA_PASSES.length, 20, 'candidate module must receive the requested final 20-pass QA review');
+assert.ok(OLAM_CANDIDATE_PROPOSED_STANDARDS.some(([value]) => value === '100%'), 'proposed process standards should remain explicit');
+assert.ok(candidateOne.metrics.some(metric => metric.value === '₹20M' && metric.label.includes('Historical evidence')));
+assert.ok(candidateOne.metrics.some(metric => metric.value === '−56.7%' && metric.detail.includes('≈57% when rounded')));
+assert.ok(closeTo(OLAM_CANDIDATE_CPM_REDUCTION_PCT, 56.7039106145, 0.0001), 'CPM reduction must be calculated from the verified before/after values');
+assert.equal(OLAM_CANDIDATE_CPM_BEFORE, 35.8);
+assert.equal(OLAM_CANDIDATE_CPM_AFTER, 15.5);
+assert.ok(candidateOne.title.includes('not try to replace category expertise'));
+assert.ok(candidateOne.insight.includes('measurement-and-experimentation layer'));
+assert.ok(candidateOne.insight.includes('category leadership keeps ownership'));
+assert.ok(candidateOne.bullets.some(bullet => bullet.includes('sell-in') && bullet.includes('verified offtake')));
+assert.ok(candidateOne.bullets.some(bullet => bullet.includes('S&OP')));
+assert.ok(candidateOne.bullets.some(bullet => bullet.includes('counterfactual')));
+assert.ok(candidateOne.bullets.some(bullet => bullet.includes('washout')));
+assert.ok(candidateTwo.title.includes('uncertainty becomes evidence'));
+assert.ok(candidateTwo.metrics.some(metric => metric.value === 'Instrument'));
+assert.ok(candidateTwo.metrics.some(metric => metric.value === 'Test'));
+assert.ok(candidateTwo.metrics.some(metric => metric.value === 'Reconcile'));
+assert.ok(candidateTwo.metrics.some(metric => metric.value === 'Codify'));
+assert.ok(candidateTwo.bullets.some(bullet => bullet.includes('Value of information')));
+assert.ok(candidateTwo.bullets.some(bullet => bullet.includes('Contribution velocity')));
+assert.ok(candidateTwo.bullets.some(bullet => bullet.includes('Learning velocity')));
+assert.ok(candidateTwo.bullets.some(bullet => bullet.includes('counterfactual')));
+assert.ok(candidateTwo.bullets.some(bullet => bullet.includes('working') || bullet.includes('stock days')));
+assert.ok(candidateTwo.insight.includes('does not promise my impact'));
+assert.ok(candidateTwo.insight.includes('Treasury retain ownership'));
+assert.ok(!JSON.stringify([candidateOne,candidateTwo]).includes('increase Olam revenue by'), 'candidate slides must not promise an Olam revenue uplift');
+assert.ok(!JSON.stringify([candidateOne,candidateTwo]).includes('transform Olam'), 'candidate slides must not use transformation heroics');
+
+const resumePath = fileURLToPath(new URL('../src/data/resume.ts', import.meta.url));
+const resumeSource = readFileSync(resumePath, 'utf8');
+assert.ok(resumeSource.includes('Managed a ₹20M marketing budget'), '₹20M proof must remain grounded in resume source');
+assert.ok(resumeSource.includes('reduce CPM from ₹35.8 to ₹15.5'), 'CPM before/after proof must remain grounded in resume source');
 
 const auditNames: string[] = OLAM_REVIEW_ITERATIONS.map(row => String(row[1]));
 for (const required of [
@@ -236,6 +280,15 @@ assert.ok(pageSource.includes('olam-insight-card'), 'Olam slides should use a de
 assert.ok(pageSource.includes('olam-slide-inner'), 'Olam slides should use a protected safe-area inner container');
 assert.ok(pageSource.includes('olam-metric-value'), 'metric typography should use the proportional presentation scale');
 assert.ok(pageSource.includes("slide.kind === 'policy'"), 'policy gate renderer must remain explicit');
+assert.ok(pageSource.includes('CandidateOneBody'), 'qualitative candidate slide must have a dedicated renderer');
+assert.ok(pageSource.includes('CandidateTwoBody'), 'quantitative candidate slide must have a dedicated renderer');
+assert.ok(pageSource.includes('VALUE OF INFORMATION'), 'candidate value architecture should include value of information');
+assert.ok(pageSource.includes('CONTRIBUTION VELOCITY'), 'candidate quantitative slide should include contribution velocity');
+assert.ok(pageSource.includes('LEARNING VELOCITY'), 'candidate quantitative slide should include learning velocity');
+assert.ok(pageSource.includes('PROPOSED OPERATING STANDARD · NOT ACHIEVED RESULTS'), 'future process thresholds must be visibly labeled as proposed, not achieved');
+assert.ok(pageSource.includes('Any financial impact here is a measurement framework or scenario—not a promise of Olam performance.'), 'candidate slide must carry an explicit non-promise guardrail');
+assert.ok(pageSource.includes('NOT PROHIBITED'), 'edible-oil visual must align with the audited HS-policy wording');
+assert.ok(!pageSource.includes('>Importable</div>'), 'edible-oil visual must not overstate not-prohibited status as unrestricted importability');
 assert.ok(pageSource.includes("slide.kind === 'sensitivity'"), 'sensitivity renderer must remain explicit');
 assert.ok(pageSource.includes("slide.kind === 'assumptions'"), 'assumption-ledger renderer must remain explicit');
 assert.ok(!/text-[(?:7|7.d+|8|8.d+|9|9.d+)px]/.test(pageSource), 'presentation slides must not contain sub-10px fixed text classes');
