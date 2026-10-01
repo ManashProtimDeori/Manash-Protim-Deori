@@ -154,7 +154,9 @@ export function calculateOlamNigeriaCase(inputs: OlamNigeriaModelInputs): OlamNi
   const routeSavingsNgnBn = sales * routeEfficiency;
   const serviceInvestmentNgnBn = sales * serviceInvestment;
 
-  // The leakage terms deliberately penalize only the unpassed-through portion of the modeled shocks.
+  // Screening approximation: each leakage term penalizes only the unpassed-through portion
+  // of its modeled shock. A production model must reconcile the procurement/BOM exposure map
+  // first so the same imported commodity cost base is not double-counted across FX and commodity risk.
   const fxLeakageNgnBn = sales * importedInputShare * fxShock * (1 - passThrough);
   const commodityLeakageNgnBn = sales * commodityInputShare * commodityShock * (1 - passThrough);
 
@@ -166,13 +168,18 @@ export function calculateOlamNigeriaCase(inputs: OlamNigeriaModelInputs): OlamNi
     fxLeakageNgnBn -
     commodityLeakageNgnBn;
 
+  // Sales-days proxy only. Investment use must replace this with Finance-owned
+  // inventory + receivables - payables exposure and a measured pilot delta.
   const workingCapitalReleaseNgnBn =
     (sales / 365) * Math.max(0, inputs.workingCapitalDaysImprovement);
 
   const fullCapitalNgnBn =
     Math.max(0, inputs.pilotCapitalNgnBn) + Math.max(0, inputs.rolloutCapitalNgnBn);
 
-  // Benefits are deliberately ramped rather than assumed to arrive fully on day one.
+  // Screening NPV: benefits are ramped rather than assumed to arrive fully on day one.
+  // This deliberately does not claim to be an investment-grade DCF; tax, depreciation,
+  // terminal/residual value, detailed capex phasing and working-capital reversal belong
+  // in the Finance-owned cash-flow model.
   const ramps = [0.5, 0.8, 1] as const;
   const discount1 = 1 + hurdleRate;
   const discount2 = discount1 ** 2;
@@ -334,6 +341,6 @@ export function simulateOlamNigeriaCase(
     p50NpvNgnBn: percentile(npvs, 0.5),
     p90NpvNgnBn: percentile(npvs, 0.9),
     positiveNpvFrequencyPct: runs <= 0 ? 0 : (positive / runs) * 100,
-    note: 'Scenario frequency under explicit assumption ranges; not a forecast probability or management guidance.',
+    note: 'Seeded stress frequency under independent uniform assumption ranges; not a calibrated forecast probability or management guidance.',
   };
 }
