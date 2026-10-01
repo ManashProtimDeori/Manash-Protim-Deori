@@ -1,3 +1,4 @@
+// Mortgage automation v2 validation rerun after scoped type-check fix
 // Mortgage automation v2 full-suite CI validation
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
