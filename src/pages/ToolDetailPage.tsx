@@ -10,6 +10,7 @@ import { MarketSignalOS } from '../components/tools/marketsignal/MarketSignalOS'
 import { HillChainTwin } from '../components/tools/hillchain/HillChainTwin';
 import { DrivetrainGTMIntelligenceTwin } from '../components/tools/drivetrain/DrivetrainGTMIntelligenceTwin';
 import { AgriCommercialIntelligenceEngine } from '../components/tools/agri/AgriCommercialIntelligenceEngine';
+import { MortgageAutomationOS } from '../components/tools/mortgage/MortgageAutomationOS';
 import { ArrowLeft } from 'lucide-react';
 import { EditButton } from '../components/editor/EditButton';
 import '../components/tools/ToolsPremium.css';
@@ -41,13 +42,19 @@ export const ToolDetailPage: React.FC = () => {
         return <DrivetrainGTMIntelligenceTwin />;
       case 'agri-commercial-intelligence-engine':
         return <AgriCommercialIntelligenceEngine />;
+      case 'mortgage-manufacturing-automation-os':
+        return <MortgageAutomationOS defaultView="Command Center" specialization="End-to-end mortgage manufacturing automation" />;
+      case 'underwriting-decision-exception-router':
+        return <MortgageAutomationOS defaultView="Underwriting Graph" specialization="Underwriting support, explainable rules and human exception routing" />;
+      case 'mortgage-compliance-closing-control-tower':
+        return <MortgageAutomationOS defaultView="Compliance" specialization="Compliance controls, closing readiness and governed operational risk" />;
       default:
         return <RoiCalculator />;
     }
   };
 
   return (
-    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'roi-calculator' || toolItem.slug === 'utm-builder' || toolItem.slug === 'positioning-analyser' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' || toolItem.slug === 'drivetrain-gtm-intelligence-twin' || toolItem.slug === 'agri-commercial-intelligence-engine' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
+    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'roi-calculator' || toolItem.slug === 'utm-builder' || toolItem.slug === 'positioning-analyser' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' || toolItem.slug === 'drivetrain-gtm-intelligence-twin' || toolItem.slug === 'agri-commercial-intelligence-engine' || toolItem.slug === 'mortgage-manufacturing-automation-os' || toolItem.slug === 'underwriting-decision-exception-router' || toolItem.slug === 'mortgage-compliance-closing-control-tower' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
       {/* Back Link & Edit */}
       <div className="tools-premium-backbar mb-8 flex items-center justify-between">
         <Link
