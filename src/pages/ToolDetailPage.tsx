@@ -48,13 +48,25 @@ export const ToolDetailPage: React.FC = () => {
         return <MortgageAutomationOS defaultView="Underwriting Graph" specialization="Underwriting support, explainable rules and human exception routing" />;
       case 'mortgage-compliance-closing-control-tower':
         return <MortgageAutomationOS defaultView="Compliance" specialization="Compliance controls, closing readiness and governed operational risk" />;
+      case 'mortgage-document-intelligence-reconciliation-engine':
+        return <MortgageAutomationOS defaultView="Document Intelligence" specialization="Document evidence confidence, provenance, freshness and contradiction reconciliation" />;
+      case 'mortgage-product-pricing-scenario-orchestrator':
+        return <MortgageAutomationOS defaultView="Product Fit" specialization="Transparent product-fit, pricing and mortgage scenario orchestration" />;
+      case 'borrower-voice-next-best-action-orchestrator':
+        return <MortgageAutomationOS defaultView="Voice & Communications" specialization="Consent-aware borrower communications and next-best-action orchestration" />;
+      case 'mortgage-quality-control-assurance-engine':
+        return <MortgageAutomationOS defaultView="Quality Control" specialization="Risk-weighted quality control, reproducibility and automation assurance" />;
+      case 'mortgage-capital-markets-matching-sandbox':
+        return <MortgageAutomationOS defaultView="Capital Markets" specialization="Synthetic capital-markets matching architecture with explicit governance" />;
+      case 'mortgage-operations-economics-twin':
+        return <MortgageAutomationOS defaultView="Operations Economics" specialization="Stage-level capacity economics, cycle-time risk and bottleneck intelligence" />;
       default:
         return <RoiCalculator />;
     }
   };
 
   return (
-    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'roi-calculator' || toolItem.slug === 'utm-builder' || toolItem.slug === 'positioning-analyser' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' || toolItem.slug === 'drivetrain-gtm-intelligence-twin' || toolItem.slug === 'agri-commercial-intelligence-engine' || toolItem.slug === 'mortgage-manufacturing-automation-os' || toolItem.slug === 'underwriting-decision-exception-router' || toolItem.slug === 'mortgage-compliance-closing-control-tower' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
+    <div data-tool={toolItem.slug} className={`tools-premium-shell py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8 ${toolItem.slug === 'roi-calculator' || toolItem.slug === 'utm-builder' || toolItem.slug === 'positioning-analyser' || toolItem.slug === 'marketing-brief-generator' || toolItem.slug === 'marketsignal-os' || toolItem.slug === 'hillchain-twin' || toolItem.slug === 'drivetrain-gtm-intelligence-twin' || toolItem.slug === 'agri-commercial-intelligence-engine' || toolItem.slug === 'mortgage-manufacturing-automation-os' || toolItem.slug === 'underwriting-decision-exception-router' || toolItem.slug === 'mortgage-compliance-closing-control-tower' || toolItem.slug === 'mortgage-document-intelligence-reconciliation-engine' || toolItem.slug === 'mortgage-product-pricing-scenario-orchestrator' || toolItem.slug === 'borrower-voice-next-best-action-orchestrator' || toolItem.slug === 'mortgage-quality-control-assurance-engine' || toolItem.slug === 'mortgage-capital-markets-matching-sandbox' || toolItem.slug === 'mortgage-operations-economics-twin' ? 'max-w-[1600px]' : 'max-w-5xl'}`}>
       {/* Back Link & Edit */}
       <div className="tools-premium-backbar mb-8 flex items-center justify-between">
         <Link
