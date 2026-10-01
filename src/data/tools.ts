@@ -267,8 +267,8 @@ export const toolsData: ToolItem[] = [
     name: 'Mortgage Manufacturing Automation OS',
     category: 'Mortgage Operations, Workflow Automation & Decision Intelligence',
     status: 'Live',
-    version: 'v1.0',
-    description: 'A company-neutral mortgage workflow decision twin that connects intake, document readiness, configurable product-fit rules, underwriting support, exception routing, borrower orchestration, pricing, compliance controls, closing dependencies, synthetic capital-market fit and operations economics in one auditable state machine.',
+    version: 'v2.0',
+    description: 'A company-neutral mortgage manufacturing decision twin that connects intake, document reconciliation, configurable product-fit rules, pricing, underwriting support, exception routing, borrower communications, compliance controls, quality control, closing dependencies, synthetic capital-market fit and operations economics in one auditable state machine.',
     instructions: 'Use the Command Center to inspect automation readiness, then move through intake, policy sandbox, underwriting graph, exception routing, borrower orchestration, payment scenarios, compliance controls, closing and synthetic capital-market matching. All thresholds are configurable demo policy inputs, not lender, agency or investor guidelines. The system never issues a real credit decision and routes ambiguous or regulated judgment to human review.',
     features: [
       'End-to-end mortgage state machine spanning point of sale, documents, product fit, pricing, underwriting support, borrower coordination, compliance controls, quality control, closing and capital markets',
@@ -276,7 +276,9 @@ export const toolsData: ToolItem[] = [
       'Configurable policy sandbox with visible DTI, LTV, credit, reserve, document, fraud-signal and exception thresholds rather than opaque eligibility scoring',
       'Rule-by-rule explainability showing actual value, configured threshold, status, owner and rationale for every workflow gate',
       'Automation routing to AUTO-CANDIDATE, HUMAN REVIEW or BLOCKED while preserving external licensed decision authority',
-      'Document-intake and verification orchestration that requests only unresolved evidence and distinguishes automatic, assisted and human-required work',
+      'Document-intake, confidence scoring, provenance, freshness and contradiction reconciliation that requests only unresolved evidence and distinguishes automatic, assisted and human-required work',
+      'Borrower communications orchestration across portal, email, SMS, voice and human escalation, with consent and role-based boundaries',
+      'Risk-weighted quality-control sampling, deterministic reproducibility checks, contradiction detection and automation error-budget governance',
       'Exception router that converts failed or ambiguous rules into a finite reviewer work queue instead of hidden model overrides',
       'Borrower orchestration layer for precise next-best actions with consent and anti-proxy safeguards',
       'Pricing and payment sensitivity simulator across loan amount, rate and term',
@@ -291,6 +293,7 @@ export const toolsData: ToolItem[] = [
     technologies: ['React 19', 'TypeScript', 'Deterministic Mortgage Formula Engine', 'Workflow State Machine', 'Decision Routing', 'Scenario Twin', 'Auditability', 'Responsive Data UI'],
     interactiveComponent: 'MortgageAutomationOS',
     changelog: [
+      { version: 'v2.0', date: '2026-10', notes: 'Expanded to 17 modules with field-level evidence confidence, contradiction routing, borrower communications orchestration, risk-weighted QC, stage-capacity telemetry and moving-bottleneck economics' },
       { version: 'v1.0', date: '2026-10', notes: 'Initial release with 13 mortgage automation modules, deterministic calculations, configurable rule engine, human-review routing, closing controls, synthetic capital markets and operations economics' }
     ]
   },
@@ -344,6 +347,152 @@ export const toolsData: ToolItem[] = [
     interactiveComponent: 'MortgageAutomationOS',
     changelog: [
       { version: 'v1.0', date: '2026-10', notes: 'Initial specialist workspace built on the Mortgage Manufacturing Automation OS engine' }
+    ]
+  },
+
+  {
+    id: 'tool-12',
+    slug: 'mortgage-document-intelligence-reconciliation-engine',
+    name: 'Mortgage Document Intelligence & Reconciliation Engine',
+    category: 'Mortgage Document AI, Evidence Quality & Reconciliation',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A document-evidence control layer that scores completeness, extraction confidence, verification state, freshness and provenance, then routes contradictions to governed human reconciliation instead of silently overwriting conflicting facts.',
+    instructions: 'Open Document Intelligence first. Inspect evidence confidence and provenance separately from verification state, then use Intake & Documents and Audit & Governance to understand why any file is incomplete, stale, contradictory or review-bound.',
+    features: [
+      'Document-level evidence registry across identity, income, assets, employment, collateral, title, insurance and disclosures',
+      'Separate completeness, extraction-confidence and verification fields so confidence is never treated as truth',
+      'Freshness metadata to prevent stale evidence from masquerading as current evidence',
+      'Contradiction detection and explicit reviewer reconciliation queue',
+      'Source-system provenance for every evidence object',
+      'Precise missing-document generation that avoids re-requesting already satisfied evidence',
+      'Deterministic audit trail linking evidence state to workflow routing',
+      'No autonomous credit approval or adverse-action logic'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Evidence Graph', 'Confidence Scoring', 'Reconciliation Rules', 'Human Review', 'Auditability'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial release with evidence confidence, freshness, provenance, contradiction detection and reconciliation routing' }
+    ]
+  },
+  {
+    id: 'tool-13',
+    slug: 'mortgage-product-pricing-scenario-orchestrator',
+    name: 'Mortgage Product, Pricing & Scenario Orchestrator',
+    category: 'Mortgage Product Fit, Pricing & Scenario Economics',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A transparent scenario engine for payment, DTI, LTV, reserves, cash-to-close and rate sensitivity, with configurable demo policy thresholds and no hidden approval score.',
+    instructions: 'Use Product Fit to inspect every configured rule, then Pricing & Payment and Scenario Twin to stress loan amount, rate, term, debt, income, leverage, reserves and exceptions. The policy pack is illustrative and must not be used as a lender or agency rulebook.',
+    features: [
+      'Deterministic payment, DTI, LTV, reserve and cash-to-close calculations',
+      'Visible configurable threshold engine rather than opaque eligibility scoring',
+      'Rate-sensitivity curve and payment impact scenarios',
+      'What-if stress testing across income, debt, leverage, credit, reserves and exceptions',
+      'PASS, REVIEW and BLOCK states with rationale and owner',
+      'Human-review routing for policy-sensitive outcomes',
+      'No automatic approval, denial or adverse-action generation'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Mortgage Math', 'Scenario Engine', 'Policy Sandbox', 'Explainability'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial specialist workspace for transparent product-fit and pricing scenario analysis' }
+    ]
+  },
+  {
+    id: 'tool-14',
+    slug: 'borrower-voice-next-best-action-orchestrator',
+    name: 'Borrower Voice & Next-Best-Action Orchestrator',
+    category: 'Mortgage Borrower Communications, Voice AI & Workflow Orchestration',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A consent-aware communications layer that converts exact case-state triggers into the next borrower or reviewer action across portal, email, SMS, voice and human escalation—without generic chasing or automated regulated judgment.',
+    instructions: 'Use Voice & Communications to inspect each trigger, channel, consent state and owner. Move to Borrower Orchestration to see borrower-owned tasks and to Audit & Governance for the exact workflow facts behind every message.',
+    features: [
+      'State-triggered borrower communications instead of generic follow-up sequences',
+      'Portal, email, SMS, voice and human escalation channel orchestration',
+      'Consent gating before automated borrower outreach',
+      'Authentication and minimum-necessary-context principles for file-specific communication',
+      'No duplicate evidence requests when the file already contains verified information',
+      'Automatic escalation of uncertainty and policy-sensitive conditions to authorized humans',
+      'Traceable rationale for every generated communication action',
+      'No automated rate lock, credit pull, exception waiver or adverse-action decision'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Workflow Orchestration', 'Voice AI Architecture', 'Consent Controls', 'Audit Trail'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial release with channel routing, consent-aware triggers, borrower next-best actions and human escalation controls' }
+    ]
+  },
+  {
+    id: 'tool-15',
+    slug: 'mortgage-quality-control-assurance-engine',
+    name: 'Mortgage Quality Control & Automation Assurance Engine',
+    category: 'Mortgage QC, Model Governance & Automation Reliability',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A mortgage automation assurance layer that combines deterministic reproducibility checks, contradiction detection, risk-weighted human sampling, cycle-time risk and audit controls so automation quality is measured rather than assumed.',
+    instructions: 'Start in Quality Control. Inspect the risk-weighted sample rate, deterministic checks, contradiction count and cycle-time risk, then move to Audit & Governance for the rule-by-rule decision trace.',
+    features: [
+      'Risk-weighted QC sample rate based on confidence, exceptions and workflow route',
+      'Deterministic calculation reproducibility checks',
+      'Document contradiction and consent/identity trace controls',
+      'Explicit adverse-action automation boundary',
+      'Production accuracy contract covering extraction, exception escapes, communications, closing defects and drift',
+      'Cycle-time risk signal for operational deterioration',
+      'Versionable audit trail for future policy/source/reviewer persistence'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Quality Control', 'Risk Sampling', 'Model Governance', 'Drift Monitoring', 'Auditability'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial release with QC sampling, reproducibility checks, contradiction assurance and drift-oriented governance' }
+    ]
+  },
+  {
+    id: 'tool-16',
+    slug: 'mortgage-capital-markets-matching-sandbox',
+    name: 'Mortgage Capital Markets Matching Sandbox',
+    category: 'Mortgage Capital Markets, Investor Fit & Execution Support',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A synthetic investor-fit architecture that demonstrates how completed loan facts could be ranked against licensed purchaser criteria while keeping all demo profiles visibly synthetic and auditable.',
+    instructions: 'Use Capital Markets to compare the synthetic fit profiles and inspect the rationale for each score. This module intentionally does not represent real or private investor guidelines; production use would require licensed, versioned purchaser policy data.',
+    features: [
+      'Synthetic investor-fit profiles with explicit candidate, review and not-fit states',
+      'Transparent fit components driven by DTI, LTV, credit, channel and operational completeness',
+      'No representation of private investor rules or commitments',
+      'Auditable rationale for each synthetic fit score',
+      'Designed for future connection to licensed, versioned purchaser criteria',
+      'Human review boundary before any execution or sale decision'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Capital Markets Sandbox', 'Fit Scoring', 'Synthetic Policy Data', 'Auditability'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial specialist workspace for synthetic investor-fit architecture and governed matching' }
+    ]
+  },
+  {
+    id: 'tool-17',
+    slug: 'mortgage-operations-economics-twin',
+    name: 'Mortgage Operations Economics & Capacity Twin',
+    category: 'Mortgage Operations, Capacity Economics & Bottleneck Intelligence',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A capacity and process-economics twin that models stage-level manual hours, automatable share, cycle-time risk, bottleneck movement, auto-candidate volume and loaded-cost capacity value under explicit assumptions.',
+    instructions: 'Use Operations Economics to identify the largest addressable manual work pool, adjust monthly applications, manual hours and loaded cost, then use Scenario Twin to see how workflow quality changes the modeled automation opportunity.',
+    features: [
+      'Stage-level manual-hours and automatable-share model',
+      'Dynamic identification of the largest addressable workflow bottleneck',
+      'Modeled auto-candidate volume, hours released and loaded-cost capacity value',
+      'Cycle-time risk signal from days-in-process and response latency',
+      'Explicit distinction between modeled capacity and guaranteed labor savings',
+      'Transformation sequence that re-measures the bottleneck after each automation deployment',
+      'Scenario twin connecting file quality to operations economics'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Operations Twin', 'Capacity Modeling', 'Bottleneck Analysis', 'Scenario Economics'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial release with stage-capacity telemetry, bottleneck movement and explicit operations-value assumptions' }
     ]
   },
 
