@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "npm run lint:canonical && npm run test:economics && npm run test:measurement && npm run test:positioning && npm run test:intelligence && npm run test:drivetrain && npm run test:agri && npm run test:canonical && npm run test:canonical-marketing && npm run test:canonical-evidence && npm run lint:olam && npm run test:olam && vite build",
+    "build": "npm run lint:canonical && npm run test:economics && npm run test:measurement && npm run test:positioning && npm run test:intelligence && npm run test:drivetrain && npm run test:agri && npm run test:canonical && npm run test:canonical-marketing && npm run test:canonical-evidence && npm run lint:olam && npm run test:olam && npm run lint:mortgage && npm run test:mortgage && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit && tsc -p api/tsconfig.json --noEmit",
@@ -21,7 +21,9 @@
     "test:canonical-marketing": "tsx tests/canonical-marketing-decision.ts",
     "test:canonical-evidence": "tsx tests/canonical-evidence.ts",
     "lint:olam": "tsc -p tsconfig.olam.json --noEmit",
-    "test:olam": "tsx tests/olam-africa-strategy.ts"
+    "test:olam": "tsx tests/olam-africa-strategy.ts",
+    "lint:mortgage": "tsc -p tsconfig.mortgage.json --noEmit",
+    "test:mortgage": "tsx tests/mortgage-automation.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
