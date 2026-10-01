@@ -74,7 +74,7 @@ assert.ok(engineSource.includes('Exceptions are never auto-cleared'));
 
 const componentPath = fileURLToPath(new URL('../src/components/tools/mortgage/MortgageAutomationOS.tsx', import.meta.url));
 const componentSource = readFileSync(componentPath,'utf8');
-for (const moduleName of ['Command Center','Architecture','Intake & Documents','Document Intelligence','Product Fit','Pricing & Payment','Underwriting Graph','Exception Router','Borrower Orchestration','Voice & Communications','Compliance','Quality Control','Closing','Capital Markets','Operations Economics','Audit & Governance','Scenario Twin']) {
+for (const moduleName of ['Command Center','Architecture','Intake & Documents','Document Intelligence','Product Fit','Pricing & Payment','Underwriting Graph','Exception Router','Borrower Orchestration','Voice & Communications','Compliance','Quality Control','Closing','Capital Markets','Operations Economics','Enterprise Ops','Audit & Governance','Scenario Twin']) {
   assert.ok(componentSource.includes(moduleName), 'missing mortgage automation module: '+moduleName);
 }
 assert.ok(componentSource.includes('Automate the file, not the judgment'));
@@ -92,6 +92,7 @@ for (const slug of [
   'mortgage-quality-control-assurance-engine',
   'mortgage-capital-markets-matching-sandbox',
   'mortgage-operations-economics-twin',
+  'fintech-enterprise-workflow-autonomy-os',
 ]) {
   assert.ok(toolsSource.includes("slug: '"+slug+"'"), 'missing tool catalog entry: '+slug);
 }
@@ -105,6 +106,7 @@ assert.ok(toolsPageSource.includes('defaultView="Document Intelligence"'));
 assert.ok(toolsPageSource.includes('defaultView="Voice & Communications"'));
 assert.ok(toolsPageSource.includes('defaultView="Quality Control"'));
 assert.ok(toolsPageSource.includes('defaultView="Operations Economics"'));
+assert.ok(toolsPageSource.includes('defaultView="Enterprise Ops"'));
 
 const detailPath = fileURLToPath(new URL('../src/pages/ToolDetailPage.tsx', import.meta.url));
 const detailSource = readFileSync(detailPath,'utf8');
@@ -112,11 +114,11 @@ assert.ok(detailSource.includes('MortgageAutomationOS'));
 
 const contextPath = fileURLToPath(new URL('../src/context/DataContext.tsx', import.meta.url));
 const contextSource = readFileSync(contextPath,'utf8');
-assert.ok(contextSource.includes("['tool-9','tool-10','tool-11','tool-12','tool-13','tool-14','tool-15','tool-16','tool-17']"), 'existing visitors should receive all required mortgage tools');
+assert.ok(contextSource.includes("['tool-9','tool-10','tool-11','tool-12','tool-13','tool-14','tool-15','tool-16','tool-17','tool-18']"), 'existing visitors should receive all required mortgage and fintech workflow tools');
 
 console.log('Mortgage automation quality checks passed', {
   baseRoute: base.route,
   automationPotential: base.automationPotential,
   architectureLayers: workflowArchitecture.length,
-  specialistTools: 9,
+  specialistTools: 10,
 });
