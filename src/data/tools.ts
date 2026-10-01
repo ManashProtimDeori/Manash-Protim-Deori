@@ -496,4 +496,31 @@ export const toolsData: ToolItem[] = [
     ]
   },
 
+  {
+    id: 'tool-18',
+    slug: 'fintech-enterprise-workflow-autonomy-os',
+    name: 'Fintech Enterprise Workflow Autonomy OS',
+    category: 'Enterprise Systems Automation, ITSM, Support, Knowledge & Finance Operations',
+    status: 'Live',
+    version: 'v1.0',
+    description: 'A governed enterprise automation control tower for the internal operating systems behind a scaled fintech: service desk, knowledge management, customer support, access workflows, invoice exceptions, reconciliation and cross-system case orchestration.',
+    instructions: 'Open Enterprise Ops to inspect the event-driven workflow map. The system distinguishes safe automatic coordination from assisted work and sensitive actions that must remain behind authorized human approval or explicit deterministic policy.',
+    features: [
+      'Cross-system workflow model spanning ITSM, knowledge, customer support and ERP/finance operations',
+      'Duplicate-ticket collapse and deterministic cross-system case linking',
+      'Approved-knowledge suggestion with human publication control',
+      'Support triage and escalation using explicit workflow state',
+      'Access-request packets that preserve authorized approver control',
+      'Invoice-exception and month-end evidence orchestration without autonomous money movement',
+      'Least-privilege write model with reversible mutations and full before/after audit state',
+      'Human gates for access grants, money movement, production changes and destructive actions',
+      'Quality measures based on resolution time, reopen rate, escalation accuracy, defects and control violations'
+    ],
+    technologies: ['React 19', 'TypeScript', 'Event-Driven Workflows', 'ITSM Automation', 'Knowledge Orchestration', 'ERP Workflow', 'Least Privilege', 'Auditability'],
+    interactiveComponent: 'MortgageAutomationOS',
+    changelog: [
+      { version: 'v1.0', date: '2026-10', notes: 'Initial enterprise systems automation workspace covering ITSM, knowledge, support, access and finance operations' }
+    ]
+  },
+
 ];
