@@ -1,3 +1,4 @@
+// Olam v2 typography/final-order validation
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
