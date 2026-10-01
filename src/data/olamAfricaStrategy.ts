@@ -1,3 +1,11 @@
+import {
+  OLAM_NIGERIA_DEFAULT_MODEL,
+  OLAM_NIGERIA_SCENARIOS,
+  buildOlamNigeriaSensitivity,
+  calculateOlamNigeriaCase,
+  simulateOlamNigeriaCase,
+} from '../lib/olamNigeriaDecisionModel';
+
 export type OlamTone = 'green' | 'lime' | 'cyan' | 'orange' | 'gold' | 'violet' | 'slate';
 
 export type OlamMetric = {
@@ -38,7 +46,11 @@ export type OlamSlide = {
     | 'risk'
     | 'candidate'
     | 'iterations'
-    | 'sources';
+    | 'sources'
+    | 'policy'
+    | 'scenario'
+    | 'sensitivity'
+    | 'assumptions';
 };
 
 export const OLAM_SOURCES: OlamSource[] = [
