@@ -1103,3 +1103,48 @@ export const OLAM_SLIDES: OlamSlide[] = [
   },
 
 ];
+
+const OLAM_SLIDE_ORDER = [
+  'cover',
+  'executive-thesis',
+  'customer-profit',
+  'affordability',
+  'wheat-baker-demand',
+  'baker-profit',
+  'west-africa',
+  'southern-africa',
+  'africa-runway',
+  'value-ladder',
+  'customer-data-loop',
+  'portfolio-flywheel',
+  'availability',
+  'marketing-os',
+  'scorecard',
+  'sustainability',
+  'nigeria-platform',
+  'processing-economics',
+  'local-supply',
+  'salic',
+  'policy-constitution',
+  'capital-gates',
+  'normalized-economics',
+  'capital-boundary',
+  'scenario-cube',
+  'sensitivity',
+  'uncertainty',
+  'risk',
+  'model-audit',
+  'assumptions-1',
+  'assumptions-2',
+  'next-90-days',
+  'candidate-1',
+  'candidate-2',
+  'sources-1',
+  'sources-2',
+  'sources-3',
+  'iterations',
+] as const;
+
+const olamSlideRank = new Map(OLAM_SLIDE_ORDER.map((id, index) => [id, index]));
+OLAM_SLIDES.sort((a, b) => (olamSlideRank.get(a.id) ?? 999) - (olamSlideRank.get(b.id) ?? 999));
+
