@@ -59,7 +59,9 @@ assert.ok(modelAudit?.insight.includes('cannot be independently validated'));
 assert.ok(modelAudit?.metrics.every(metric => metric.detail.toLowerCase().includes('scenario') || metric.detail.toLowerCase().includes('not independently') || metric.detail.toLowerCase().includes('not supplied')));
 
 const valueLadder = OLAM_SLIDES.find(slide => slide.id === 'value-ladder');
-assert.ok(valueLadder?.narrative.includes('illustrative'), 'uploaded price-pack values must be explicitly framed as illustrative');
+assert.ok(valueLadder?.title.includes('two prices at once'), 'affordability architecture must separate cash ticket from usage economics');
+assert.ok(valueLadder?.metrics.some(metric => metric.value === 'Cash ticket'));
+assert.ok(valueLadder?.metrics.some(metric => metric.value === '₦ / use'));
 
 const capital = OLAM_SLIDES.find(slide => slide.id === 'capital-gates');
 assert.ok(capital?.narrative.includes('scenario envelope'), 'uploaded NGN4.2bn funding ask must not be presented as company guidance');
