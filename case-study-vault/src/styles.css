@@ -186,7 +186,7 @@ footer { display:flex; justify-content:space-between; gap:20px; padding:26px 0 4
 .modal-main { min-width:0; }
 .detail-block { margin-bottom:28px; }
 .detail-label { display:block; margin-bottom:9px; font:500 9px "DM Mono",monospace; color:#6fcfa9; text-transform:uppercase; letter-spacing:.14em; }
-.detail-block p,.insight-block p,.aside-card p { color:#9bad a7; }
+.detail-block p,.insight-block p,.aside-card p { color:#9bada7; }
 .detail-block p { color:#9aaba5; line-height:1.7; font-size:13px; }
 .detail-block .lead { color:#ced9d5; font-size:15px; line-height:1.7; }
 .insight-block { margin:0 0 30px; padding:20px 22px; border:1px solid; border-radius:16px; background:rgba(255,255,255,.02); }
