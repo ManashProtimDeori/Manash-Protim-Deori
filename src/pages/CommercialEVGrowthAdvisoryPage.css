@@ -84,3 +84,6 @@
   .ev-qa-grid{grid-template-columns:1fr}
   .ev-pdf-shell{height:62vh}
 }
+
+.ev-download-grid-single{grid-template-columns:minmax(0,720px)}
+.ev-owner-resource{border-color:rgba(20,184,166,.42);background:linear-gradient(145deg,rgba(20,184,166,.08),var(--ev-panel))}
