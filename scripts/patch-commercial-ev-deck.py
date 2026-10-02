@@ -748,7 +748,7 @@ def print_appendix_diagnostics(prs):
     print("APPENDIX-DIAGNOSTICS-BEGIN")
     for idx, slide in enumerate(prs.slides, start=1):
         labels = [norm(s.text) for s in slide.shapes if getattr(s, "has_text_frame", False) and norm(s.text)]
-        appendix_labels = [t for t in labels if re.match(r"^A\\d{1,2}\\s*/", t)]
+        appendix_labels = [t for t in labels if re.match(r"^A\d{1,2}\s*/", t)]
         if not appendix_labels:
             continue
         print(f"APPENDIX-SLIDE {idx}: {appendix_labels[0]}")
