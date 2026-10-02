@@ -577,7 +577,10 @@ def patch_global_text_layout(slide, prs, counts):
         est_need = est_lines * avg_after * 1.12 + 5
         dense = est_need > height_pt * 0.93 or len(text) > 110 or len(tf.paragraphs) >= 4
 
-        if dense and not is_source:
+        if dense:
+            # Dense source footers also need fit protection; they are allowed
+            # to compress slightly because clipping a citation is worse than
+            # a small reduction in source-note type.
             tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
             counts["global_autofit"] += 1
         else:
