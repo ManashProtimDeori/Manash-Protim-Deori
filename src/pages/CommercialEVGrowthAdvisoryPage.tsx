@@ -133,7 +133,20 @@ export const CommercialEVGrowthAdvisoryPage: React.FC = () => {
           </div>
         </div>
         <div className="ev-pdf-shell">
-          <iframe title="Commercial EV Growth Advisory case study" src={PDF_FILE + '#view=FitH&toolbar=0'} loading="lazy" />
+          <object
+            data={PDF_FILE + '#view=FitH'}
+            type="application/pdf"
+            aria-label="Commercial EV Growth Advisory case study"
+          >
+            <div className="ev-pdf-fallback">
+              <FileText size={28} />
+              <strong>PDF preview is not available in this browser.</strong>
+              <span>The case study file is still available directly.</span>
+              <a href={PDF_FILE} target="_blank" rel="noreferrer">
+                Open PDF directly <ExternalLink size={14} />
+              </a>
+            </div>
+          </object>
         </div>
       </section>
 
