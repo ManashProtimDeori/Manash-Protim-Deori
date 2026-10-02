@@ -65,8 +65,12 @@ export const CommercialEVGrowthAdvisoryPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="ev-cover-frame" aria-label="Case study deck cover">
-          <img src={ASSET_ROOT + '/commercial-ev-cover.png'} alt="Cover of the India commercial EV Growth Advisory case study" />
+        <div className="ev-cover-frame ev-cover-art" aria-label="Case study deck cover">
+          <div className="ev-cover-grid" aria-hidden="true" />
+          <span>Mobility Growth Advisory</span>
+          <h2>Winning India&apos;s<br/>Commercial EV Transition</h2>
+          <p>Where will the most defensible growth opportunities emerge through 2030?</p>
+          <small>Independent Candidate Analysis · 02 Oct 2026</small>
         </div>
       </section>
 
