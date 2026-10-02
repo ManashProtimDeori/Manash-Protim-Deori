@@ -2,13 +2,11 @@
 from __future__ import annotations
 
 import base64
-import os
 import subprocess
-import sys
 from pathlib import Path
 
 from pptx import Presentation
-from pptx.enum.text import MSO_AUTO_SIZE
+from pptx.enum.text import MSO_AUTO_SIZE, MSO_ANCHOR, PP_ALIGN
 from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -60,7 +58,68 @@ def delete_shape(shape) -> None:
     sp.getparent().remove(sp)
 
 
-def set_textbox_text(shape, lines, font_pt=9.0, bold=False):
+def text_shape(slide, exact=None, contains=None):
+    for shape in slide.shapes:
+        if not getattr(shape, "has_text_frame", False):
+            continue
+        t = norm(shape.text)
+        if exact is not None and t == exact:
+            return shape
+        if contains is not None and contains in t:
+            return shape
+    return None
+
+
+def set_text(shape, value: str, font_pt=None, bold=None, align=None, valign=None):
+    tf = shape.text_frame
+    tf.clear()
+    tf.word_wrap = True
+    tf.auto_size = MSO_AUTO_SIZE.NONE
+    tf.margin_left = Pt(2)
+    tf.margin_right = Pt(2)
+    tf.margin_top = Pt(1)
+    tf.margin_bottom = Pt(1)
+    if valign is not None:
+        tf.vertical_anchor = valign
+    p = tf.paragraphs[0]
+    p.text = value
+    p.space_before = Pt(0)
+    p.space_after = Pt(0)
+    p.line_spacing = 1.0
+    if align is not None:
+        p.alignment = align
+    for r in p.runs:
+        if font_pt is not None:
+            r.font.size = Pt(font_pt)
+        if bold is not None:
+            r.font.bold = bold
+
+
+def format_text(shape, font_pt=None, bold=None, align=None, valign=None,
+                ml=2, mr=2, mt=1, mb=1, line_spacing=1.0):
+    tf = shape.text_frame
+    tf.word_wrap = True
+    tf.auto_size = MSO_AUTO_SIZE.NONE
+    tf.margin_left = Pt(ml)
+    tf.margin_right = Pt(mr)
+    tf.margin_top = Pt(mt)
+    tf.margin_bottom = Pt(mb)
+    if valign is not None:
+        tf.vertical_anchor = valign
+    for p in tf.paragraphs:
+        p.space_before = Pt(0)
+        p.space_after = Pt(0)
+        p.line_spacing = line_spacing
+        if align is not None:
+            p.alignment = align
+        for r in p.runs:
+            if font_pt is not None:
+                r.font.size = Pt(font_pt)
+            if bold is not None:
+                r.font.bold = bold
+
+
+def set_textbox_lines(shape, lines, font_pt=9.0, bold=False):
     tf = shape.text_frame
     tf.clear()
     tf.word_wrap = True
@@ -82,19 +141,325 @@ def set_textbox_text(shape, lines, font_pt=9.0, bold=False):
 
 
 def normalize_source_box(shape):
-    tf = shape.text_frame
-    tf.word_wrap = True
-    tf.margin_left = Pt(2)
-    tf.margin_right = Pt(2)
-    tf.margin_top = Pt(1)
-    tf.margin_bottom = Pt(1)
-    tf.auto_size = MSO_AUTO_SIZE.NONE
-    for p in tf.paragraphs:
-        p.space_before = Pt(0)
-        p.space_after = Pt(0)
-        p.line_spacing = 1.0
-        for r in p.runs:
-            r.font.size = Pt(6.5)
+    format_text(shape, font_pt=6.4, line_spacing=1.0)
+
+
+def patch_legacy_cleanup(slide, slide_text, prs, counts):
+    # Earlier cleanup remains idempotent on future runs.
+    if "Source URLs" in slide_text:
+        bodies = []
+        for s in list(slide.shapes):
+            if not getattr(s, "has_text_frame", False):
+                continue
+            t = norm(s.text)
+            if any(m in t for m in SOURCE_URL_MARKERS) and "Source URLs" not in t:
+                bodies.append(s)
+        if bodies:
+            keeper = max(bodies, key=lambda s: int(s.width) * int(s.height))
+            for s in bodies:
+                if s is not keeper:
+                    delete_shape(s)
+            normalize_source_box(keeper)
+            max_h = int(prs.slide_height - keeper.top - Inches(0.30))
+            if max_h > keeper.height:
+                keeper.height = max_h
+            counts["source_url_boxes"] += 1
+
+    for shape in list(slide.shapes):
+        if not getattr(shape, "has_text_frame", False):
+            continue
+        original = norm(shape.text)
+        if not original:
+            continue
+
+        if original in {
+            "Sources: Candidate interview defence",
+            "Sources: Candidate interview defense",
+            "Sources: MPD interview defence",
+            "Sources: MPD interview defense",
+        }:
+            delete_shape(shape)
+            counts["candidate_defence_removed"] += 1
+            continue
+
+        if original in {"Interview defence", "Interview defense"}:
+            delete_shape(shape)
+            counts["interview_heading_removed"] += 1
+            continue
+
+        if "If challenged on any input, change it." in original:
+            set_text(shape, QUALITY_SENTENCE, font_pt=10, bold=True)
+            counts["interview_sentence_trimmed"] += 1
+            continue
+
+        if original.startswith("Sources:") and "Candidate" in original:
+            set_text(shape, shape.text.replace("Candidate", "MPD"), font_pt=6.3)
+            counts["candidate_to_mpd"] += 1
+
+    if "Hardest TCO challenge sequence" in slide_text:
+        title = None
+        body_candidates = []
+        for s in list(slide.shapes):
+            if not getattr(s, "has_text_frame", False):
+                continue
+            t = norm(s.text)
+            if "Hardest TCO challenge sequence" in t:
+                title = s
+            elif any(m in t for m in TCO_MARKERS):
+                body_candidates.append(s)
+
+        if body_candidates:
+            keeper = max(body_candidates, key=lambda s: int(s.width) * int(s.height))
+            for s in body_candidates:
+                if s is not keeper:
+                    delete_shape(s)
+            if title is not None:
+                keeper.top = int(title.top + title.height + Inches(0.12))
+            keeper.height = int(prs.slide_height - keeper.top - Inches(0.45))
+            set_textbox_lines(keeper, TCO_ITEMS, font_pt=8.8, bold=False)
+            counts["tco_slide_rebuilt"] += 1
+
+
+def patch_state_slide(slide, counts):
+    if "GEOGRAPHIC HETEROGENEITY" not in "\n".join(
+        norm(s.text) for s in slide.shapes if getattr(s, "has_text_frame", False)
+    ):
+        return
+
+    # Keep state labels directly adjacent to their data marker and separate the
+    # dense low-share cluster so each label clearly maps to one block.
+    positions = {
+        "Tripura":      (2.62, 2.68, 0.78, 0.22, PP_ALIGN.LEFT),
+        "Assam":        (2.34, 3.28, 0.72, 0.22, PP_ALIGN.LEFT),
+        "Uttar Pradesh":(2.38, 4.23, 1.08, 0.22, PP_ALIGN.LEFT),
+        "Delhi":        (7.17, 4.43, 0.62, 0.22, PP_ALIGN.LEFT),
+        "Karnataka":    (6.57, 5.36, 0.82, 0.22, PP_ALIGN.LEFT),
+        "Maharashtra":  (3.91, 5.49, 0.94, 0.22, PP_ALIGN.LEFT),
+        "Tamil Nadu":   (2.98, 5.37, 0.82, 0.22, PP_ALIGN.LEFT),
+        "Rajasthan":    (1.86, 5.54, 0.86, 0.22, PP_ALIGN.RIGHT),
+    }
+    for name, (x, y, w, h, align) in positions.items():
+        s = text_shape(slide, exact=name)
+        if s:
+            s.left, s.top, s.width, s.height = map(
+                lambda v: Inches(v),
+                (x, y, w, h),
+            )
+            format_text(s, font_pt=7.1, bold=True, align=align, valign=MSO_ANCHOR.MIDDLE, ml=1, mr=1, mt=0, mb=0)
+
+    # Right-side insight cards: make every line wrap inside the card.
+    specs = [
+        ("Adoption can outrun public charging", 10.2, True, 3.60, 0.28),
+        ("Assam: 49% commercial-EV", 8.1, False, 3.50, 0.66),
+        ("Infrastructure alone does not ensure adoption", 9.8, True, 3.55, 0.36),
+        ("Delhi (41.1) and Karnataka", 8.0, False, 3.48, 0.58),
+        ("Interpretation: route economics", 7.8, True, 3.48, 0.38),
+    ]
+    for marker, size, bold, width, height in specs:
+        s = text_shape(slide, contains=marker)
+        if s:
+            s.width = Inches(width)
+            s.height = Inches(height)
+            format_text(s, font_pt=size, bold=bold, valign=MSO_ANCHOR.MIDDLE, ml=3, mr=3, mt=1, mb=1)
+
+    src = text_shape(slide, contains="Source: NITI Aayog/WRI India")
+    if src:
+        format_text(src, font_pt=5.8, line_spacing=0.95)
+    counts["state_slide"] += 1
+
+
+def patch_tco_slide(slide, counts):
+    if text_shape(slide, exact="05 / FLEET ECONOMICS") is None:
+        return
+
+    headline = text_shape(slide, contains="Under the base assumptions")
+    if headline:
+        headline.height = Inches(0.66)
+        format_text(headline, font_pt=18.5, bold=True, ml=1, mr=1, mt=0, mb=0)
+
+    subtitle = text_shape(slide, contains="Illustrative five-year Ace Pro ownership model")
+    if subtitle:
+        format_text(subtitle, font_pt=8.5, ml=1, mr=1, mt=0, mb=0)
+
+    for marker, size, bold, h in [
+        ("Verified vehicle inputs", 9.4, True, 0.24),
+        ("EV ₹688,779", 7.7, False, 0.74),
+        ("Exposed assumptions", 9.4, True, 0.24),
+        ("300 days/year", 7.4, False, 0.94),
+        ("Base proxy uses 110 km midpoint", 7.0, False, 0.31),
+    ]:
+        s = text_shape(slide, contains=marker)
+        if s:
+            s.height = Inches(h)
+            format_text(s, font_pt=size, bold=bold, valign=MSO_ANCHOR.MIDDLE, ml=3, mr=3, mt=1, mb=1)
+
+    crossover = text_shape(slide, contains="Revised base-case crossover")
+    if crossover:
+        crossover.top = Inches(5.48)
+        crossover.width = Inches(2.95)
+        format_text(crossover, font_pt=7.3, bold=True, ml=1, mr=1, mt=0, mb=0)
+
+    source = text_shape(slide, contains="Sources: Tata Motors FleetVerse")
+    if source:
+        source.top = Inches(6.84)
+        source.height = Inches(0.38)
+        format_text(source, font_pt=5.3, line_spacing=0.94, ml=1, mr=1, mt=0, mb=0)
+    counts["tco_slide"] += 1
+
+
+def patch_value_pool_slide(slide, counts):
+    if text_shape(slide, exact="08 / VALUE-POOL MIGRATION") is None:
+        return
+    body_markers = [
+        "Software, managed charging",
+        "Data history, charging integration",
+        "Charging infrastructure and battery ownership",
+        "The winning ecosystem may be orchestrated",
+    ]
+    title_markers = [
+        "Recurring revenue potential", "Switching-cost potential",
+        "Capital intensity", "Partnership logic",
+    ]
+    for marker in title_markers:
+        s = text_shape(slide, contains=marker)
+        if s:
+            format_text(s, font_pt=9.2, bold=True, valign=MSO_ANCHOR.MIDDLE, ml=2, mr=2, mt=0, mb=0)
+    for marker in body_markers:
+        s = text_shape(slide, contains=marker)
+        if s:
+            s.width = Inches(2.42)
+            s.height = Inches(0.72)
+            format_text(s, font_pt=7.9, valign=MSO_ANCHOR.MIDDLE, ml=3, mr=3, mt=2, mb=2)
+    src = text_shape(slide, contains="Sources: Frost & Sullivan")
+    if src:
+        format_text(src, font_pt=5.3, line_spacing=0.94)
+    counts["value_pool_slide"] += 1
+
+
+def patch_priority_slide(slide, counts):
+    if text_shape(slide, exact="09 / GROWTH OPPORTUNITY PRIORITISATION") is None:
+        return
+
+    for marker in ["Priority 1 — Fleet electrification bundles", "Priority 2 — Fleet software / telematics"]:
+        s = text_shape(slide, contains=marker)
+        if s:
+            format_text(s, font_pt=9.1, bold=True, valign=MSO_ANCHOR.MIDDLE, ml=2, mr=2, mt=0, mb=0)
+
+    for marker in [
+        "Vehicle + finance + charging design",
+        "Lower capital intensity, powertrain-agnostic scalability",
+    ]:
+        s = text_shape(slide, contains=marker)
+        if s:
+            s.width = Inches(3.18)
+            s.height = Inches(0.76)
+            format_text(s, font_pt=7.9, valign=MSO_ANCHOR.MIDDLE, ml=3, mr=3, mt=2, mb=2)
+
+    # Keep plotted labels compact and inside the chart.
+    for marker in [
+        "Fleet electrification bundles", "Fleet software & telematics",
+        "Depot / managed charging", "Battery lifecycle analytics",
+        "High-power truck charging",
+    ]:
+        s = text_shape(slide, exact=marker)
+        if s:
+            format_text(s, font_pt=7.2, bold=True, ml=1, mr=1, mt=0, mb=0)
+
+    evidence = text_shape(slide, contains="Evidence basis: Frost & Sullivan")
+    if evidence:
+        replacement = norm(evidence.text).replace(
+            "candidate judgement", "MPD judgement"
+        )
+        set_text(evidence, replacement, font_pt=5.3, bold=False)
+        evidence.height = Inches(0.30)
+
+    guard = text_shape(slide, contains="Methodological guardrail")
+    if guard:
+        format_text(guard, font_pt=6.2, bold=True, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE, ml=1, mr=1, mt=0, mb=0)
+
+    counts["priority_slide"] += 1
+
+
+def patch_90_day_slide(slide, counts):
+    if text_shape(slide, exact="12 / CONTRIBUTION IN ROLE") is None:
+        return
+
+    # Centre the coloured day-range chips horizontally within each large card.
+    columns = [
+        ("0-30 DAYS", "LEARN & CALIBRATE"),
+        ("31-60 DAYS", "PRODUCE"),
+        ("61-90 DAYS", "IMPROVE"),
+        ("LONGER TERM", "OWN MODULES END-TO-END"),
+    ]
+    for chip_text, body_title in columns:
+        chip = text_shape(slide, exact=chip_text)
+        body = text_shape(slide, exact=body_title)
+        if chip and body:
+            chip.left = int(body.left + (body.width - chip.width) / 2)
+            chip.top = Inches(2.30)
+            format_text(chip, font_pt=7.0, bold=True, align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0)
+    counts["roadmap_slide"] += 1
+
+
+def patch_claim_reconciliation(slide, counts):
+    if text_shape(slide, exact="A15 / CLAIM RECONCILIATION") is None:
+        return
+
+    title = text_shape(slide, contains="Six challenged figures")
+    if title:
+        set_text(
+            title,
+            "Six figures I pressure-tested: what I corrected, retained and clarified",
+            font_pt=19.5, bold=True,
+        )
+        title.height = Inches(0.62)
+
+    subtitle = text_shape(slide, contains="The standard is source-specific precision")
+    if subtitle:
+        set_text(
+            subtitle,
+            "My rule is source-specific precision: I change a figure only when the evidence demands it; otherwise I make the scope and denominator explicit.",
+            font_pt=8.2, bold=False,
+        )
+        subtitle.height = Inches(0.42)
+
+    replacements = {
+        "IEA: almost 70% of India 3W sales":
+            "My read: IEA reports almost 70% of India’s 3W sales as electric in 2025, while FADA’s CY2025 retail data shows 60.91%. I treat both as valid because the datasets and denominators differ.",
+        "Deck treatment: Keep IEA ~70%":
+            "How I use it: cite ~70% only as the IEA measure and show FADA’s 60.91% retail figure alongside it.",
+        "IEA: 165k electric cars":
+            "My check: IEA records about 165k electric cars and nearly 4% of 2025 car sales; FADA’s CY2025 passenger-vehicle EV share is 3.95%.",
+        "Deck treatment: ~4% is supported":
+            "How I use it: retain ~4% as the rounded share because both sources converge on that level.",
+        "Eligible e-trucks are N2/N3":
+            "My scope check: PM E-DRIVE’s e-truck incentive applies to N2/N3 vehicles above 3.5 t GVW; the support is the lowest of ₹5,000/kWh, 10% of ex-factory price or the GVW-linked cap.",
+        "Deck treatment: Do not apply this incentive":
+            "How I use it: I exclude this incentive from the Ace Pro EV TCO because its 1.61 t GVW falls outside that eligibility scope.",
+        "Old 0.093 kWh/km":
+            "My recalculation: 14.4/155 gives the old certified-range proxy of 0.093 kWh/km. Using a 110 km real-world midpoint and 15% charging losses gives ≈0.154 kWh/km on a grid-side basis.",
+        "Deck treatment: Use real-world range midpoint":
+            "How I use it: model the real-world midpoint, then stress-test 100–120 km range and 10–15% charging losses.",
+        "NITI IEMI: Delhi 41.1":
+            "My denominator check: NITI/WRI IEMI reports Delhi at 41.1 and Assam at 6.6 operational public charging points per lakh total registered vehicles, using the stated 15-year vehicle base.",
+        "Deck treatment: Do not describe this as chargers per lakh EVs":
+            "How I use it: describe this strictly as chargers per lakh total registered vehicles — not chargers per lakh EVs.",
+        "₹688,779 EV vs ₹442,654 petrol":
+            "My arithmetic check: ₹688,779 for the EV versus ₹442,654 for the petrol reference variant implies a 55.6% acquisition premium.",
+        "Deck treatment: Valid arithmetic":
+            "How I use it: retain the arithmetic, but label both prices as variant-level ex-showroom references rather than a universal market premium.",
+    }
+
+    for marker, replacement in replacements.items():
+        s = text_shape(slide, contains=marker)
+        if s:
+            set_text(s, replacement, font_pt=6.9, bold=False)
+            s.height = Inches(0.40 if replacement.startswith(("My read", "My check", "My scope", "My recalculation", "My denominator", "My arithmetic")) else 0.32)
+
+    footer = text_shape(slide, contains="Primary sources:")
+    if footer:
+        format_text(footer, font_pt=5.2, line_spacing=0.94)
+    counts["claim_slide"] += 1
 
 
 def main():
@@ -112,126 +477,56 @@ def main():
         "candidate_to_mpd": 0,
         "candidate_defence_removed": 0,
         "tco_slide_rebuilt": 0,
+        "state_slide": 0,
+        "tco_slide": 0,
+        "value_pool_slide": 0,
+        "priority_slide": 0,
+        "roadmap_slide": 0,
+        "claim_slide": 0,
     }
 
     for slide in prs.slides:
         text_shapes = [s for s in slide.shapes if getattr(s, "has_text_frame", False)]
         slide_text = "\n".join(norm(s.text) for s in text_shapes)
 
-        # Pic 1: Source URLs — remove any duplicate body boxes, then make the kept box fit.
-        if "Source URLs" in slide_text:
-            bodies = []
-            for s in text_shapes:
-                t = norm(s.text)
-                if any(m in t for m in SOURCE_URL_MARKERS) and "Source URLs" not in t:
-                    bodies.append(s)
-            if bodies:
-                keeper = max(bodies, key=lambda s: int(s.width) * int(s.height))
-                for s in bodies:
-                    if s is not keeper:
-                        delete_shape(s)
-                normalize_source_box(keeper)
-                # Keep existing left/width but give the text more vertical room.
-                max_h = int(prs.slide_height - keeper.top - Inches(0.30))
-                if max_h > keeper.height:
-                    keeper.height = max_h
-                counts["source_url_boxes"] += 1
+        patch_legacy_cleanup(slide, slide_text, prs, counts)
+        patch_state_slide(slide, counts)
+        patch_tco_slide(slide, counts)
+        patch_value_pool_slide(slide, counts)
+        patch_priority_slide(slide, counts)
+        patch_90_day_slide(slide, counts)
+        patch_claim_reconciliation(slide, counts)
 
-        # Pic 2, 3 and 4: wording/source cleanup.
-        # Work from a fresh list because some shapes may have been deleted above.
-        for shape in list(slide.shapes):
-            if not getattr(shape, "has_text_frame", False):
-                continue
-            original = norm(shape.text)
-            if not original:
-                continue
-
-            # Pic 4: remove the entire source sentence.
-            if original in {
-                "Sources: Candidate interview defence",
-                "Sources: Candidate interview defense",
-                "Sources: MPD interview defence",
-                "Sources: MPD interview defense",
-            }:
-                delete_shape(shape)
-                counts["candidate_defence_removed"] += 1
-                continue
-
-            # Pic 2: remove the label and the first sentence, retaining only the useful sentence.
-            if original == "Interview defence" or original == "Interview defense":
-                delete_shape(shape)
-                counts["interview_heading_removed"] += 1
-                continue
-            if "If challenged on any input, change it." in original:
-                shape.text_frame.clear()
-                p = shape.text_frame.paragraphs[0]
-                p.text = QUALITY_SENTENCE
-                p.space_before = Pt(0)
-                p.space_after = Pt(0)
-                p.line_spacing = 1.0
-                for r in p.runs:
-                    r.font.size = Pt(10)
-                    r.font.bold = True
-                shape.text_frame.word_wrap = True
-                counts["interview_sentence_trimmed"] += 1
-                continue
-
-            # Pic 3: all source references should use MPD instead of Candidate.
-            if original.startswith("Sources:") and "Candidate" in original:
-                new_text = shape.text.replace("Candidate", "MPD")
-                for p in shape.text_frame.paragraphs:
-                    for r in p.runs:
-                        if "Candidate" in r.text:
-                            r.text = r.text.replace("Candidate", "MPD")
-                # If replacement through runs did not preserve the whole string, fall back.
-                if "Candidate" in norm(shape.text):
-                    shape.text = new_text
-                counts["candidate_to_mpd"] += 1
-
-        # Pic 5: rebuild the overlapped TCO challenge list as one clean text box.
-        if "Hardest TCO challenge sequence" in slide_text:
-            title = None
-            body_candidates = []
-            for s in list(slide.shapes):
-                if not getattr(s, "has_text_frame", False):
-                    continue
-                t = norm(s.text)
-                if "Hardest TCO challenge sequence" in t:
-                    title = s
-                elif any(m in t for m in TCO_MARKERS):
-                    body_candidates.append(s)
-
-            if body_candidates:
-                keeper = max(body_candidates, key=lambda s: int(s.width) * int(s.height))
-                for s in body_candidates:
-                    if s is not keeper:
-                        delete_shape(s)
-
-                # Place the body directly below the title and use the remaining slide height.
-                if title is not None:
-                    keeper.top = int(title.top + title.height + Inches(0.12))
-                keeper.height = int(prs.slide_height - keeper.top - Inches(0.45))
-                set_textbox_text(keeper, TCO_ITEMS, font_pt=8.8, bold=False)
-                counts["tco_slide_rebuilt"] += 1
-
-    required = [
-        "source_url_boxes",
-        "interview_sentence_trimmed",
-        "candidate_to_mpd",
-        "candidate_defence_removed",
-        "tco_slide_rebuilt",
-    ]
-    missing = [k for k in required if counts[k] == 0]
-    print("Patch counts:", counts)
+    # Verify the requested slides were found and the earlier wording remains clean.
+    expected = ["state_slide", "tco_slide", "value_pool_slide", "priority_slide", "roadmap_slide", "claim_slide"]
+    missing = [k for k in expected if counts[k] == 0]
     if missing:
-        raise RuntimeError("Expected deck elements were not found: " + ", ".join(missing))
+        raise RuntimeError("Expected target slides were not found: " + ", ".join(missing))
 
+    all_text = "\n".join(
+        norm(s.text)
+        for slide in prs.slides
+        for s in slide.shapes
+        if getattr(s, "has_text_frame", False)
+    )
+    forbidden = [
+        "If challenged on any input, change it.",
+        "Sources: Candidate interview defence",
+        "Sources: Candidate interview defense",
+        "candidate judgement",
+    ]
+    still_present = [x for x in forbidden if x in all_text]
+    if still_present:
+        raise RuntimeError("Forbidden legacy wording remains: " + repr(still_present))
+
+    print("Patch counts:", counts)
     prs.save(OUT_PPTX)
 
-    # Replace PPTX asset.
     PPT_B64.write_text(base64.b64encode(OUT_PPTX.read_bytes()).decode("ascii"), encoding="utf-8")
 
-    # Regenerate the public PDF from the corrected PPTX so the web viewer and download stay in sync.
+    # Recreate the public PDF so portfolio viewer and downloadable PPT stay in sync.
+    for old in PDF_OUT_DIR.glob("*.pdf"):
+        old.unlink()
     subprocess.run(
         [
             "libreoffice", "--headless",
@@ -241,14 +536,10 @@ def main():
         ],
         check=True,
     )
-    generated_pdf = PDF_OUT_DIR / "patched.pdf"
-    if not generated_pdf.exists():
-        pdfs = list(PDF_OUT_DIR.glob("*.pdf"))
-        if len(pdfs) != 1:
-            raise RuntimeError(f"Expected one converted PDF, found: {pdfs}")
-        generated_pdf = pdfs[0]
-
-    PDF_B64.write_text(base64.b64encode(generated_pdf.read_bytes()).decode("ascii"), encoding="utf-8")
+    pdfs = list(PDF_OUT_DIR.glob("*.pdf"))
+    if len(pdfs) != 1:
+        raise RuntimeError(f"Expected one converted PDF, found: {pdfs}")
+    PDF_B64.write_text(base64.b64encode(pdfs[0].read_bytes()).decode("ascii"), encoding="utf-8")
     print("Updated:", PPT_B64.relative_to(ROOT), PDF_B64.relative_to(ROOT))
 
 
