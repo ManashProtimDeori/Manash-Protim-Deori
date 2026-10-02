@@ -38,3 +38,5 @@ for j, s in enumerate(slide.shapes):
     if getattr(s, "has_text_frame", False):
         t = " ".join((s.text or "").replace("\n"," ").split())
     print(f"[{j}] type={s.shape_type} x={s.left/914400:.3f} y={s.top/914400:.3f} w={s.width/914400:.3f} h={s.height/914400:.3f} text={t}")
+
+# final-verification-run
