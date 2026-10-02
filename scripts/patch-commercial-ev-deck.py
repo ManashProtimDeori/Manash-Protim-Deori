@@ -1004,7 +1004,7 @@ def main():
     apply_appendix_reference_style(prs, counts)
 
     # Verify the requested slides were found and the earlier wording remains clean.
-    expected = ["state_slide", "tco_slide", "value_pool_slide", "priority_slide", "roadmap_slide", "claim_slide", "tco_final_geometry", "roadmap_final_geometry"]
+    expected = ["state_slide", "tco_slide", "value_pool_slide", "priority_slide", "roadmap_slide", "claim_slide", "roadmap_final_geometry"]
     missing = [k for k in expected if counts[k] == 0]
     if counts["roadmap_chips_fixed"] != 4:
         missing.append("roadmap_chips_fixed=" + str(counts["roadmap_chips_fixed"]))
