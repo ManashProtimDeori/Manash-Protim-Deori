@@ -709,7 +709,7 @@ def finalize_tco_challenge_card(slide, counts):
     counts["tco_final_geometry"] += 1
 
 
-def _pill_background_candidates(slide, text_box):
+def _pill_background_candidates(slide, text_box, min_width_in=0.80, max_width_in=2.60):
     """Return the small empty auto-shapes directly behind a pill label."""
     tx = text_box.left + text_box.width / 2
     ty = text_box.top + text_box.height / 2
@@ -719,7 +719,7 @@ def _pill_background_candidates(slide, text_box):
             continue
         if getattr(s, "has_text_frame", False) and norm(s.text):
             continue
-        if not (Inches(0.80) <= s.width <= Inches(2.60)):
+        if not (Inches(min_width_in) <= s.width <= Inches(max_width_in)):
             continue
         if not (Inches(0.22) <= s.height <= Inches(0.75)):
             continue
@@ -766,10 +766,27 @@ def finalize_kpi_pills(slide, counts):
     if not kpis:
         return
 
-    # 7.2 pt fits the longest KPI string in the existing pill width while
-    # remaining clearly readable and identical across all three bars.
+    # Use one font size across all three. Also make the text box occupy
+    # the coloured pill itself (rather than the much shorter legacy text box),
+    # which provides identical vertical centring and eliminates clipping.
     for s in kpis:
-        _style_single_line_pill_text(s, 7.2)
+        backgrounds = _pill_background_candidates(
+            slide, s, min_width_in=2.40, max_width_in=4.80
+        )
+        if backgrounds:
+            front = backgrounds[0]
+            if len(backgrounds) > 1:
+                front = min(backgrounds[:2], key=lambda bg: (bg.top, bg.left))
+            s.left = int(front.left + Inches(0.06))
+            s.top = int(front.top + Inches(0.02))
+            s.width = int(front.width - Inches(0.12))
+            s.height = int(front.height - Inches(0.04))
+        else:
+            centre_y = s.top + s.height / 2
+            s.height = Inches(0.32)
+            s.top = int(centre_y - s.height / 2)
+
+        _style_single_line_pill_text(s, 7.0)
 
     counts["kpi_pills_styled"] += len(kpis)
 
