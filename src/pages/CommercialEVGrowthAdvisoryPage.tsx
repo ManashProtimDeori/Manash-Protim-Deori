@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { Download, FileText, Presentation, Database, ShieldCheck, ArrowUpRight, ExternalLink } from 'lucide-react';
 import './CommercialEVGrowthAdvisoryPage.css';
@@ -8,6 +7,7 @@ const ASSET_ROOT = '/case-studies/commercial-ev-growth-advisory';
 const PDF_FILE = ASSET_ROOT + '/Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pdf';
 const PPT_FILE = ASSET_ROOT + '/Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pptx';
 const MODEL_FILE = ASSET_ROOT + '/Manash-Protim-Deori-Commercial-EV-Model.xlsx';
+const DEFENCE_FILE = ASSET_ROOT + '/Commercial-EV-Case-Interview-Defence.pdf';
 
 const sources = [
   { label: 'IEA · Global EV Outlook 2026', href: 'https://www.iea.org/reports/global-ev-outlook-2026/trends-in-other-ev-modes' },
@@ -172,14 +172,14 @@ export const CommercialEVGrowthAdvisoryPage: React.FC = () => {
           </a>
 
           {isOwner && (
-            <Link className="ev-resource ev-owner-resource" to="/work/india-commercial-ev-growth-advisory/interview-defence">
+            <a className="ev-resource ev-owner-resource" href={DEFENCE_FILE} download>
               <ShieldCheck size={22}/>
               <div>
                 <strong>Private interview defence guide</strong>
-                <span>Owner-only workspace · toughest questions · concise defences · evidence boundaries</span>
+                <span>Visible in the portfolio only when you are signed in as the owner</span>
               </div>
               <ArrowUpRight size={18}/>
-            </Link>
+            </a>
           )}
         </div>
       </section>
