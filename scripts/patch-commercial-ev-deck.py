@@ -8,6 +8,7 @@ import subprocess
 from pathlib import Path
 
 from pptx import Presentation
+from pptx.dml.color import RGBColor
 from pptx.enum.text import MSO_AUTO_SIZE, MSO_ANCHOR, PP_ALIGN
 from pptx.util import Inches, Pt
 
@@ -616,65 +617,95 @@ def _find_card_around(slide, anchor, min_width=4.0, max_height=2.4):
     return min(candidates, key=lambda s: int(s.width) * int(s.height))
 
 
+def _shape_center_inside(inner, outer, tol=0):
+    cx = inner.left + inner.width / 2
+    cy = inner.top + inner.height / 2
+    return (
+        outer.left - tol <= cx <= outer.left + outer.width + tol
+        and outer.top - tol <= cy <= outer.top + outer.height + tol
+    )
+
+
+def _find_enclosing_card(slide, anchor, min_width=2.0, min_height=0.8, max_height=5.0):
+    candidates = []
+    tol = int(Inches(0.10))
+    for s in slide.shapes:
+        if s is anchor or s.shape_type != 1:
+            continue
+        if s.width < Inches(min_width) or s.height < Inches(min_height) or s.height > Inches(max_height):
+            continue
+        if not _shape_center_inside(anchor, s, tol=tol):
+            continue
+        candidates.append(s)
+    if not candidates:
+        return None
+    return min(candidates, key=lambda s: int(s.width) * int(s.height))
+
+
 def finalize_tco_challenge_card(slide, counts):
     title = text_shape(slide, contains="Hardest TCO challenge sequence")
     if title is None:
         return
 
-    card = _find_card_around(slide, title, min_width=5.0, max_height=2.2)
+    # The actual challenge card is ~4 inches wide. Earlier logic looked only
+    # for 5-inch+ containers, missed it, and left legacy text underneath.
+    card = _find_enclosing_card(slide, title, min_width=3.2, min_height=1.8, max_height=4.8)
     if card is None:
-        # Conservative fallback based on the existing title geometry.
-        card_left = max(Inches(0.45), title.left - Inches(0.10))
-        card_right = min(Inches(12.85), _shape_right(title) + Inches(0.10))
-        card_top = max(Inches(0.35), title.top - Inches(0.08))
-        card_bottom = min(Inches(6.95), title.top + Inches(1.35))
+        card_left = Inches(8.45)
+        card_right = Inches(12.55)
+        card_top = Inches(2.12)
+        card_bottom = Inches(6.25)
     else:
         card_left, card_right = card.left, _shape_right(card)
         card_top, card_bottom = card.top, _shape_bottom(card)
 
-    # Remove any remaining list text boxes from earlier versions.
+    # Delete EVERY text object geometrically inside the challenge card except
+    # the heading. This removes legacy lines such as financing APR and the
+    # older charging-loss line, not just strings that happen to match markers.
+    removed = 0
     for s in list(slide.shapes):
-        if not getattr(s, "has_text_frame", False) or s is title:
+        if s is title or not getattr(s, "has_text_frame", False):
             continue
-        t = norm(s.text)
-        if any(m in t for m in TCO_MARKERS) or any(item.split(". ", 1)[-1] in t for item in TCO_ITEMS):
+        if not norm(s.text):
+            continue
+        if (
+            s.left >= card_left - Inches(0.05)
+            and _shape_right(s) <= card_right + Inches(0.05)
+            and s.top >= card_top - Inches(0.05)
+            and _shape_bottom(s) <= card_bottom + Inches(0.05)
+        ):
             delete_shape(s)
+            removed += 1
 
-    # Keep title compact and clearly inside the card.
-    title.left = int(card_left + Inches(0.22))
-    title.width = int(card_right - card_left - Inches(0.44))
-    title.top = int(card_top + Inches(0.10))
-    title.height = Inches(0.28)
+    title.left = int(card_left + Inches(0.26))
+    title.width = int(card_right - card_left - Inches(0.52))
+    title.top = int(card_top + Inches(0.16))
+    title.height = Inches(0.30)
     format_text(
-        title, font_pt=9.1, bold=True, align=PP_ALIGN.LEFT,
+        title, font_pt=8.3, bold=True, align=PP_ALIGN.LEFT,
         valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0
     )
 
-    body_top = int(title.top + title.height + Inches(0.06))
-    body_bottom = int(card_bottom - Inches(0.12))
-    body_h = max(Inches(0.58), body_bottom - body_top)
-    inner_left = int(card_left + Inches(0.28))
-    inner_right = int(card_right - Inches(0.28))
-    gap = int(Inches(0.22))
-    col_w = int((inner_right - inner_left - gap) / 2)
+    body_left = int(card_left + Inches(0.28))
+    body_top = int(title.top + title.height + Inches(0.10))
+    body_w = int(card_right - card_left - Inches(0.56))
+    body_h = int(card_bottom - body_top - Inches(0.22))
+    body = slide.shapes.add_textbox(body_left, body_top, body_w, body_h)
+    set_textbox_lines(body, TCO_ITEMS, font_pt=6.8, bold=False)
+    tf = body.text_frame
+    tf.vertical_anchor = MSO_ANCHOR.TOP
+    tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+    tf.word_wrap = True
+    tf.margin_left = Pt(0)
+    tf.margin_right = Pt(0)
+    tf.margin_top = Pt(0)
+    tf.margin_bottom = Pt(0)
+    for p in tf.paragraphs:
+        p.space_before = Pt(0)
+        p.space_after = Pt(0.8)
+        p.line_spacing = 0.96
 
-    left_box = slide.shapes.add_textbox(inner_left, body_top, col_w, body_h)
-    right_box = slide.shapes.add_textbox(inner_left + col_w + gap, body_top, col_w, body_h)
-
-    for box, items in ((left_box, TCO_ITEMS[:4]), (right_box, TCO_ITEMS[4:])):
-        set_textbox_lines(box, items, font_pt=7.0, bold=False)
-        tf = box.text_frame
-        tf.vertical_anchor = MSO_ANCHOR.TOP
-        tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
-        tf.margin_left = Pt(0)
-        tf.margin_right = Pt(0)
-        tf.margin_top = Pt(0)
-        tf.margin_bottom = Pt(0)
-        for p in tf.paragraphs:
-            p.space_before = Pt(0)
-            p.space_after = Pt(0.6)
-            p.line_spacing = 0.96
-
+    counts["tco_legacy_inside_removed"] += removed
     counts["tco_final_geometry"] += 1
 
 
@@ -682,35 +713,209 @@ def finalize_roadmap_chips(slide, counts):
     if text_shape(slide, exact="12 / CONTRIBUTION IN ROLE") is None:
         return
 
-    specs = [
-        ("0-30 DAYS", "LEARN & CALIBRATE", 1.62),
-        ("31-60 DAYS", "PRODUCE", 1.62),
-        ("61-90 DAYS", "IMPROVE", 1.62),
-        ("LONGER TERM", "OWN MODULES END-TO-END", 1.82),
-    ]
-    for chip_text, body_title, chip_w in specs:
+    chip_texts = ["0-30 DAYS", "31-60 DAYS", "61-90 DAYS", "LONGER TERM"]
+    fixed = 0
+    for chip_text in chip_texts:
         chip = text_shape(slide, exact=chip_text)
-        body = text_shape(slide, exact=body_title)
-        if chip is None or body is None:
+        if chip is None:
             continue
 
-        chip.width = Inches(chip_w)
-        chip.height = Inches(0.40)
-        chip.left = int(body.left + (body.width - chip.width) / 2)
-        chip.top = Inches(2.28)
-        format_text(
-            chip, font_pt=7.0, bold=True, align=PP_ALIGN.CENTER,
-            valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0
-        )
-        chip.text_frame.word_wrap = False
-        chip.text_frame.auto_size = MSO_AUTO_SIZE.NONE
+        card = _find_enclosing_card(slide, chip, min_width=2.1, min_height=1.6, max_height=4.8)
+        if card is None:
+            # Fallback keeps the current card relationship but still fixes the
+            # chip text itself.
+            card_left = chip.left - Inches(0.75)
+            card_width = chip.width + Inches(1.50)
+            card_top = chip.top - Inches(0.18)
+        else:
+            card_left = card.left
+            card_width = card.width
+            card_top = card.top
 
+        desired_w = Inches(1.95 if chip_text == "LONGER TERM" else 1.78)
+        chip.width = min(int(card_width * 0.70), desired_w)
+        chip.height = Inches(0.40)
+        chip.left = int(card_left + (card_width - chip.width) / 2)
+        chip.top = int(card_top + Inches(0.18))
+
+        # Rebuild as one run, then force fit. This prevents "DAYS"/"TERM"
+        # from inheriting a different size and leaking outside the pill.
+        set_text(
+            chip, chip_text, font_pt=6.0, bold=True,
+            align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE
+        )
+        chip.text_frame.margin_left = Pt(1)
+        chip.text_frame.margin_right = Pt(1)
+        chip.text_frame.margin_top = Pt(0)
+        chip.text_frame.margin_bottom = Pt(0)
+        chip.text_frame.word_wrap = False
+        chip.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+        for p in chip.text_frame.paragraphs:
+            for r in p.runs:
+                r.font.color.rgb = RGBColor(255, 255, 255)
+        fixed += 1
+
+    counts["roadmap_chips_fixed"] += fixed
     counts["roadmap_final_geometry"] += 1
 
 
+def cleanup_a10_orphan_and_raise_ledger(slide, counts):
+    if text_shape(slide, exact="A10 / TCO CALCULATION LEDGER") is None:
+        return
+
+    # A10 contains a decorative 7.3 x 1.0 pair at y≈2.15 with no text or
+    # embedded content. It is an orphan from an earlier summary block.
+    orphan_shapes = []
+    for s in list(slide.shapes):
+        t = norm(s.text) if getattr(s, "has_text_frame", False) else ""
+        if (
+            not t
+            and s.shape_type == 1
+            and s.left < Inches(1.0)
+            and Inches(2.00) <= s.top <= Inches(2.35)
+            and Inches(6.8) <= s.width <= Inches(7.6)
+            and Inches(0.85) <= s.height <= Inches(1.15)
+        ):
+            orphan_shapes.append(s)
+
+    if not orphan_shapes:
+        return
+
+    for s in orphan_shapes:
+        delete_shape(s)
+
+    # Pull the actual ledger up into the vacated area. Move only the left-side
+    # ledger card and its row text; the right-side challenge card stays put.
+    delta = -Inches(1.20)
+    moved = 0
+    for s in slide.shapes:
+        if (
+            s.left < Inches(8.15)
+            and Inches(3.30) <= s.top <= Inches(6.05)
+            and not (getattr(s, "has_text_frame", False) and norm(s.text).startswith("Verified inputs:"))
+        ):
+            s.top = int(s.top + delta)
+            moved += 1
+
+    counts["a10_orphan_removed"] += len(orphan_shapes)
+    counts["a10_ledger_shapes_raised"] += moved
+
+
+APPENDIX_BADGES = {
+    "HIGH", "MED-HIGH", "MEDIUM", "LOW", "PASS",
+    "CLARIFIED", "RETAINED", "CORRECTED",
+}
+
+
+def _appendix_label(slide):
+    for s in slide.shapes:
+        if not getattr(s, "has_text_frame", False):
+            continue
+        t = norm(s.text)
+        if re.match(r"^A\d{1,2}\s*/", t):
+            return t
+    return None
+
+
+def _reference_appendix_style(prs):
+    ref = None
+    for slide in prs.slides:
+        s = text_shape(slide, contains="PM E-DRIVE e-trucks: N2/N3 only")
+        if s is None:
+            continue
+        for p in s.text_frame.paragraphs:
+            for r in p.runs:
+                if not r.text.strip():
+                    continue
+                size = r.font.size.pt if r.font.size is not None else 8.0
+                rgb = None
+                theme = None
+                try:
+                    rgb = r.font.color.rgb
+                except Exception:
+                    rgb = None
+                try:
+                    theme = r.font.color.theme_color
+                except Exception:
+                    theme = None
+                ref = (size, rgb, theme)
+                break
+            if ref:
+                break
+        if ref:
+            break
+    return ref or (8.0, RGBColor(25, 32, 38), None)
+
+
+def _apply_font_style_to_text_frame(tf, size_pt, rgb, theme, apply_color=True):
+    tf.word_wrap = True
+    for p in tf.paragraphs:
+        p.space_before = Pt(0)
+        p.space_after = Pt(0)
+        for r in p.runs:
+            r.font.size = Pt(size_pt)
+            if apply_color:
+                if rgb is not None:
+                    r.font.color.rgb = rgb
+                elif theme is not None:
+                    r.font.color.theme_color = theme
+
+
+def apply_appendix_reference_style(prs, counts):
+    size_pt, rgb, theme = _reference_appendix_style(prs)
+    styled_boxes = 0
+    styled_cells = 0
+
+    for slide in prs.slides:
+        label = _appendix_label(slide)
+        if not label:
+            continue
+
+        for shape in slide.shapes:
+            # Real PowerPoint tables.
+            if getattr(shape, "has_table", False):
+                for row in shape.table.rows:
+                    for cell in row.cells:
+                        _apply_font_style_to_text_frame(
+                            cell.text_frame, size_pt, rgb, theme, apply_color=True
+                        )
+                        styled_cells += 1
+                continue
+
+            if not getattr(shape, "has_text_frame", False):
+                continue
+
+            t = norm(shape.text)
+            if not t:
+                continue
+
+            # Keep slide-level hierarchy and source/footer microtype intact.
+            if shape.top < Inches(1.90):
+                continue
+            if shape.top > Inches(6.68):
+                continue
+            if re.match(r"^A\d{1,2}\s*/", t):
+                continue
+            if t.startswith(("Sources:", "Source:", "Evidence:", "Source hierarchy:", "Primary sources:")):
+                continue
+
+            # Coloured status chips must retain their white/contrast colour,
+            # but use the same reference size.
+            apply_color = t.upper() not in APPENDIX_BADGES
+            _apply_font_style_to_text_frame(
+                shape.text_frame, size_pt, rgb, theme, apply_color=apply_color
+            )
+            styled_boxes += 1
+
+    counts["appendix_boxes_styled"] += styled_boxes
+    counts["appendix_table_cells_styled"] += styled_cells
+    counts["appendix_reference_font_pt"] = round(size_pt, 2)
+
+
 def finalize_problem_geometry(slide, counts):
-    # These are deliberately last: the global prominence pass must not
-    # re-enlarge or reflow these tightly constrained objects.
+    # Deliberately last within each slide: global prominence must not reflow
+    # these tightly constrained objects.
+    cleanup_a10_orphan_and_raise_ledger(slide, counts)
     finalize_tco_challenge_card(slide, counts)
     finalize_roadmap_chips(slide, counts)
 
@@ -744,22 +949,6 @@ def validate_text_layout(prs):
     else:
         print("Text-layout diagnostics: no obvious overflow/off-canvas risks.")
 
-def print_appendix_diagnostics(prs):
-    print("APPENDIX-DIAGNOSTICS-BEGIN")
-    for idx, slide in enumerate(prs.slides, start=1):
-        labels = [norm(s.text) for s in slide.shapes if getattr(s, "has_text_frame", False) and norm(s.text)]
-        appendix_labels = [t for t in labels if re.match(r"^A\d{1,2}\s*/", t)]
-        if not appendix_labels:
-            continue
-        print(f"APPENDIX-SLIDE {idx}: {appendix_labels[0]}")
-        for si, s in enumerate(slide.shapes):
-            t = norm(s.text) if getattr(s, "has_text_frame", False) else ""
-            has_table = bool(getattr(s, "has_table", False))
-            if t or has_table or (s.width > Inches(5.0) and s.height > Inches(0.45)):
-                print(f"  shape={si} type={s.shape_type} x={s.left/Inches(1):.2f} y={s.top/Inches(1):.2f} w={s.width/Inches(1):.2f} h={s.height/Inches(1):.2f} table={has_table} text={t[:180]!r}")
-    print("APPENDIX-DIAGNOSTICS-END")
-
-
 def main():
     WORK.mkdir(exist_ok=True)
     PDF_OUT_DIR.mkdir(exist_ok=True)
@@ -768,7 +957,6 @@ def main():
     PPTX.write_bytes(raw)
 
     prs = Presentation(PPTX)
-    print_appendix_diagnostics(prs)
     counts = {
         "source_url_boxes": 0,
         "interview_heading_removed": 0,
@@ -786,6 +974,13 @@ def main():
         "global_autofit": 0,
         "tco_final_geometry": 0,
         "roadmap_final_geometry": 0,
+        "roadmap_chips_fixed": 0,
+        "tco_legacy_inside_removed": 0,
+        "a10_orphan_removed": 0,
+        "a10_ledger_shapes_raised": 0,
+        "appendix_boxes_styled": 0,
+        "appendix_table_cells_styled": 0,
+        "appendix_reference_font_pt": 0,
     }
 
     for slide in prs.slides:
@@ -802,10 +997,9 @@ def main():
         patch_global_text_layout(slide, prs, counts)
         finalize_problem_geometry(slide, counts)
 
-    # Verify the requested slides were found and the earlier wording remains clean.
+    # Normalize appendix table/box typography to the A13 e-truck reference box.\n    apply_appendix_reference_style(prs, counts)\n\n    # Verify the requested slides were found and the earlier wording remains clean.
     expected = ["state_slide", "tco_slide", "value_pool_slide", "priority_slide", "roadmap_slide", "claim_slide", "tco_final_geometry", "roadmap_final_geometry"]
-    missing = [k for k in expected if counts[k] == 0]
-    if missing:
+    missing = [k for k in expected if counts[k] == 0]\n    if counts["roadmap_chips_fixed"] != 4:\n        missing.append(f"roadmap_chips_fixed={counts[\\"roadmap_chips_fixed\\"]}")\n    if counts["appendix_boxes_styled"] == 0:\n        missing.append("appendix_boxes_styled")\n    if missing:
         raise RuntimeError("Expected target slides were not found: " + ", ".join(missing))
 
     all_text = "\n".join(
