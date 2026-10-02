@@ -997,7 +997,10 @@ def main():
         patch_global_text_layout(slide, prs, counts)
         finalize_problem_geometry(slide, counts)
 
-    # Normalize appendix table/box typography to the A13 e-truck reference box.\n    apply_appendix_reference_style(prs, counts)\n\n    # Verify the requested slides were found and the earlier wording remains clean.
+    # Normalize appendix table/box typography to the A13 e-truck reference box.
+    apply_appendix_reference_style(prs, counts)
+
+    # Verify the requested slides were found and the earlier wording remains clean.
     expected = ["state_slide", "tco_slide", "value_pool_slide", "priority_slide", "roadmap_slide", "claim_slide", "tco_final_geometry", "roadmap_final_geometry"]
     missing = [k for k in expected if counts[k] == 0]
     if counts["roadmap_chips_fixed"] != 4:
