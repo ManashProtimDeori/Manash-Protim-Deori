@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import base64
+import math
+import re
 import subprocess
 from pathlib import Path
 
@@ -329,7 +331,7 @@ def patch_value_pool_slide(slide, counts):
         if s:
             s.width = Inches(2.42)
             s.height = Inches(0.72)
-            format_text(s, font_pt=7.9, valign=MSO_ANCHOR.MIDDLE, ml=3, mr=3, mt=2, mb=2)
+            format_text(s, font_pt=8.4, valign=MSO_ANCHOR.MIDDLE, ml=3, mr=3, mt=2, mb=2)
     src = text_shape(slide, contains="Sources: Frost & Sullivan")
     if src:
         format_text(src, font_pt=5.3, line_spacing=0.94)
@@ -363,7 +365,7 @@ def patch_priority_slide(slide, counts):
     ]:
         s = text_shape(slide, exact=marker)
         if s:
-            format_text(s, font_pt=7.2, bold=True, ml=1, mr=1, mt=0, mb=0)
+            format_text(s, font_pt=7.7, bold=True, ml=1, mr=1, mt=0, mb=0)
 
     evidence = text_shape(slide, contains="Evidence basis: Frost & Sullivan")
     if evidence:
@@ -462,6 +464,157 @@ def patch_claim_reconciliation(slide, counts):
     counts["claim_slide"] += 1
 
 
+
+SECTION_RE = re.compile(r"^(?:\d{2}|A\d{1,2})\s*/\s*")
+SOURCE_RE = re.compile(r"^(?:Source|Sources|Evidence basis|Primary sources):", re.I)
+
+
+def _run_sizes(shape):
+    sizes = []
+    for p in shape.text_frame.paragraphs:
+        for r in p.runs:
+            if r.font.size is not None:
+                sizes.append(r.font.size.pt)
+    return sizes
+
+
+def _set_min_font(shape, minimum_pt, maximum_pt=None):
+    """Raise undersized text while preserving intentionally larger emphasis."""
+    for p in shape.text_frame.paragraphs:
+        for r in p.runs:
+            current = r.font.size.pt if r.font.size is not None else minimum_pt
+            target = max(current, minimum_pt)
+            if maximum_pt is not None:
+                target = min(target, maximum_pt)
+            r.font.size = Pt(target)
+
+
+def _estimate_lines(text, width_pt, font_pt):
+    """Conservative line-count estimate used only for diagnostics."""
+    if not text:
+        return 0
+    chars_per_line = max(7, int(width_pt / max(3.0, font_pt * 0.52)))
+    lines = 0
+    for raw in text.splitlines() or [text]:
+        part = raw.strip()
+        lines += max(1, math.ceil(max(1, len(part)) / chars_per_line))
+    return lines
+
+
+def patch_global_text_layout(slide, prs, counts):
+    """
+    Deck-wide safety pass:
+    - keep every text box inside the canvas,
+    - remove excessive internal margins,
+    - make undersized copy proportionately more prominent,
+    - enable text-to-fit only where copy is dense enough to risk clipping,
+    - preserve large display type and tiny source hierarchy.
+    """
+    slide_w = int(prs.slide_width)
+    slide_h = int(prs.slide_height)
+    edge = int(Inches(0.08))
+
+    for shape in slide.shapes:
+        if not getattr(shape, "has_text_frame", False):
+            continue
+        text = norm(shape.text)
+        if not text:
+            continue
+
+        # Keep text boxes fully on-canvas. This addresses edge clipping caused
+        # by imported coordinates and by later edits that widened boxes.
+        if shape.left < edge:
+            shape.left = edge
+        if shape.top < edge:
+            shape.top = edge
+        if shape.left + shape.width > slide_w - edge:
+            shape.width = max(int(Inches(0.22)), slide_w - edge - shape.left)
+        if shape.top + shape.height > slide_h - edge:
+            shape.height = max(int(Inches(0.16)), slide_h - edge - shape.top)
+
+        tf = shape.text_frame
+        tf.word_wrap = True
+        tf.margin_left = min(tf.margin_left, Pt(3))
+        tf.margin_right = min(tf.margin_right, Pt(3))
+        tf.margin_top = min(tf.margin_top, Pt(2))
+        tf.margin_bottom = min(tf.margin_bottom, Pt(2))
+
+        sizes = _run_sizes(shape)
+        avg_size = sum(sizes) / len(sizes) if sizes else 9.0
+        is_source = bool(SOURCE_RE.match(text)) or "http://" in text or "https://" in text
+        is_section = bool(SECTION_RE.match(text))
+        is_title_zone = shape.top < Inches(1.75) and len(text) <= 150 and not is_section and not is_source
+        is_short_label = len(text) <= 42 and shape.height <= Inches(0.50) and not is_source
+
+        if is_source:
+            _set_min_font(shape, 5.5, 6.6)
+            for p in tf.paragraphs:
+                p.line_spacing = 0.94
+        elif is_section:
+            _set_min_font(shape, 7.2)
+        elif is_title_zone:
+            # Prominent but bounded; dense title copy can still shrink via
+            # TEXT_TO_FIT_SHAPE below if a specific slide needs it.
+            _set_min_font(shape, 18.0)
+        elif is_short_label:
+            _set_min_font(shape, 7.6)
+        else:
+            _set_min_font(shape, 8.1)
+
+        # Minimise paragraph spacing, a frequent cause of apparently "cut"
+        # final lines in PowerPoint/LibreOffice conversions.
+        for p in tf.paragraphs:
+            p.space_before = Pt(0)
+            p.space_after = Pt(0)
+
+        # Enable shrink-to-fit only for genuinely dense boxes. Sparse boxes
+        # keep NONE so their type remains as prominent as authored.
+        width_pt = max(1.0, shape.width / 12700)
+        height_pt = max(1.0, shape.height / 12700)
+        size_after = _run_sizes(shape)
+        avg_after = sum(size_after) / len(size_after) if size_after else avg_size
+        est_lines = _estimate_lines(shape.text, width_pt, avg_after)
+        est_need = est_lines * avg_after * 1.12 + 5
+        dense = est_need > height_pt * 0.93 or len(text) > 110 or len(tf.paragraphs) >= 4
+
+        if dense and not is_source:
+            tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+            counts["global_autofit"] += 1
+        else:
+            tf.auto_size = MSO_AUTO_SIZE.NONE
+
+        counts["global_text_boxes"] += 1
+
+
+def validate_text_layout(prs):
+    """Print conservative diagnostics so CI logs reveal remaining risk areas."""
+    warnings = []
+    for slide_no, slide in enumerate(prs.slides, start=1):
+        for shape in slide.shapes:
+            if not getattr(shape, "has_text_frame", False):
+                continue
+            text = norm(shape.text)
+            if not text:
+                continue
+            if shape.left < 0 or shape.top < 0 or shape.left + shape.width > prs.slide_width or shape.top + shape.height > prs.slide_height:
+                warnings.append(f"slide {slide_no}: off-canvas text box: {text[:70]}")
+                continue
+            sizes = _run_sizes(shape)
+            avg = sum(sizes) / len(sizes) if sizes else 9.0
+            width_pt = max(1.0, shape.width / 12700)
+            height_pt = max(1.0, shape.height / 12700)
+            need = _estimate_lines(shape.text, width_pt, avg) * avg * 1.12 + 5
+            if need > height_pt * 1.28 and shape.text_frame.auto_size != MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE:
+                warnings.append(f"slide {slide_no}: possible overflow: {text[:70]}")
+    if warnings:
+        print("Text-layout diagnostics:")
+        for warning in warnings[:40]:
+            print(" -", warning)
+        if len(warnings) > 40:
+            print(f" - ... {len(warnings) - 40} more")
+    else:
+        print("Text-layout diagnostics: no obvious overflow/off-canvas risks.")
+
 def main():
     WORK.mkdir(exist_ok=True)
     PDF_OUT_DIR.mkdir(exist_ok=True)
@@ -483,6 +636,8 @@ def main():
         "priority_slide": 0,
         "roadmap_slide": 0,
         "claim_slide": 0,
+        "global_text_boxes": 0,
+        "global_autofit": 0,
     }
 
     for slide in prs.slides:
@@ -496,6 +651,7 @@ def main():
         patch_priority_slide(slide, counts)
         patch_90_day_slide(slide, counts)
         patch_claim_reconciliation(slide, counts)
+        patch_global_text_layout(slide, prs, counts)
 
     # Verify the requested slides were found and the earlier wording remains clean.
     expected = ["state_slide", "tco_slide", "value_pool_slide", "priority_slide", "roadmap_slide", "claim_slide"]
@@ -519,6 +675,7 @@ def main():
     if still_present:
         raise RuntimeError("Forbidden legacy wording remains: " + repr(still_present))
 
+    validate_text_layout(prs)
     print("Patch counts:", counts)
     prs.save(OUT_PPTX)
 
