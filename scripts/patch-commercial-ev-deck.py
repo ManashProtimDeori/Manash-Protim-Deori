@@ -732,16 +732,19 @@ def finalize_roadmap_chips(slide, counts):
             card_width = card.width
             card_top = card.top
 
-        desired_w = Inches(1.95 if chip_text == "LONGER TERM" else 1.78)
-        chip.width = min(int(card_width * 0.70), desired_w)
-        chip.height = Inches(0.40)
+        # Give the phase label enough physical width that it can stay large
+        # and legible. The earlier auto-fit rule shrank the numerals to ~6 pt.
+        desired_w = Inches(2.20 if chip_text == "LONGER TERM" else 2.02)
+        chip.width = min(int(card_width * 0.78), desired_w)
+        chip.height = Inches(0.46)
         chip.left = int(card_left + (card_width - chip.width) / 2)
-        chip.top = int(card_top + Inches(0.18))
+        chip.top = int(card_top + Inches(0.16))
 
-        # Rebuild as one run, then force fit. This prevents "DAYS"/"TERM"
-        # from inheriting a different size and leaking outside the pill.
+        # Fixed-size text is intentional here: these are navigation labels,
+        # not body copy. The wider pills above provide the fit budget.
+        chip_font = 8.8 if chip_text == "LONGER TERM" else 9.2
         set_text(
-            chip, chip_text, font_pt=6.0, bold=True,
+            chip, chip_text, font_pt=chip_font, bold=True,
             align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE
         )
         chip.text_frame.margin_left = Pt(1)
@@ -749,7 +752,7 @@ def finalize_roadmap_chips(slide, counts):
         chip.text_frame.margin_top = Pt(0)
         chip.text_frame.margin_bottom = Pt(0)
         chip.text_frame.word_wrap = False
-        chip.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+        chip.text_frame.auto_size = MSO_AUTO_SIZE.NONE
         for p in chip.text_frame.paragraphs:
             for r in p.runs:
                 r.font.color.rgb = RGBColor(255, 255, 255)
