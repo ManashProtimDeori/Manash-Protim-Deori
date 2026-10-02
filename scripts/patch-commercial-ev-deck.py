@@ -709,53 +709,143 @@ def finalize_tco_challenge_card(slide, counts):
     counts["tco_final_geometry"] += 1
 
 
+def _pill_background_candidates(slide, text_box):
+    """Return the small empty auto-shapes directly behind a pill label."""
+    tx = text_box.left + text_box.width / 2
+    ty = text_box.top + text_box.height / 2
+    candidates = []
+    for s in slide.shapes:
+        if s is text_box or s.shape_type != 1:
+            continue
+        if getattr(s, "has_text_frame", False) and norm(s.text):
+            continue
+        if not (Inches(0.80) <= s.width <= Inches(2.60)):
+            continue
+        if not (Inches(0.22) <= s.height <= Inches(0.75)):
+            continue
+        sx = s.left + s.width / 2
+        sy = s.top + s.height / 2
+        dx = abs(sx - tx)
+        dy = abs(sy - ty)
+        if dx <= Inches(0.60) and dy <= Inches(0.38):
+            candidates.append((dx + dy, s))
+    return [s for _, s in sorted(candidates, key=lambda item: item[0])]
+
+
+def _style_single_line_pill_text(shape, font_pt):
+    tf = shape.text_frame
+    tf.word_wrap = False
+    tf.auto_size = MSO_AUTO_SIZE.NONE
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    tf.margin_left = Pt(1)
+    tf.margin_right = Pt(1)
+    tf.margin_top = Pt(0)
+    tf.margin_bottom = Pt(0)
+    for p in tf.paragraphs:
+        p.alignment = PP_ALIGN.CENTER
+        p.space_before = Pt(0)
+        p.space_after = Pt(0)
+        p.line_spacing = 1.0
+        for r in p.runs:
+            r.font.size = Pt(font_pt)
+            r.font.bold = True
+            r.font.color.rgb = RGBColor(255, 255, 255)
+
+
+def finalize_kpi_pills(slide, counts):
+    """
+    Make the three KPI bars use one proportional typographic system.
+    They are deliberately fixed-size rather than individually auto-fitted,
+    so no KPI appears visually weaker simply because its wording is longer.
+    """
+    kpis = [
+        s for s in slide.shapes
+        if getattr(s, "has_text_frame", False)
+        and norm(s.text).startswith("KPI:")
+    ]
+    if not kpis:
+        return
+
+    # 7.2 pt fits the longest KPI string in the existing pill width while
+    # remaining clearly readable and identical across all three bars.
+    for s in kpis:
+        _style_single_line_pill_text(s, 7.2)
+
+    counts["kpi_pills_styled"] += len(kpis)
+
+
 def finalize_roadmap_chips(slide, counts):
     if text_shape(slide, exact="12 / CONTRIBUTION IN ROLE") is None:
         return
 
-    chip_texts = ["0-30 DAYS", "31-60 DAYS", "61-90 DAYS", "LONGER TERM"]
+    chip_specs = [
+        ("0-30 DAYS", 1.72, 7.6),
+        ("31-60 DAYS", 1.72, 7.6),
+        ("61-90 DAYS", 1.72, 7.6),
+        ("LONGER TERM", 1.92, 7.2),
+    ]
     fixed = 0
-    for chip_text in chip_texts:
+
+    for chip_text, width_in, font_pt in chip_specs:
         chip = text_shape(slide, exact=chip_text)
         if chip is None:
             continue
 
+        # Locate the large card first, then centre the visible pill within it.
         card = _find_enclosing_card(slide, chip, min_width=2.1, min_height=1.6, max_height=4.8)
         if card is None:
-            # Fallback keeps the current card relationship but still fixes the
-            # chip text itself.
-            card_left = chip.left - Inches(0.75)
-            card_width = chip.width + Inches(1.50)
+            card_left = chip.left - Inches(0.70)
+            card_width = chip.width + Inches(1.40)
             card_top = chip.top - Inches(0.18)
         else:
             card_left = card.left
             card_width = card.width
             card_top = card.top
 
-        # Give the phase label enough physical width that it can stay large
-        # and legible. The earlier auto-fit rule shrank the numerals to ~6 pt.
-        desired_w = Inches(2.20 if chip_text == "LONGER TERM" else 2.02)
-        chip.width = min(int(card_width * 0.78), desired_w)
-        chip.height = Inches(0.46)
-        chip.left = int(card_left + (card_width - chip.width) / 2)
-        chip.top = int(card_top + Inches(0.16))
+        pill_w = min(Inches(width_in), int(card_width * 0.76))
+        pill_h = Inches(0.42)
+        pill_left = int(card_left + (card_width - pill_w) / 2)
+        pill_top = int(card_top + Inches(0.18))
 
-        # Fixed-size text is intentional here: these are navigation labels,
-        # not body copy. The wider pills above provide the fit budget.
-        chip_font = 8.8 if chip_text == "LONGER TERM" else 9.2
+        # The coloured pill and its drop shadow are separate empty shapes.
+        # Resize/reposition BOTH of them; previously only the text box moved,
+        # which is why DAYS/TERM appeared outside the coloured region.
+        backgrounds = _pill_background_candidates(slide, chip)
+        if backgrounds:
+            front = backgrounds[0]
+            # Use the top-left-most of the near-identical pair as foreground;
+            # the other is normally the small down/right shadow.
+            if len(backgrounds) > 1:
+                pair = backgrounds[:2]
+                front = min(pair, key=lambda s: (s.top, s.left))
+            old_left, old_top = front.left, front.top
+            front.left = pill_left
+            front.top = pill_top
+            front.width = pill_w
+            front.height = pill_h
+
+            for bg in backgrounds:
+                if bg is front:
+                    continue
+                dx = max(Inches(0.02), min(Inches(0.08), bg.left - old_left))
+                dy = max(Inches(0.02), min(Inches(0.08), bg.top - old_top))
+                bg.left = int(pill_left + dx)
+                bg.top = int(pill_top + dy)
+                bg.width = pill_w
+                bg.height = pill_h
+
+        # Rebuild the label as a single run and make the text box exactly the
+        # size of the visible pill. Fixed sizing prevents inherited run styles
+        # or PowerPoint/LibreOffice auto-fit from pushing DAYS/TERM outside.
         set_text(
-            chip, chip_text, font_pt=chip_font, bold=True,
+            chip, chip_text, font_pt=font_pt, bold=True,
             align=PP_ALIGN.CENTER, valign=MSO_ANCHOR.MIDDLE
         )
-        chip.text_frame.margin_left = Pt(1)
-        chip.text_frame.margin_right = Pt(1)
-        chip.text_frame.margin_top = Pt(0)
-        chip.text_frame.margin_bottom = Pt(0)
-        chip.text_frame.word_wrap = False
-        chip.text_frame.auto_size = MSO_AUTO_SIZE.NONE
-        for p in chip.text_frame.paragraphs:
-            for r in p.runs:
-                r.font.color.rgb = RGBColor(255, 255, 255)
+        chip.left = pill_left
+        chip.top = pill_top
+        chip.width = pill_w
+        chip.height = pill_h
+        _style_single_line_pill_text(chip, font_pt)
         fixed += 1
 
     counts["roadmap_chips_fixed"] += fixed
@@ -978,6 +1068,7 @@ def main():
         "tco_final_geometry": 0,
         "roadmap_final_geometry": 0,
         "roadmap_chips_fixed": 0,
+        "kpi_pills_styled": 0,
         "tco_legacy_inside_removed": 0,
         "a10_orphan_removed": 0,
         "a10_ledger_shapes_raised": 0,
@@ -998,6 +1089,7 @@ def main():
         patch_90_day_slide(slide, counts)
         patch_claim_reconciliation(slide, counts)
         patch_global_text_layout(slide, prs, counts)
+        finalize_kpi_pills(slide, counts)
         finalize_problem_geometry(slide, counts)
 
     # Normalize appendix table/box typography to the A13 e-truck reference box.
@@ -1008,6 +1100,8 @@ def main():
     missing = [k for k in expected if counts[k] == 0]
     if counts["roadmap_chips_fixed"] != 4:
         missing.append("roadmap_chips_fixed=" + str(counts["roadmap_chips_fixed"]))
+    if counts["kpi_pills_styled"] != 3:
+        missing.append("kpi_pills_styled=" + str(counts["kpi_pills_styled"]))
     if counts["appendix_boxes_styled"] == 0:
         missing.append("appendix_boxes_styled")
     if missing:
