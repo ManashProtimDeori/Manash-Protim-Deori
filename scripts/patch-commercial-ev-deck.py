@@ -26,10 +26,10 @@ QUALITY_SENTENCE = (
 )
 
 TCO_ITEMS = [
-    "1. Stress Tata real-world range across 100–120 km.",
-    "2. Stress charging losses from 10–15% rather than assume one efficiency.",
-    "3. Add a ₹50k charger / depot electrification cost.",
-    "4. Add lost-revenue hours from charging / queueing.",
+    "1. Stress real-world range: 100–120 km.",
+    "2. Stress charging loss: 10–15%.",
+    "3. Add ₹50k charger / depot capex.",
+    "4. Add charging / queueing lost-revenue hours.",
     "5. Stress residual value to zero.",
     "6. Add out-of-warranty battery-event downside.",
     "7. Stress fuel and electricity prices separately.",
@@ -211,14 +211,11 @@ def patch_legacy_cleanup(slide, slide_text, prs, counts):
                 body_candidates.append(s)
 
         if body_candidates:
-            keeper = max(body_candidates, key=lambda s: int(s.width) * int(s.height))
+            # Remove duplicate/legacy list bodies here. The final geometry pass
+            # rebuilds this card in two compact columns after the global
+            # typography pass, so the list can never spill into the table.
             for s in body_candidates:
-                if s is not keeper:
-                    delete_shape(s)
-            if title is not None:
-                keeper.top = int(title.top + title.height + Inches(0.12))
-            keeper.height = int(prs.slide_height - keeper.top - Inches(0.45))
-            set_textbox_lines(keeper, TCO_ITEMS, font_pt=8.8, bold=False)
+                delete_shape(s)
             counts["tco_slide_rebuilt"] += 1
 
 
@@ -589,6 +586,135 @@ def patch_global_text_layout(slide, prs, counts):
         counts["global_text_boxes"] += 1
 
 
+
+def _shape_right(shape):
+    return int(shape.left + shape.width)
+
+
+def _shape_bottom(shape):
+    return int(shape.top + shape.height)
+
+
+def _find_card_around(slide, anchor, min_width=4.0, max_height=2.4):
+    """Find the smallest wide shape visually enclosing an anchor text box."""
+    candidates = []
+    tol = int(Inches(0.14))
+    for s in slide.shapes:
+        if s is anchor:
+            continue
+        if s.width < Inches(min_width) or s.height > Inches(max_height):
+            continue
+        if s.left > anchor.left + tol or _shape_right(s) < _shape_right(anchor) - tol:
+            continue
+        if s.top > anchor.top + tol:
+            continue
+        if _shape_bottom(s) < anchor.top + Inches(0.75):
+            continue
+        candidates.append(s)
+    if not candidates:
+        return None
+    return min(candidates, key=lambda s: int(s.width) * int(s.height))
+
+
+def finalize_tco_challenge_card(slide, counts):
+    title = text_shape(slide, contains="Hardest TCO challenge sequence")
+    if title is None:
+        return
+
+    card = _find_card_around(slide, title, min_width=5.0, max_height=2.2)
+    if card is None:
+        # Conservative fallback based on the existing title geometry.
+        card_left = max(Inches(0.45), title.left - Inches(0.10))
+        card_right = min(Inches(12.85), _shape_right(title) + Inches(0.10))
+        card_top = max(Inches(0.35), title.top - Inches(0.08))
+        card_bottom = min(Inches(6.95), title.top + Inches(1.35))
+    else:
+        card_left, card_right = card.left, _shape_right(card)
+        card_top, card_bottom = card.top, _shape_bottom(card)
+
+    # Remove any remaining list text boxes from earlier versions.
+    for s in list(slide.shapes):
+        if not getattr(s, "has_text_frame", False) or s is title:
+            continue
+        t = norm(s.text)
+        if any(m in t for m in TCO_MARKERS) or any(item.split(". ", 1)[-1] in t for item in TCO_ITEMS):
+            delete_shape(s)
+
+    # Keep title compact and clearly inside the card.
+    title.left = int(card_left + Inches(0.22))
+    title.width = int(card_right - card_left - Inches(0.44))
+    title.top = int(card_top + Inches(0.10))
+    title.height = Inches(0.28)
+    format_text(
+        title, font_pt=9.1, bold=True, align=PP_ALIGN.LEFT,
+        valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0
+    )
+
+    body_top = int(title.top + title.height + Inches(0.06))
+    body_bottom = int(card_bottom - Inches(0.12))
+    body_h = max(Inches(0.58), body_bottom - body_top)
+    inner_left = int(card_left + Inches(0.28))
+    inner_right = int(card_right - Inches(0.28))
+    gap = int(Inches(0.22))
+    col_w = int((inner_right - inner_left - gap) / 2)
+
+    left_box = slide.shapes.add_textbox(inner_left, body_top, col_w, body_h)
+    right_box = slide.shapes.add_textbox(inner_left + col_w + gap, body_top, col_w, body_h)
+
+    for box, items in ((left_box, TCO_ITEMS[:4]), (right_box, TCO_ITEMS[4:])):
+        set_textbox_lines(box, items, font_pt=7.0, bold=False)
+        tf = box.text_frame
+        tf.vertical_anchor = MSO_ANCHOR.TOP
+        tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+        tf.margin_left = Pt(0)
+        tf.margin_right = Pt(0)
+        tf.margin_top = Pt(0)
+        tf.margin_bottom = Pt(0)
+        for p in tf.paragraphs:
+            p.space_before = Pt(0)
+            p.space_after = Pt(0.6)
+            p.line_spacing = 0.96
+
+    counts["tco_final_geometry"] += 1
+
+
+def finalize_roadmap_chips(slide, counts):
+    if text_shape(slide, exact="12 / CONTRIBUTION IN ROLE") is None:
+        return
+
+    specs = [
+        ("0-30 DAYS", "LEARN & CALIBRATE", 1.62),
+        ("31-60 DAYS", "PRODUCE", 1.62),
+        ("61-90 DAYS", "IMPROVE", 1.62),
+        ("LONGER TERM", "OWN MODULES END-TO-END", 1.82),
+    ]
+    for chip_text, body_title, chip_w in specs:
+        chip = text_shape(slide, exact=chip_text)
+        body = text_shape(slide, exact=body_title)
+        if chip is None or body is None:
+            continue
+
+        chip.width = Inches(chip_w)
+        chip.height = Inches(0.40)
+        chip.left = int(body.left + (body.width - chip.width) / 2)
+        chip.top = Inches(2.28)
+        format_text(
+            chip, font_pt=7.0, bold=True, align=PP_ALIGN.CENTER,
+            valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0
+        )
+        chip.text_frame.word_wrap = False
+        chip.text_frame.auto_size = MSO_AUTO_SIZE.NONE
+
+    counts["roadmap_final_geometry"] += 1
+
+
+def finalize_problem_geometry(slide, counts):
+    # These are deliberately last: the global prominence pass must not
+    # re-enlarge or reflow these tightly constrained objects.
+    finalize_tco_challenge_card(slide, counts)
+    finalize_roadmap_chips(slide, counts)
+
+
 def validate_text_layout(prs):
     """Print conservative diagnostics so CI logs reveal remaining risk areas."""
     warnings = []
@@ -641,6 +767,8 @@ def main():
         "claim_slide": 0,
         "global_text_boxes": 0,
         "global_autofit": 0,
+        "tco_final_geometry": 0,
+        "roadmap_final_geometry": 0,
     }
 
     for slide in prs.slides:
@@ -655,9 +783,10 @@ def main():
         patch_90_day_slide(slide, counts)
         patch_claim_reconciliation(slide, counts)
         patch_global_text_layout(slide, prs, counts)
+        finalize_problem_geometry(slide, counts)
 
     # Verify the requested slides were found and the earlier wording remains clean.
-    expected = ["state_slide", "tco_slide", "value_pool_slide", "priority_slide", "roadmap_slide", "claim_slide"]
+    expected = ["state_slide", "tco_slide", "value_pool_slide", "priority_slide", "roadmap_slide", "claim_slide", "tco_final_geometry", "roadmap_final_geometry"]
     missing = [k for k in expected if counts[k] == 0]
     if missing:
         raise RuntimeError("Expected target slides were not found: " + ", ".join(missing))
