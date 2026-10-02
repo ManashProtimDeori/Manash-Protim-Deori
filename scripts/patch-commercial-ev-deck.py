@@ -791,6 +791,115 @@ def finalize_kpi_pills(slide, counts):
     counts["kpi_pills_styled"] += len(kpis)
 
 
+def finalize_roadmap_card_content(slide, counts):
+    """
+    Rebalance the heading, description and outcome inside each 90-day card.
+    The three text blocks are treated as one content group and vertically
+    centred in the usable area below the phase pill, with consistent type
+    hierarchy across all four cards.
+    """
+    if text_shape(slide, exact="12 / CONTRIBUTION IN ROLE") is None:
+        return
+
+    columns = [
+        ("0-30 DAYS", "LEARN & CALIBRATE"),
+        ("31-60 DAYS", "PRODUCE"),
+        ("61-90 DAYS", "IMPROVE"),
+        ("LONGER TERM", "OWN MODULES END-TO-END"),
+    ]
+    balanced = 0
+
+    for chip_text, heading_text in columns:
+        heading = text_shape(slide, exact=heading_text)
+        chip = text_shape(slide, exact=chip_text)
+        if heading is None:
+            continue
+
+        card = _find_enclosing_card(
+            slide, heading, min_width=2.1, min_height=2.4, max_height=5.2
+        )
+        if card is None:
+            continue
+
+        # Collect only the three meaningful content text boxes inside the
+        # large card; exclude the phase chip and any empty/decorative shapes.
+        members = []
+        for s in slide.shapes:
+            if not getattr(s, "has_text_frame", False):
+                continue
+            t = norm(s.text)
+            if not t or s is chip:
+                continue
+            cx = s.left + s.width / 2
+            cy = s.top + s.height / 2
+            if (
+                card.left <= cx <= card.left + card.width
+                and card.top <= cy <= card.top + card.height
+            ):
+                members.append(s)
+
+        # Heading is known; the remaining two are ordered by vertical
+        # position: description first, outcome second.
+        others = sorted(
+            [s for s in members if s is not heading],
+            key=lambda s: s.top
+        )
+        if len(others) < 2:
+            continue
+
+        description = others[0]
+        outcome = others[-1]
+
+        inner_left = int(card.left + Inches(0.18))
+        inner_width = int(card.width - Inches(0.36))
+
+        # Consistent widths and typography make all four cards read as a
+        # coordinated system rather than four independently formatted boxes.
+        heading.left = inner_left
+        heading.width = inner_width
+        heading.height = Inches(0.34)
+        format_text(
+            heading, font_pt=10.0, bold=True, align=PP_ALIGN.LEFT,
+            valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0
+        )
+
+        description.left = inner_left
+        description.width = inner_width
+        description.height = Inches(0.72)
+        format_text(
+            description, font_pt=8.4, bold=False, align=PP_ALIGN.LEFT,
+            valign=MSO_ANCHOR.TOP, ml=0, mr=0, mt=0, mb=0,
+            line_spacing=1.0
+        )
+        description.text_frame.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
+
+        outcome.left = inner_left
+        outcome.width = inner_width
+        outcome.height = Inches(0.30)
+        format_text(
+            outcome, font_pt=8.3, bold=True, align=PP_ALIGN.LEFT,
+            valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0
+        )
+
+        # Centre the three-block content group in the usable region beneath
+        # the pill. This yields balanced top/bottom whitespace while keeping
+        # the hierarchy intact.
+        usable_top = int(card.top + Inches(0.78))
+        usable_bottom = int(card.top + card.height - Inches(0.28))
+        gap1 = Inches(0.34)
+        gap2 = Inches(0.42)
+        block_h = heading.height + gap1 + description.height + gap2 + outcome.height
+        start_y = int(usable_top + max(0, (usable_bottom - usable_top - block_h) / 2))
+
+        heading.top = start_y
+        description.top = int(heading.top + heading.height + gap1)
+        outcome.top = int(description.top + description.height + gap2)
+
+        balanced += 1
+
+    counts["roadmap_cards_balanced"] += balanced
+
+
 def finalize_roadmap_chips(slide, counts):
     if text_shape(slide, exact="12 / CONTRIBUTION IN ROLE") is None:
         return
@@ -1027,6 +1136,7 @@ def finalize_problem_geometry(slide, counts):
     # these tightly constrained objects.
     cleanup_a10_orphan_and_raise_ledger(slide, counts)
     finalize_tco_challenge_card(slide, counts)
+    finalize_roadmap_card_content(slide, counts)
     finalize_roadmap_chips(slide, counts)
 
 
@@ -1085,6 +1195,7 @@ def main():
         "tco_final_geometry": 0,
         "roadmap_final_geometry": 0,
         "roadmap_chips_fixed": 0,
+        "roadmap_cards_balanced": 0,
         "kpi_pills_styled": 0,
         "tco_legacy_inside_removed": 0,
         "a10_orphan_removed": 0,
@@ -1117,6 +1228,8 @@ def main():
     missing = [k for k in expected if counts[k] == 0]
     if counts["roadmap_chips_fixed"] != 4:
         missing.append("roadmap_chips_fixed=" + str(counts["roadmap_chips_fixed"]))
+    if counts["roadmap_cards_balanced"] != 4:
+        missing.append("roadmap_cards_balanced=" + str(counts["roadmap_cards_balanced"]))
     if counts["kpi_pills_styled"] != 3:
         missing.append("kpi_pills_styled=" + str(counts["kpi_pills_styled"]))
     if counts["appendix_boxes_styled"] == 0:
