@@ -80,7 +80,7 @@ export const CommercialEVGrowthAdvisoryPage: React.FC = () => {
       <section className="ev-proof-strip" aria-label="Selected evidence">
         <article><strong>2.3m</strong><span>India EV sales in 2025 · IEA</span></article>
         <article><strong>~0.8m</strong><span>Electric 3W sales in 2025 · IEA</span></article>
-        <article><strong>~70%</strong><span>Electric share of India 3W sales · IEA</span></article>
+        <article><strong>~70%*</strong><span>IEA 2025 share · FADA retail: 60.91%</span></article>
         <article><strong>20</strong><span>Distinct QA passes documented</span></article>
       </section>
 
