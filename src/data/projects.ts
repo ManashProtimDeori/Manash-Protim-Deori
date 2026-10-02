@@ -2,6 +2,35 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'project-commercial-ev-growth-advisory',
+    slug: 'india-commercial-ev-growth-advisory',
+    title: "Winning India's Commercial EV Transition",
+    subtitle: 'Market attractiveness, fleet economics, competitive positioning and lifecycle growth opportunities through 2030',
+    excerpt: 'An independent Mobility Growth Advisory case that combines current institutional research, a transparent commercial-vehicle TCO model, state-level readiness analysis, competitive ecosystem benchmarking and a 20-pass QA protocol.',
+    status: 'Live',
+    year: '2026',
+    categories: ['Strategy', 'Analytics'],
+    tags: ['Mobility', 'Electric Vehicles', 'Market Sizing', 'TCO', 'Growth Advisory', 'Competitive Intelligence'],
+    skills: ['Secondary Research', 'Market Sizing', 'Financial Modeling', 'Scenario Analysis', 'Executive Storytelling'],
+    technologies: ['React', 'TypeScript', 'PowerPoint', 'Excel', 'Public-Source Research'],
+    role: 'Independent Strategy & Mobility Analyst',
+    problem: 'Commercial EV adoption is often discussed as one national growth curve even though vehicle economics, duty cycles, infrastructure, financing and state-level readiness differ dramatically by segment.',
+    context: 'The case focuses on India\'s commercial mobility transition and uses the already-mainstream electric three-wheeler market as an observed anchor before testing where heavier commercial segments face different economic and infrastructure constraints.',
+    insight: 'Commercial electrification advances in islands of strong economics. Scaling beyond those islands requires solving uptime, charging, financing and lifecycle economics rather than simply adding electric models.',
+    strategy: 'Use a source hierarchy, explicit evidence classes, segment-level analysis, a falsifiable TCO model, sensitivity testing and independent opportunity prioritisation to identify the growth moves that remain attractive under challenge.',
+    solution: 'Built a 21-slide editable consulting deck, PDF, analytical workbook, interview-defence guide and dedicated responsive portfolio viewer with direct PPT/PDF downloads and transparent evidence boundaries.',
+    process: 'Cross-checked current IEA, NITI Aayog/WRI, PM E-DRIVE, Ministry of Power, Mahindra, Tata Motors and Frost & Sullivan public materials; separated verified facts from derived facts, modelled estimates and assumptions; then applied 20 distinct QA passes.',
+    results: 'Produces a client-style strategy narrative that can be inspected, downloaded, stress-tested and defended in an interview without presenting model assumptions as observed market facts.',
+    lessons: [
+      'A credible mobility recommendation begins with duty-cycle economics rather than an aggregate EV growth rate.',
+      'Charging becomes a fleet-economics variable when it affects productive kilometres and uptime.',
+      'The most defensible strategy makes assumptions visible so the recommendation can change when the evidence changes.'
+    ],
+    nextSteps: 'Replace public proxies with operator-level utilisation, tariff, financing, residual-value and route data in a live client engagement, then recalibrate the market and opportunity models.',
+    featured: true,
+    accentColor: '#14b8a6',
+  },
+  {
     id: 'project-canonical-strategy',
     slug: 'canonical-competitive-strategy',
     title: 'Canonical Competitive Strategy Lab',
