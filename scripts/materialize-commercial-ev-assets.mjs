@@ -6,8 +6,8 @@ const src = resolve(root, 'src/generated/commercial-ev-assets');
 const out = resolve(root, 'public/case-studies/commercial-ev-growth-advisory');
 
 const assets = [
-  { name: 'Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pptx', parts: 12 },
-  { name: 'Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pdf', parts: 7 },
+  { name: 'Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pptx', parts: 1 },
+  { name: 'Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pdf', parts: 1 },
   { name: 'Manash-Protim-Deori-Commercial-EV-Model.xlsx', parts: 1 },
   { name: 'Commercial-EV-Case-Interview-Defence.pdf', parts: 1 },
 ];
