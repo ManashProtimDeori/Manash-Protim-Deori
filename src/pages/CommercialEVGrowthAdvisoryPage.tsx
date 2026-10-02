@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
 import { Download, FileText, Presentation, Database, ShieldCheck, ArrowUpRight, ExternalLink } from 'lucide-react';
 import './CommercialEVGrowthAdvisoryPage.css';
 
@@ -6,7 +8,6 @@ const ASSET_ROOT = '/case-studies/commercial-ev-growth-advisory';
 const PDF_FILE = ASSET_ROOT + '/Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pdf';
 const PPT_FILE = ASSET_ROOT + '/Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pptx';
 const MODEL_FILE = ASSET_ROOT + '/Manash-Protim-Deori-Commercial-EV-Model.xlsx';
-const DEFENCE_FILE = ASSET_ROOT + '/Commercial-EV-Case-Interview-Defence.pdf';
 
 const sources = [
   { label: 'IEA · Global EV Outlook 2026', href: 'https://www.iea.org/reports/global-ev-outlook-2026/trends-in-other-ev-modes' },
@@ -25,6 +26,8 @@ const qaPasses = [
 ];
 
 export const CommercialEVGrowthAdvisoryPage: React.FC = () => {
+  const { isOwner } = useAuth();
+
   useEffect(() => {
     const previous = document.title;
     document.title = 'India Commercial EV Growth Advisory Case Study | Manash Protim Deori';
@@ -158,24 +161,26 @@ export const CommercialEVGrowthAdvisoryPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="ev-grid ev-download-grid">
+        <div className={`ev-grid ev-download-grid ${isOwner ? '' : 'ev-download-grid-single'}`}>
           <a className="ev-resource" href={MODEL_FILE} download>
             <Database size={22}/>
             <div>
               <strong>Download analytical model</strong>
-              <span>Source register · assumptions · TCO · sensitivity · state matrix · opportunity index · QA</span>
+              <span>Formula-driven TCO · sensitivity · state matrix · source lineage · three-pass verification · QA</span>
             </div>
             <ArrowUpRight size={18}/>
           </a>
 
-          <a className="ev-resource" href={DEFENCE_FILE} download>
-            <ShieldCheck size={22}/>
-            <div>
-              <strong>Interview defence guide</strong>
-              <span>Hard questions, concise defences, evidence boundaries and facts worth memorising</span>
-            </div>
-            <ArrowUpRight size={18}/>
-          </a>
+          {isOwner && (
+            <Link className="ev-resource ev-owner-resource" to="/work/india-commercial-ev-growth-advisory/interview-defence">
+              <ShieldCheck size={22}/>
+              <div>
+                <strong>Private interview defence guide</strong>
+                <span>Owner-only workspace · toughest questions · concise defences · evidence boundaries</span>
+              </div>
+              <ArrowUpRight size={18}/>
+            </Link>
+          )}
         </div>
       </section>
 
