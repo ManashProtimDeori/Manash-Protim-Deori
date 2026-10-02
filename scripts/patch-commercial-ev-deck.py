@@ -744,6 +744,22 @@ def validate_text_layout(prs):
     else:
         print("Text-layout diagnostics: no obvious overflow/off-canvas risks.")
 
+def print_appendix_diagnostics(prs):
+    print("APPENDIX-DIAGNOSTICS-BEGIN")
+    for idx, slide in enumerate(prs.slides, start=1):
+        labels = [norm(s.text) for s in slide.shapes if getattr(s, "has_text_frame", False) and norm(s.text)]
+        appendix_labels = [t for t in labels if re.match(r"^A\\d{1,2}\\s*/", t)]
+        if not appendix_labels:
+            continue
+        print(f"APPENDIX-SLIDE {idx}: {appendix_labels[0]}")
+        for si, s in enumerate(slide.shapes):
+            t = norm(s.text) if getattr(s, "has_text_frame", False) else ""
+            has_table = bool(getattr(s, "has_table", False))
+            if t or has_table or (s.width > Inches(5.0) and s.height > Inches(0.45)):
+                print(f"  shape={si} type={s.shape_type} x={s.left/Inches(1):.2f} y={s.top/Inches(1):.2f} w={s.width/Inches(1):.2f} h={s.height/Inches(1):.2f} table={has_table} text={t[:180]!r}")
+    print("APPENDIX-DIAGNOSTICS-END")
+
+
 def main():
     WORK.mkdir(exist_ok=True)
     PDF_OUT_DIR.mkdir(exist_ok=True)
