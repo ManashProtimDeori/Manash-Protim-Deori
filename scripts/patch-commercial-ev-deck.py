@@ -768,6 +768,7 @@ def main():
     PPTX.write_bytes(raw)
 
     prs = Presentation(PPTX)
+    print_appendix_diagnostics(prs)
     counts = {
         "source_url_boxes": 0,
         "interview_heading_removed": 0,
