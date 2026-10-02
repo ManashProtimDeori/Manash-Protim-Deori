@@ -1,13 +1,13 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { resolve } from 'node:path';
 
 const root = process.cwd();
 const src = resolve(root, 'src/generated/commercial-ev-assets');
 const out = resolve(root, 'public/case-studies/commercial-ev-growth-advisory');
 
 const assets = [
-  { name: 'Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pptx', parts: 1 },
-  { name: 'Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pdf', parts: 1 },
+  { name: 'Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pptx', parts: 4 },
+  { name: 'Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pdf', parts: 13 },
   { name: 'Manash-Protim-Deori-Commercial-EV-Model.xlsx', parts: 1 },
   { name: 'Commercial-EV-Case-Interview-Defence.pdf', parts: 1 },
 ];
