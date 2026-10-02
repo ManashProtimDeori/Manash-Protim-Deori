@@ -29,3 +29,12 @@ for i, slide in enumerate(prs.slides, start=1):
         print(f"\n===== SLIDE {i} =====")
         for j, s, t in texts:
             print(f"[{j}] x={s.left/914400:.3f} y={s.top/914400:.3f} w={s.width/914400:.3f} h={s.height/914400:.3f} :: {t}")
+
+
+print("\n===== SLIDE 5 ALL SHAPES =====")
+slide = prs.slides[4]
+for j, s in enumerate(slide.shapes):
+    t = ""
+    if getattr(s, "has_text_frame", False):
+        t = " ".join((s.text or "").replace("\n"," ").split())
+    print(f"[{j}] type={s.shape_type} x={s.left/914400:.3f} y={s.top/914400:.3f} w={s.width/914400:.3f} h={s.height/914400:.3f} text={t}")
