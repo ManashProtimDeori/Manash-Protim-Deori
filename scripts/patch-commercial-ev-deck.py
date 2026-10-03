@@ -1457,6 +1457,11 @@ def patch_boardroom_language(prs, counts):
 
 def validate_boardroom_language(prs):
     forbidden = []
+    final_labels = {
+        "What would change the strategy?": 0,
+        "Why me?": 0,
+    }
+
     for slide_no, slide in enumerate(prs.slides, start=1):
         is_appendix = _appendix_label(slide) is not None
         for shape in slide.shapes:
@@ -1465,6 +1470,10 @@ def validate_boardroom_language(prs):
             t = norm(shape.text)
             if not t:
                 continue
+
+            if t in final_labels:
+                final_labels[t] += 1
+
             if (
                 re.match(r"^Consulting Analyst\s*[-–—]\s*Mobility Growth Advisory$", t, re.I)
                 or (
@@ -1473,12 +1482,21 @@ def validate_boardroom_language(prs):
                 )
             ):
                 forbidden.append(f"slide {slide_no}: role-prep line remains: {t[:120]}")
+
+            if t in {"What would change your strategy?", "Why you?"}:
+                forbidden.append(f"slide {slide_no}: old requested label remains: {t}")
+
             if is_appendix and re.search(
                 r"\b(interview defence|interview defense|interviewer|candidate model|candidate analysis|the role combines)\b",
                 t,
                 re.I,
             ):
                 forbidden.append(f"slide {slide_no}: interview-prep wording remains: {t[:120]}")
+
+    for label, count in final_labels.items():
+        if count == 0:
+            forbidden.append(f"required final label missing: {label}")
+
     if forbidden:
         raise RuntimeError("Boardroom-language validation failed: " + " | ".join(forbidden))
 
@@ -1556,8 +1574,6 @@ def main():
         missing.append("kpi_pills_styled=" + str(counts["kpi_pills_styled"]))
     if counts["appendix_boxes_styled"] == 0:
         missing.append("appendix_boxes_styled")
-    if counts["requested_label_rewrites"] != 2:
-        missing.append("requested_label_rewrites=" + str(counts["requested_label_rewrites"]))
     if missing:
         raise RuntimeError("Expected target slides were not found: " + ", ".join(missing))
 
