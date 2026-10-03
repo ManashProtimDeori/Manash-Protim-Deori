@@ -314,6 +314,11 @@ assert.ok(!pageSource.includes('<SourceLine'), 'no slide should render a bottom 
 assert.ok(pageSource.includes('olam-title-card'), 'Olam slides should use a Canonical-like thesis card hierarchy');
 assert.ok(pageSource.includes('olam-insight-card'), 'Olam slides should use a dedicated executive insight card');
 assert.ok(pageSource.includes('olam-slide-inner'), 'Olam slides should use a protected safe-area inner container');
+assert.ok(pageSource.includes('olam-title-row'), 'slide title row needs a stable compact-layout hook');
+assert.ok(pageSource.includes('olam-body-region'), 'slide body needs a stable protected fit region');
+assert.ok(pageSource.includes('grid min-h-0 grid-cols-3 grid-rows-2 gap-2'), 'candidate contribution systems should use a 3×2 layout instead of a clipping 2×3 stack');
+assert.ok(pageSource.includes('olam-candidate-support-strip'), 'candidate support material should stay in a compact horizontal strip');
+
 assert.ok(pageSource.includes('olam-metric-value'), 'metric typography should use the proportional presentation scale');
 assert.ok(pageSource.includes("slide.kind === 'policy'"), 'policy gate renderer must remain explicit');
 assert.ok(pageSource.includes('CandidateOneBody'), 'qualitative candidate slide must have a dedicated renderer');
@@ -357,6 +362,11 @@ assert.ok(cssSource.includes('color-scheme:light!important'), 'Olam presentation
 assert.ok(cssSource.includes('.olam-strategy-lab .olam-deck-slide [class*="text-white"]'), 'dark-theme text utility classes must be remapped for light-slide readability');
 assert.ok(cssSource.includes('background:#f5f9f6!important'), 'export host must use the light presentation background');
 assert.ok(cssSource.includes('box-shadow:none!important'), 'export mode must suppress shadow raster artifacts');
+assert.ok(cssSource.includes('.olam-slide--candidate-1'), 'candidate-1 needs slide-specific anti-clipping typography');
+assert.ok(cssSource.includes('.olam-kind--evidence-register .olam-slide-inner'), 'evidence appendix needs the dense-slide safe-area treatment');
+assert.ok(cssSource.includes('.olam-kind--sources .olam-slide-inner'), 'source appendix needs the dense-slide safe-area treatment');
+assert.ok(cssSource.includes('.olam-kind--policy .olam-slide-inner'), 'policy slide needs the dense-slide safe-area treatment');
+
 
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S20')?.url.includes('management_discussion_and_analysis'), 'processing source should point to the exact Olam Group FY2025 MDA');
