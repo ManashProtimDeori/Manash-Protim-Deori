@@ -419,7 +419,7 @@ assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F34' && row.figure.includ
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F35' && row.classification === 'Portfolio evidence' && row.sourceIds.length === 0));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F36' && row.figure.includes('60 reviews') && row.figure.includes('36 figure lines')));
 
-assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('can lag'), 'CBN key-rates lag caveat must remain explicit');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('governing policy-rate source'), 'CBN source hierarchy must use the formal MPC decision as the governing policy-rate source');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S27')?.note.includes('duty-free or unrestricted'), 'trade-policy caveat must distinguish prohibition status from import economics');
 assert.equal(OLAM_SOURCES.find(source => source.id === 'S12')?.url, 'https://www.nigerianstat.gov.ng/', 'Nigeria NBS source should point to the official live NBS site');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S24')?.note.includes('revised across releases'), 'USDA forecast-version source should not hard-code a figure behind a dynamic current-report URL');
