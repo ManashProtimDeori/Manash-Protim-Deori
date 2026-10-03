@@ -336,11 +336,13 @@ export const OLAM_FIGURE_EVIDENCE: OlamFigureEvidence[] = [
   { id: 'F27', figure: '1.5m MT; ~1.8% global', claim: 'Nigeria palm-oil production, 2025/26', classification: 'Reported', sourceIds: ['S30'], provenance: 'USDA FAS global production table; supply context only, not Olam share or category demand.' },
   { id: 'F28', figure: 'NGN2.5bn; NGN20bn; 2.27 yrs; NGN0.31bn', claim: 'Outputs inherited from the prior uploaded financial model/deck', classification: 'Model', sourceIds: [], provenance: 'Prior case working model. Explicitly not independently validated because its full cash-flow bridge and assumptions were not supplied.' },
   { id: 'F29', figure: 'NGN4.2bn = NGN0.6bn + NGN3.6bn', claim: 'Pilot plus conditional rollout scenario envelope', classification: 'Model', sourceIds: [], provenance: 'Inherited from the prior uploaded case; scenario envelope only, not Olam management guidance.' },
-  { id: 'F30', figure: 'NGN100bn; 7 days; 28%; 50/80/100%', claim: 'Normalized public screening-model conventions', classification: 'Model', sourceIds: ['S21'], provenance: 'NGN100bn normalized eligible-sales unit; 7-day sales proxy; 28% hurdle = 23% MPR anchor + explicit 5pp model premium; modeled benefit ramp.' },
-  { id: 'F31', figure: '~NGN1.99bn / ~2.0%', claim: 'Zero-NPV recurring run-rate boundary per NGN100bn normalized sales', classification: 'Model', sourceIds: ['S21'], provenance: 'Formula-derived from the explicit screening model; changes when the hurdle, cash-flow timing, working capital or capital envelope changes.' },
-  { id: 'F32', figure: '5,000 runs; seed 20261001', claim: 'Reproducible uncertainty stress simulation', classification: 'Model', sourceIds: [], provenance: 'Seeded independent-uniform scenario simulation; positive-NPV share is a scenario frequency, not a forecast probability.' },
-  { id: 'F33', figure: '₹20M; ₹35.8 → ₹15.5; −56.7%', claim: 'Historical campaign-budget / CPM evidence used on candidate-contribution slide', classification: 'Portfolio evidence', sourceIds: [], provenance: 'Grounded in the portfolio resume source; presented as prior experience, not an Olam performance claim.' },
-  { id: 'F34', figure: '60 reviews; 8 gates; 16 assumptions', claim: 'Deck QA and model-governance structure after this revalidation', classification: 'Deck QA', sourceIds: [], provenance: 'Repository-defined QA structure: 50 prior reviews + 10 fresh revalidation passes; eight capital/evidence gates; sixteen explicit model assumptions.' },
+  { id: 'F30', figure: 'A01–A08: NGN100bn; 8%; 2%; 2%; 1%; 70%; 0.6%; 0.4%', claim: 'Normalized operating assumptions', classification: 'Model', sourceIds: [], provenance: 'Explicit screening assumptions only: eligible sales, contribution margin, availability, repeat, net price/mix, flow-through, route efficiency and service investment. Replace with Olam Finance/category/route evidence.' },
+  { id: 'F31', figure: 'A09–A16: 45%; 5%; 30%/5%; 80%; 7 days; NGN0.6bn + NGN3.6bn; 28%; 50/80/100%', claim: 'Risk, cash, capital and benefit-ramp assumptions', classification: 'Model', sourceIds: ['S21'], provenance: 'Explicit screening assumptions. 23% CBN MPR is only the public financing anchor beneath the 28% modeled hurdle; all other values require Olam-owned replacement data.' },
+  { id: 'F32', figure: 'NGN0.47bn run-rate; NGN1.92bn WC release; −NGN2.06bn 3Y NPV', claim: 'Evidence-base normalized screening outputs', classification: 'Model', sourceIds: ['S21'], provenance: 'Re-performed from A01–A16 with the stated formulas and 50/80/100% benefit ramp. These are screening outputs, not Olam guidance or an investment-grade DCF.' },
+  { id: 'F33', figure: '~NGN1.99bn / ~2.0%', claim: 'Zero-NPV recurring run-rate boundary per NGN100bn normalized sales', classification: 'Model', sourceIds: ['S21'], provenance: 'Formula-derived from the explicit screening model; changes when hurdle, cash-flow timing, working capital or capital envelope changes.' },
+  { id: 'F34', figure: '5,000 runs; seed 20261001; P10 −NGN6.00bn; P50 −NGN3.37bn; P90 −NGN1.17bn; positive-NPV frequency 2.0%', claim: 'Reproducible uncertainty stress simulation', classification: 'Model', sourceIds: [], provenance: 'Seeded independent-uniform scenario simulation. Percentiles and positive-NPV share are reproducible scenario frequencies, not calibrated forecast probabilities.' },
+  { id: 'F35', figure: '₹20M; ₹35.8 → ₹15.5; −56.7%', claim: 'Historical campaign-budget / CPM evidence used on candidate-contribution slide', classification: 'Portfolio evidence', sourceIds: [], provenance: 'Grounded in the portfolio resume source; presented as prior experience, not an Olam performance claim.' },
+  { id: 'F36', figure: '60 reviews; 8 gates; 16 assumptions; 36 figure lines', claim: 'Deck QA and model-governance structure after this revalidation', classification: 'Deck QA', sourceIds: [], provenance: 'Repository-defined QA structure: 50 prior reviews + 10 fresh revalidation passes; eight capital/evidence gates; sixteen explicit model assumptions; thirty-six evidence-register lines.' },
 ];
 
 export const OLAM_REVIEW_ITERATIONS = [
@@ -1341,7 +1343,7 @@ export const OLAM_SLIDES: OlamSlide[] = [
   {
     id: 'figure-evidence-3',
     section: 'Evidence appendix · figure register 3/3',
-    title: 'Programme, market-context, scenario and portfolio numbers are separated from externally reported operating facts',
+    title: 'Programme, market-context, model-assumption, scenario and portfolio numbers are separated from externally reported operating facts',
     narrative: 'The final register page covers programme targets, macro forecasts, supply context, prior-case outputs, normalized model conventions, formula-derived thresholds, simulations and personal portfolio evidence.',
     insight: 'No modeled or personal number is allowed to masquerade as an Olam-reported fact; each carries a provenance statement and replacement-data rule.',
     metrics: [],
@@ -1390,7 +1392,7 @@ export const OLAM_SLIDES: OlamSlide[] = [
     metrics: [
       { label: 'Total reviews', value: '60', detail: '50 prior reviews + 10 fresh factual/source passes', tone: 'green' },
       { label: 'Latest revalidation', value: '10', detail: 'Freshness, arithmetic, insight consistency and figure traceability', tone: 'cyan' },
-      { label: 'Figure register', value: '34 lines', detail: 'Reported, forecast, derived, model, portfolio and QA numbers classified', tone: 'gold' },
+      { label: 'Figure register', value: '36 lines', detail: 'Reported, forecast, derived, model, portfolio and QA numbers classified', tone: 'gold' },
       { label: 'Capital discipline', value: '8 gates', detail: 'No scale without evidence, contribution, cash and repeatability', tone: 'violet' },
     ],
     bullets: OLAM_REVIEW_ITERATIONS.slice(-10).map((row) => row[0] + ' · ' + row[2]),
