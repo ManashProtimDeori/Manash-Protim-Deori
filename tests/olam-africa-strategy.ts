@@ -355,6 +355,12 @@ assert.ok(pageSource.includes('olam-title-row'), 'slide title row needs a stable
 assert.ok(pageSource.includes('olam-body-region'), 'slide body needs a stable protected fit region');
 assert.ok(pageSource.includes('grid min-h-0 grid-cols-3 grid-rows-2 gap-2'), 'candidate contribution systems should use a 3×2 layout instead of a clipping 2×3 stack');
 assert.ok(pageSource.includes('olam-candidate-support-strip'), 'candidate support material should stay in a compact horizontal strip');
+assert.ok(pageSource.includes('grid grid-cols-2 gap-x-2 gap-y-1 border-t'), 'candidate contribution cards should use a compact 2×2 analytical matrix to avoid vertical cuts');
+assert.ok(pageSource.includes('olam-candidate-two-body'), 'candidate-2 needs a dedicated fit hook');
+assert.ok(pageSource.includes('grid grid-cols-3 gap-x-1.5 gap-y-1'), 'candidate-2 ownership inputs should use a 3-column fit-safe layout');
+assert.ok(pageSource.includes('grid grid-cols-4 gap-x-1.5 gap-y-1'), 'candidate-2 operating standards should use a 4-column fit-safe layout');
+assert.ok(pageSource.includes('olam-evidence-register-grid grid grid-cols-3'), 'figure evidence pages should use three columns to prevent the final row being clipped');
+
 
 assert.ok(pageSource.includes('olam-metric-value'), 'metric typography should use the proportional presentation scale');
 assert.ok(pageSource.includes("slide.kind === 'policy'"), 'policy gate renderer must remain explicit');
@@ -403,6 +409,11 @@ assert.ok(cssSource.includes('.olam-slide--candidate-1'), 'candidate-1 needs sli
 assert.ok(cssSource.includes('.olam-kind--evidence-register .olam-slide-inner'), 'evidence appendix needs the dense-slide safe-area treatment');
 assert.ok(cssSource.includes('.olam-kind--sources .olam-slide-inner'), 'source appendix needs the dense-slide safe-area treatment');
 assert.ok(cssSource.includes('.olam-kind--policy .olam-slide-inner'), 'policy slide needs the dense-slide safe-area treatment');
+assert.ok(cssSource.includes('.olam-kind--gate .olam-slide-inner'), 'gate slides need the dense-slide safe-area treatment');
+assert.ok(cssSource.includes('.olam-slide--capital-boundary'), 'capital-boundary needs a dedicated clipping reserve');
+assert.ok(cssSource.includes('.olam-slide--candidate-2'), 'candidate-2 needs slide-specific anti-clipping typography');
+assert.ok(cssSource.includes('.olam-evidence-register-card'), 'evidence register cards need compact fit-safe styling');
+
 
 
 
