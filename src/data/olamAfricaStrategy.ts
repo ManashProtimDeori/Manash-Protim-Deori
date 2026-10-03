@@ -94,7 +94,7 @@ export const OLAM_SOURCES: OlamSource[] = [
     url: 'https://www.olamagri.com/news/press-release/olam-agri-launches-baking-brighter-futures-and-commits-usd-2-million-to-support-20000-bakers-across-africa',
     date: '2025',
     authority: 'primary',
-    note: 'Primary programme evidence: planned US$2m investment, >20,000 training target by 2030, and >10,000 bakers benefitted since 2019 (around half women). These are programme commitments/reach metrics, not realized revenue, EBIT, ROMI or financial return.',
+    note: 'Primary programme evidence: planned $2m investment, >20,000 training target by 2030, and >10,000 bakers benefitted since 2019 (around half women). These are programme commitments/reach metrics, not realized revenue, EBIT, ROMI or financial return.',
   },
   {
     id: 'S05',
@@ -411,7 +411,7 @@ export const OLAM_REVIEW_ITERATIONS = [
   ['63', 'Deck-wide contradiction regression', 'After integrating the review, does any slide re-introduce a contradicted ownership, volume, MPR, WACC, policy or return claim?', 'No material contradiction remains in the repository tests: 23% is labeled a public anchor rather than Olam WACC; 53.7m MT is kept separate from 49.474m MT handled; 81.11% appears only as a disclosed source conflict; inherited returns remain unverified; and NOT Prohibited is never translated into duty-free or unrestricted importability.'],
   ['64', 'Corporate/regulatory primary-source web pass', 'Do current Olam Group, Olam Agri and CBN pages still support the ownership, volume-definition and September policy-rate corrections?', 'Yes. Olam Group confirms 81.81% SALIC / 18.19% Olam Group after the 30 Jun CFG issuance; Olam Agri’s current About page still contains both 81.81% and stale 81.11%; the FY2025 report separately labels 53.7m MT sales volume and 49.474m MT handled; CBN shows the September 2026 MPR reset to 23% after 26.5% in July.'],
   ['65', 'Regulator/multilateral macro-boundary web pass', 'Do USDA, NBS and World Bank sources support the wheat, inflation, palm-oil, 73-market and $1tn claims without allowing macro data to masquerade as Olam operating performance?', 'Yes. USDA supports 6.8m MT MY2026/27 wheat consumption and the crude/refined palm-oil prohibition distinction; NBS supports 15.39% headline and 19.57% food inflation for Aug-2026; World Bank documents a 73-market mixed measured/ML price dataset and a $1tn Africa food-market projection. All remain external context, not Olam transaction-level evidence.'],
-  ['66', 'Programme/model-boundary web pass', 'Do the Olam programme claims and inherited-model treatment remain correctly classified after a final source review?', 'Yes. Olam Agri supports the planned US$2m / >20,000 target and >10,000 beneficiaries since 2019, around half women, but not a financial-return claim. The inherited NGN2.5bn / NGN20bn / 2.27-year / NGN0.31bn outputs still have no external primary source and remain unverified model inheritance; the 28% hurdle remains a screening convention, not an externally required premium or Olam Treasury WACC.'],
+  ['66', 'Programme/model-boundary web pass', 'Do the Olam programme claims and inherited-model treatment remain correctly classified after a final source review?', 'Yes. Olam Agri supports the planned $2m / >20,000 target and >10,000 beneficiaries since 2019, around half women, but not a financial-return claim. The inherited NGN2.5bn / NGN20bn / 2.27-year / NGN0.31bn outputs still have no external primary source and remain unverified model inheritance; the 28% hurdle remains a screening convention, not an externally required premium or Olam Treasury WACC.'],
 ] as const;
 
 export const OLAM_POLICY_GATES = [
@@ -1385,7 +1385,7 @@ export const OLAM_SLIDES: OlamSlide[] = [
       'WHEAT · USDA projects 6.8m MT consumption in MY2026/27. Use it to size the national demand environment, not to infer Olam brand growth, semolina penetration or campaign lift.',
       'INFLATION · NBS August 2026 shows 15.39% headline and 19.57% food inflation. A lower inflation rate means slower price growth; it does not prove lower price levels or restored purchasing power.',
       'REGIONAL PRICES · World Bank’s Nigeria RTFP dataset covers 73 markets and combines direct observations with machine-learning estimation of missing prices. It is a pressure-signal layer, not Olam invoice or sell-out ground truth.',
-      'PROGRAMME REACH · Olam Agri says planned investment is US$2m, target >20,000 by 2030, and >10,000 bakers have benefitted since 2019, around half women. These are programme metrics, not realized financial returns.',
+      'PROGRAMME REACH · Olam Agri says planned investment is $2m, target >20,000 by 2030, and >10,000 bakers have benefitted since 2019, around half women. These are programme metrics, not realized financial returns.',
       'MARKET SCALE · World Bank’s $1tn by 2030 figure is a continental food-market projection. It cannot be used as Olam addressable revenue, Nigeria category TAM or an earnings forecast without a bottom-up perimeter bridge.',
     ],
     sourceIds: ['S04', 'S12', 'S13', 'S14', 'S29'],
