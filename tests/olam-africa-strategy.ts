@@ -359,8 +359,8 @@ assert.ok(pageSource.includes('BUSINESS QUESTION'), 'candidate system cards shou
 assert.ok(pageSource.includes('DECISION ENABLED'), 'candidate system cards should state the decision enabled');
 assert.ok(pageSource.includes('HOW TO JUDGE THE LAYER'), 'candidate slide should define how the intelligence layer is judged');
 assert.ok(pageSource.includes('olam-candidate-two-body'), 'candidate-2 needs a dedicated fit hook');
-assert.ok(pageSource.includes('grid grid-cols-3 gap-x-1.5 gap-y-1'), 'candidate-2 ownership inputs should use a 3-column fit-safe layout');
-assert.ok(pageSource.includes('grid grid-cols-4 gap-x-1.5 gap-y-1'), 'candidate-2 operating standards should use a 4-column fit-safe layout');
+assert.ok(pageSource.includes('mt-1.5 grid grid-cols-3 gap-1'), 'candidate-2 ownership inputs should use a compact 3-column fit-safe layout');
+assert.ok(pageSource.includes('mt-1 grid grid-cols-2 gap-x-2 gap-y-1'), 'candidate-2 operating standards should use a readable 2-column layout');
 assert.ok(pageSource.includes('olam-evidence-register-grid grid grid-cols-3'), 'figure evidence pages should use three columns to prevent the final row being clipped');
 
 
@@ -371,7 +371,7 @@ assert.ok(pageSource.includes('CandidateTwoBody'), 'quantitative candidate slide
 assert.ok(pageSource.includes('VALUE OF INFORMATION'), 'candidate value architecture should include value of information');
 assert.ok(pageSource.includes('CONTRIBUTION VELOCITY'), 'candidate quantitative slide should include contribution velocity');
 assert.ok(pageSource.includes('LEARNING VELOCITY'), 'candidate quantitative slide should include learning velocity');
-assert.ok(pageSource.includes('PROPOSED OPERATING STANDARD · NOT ACHIEVED RESULTS'), 'future process thresholds must be visibly labeled as proposed, not achieved');
+assert.ok(pageSource.includes('PROPOSED STANDARD · NOT ACHIEVED RESULTS'), 'future process thresholds must be visibly labeled as proposed, not achieved');
 assert.ok(pageSource.includes('TRANSFERABLE PROOF'), 'candidate slide should retain compact historical proof without a separate cluttered panel');
 assert.ok(pageSource.includes('I enable intelligence, experiments and causal measurement.'), 'candidate slide should retain the Olam-versus-candidate ownership boundary');
 assert.ok(pageSource.includes('LEARNING FLYWHEEL'), 'candidate quantitative slide should show the reusable learning loop');
@@ -379,7 +379,7 @@ assert.ok(pageSource.includes('OUTPUT ≠ OUTCOME ≠ ECONOMIC VALUE'), 'candida
 assert.ok(pageSource.includes('system.beneficiaries'), 'qualitative candidate renderer must show cross-functional beneficiaries');
 assert.ok(!pageSource.includes('system.gap'), 'candidate-1 should keep diagnostic gap detail in the data model rather than overloading the visual slide');
 assert.ok(pageSource.includes('OLAM_CANDIDATE_MODEL_OWNERSHIP.map'), 'full model-input ownership matrix must be rendered');
-assert.ok(pageSource.includes('Any financial impact here is a measurement framework or scenario—not a promise of Olam performance.'), 'candidate slide must carry an explicit non-promise guardrail');
+assert.ok(pageSource.includes('olam-candidate-economics') && pageSource.includes('olam-candidate-scorecard') && pageSource.includes('olam-candidate-ownership'), 'candidate-2 should keep its three analytical panels explicit and separately contained');
 assert.ok(pageSource.includes('NOT PROHIBITED'), 'edible-oil visual must align with the audited HS-policy wording');
 assert.ok(!pageSource.includes('>Importable</div>'), 'edible-oil visual must not overstate not-prohibited status as unrestricted importability');
 assert.ok(pageSource.includes("slide.kind === 'sensitivity'"), 'sensitivity renderer must remain explicit');
