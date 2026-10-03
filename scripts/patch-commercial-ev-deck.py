@@ -1322,19 +1322,153 @@ def validate_text_layout(prs):
     else:
         print("Text-layout diagnostics: no obvious overflow/off-canvas risks.")
 
-def print_appendix_text_inventory(prs):
-    print("APPENDIX-TEXT-INVENTORY-BEGIN")
-    for idx, slide in enumerate(prs.slides, start=1):
-        label = _appendix_label(slide)
-        if not label:
-            continue
-        print(f"APPENDIX {idx}: {label}")
-        for s in slide.shapes:
-            if getattr(s, "has_text_frame", False):
-                t = norm(s.text)
-                if t:
-                    print("  " + t[:500])
-    print("APPENDIX-TEXT-INVENTORY-END")
+BOARDROOM_EXACT_REPLACEMENTS = {
+    # User-requested labels.
+    "What would change your strategy?": "What would change the strategy?",
+    "Why you?": "Why me?",
+
+    # Appendix framing: turn interview-prep language into client/boardroom language.
+    "A7 / INTERVIEW DEFENCE": "A7 / DECISION QUESTIONS & IMPLICATIONS",
+    "A7 / INTERVIEW DEFENSE": "A7 / DECISION QUESTIONS & IMPLICATIONS",
+    "The case uses explicit evidence classes so observed data cannot quietly become “fact-like” modelling":
+        "The analysis uses explicit evidence classes so observed data cannot quietly become “fact-like” modelling",
+    "Sources: MPD methodology": "Methodology: evidence classification and source-governance framework",
+    "Replace any assumption with operator data and the model recalculates; no hidden “magic” coefficients are required.":
+        "Operator data can replace any assumption and the model recalculates transparently; no hidden coefficients are used.",
+    "These assumptions are not offered as market truths; they are deliberately exposed so an interviewer can challenge them and observe how the conclusion changes.":
+        "These assumptions are not market truths; they are deliberately exposed so decision-makers can challenge inputs and observe how the recommendation changes.",
+    "Sources: MPD model; workbook Sensitivity tab":
+        "Sources: analytical model; workbook Sensitivity tab",
+    "Sources: MPD red-team protocol":
+        "Methodology: red-team challenge protocol",
+    "The hardest questions are methodological: definitions, denominator choice, sensitivity and what would change the recommendation":
+        "The critical boardroom questions are methodological: definitions, denominator choice, sensitivity and what would change the recommendation",
+    "The strongest answer is often to show the assumption, not to defend a number emotionally.":
+        "The strongest decision support makes the assumption explicit and shows how the conclusion changes.",
+    "Why Frost & Sullivan?":
+        "Where can Frost & Sullivan add the most value?",
+    "The role combines industry intelligence, quantified growth opportunity analysis and executive recommendation - the exact chain demonstrated here.":
+        "By combining industry intelligence, quantified opportunity sizing and executive recommendations into an actionable mobility growth agenda.",
+    "Engineering systems thinking + MBA commercial judgement + client execution + evidence of rapid domain learning in this case.":
+        "Engineering systems thinking + MBA-level commercial judgement + client execution + rapid domain synthesis — a combination suited to actionable mobility growth decisions.",
+    "Candidate model": "Analytical model",
+    "Candidate 5-year model": "Five-year analytical model",
+    "Evidence + candidate analysis": "Evidence + strategic analysis",
+    "Not market shares or Frost scores.": "Not market shares or externally validated scoring outputs.",
+    "The TCO mechanism is fully reconstructable in the room — every input can be replaced live":
+        "The TCO mechanism is fully reconstructable: every input can be replaced with client or operator data",
+    "Use this slide when challenged on breakeven, charging losses, battery risk, residual values, financing or utilisation.":
+        "Use this ledger to test breakeven, charging losses, battery risk, residual values, financing and utilisation.",
+    "Verified inputs: Tata Motors. Model logic: candidate analysis. Answer protocol: state input → show equation → run sensitivity → explain whether recommendation changes.":
+        "Verified inputs: Tata Motors. Model logic: transparent analytical reconstruction. Decision protocol: state input → show equation → run sensitivity → identify whether the recommendation changes.",
+    "The strongest technical answers separate what is known about the vehicle from what requires field validation":
+        "Robust technical assessment separates what is known about the vehicle from what requires field validation",
+    "Use Evidence → Mechanism → Sensitivity → Decision Impact. Never answer an engineering question with a market-growth slogan.":
+        "Use Evidence → Mechanism → Sensitivity → Decision Impact. Engineering claims should translate into operating and economic implications.",
+    "This turns the interview from 'Do EVs work?' into the more useful question: 'Under what operating system do they work economically?'":
+        "This reframes the discussion from 'Do EVs work?' to the more useful question: 'Under what operating system do they work economically?'",
+    "The hardest strategic questions are about definitions, transferability and what would falsify the recommendation":
+        "The critical strategic questions are about definitions, transferability and what would falsify the recommendation",
+    "Answering well means narrowing an over-broad claim rather than defending unsupported precision.":
+        "Decision quality improves when over-broad claims are narrowed rather than defended with unsupported precision.",
+    "What research next?": "What evidence is needed next?",
+    "Fleet telematics, depot power studies, finance quotes, used-EV values, interviews and charger uptime logs.":
+        "Fleet telematics, depot power studies, finance quotes, used-EV values, fleet/operator interviews and charger uptime logs.",
+    "Six figures I pressure-tested: what I corrected, retained and clarified":
+        "Six figures reconciled across sources: what was corrected, retained and clarified",
+    "My rule is source-specific precision: I change a figure only when the evidence demands it; otherwise I make the scope and denominator explicit.":
+        "Rule: use source-specific precision—change a figure only when evidence requires it; otherwise make scope and denominator explicit.",
+}
+
+BOARDROOM_PREFIX_REPLACEMENTS = (
+    ("My read:", "Reconciliation:"),
+    ("My check:", "Cross-check:"),
+    ("My scope check:", "Scope check:"),
+    ("My recalculation:", "Recalculation:"),
+    ("My denominator check:", "Denominator check:"),
+    ("My arithmetic check:", "Arithmetic check:"),
+    ("How I use it:", "Boardroom use:"),
+)
+
+
+def _replace_shape_text(shape, value):
+    """Replace a text shape cleanly; deck-wide typography is applied later."""
+    old_tf = shape.text_frame
+    align = old_tf.paragraphs[0].alignment if old_tf.paragraphs else None
+    valign = old_tf.vertical_anchor
+    set_text(shape, value, align=align, valign=valign)
+
+
+def patch_boardroom_language(prs, counts):
+    removed_role_lines = 0
+    appendix_rewrites = 0
+    exact_user_labels = 0
+
+    role_line_re = re.compile(
+        r"^Consulting Analyst\s*[-–—]\s*Mobility Growth Advisory$",
+        re.I,
+    )
+
+    for slide in prs.slides:
+        is_appendix = _appendix_label(slide) is not None
+
+        for shape in list(slide.shapes):
+            if not getattr(shape, "has_text_frame", False):
+                continue
+            original = norm(shape.text)
+            if not original:
+                continue
+
+            # Pic 1: remove the role-preparation line wherever it appears.
+            if role_line_re.match(original):
+                delete_shape(shape)
+                removed_role_lines += 1
+                continue
+
+            replacement = BOARDROOM_EXACT_REPLACEMENTS.get(original)
+            if replacement is not None:
+                _replace_shape_text(shape, replacement)
+                if original in {"What would change your strategy?", "Why you?"}:
+                    exact_user_labels += 1
+                if is_appendix:
+                    appendix_rewrites += 1
+                continue
+
+            if is_appendix:
+                for old_prefix, new_prefix in BOARDROOM_PREFIX_REPLACEMENTS:
+                    if original.startswith(old_prefix):
+                        _replace_shape_text(
+                            shape,
+                            new_prefix + original[len(old_prefix):],
+                        )
+                        appendix_rewrites += 1
+                        break
+
+    counts["role_line_removed"] += removed_role_lines
+    counts["boardroom_appendix_rewrites"] += appendix_rewrites
+    counts["requested_label_rewrites"] += exact_user_labels
+
+
+def validate_boardroom_language(prs):
+    forbidden = []
+    for slide_no, slide in enumerate(prs.slides, start=1):
+        is_appendix = _appendix_label(slide) is not None
+        for shape in slide.shapes:
+            if not getattr(shape, "has_text_frame", False):
+                continue
+            t = norm(shape.text)
+            if not t:
+                continue
+            if re.match(r"^Consulting Analyst\s*[-–—]\s*Mobility Growth Advisory$", t, re.I):
+                forbidden.append(f"slide {slide_no}: role-prep line remains")
+            if is_appendix and re.search(
+                r"\b(interview defence|interview defense|interviewer|candidate model|candidate analysis|the role combines)\b",
+                t,
+                re.I,
+            ):
+                forbidden.append(f"slide {slide_no}: interview-prep wording remains: {t[:120]}")
+    if forbidden:
+        raise RuntimeError("Boardroom-language validation failed: " + " | ".join(forbidden))
 
 
 def main():
@@ -1345,7 +1479,6 @@ def main():
     PPTX.write_bytes(raw)
 
     prs = Presentation(PPTX)
-    print_appendix_text_inventory(prs)
     counts = {
         "source_url_boxes": 0,
         "interview_heading_removed": 0,
@@ -1373,7 +1506,12 @@ def main():
         "appendix_boxes_styled": 0,
         "appendix_table_cells_styled": 0,
         "appendix_reference_font_pt": 0,
+        "role_line_removed": 0,
+        "boardroom_appendix_rewrites": 0,
+        "requested_label_rewrites": 0,
     }
+
+    patch_boardroom_language(prs, counts)
 
     for slide in prs.slides:
         text_shapes = [s for s in slide.shapes if getattr(s, "has_text_frame", False)]
@@ -1406,6 +1544,8 @@ def main():
         missing.append("kpi_pills_styled=" + str(counts["kpi_pills_styled"]))
     if counts["appendix_boxes_styled"] == 0:
         missing.append("appendix_boxes_styled")
+    if counts["requested_label_rewrites"] != 2:
+        missing.append("requested_label_rewrites=" + str(counts["requested_label_rewrites"]))
     if missing:
         raise RuntimeError("Expected target slides were not found: " + ", ".join(missing))
 
@@ -1425,6 +1565,7 @@ def main():
     if still_present:
         raise RuntimeError("Forbidden legacy wording remains: " + repr(still_present))
 
+    validate_boardroom_language(prs)
     validate_text_layout(prs)
     print("Patch counts:", counts)
     prs.save(OUT_PPTX)
