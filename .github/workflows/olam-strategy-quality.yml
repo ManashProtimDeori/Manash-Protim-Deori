@@ -1,6 +1,16 @@
 name: Olam Africa Strategy Quality
 
-on:
+
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/pages/OlamAfricaGrowthStrategyPage.tsx'
+      - 'src/data/olamAfricaStrategy.ts'
+      - 'src/lib/olamNigeriaDecisionModel.ts'
+      - 'tests/olam-africa-strategy.ts'
+      - 'src/index.css'
+      - '.github/workflows/olam-strategy-quality.yml'
   pull_request:
     paths:
       - 'src/pages/OlamAfricaGrowthStrategyPage.tsx'
