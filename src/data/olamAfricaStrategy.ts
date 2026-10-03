@@ -342,7 +342,7 @@ export const OLAM_FIGURE_EVIDENCE: OlamFigureEvidence[] = [
   { id: 'F33', figure: '~NGN1.99bn / ~2.0%', claim: 'Zero-NPV recurring run-rate boundary per NGN100bn normalized sales', classification: 'Model', sourceIds: ['S21'], provenance: 'Formula-derived from the explicit screening model; changes when hurdle, cash-flow timing, working capital or capital envelope changes.' },
   { id: 'F34', figure: '5,000 runs; seed 20261001; P10 −NGN6.00bn; P50 −NGN3.37bn; P90 −NGN1.17bn; positive-NPV frequency 2.0%', claim: 'Reproducible uncertainty stress simulation', classification: 'Model', sourceIds: [], provenance: 'Seeded independent-uniform scenario simulation. Percentiles and positive-NPV share are reproducible scenario frequencies, not calibrated forecast probabilities.' },
   { id: 'F35', figure: '₹20M; ₹35.8 → ₹15.5; −56.7%', claim: 'Historical campaign-budget / CPM evidence used on candidate-contribution slide', classification: 'Portfolio evidence', sourceIds: [], provenance: 'Grounded in the portfolio resume source; presented as prior experience, not an Olam performance claim.' },
-  { id: 'F36', figure: '60 reviews; 8 gates; 16 assumptions; 36 figure lines', claim: 'Deck QA and model-governance structure after this revalidation', classification: 'Deck QA', sourceIds: [], provenance: 'Repository-defined QA structure: 50 prior reviews + 10 fresh revalidation passes; eight capital/evidence gates; sixteen explicit model assumptions; thirty-six evidence-register lines.' },
+  { id: 'F36', figure: '63 reviews; 8 gates; 16 assumptions; 36 figure lines', claim: 'Deck QA and model-governance structure after this revalidation', classification: 'Deck QA', sourceIds: [], provenance: 'Repository-defined QA structure: 50 prior reviews + 10 fresh factual/source revalidation passes + 3 additional cross-check iterations requested on 3 Oct 2026; eight capital/evidence gates; sixteen explicit model assumptions; thirty-six evidence-register lines.' },
 ];
 
 export const OLAM_REVIEW_ITERATIONS = [
@@ -406,6 +406,9 @@ export const OLAM_REVIEW_ITERATIONS = [
   ['58', 'Ownership chronology recheck', 'Does the post-CFG ownership split remain the governing figure while the website conflict is disclosed?', 'Yes. 81.81% SALIC / 18.19% Olam Group is tied to the transaction-specific disclosure; 81.11% remains visible only as a stale lower-page conflict.'],
   ['59', 'Derived/model arithmetic re-performance', 'Can every derived or modeled number be reproduced without borrowing authority from an external source?', 'Re-performed EBIT margin, 30-day carry, screening economics, zero-NPV threshold and seeded simulation; each is labeled Derived or Model and separated from reported facts.'],
   ['60', 'Figure-level source traceability', 'Can every displayed figure, statistic or number be traced in the appendix to a source or explicit non-source classification?', 'Added a figure evidence register covering reported facts, external forecasts, derivations, model outputs, portfolio evidence and deck-QA counts; source IDs link back to the full evidence registry.'],
+  ['61', 'Primary-source conflict recheck', 'Do the ownership, volume-definition, CBN-rate and palm-oil policy flags still survive a fresh primary-source review?', 'Yes. Olam Group confirms 81.81% / 18.19% post-CFG ownership; the Olam Agri About page still contains both 81.81% and stale 81.11%; FY2025 sales volume remains distinct from handled volume; CBN confirms the September reset to 23%; USDA preserves the crude-versus-refined prohibition distinction.'],
+  ['62', 'Model-to-governance cross-check', 'Do the proposed remedies actually close the weaknesses identified in the original model and source audit?', 'Yes, as governance recommendations rather than reported Olam practices: staged capital keeps NGN3.6bn conditional, internal Finance/Treasury data are required to replace public defaults, causal ROMI removes inventory loading, and G0–G7 prevent narrative from bypassing evidence, contribution, route, resilience and cash tests.'],
+  ['63', 'Deck-wide contradiction regression', 'After integrating the review, does any slide re-introduce a contradicted ownership, volume, MPR, WACC, policy or return claim?', 'No material contradiction remains in the repository tests: 23% is labeled a public anchor rather than Olam WACC; 53.7m MT is kept separate from 49.474m MT handled; 81.11% appears only as a disclosed source conflict; inherited returns remain unverified; and NOT Prohibited is never translated into duty-free or unrestricted importability.'],
 ] as const;
 
 export const OLAM_POLICY_GATES = [
@@ -1342,6 +1345,28 @@ export const OLAM_SLIDES: OlamSlide[] = [
     kind: 'audit',
   },
   {
+    id: 'review-corrective-actions',
+    section: 'Corrective action contract · post 3-pass review',
+    title: 'The audit becomes operational only when every flagged weakness is converted into a release rule, data owner or measurement rule',
+    narrative: 'The factual review identifies where public evidence or the inherited model is insufficient. The corrective response should therefore be procedural: lock conditional capital, assign replacement-data owners, measure verified offtake contribution, and make the eight-gate constitution the default path to scale.',
+    insight: 'These are analytical governance recommendations, not claims about Olam’s current internal process. They are designed to make the case falsifiable and investment-ready once internal Finance, Treasury, Sales, Supply Chain and Category data replace public screening assumptions.',
+    metrics: [
+      { label: 'Capital', value: 'Stage it', detail: 'NGN0.6bn pilot first; NGN3.6bn rollout remains conditional on evidence', tone: 'cyan' },
+      { label: 'Data', value: 'Own it', detail: 'Finance NWC + audited eligible sales + Treasury-approved nominal-NGN hurdle', tone: 'green' },
+      { label: 'ROMI', value: 'Causal', detail: 'Verified offtake contribution less route/service cost, carry and cannibalization', tone: 'gold' },
+      { label: 'Governance', value: 'G0–G7', detail: 'No scale until evidence, customer economics, contribution, route, resilience, cash and replication clear', tone: 'violet' },
+    ],
+    bullets: [
+      'STAGED CAPITAL · Treat NGN4.2bn as a scenario envelope, not a one-shot approval. Release the conditional tranche only after pilot repeat, route economics, cash conversion and second-market replication clear pre-registered thresholds.',
+      'SOURCE HIERARCHY · Use transaction disclosures over stale web copy, formal metric definitions over headline summaries, and formal MPC decisions over live widgets when source cadence conflicts.',
+      'INTERNAL DATA REPLACEMENT · Replace the normalized NGN100bn sales base, seven-day sales-based working-capital proxy and 28% screening hurdle with audited eligible sales, Finance-owned inventory + receivables − payables and a Treasury-approved project hurdle.',
+      'CAUSAL ROMI · Credit verified incremental offtake contribution, not channel loading. Deduct trade spend, variable route/service cost, working-capital carry and cannibalization before marketing receives return credit.',
+      'EIGHT-GATE CONSTITUTION · Make G0–G7 sequential and non-waivable for scale: truth → customer economics → contribution → route → resilience → cash → repeatability → capital release.',
+    ],
+    sourceIds: ['S01', 'S19', 'S21', 'S27'],
+    kind: 'gate',
+  },
+  {
     id: 'figure-evidence-1',
     section: 'Evidence appendix · figure register 1/3',
     title: 'Corporate performance and Nigeria operating figures are mapped one-by-one to source, definition and evidence class',
@@ -1408,13 +1433,13 @@ export const OLAM_SLIDES: OlamSlide[] = [
     kind: 'sources',
   },  {
     id: 'iterations',
-    section: '60-pass executive review · latest 10-pass revalidation',
-    title: 'Ten fresh revalidation passes took the deck to 60 total reviews — with every material number forced through a source, definition or model-boundary test',
-    narrative: 'Passes 51–60 re-opened the primary evidence, re-performed core arithmetic, challenged insight wording and added figure-level source traceability. They build on the first 50 rather than repeat them.',
+    section: '63-pass executive review · latest 3-pass cross-check',
+    title: 'Three additional cross-check iterations took the deck to 63 total reviews — with the review flags converted into explicit governance rules',
+    narrative: 'Passes 61–63 re-opened the primary-source conflicts, tested whether the proposed remedies actually close the model weaknesses, and ran a deck-wide contradiction regression. They build on the prior 60 reviews rather than repeat them.',
     insight: 'The resulting deck is designed to be auditable, not omniscient: reported facts stay reported, estimates stay estimates, model outputs stay conditional, and unknown internal Olam economics are explicitly left for internal data replacement.',
     metrics: [
-      { label: 'Total reviews', value: '60', detail: '50 prior reviews + 10 fresh factual/source passes', tone: 'green' },
-      { label: 'Latest revalidation', value: '10', detail: 'Freshness, arithmetic, insight consistency and figure traceability', tone: 'cyan' },
+      { label: 'Total reviews', value: '63', detail: '50 prior + 10 fresh factual/source + 3 requested cross-check passes', tone: 'green' },
+      { label: 'Latest cross-check', value: '3', detail: 'Primary-source conflicts · model/governance remedies · contradiction regression', tone: 'cyan' },
       { label: 'Figure register', value: '36 lines', detail: 'Reported, forecast, derived, model, portfolio and QA numbers classified', tone: 'gold' },
       { label: 'Capital discipline', value: '8 gates', detail: 'No scale without evidence, contribution, cash and repeatability', tone: 'violet' },
     ],
@@ -1461,6 +1486,7 @@ const OLAM_SLIDE_ORDER = [
   'candidate-1',
   'candidate-2',
   'review-reverification',
+  'review-corrective-actions',
   'figure-evidence-1',
   'figure-evidence-2',
   'figure-evidence-3',
