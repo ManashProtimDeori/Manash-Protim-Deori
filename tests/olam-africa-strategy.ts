@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync, statSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS,
@@ -289,7 +289,7 @@ const pageSource = readFileSync(pagePath, 'utf8');
 assert.ok(pageSource.includes('Download PPT'));
 assert.ok(pageSource.includes('Download PDF'));
 assert.ok(pageSource.includes('Download Excel'));
-assert.ok(pageSource.includes('Olam_Africa_Growth_Analytical_Model.xlsx'));
+assert.ok(pageSource.includes('downloadOlamAnalyticalWorkbook'));
 assert.ok(pageSource.includes("backgroundColor: '#F5F9F6'"), 'PDF/PPT capture surface must be light themed');
 assert.ok(pageSource.includes("slide.background = { color: 'F5F9F6' }"), 'PPTX slide background must be light themed');
 assert.ok(pageSource.includes('const EXPORT_WIDTH = 1200'));
@@ -359,15 +359,27 @@ assert.ok(cssSource.includes('background:#f5f9f6!important'), 'export host must 
 assert.ok(cssSource.includes('box-shadow:none!important'), 'export mode must suppress shadow raster artifacts');
 
 
-const workbookPath = fileURLToPath(new URL('../public/assets/Olam_Africa_Growth_Analytical_Model.xlsx', import.meta.url));
-assert.ok(existsSync(workbookPath), 'audited Olam analytical workbook must be bundled as a static download');
-assert.ok(statSync(workbookPath).size > 50000, 'analytical workbook should be substantive rather than a placeholder');
-const workbookBytes = readFileSync(workbookPath);
-assert.equal(workbookBytes.subarray(0,2).toString('utf8'), 'PK', 'analytical workbook must be a valid XLSX/ZIP container');
-
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S20')?.url.includes('management_discussion_and_analysis'), 'processing source should point to the exact Olam Group FY2025 MDA');
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F05' && row.figure.includes('S$610.5m')), 'processing EBIT register should retain the exact S$610.5m value');
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F07' && row.figure.includes('S$2.409bn')), 'processing invested-capital register should retain the exact S$2.409bn value');
+
+const excelExporterPath = fileURLToPath(new URL('../src/lib/olamExcelExport.ts', import.meta.url));
+const excelExporterSource = readFileSync(excelExporterPath, 'utf8');
+assert.ok(excelExporterSource.includes("xlsx@0.18.5"), 'Excel exporter should load a deterministic SheetJS runtime');
+assert.ok(excelExporterSource.includes("addSheet('Source_Register'"), 'Excel workbook must include source registry');
+assert.ok(excelExporterSource.includes("addSheet('Figure_Evidence'"), 'Excel workbook must include figure-level evidence registry');
+assert.ok(excelExporterSource.includes("addSheet('Assumptions'"), 'Excel workbook must include minute assumption ledger');
+assert.ok(excelExporterSource.includes("addSheet('Base_Case'"), 'Excel workbook must include formula-driven base case');
+assert.ok(excelExporterSource.includes("addSheet('Scenarios'"), 'Excel workbook must include scenario analysis');
+assert.ok(excelExporterSource.includes("addSheet('Sensitivity'"), 'Excel workbook must include sensitivity analysis');
+assert.ok(excelExporterSource.includes("addSheet('Simulation'"), 'Excel workbook must include the full 5,000-run simulation detail');
+assert.ok(excelExporterSource.includes("addSheet('Decision_Gates'"), 'Excel workbook must include decision gates');
+assert.ok(excelExporterSource.includes("addSheet('QA_10_Pass'"), 'Excel workbook must include ten internal QA passes');
+assert.ok(excelExporterSource.includes("addSheet('Fresh_Source_Audit'"), 'Excel workbook must include ten fresh-source checks');
+assert.ok(excelExporterSource.includes("addSheet('Formula_Map'"), 'Excel workbook must include formula lineage');
+assert.ok(excelExporterSource.includes('for (let i = 1; i <= 5000; i += 1)'), 'Excel workbook should retain all 5,000 seeded simulation draws');
+assert.ok(excelExporterSource.includes("2026-10-03"), 'fresh-source audit date should be explicit');
+assert.ok(excelExporterSource.includes("Olam_Africa_Growth_Analytical_Model.xlsx"), 'downloaded workbook filename must be stable');
 
 const reviewSlide = OLAM_SLIDES.find(slide => slide.id === 'iterations');
 assert.ok(reviewSlide);
