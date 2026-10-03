@@ -106,13 +106,13 @@ export async function downloadOlamAnalyticalWorkbook() {
   addSheet('README', [
     ['Olam Agri Nigeria Category Growth — Analytical Model'],
     ['Purpose', 'Auditable decision-screening workbook aligned to the Olam strategy deck.'],
-    ['Accuracy standard', 'Ten workbook QA iterations + ten fresh-source checks + three additional cross-check iterations (primary-source conflict recheck, model/governance remedy test, deck-wide contradiction regression). Public sources can change, so the workbook preserves dates, versions, caveats and source conflicts rather than claiming immutable certainty.'],
+    ['Accuracy standard', 'Ten workbook QA iterations + ten fresh-source checks + three corrective-action cross-checks + three new web-verification iterations (corporate/regulatory, macro-boundary, programme/model-boundary). Public sources can change, so the workbook preserves dates, versions, caveats and source conflicts rather than claiming immutable certainty.'],
     ['Model perimeter', 'Normalized NGN100bn eligible-sales decision unit; Nigeria first-wave category-growth screening.'],
     ['Base-case gate', baseCase.fullScaleGate.toUpperCase()],
     ['Base 3Y NPV (NGN bn)', baseCase.threeYearNpvNgnBn],
     ['Required run-rate for zero NPV (NGN bn)', baseCase.requiredRunRateForNpvZeroNgnBn],
     ['Simulation', simulation.runs + ' runs · seed ' + simulation.seed + ' · positive-NPV frequency ' + simulation.positiveNpvFrequencyPct.toFixed(2) + '%'],
-    ['Workbook sections', 'Source_Register · Figure_Evidence · Assumptions · Base_Case · Scenarios · Sensitivity · Simulation · Decision_Gates · Review_3_Pass · Corrective_Actions · QA_10_Pass · Fresh_Source_Audit · Formula_Map'],
+    ['Workbook sections', 'Source_Register · Figure_Evidence · Assumptions · Base_Case · Scenarios · Sensitivity · Simulation · Decision_Gates · Review_3_Pass · Corrective_Actions · Signal_Boundaries · QA_10_Pass · Fresh_Source_Audit · Formula_Map'],
     ['Checked / rebuilt', '2026-10-03'],
   ], [36, 112]);
 
@@ -300,6 +300,16 @@ export async function downloadOlamAnalyticalWorkbook() {
     ['Causal Incremental Contribution ROMI', 'Credit verified incremental offtake contribution, not primary sell-in or inventory loading.', 'Channel loading can look like growth while worsening carry, route cost and cannibalization.', 'Counterfactual baseline, verified offtake, net price/trade spend, route/service cost, carry and cannibalization.'],
     ['Eight-gate constitution', 'G0–G7 are sequential; a failed earlier gate cannot be waived by market size, volume or narrative.', 'The review requires evidence, customer economics, contribution, route reliability, resilience, cash and replication before capital release.', 'Gate owner, pass condition, falsifier and evidence timestamp for every intervention.'],
   ], [34, 86, 90, 100]);
+
+  addSheet('Signal_Boundaries', [
+    ['External signal', 'Verified public figure', 'Correct use', 'Prohibited inference', 'Replacement / internal proof'],
+    ['Nigeria wheat consumption', '6.8m MT MY2026/27 USDA projection', 'National demand context', 'Olam semolina penetration, Olam share, brand growth or campaign lift', 'Olam sell-out, pack, availability, repeat and contribution data'],
+    ['Nigeria inflation', '15.39% headline / 19.57% food, Aug-2026 NBS', 'Affordability-pressure and price-change context', 'Falling prices or restored purchasing power', 'Olam pack-price, basket, cohort and realized net-price evidence'],
+    ['World Bank food-price grid', '73 Nigeria markets; measured + ML estimation', 'External regional pressure signal', 'Olam invoice, sell-out or transaction ground truth', 'Customer/route-level Olam transaction data'],
+    ['Baking Brighter Futures', 'US$2m planned; >20,000 target; >10,000 benefitted; ~50% women', 'Programme commitment and reach', 'Realized revenue, EBIT or ROMI', 'Measured customer economics and incremental contribution'],
+    ['Africa food market', '$1tn by 2030 World Bank projection', 'Continental macro opportunity anchor', 'Olam addressable revenue, Nigeria category TAM or earnings forecast', 'Bottom-up served-market perimeter and economics'],
+    ['CBN MPR', '23% Sep-2026', 'Public financing-condition anchor', 'Olam WACC or required project hurdle', 'Treasury-approved nominal-NGN project hurdle'],
+  ], [34, 40, 68, 82, 84]);
 
   addSheet('QA_10_Pass', [
     ['Pass', 'Audit', 'Status', 'Benchmark / rule'],
