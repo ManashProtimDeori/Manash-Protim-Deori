@@ -1322,6 +1322,21 @@ def validate_text_layout(prs):
     else:
         print("Text-layout diagnostics: no obvious overflow/off-canvas risks.")
 
+def print_appendix_text_inventory(prs):
+    print("APPENDIX-TEXT-INVENTORY-BEGIN")
+    for idx, slide in enumerate(prs.slides, start=1):
+        label = _appendix_label(slide)
+        if not label:
+            continue
+        print(f"APPENDIX {idx}: {label}")
+        for s in slide.shapes:
+            if getattr(s, "has_text_frame", False):
+                t = norm(s.text)
+                if t:
+                    print("  " + t[:500])
+    print("APPENDIX-TEXT-INVENTORY-END")
+
+
 def main():
     WORK.mkdir(exist_ok=True)
     PDF_OUT_DIR.mkdir(exist_ok=True)
@@ -1330,6 +1345,7 @@ def main():
     PPTX.write_bytes(raw)
 
     prs = Presentation(PPTX)
+    print_appendix_text_inventory(prs)
     counts = {
         "source_url_boxes": 0,
         "interview_heading_removed": 0,
