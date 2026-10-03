@@ -433,11 +433,23 @@ const CandidateOneBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
             </div>
           </div>
 
-          <div className="mt-1 border-t border-white/7 pt-1">
-            <div className="olam-dense-copy leading-[1.16] text-white/50"><span className="font-mono text-white/36">GAP · </span>{system.gap}</div>
-            <div className="olam-dense-copy mt-0.5 leading-[1.16] text-amber-100/68"><span className="font-mono text-amber-200/72">DECISION · </span>{system.decision}</div>
-            <div className="olam-dense-copy mt-0.5 leading-[1.14] text-violet-100/52"><span className="font-mono text-violet-200/58">USERS · </span>{system.beneficiaries}</div>
-            <div className="olam-dense-copy mt-0.5 leading-[1.14] text-white/46"><span className="font-mono text-cyan-200/58">PROVE / FALSIFY · </span>{system.proof} / {system.falsifier}</div>
+          <div className="mt-1 grid grid-cols-2 gap-x-2 gap-y-1 border-t border-white/7 pt-1">
+            <div className="min-w-0">
+              <div className="olam-dense-meta font-mono text-white/36">GAP</div>
+              <div className="olam-dense-copy mt-0.5 leading-[1.12] text-white/50">{system.gap}</div>
+            </div>
+            <div className="min-w-0">
+              <div className="olam-dense-meta font-mono text-amber-200/72">DECISION</div>
+              <div className="olam-dense-copy mt-0.5 leading-[1.12] text-amber-100/68">{system.decision}</div>
+            </div>
+            <div className="min-w-0">
+              <div className="olam-dense-meta font-mono text-violet-200/58">USERS</div>
+              <div className="olam-dense-copy mt-0.5 leading-[1.1] text-violet-100/52">{system.beneficiaries}</div>
+            </div>
+            <div className="min-w-0">
+              <div className="olam-dense-meta font-mono text-cyan-200/58">PROVE / FALSIFY</div>
+              <div className="olam-dense-copy mt-0.5 leading-[1.1] text-white/46">{system.proof} / {system.falsifier}</div>
+            </div>
           </div>
         </article>
       ))}
@@ -499,10 +511,10 @@ const CandidateOneBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
 );
 
 const CandidateTwoBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
-  <div className="grid h-full grid-rows-[.88fr_1.12fr] gap-3">
-    <div className="grid grid-cols-4 gap-2.5">
+  <div className="olam-candidate-two-body grid h-full min-h-0 grid-rows-[auto_1fr] gap-2.5">
+    <div className="olam-candidate-phase-grid grid grid-cols-4 gap-2">
       {OLAM_CANDIDATE_90_DAY_PHASES.map((phase, idx) => (
-        <article key={phase.window} className="relative min-w-0 overflow-hidden rounded-[16px] border border-white/9 bg-white/[0.026] p-2.5">
+        <article key={phase.window} className="relative min-w-0 overflow-hidden rounded-[14px] border border-white/9 bg-white/[0.026] p-2">
           <div className="absolute inset-x-0 top-0 h-[2px]" style={{background:[palette.cyan,palette.green,palette.gold,palette.violet][idx]}} />
           <div className="flex items-baseline justify-between gap-2">
             <span className="olam-dense-meta font-mono" style={{color:[palette.cyan,palette.green,palette.gold,palette.violet][idx]}}>{phase.window} DAYS</span>
@@ -519,7 +531,7 @@ const CandidateTwoBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
       ))}
     </div>
 
-    <div className="grid min-h-0 grid-cols-[1.04fr_.96fr_1fr] gap-2.5">
+    <div className="olam-candidate-two-lower grid min-h-0 grid-cols-[1.04fr_.96fr_1fr] gap-2">
       <section className="min-w-0 rounded-[17px] border border-emerald-300/14 bg-emerald-300/[0.025] p-3">
         <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-emerald-200/76">Economic evidence architecture</div>
         <div className="olam-dense-copy mt-2 leading-[1.34] text-white/68">
@@ -564,9 +576,9 @@ const CandidateTwoBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
         </div>
       </section>
 
-      <section className="min-w-0 rounded-[17px] border border-violet-300/14 bg-violet-300/[0.025] p-3">
+      <section className="olam-candidate-ownership min-w-0 rounded-[17px] border border-violet-300/14 bg-violet-300/[0.025] p-2.5">
         <div className="olam-card-kicker font-mono uppercase tracking-[0.13em] text-violet-200/76">Ownership + proposed operating standard</div>
-        <div className="mt-2 grid grid-cols-2 gap-x-2 gap-y-1">
+        <div className="mt-1.5 grid grid-cols-3 gap-x-1.5 gap-y-1">
           {OLAM_CANDIDATE_MODEL_OWNERSHIP.map(([input,owner,support]) => (
             <div key={input} className="min-w-0 rounded-lg border border-white/6 bg-black/10 px-1.5 py-1">
               <div className="olam-dense-meta font-mono text-white/45">{input}</div>
@@ -575,22 +587,22 @@ const CandidateTwoBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
             </div>
           ))}
         </div>
-        <div className="mt-2 border-t border-white/8 pt-2">
+        <div className="mt-1.5 border-t border-white/8 pt-1.5">
           <div className="olam-dense-meta font-mono text-amber-200/70">PROPOSED OPERATING STANDARD · NOT ACHIEVED RESULTS</div>
-          <div className="mt-1 grid grid-cols-2 gap-x-2 gap-y-1">
+          <div className="mt-1 grid grid-cols-4 gap-x-1.5 gap-y-1">
             {OLAM_CANDIDATE_PROPOSED_STANDARDS.map(([value,label]) => (
-              <div key={value+label} className="grid grid-cols-[34px_1fr] gap-1.5">
+              <div key={value+label} className="grid min-w-0 grid-cols-[28px_1fr] gap-1">
                 <span className="olam-dense-title font-semibold text-amber-200">{value}</span>
                 <span className="olam-dense-copy leading-[1.16] text-white/44">{label}</span>
               </div>
             ))}
           </div>
         </div>
-        <div className="mt-2 rounded-lg border border-cyan-300/10 bg-cyan-300/[0.02] p-1.5">
+        <div className="mt-1.5 rounded-lg border border-cyan-300/10 bg-cyan-300/[0.02] p-1.5">
           <div className="olam-dense-meta font-mono text-cyan-200/62">LEARNING FLYWHEEL</div>
           <div className="olam-dense-copy mt-0.5 leading-[1.18] text-white/48">signal → diagnose → design test → measure economics → reconcile with S&OP → decide → codify → next signal</div>
         </div>
-        <div className="mt-1.5 olam-dense-copy leading-[1.2] text-orange-100/52">
+        <div className="mt-1 olam-dense-copy leading-[1.16] text-orange-100/52">
           Any financial impact here is a measurement framework or scenario—not a promise of Olam performance.
         </div>
       </section>
@@ -672,10 +684,10 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
       .filter(Boolean);
 
     return (
-      <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+      <div className="olam-evidence-register-grid grid grid-cols-3 gap-x-2 gap-y-1.5">
         {rows.map((row) => (
-          <div key={row.id} className="min-w-0 rounded-xl border border-white/9 bg-white/[0.026] px-3 py-2.5">
-            <div className="flex items-start gap-2.5">
+          <div key={row.id} className="olam-evidence-register-card min-w-0 rounded-lg border border-white/9 bg-white/[0.026] px-2.5 py-2">
+            <div className="flex items-start gap-2">
               <span className="olam-dense-meta shrink-0 font-mono text-emerald-300">{row.id}</span>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
@@ -683,8 +695,8 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
                   <span className="olam-dense-meta rounded-full border border-white/10 bg-white/[0.035] px-1.5 py-0.5 font-mono uppercase tracking-[0.08em] text-white/48">{row.classification}</span>
                 </div>
                 <div className="olam-dense-copy mt-0.5 leading-[1.28] text-white/72">{row.claim}</div>
-                <div className="olam-dense-copy mt-1 leading-[1.25] text-white/45">{row.provenance}</div>
-                <div className="mt-1 flex flex-wrap gap-1.5">
+                <div className="olam-dense-copy mt-0.5 leading-[1.2] text-white/45">{row.provenance}</div>
+                <div className="mt-0.5 flex flex-wrap gap-1">
                   {row.sourceIds.length > 0 ? row.sourceIds.map((sourceId) => {
                     const source = sourceMap[sourceId];
                     return (
