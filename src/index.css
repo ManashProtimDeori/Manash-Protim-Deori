@@ -5040,6 +5040,134 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
 .olam-strategy-lab .olam-dense-title{font-size:var(--olam-dense-title)}
 .olam-strategy-lab .olam-dense-copy{font-size:var(--olam-dense-copy)}
 
+
+/* Dense-slide fit system --------------------------------------------------
+   These slides carry evidence/model/candidate detail. Give the body more of
+   the 16:9 canvas instead of clipping lower rows behind the slide boundary. */
+.olam-strategy-lab .olam-kind--candidate .olam-slide-inner,
+.olam-strategy-lab .olam-kind--policy .olam-slide-inner,
+.olam-strategy-lab .olam-kind--assumptions .olam-slide-inner,
+.olam-strategy-lab .olam-kind--sensitivity .olam-slide-inner,
+.olam-strategy-lab .olam-kind--evidence-register .olam-slide-inner,
+.olam-strategy-lab .olam-kind--sources .olam-slide-inner,
+.olam-strategy-lab .olam-kind--iterations .olam-slide-inner,
+.olam-strategy-lab .olam-kind--audit .olam-slide-inner,
+.olam-strategy-lab .olam-kind--scenario .olam-slide-inner{
+  padding:22px 30px 20px!important;
+}
+.olam-strategy-lab .olam-kind--candidate .olam-title-row,
+.olam-strategy-lab .olam-kind--policy .olam-title-row,
+.olam-strategy-lab .olam-kind--assumptions .olam-title-row,
+.olam-strategy-lab .olam-kind--sensitivity .olam-title-row,
+.olam-strategy-lab .olam-kind--evidence-register .olam-title-row,
+.olam-strategy-lab .olam-kind--sources .olam-title-row,
+.olam-strategy-lab .olam-kind--iterations .olam-title-row,
+.olam-strategy-lab .olam-kind--audit .olam-title-row,
+.olam-strategy-lab .olam-kind--scenario .olam-title-row{
+  margin-top:9px!important;
+  gap:12px!important;
+}
+.olam-strategy-lab .olam-kind--candidate .olam-title-card,
+.olam-strategy-lab .olam-kind--candidate .olam-insight-card,
+.olam-strategy-lab .olam-kind--policy .olam-title-card,
+.olam-strategy-lab .olam-kind--policy .olam-insight-card,
+.olam-strategy-lab .olam-kind--assumptions .olam-title-card,
+.olam-strategy-lab .olam-kind--assumptions .olam-insight-card,
+.olam-strategy-lab .olam-kind--sensitivity .olam-title-card,
+.olam-strategy-lab .olam-kind--sensitivity .olam-insight-card,
+.olam-strategy-lab .olam-kind--evidence-register .olam-title-card,
+.olam-strategy-lab .olam-kind--evidence-register .olam-insight-card,
+.olam-strategy-lab .olam-kind--sources .olam-title-card,
+.olam-strategy-lab .olam-kind--sources .olam-insight-card,
+.olam-strategy-lab .olam-kind--iterations .olam-title-card,
+.olam-strategy-lab .olam-kind--iterations .olam-insight-card,
+.olam-strategy-lab .olam-kind--audit .olam-title-card,
+.olam-strategy-lab .olam-kind--audit .olam-insight-card,
+.olam-strategy-lab .olam-kind--scenario .olam-title-card,
+.olam-strategy-lab .olam-kind--scenario .olam-insight-card{
+  padding:13px 15px!important;
+  border-radius:18px!important;
+}
+.olam-strategy-lab .olam-kind--candidate .olam-body-region,
+.olam-strategy-lab .olam-kind--policy .olam-body-region,
+.olam-strategy-lab .olam-kind--assumptions .olam-body-region,
+.olam-strategy-lab .olam-kind--sensitivity .olam-body-region,
+.olam-strategy-lab .olam-kind--evidence-register .olam-body-region,
+.olam-strategy-lab .olam-kind--sources .olam-body-region,
+.olam-strategy-lab .olam-kind--iterations .olam-body-region,
+.olam-strategy-lab .olam-kind--audit .olam-body-region,
+.olam-strategy-lab .olam-kind--scenario .olam-body-region{
+  margin-top:10px!important;
+}
+.olam-strategy-lab .olam-kind--candidate .olam-narrative,
+.olam-strategy-lab .olam-kind--policy .olam-narrative,
+.olam-strategy-lab .olam-kind--assumptions .olam-narrative,
+.olam-strategy-lab .olam-kind--sensitivity .olam-narrative,
+.olam-strategy-lab .olam-kind--evidence-register .olam-narrative,
+.olam-strategy-lab .olam-kind--sources .olam-narrative,
+.olam-strategy-lab .olam-kind--iterations .olam-narrative,
+.olam-strategy-lab .olam-kind--audit .olam-narrative,
+.olam-strategy-lab .olam-kind--scenario .olam-narrative{
+  margin-top:6px!important;
+  line-height:1.32!important;
+}
+.olam-strategy-lab .olam-kind--candidate .olam-insight-copy,
+.olam-strategy-lab .olam-kind--policy .olam-insight-copy,
+.olam-strategy-lab .olam-kind--assumptions .olam-insight-copy,
+.olam-strategy-lab .olam-kind--sensitivity .olam-insight-copy,
+.olam-strategy-lab .olam-kind--evidence-register .olam-insight-copy,
+.olam-strategy-lab .olam-kind--sources .olam-insight-copy,
+.olam-strategy-lab .olam-kind--iterations .olam-insight-copy,
+.olam-strategy-lab .olam-kind--audit .olam-insight-copy,
+.olam-strategy-lab .olam-kind--scenario .olam-insight-copy{
+  margin-top:6px!important;
+  line-height:1.3!important;
+}
+
+/* The six contribution systems are now 3×2 instead of 2×3; this is the
+   slide from the reported screenshot and removes the bottom-canvas cutoff
+   without deleting analytical content. */
+.olam-strategy-lab .olam-slide--candidate-1{
+  --olam-dense-title:10.5px;
+  --olam-dense-copy:9.35px;
+  --olam-meta:8.65px;
+  --olam-card-kicker:9px;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card,
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip>div{
+  overflow:hidden;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card p,
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card div,
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip div,
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip p{
+  overflow-wrap:anywhere;
+}
+
+/* Other high-density slide families receive a small typographic reserve so
+   line-height differences between Chromium, html2canvas and PowerPoint/PDF
+   rasterization do not push the last line outside its card. */
+.olam-strategy-lab .olam-kind--policy,
+.olam-strategy-lab .olam-kind--assumptions,
+.olam-strategy-lab .olam-kind--evidence-register,
+.olam-strategy-lab .olam-kind--sources,
+.olam-strategy-lab .olam-kind--iterations{
+  --olam-dense-copy:9.55px;
+  --olam-dense-title:10.6px;
+  --olam-meta:8.9px;
+}
+.olam-strategy-lab .olam-kind--policy article,
+.olam-strategy-lab .olam-kind--assumptions .rounded-xl,
+.olam-strategy-lab .olam-kind--evidence-register .rounded-xl{
+  padding-top:8px!important;
+  padding-bottom:8px!important;
+}
+.olam-strategy-lab .olam-deck-slide p,
+.olam-strategy-lab .olam-deck-slide span,
+.olam-strategy-lab .olam-deck-slide div{
+  text-wrap:pretty;
+}
+
 .olam-strategy-lab .olam-title-card,
 .olam-strategy-lab .olam-insight-card,
 .olam-strategy-lab .olam-metric-card{
