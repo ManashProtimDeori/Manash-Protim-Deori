@@ -5192,6 +5192,28 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   line-height:1.25!important;
 }
 
+
+/* External-signal boundary audit: five evidence-boundary bullets plus four
+   metrics need a compact reserve to stay inside the fixed export canvas. */
+.olam-strategy-lab .olam-slide--review-signal-boundaries{
+  --olam-bullet:10.1px;
+  --olam-detail:9.25px;
+  --olam-value:18.5px;
+  --olam-card-kicker:8.8px;
+}
+.olam-strategy-lab .olam-slide--review-signal-boundaries .olam-metric-card{
+  padding:9px 11px!important;
+}
+.olam-strategy-lab .olam-slide--review-signal-boundaries .olam-metric-detail{
+  line-height:1.24!important;
+}
+.olam-strategy-lab .olam-slide--review-signal-boundaries .space-y-3>:not([hidden])~:not([hidden]){
+  margin-top:5px!important;
+}
+.olam-strategy-lab .olam-slide--review-signal-boundaries .olam-bullet-copy{
+  line-height:1.23!important;
+}
+
 /* Other high-density slide families receive a small typographic reserve so
    line-height differences between Chromium, html2canvas and PowerPoint/PDF
    rasterization do not push the last line outside its card. */
