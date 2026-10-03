@@ -1,6 +1,6 @@
 name: Olam Africa Strategy Quality
 
-
+on:
   push:
     branches:
       - main
