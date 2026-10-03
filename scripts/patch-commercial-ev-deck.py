@@ -652,10 +652,15 @@ def _name_shape(shape, name):
 
 def _insert_before(reference_shape, new_shape):
     """Place new_shape immediately behind reference_shape in z-order."""
-    parent = reference_shape._element.getparent()
+    ref_el = reference_shape._element
+    ref_parent = ref_el.getparent()
+    if ref_parent is None:
+        return
     el = new_shape._element
-    parent.remove(el)
-    parent.insert(parent.index(reference_shape._element), el)
+    current_parent = el.getparent()
+    if current_parent is not None:
+        current_parent.remove(el)
+    ref_parent.insert(ref_parent.index(ref_el), el)
 
 
 def _delete_named_shapes(slide, prefix):
@@ -675,7 +680,7 @@ def _style_3d_tco_card(slide, card):
     # Remove the legacy empty shadow plate that sat almost exactly behind the
     # original card, otherwise the new depth system becomes visually muddy.
     for s in list(slide.shapes):
-        if s is card or s.shape_type != 1:
+        if s._element is card._element or s.shape_type != 1:
             continue
         t = norm(s.text) if getattr(s, "has_text_frame", False) else ""
         if t:
