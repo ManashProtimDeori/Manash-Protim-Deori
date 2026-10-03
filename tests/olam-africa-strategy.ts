@@ -118,7 +118,7 @@ assert.equal(correctiveActions?.kind, 'gate');
 assert.ok(correctiveActions?.metrics.some(metric => metric.value === 'Stage it'));
 assert.ok(correctiveActions?.metrics.some(metric => metric.value === 'Causal'));
 assert.ok(correctiveActions?.metrics.some(metric => metric.value === 'G0–G7'));
-assert.ok(correctiveActions?.bullets.some(bullet => bullet.includes('NGN3.6bn rollout')));
+assert.ok(correctiveActions?.metrics.some(metric => metric.detail.includes('NGN3.6bn rollout')));
 assert.ok(correctiveActions?.bullets.some(bullet => bullet.includes('Finance-owned inventory + receivables − payables')));
 assert.ok(correctiveActions?.bullets.some(bullet => bullet.includes('verified incremental offtake contribution')));
 assert.deepEqual(OLAM_REVIEW_ITERATIONS.slice(-3).map(row => row[0]), ['61','62','63']);
