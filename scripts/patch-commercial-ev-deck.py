@@ -9,6 +9,7 @@ from pathlib import Path
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
+from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import MSO_AUTO_SIZE, MSO_ANCHOR, PP_ALIGN
 from pptx.util import Inches, Pt
 
@@ -642,6 +643,105 @@ def _find_enclosing_card(slide, anchor, min_width=2.0, min_height=0.8, max_heigh
     return min(candidates, key=lambda s: int(s.width) * int(s.height))
 
 
+def _name_shape(shape, name):
+    try:
+        shape._element.nvSpPr.cNvPr.set("name", name)
+    except Exception:
+        pass
+
+
+def _insert_before(reference_shape, new_shape):
+    """Place new_shape immediately behind reference_shape in z-order."""
+    parent = reference_shape._element.getparent()
+    el = new_shape._element
+    parent.remove(el)
+    parent.insert(parent.index(reference_shape._element), el)
+
+
+def _delete_named_shapes(slide, prefix):
+    for s in list(slide.shapes):
+        if getattr(s, "name", "").startswith(prefix):
+            delete_shape(s)
+
+
+def _style_3d_tco_card(slide, card):
+    """
+    Give the TCO stress-test card a restrained consulting-grade 3D treatment:
+    deep offset plate -> warm mid edge -> clean ivory face.
+    The treatment is intentionally structural rather than decorative-heavy.
+    """
+    _delete_named_shapes(slide, "TCO 3D ")
+
+    # Remove the legacy empty shadow plate that sat almost exactly behind the
+    # original card, otherwise the new depth system becomes visually muddy.
+    for s in list(slide.shapes):
+        if s is card or s.shape_type != 1:
+            continue
+        t = norm(s.text) if getattr(s, "has_text_frame", False) else ""
+        if t:
+            continue
+        same_size = (
+            abs(s.width - card.width) <= Inches(0.20)
+            and abs(s.height - card.height) <= Inches(0.20)
+        )
+        nearby = (
+            abs(s.left - card.left) <= Inches(0.18)
+            and abs(s.top - card.top) <= Inches(0.18)
+        )
+        if same_size and nearby:
+            delete_shape(s)
+
+    # Deep rear plate.
+    back = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        int(card.left + Inches(0.13)),
+        int(card.top + Inches(0.13)),
+        card.width,
+        card.height,
+    )
+    _name_shape(back, "TCO 3D Back Plate")
+    back.fill.solid()
+    back.fill.fore_color.rgb = RGBColor(155, 87, 4)
+    back.line.fill.background()
+    _insert_before(card, back)
+
+    # Mid-depth plate creates a bevel rather than a flat drop shadow.
+    mid = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        int(card.left + Inches(0.065)),
+        int(card.top + Inches(0.065)),
+        card.width,
+        card.height,
+    )
+    _name_shape(mid, "TCO 3D Mid Plate")
+    mid.fill.solid()
+    mid.fill.fore_color.rgb = RGBColor(224, 151, 25)
+    mid.line.fill.background()
+    _insert_before(card, mid)
+
+    # Front face: warm ivory with a crisp premium edge.
+    card.fill.solid()
+    card.fill.fore_color.rgb = RGBColor(255, 250, 237)
+    card.line.color.rgb = RGBColor(213, 139, 18)
+    card.line.width = Pt(1.4)
+
+    # Subtle top bevel highlight. It sits within the face and never touches
+    # body copy; the narrow band gives the card dimensionality at a glance.
+    highlight = slide.shapes.add_shape(
+        MSO_SHAPE.ROUNDED_RECTANGLE,
+        int(card.left + Inches(0.22)),
+        int(card.top + Inches(0.12)),
+        int(card.width - Inches(0.44)),
+        Inches(0.075),
+    )
+    _name_shape(highlight, "TCO 3D Highlight")
+    highlight.fill.solid()
+    highlight.fill.fore_color.rgb = RGBColor(255, 226, 157)
+    highlight.line.fill.background()
+
+    return back, mid, highlight
+
+
 def finalize_tco_challenge_card(slide, counts):
     title = text_shape(slide, contains="Hardest TCO challenge sequence")
     if title is None:
@@ -658,6 +758,7 @@ def finalize_tco_challenge_card(slide, counts):
     else:
         card_left, card_right = card.left, _shape_right(card)
         card_top, card_bottom = card.top, _shape_bottom(card)
+        _style_3d_tco_card(slide, card)
 
     # Delete EVERY text object geometrically inside the challenge card except
     # the heading. This removes legacy lines such as financing APR and the
@@ -677,22 +778,29 @@ def finalize_tco_challenge_card(slide, counts):
             delete_shape(s)
             removed += 1
 
-    title.left = int(card_left + Inches(0.26))
-    title.width = int(card_right - card_left - Inches(0.52))
-    title.top = int(card_top + Inches(0.16))
-    title.height = Inches(0.30)
+    # Stronger title hierarchy.
+    title.left = int(card_left + Inches(0.30))
+    title.width = int(card_right - card_left - Inches(0.60))
+    title.top = int(card_top + Inches(0.28))
+    title.height = Inches(0.34)
     format_text(
-        title, font_pt=8.3, bold=True, align=PP_ALIGN.LEFT,
+        title, font_pt=10.4, bold=True, align=PP_ALIGN.LEFT,
         valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0
     )
+    for p in title.text_frame.paragraphs:
+        for r in p.runs:
+            r.font.color.rgb = RGBColor(20, 38, 55)
 
-    body_left = int(card_left + Inches(0.28))
-    body_top = int(title.top + title.height + Inches(0.10))
-    body_w = int(card_right - card_left - Inches(0.56))
-    body_h = int(card_bottom - body_top - Inches(0.22))
+    # Build the checklist with prominent amber numerals and dark body copy.
+    body_left = int(card_left + Inches(0.30))
+    body_top = int(title.top + title.height + Inches(0.14))
+    body_w = int(card_right - card_left - Inches(0.60))
+    body_h = int(card_bottom - body_top - Inches(0.28))
     body = slide.shapes.add_textbox(body_left, body_top, body_w, body_h)
-    set_textbox_lines(body, TCO_ITEMS, font_pt=6.8, bold=False)
+    _name_shape(body, "TCO 3D Checklist")
+
     tf = body.text_frame
+    tf.clear()
     tf.vertical_anchor = MSO_ANCHOR.TOP
     tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
     tf.word_wrap = True
@@ -700,13 +808,30 @@ def finalize_tco_challenge_card(slide, counts):
     tf.margin_right = Pt(0)
     tf.margin_top = Pt(0)
     tf.margin_bottom = Pt(0)
-    for p in tf.paragraphs:
+
+    for i, item in enumerate(TCO_ITEMS):
+        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        number, statement = item.split(". ", 1)
+        num_run = p.add_run()
+        num_run.text = number + ". "
+        num_run.font.size = Pt(8.8)
+        num_run.font.bold = True
+        num_run.font.color.rgb = RGBColor(181, 105, 4)
+
+        text_run = p.add_run()
+        text_run.text = statement
+        text_run.font.size = Pt(8.8)
+        text_run.font.bold = False
+        text_run.font.color.rgb = RGBColor(24, 42, 57)
+
         p.space_before = Pt(0)
-        p.space_after = Pt(0.8)
-        p.line_spacing = 0.96
+        p.space_after = Pt(2.0)
+        p.line_spacing = 1.03
+        p.alignment = PP_ALIGN.LEFT
 
     counts["tco_legacy_inside_removed"] += removed
     counts["tco_final_geometry"] += 1
+    counts["tco_3d_card_styled"] += 1
 
 
 def _pill_background_candidates(slide, text_box, min_width_in=0.80, max_width_in=2.60):
@@ -1193,6 +1318,7 @@ def main():
         "global_text_boxes": 0,
         "global_autofit": 0,
         "tco_final_geometry": 0,
+        "tco_3d_card_styled": 0,
         "roadmap_final_geometry": 0,
         "roadmap_chips_fixed": 0,
         "roadmap_cards_balanced": 0,
