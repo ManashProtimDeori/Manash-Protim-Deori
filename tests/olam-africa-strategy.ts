@@ -354,8 +354,10 @@ assert.ok(pageSource.includes('olam-slide-inner'), 'Olam slides should use a pro
 assert.ok(pageSource.includes('olam-title-row'), 'slide title row needs a stable compact-layout hook');
 assert.ok(pageSource.includes('olam-body-region'), 'slide body needs a stable protected fit region');
 assert.ok(pageSource.includes('grid min-h-0 grid-cols-3 grid-rows-2 gap-2'), 'candidate contribution systems should use a 3×2 layout instead of a clipping 2×3 stack');
-assert.ok(pageSource.includes('olam-candidate-support-strip'), 'candidate support material should stay in a compact horizontal strip');
-assert.ok(pageSource.includes('grid grid-cols-2 gap-x-2 gap-y-1 border-t'), 'candidate contribution cards should use a compact 2×2 analytical matrix to avoid vertical cuts');
+assert.ok(pageSource.includes('olam-candidate-boundary-bar'), 'candidate slide should end with one compact boardroom boundary bar');
+assert.ok(pageSource.includes('BUSINESS QUESTION'), 'candidate system cards should foreground the business question');
+assert.ok(pageSource.includes('DECISION ENABLED'), 'candidate system cards should state the decision enabled');
+assert.ok(pageSource.includes('HOW TO JUDGE THE LAYER'), 'candidate slide should define how the intelligence layer is judged');
 assert.ok(pageSource.includes('olam-candidate-two-body'), 'candidate-2 needs a dedicated fit hook');
 assert.ok(pageSource.includes('grid grid-cols-3 gap-x-1.5 gap-y-1'), 'candidate-2 ownership inputs should use a 3-column fit-safe layout');
 assert.ok(pageSource.includes('grid grid-cols-4 gap-x-1.5 gap-y-1'), 'candidate-2 operating standards should use a 4-column fit-safe layout');
@@ -370,8 +372,8 @@ assert.ok(pageSource.includes('VALUE OF INFORMATION'), 'candidate value architec
 assert.ok(pageSource.includes('CONTRIBUTION VELOCITY'), 'candidate quantitative slide should include contribution velocity');
 assert.ok(pageSource.includes('LEARNING VELOCITY'), 'candidate quantitative slide should include learning velocity');
 assert.ok(pageSource.includes('PROPOSED OPERATING STANDARD · NOT ACHIEVED RESULTS'), 'future process thresholds must be visibly labeled as proposed, not achieved');
-assert.ok(pageSource.includes('Decision examples · system value, not heroics'), 'candidate slide should include concrete semolina/oil/S&OP/NPD examples');
-assert.ok(pageSource.includes('sell-in +12% ≠ win'), 'edible-oil promotion example must remain explicitly illustrative and non-celebratory');
+assert.ok(pageSource.includes('TRANSFERABLE PROOF'), 'candidate slide should retain compact historical proof without a separate cluttered panel');
+assert.ok(pageSource.includes('I enable intelligence, experiments and causal measurement.'), 'candidate slide should retain the Olam-versus-candidate ownership boundary');
 assert.ok(pageSource.includes('LEARNING FLYWHEEL'), 'candidate quantitative slide should show the reusable learning loop');
 assert.ok(pageSource.includes('OUTPUT ≠ OUTCOME ≠ ECONOMIC VALUE'), 'candidate impact should be evaluated beyond artifact production');
 assert.ok(pageSource.includes('system.beneficiaries'), 'qualitative candidate renderer must show cross-functional beneficiaries');
@@ -406,6 +408,8 @@ assert.ok(cssSource.includes('.olam-strategy-lab .olam-deck-slide [class*="text-
 assert.ok(cssSource.includes('background:#f5f9f6!important'), 'export host must use the light presentation background');
 assert.ok(cssSource.includes('box-shadow:none!important'), 'export mode must suppress shadow raster artifacts');
 assert.ok(cssSource.includes('.olam-slide--candidate-1'), 'candidate-1 needs slide-specific anti-clipping typography');
+assert.ok(cssSource.includes('.olam-candidate-boundary-bar'), 'candidate-1 compact boundary bar needs fit-safe styling');
+assert.ok(cssSource.includes('overflow:hidden!important'), 'candidate cards should contain text rather than visibly spilling across neighboring cards');
 assert.ok(cssSource.includes('.olam-kind--evidence-register .olam-slide-inner'), 'evidence appendix needs the dense-slide safe-area treatment');
 assert.ok(cssSource.includes('.olam-kind--sources .olam-slide-inner'), 'source appendix needs the dense-slide safe-area treatment');
 assert.ok(cssSource.includes('.olam-kind--policy .olam-slide-inner'), 'policy slide needs the dense-slide safe-area treatment');
