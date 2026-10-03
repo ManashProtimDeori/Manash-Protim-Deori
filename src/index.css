@@ -5144,6 +5144,32 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   overflow-wrap:anywhere;
 }
 
+
+/* Six-flag re-verification slide: preserve the full source-governance wording
+   without recreating the lower-edge clipping seen on earlier dense pages. */
+.olam-strategy-lab .olam-slide--review-reverification{
+  --olam-bullet:10.25px;
+  --olam-detail:9.4px;
+  --olam-value:19px;
+  --olam-card-kicker:8.9px;
+}
+.olam-strategy-lab .olam-slide--review-reverification .olam-metric-card{
+  padding:10px 12px!important;
+}
+.olam-strategy-lab .olam-slide--review-reverification .olam-metric-value{
+  margin-top:4px!important;
+}
+.olam-strategy-lab .olam-slide--review-reverification .olam-metric-detail{
+  margin-top:4px!important;
+  line-height:1.28!important;
+}
+.olam-strategy-lab .olam-slide--review-reverification .space-y-3>:not([hidden])~:not([hidden]){
+  margin-top:6px!important;
+}
+.olam-strategy-lab .olam-slide--review-reverification .olam-bullet-copy{
+  line-height:1.28!important;
+}
+
 /* Other high-density slide families receive a small typographic reserve so
    line-height differences between Chromium, html2canvas and PowerPoint/PDF
    rasterization do not push the last line outside its card. */
