@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS,
@@ -288,6 +288,10 @@ const pagePath = fileURLToPath(new URL('../src/pages/OlamAfricaGrowthStrategyPag
 const pageSource = readFileSync(pagePath, 'utf8');
 assert.ok(pageSource.includes('Download PPT'));
 assert.ok(pageSource.includes('Download PDF'));
+assert.ok(pageSource.includes('Download Excel'));
+assert.ok(pageSource.includes('Olam_Africa_Growth_Analytical_Model.xlsx'));
+assert.ok(pageSource.includes("backgroundColor: '#F5F9F6'"), 'PDF/PPT capture surface must be light themed');
+assert.ok(pageSource.includes("slide.background = { color: 'F5F9F6' }"), 'PPTX slide background must be light themed');
 assert.ok(pageSource.includes('const EXPORT_WIDTH = 1200'));
 assert.ok(pageSource.includes('const EXPORT_HEIGHT = 675'));
 assert.ok(pageSource.includes("host.className = 'olam-strategy-lab olam-export-host'"));
@@ -349,8 +353,21 @@ assert.ok(cssSource.includes('.olam-export-host{'), 'fixed-size off-screen expor
 assert.ok(cssSource.includes('width:1200px!important'), 'export host must use deterministic 1200px width');
 assert.ok(cssSource.includes('height:675px!important'), 'export host must use deterministic 675px height');
 assert.ok(cssSource.includes('.olam-exporting .olam-export-host .olam-metric-card'), 'metric cards need explicit export-safe styling');
+assert.ok(cssSource.includes('color-scheme:light!important'), 'Olam presentation surface must force a light color scheme');
+assert.ok(cssSource.includes('.olam-strategy-lab .olam-deck-slide [class*="text-white"]'), 'dark-theme text utility classes must be remapped for light-slide readability');
+assert.ok(cssSource.includes('background:#f5f9f6!important'), 'export host must use the light presentation background');
 assert.ok(cssSource.includes('box-shadow:none!important'), 'export mode must suppress shadow raster artifacts');
 
+
+const workbookPath = fileURLToPath(new URL('../public/assets/Olam_Africa_Growth_Analytical_Model.xlsx', import.meta.url));
+assert.ok(existsSync(workbookPath), 'audited Olam analytical workbook must be bundled as a static download');
+assert.ok(statSync(workbookPath).size > 50000, 'analytical workbook should be substantive rather than a placeholder');
+const workbookBytes = readFileSync(workbookPath);
+assert.equal(workbookBytes.subarray(0,2).toString('utf8'), 'PK', 'analytical workbook must be a valid XLSX/ZIP container');
+
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S20')?.url.includes('management_discussion_and_analysis'), 'processing source should point to the exact Olam Group FY2025 MDA');
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F05' && row.figure.includes('S$610.5m')), 'processing EBIT register should retain the exact S$610.5m value');
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F07' && row.figure.includes('S$2.409bn')), 'processing invested-capital register should retain the exact S$2.409bn value');
 
 const reviewSlide = OLAM_SLIDES.find(slide => slide.id === 'iterations');
 assert.ok(reviewSlide);
