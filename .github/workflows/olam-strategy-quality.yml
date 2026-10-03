@@ -9,6 +9,7 @@ on:
       - 'src/data/olamAfricaStrategy.ts'
       - 'src/lib/olamNigeriaDecisionModel.ts'
       - 'tests/olam-africa-strategy.ts'
+      - 'public/assets/Olam_Africa_Growth_Analytical_Model.xlsx'
       - 'src/index.css'
       - '.github/workflows/olam-strategy-quality.yml'
   pull_request:
