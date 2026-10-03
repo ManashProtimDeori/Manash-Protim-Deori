@@ -1420,7 +1420,13 @@ def patch_boardroom_language(prs, counts):
                 continue
 
             # Pic 1: remove the role-preparation line wherever it appears.
-            if role_line_re.match(original):
+            if (
+                role_line_re.match(original)
+                or (
+                    "consulting analyst" in original.lower()
+                    and "mobility growth advisory" in original.lower()
+                )
+            ):
                 delete_shape(shape)
                 removed_role_lines += 1
                 continue
@@ -1459,8 +1465,14 @@ def validate_boardroom_language(prs):
             t = norm(shape.text)
             if not t:
                 continue
-            if re.match(r"^Consulting Analyst\s*[-–—]\s*Mobility Growth Advisory$", t, re.I):
-                forbidden.append(f"slide {slide_no}: role-prep line remains")
+            if (
+                re.match(r"^Consulting Analyst\s*[-–—]\s*Mobility Growth Advisory$", t, re.I)
+                or (
+                    "consulting analyst" in t.lower()
+                    and "mobility growth advisory" in t.lower()
+                )
+            ):
+                forbidden.append(f"slide {slide_no}: role-prep line remains: {t[:120]}")
             if is_appendix and re.search(
                 r"\b(interview defence|interview defense|interviewer|candidate model|candidate analysis|the role combines)\b",
                 t,
