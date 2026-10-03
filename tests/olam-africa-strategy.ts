@@ -377,7 +377,7 @@ assert.ok(pageSource.includes('I enable intelligence, experiments and causal mea
 assert.ok(pageSource.includes('LEARNING FLYWHEEL'), 'candidate quantitative slide should show the reusable learning loop');
 assert.ok(pageSource.includes('OUTPUT ≠ OUTCOME ≠ ECONOMIC VALUE'), 'candidate impact should be evaluated beyond artifact production');
 assert.ok(pageSource.includes('system.beneficiaries'), 'qualitative candidate renderer must show cross-functional beneficiaries');
-assert.ok(pageSource.includes('system.gap'), 'qualitative candidate renderer must show the information/organizational gap');
+assert.ok(!pageSource.includes('system.gap'), 'candidate-1 should keep diagnostic gap detail in the data model rather than overloading the visual slide');
 assert.ok(pageSource.includes('OLAM_CANDIDATE_MODEL_OWNERSHIP.map'), 'full model-input ownership matrix must be rendered');
 assert.ok(pageSource.includes('Any financial impact here is a measurement framework or scenario—not a promise of Olam performance.'), 'candidate slide must carry an explicit non-promise guardrail');
 assert.ok(pageSource.includes('NOT PROHIBITED'), 'edible-oil visual must align with the audited HS-policy wording');
