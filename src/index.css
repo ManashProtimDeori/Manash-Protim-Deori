@@ -5131,44 +5131,54 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   line-height:1.3!important;
 }
 
-/* The six contribution systems are now 3×2 instead of 2×3; this is the
-   slide from the reported screenshot and removes the bottom-canvas cutoff
-   without deleting analytical content. */
+/* Candidate-1 boardroom layout --------------------------------------------------
+   Six systems stay in a clean 3×2 grid. The slide shows only business question,
+   build, decision, users and proof; secondary diagnostic detail remains in data
+   rather than being forced into the visual canvas. */
 .olam-strategy-lab .olam-slide--candidate-1{
-  --olam-dense-title:10.5px;
-  --olam-dense-copy:9.35px;
-  --olam-meta:8.65px;
-  --olam-card-kicker:9px;
+  --olam-dense-copy:9.05px;
+  --olam-dense-title:10.15px;
+  --olam-meta:8.35px;
+  --olam-card-kicker:8.8px;
 }
-.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card,
-.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip>div{
-  overflow:hidden;
+.olam-strategy-lab .olam-slide--candidate-1 .olam-title-row{
+  margin-top:7px!important;
+  gap:10px!important;
 }
-.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card p,
-.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card div,
-.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip div,
-.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip p{
-  overflow-wrap:anywhere;
+.olam-strategy-lab .olam-slide--candidate-1 .olam-title-card,
+.olam-strategy-lab .olam-slide--candidate-1 .olam-insight-card{
+  padding:11px 13px!important;
 }
-
-
-/* Screenshot-driven fit corrections ------------------------------------------------
-   Candidate 1 now uses a 2×2 lower matrix inside every system card, so reserve
-   a slightly tighter text scale and remove the hard internal clipping behavior. */
-.olam-strategy-lab .olam-slide--candidate-1{
-  --olam-dense-copy:8.85px;
-  --olam-dense-title:10px;
-  --olam-meta:8.25px;
+.olam-strategy-lab .olam-slide--candidate-1 .olam-narrative,
+.olam-strategy-lab .olam-slide--candidate-1 .olam-insight-copy{
+  margin-top:5px!important;
+  line-height:1.25!important;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-body-region{
+  margin-top:8px!important;
+  padding-bottom:0!important;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-grid{
+  min-height:0;
 }
 .olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card{
-  overflow:visible!important;
-  padding:7px!important;
+  overflow:hidden!important;
+  padding:8px!important;
+  box-sizing:border-box;
 }
-.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip{
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card p,
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card div{
+  overflow-wrap:anywhere;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-boundary-bar{
   gap:7px!important;
 }
-.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip>div{
-  padding:7px!important;
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-boundary-bar>div{
+  padding:6px 8px!important;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-boundary-bar .olam-dense-copy{
+  font-size:8.65px!important;
+  line-height:1.12!important;
 }
 
 /* Candidate 2 was vertically dominated by 11 ownership inputs plus eight
