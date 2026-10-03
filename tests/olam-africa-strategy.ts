@@ -447,7 +447,7 @@ assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F36' && row.figure.includ
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('governing policy-rate source'), 'CBN source hierarchy must use the formal MPC decision as the governing policy-rate source');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S27')?.note.includes('duty-free or unrestricted'), 'trade-policy caveat must distinguish prohibition status from import economics');
-assert.equal(OLAM_SOURCES.find(source => source.id === 'S12')?.url, 'https://www.nigerianstat.gov.ng/', 'Nigeria NBS source should point to the official live NBS site');
+assert.equal(OLAM_SOURCES.find(source => source.id === 'S12')?.url, 'https://microdata.nigerianstat.gov.ng/index.php/catalog/154/related-materials', 'Nigeria NBS source should point to the dated official August 2026 CPI materials');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S24')?.note.includes('revised across releases'), 'USDA forecast-version source should not hard-code a figure behind a dynamic current-report URL');
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S01')?.note.includes('49.474m MT handled'), 'annual-report metric definitions must distinguish handled tonnes from sales volume');
