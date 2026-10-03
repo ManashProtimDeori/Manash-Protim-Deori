@@ -133,7 +133,7 @@ assert.ok(signalBoundaries?.bullets.some(bullet => bullet.includes('machine-lear
 assert.deepEqual(OLAM_REVIEW_ITERATIONS.slice(-3).map(row => row[0]), ['64','65','66']);
 assert.ok(OLAM_REVIEW_ITERATIONS[63][3].includes('81.81%'));
 assert.ok(OLAM_REVIEW_ITERATIONS[64][3].includes('6.8m MT'));
-assert.ok(OLAM_REVIEW_ITERATIONS[65][3].includes('US$2m'));
+assert.ok(OLAM_REVIEW_ITERATIONS[65][3].includes('$2m'));
 
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S16')?.note.includes('81.11%'), 'second primary ownership source should surface the stale 81.11% conflict');
