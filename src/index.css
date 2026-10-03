@@ -5045,6 +5045,7 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
    These slides carry evidence/model/candidate detail. Give the body more of
    the 16:9 canvas instead of clipping lower rows behind the slide boundary. */
 .olam-strategy-lab .olam-kind--candidate .olam-slide-inner,
+.olam-strategy-lab .olam-kind--gate .olam-slide-inner,
 .olam-strategy-lab .olam-kind--policy .olam-slide-inner,
 .olam-strategy-lab .olam-kind--assumptions .olam-slide-inner,
 .olam-strategy-lab .olam-kind--sensitivity .olam-slide-inner,
@@ -5056,6 +5057,7 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   padding:22px 30px 20px!important;
 }
 .olam-strategy-lab .olam-kind--candidate .olam-title-row,
+.olam-strategy-lab .olam-kind--gate .olam-title-row,
 .olam-strategy-lab .olam-kind--policy .olam-title-row,
 .olam-strategy-lab .olam-kind--assumptions .olam-title-row,
 .olam-strategy-lab .olam-kind--sensitivity .olam-title-row,
@@ -5069,6 +5071,8 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
 }
 .olam-strategy-lab .olam-kind--candidate .olam-title-card,
 .olam-strategy-lab .olam-kind--candidate .olam-insight-card,
+.olam-strategy-lab .olam-kind--gate .olam-title-card,
+.olam-strategy-lab .olam-kind--gate .olam-insight-card,
 .olam-strategy-lab .olam-kind--policy .olam-title-card,
 .olam-strategy-lab .olam-kind--policy .olam-insight-card,
 .olam-strategy-lab .olam-kind--assumptions .olam-title-card,
@@ -5089,6 +5093,7 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   border-radius:18px!important;
 }
 .olam-strategy-lab .olam-kind--candidate .olam-body-region,
+.olam-strategy-lab .olam-kind--gate .olam-body-region,
 .olam-strategy-lab .olam-kind--policy .olam-body-region,
 .olam-strategy-lab .olam-kind--assumptions .olam-body-region,
 .olam-strategy-lab .olam-kind--sensitivity .olam-body-region,
@@ -5100,6 +5105,7 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   margin-top:10px!important;
 }
 .olam-strategy-lab .olam-kind--candidate .olam-narrative,
+.olam-strategy-lab .olam-kind--gate .olam-narrative,
 .olam-strategy-lab .olam-kind--policy .olam-narrative,
 .olam-strategy-lab .olam-kind--assumptions .olam-narrative,
 .olam-strategy-lab .olam-kind--sensitivity .olam-narrative,
@@ -5112,6 +5118,7 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   line-height:1.32!important;
 }
 .olam-strategy-lab .olam-kind--candidate .olam-insight-copy,
+.olam-strategy-lab .olam-kind--gate .olam-insight-copy,
 .olam-strategy-lab .olam-kind--policy .olam-insight-copy,
 .olam-strategy-lab .olam-kind--assumptions .olam-insight-copy,
 .olam-strategy-lab .olam-kind--sensitivity .olam-insight-copy,
@@ -5142,6 +5149,105 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
 .olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip div,
 .olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip p{
   overflow-wrap:anywhere;
+}
+
+
+/* Screenshot-driven fit corrections ------------------------------------------------
+   Candidate 1 now uses a 2×2 lower matrix inside every system card, so reserve
+   a slightly tighter text scale and remove the hard internal clipping behavior. */
+.olam-strategy-lab .olam-slide--candidate-1{
+  --olam-dense-copy:8.85px;
+  --olam-dense-title:10px;
+  --olam-meta:8.25px;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-system-card{
+  overflow:visible!important;
+  padding:7px!important;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip{
+  gap:7px!important;
+}
+.olam-strategy-lab .olam-slide--candidate-1 .olam-candidate-support-strip>div{
+  padding:7px!important;
+}
+
+/* Candidate 2 was vertically dominated by 11 ownership inputs plus eight
+   standards. The JSX now uses 3-column ownership and 4-column standards;
+   these rules keep all rows inside the card and preserve legibility. */
+.olam-strategy-lab .olam-slide--candidate-2{
+  --olam-dense-copy:8.8px;
+  --olam-dense-title:9.9px;
+  --olam-meta:8.2px;
+  --olam-card-kicker:8.65px;
+}
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-phase-grid{
+  min-height:0;
+}
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-two-lower{
+  min-height:0;
+}
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-ownership{
+  overflow:hidden;
+}
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-ownership .olam-dense-copy{
+  line-height:1.1!important;
+}
+
+/* Capital-boundary is the gate slide visible in the first clipping screenshot.
+   Gate slides now use the dense safe-area treatment; this slide also gets a
+   compact metric/bullet reserve so all four capital rules remain visible. */
+.olam-strategy-lab .olam-kind--gate{
+  --olam-bullet:10.45px;
+  --olam-metric-detail:10.2px;
+  --olam-metric-value:20px;
+}
+.olam-strategy-lab .olam-kind--gate .olam-metric-card{
+  padding:10px 12px!important;
+}
+.olam-strategy-lab .olam-kind--gate .olam-metric-detail{
+  margin-top:4px!important;
+  line-height:1.25!important;
+}
+.olam-strategy-lab .olam-kind--gate .space-y-2\.5>:not([hidden])~:not([hidden]){
+  margin-top:6px!important;
+}
+.olam-strategy-lab .olam-kind--gate .olam-bullet-copy{
+  line-height:1.28!important;
+}
+.olam-strategy-lab .olam-slide--capital-boundary .olam-body-region{
+  margin-top:8px!important;
+}
+.olam-strategy-lab .olam-slide--capital-boundary .olam-metric-card{
+  padding-top:8px!important;
+  padding-bottom:8px!important;
+}
+
+/* Evidence-register pages had the last row clipped in the 2-column layout.
+   Three columns reduce the vertical row count from 6–7 to 4–5. */
+.olam-strategy-lab .olam-kind--evidence-register{
+  --olam-dense-copy:8.45px;
+  --olam-dense-title:9.45px;
+  --olam-meta:8px;
+}
+.olam-strategy-lab .olam-evidence-register-grid{
+  align-content:start;
+}
+.olam-strategy-lab .olam-evidence-register-card{
+  padding:7px 8px!important;
+  overflow:hidden;
+}
+.olam-strategy-lab .olam-evidence-register-card .olam-dense-copy{
+  overflow-wrap:anywhere;
+}
+.olam-strategy-lab .olam-kind--evidence-register .olam-body-region{
+  padding-bottom:2px;
+}
+
+/* A tiny universal bottom reserve prevents browser/font rounding from clipping
+   descenders on otherwise correctly fitted dense slides. */
+.olam-strategy-lab .olam-body-region{
+  padding-bottom:2px;
+  box-sizing:border-box;
 }
 
 
