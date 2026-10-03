@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Download, ExternalLink, Leaf, Network, Presentation, Target, TrendingUp } from 'lucide-react';
+import { Download, ExternalLink, FileSpreadsheet, Leaf, Network, Presentation, Target, TrendingUp } from 'lucide-react';
 import {
   OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS,
   OLAM_CANDIDATE_MODEL_OWNERSHIP,
@@ -909,7 +909,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
     try {
       await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
       const canvas = await html2canvas(clone, {
-        backgroundColor: '#071117',
+        backgroundColor: '#F5F9F6',
         scale: 2,
         useCORS: true,
         allowTaint: false,
@@ -959,7 +959,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
         for (const slideData of slides) {
           const imageData = await captureSlide(slideData);
           const slide = pptx.addSlide();
-          slide.background = { color: '071117' };
+          slide.background = { color: 'F5F9F6' };
           slide.addImage({ data: imageData, x: 0, y: 0, w: 13.333, h: 7.5 });
           await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
         }
@@ -997,26 +997,29 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
   };
 
   return (
-    <div className="olam-strategy-lab min-h-screen bg-[#050B0E] text-white">
+    <div className="olam-strategy-lab min-h-screen bg-[#F4F8F5] text-[#17324D]">
       <div className="mx-auto max-w-[1340px] px-5 py-12 md:px-8">
         <header className="olam-local-header mb-8 rounded-[24px] border border-white/10 bg-white/[0.025] p-6 md:p-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <OlamIdentity />
               <h1 className="mt-6 text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-white">Olam Agri Nigeria Category Growth Strategy Lab</h1>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A cross-verified, 60-pass decision system for semolina and edible oils in Nigeria: 50 prior reviews plus 10 fresh factual, arithmetic, insight-consistency and figure-traceability passes across category economics, trade capital, causal ROMI, policy scope, model boundaries, eight sequential capital gates and a reproducible 5,000-run stress simulation.</p>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A cross-verified, 60-pass decision system for semolina and edible oils in Nigeria: 50 prior reviews plus 10 fresh factual, arithmetic, insight-consistency and figure-traceability passes across category economics, trade capital, causal ROMI, policy scope, model boundaries, eight sequential capital gates and a reproducible 5,000-run stress simulation. The downloadable Excel model exposes the same assumptions, formulas, scenarios, source lineage and QA checks.</p>
             </div>
             <div className="flex flex-wrap gap-2" data-export-hide="true">
-              <button onClick={downloadPdf} disabled={pdfBusy} className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-[#04100D] hover:bg-emerald-400 disabled:opacity-50">
+              <button onClick={downloadPdf} disabled={pdfBusy} className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-500 disabled:opacity-50">
                 <Download className="h-4 w-4" /> {pdfBusy ? 'Preparing PDF…' : 'Download PDF'}
               </button>
-              <button onClick={downloadPptx} disabled={pptBusy} className="inline-flex items-center gap-2 rounded-lg border border-emerald-300/25 bg-emerald-300/[0.07] px-4 py-2.5 text-sm font-semibold text-emerald-100 hover:bg-emerald-300/[0.12] disabled:opacity-50">
+              <button onClick={downloadPptx} disabled={pptBusy} className="inline-flex items-center gap-2 rounded-lg border border-emerald-700/20 bg-white px-4 py-2.5 text-sm font-semibold text-[#17324D] shadow-sm hover:bg-emerald-50 disabled:opacity-50">
                 <Presentation className="h-4 w-4" /> {pptBusy ? 'Preparing PPT…' : 'Download PPT'}
               </button>
+              <a href="/assets/Olam_Africa_Growth_Analytical_Model.xlsx" download className="inline-flex items-center gap-2 rounded-lg border border-amber-600/25 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-[#17324D] shadow-sm hover:bg-amber-100">
+                <FileSpreadsheet className="h-4 w-4" /> Download Excel
+              </a>
             </div>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-[10.5px] font-mono uppercase tracking-[0.12em] text-white/44">
-            <span>{slides.length} slides</span><span>60 review iterations · 10 latest factual/source passes</span><span>8 policy gates</span><span>5,000-run sensitivity simulation</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
+            <span>{slides.length} slides</span><span>60 review iterations · 10 latest factual/source passes</span><span>10-pass Excel QA · 10 fresh-source checks</span><span>8 policy gates</span><span>5,000-run sensitivity simulation</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
           </div>
         </header>
 
