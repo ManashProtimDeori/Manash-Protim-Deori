@@ -11,6 +11,7 @@ import {
   OLAM_CANDIDATE_QA_PASSES,
   OLAM_CANDIDATE_90_DAY_PHASES,
   OLAM_CANDIDATE_SCORECARD,
+  OLAM_FIGURE_EVIDENCE,
   OLAM_MODEL_ASSUMPTIONS,
   OLAM_POLICY_GATES,
   OLAM_REVIEW_ITERATIONS,
@@ -28,16 +29,19 @@ import {
 const closeTo = (actual: number, expected: number, tolerance = 0.005) =>
   Math.abs(actual - expected) <= tolerance;
 
-assert.equal(OLAM_REVIEW_ITERATIONS.length, 50, 'Olam strategy must retain exactly 50 meaningful review iterations after the final 20 forensic passes');
+assert.equal(OLAM_REVIEW_ITERATIONS.length, 60, 'Olam strategy must retain 50 prior reviews plus the requested 10 fresh factual/source revalidation passes');
 assert.equal(OLAM_POLICY_GATES.length, 8, 'Nigeria policy constitution must contain exactly eight sequential gates');
 assert.equal(OLAM_MODEL_ASSUMPTIONS.length, 16, 'normalized decision model must expose every default assumption');
-assert.equal(OLAM_SLIDES.length, 38, 'Olam executive deck should contain 38 slides after policy/sensitivity expansion');
-assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '50-pass review slide should remain the final slide');
+assert.equal(OLAM_SLIDES.length, 41, 'Olam executive deck should contain 41 slides after adding the three-page figure evidence register');
+assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '60-pass review slide should remain the final slide');
 assert.ok(!JSON.stringify(OLAM_SLIDES).includes('US' + String.fromCharCode(36)), 'deck-facing dollar notation should use $ without redundant US prefix');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'candidate').length, 2, 'deck must include exactly two candidate-contribution slides');
 const candidateIndexes = OLAM_SLIDES.map(slide => slide.id).filter(id => id.startsWith('candidate-')).map(id => OLAM_SLIDES.findIndex(slide => slide.id === id));
 assert.deepEqual(candidateIndexes, [32,33], 'candidate slides must remain adjacent after the 90-day operating slide and before the evidence appendix');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'sources').length, 3, 'expanded evidence appendix should use three readable source slides');
+assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'evidence-register').length, 3, 'figure evidence register should use three readable appendix slides');
+assert.equal(OLAM_FIGURE_EVIDENCE.length, 34, 'figure evidence register must cover the full set of displayed/referenced quantitative claims');
+
 assert.equal(new Set(OLAM_SOURCES.map(source => source.id)).size, OLAM_SOURCES.length, 'source IDs must be unique');
 assert.equal(OLAM_SOURCES.length, 30, 'evidence registry should include the expanded cross-check sources');
 
@@ -47,6 +51,16 @@ for (const slide of OLAM_SLIDES) {
     assert.ok(sourceIds.has(sourceId), 'unknown source ID on slide ' + slide.id + ': ' + sourceId);
   }
 }
+for (const row of OLAM_FIGURE_EVIDENCE) {
+  assert.ok(row.figure.length > 0 && row.claim.length > 0 && row.provenance.length > 0, 'figure evidence row must be fully described: ' + row.id);
+  for (const sourceId of row.sourceIds) {
+    assert.ok(sourceIds.has(sourceId), 'unknown source ID on figure evidence row ' + row.id + ': ' + sourceId);
+  }
+}
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.classification === 'Derived'));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.classification === 'Model'));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.classification === 'Portfolio evidence'));
+
 for (const requiredSource of ['S19','S20','S21','S22','S23','S24','S25','S26','S27','S28','S29','S30']) {
   assert.ok(sourceIds.has(requiredSource), 'missing expanded evidence source: ' + requiredSource);
 }
@@ -60,6 +74,10 @@ assert.ok(executive.metrics.some(metric => metric.value === '~2.45%' && metric.d
 
 const processing = OLAM_SLIDES.find(slide => slide.id === 'processing-economics');
 assert.ok(processing);
+const nigeriaPlatform = OLAM_SLIDES.find(slide => slide.id === 'nigeria-platform');
+assert.ok(nigeriaPlatform?.title.includes('high-density first-wave laboratory'));
+assert.ok(!nigeriaPlatform?.title.includes('largest first-wave market'));
+assert.ok(!nigeriaPlatform?.title.includes('best laboratory'));
 assert.ok(processing.metrics.some(metric => metric.value === 'S$611m'));
 assert.ok(processing.metrics.some(metric => metric.value === 'S$127'));
 assert.ok(processing.metrics.some(metric => metric.value === 'S$7.5bn' && metric.label === 'Olam Agri invested capital'));
@@ -252,22 +270,32 @@ for (const required of [
   'Causality-seasonality audit',
   'Recommendation-sequencing audit',
   'Executive-traceability audit',
+  'Primary-source freshness',
+  'FY2025 financial re-performance',
+  'Processing economics cross-check',
+  'Nigeria footprint revalidation',
+  'Macro timestamp and base audit',
+  'Wheat forecast scope audit',
+  'Edible-oil policy semantics recheck',
+  'Ownership chronology recheck',
+  'Derived/model arithmetic re-performance',
+  'Figure-level source traceability',
 ]) {
   assert.ok(auditNames.includes(required), 'missing heavy audit dimension: ' + required);
 }
 
 const pagePath = fileURLToPath(new URL('../src/pages/OlamAfricaGrowthStrategyPage.tsx', import.meta.url));
 const pageSource = readFileSync(pagePath, 'utf8');
-assert.ok(pageSource.includes('Download exact PPTX'));
-assert.ok(pageSource.includes('Download high-res PDF'));
+assert.ok(pageSource.includes('Download PPT'));
+assert.ok(pageSource.includes('Download PDF'));
 assert.ok(pageSource.includes('const EXPORT_WIDTH = 1200'));
 assert.ok(pageSource.includes('const EXPORT_HEIGHT = 675'));
 assert.ok(pageSource.includes("host.className = 'olam-strategy-lab olam-export-host'"));
 assert.ok(pageSource.includes("clone.classList.add('olam-export-slide')"));
 assert.ok(pageSource.includes("windowWidth: 1440"));
-assert.ok(pageSource.includes("Olam_Nigeria_Category_Growth_Strategy_"));
-assert.ok(pageSource.includes('A cross-verified, 50-pass decision system'));
-assert.ok(pageSource.includes('50 review iterations · 20 final forensic passes'));
+assert.ok(pageSource.includes("Olam_Africa_Growth_Strategy.pptx"));
+assert.ok(pageSource.includes('A cross-verified, 60-pass decision system'));
+assert.ok(pageSource.includes('60 review iterations · 10 latest factual/source passes'));
 
 assert.ok(pageSource.includes("html2canvas-pro@2.4.2"));
 assert.ok(pageSource.includes("slide.addImage({ data: imageData, x: 0, y: 0, w: 13.333, h: 7.5 })"));
@@ -303,8 +331,13 @@ assert.ok(!pageSource.includes('>Importable</div>'), 'edible-oil visual must not
 assert.ok(pageSource.includes("slide.kind === 'sensitivity'"), 'sensitivity renderer must remain explicit');
 assert.ok(pageSource.includes("slide.kind === 'assumptions'"), 'assumption-ledger renderer must remain explicit');
 assert.ok(!/text-[(?:7|7.d+|8|8.d+|9|9.d+)px]/.test(pageSource), 'presentation slides must not contain sub-10px fixed text classes');
-assert.ok(pageSource.includes("grid grid-cols-5 gap-x-2.5"), 'final 20 forensic passes should use a five-column layout to avoid vertical spillover');
+assert.ok(pageSource.includes("OLAM_REVIEW_ITERATIONS.slice(-10)"), 'final review slide should show the requested latest 10 passes');
+assert.ok(pageSource.includes("grid grid-cols-2 gap-x-3 gap-y-2"), 'latest 10 passes and evidence register should use compact two-column layouts');
 assert.ok(pageSource.includes("grid grid-cols-3 gap-3"), 'source appendix should use a three-column layout to avoid vertical spillover');
+assert.ok(pageSource.includes('figureEvidenceMap'), 'figure-level appendix must render the structured evidence register');
+assert.ok(pageSource.includes("slide.kind === 'evidence-register'"), 'figure evidence register requires a dedicated appendix renderer');
+assert.ok(pageSource.includes('Internal/model provenance — no external source claimed'), 'modeled/personal numbers must not be assigned fake external sources');
+
 
 const cssPath = fileURLToPath(new URL('../src/index.css', import.meta.url));
 const cssSource = readFileSync(cssPath, 'utf8');
@@ -321,11 +354,20 @@ assert.ok(cssSource.includes('box-shadow:none!important'), 'export mode must sup
 
 const reviewSlide = OLAM_SLIDES.find(slide => slide.id === 'iterations');
 assert.ok(reviewSlide);
-assert.equal(reviewSlide.bullets.length, 20, 'final review slide should show only passes 31–50 to remain presentation-safe');
-assert.ok(reviewSlide.metrics.some(metric => metric.value === '50'));
-assert.ok(reviewSlide.metrics.some(metric => metric.value === '20'));
+assert.equal(reviewSlide.bullets.length, 10, 'final review slide should show only the fresh passes 51–60 to remain presentation-safe');
+assert.ok(reviewSlide.metrics.some(metric => metric.value === '60'));
+assert.ok(reviewSlide.metrics.some(metric => metric.value === '10'));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F01' && row.figure.includes('$28.666bn') && row.sourceIds.includes('S01')));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F19' && row.figure.includes('~1.9%') && row.classification === 'Derived'));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F28' && row.classification === 'Model' && row.sourceIds.length === 0));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F33' && row.classification === 'Portfolio evidence' && row.sourceIds.length === 0));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F34' && row.figure.includes('60 reviews')));
+
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('can lag'), 'CBN key-rates lag caveat must remain explicit');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S27')?.note.includes('duty-free or unrestricted'), 'trade-policy caveat must distinguish prohibition status from import economics');
+assert.equal(OLAM_SOURCES.find(source => source.id === 'S12')?.url, 'https://www.nigerianstat.gov.ng/', 'Nigeria NBS source should point to the official live NBS site');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S24')?.note.includes('revised across releases'), 'USDA forecast-version source should not hard-code a figure behind a dynamic current-report URL');
+
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S01')?.note.includes('49.474m MT handled'), 'annual-report metric definitions must distinguish handled tonnes from sales volume');
 
 const appPath = fileURLToPath(new URL('../src/App.tsx', import.meta.url));
