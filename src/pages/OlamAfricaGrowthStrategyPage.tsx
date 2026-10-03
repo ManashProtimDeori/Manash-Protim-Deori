@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Download, ExternalLink, FileDown, Leaf, Network, Target, TrendingUp } from 'lucide-react';
+import { Download, ExternalLink, Leaf, Network, Presentation, Target, TrendingUp } from 'lucide-react';
 import {
   OLAM_CANDIDATE_CONTRIBUTION_SYSTEMS,
   OLAM_CANDIDATE_MODEL_OWNERSHIP,
   OLAM_CANDIDATE_PROPOSED_STANDARDS,
   OLAM_CANDIDATE_90_DAY_PHASES,
   OLAM_CANDIDATE_SCORECARD,
+  OLAM_FIGURE_EVIDENCE,
   OLAM_MODEL_ASSUMPTIONS,
   OLAM_POLICY_GATES,
   OLAM_REVIEW_ITERATIONS,
@@ -25,6 +26,7 @@ const palette: Record<OlamTone, string> = {
 };
 
 const sourceMap = Object.fromEntries(OLAM_SOURCES.map((source) => [source.id, source]));
+const figureEvidenceMap = Object.fromEntries(OLAM_FIGURE_EVIDENCE.map((row) => [row.id, row]));
 
 const OlamIdentity: React.FC = () => (
   <div className="inline-flex items-center gap-3" aria-label="Olam Agri strategy">
@@ -663,10 +665,54 @@ const SlideBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => {
     );
   }
 
+  if (slide.kind === 'evidence-register') {
+    const rows = slide.bullets
+      .map((id) => figureEvidenceMap[id])
+      .filter(Boolean);
+
+    return (
+      <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+        {rows.map((row) => (
+          <div key={row.id} className="min-w-0 rounded-xl border border-white/9 bg-white/[0.026] px-3 py-2.5">
+            <div className="flex items-start gap-2.5">
+              <span className="olam-dense-meta shrink-0 font-mono text-emerald-300">{row.id}</span>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                  <span className="olam-dense-title font-semibold text-white/90">{row.figure}</span>
+                  <span className="olam-dense-meta rounded-full border border-white/10 bg-white/[0.035] px-1.5 py-0.5 font-mono uppercase tracking-[0.08em] text-white/48">{row.classification}</span>
+                </div>
+                <div className="olam-dense-copy mt-0.5 leading-[1.28] text-white/72">{row.claim}</div>
+                <div className="olam-dense-copy mt-1 leading-[1.25] text-white/45">{row.provenance}</div>
+                <div className="mt-1 flex flex-wrap gap-1.5">
+                  {row.sourceIds.length > 0 ? row.sourceIds.map((sourceId) => {
+                    const source = sourceMap[sourceId];
+                    return (
+                      <a
+                        key={sourceId}
+                        href={source?.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="olam-dense-meta inline-flex items-center gap-1 rounded-md border border-emerald-300/14 bg-emerald-300/[0.045] px-1.5 py-0.5 font-mono text-emerald-200/76"
+                      >
+                        {sourceId}
+                      </a>
+                    );
+                  }) : (
+                    <span className="olam-dense-meta font-mono uppercase tracking-[0.07em] text-amber-200/54">Internal/model provenance — no external source claimed</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   if (slide.kind === 'iterations') {
     return (
-      <div className="grid grid-cols-5 gap-x-2.5 gap-y-1">
-        {OLAM_REVIEW_ITERATIONS.map((row) => (
+      <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+        {OLAM_REVIEW_ITERATIONS.slice(-10).map((row) => (
           <div key={row[0]} className="grid grid-cols-[28px_1fr] gap-2 border-t border-white/8 py-1.5">
             <div className="olam-dense-meta font-mono text-emerald-300">{row[0]}</div>
             <div className="min-w-0">
@@ -917,7 +963,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
           slide.addImage({ data: imageData, x: 0, y: 0, w: 13.333, h: 7.5 });
           await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
         }
-        await pptx.writeFile({ fileName: 'Olam_Nigeria_Category_Growth_Strategy_' + new Date().toISOString().slice(0,10) + '.pptx' });
+        await pptx.writeFile({ fileName: 'Olam_Africa_Growth_Strategy.pptx' });
       });
     } catch (error) {
       console.error(error);
@@ -940,7 +986,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
           pdf.addImage(imageData, 'PNG', 0, 0, 1200, 675, undefined, 'SLOW');
           await new Promise<void>((resolve) => window.setTimeout(resolve, 0));
         }
-        pdf.save('Olam_Africa_Growth_Strategy_' + new Date().toISOString().slice(0,10) + '.pdf');
+        pdf.save('Olam_Africa_Growth_Strategy.pdf');
       });
     } catch (error) {
       console.error(error);
@@ -958,19 +1004,19 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
             <div className="max-w-3xl">
               <OlamIdentity />
               <h1 className="mt-6 text-3xl md:text-5xl font-semibold tracking-[-0.05em] text-white">Olam Agri Nigeria Category Growth Strategy Lab</h1>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A cross-verified, 50-pass decision system for semolina and edible oils in Nigeria: 30 structural reviews plus 20 final forensic audits across metric definitions, evidence freshness, category economics, trade-capital velocity, causal ROMI, regional affordability, policy scope, model boundaries, eight sequential capital gates and a reproducible 5,000-run stress simulation.</p>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">A cross-verified, 60-pass decision system for semolina and edible oils in Nigeria: 50 prior reviews plus 10 fresh factual, arithmetic, insight-consistency and figure-traceability passes across category economics, trade capital, causal ROMI, policy scope, model boundaries, eight sequential capital gates and a reproducible 5,000-run stress simulation.</p>
             </div>
             <div className="flex flex-wrap gap-2" data-export-hide="true">
-              <button onClick={downloadPptx} disabled={pptBusy} className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-[#04100D] hover:bg-emerald-400 disabled:opacity-50">
-                <FileDown className="h-4 w-4" /> {pptBusy ? 'Rendering exact PPTX…' : 'Download exact PPTX'}
+              <button onClick={downloadPdf} disabled={pdfBusy} className="inline-flex items-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-sm font-semibold text-[#04100D] hover:bg-emerald-400 disabled:opacity-50">
+                <Download className="h-4 w-4" /> {pdfBusy ? 'Preparing PDF…' : 'Download PDF'}
               </button>
-              <button onClick={downloadPdf} disabled={pdfBusy} className="inline-flex items-center gap-2 rounded-lg border border-emerald-300/25 bg-emerald-300/[0.07] px-4 py-2.5 text-sm font-semibold text-emerald-100 hover:bg-emerald-300/[0.12] disabled:opacity-50">
-                <Download className="h-4 w-4" /> {pdfBusy ? 'Rendering high-res PDF…' : 'Download high-res PDF'}
+              <button onClick={downloadPptx} disabled={pptBusy} className="inline-flex items-center gap-2 rounded-lg border border-emerald-300/25 bg-emerald-300/[0.07] px-4 py-2.5 text-sm font-semibold text-emerald-100 hover:bg-emerald-300/[0.12] disabled:opacity-50">
+                <Presentation className="h-4 w-4" /> {pptBusy ? 'Preparing PPT…' : 'Download PPT'}
               </button>
             </div>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-[10.5px] font-mono uppercase tracking-[0.12em] text-white/44">
-            <span>{slides.length} slides</span><span>50 review iterations · 20 final forensic passes</span><span>8 policy gates</span><span>5,000-run sensitivity simulation</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
+            <span>{slides.length} slides</span><span>60 review iterations · 10 latest factual/source passes</span><span>8 policy gates</span><span>5,000-run sensitivity simulation</span><span>2025 reported base</span><span>2026 live market signals</span><span>modeled outputs explicitly labeled</span>
           </div>
         </header>
 
