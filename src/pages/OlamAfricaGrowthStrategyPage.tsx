@@ -14,6 +14,7 @@ import {
   OLAM_SOURCES,
 } from '../data/olamAfricaStrategy';
 import type { OlamMetric, OlamSlide, OlamTone } from '../data/olamAfricaStrategy';
+import { downloadOlamAnalyticalWorkbook } from '../lib/olamExcelExport';
 
 const palette: Record<OlamTone, string> = {
   green: '#12B981',
@@ -854,6 +855,7 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
   const slides = useMemo(() => OLAM_SLIDES, []);
   const [pptBusy, setPptBusy] = useState(false);
   const [pdfBusy, setPdfBusy] = useState(false);
+  const [excelBusy, setExcelBusy] = useState(false);
 
   const loadScript = (src: string, ready: () => boolean) => new Promise<void>((resolve, reject) => {
     if (ready()) return resolve();
@@ -996,6 +998,18 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
     }
   };
 
+  const downloadExcel = async () => {
+    setExcelBusy(true);
+    try {
+      await downloadOlamAnalyticalWorkbook();
+    } catch (error) {
+      console.error(error);
+      alert('Excel export failed: ' + (error instanceof Error ? error.message : 'Unknown error'));
+    } finally {
+      setExcelBusy(false);
+    }
+  };
+
   return (
     <div className="olam-strategy-lab min-h-screen bg-[#F4F8F5] text-[#17324D]">
       <div className="mx-auto max-w-[1340px] px-5 py-12 md:px-8">
@@ -1013,9 +1027,9 @@ export const OlamAfricaGrowthStrategyPage: React.FC = () => {
               <button onClick={downloadPptx} disabled={pptBusy} className="inline-flex items-center gap-2 rounded-lg border border-emerald-700/20 bg-white px-4 py-2.5 text-sm font-semibold text-[#17324D] shadow-sm hover:bg-emerald-50 disabled:opacity-50">
                 <Presentation className="h-4 w-4" /> {pptBusy ? 'Preparing PPT…' : 'Download PPT'}
               </button>
-              <a href="/assets/Olam_Africa_Growth_Analytical_Model.xlsx" download className="inline-flex items-center gap-2 rounded-lg border border-amber-600/25 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-[#17324D] shadow-sm hover:bg-amber-100">
-                <FileSpreadsheet className="h-4 w-4" /> Download Excel
-              </a>
+              <button onClick={downloadExcel} disabled={excelBusy} className="inline-flex items-center gap-2 rounded-lg border border-amber-600/25 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-[#17324D] shadow-sm hover:bg-amber-100 disabled:opacity-50">
+                <FileSpreadsheet className="h-4 w-4" /> {excelBusy ? 'Preparing Excel…' : 'Download Excel'}
+              </button>
             </div>
           </div>
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/8 pt-4 text-[10.5px] font-mono uppercase tracking-[0.12em] text-white/44">
