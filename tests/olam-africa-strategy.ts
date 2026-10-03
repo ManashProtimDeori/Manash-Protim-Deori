@@ -29,11 +29,11 @@ import {
 const closeTo = (actual: number, expected: number, tolerance = 0.005) =>
   Math.abs(actual - expected) <= tolerance;
 
-assert.equal(OLAM_REVIEW_ITERATIONS.length, 60, 'Olam strategy must retain 50 prior reviews plus the requested 10 fresh factual/source revalidation passes');
+assert.equal(OLAM_REVIEW_ITERATIONS.length, 63, 'Olam strategy must retain 50 prior reviews, 10 fresh factual/source passes and the requested 3 additional cross-check iterations');
 assert.equal(OLAM_POLICY_GATES.length, 8, 'Nigeria policy constitution must contain exactly eight sequential gates');
 assert.equal(OLAM_MODEL_ASSUMPTIONS.length, 16, 'normalized decision model must expose every default assumption');
-assert.equal(OLAM_SLIDES.length, 42, 'Olam executive deck should contain 42 slides after adding the six-flag review re-verification slide');
-assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '60-pass review slide should remain the final slide');
+assert.equal(OLAM_SLIDES.length, 43, 'Olam executive deck should contain 43 slides after adding the review re-verification and corrective-action synthesis slides');
+assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '63-pass review slide should remain the final slide');
 assert.ok(!JSON.stringify(OLAM_SLIDES).includes('US' + String.fromCharCode(36)), 'deck-facing dollar notation should use $ without redundant US prefix');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'candidate').length, 2, 'deck must include exactly two candidate-contribution slides');
 const candidateIndexes = OLAM_SLIDES.map(slide => slide.id).filter(id => id.startsWith('candidate-')).map(id => OLAM_SLIDES.findIndex(slide => slide.id === id));
@@ -112,6 +112,20 @@ assert.ok(reviewReverification?.bullets.some(bullet => bullet.includes('15111000
 assert.ok(reviewReverification?.sourceIds.includes('S27'));
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S21')?.note.includes('from 26.5% to 23%'), 'CBN note must state the September 2026 move correctly as a cut/reset');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('Current CBN public materials now show 23%') || OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('current CBN public materials display a 23% MPR'), 'live key-rates governance note should not imply a currently observed MPR conflict');
+const correctiveActions = OLAM_SLIDES.find(slide => slide.id === 'review-corrective-actions');
+assert.ok(correctiveActions, 'deck must contain a corrective-action synthesis after the three-pass review');
+assert.equal(correctiveActions?.kind, 'gate');
+assert.ok(correctiveActions?.metrics.some(metric => metric.value === 'Stage it'));
+assert.ok(correctiveActions?.metrics.some(metric => metric.value === 'Causal'));
+assert.ok(correctiveActions?.metrics.some(metric => metric.value === 'G0–G7'));
+assert.ok(correctiveActions?.bullets.some(bullet => bullet.includes('NGN3.6bn rollout')));
+assert.ok(correctiveActions?.bullets.some(bullet => bullet.includes('Finance-owned inventory + receivables − payables')));
+assert.ok(correctiveActions?.bullets.some(bullet => bullet.includes('verified incremental offtake contribution')));
+assert.deepEqual(OLAM_REVIEW_ITERATIONS.slice(-3).map(row => row[0]), ['61','62','63']);
+assert.ok(OLAM_REVIEW_ITERATIONS[60][3].includes('81.81%'));
+assert.ok(OLAM_REVIEW_ITERATIONS[61][3].includes('staged capital'));
+assert.ok(OLAM_REVIEW_ITERATIONS[62][3].includes('23%'));
+
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S16')?.note.includes('81.11%'), 'second primary ownership source should surface the stale 81.11% conflict');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S16')?.note.includes('81.81%'), 'second primary ownership source should support the transaction-specific 81.81% figure');
@@ -398,6 +412,8 @@ assert.ok(excelExporterSource.includes("addSheet('Scenarios'"), 'Excel workbook 
 assert.ok(excelExporterSource.includes("addSheet('Sensitivity'"), 'Excel workbook must include sensitivity analysis');
 assert.ok(excelExporterSource.includes("addSheet('Simulation'"), 'Excel workbook must include the full 5,000-run simulation detail');
 assert.ok(excelExporterSource.includes("addSheet('Decision_Gates'"), 'Excel workbook must include decision gates');
+assert.ok(excelExporterSource.includes("addSheet('Review_3_Pass'"), 'Excel workbook must include the requested three-pass review record');
+assert.ok(excelExporterSource.includes("addSheet('Corrective_Actions'"), 'Excel workbook must include review-derived corrective actions');
 assert.ok(excelExporterSource.includes("addSheet('QA_10_Pass'"), 'Excel workbook must include ten internal QA passes');
 assert.ok(excelExporterSource.includes("addSheet('Fresh_Source_Audit'"), 'Excel workbook must include ten fresh-source checks');
 assert.ok(excelExporterSource.includes("addSheet('Formula_Map'"), 'Excel workbook must include formula lineage');
@@ -407,9 +423,9 @@ assert.ok(excelExporterSource.includes("Olam_Africa_Growth_Analytical_Model.xlsx
 
 const reviewSlide = OLAM_SLIDES.find(slide => slide.id === 'iterations');
 assert.ok(reviewSlide);
-assert.equal(reviewSlide.bullets.length, 10, 'final review slide should show only the fresh passes 51–60 to remain presentation-safe');
-assert.ok(reviewSlide.metrics.some(metric => metric.value === '60'));
-assert.ok(reviewSlide.metrics.some(metric => metric.value === '10'));
+assert.equal(reviewSlide.bullets.length, 10, 'final review slide should show only the latest ten review prompts to remain presentation-safe');
+assert.ok(reviewSlide.metrics.some(metric => metric.value === '63'));
+assert.ok(reviewSlide.metrics.some(metric => metric.value === '3'));
 assert.ok(reviewSlide.metrics.some(metric => metric.value === '36 lines'));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F01' && row.figure.includes('$28.666bn') && row.sourceIds.includes('S01')));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F19' && row.figure.includes('~1.9%') && row.classification === 'Derived'));
@@ -417,7 +433,7 @@ assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F28' && row.classificatio
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F32' && row.figure.includes('NGN0.47bn') && row.figure.includes('−NGN2.06bn')));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F34' && row.figure.includes('P50 −NGN3.37bn') && row.figure.includes('2.0%')));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F35' && row.classification === 'Portfolio evidence' && row.sourceIds.length === 0));
-assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F36' && row.figure.includes('60 reviews') && row.figure.includes('36 figure lines')));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F36' && row.figure.includes('63 reviews') && row.figure.includes('36 figure lines')));
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('governing policy-rate source'), 'CBN source hierarchy must use the formal MPC decision as the governing policy-rate source');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S27')?.note.includes('duty-free or unrestricted'), 'trade-policy caveat must distinguish prohibition status from import economics');
