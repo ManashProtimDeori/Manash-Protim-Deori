@@ -40,7 +40,7 @@ const candidateIndexes = OLAM_SLIDES.map(slide => slide.id).filter(id => id.star
 assert.deepEqual(candidateIndexes, [32,33], 'candidate slides must remain adjacent after the 90-day operating slide and before the evidence appendix');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'sources').length, 3, 'expanded evidence appendix should use three readable source slides');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'evidence-register').length, 3, 'figure evidence register should use three readable appendix slides');
-assert.equal(OLAM_FIGURE_EVIDENCE.length, 34, 'figure evidence register must cover the full set of displayed/referenced quantitative claims');
+assert.equal(OLAM_FIGURE_EVIDENCE.length, 36, 'figure evidence register must cover the full set of displayed/referenced quantitative claims, model assumptions and model outputs');
 
 assert.equal(new Set(OLAM_SOURCES.map(source => source.id)).size, OLAM_SOURCES.length, 'source IDs must be unique');
 assert.equal(OLAM_SOURCES.length, 30, 'evidence registry should include the expanded cross-check sources');
@@ -357,11 +357,14 @@ assert.ok(reviewSlide);
 assert.equal(reviewSlide.bullets.length, 10, 'final review slide should show only the fresh passes 51–60 to remain presentation-safe');
 assert.ok(reviewSlide.metrics.some(metric => metric.value === '60'));
 assert.ok(reviewSlide.metrics.some(metric => metric.value === '10'));
+assert.ok(reviewSlide.metrics.some(metric => metric.value === '36 lines'));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F01' && row.figure.includes('$28.666bn') && row.sourceIds.includes('S01')));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F19' && row.figure.includes('~1.9%') && row.classification === 'Derived'));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F28' && row.classification === 'Model' && row.sourceIds.length === 0));
-assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F33' && row.classification === 'Portfolio evidence' && row.sourceIds.length === 0));
-assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F34' && row.figure.includes('60 reviews')));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F32' && row.figure.includes('NGN0.47bn') && row.figure.includes('−NGN2.06bn')));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F34' && row.figure.includes('P50 −NGN3.37bn') && row.figure.includes('2.0%')));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F35' && row.classification === 'Portfolio evidence' && row.sourceIds.length === 0));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F36' && row.figure.includes('60 reviews') && row.figure.includes('36 figure lines')));
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('can lag'), 'CBN key-rates lag caveat must remain explicit');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S27')?.note.includes('duty-free or unrestricted'), 'trade-policy caveat must distinguish prohibition status from import economics');
