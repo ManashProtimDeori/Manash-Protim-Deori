@@ -29,11 +29,11 @@ import {
 const closeTo = (actual: number, expected: number, tolerance = 0.005) =>
   Math.abs(actual - expected) <= tolerance;
 
-assert.equal(OLAM_REVIEW_ITERATIONS.length, 63, 'Olam strategy must retain 50 prior reviews, 10 fresh factual/source passes and the requested 3 additional cross-check iterations');
+assert.equal(OLAM_REVIEW_ITERATIONS.length, 66, 'Olam strategy must retain 50 prior reviews, 10 factual/source passes, 3 corrective-action checks and the requested 3 web-verification iterations');
 assert.equal(OLAM_POLICY_GATES.length, 8, 'Nigeria policy constitution must contain exactly eight sequential gates');
 assert.equal(OLAM_MODEL_ASSUMPTIONS.length, 16, 'normalized decision model must expose every default assumption');
-assert.equal(OLAM_SLIDES.length, 43, 'Olam executive deck should contain 43 slides after adding the review re-verification and corrective-action synthesis slides');
-assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '63-pass review slide should remain the final slide');
+assert.equal(OLAM_SLIDES.length, 44, 'Olam executive deck should contain 44 slides after adding the external-signal boundary audit slide');
+assert.equal(OLAM_SLIDES[OLAM_SLIDES.length - 1]?.id, 'iterations', '66-pass review slide should remain the final slide');
 assert.ok(!JSON.stringify(OLAM_SLIDES).includes('US' + String.fromCharCode(36)), 'deck-facing dollar notation should use $ without redundant US prefix');
 assert.equal(OLAM_SLIDES.filter(slide => slide.kind === 'candidate').length, 2, 'deck must include exactly two candidate-contribution slides');
 const candidateIndexes = OLAM_SLIDES.map(slide => slide.id).filter(id => id.startsWith('candidate-')).map(id => OLAM_SLIDES.findIndex(slide => slide.id === id));
@@ -121,10 +121,19 @@ assert.ok(correctiveActions?.metrics.some(metric => metric.value === 'G0–G7'))
 assert.ok(correctiveActions?.metrics.some(metric => metric.detail.includes('NGN3.6bn rollout')));
 assert.ok(correctiveActions?.bullets.some(bullet => bullet.includes('Finance-owned inventory + receivables − payables')));
 assert.ok(correctiveActions?.bullets.some(bullet => bullet.includes('verified incremental offtake contribution')));
-assert.deepEqual(OLAM_REVIEW_ITERATIONS.slice(-3).map(row => row[0]), ['61','62','63']);
-assert.ok(OLAM_REVIEW_ITERATIONS[60][3].includes('81.81%'));
-assert.ok(OLAM_REVIEW_ITERATIONS[61][3].includes('staged capital'));
-assert.ok(OLAM_REVIEW_ITERATIONS[62][3].includes('23%'));
+const signalBoundaries = OLAM_SLIDES.find(slide => slide.id === 'review-signal-boundaries');
+assert.ok(signalBoundaries, 'deck must contain a dedicated external-signal boundary audit slide');
+assert.equal(signalBoundaries?.kind, 'audit');
+assert.ok(signalBoundaries?.metrics.some(metric => metric.value === '6.8m MT'));
+assert.ok(signalBoundaries?.metrics.some(metric => metric.value === '15.39 / 19.57%'));
+assert.ok(signalBoundaries?.metrics.some(metric => metric.value === '73 markets'));
+assert.ok(signalBoundaries?.metrics.some(metric => metric.value === '$2m / 20k+'));
+assert.ok(signalBoundaries?.bullets.some(bullet => bullet.includes('$1tn by 2030')));
+assert.ok(signalBoundaries?.bullets.some(bullet => bullet.includes('machine-learning')));
+assert.deepEqual(OLAM_REVIEW_ITERATIONS.slice(-3).map(row => row[0]), ['64','65','66']);
+assert.ok(OLAM_REVIEW_ITERATIONS[63][3].includes('81.81%'));
+assert.ok(OLAM_REVIEW_ITERATIONS[64][3].includes('6.8m MT'));
+assert.ok(OLAM_REVIEW_ITERATIONS[65][3].includes('US$2m'));
 
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S16')?.note.includes('81.11%'), 'second primary ownership source should surface the stale 81.11% conflict');
@@ -414,6 +423,7 @@ assert.ok(excelExporterSource.includes("addSheet('Simulation'"), 'Excel workbook
 assert.ok(excelExporterSource.includes("addSheet('Decision_Gates'"), 'Excel workbook must include decision gates');
 assert.ok(excelExporterSource.includes("addSheet('Review_3_Pass'"), 'Excel workbook must include the requested three-pass review record');
 assert.ok(excelExporterSource.includes("addSheet('Corrective_Actions'"), 'Excel workbook must include review-derived corrective actions');
+assert.ok(excelExporterSource.includes("addSheet('Signal_Boundaries'"), 'Excel workbook must preserve macro/programme versus operating-proof boundaries');
 assert.ok(excelExporterSource.includes("addSheet('QA_10_Pass'"), 'Excel workbook must include ten internal QA passes');
 assert.ok(excelExporterSource.includes("addSheet('Fresh_Source_Audit'"), 'Excel workbook must include ten fresh-source checks');
 assert.ok(excelExporterSource.includes("addSheet('Formula_Map'"), 'Excel workbook must include formula lineage');
@@ -424,7 +434,7 @@ assert.ok(excelExporterSource.includes("Olam_Africa_Growth_Analytical_Model.xlsx
 const reviewSlide = OLAM_SLIDES.find(slide => slide.id === 'iterations');
 assert.ok(reviewSlide);
 assert.equal(reviewSlide.bullets.length, 10, 'final review slide should show only the latest ten review prompts to remain presentation-safe');
-assert.ok(reviewSlide.metrics.some(metric => metric.value === '63'));
+assert.ok(reviewSlide.metrics.some(metric => metric.value === '66'));
 assert.ok(reviewSlide.metrics.some(metric => metric.value === '3'));
 assert.ok(reviewSlide.metrics.some(metric => metric.value === '36 lines'));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F01' && row.figure.includes('$28.666bn') && row.sourceIds.includes('S01')));
@@ -433,7 +443,7 @@ assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F28' && row.classificatio
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F32' && row.figure.includes('NGN0.47bn') && row.figure.includes('−NGN2.06bn')));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F34' && row.figure.includes('P50 −NGN3.37bn') && row.figure.includes('2.0%')));
 assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F35' && row.classification === 'Portfolio evidence' && row.sourceIds.length === 0));
-assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F36' && row.figure.includes('63 reviews') && row.figure.includes('36 figure lines')));
+assert.ok(OLAM_FIGURE_EVIDENCE.some(row => row.id === 'F36' && row.figure.includes('66 reviews') && row.figure.includes('36 figure lines')));
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S22')?.note.includes('governing policy-rate source'), 'CBN source hierarchy must use the formal MPC decision as the governing policy-rate source');
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S27')?.note.includes('duty-free or unrestricted'), 'trade-policy caveat must distinguish prohibition status from import economics');
@@ -441,6 +451,12 @@ assert.equal(OLAM_SOURCES.find(source => source.id === 'S12')?.url, 'https://www
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S24')?.note.includes('revised across releases'), 'USDA forecast-version source should not hard-code a figure behind a dynamic current-report URL');
 
 assert.ok(OLAM_SOURCES.find(source => source.id === 'S01')?.note.includes('49.474m MT handled'), 'annual-report metric definitions must distinguish handled tonnes from sales volume');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S12')?.url.includes('microdata.nigerianstat.gov.ng'), 'August 2026 CPI should point to the dated official NBS materials');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S12')?.note.includes('does not mean prices fell'), 'inflation source note must preserve the disinflation-versus-price-level distinction');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S13')?.note.includes('not evidence of Olam brand growth'), 'USDA wheat forecast must remain macro context only');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S14')?.note.includes('not Olam addressable revenue'), 'World Bank $1tn projection must remain a macro market-scale anchor');
+assert.ok(OLAM_SOURCES.find(source => source.id === 'S04')?.note.includes('not realized revenue, EBIT, ROMI or financial return'), 'baker programme metrics must not be presented as realized earnings');
+
 
 const appPath = fileURLToPath(new URL('../src/App.tsx', import.meta.url));
 const appSource = readFileSync(appPath, 'utf8');
