@@ -28,13 +28,76 @@ jobs:
       - name: Install Python dependency
         run: pip install python-pptx
 
-      - name: Install LibreOffice
+      - name: Install document tooling
         run: |
           sudo apt-get update
-          sudo apt-get install -y libreoffice
+          sudo apt-get install -y libreoffice zstd
 
       - name: Patch PPTX and regenerate PDF
         run: python scripts/patch-commercial-ev-deck.py
+
+      - name: Sync analytical model with latest deck corrections
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          MODEL_B64="src/generated/commercial-ev-assets/Manash-Protim-Deori-Commercial-EV-Model.xlsx.01.b64"
+          PATCH_B64="scripts/patches/commercial-ev-model-latest.zstpatch.b64"
+          OLD_XLSX="/tmp/commercial-ev-model-old.xlsx"
+          PATCH_BIN="/tmp/commercial-ev-model.zstpatch"
+          NEW_XLSX="/tmp/commercial-ev-model-new.xlsx"
+
+          python - <<'PY'
+          import base64
+          import hashlib
+          from pathlib import Path
+
+          model_b64 = Path("src/generated/commercial-ev-assets/Manash-Protim-Deori-Commercial-EV-Model.xlsx.01.b64")
+          patch_b64 = Path("scripts/patches/commercial-ev-model-latest.zstpatch.b64")
+          old_xlsx = Path("/tmp/commercial-ev-model-old.xlsx")
+          patch_bin = Path("/tmp/commercial-ev-model.zstpatch")
+
+          current = base64.b64decode(model_b64.read_text().strip())
+          current_sha = hashlib.sha256(current).hexdigest()
+          old_sha = "7b635fe064d2d354f6dd7a0871ec3a50fe2a77e8f9b162e7188e55ffb4bc3c6e"
+          new_sha = "fa6ad079b43181e7b486874bc9c4cd06b046b204a35d6c5a18e499d3b2bf1b79"
+
+          if current_sha == new_sha:
+              print("Analytical model already synchronized:", current_sha)
+              Path("/tmp/model-already-current").write_text("1")
+          elif current_sha == old_sha:
+              old_xlsx.write_bytes(current)
+              patch_bin.write_bytes(base64.b64decode(patch_b64.read_text().strip()))
+              print("Analytical model baseline verified:", current_sha)
+          else:
+              raise SystemExit(
+                  "Analytical model drift detected. Expected old/new SHA256; got " + current_sha
+              )
+          PY
+
+          if [ -f /tmp/model-already-current ]; then
+            exit 0
+          fi
+
+          zstd -q -d --patch-from="$OLD_XLSX" "$PATCH_BIN" -o "$NEW_XLSX"
+
+          python - <<'PY'
+          import base64
+          import hashlib
+          from pathlib import Path
+
+          new_xlsx = Path("/tmp/commercial-ev-model-new.xlsx")
+          model_b64 = Path("src/generated/commercial-ev-assets/Manash-Protim-Deori-Commercial-EV-Model.xlsx.01.b64")
+          expected = "fa6ad079b43181e7b486874bc9c4cd06b046b204a35d6c5a18e499d3b2bf1b79"
+
+          data = new_xlsx.read_bytes()
+          actual = hashlib.sha256(data).hexdigest()
+          if actual != expected:
+              raise SystemExit(f"Analytical model patch verification failed: {actual}")
+
+          model_b64.write_text(base64.b64encode(data).decode("ascii"))
+          print("Analytical model synchronized:", actual)
+          PY
 
       - name: Commit corrected deck assets
         run: |
@@ -44,6 +107,9 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add             src/generated/commercial-ev-assets/Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pptx.01.b64             src/generated/commercial-ev-assets/Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pdf.01.b64
-          git commit -m "Fix Commercial EV deck text layout and source labels"
+          git add \
+            src/generated/commercial-ev-assets/Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pptx.01.b64 \
+            src/generated/commercial-ev-assets/Manash-Protim-Deori-Commercial-EV-Growth-Advisory-Case.pdf.01.b64 \
+            src/generated/commercial-ev-assets/Manash-Protim-Deori-Commercial-EV-Model.xlsx.01.b64
+          git commit -m "Sync Commercial EV deck and analytical model"
           git push
