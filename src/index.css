@@ -5181,25 +5181,46 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   line-height:1.12!important;
 }
 
-/* Candidate 2 was vertically dominated by 11 ownership inputs plus eight
-   standards. The JSX now uses 3-column ownership and 4-column standards;
-   these rules keep all rows inside the card and preserve legibility. */
+/* Candidate-2 boardroom fit ---------------------------------------------------
+   The phase strip is intentionally concise so the economic scorecard and
+   ownership/standards panels have enough vertical room in the fixed 16:9 canvas. */
 .olam-strategy-lab .olam-slide--candidate-2{
-  --olam-dense-copy:8.8px;
-  --olam-dense-title:9.9px;
-  --olam-meta:8.2px;
-  --olam-card-kicker:8.65px;
+  --olam-dense-copy:8.7px;
+  --olam-dense-title:9.8px;
+  --olam-meta:8.15px;
+  --olam-card-kicker:8.55px;
 }
-.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-phase-grid{
-  min-height:0;
+.olam-strategy-lab .olam-slide--candidate-2 .olam-title-row{
+  margin-top:7px!important;
+  gap:10px!important;
 }
+.olam-strategy-lab .olam-slide--candidate-2 .olam-title-card,
+.olam-strategy-lab .olam-slide--candidate-2 .olam-insight-card{
+  padding:11px 13px!important;
+}
+.olam-strategy-lab .olam-slide--candidate-2 .olam-narrative,
+.olam-strategy-lab .olam-slide--candidate-2 .olam-insight-copy{
+  margin-top:5px!important;
+  line-height:1.24!important;
+}
+.olam-strategy-lab .olam-slide--candidate-2 .olam-body-region{
+  margin-top:8px!important;
+  padding-bottom:0!important;
+}
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-phase-grid,
 .olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-two-lower{
   min-height:0;
 }
-.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-ownership{
-  overflow:hidden;
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-two-lower>section{
+  box-sizing:border-box;
 }
-.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-ownership .olam-dense-copy{
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-economics,
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-scorecard,
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-ownership{
+  overflow:hidden!important;
+}
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-ownership .olam-dense-copy,
+.olam-strategy-lab .olam-slide--candidate-2 .olam-candidate-scorecard .olam-dense-copy{
   line-height:1.1!important;
 }
 
