@@ -436,6 +436,7 @@ const CandidateOneBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
           <div className="mt-1 border-t border-white/7 pt-1">
             <div className="olam-dense-copy leading-[1.16] text-white/50"><span className="font-mono text-white/36">GAP · </span>{system.gap}</div>
             <div className="olam-dense-copy mt-0.5 leading-[1.16] text-amber-100/68"><span className="font-mono text-amber-200/72">DECISION · </span>{system.decision}</div>
+            <div className="olam-dense-copy mt-0.5 leading-[1.14] text-violet-100/52"><span className="font-mono text-violet-200/58">USERS · </span>{system.beneficiaries}</div>
             <div className="olam-dense-copy mt-0.5 leading-[1.14] text-white/46"><span className="font-mono text-cyan-200/58">PROVE / FALSIFY · </span>{system.proof} / {system.falsifier}</div>
           </div>
         </article>
@@ -481,7 +482,7 @@ const CandidateOneBody: React.FC<{ slide: OlamSlide }> = ({ slide }) => (
           </div>
           <div className="rounded-md border border-white/7 bg-black/10 px-1.5 py-1">
             <div className="olam-dense-meta font-mono text-cyan-200/68">OIL PROMO</div>
-            <div className="olam-dense-copy mt-0.5 leading-[1.12] text-white/50">sell-in ≠ win → offtake / stock / net price / route / washout</div>
+            <div className="olam-dense-copy mt-0.5 leading-[1.12] text-white/50">sell-in +12% ≠ win → offtake / stock / net price / route / washout</div>
           </div>
           <div className="rounded-md border border-white/7 bg-black/10 px-1.5 py-1">
             <div className="olam-dense-meta font-mono text-green-200/68">S&OP MISS</div>
