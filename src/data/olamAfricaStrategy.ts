@@ -94,7 +94,7 @@ export const OLAM_SOURCES: OlamSource[] = [
     url: 'https://www.olamagri.com/news/press-release/olam-agri-launches-baking-brighter-futures-and-commits-usd-2-million-to-support-20000-bakers-across-africa',
     date: '2025',
     authority: 'primary',
-    note: 'Primary evidence for baker and food-entrepreneur training scale, geographic reach and the planned $2m programme through 2030.',
+    note: 'Primary programme evidence: planned US$2m investment, >20,000 training target by 2030, and >10,000 bakers benefitted since 2019 (around half women). These are programme commitments/reach metrics, not realized revenue, EBIT, ROMI or financial return.',
   },
   {
     id: 'S05',
@@ -155,10 +155,10 @@ export const OLAM_SOURCES: OlamSource[] = [
   {
     id: 'S12',
     label: 'Nigeria NBS — August 2026 CPI',
-    url: 'https://www.nigerianstat.gov.ng/',
+    url: 'https://microdata.nigerianstat.gov.ng/index.php/catalog/154/related-materials',
     date: '2026-09-15',
     authority: 'regulator',
-    note: 'Official August 2026 CPI release anchor: headline inflation 15.39% year over year and food inflation 19.57%. Nigeria’s CPI was rebased to 2024=100; the deck uses this dated historical release and does not equate disinflation with a fall in the price level.',
+    note: 'Official NBS August 2026 CPI release anchor, published 15 Sep 2026: headline inflation 15.39% year over year and food inflation 19.57%, with CPI base period 2024=100. The deck treats this as a rate-of-change signal: disinflation does not mean prices fell or household purchasing power was restored.',
   },
   {
     id: 'S13',
@@ -166,7 +166,7 @@ export const OLAM_SOURCES: OlamSource[] = [
     url: 'https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=Grain+and+Feed+Annual_Lagos_Nigeria_NI2026-0003.pdf',
     date: '2026',
     authority: 'regulator',
-    note: 'Industry-demand context: MY2026/27 wheat consumption projected at 6.8m MT, with about 60% of wheat flour used by bakeries for bread.',
+    note: 'Industry-demand context: USDA FAS projects MY2026/27 Nigeria wheat consumption at 6.8m MT. This is a national macro-demand signal only; it is not evidence of Olam brand growth, semolina penetration, market share or incremental contribution.',
   },
   {
     id: 'S14',
@@ -174,7 +174,7 @@ export const OLAM_SOURCES: OlamSource[] = [
     url: 'https://blogs.worldbank.org/en/voices/grow-food--create-jobs--africa-s-agribusiness-moment-is-now-',
     date: '2026-07',
     authority: 'multilateral',
-    note: 'Macro context for African agribusiness, jobs and the projected scale of the continent’s food market toward 2030.',
+    note: 'World Bank macro context: Africa’s food market is projected to reach $1tn by 2030. This is a continental market-scale anchor, not Olam addressable revenue, Nigeria category revenue or a forecast of Olam earnings.',
   },
   {
     id: 'S15',
@@ -330,9 +330,9 @@ export const OLAM_FIGURE_EVIDENCE: OlamFigureEvidence[] = [
   { id: 'F21', figure: '73 markets; version 2026-08-24', claim: 'World Bank Nigeria Real-Time Food Prices coverage/version', classification: 'Reported', sourceIds: ['S29'], provenance: 'World Bank dataset; combines observed and machine-learning-estimated missing prices and is revised over time.' },
   { id: 'F22', figure: '81.81% / 18.19%', claim: 'Post-CFG SALIC / Olam Group ownership', classification: 'Reported', sourceIds: ['S02', 'S16'], provenance: 'Olam Group transaction-specific disclosure after 30 Jun 2026 CFG acquisition; Olam Agri About-page main text aligns, while a stale lower section still says 81.11%.' },
   { id: 'F23', figure: '81.11%', claim: 'Conflicting legacy Olam Agri About-page ownership statement', classification: 'Reported', sourceIds: ['S16'], provenance: 'Stale lower-page statement retained only as a disclosed source conflict; not used as governing ownership.' },
-  { id: 'F24', figure: '$2m through 2030; 20,000+', claim: 'Baking Brighter Futures planned investment and training ambition', classification: 'Reported', sourceIds: ['S04'], provenance: 'Olam Agri programme announcement; planned investment/target, not realized financial return.' },
-  { id: 'F25', figure: '10,000+ since 2019; ~50% women', claim: 'Bakers already reached by Olam Agri baking programmes', classification: 'Reported', sourceIds: ['S04'], provenance: 'Olam Agri Baking Brighter Futures announcement across Nigeria, Ghana, Senegal and Cameroon.' },
-  { id: 'F26', figure: '$1tn by 2030', claim: 'Projected scale of Africa food market', classification: 'External forecast', sourceIds: ['S14'], provenance: 'World Bank agribusiness context; macro opportunity anchor only.' },
+  { id: 'F24', figure: '$2m through 2030; 20,000+', claim: 'Baking Brighter Futures planned investment and training ambition', classification: 'Reported', sourceIds: ['S04'], provenance: 'Olam Agri programme announcement: planned investment and future training target only; not realized revenue, EBIT, ROMI or financial return.' },
+  { id: 'F25', figure: '10,000+ since 2019; ~50% women', claim: 'Bakers already reached by Olam Agri baking programmes', classification: 'Reported', sourceIds: ['S04'], provenance: 'Olam Agri says more than 10,000 bakers have benefitted from its baking programmes since 2019, around half women; programme reach is not a realized earnings metric.' },
+  { id: 'F26', figure: '$1tn by 2030', claim: 'Projected scale of Africa food market', classification: 'External forecast', sourceIds: ['S14'], provenance: 'World Bank continental food-market projection; macro opportunity anchor only, not Olam addressable revenue or category-specific sales.' },
   { id: 'F27', figure: '1.5m MT; ~1.8% global', claim: 'Nigeria palm-oil production, 2025/26', classification: 'Reported', sourceIds: ['S30'], provenance: 'USDA FAS global production table; supply context only, not Olam share or category demand.' },
   { id: 'F28', figure: 'NGN2.5bn; NGN20bn; 2.27 yrs; NGN0.31bn', claim: 'Outputs inherited from the prior uploaded financial model/deck', classification: 'Model', sourceIds: [], provenance: 'Prior case working model. Explicitly not independently validated because its full cash-flow bridge and assumptions were not supplied.' },
   { id: 'F29', figure: 'NGN4.2bn = NGN0.6bn + NGN3.6bn', claim: 'Pilot plus conditional rollout scenario envelope', classification: 'Model', sourceIds: [], provenance: 'Inherited from the prior uploaded case; scenario envelope only, not Olam management guidance.' },
@@ -342,7 +342,7 @@ export const OLAM_FIGURE_EVIDENCE: OlamFigureEvidence[] = [
   { id: 'F33', figure: '~NGN1.99bn / ~2.0%', claim: 'Zero-NPV recurring run-rate boundary per NGN100bn normalized sales', classification: 'Model', sourceIds: ['S21'], provenance: 'Formula-derived from the explicit screening model; changes when hurdle, cash-flow timing, working capital or capital envelope changes.' },
   { id: 'F34', figure: '5,000 runs; seed 20261001; P10 −NGN6.00bn; P50 −NGN3.37bn; P90 −NGN1.17bn; positive-NPV frequency 2.0%', claim: 'Reproducible uncertainty stress simulation', classification: 'Model', sourceIds: [], provenance: 'Seeded independent-uniform scenario simulation. Percentiles and positive-NPV share are reproducible scenario frequencies, not calibrated forecast probabilities.' },
   { id: 'F35', figure: '₹20M; ₹35.8 → ₹15.5; −56.7%', claim: 'Historical campaign-budget / CPM evidence used on candidate-contribution slide', classification: 'Portfolio evidence', sourceIds: [], provenance: 'Grounded in the portfolio resume source; presented as prior experience, not an Olam performance claim.' },
-  { id: 'F36', figure: '63 reviews; 8 gates; 16 assumptions; 36 figure lines', claim: 'Deck QA and model-governance structure after this revalidation', classification: 'Deck QA', sourceIds: [], provenance: 'Repository-defined QA structure: 50 prior reviews + 10 fresh factual/source revalidation passes + 3 additional cross-check iterations requested on 3 Oct 2026; eight capital/evidence gates; sixteen explicit model assumptions; thirty-six evidence-register lines.' },
+  { id: 'F36', figure: '66 reviews; 8 gates; 16 assumptions; 36 figure lines', claim: 'Deck QA and model-governance structure after this revalidation', classification: 'Deck QA', sourceIds: [], provenance: 'Repository-defined QA structure: 50 prior reviews + 10 fresh factual/source revalidation passes + 3 corrective-action cross-checks + 3 new web-verification iterations on 3 Oct 2026; eight capital/evidence gates; sixteen explicit model assumptions; thirty-six evidence-register lines.' },
 ];
 
 export const OLAM_REVIEW_ITERATIONS = [
@@ -409,6 +409,9 @@ export const OLAM_REVIEW_ITERATIONS = [
   ['61', 'Primary-source conflict recheck', 'Do the ownership, volume-definition, CBN-rate and palm-oil policy flags still survive a fresh primary-source review?', 'Yes. Olam Group confirms 81.81% / 18.19% post-CFG ownership; the Olam Agri About page still contains both 81.81% and stale 81.11%; FY2025 sales volume remains distinct from handled volume; CBN confirms the September reset to 23%; USDA preserves the crude-versus-refined prohibition distinction.'],
   ['62', 'Model-to-governance cross-check', 'Do the proposed remedies actually close the weaknesses identified in the original model and source audit?', 'Yes, as governance recommendations rather than reported Olam practices: staged capital keeps NGN3.6bn conditional, internal Finance/Treasury data are required to replace public defaults, causal ROMI removes inventory loading, and G0–G7 prevent narrative from bypassing evidence, contribution, route, resilience and cash tests.'],
   ['63', 'Deck-wide contradiction regression', 'After integrating the review, does any slide re-introduce a contradicted ownership, volume, MPR, WACC, policy or return claim?', 'No material contradiction remains in the repository tests: 23% is labeled a public anchor rather than Olam WACC; 53.7m MT is kept separate from 49.474m MT handled; 81.11% appears only as a disclosed source conflict; inherited returns remain unverified; and NOT Prohibited is never translated into duty-free or unrestricted importability.'],
+  ['64', 'Corporate/regulatory primary-source web pass', 'Do current Olam Group, Olam Agri and CBN pages still support the ownership, volume-definition and September policy-rate corrections?', 'Yes. Olam Group confirms 81.81% SALIC / 18.19% Olam Group after the 30 Jun CFG issuance; Olam Agri’s current About page still contains both 81.81% and stale 81.11%; the FY2025 report separately labels 53.7m MT sales volume and 49.474m MT handled; CBN shows the September 2026 MPR reset to 23% after 26.5% in July.'],
+  ['65', 'Regulator/multilateral macro-boundary web pass', 'Do USDA, NBS and World Bank sources support the wheat, inflation, palm-oil, 73-market and $1tn claims without allowing macro data to masquerade as Olam operating performance?', 'Yes. USDA supports 6.8m MT MY2026/27 wheat consumption and the crude/refined palm-oil prohibition distinction; NBS supports 15.39% headline and 19.57% food inflation for Aug-2026; World Bank documents a 73-market mixed measured/ML price dataset and a $1tn Africa food-market projection. All remain external context, not Olam transaction-level evidence.'],
+  ['66', 'Programme/model-boundary web pass', 'Do the Olam programme claims and inherited-model treatment remain correctly classified after a final source review?', 'Yes. Olam Agri supports the planned US$2m / >20,000 target and >10,000 beneficiaries since 2019, around half women, but not a financial-return claim. The inherited NGN2.5bn / NGN20bn / 2.27-year / NGN0.31bn outputs still have no external primary source and remain unverified model inheritance; the 28% hurdle remains a screening convention, not an externally required premium or Olam Treasury WACC.'],
 ] as const;
 
 export const OLAM_POLICY_GATES = [
@@ -1324,7 +1327,7 @@ export const OLAM_SLIDES: OlamSlide[] = [
   {
     id: 'review-reverification',
     section: 'Review re-verification · 3 Oct 2026',
-    title: 'The six review flags survive re-checking — with one material wording correction on the September policy rate',
+    title: 'The core source and model flags survive re-checking — with one material wording correction on the September policy rate',
     narrative: 'Primary-source re-verification confirms the ownership conflict, volume-definition boundary, palm-oil policy scope, FY2025 growth-quality divergence and the inability to reproduce the original case-model outputs from the supplied evidence. The CBN item needs one correction: September 2026 was a reset/cut from 26.5% to 23%, not an increase.',
     insight: 'Decision-grade source hierarchy: transaction disclosures over stale web copy; metric labels over headline summaries; formal MPC decisions over live key-rate widgets; HS-level policy tables over shorthand; and reproducible cash-flow schedules over inherited model outputs.',
     metrics: [
@@ -1365,6 +1368,28 @@ export const OLAM_SLIDES: OlamSlide[] = [
     ],
     sourceIds: ['S01', 'S19', 'S21', 'S27'],
     kind: 'gate',
+  },
+  {
+    id: 'review-signal-boundaries',
+    section: 'Evidence perimeter · external signals versus operating proof',
+    title: 'Macro scale, programme reach and public datasets can define context — but they cannot substitute for Olam transaction-level economics',
+    narrative: 'The third web-verification cycle confirmed the external figures, but also reinforced their epistemic boundary. National wheat consumption, inflation, modeled market-price grids, continental food-market forecasts and social-programme reach belong in the context layer; only Olam-owned sell-out, contribution, NWC, route and repeat data can prove an investable category-growth mechanism.',
+    insight: 'The practical rule is classification before interpretation: External Forecast ≠ Olam demand; Inflation ≠ affordability recovery; Programme Reach ≠ earnings; Market Scale ≠ addressable revenue; ML-assisted price estimate ≠ transaction truth.',
+    metrics: [
+      { label: 'Wheat context', value: '6.8m MT', detail: 'USDA MY2026/27 Nigeria consumption projection — not semolina penetration or Olam share', tone: 'cyan' },
+      { label: 'Inflation', value: '15.39 / 19.57%', detail: 'Aug-2026 headline / food inflation — disinflation, not falling prices', tone: 'gold' },
+      { label: 'Price grid', value: '73 markets', detail: 'World Bank measured + machine-learning estimates — external pressure signal only', tone: 'violet' },
+      { label: 'Programme', value: '$2m / 20k+', detail: 'Planned investment / training target — not realized EBIT or ROMI', tone: 'green' },
+    ],
+    bullets: [
+      'WHEAT · USDA projects 6.8m MT consumption in MY2026/27. Use it to size the national demand environment, not to infer Olam brand growth, semolina penetration or campaign lift.',
+      'INFLATION · NBS August 2026 shows 15.39% headline and 19.57% food inflation. A lower inflation rate means slower price growth; it does not prove lower price levels or restored purchasing power.',
+      'REGIONAL PRICES · World Bank’s Nigeria RTFP dataset covers 73 markets and combines direct observations with machine-learning estimation of missing prices. It is a pressure-signal layer, not Olam invoice or sell-out ground truth.',
+      'PROGRAMME REACH · Olam Agri says planned investment is US$2m, target >20,000 by 2030, and >10,000 bakers have benefitted since 2019, around half women. These are programme metrics, not realized financial returns.',
+      'MARKET SCALE · World Bank’s $1tn by 2030 figure is a continental food-market projection. It cannot be used as Olam addressable revenue, Nigeria category TAM or an earnings forecast without a bottom-up perimeter bridge.',
+    ],
+    sourceIds: ['S04', 'S12', 'S13', 'S14', 'S29'],
+    kind: 'audit',
   },
   {
     id: 'figure-evidence-1',
@@ -1433,13 +1458,13 @@ export const OLAM_SLIDES: OlamSlide[] = [
     kind: 'sources',
   },  {
     id: 'iterations',
-    section: '63-pass executive review · latest 3-pass cross-check',
-    title: 'Three additional cross-check iterations took the deck to 63 total reviews — with the review flags converted into explicit governance rules',
-    narrative: 'Passes 61–63 re-opened the primary-source conflicts, tested whether the proposed remedies actually close the model weaknesses, and ran a deck-wide contradiction regression. They build on the prior 60 reviews rather than repeat them.',
+    section: '66-pass executive review · latest 3-pass web verification',
+    title: 'Three new web-verification iterations took the deck to 66 total reviews — and tightened the boundary between external context and Olam operating proof',
+    narrative: 'Passes 64–66 re-opened the corporate/regulatory sources, challenged the macro-to-operating inference boundary, and rechecked programme-versus-earnings and model-versus-fact classification. They build on the prior 63 reviews rather than repeat them.',
     insight: 'The resulting deck is designed to be auditable, not omniscient: reported facts stay reported, estimates stay estimates, model outputs stay conditional, and unknown internal Olam economics are explicitly left for internal data replacement.',
     metrics: [
-      { label: 'Total reviews', value: '63', detail: '50 prior + 10 fresh factual/source + 3 requested cross-check passes', tone: 'green' },
-      { label: 'Latest cross-check', value: '3', detail: 'Primary-source conflicts · model/governance remedies · contradiction regression', tone: 'cyan' },
+      { label: 'Total reviews', value: '66', detail: '50 prior + 10 factual/source + 3 corrective-action + 3 web-verification passes', tone: 'green' },
+      { label: 'Latest web verification', value: '3', detail: 'Corporate/regulatory · macro-boundary · programme/model-boundary', tone: 'cyan' },
       { label: 'Figure register', value: '36 lines', detail: 'Reported, forecast, derived, model, portfolio and QA numbers classified', tone: 'gold' },
       { label: 'Capital discipline', value: '8 gates', detail: 'No scale without evidence, contribution, cash and repeatability', tone: 'violet' },
     ],
@@ -1487,6 +1512,7 @@ const OLAM_SLIDE_ORDER = [
   'candidate-2',
   'review-reverification',
   'review-corrective-actions',
+  'review-signal-boundaries',
   'figure-evidence-1',
   'figure-evidence-2',
   'figure-evidence-3',
