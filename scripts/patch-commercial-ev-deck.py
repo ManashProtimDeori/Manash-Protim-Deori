@@ -743,59 +743,81 @@ def _style_3d_tco_card(slide, card):
 
 
 def finalize_tco_challenge_card(slide, counts):
-    title = text_shape(slide, contains="Hardest TCO challenge sequence")
-    if title is None:
+    # Current generated versions may no longer contain the legacy heading, so
+    # anchor on the visible checklist itself. This makes the styling robust on
+    # both the original and already-patched deck.
+    legacy_title = text_shape(slide, contains="Hardest TCO challenge sequence")
+    checklist = text_shape(slide, contains="Stress real-world range")
+    anchor = legacy_title or checklist
+    if anchor is None:
         return
 
-    # The actual challenge card is ~4 inches wide. Earlier logic looked only
-    # for 5-inch+ containers, missed it, and left legacy text underneath.
-    card = _find_enclosing_card(slide, title, min_width=3.2, min_height=1.8, max_height=4.8)
+    card = _find_enclosing_card(
+        slide, anchor, min_width=3.2, min_height=1.8, max_height=4.8
+    )
     if card is None:
-        card_left = Inches(8.45)
-        card_right = Inches(12.55)
-        card_top = Inches(2.12)
-        card_bottom = Inches(6.25)
-    else:
-        card_left, card_right = card.left, _shape_right(card)
-        card_top, card_bottom = card.top, _shape_bottom(card)
-        _style_3d_tco_card(slide, card)
+        return
 
-    # Delete EVERY text object geometrically inside the challenge card except
-    # the heading. This removes legacy lines such as financing APR and the
-    # older charging-loss line, not just strings that happen to match markers.
+    card_left, card_right = card.left, _shape_right(card)
+    card_top, card_bottom = card.top, _shape_bottom(card)
+
+    _style_3d_tco_card(slide, card)
+
+    # Clear all old text within the card and rebuild once. This guarantees
+    # consistent hierarchy even when the incoming deck has already been
+    # through an earlier patch version.
     removed = 0
     for s in list(slide.shapes):
-        if s is title or not getattr(s, "has_text_frame", False):
+        if not getattr(s, "has_text_frame", False):
             continue
         if not norm(s.text):
             continue
         if (
-            s.left >= card_left - Inches(0.05)
-            and _shape_right(s) <= card_right + Inches(0.05)
-            and s.top >= card_top - Inches(0.05)
-            and _shape_bottom(s) <= card_bottom + Inches(0.05)
+            s.left >= card_left - Inches(0.06)
+            and _shape_right(s) <= card_right + Inches(0.06)
+            and s.top >= card_top - Inches(0.06)
+            and _shape_bottom(s) <= card_bottom + Inches(0.06)
         ):
             delete_shape(s)
             removed += 1
 
-    # Stronger title hierarchy.
-    title.left = int(card_left + Inches(0.30))
-    title.width = int(card_right - card_left - Inches(0.60))
-    title.top = int(card_top + Inches(0.28))
-    title.height = Inches(0.34)
-    format_text(
-        title, font_pt=10.4, bold=True, align=PP_ALIGN.LEFT,
-        valign=MSO_ANCHOR.MIDDLE, ml=0, mr=0, mt=0, mb=0
+    # Premium heading placed below the bevel highlight.
+    title = slide.shapes.add_textbox(
+        int(card_left + Inches(0.30)),
+        int(card_top + Inches(0.28)),
+        int(card_right - card_left - Inches(0.60)),
+        Inches(0.38),
     )
+    _name_shape(title, "TCO 3D Heading")
+    set_text(
+        title, "TCO STRESS-TEST CHECKLIST", font_pt=11.0, bold=True,
+        align=PP_ALIGN.LEFT, valign=MSO_ANCHOR.MIDDLE
+    )
+    title.text_frame.margin_left = Pt(0)
+    title.text_frame.margin_right = Pt(0)
+    title.text_frame.margin_top = Pt(0)
+    title.text_frame.margin_bottom = Pt(0)
     for p in title.text_frame.paragraphs:
         for r in p.runs:
-            r.font.color.rgb = RGBColor(20, 38, 55)
+            r.font.color.rgb = RGBColor(18, 39, 56)
 
-    # Build the checklist with prominent amber numerals and dark body copy.
+    # Small amber rule reinforces the 3D card's top plane without adding noise.
+    rule = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE,
+        int(card_left + Inches(0.30)),
+        int(title.top + title.height + Inches(0.055)),
+        Inches(0.72),
+        Inches(0.035),
+    )
+    _name_shape(rule, "TCO 3D Accent Rule")
+    rule.fill.solid()
+    rule.fill.fore_color.rgb = RGBColor(215, 135, 11)
+    rule.line.fill.background()
+
     body_left = int(card_left + Inches(0.30))
-    body_top = int(title.top + title.height + Inches(0.14))
+    body_top = int(rule.top + rule.height + Inches(0.16))
     body_w = int(card_right - card_left - Inches(0.60))
-    body_h = int(card_bottom - body_top - Inches(0.28))
+    body_h = int(card_bottom - body_top - Inches(0.30))
     body = slide.shapes.add_textbox(body_left, body_top, body_w, body_h)
     _name_shape(body, "TCO 3D Checklist")
 
@@ -812,21 +834,22 @@ def finalize_tco_challenge_card(slide, counts):
     for i, item in enumerate(TCO_ITEMS):
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
         number, statement = item.split(". ", 1)
+
         num_run = p.add_run()
         num_run.text = number + ". "
-        num_run.font.size = Pt(8.8)
+        num_run.font.size = Pt(9.2)
         num_run.font.bold = True
-        num_run.font.color.rgb = RGBColor(181, 105, 4)
+        num_run.font.color.rgb = RGBColor(176, 100, 3)
 
         text_run = p.add_run()
         text_run.text = statement
-        text_run.font.size = Pt(8.8)
+        text_run.font.size = Pt(9.2)
         text_run.font.bold = False
-        text_run.font.color.rgb = RGBColor(24, 42, 57)
+        text_run.font.color.rgb = RGBColor(22, 41, 56)
 
         p.space_before = Pt(0)
-        p.space_after = Pt(2.0)
-        p.line_spacing = 1.03
+        p.space_after = Pt(2.5)
+        p.line_spacing = 1.04
         p.alignment = PP_ALIGN.LEFT
 
     counts["tco_legacy_inside_removed"] += removed
@@ -1356,6 +1379,8 @@ def main():
         missing.append("roadmap_chips_fixed=" + str(counts["roadmap_chips_fixed"]))
     if counts["roadmap_cards_balanced"] != 4:
         missing.append("roadmap_cards_balanced=" + str(counts["roadmap_cards_balanced"]))
+    if counts["tco_3d_card_styled"] != 1:
+        missing.append("tco_3d_card_styled=" + str(counts["tco_3d_card_styled"]))
     if counts["kpi_pills_styled"] != 3:
         missing.append("kpi_pills_styled=" + str(counts["kpi_pills_styled"]))
     if counts["appendix_boxes_styled"] == 0:
