@@ -5170,6 +5170,28 @@ em,.font-serif{font-family:var(--apple-font)!important;font-style:normal!importa
   line-height:1.28!important;
 }
 
+
+/* Corrective-action synthesis added after the three-pass review. Keep five
+   governance actions readable inside the fixed 16:9 export canvas. */
+.olam-strategy-lab .olam-slide--review-corrective-actions{
+  --olam-bullet:10.2px;
+  --olam-detail:9.35px;
+  --olam-value:19px;
+  --olam-card-kicker:8.9px;
+}
+.olam-strategy-lab .olam-slide--review-corrective-actions .olam-metric-card{
+  padding:10px 12px!important;
+}
+.olam-strategy-lab .olam-slide--review-corrective-actions .olam-metric-detail{
+  line-height:1.26!important;
+}
+.olam-strategy-lab .olam-slide--review-corrective-actions .space-y-3>:not([hidden])~:not([hidden]){
+  margin-top:6px!important;
+}
+.olam-strategy-lab .olam-slide--review-corrective-actions .olam-bullet-copy{
+  line-height:1.25!important;
+}
+
 /* Other high-density slide families receive a small typographic reserve so
    line-height differences between Chromium, html2canvas and PowerPoint/PDF
    rasterization do not push the last line outside its card. */
