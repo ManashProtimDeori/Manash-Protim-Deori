@@ -2,6 +2,7 @@ import {
   OLAM_FIGURE_EVIDENCE,
   OLAM_MODEL_ASSUMPTIONS,
   OLAM_POLICY_GATES,
+  OLAM_REVIEW_ITERATIONS,
   OLAM_SOURCES,
 } from '../data/olamAfricaStrategy';
 import {
@@ -105,13 +106,13 @@ export async function downloadOlamAnalyticalWorkbook() {
   addSheet('README', [
     ['Olam Agri Nigeria Category Growth — Analytical Model'],
     ['Purpose', 'Auditable decision-screening workbook aligned to the Olam strategy deck.'],
-    ['Accuracy standard', 'Ten workbook QA iterations plus ten fresh-source checks. Public sources can change, so the workbook preserves dates, versions, caveats and source conflicts rather than claiming immutable certainty.'],
+    ['Accuracy standard', 'Ten workbook QA iterations + ten fresh-source checks + three additional cross-check iterations (primary-source conflict recheck, model/governance remedy test, deck-wide contradiction regression). Public sources can change, so the workbook preserves dates, versions, caveats and source conflicts rather than claiming immutable certainty.'],
     ['Model perimeter', 'Normalized NGN100bn eligible-sales decision unit; Nigeria first-wave category-growth screening.'],
     ['Base-case gate', baseCase.fullScaleGate.toUpperCase()],
     ['Base 3Y NPV (NGN bn)', baseCase.threeYearNpvNgnBn],
     ['Required run-rate for zero NPV (NGN bn)', baseCase.requiredRunRateForNpvZeroNgnBn],
     ['Simulation', simulation.runs + ' runs · seed ' + simulation.seed + ' · positive-NPV frequency ' + simulation.positiveNpvFrequencyPct.toFixed(2) + '%'],
-    ['Workbook sections', 'Source_Register · Figure_Evidence · Assumptions · Base_Case · Scenarios · Sensitivity · Simulation · Decision_Gates · QA_10_Pass · Fresh_Source_Audit · Formula_Map'],
+    ['Workbook sections', 'Source_Register · Figure_Evidence · Assumptions · Base_Case · Scenarios · Sensitivity · Simulation · Decision_Gates · Review_3_Pass · Corrective_Actions · QA_10_Pass · Fresh_Source_Audit · Formula_Map'],
     ['Checked / rebuilt', '2026-10-03'],
   ], [36, 112]);
 
@@ -285,6 +286,20 @@ export async function downloadOlamAnalyticalWorkbook() {
     ['Gate', 'Title', 'Rule', 'Pass condition', 'Falsifier'],
     ...OLAM_POLICY_GATES.map((g) => [g.id, g.title, g.rule, g.pass, g.falsifier]),
   ], [10, 28, 86, 76, 76]);
+
+  addSheet('Review_3_Pass', [
+    ['Iteration', 'Review layer', 'Question', 'Cross-check result'],
+    ...OLAM_REVIEW_ITERATIONS.slice(-3).map((r) => [r[0], r[1], r[2], r[3]]),
+  ], [12, 34, 80, 120]);
+
+  addSheet('Corrective_Actions', [
+    ['Action', 'Governance rule', 'Why it follows from the review', 'Internal evidence required before investment use'],
+    ['Staged capital release', 'Treat NGN4.2bn as a scenario envelope; pilot first, conditional rollout only after pre-registered gates clear.', 'The inherited returns are not independently reproducible and the public screening model is intentionally conservative.', 'Pilot repeat, verified contribution, route cost, cash conversion and second-market replication.'],
+    ['Source hierarchy discipline', 'Transaction disclosure > stale web copy; formal metric label > headline summary; formal MPC decision > live key-rate widget.', 'The review found ownership, metric-definition and policy-rate source-cadence conflicts.', 'Named owner for source reconciliation and dated evidence register at every capital gate.'],
+    ['Replace model defaults', 'Retire public screening placeholders before funding decisions.', 'NGN100bn eligible sales, 7-day sales-based working-capital proxy and 28% hurdle are conventions, not Olam internal facts.', 'Audited eligible sales; Finance-owned inventory + receivables − payables; Treasury-approved nominal-NGN hurdle.'],
+    ['Causal Incremental Contribution ROMI', 'Credit verified incremental offtake contribution, not primary sell-in or inventory loading.', 'Channel loading can look like growth while worsening carry, route cost and cannibalization.', 'Counterfactual baseline, verified offtake, net price/trade spend, route/service cost, carry and cannibalization.'],
+    ['Eight-gate constitution', 'G0–G7 are sequential; a failed earlier gate cannot be waived by market size, volume or narrative.', 'The review requires evidence, customer economics, contribution, route reliability, resilience, cash and replication before capital release.', 'Gate owner, pass condition, falsifier and evidence timestamp for every intervention.'],
+  ], [34, 86, 90, 100]);
 
   addSheet('QA_10_Pass', [
     ['Pass', 'Audit', 'Status', 'Benchmark / rule'],
