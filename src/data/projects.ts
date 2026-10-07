@@ -2,6 +2,36 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'project-meghalaya-strategic-communications',
+    slug: 'strategic-communications-meghalaya',
+    title: 'How I Would Communicate Meghalaya',
+    subtitle: 'My research-led operating perspective for public programmes, citizen engagement and strategic communications in Shillong',
+    excerpt: 'I built a 42-slide, source-first communications case that turns Meghalaya’s regional realities into a practical operating system for policy simplification, multi-channel distribution, narrative monitoring, feedback and measurable public communication.',
+    status: 'Live',
+    year: '2026',
+    categories: ['Marketing', 'Strategy'],
+    tags: ['Strategic Communications', 'Meghalaya', 'Public Affairs', 'Citizen Engagement', 'Media Intelligence', 'Digital Strategy'],
+    skills: ['Strategic Communications', 'Public-Source Research', 'Stakeholder Communication', 'Narrative Monitoring', 'Executive Storytelling'],
+    technologies: ['React', 'TypeScript', 'PowerPoint', 'PDF', 'Public-Source Research'],
+    role: 'I developed the independent candidate perspective, research system and presentation',
+    problem: 'Public-programme communication can become a content-production exercise even when the harder problem is helping people receive, understand, act on and respond to information across different geographic, linguistic and channel contexts.',
+    context: 'I studied Meghalaya’s demographic structure, government citizen-engagement mandates, language framework, telecom indicators, public-information systems and stakeholder-engagement standards, while keeping Shillong distinct from the rest of the state.',
+    insight: 'I conclude that effective public communication in Meghalaya is best designed as an access-and-feedback system, not only a publishing calendar.',
+    strategy: 'I triangulated the central thesis across 12 institutional sources, used canonical primary sources for atomic statistics, classified facts separately from synthesis and recommendations, and mapped every major claim to an exact URL, PDF page where applicable, rationale and confidence.',
+    solution: 'I created a 17-slide executive storyline followed by a thank-you slide and a detailed appendix containing claim ledgers, my evidence ledger, reasoning chains, limitations, 20 documented review passes and a complete source register.',
+    process: 'I moved from regional evidence to communications implications, then to operating design, contribution proof and a 90-day approach. I used a restrained Meghalaya-inspired visual system with subdued aubergine, mist and pine cues rather than tourism imagery or unauthorised Grant Thornton branding.',
+    results: 'I produced a web-native portfolio case with a full PDF viewer plus downloadable PDF and editable PowerPoint outputs generated from the same evidence-controlled source.',
+    lessons: [
+      'I found that public communication becomes more useful when I treat access, comprehension, action and feedback as one system.',
+      'I would use digital reach aggressively without assuming digital uniformity across audiences or geographies.',
+      'I would localise meaning, examples, calls-to-action and support paths rather than simply translate one master asset.',
+      'I would keep observed facts, my inferences and my recommendations visibly separate.'
+    ],
+    nextSteps: 'I would validate channel behaviour, language preference, stakeholder workflows, comprehension and service-outcome attribution in the field before scaling any operating recommendation.',
+    featured: true,
+    accentColor: '#6B4A7C',
+  },
+  {
     id: 'project-commercial-ev-growth-advisory',
     slug: 'india-commercial-ev-growth-advisory',
     title: "Winning India's Commercial EV Transition",
