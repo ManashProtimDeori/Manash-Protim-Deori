@@ -1,0 +1,54 @@
+Global Code,Global Name,Region Code,Region Name,Sub-region Code,Sub-region Name,Intermediate Region Code,Intermediate Region Name,Country or Area,M49 Code,ISO-alpha2 Code,ISO-alpha3 Code,Least Developed Countries (LDC),Land Locked Developing Countries (LLDC),Small Island Developing States (SIDS)
+1,World,2.0,Africa,15.0,Northern Africa,,,Western Sahara,732,EH,ESH,,,
+1,World,2.0,Africa,202.0,Sub-Saharan Africa,14.0,Eastern Africa,British Indian Ocean Territory,86,IO,IOT,,,
+1,World,2.0,Africa,202.0,Sub-Saharan Africa,14.0,Eastern Africa,French Southern Territories,260,TF,ATF,,,
+1,World,2.0,Africa,202.0,Sub-Saharan Africa,14.0,Eastern Africa,Mayotte,175,YT,MYT,,,
+1,World,2.0,Africa,202.0,Sub-Saharan Africa,14.0,Eastern Africa,Réunion,638,RE,REU,,,
+1,World,2.0,Africa,202.0,Sub-Saharan Africa,11.0,Western Africa,Saint Helena,654,SH,SHN,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Anguilla,660,AI,AIA,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Aruba,533,AW,ABW,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,"Bonaire, Sint Eustatius and Saba",535,BQ,BES,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,British Virgin Islands,92,VG,VGB,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Cayman Islands,136,KY,CYM,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Curaçao,531,CW,CUW,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Guadeloupe,312,GP,GLP,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Martinique,474,MQ,MTQ,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Montserrat,500,MS,MSR,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Puerto Rico,630,PR,PRI,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Saint Barthélemy,652,BL,BLM,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Saint Martin (French Part),663,MF,MAF,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Sint Maarten (Dutch part),534,SX,SXM,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,Turks and Caicos Islands,796,TC,TCA,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,29.0,Caribbean,United States Virgin Islands,850,VI,VIR,,,x
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,5.0,South America,Bouvet Island,74,BV,BVT,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,5.0,South America,Falkland Islands (Malvinas),238,FK,FLK,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,5.0,South America,French Guiana,254,GF,GUF,,,
+1,World,19.0,Americas,419.0,Latin America and the Caribbean,5.0,South America,South Georgia and the South Sandwich Islands,239,GS,SGS,,,
+1,World,19.0,Americas,21.0,Northern America,,,Bermuda,60,BM,BMU,,,
+1,World,19.0,Americas,21.0,Northern America,,,Greenland,304,GL,GRL,,,
+1,World,19.0,Americas,21.0,Northern America,,,Saint Pierre and Miquelon,666,PM,SPM,,,
+1,World,,,,,,,Antarctica,10,AQ,ATA,,,
+1,World,142.0,Asia,30.0,Eastern Asia,,,"China, Hong Kong Special Administrative Region",344,HK,HKG,,,
+1,World,142.0,Asia,30.0,Eastern Asia,,,"China, Macao Special Administrative Region",446,MO,MAC,,,
+1,World,150.0,Europe,154.0,Northern Europe,,,Åland Islands,248,AX,ALA,,,
+1,World,150.0,Europe,154.0,Northern Europe,,,Faroe Islands,234,FO,FRO,,,
+1,World,150.0,Europe,154.0,Northern Europe,,,Guernsey,831,GG,GGY,,,
+1,World,150.0,Europe,154.0,Northern Europe,,,Isle of Man,833,IM,IMN,,,
+1,World,150.0,Europe,154.0,Northern Europe,,,Jersey,832,JE,JEY,,,
+1,World,150.0,Europe,154.0,Northern Europe,,,Svalbard and Jan Mayen Islands,744,SJ,SJM,,,
+1,World,150.0,Europe,39.0,Southern Europe,,,Gibraltar,292,GI,GIB,,,
+1,World,9.0,Oceania,53.0,Australia and New Zealand,,,Christmas Island,162,CX,CXR,,,
+1,World,9.0,Oceania,53.0,Australia and New Zealand,,,Cocos (Keeling) Islands,166,CC,CCK,,,
+1,World,9.0,Oceania,53.0,Australia and New Zealand,,,Heard Island and McDonald Islands,334,HM,HMD,,,
+1,World,9.0,Oceania,53.0,Australia and New Zealand,,,Norfolk Island,574,NF,NFK,,,
+1,World,9.0,Oceania,54.0,Melanesia,,,New Caledonia,540,NC,NCL,,,x
+1,World,9.0,Oceania,57.0,Micronesia,,,Guam,316,GU,GUM,,,x
+1,World,9.0,Oceania,57.0,Micronesia,,,Northern Mariana Islands,580,MP,MNP,,,x
+1,World,9.0,Oceania,57.0,Micronesia,,,United States Minor Outlying Islands,581,UM,UMI,,,
+1,World,9.0,Oceania,61.0,Polynesia,,,American Samoa,16,AS,ASM,,,x
+1,World,9.0,Oceania,61.0,Polynesia,,,Cook Islands,184,CK,COK,,,x
+1,World,9.0,Oceania,61.0,Polynesia,,,French Polynesia,258,PF,PYF,,,x
+1,World,9.0,Oceania,61.0,Polynesia,,,Niue,570,NU,NIU,,,x
+1,World,9.0,Oceania,61.0,Polynesia,,,Pitcairn,612,PN,PCN,,,
+1,World,9.0,Oceania,61.0,Polynesia,,,Tokelau,772,TK,TKL,,,
+1,World,9.0,Oceania,61.0,Polynesia,,,Wallis and Futuna Islands,876,WF,WLF,,,

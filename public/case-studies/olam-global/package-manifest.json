@@ -1,0 +1,295 @@
+{
+  "version": "1.0.0",
+  "entries": [
+    {
+      "path": "public/case-studies/olam-global/analysis.json",
+      "bytes": 930559,
+      "sha256": "561ca7982f83176510274178b69a1fa77e319e1e76e63c0564a29bc92c60836d"
+    },
+    {
+      "path": "public/case-studies/olam-global/assumption-register.csv",
+      "bytes": 2228,
+      "sha256": "9486070bd364c0520b3db7f9491cbce0ec753d6e6eb3f0aeb6c3e8b29b3f8b01"
+    },
+    {
+      "path": "public/case-studies/olam-global/calculation-appendix.md",
+      "bytes": 170838,
+      "sha256": "97a8af327305a410c05c487374dd651cc1eac2a537fb790686b860a9000076a0"
+    },
+    {
+      "path": "public/case-studies/olam-global/calculation-appendix.pdf",
+      "bytes": 216729,
+      "sha256": "24f44f4b71681a4d402c33f4b66ff1a5768198f3d2e848515b78b54c7815e6ba"
+    },
+    {
+      "path": "public/case-studies/olam-global/calculation-register.csv",
+      "bytes": 110191,
+      "sha256": "2e42f5f121f3e4b164e883bd4d3f8e4bee88b02086584ea3eea4c7581e933559"
+    },
+    {
+      "path": "public/case-studies/olam-global/change-audit.csv",
+      "bytes": 11816,
+      "sha256": "b3e881a1104d73147da21c57bcb444513f0bf63a8bbecd3685ac6db3bb612b59"
+    },
+    {
+      "path": "public/case-studies/olam-global/change-log.md",
+      "bytes": 9152,
+      "sha256": "5f01e18fa05096b01a9ce6dae22097706ac71b8dcd367fd69a2d89f932017122"
+    },
+    {
+      "path": "public/case-studies/olam-global/claim-register.csv",
+      "bytes": 15207,
+      "sha256": "b175f2407d8d0a88849bbb361a06c8a70e5c29767903fb75c7350971e41b6687"
+    },
+    {
+      "path": "public/case-studies/olam-global/country-atlas-v1.pdf",
+      "bytes": 693997,
+      "sha256": "bba91a279338ce94f6e2c7d6413972d8241ec7634a3221e85374f207cc2b4437"
+    },
+    {
+      "path": "public/case-studies/olam-global/country-register.csv",
+      "bytes": 254329,
+      "sha256": "8c6dff1197442afd8bba9f338c57d61579f5405b430c768c03ca23495d5dfcc5"
+    },
+    {
+      "path": "public/case-studies/olam-global/country-scenario-matrix.csv",
+      "bytes": 5840233,
+      "sha256": "f5d1de3968d18099ed434c4e950ef0b4cfb4ae6437db1cfbcf46aa7411a2ea84"
+    },
+    {
+      "path": "public/case-studies/olam-global/deck.json",
+      "bytes": 319040,
+      "sha256": "7c9d4b525368b4bc8492376b22662b21f1817b21ce449a1ea8531b139c9e5f25"
+    },
+    {
+      "path": "public/case-studies/olam-global/environment.json",
+      "bytes": 129,
+      "sha256": "925e8dfbe9b5b23a81f5d6bba9da9b1f67b2a34921a3c8b916775f972282d7f1"
+    },
+    {
+      "path": "public/case-studies/olam-global/executive-decision-memo.md",
+      "bytes": 5514,
+      "sha256": "20ba16ec9179a9deec5f7092ff4bc0a0e6513778a7194f0d57dd7580400718e3"
+    },
+    {
+      "path": "public/case-studies/olam-global/executive-decision-memo.pdf",
+      "bytes": 49994,
+      "sha256": "5c078ff9a788f05c5a193153629c06281cb21dbc391616cc464ceaa57b6a7d4b"
+    },
+    {
+      "path": "public/case-studies/olam-global/limitations-and-missing-data.md",
+      "bytes": 1772,
+      "sha256": "07400f98e533b9784b36ad2d52dffd455f135c4198c2572705ed4a996c87edfd"
+    },
+    {
+      "path": "public/case-studies/olam-global/limitations-and-missing-data.pdf",
+      "bytes": 45740,
+      "sha256": "89a5af6c0168c808e28e4201a2f6f4b78bac72a385e6f24b7a69217e9948e5e2"
+    },
+    {
+      "path": "public/case-studies/olam-global/olam-global-model-v1.xlsx",
+      "bytes": 119745,
+      "sha256": "b09b103e5277616ae230915318fbb120b2437d61610c483ce677b2a08b48a78a"
+    },
+    {
+      "path": "public/case-studies/olam-global/olam-global-strategy-v1.pdf",
+      "bytes": 6170543,
+      "sha256": "6fdd75d7c08a2890862f51dcf5769585eef09b8d8fcf47699847fcb02a7ac945"
+    },
+    {
+      "path": "public/case-studies/olam-global/olam-global-strategy-v1.pptx",
+      "bytes": 314336,
+      "sha256": "26056eef5008a0cb8c3ad993d430f8069c45dbb12622972063639500a412cd31"
+    },
+    {
+      "path": "public/case-studies/olam-global/pilot-charter.md",
+      "bytes": 3030,
+      "sha256": "6acc747664d35a7b3ed4045c9aa679dea8703a598b1dacb70a7a5116abdf4848"
+    },
+    {
+      "path": "public/case-studies/olam-global/pilot-charter.pdf",
+      "bytes": 47315,
+      "sha256": "6cdc6361ae6b35a8d70558f7f5fcaf2cc943e62693a0b7608582251c6006b9bf"
+    },
+    {
+      "path": "public/case-studies/olam-global/prior-art-and-originality.md",
+      "bytes": 1741,
+      "sha256": "d0c6ddc564d03695b83d0ca7de9a26525de200294c61d845d7bb116dfde0780a"
+    },
+    {
+      "path": "public/case-studies/olam-global/prior-art-and-originality.pdf",
+      "bytes": 45730,
+      "sha256": "bbaf07e3794749dd65d3462fccf330827668b725e096b5391b72f2896de81afa"
+    },
+    {
+      "path": "public/case-studies/olam-global/reproduce.md",
+      "bytes": 1491,
+      "sha256": "62a0b6d0b2abb0f0ea7366a7cafbe8f0495c2afbe7659e2340442fbc0b0acf6e"
+    },
+    {
+      "path": "public/case-studies/olam-global/source-book.csv",
+      "bytes": 12143,
+      "sha256": "65dc86f318e4e0f5376663c6cd918ea5ca1dd4bb60aea94ff2473d4d39db97de"
+    },
+    {
+      "path": "public/case-studies/olam-global/source-book.md",
+      "bytes": 13642,
+      "sha256": "ec079a1b64028ae52b0a46fa1bd289ac8944b82cda01d05077802d50a0ba2c20"
+    },
+    {
+      "path": "public/case-studies/olam-global/source-book.pdf",
+      "bytes": 58401,
+      "sha256": "f7a3935d315ebe9a38678eea9907f3416e0dad920ce857c4b5cff3b206ecd54b"
+    },
+    {
+      "path": "public/case-studies/olam-global/territories-annex.csv",
+      "bytes": 4997,
+      "sha256": "6ae0fdc4f2dfb65f374ddbff12d28b26cd455425d2c6ad59187dec78f44f703c"
+    },
+    {
+      "path": "public/case-studies/olam-global/validation-and-red-team.md",
+      "bytes": 3078,
+      "sha256": "821cc8bd1d86494f944045d93c2c0db0c5711e430b21824222cfd1d29637513a"
+    },
+    {
+      "path": "public/case-studies/olam-global/validation-and-red-team.pdf",
+      "bytes": 47346,
+      "sha256": "8dcf2b3b181f6668a2e81466e7922082303aa900e2327902e287651a4c9e698c"
+    },
+    {
+      "path": "research/olam-global/baseline.json",
+      "bytes": 128073,
+      "sha256": "cb0e1ab7f8087ef7a1fef0bb5ebaea3b00d211406edaf24b072a84de584bfa67"
+    },
+    {
+      "path": "research/olam-global/country-panel.csv",
+      "bytes": 4547874,
+      "sha256": "fafc76687e0e017f7bdb530c218639bf399fcf121186c80ba3cfa39839d97898"
+    },
+    {
+      "path": "research/olam-global/membership-verification.csv",
+      "bytes": 15777,
+      "sha256": "98d7abb5de775c5682b6721a5afb29e20b1f09726d45f08e45f807aed10750bd"
+    },
+    {
+      "path": "research/olam-global/raw/m49.csv",
+      "bytes": 20406,
+      "sha256": "ccfd0a7b9b406b7b75bdfb4725af35adcca88e6102898401c46e29a796656037"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_cereal_yield.json",
+      "bytes": 1485512,
+      "sha256": "552933117cf9835ed5f0f3493f175aac3b672cdb37da9ccdca4ed207d1008a3d"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_exports_usd.json",
+      "bytes": 1557640,
+      "sha256": "d146f5d949e220afce4d5c99d570ab36a0ddb9b4d0f252940aa78102071eda0c"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_food_export_share.json",
+      "bytes": 1617199,
+      "sha256": "4df9395bef03dcc4693bbb2ca756dad63f0c56a8c51b5d255260c802db009398"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_food_import_share.json",
+      "bytes": 1617252,
+      "sha256": "0a135996d8a9e212972aec200f8c3b7fc54730aa272d48359cc2c61ee6acc11a"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_food_index.json",
+      "bytes": 1541166,
+      "sha256": "c62ba563ca036811ae1716af9f0c45a3d6d6ee00b6be6d9bbf773019444cf882"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_imports_usd.json",
+      "bytes": 1558843,
+      "sha256": "5f3b4bbbcd016e899b8c946c3b161bc20a94a91edd465de53b21a83e38593046"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_income_ppp.json",
+      "bytes": 1711448,
+      "sha256": "71b6d51ad0b451ea410cb8948bfb04ac9f42b31ec80148a3c8902ffe7b48072f"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_inflation.json",
+      "bytes": 1590571,
+      "sha256": "8982c015c0f292aefc7d0d450d48ced27d3007bc135cafd9cb0b33efd25af454"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_population.json",
+      "bytes": 1384770,
+      "sha256": "9f5b06621149da8759afaa661311af7aab5c8b4d29bf1ae9a76197ab543b9f65"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_urban.json",
+      "bytes": 1638427,
+      "sha256": "8fd11140e65a802a137745dfd3dba911e1458f89b48db6295c2abb2ce94963ee"
+    },
+    {
+      "path": "research/olam-global/raw/wdi_water_stress.json",
+      "bytes": 1938736,
+      "sha256": "a6a0be98d7148f86f164db84a904d56970c68aef3b694d86dc61c7686c4a5f16"
+    },
+    {
+      "path": "research/olam-global/raw/wpp-milestones.csv",
+      "bytes": 118496,
+      "sha256": "bb9f4e08de220667848ebae59935f065311e7645b86764e051d2dce5c628ecfb"
+    },
+    {
+      "path": "research/olam-global/regression-holdout.csv",
+      "bytes": 48611,
+      "sha256": "c8e31ea0b410befd29653345c92c06f41ac398636e51a61ed8f8298fa6584379"
+    },
+    {
+      "path": "research/olam-global/retrieval-manifest.json",
+      "bytes": 18850,
+      "sha256": "5f1366c1bcaed8538af5826f0e841e338b3e840e5194e4725aa74caf37c15e02"
+    },
+    {
+      "path": "scripts/olam-analyse.py",
+      "bytes": 26420,
+      "sha256": "f057da4736509df14ec0d51aadc4f5c01bddc9b7f0f017b9d83e6310efa3a210"
+    },
+    {
+      "path": "scripts/olam-artifacts.mjs",
+      "bytes": 25026,
+      "sha256": "92fe91e01a2308ce462c021ec3370745bd9552a420f82ab2fb8e28f0cf08ccf9"
+    },
+    {
+      "path": "scripts/olam-bundle.py",
+      "bytes": 1621,
+      "sha256": "e30dc70616182b3621c0f9d01d58f9426e9530c0b3bc41ce18a22bd313d1d95f"
+    },
+    {
+      "path": "scripts/olam-editorial.json",
+      "bytes": 32808,
+      "sha256": "d227d582831f3c46bcf9751c88e16a664456ede7531652e54492fc2a738e0efb"
+    },
+    {
+      "path": "scripts/olam-package.py",
+      "bytes": 78293,
+      "sha256": "5610861a67af2ad09965ac65e709880f0877ce4880c3aa55924722ccd5c9db70"
+    },
+    {
+      "path": "scripts/olam-pdfs.py",
+      "bytes": 7978,
+      "sha256": "0e0b69f4a45976eec1cb1a103adb168808f581d966d5e80e2afb39da1dd13009"
+    },
+    {
+      "path": "scripts/olam-retrieve.py",
+      "bytes": 6337,
+      "sha256": "d20ac650d48f19718150ffbcdbb2d0d82f0a3ef53b07ec98610b22f541b0956a"
+    },
+    {
+      "path": "src/lib/olamGlobalModel.ts",
+      "bytes": 3064,
+      "sha256": "191e2d6f3443ebc70c400b724541cb63a2dcc2b801dc641cd38d639e0df41665"
+    },
+    {
+      "path": "tests/olam-africa-strategy.ts",
+      "bytes": 4475,
+      "sha256": "0f56ec93b678e657137896a00166891de5751aab133675a1a7ad2a5f545cef63"
+    }
+  ]
+}

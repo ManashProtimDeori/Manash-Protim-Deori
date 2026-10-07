@@ -33,3 +33,12 @@ Thumbs.db
 
 # Generated smoke-test bundle
 tests/.smoke.mjs
+
+# Olam reproducible research intermediates
+.olam-build/
+research/olam-global/raw/
+research/olam-global/country-panel.csv
+research/olam-global/analysis.json
+
+.chart-data-*/
+tests/.olam-*

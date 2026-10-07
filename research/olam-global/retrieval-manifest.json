@@ -1,0 +1,475 @@
+[
+  {
+    "key": "wdi_population",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_population.json",
+    "bytes": 1384770,
+    "sha256": "9f5b06621149da8759afaa661311af7aab5c8b4d29bf1ae9a76197ab543b9f65",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_inflation",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_inflation.json",
+    "bytes": 1590571,
+    "sha256": "8982c015c0f292aefc7d0d450d48ced27d3007bc135cafd9cb0b33efd25af454",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_income_ppp",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.PP.KD?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_income_ppp.json",
+    "bytes": 1711448,
+    "sha256": "71b6d51ad0b451ea410cb8948bfb04ac9f42b31ec80148a3c8902ffe7b48072f",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_food_index",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/AG.PRD.FOOD.XD?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_food_index.json",
+    "bytes": 1541166,
+    "sha256": "c62ba563ca036811ae1716af9f0c45a3d6d6ee00b6be6d9bbf773019444cf882",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_urban",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SP.URB.TOTL.IN.ZS?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_urban.json",
+    "bytes": 1638427,
+    "sha256": "8fd11140e65a802a137745dfd3dba911e1458f89b48db6295c2abb2ce94963ee",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_food_import_share",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/TM.VAL.FOOD.ZS.UN?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_food_import_share.json",
+    "bytes": 1617252,
+    "sha256": "0a135996d8a9e212972aec200f8c3b7fc54730aa272d48359cc2c61ee6acc11a",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "ownership",
+    "url": "https://www.olamgroup.com/investors/our-re-organisation.html",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/ownership.html",
+    "bytes": 205850,
+    "sha256": "383050bcfb0d3de757fe74d546a1f91182a15ae3a1314494980eb3514dd95c24",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_water_stress",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/ER.H2O.FWST.ZS?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_water_stress.json",
+    "bytes": 1938736,
+    "sha256": "a6a0be98d7148f86f164db84a904d56970c68aef3b694d86dc61c7686c4a5f16",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_exports_usd",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/TX.VAL.MRCH.CD.WT?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_exports_usd.json",
+    "bytes": 1557640,
+    "sha256": "d146f5d949e220afce4d5c99d570ab36a0ddb9b4d0f252940aa78102071eda0c",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_imports_usd",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/TM.VAL.MRCH.CD.WT?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_imports_usd.json",
+    "bytes": 1558843,
+    "sha256": "5f3b4bbbcd016e899b8c946c3b161bc20a94a91edd465de53b21a83e38593046",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_food_export_share",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/TX.VAL.FOOD.ZS.UN?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_food_export_share.json",
+    "bytes": 1617199,
+    "sha256": "4df9395bef03dcc4693bbb2ca756dad63f0c56a8c51b5d255260c802db009398",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wdi_cereal_yield",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/AG.YLD.CREL.KG?format=json&date=2000:2025&per_page=20000",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wdi_cereal_yield.json",
+    "bytes": 1485512,
+    "sha256": "552933117cf9835ed5f0f3493f175aac3b672cdb37da9ccdca4ed207d1008a3d",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "factsheet2026",
+    "url": "https://www.olamagri.com/content/dam/olam-agri/assets/webp/au/au-pdfs/factsheet/olamagri-corporate-factsheet-2026.pdf",
+    "status": "unavailable",
+    "error": "Response is not a PDF",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "about",
+    "url": "https://www.olamagri.com/about-us",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/about.html",
+    "bytes": 68145,
+    "sha256": "193a8be7f3306117e2b12e4e0369d848c2cb2c6131a8de5af17ea246e20f6bd7",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "annual2025",
+    "url": "https://www.olamagri.com/content/dam/olam-agri/assets/webp/au/ar/annual-report-pdf/2025/annual-report-2025.pdf",
+    "status": "unavailable",
+    "error": "Response is not a PDF",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "ipcc_food",
+    "url": "https://www.ipcc.ch/report/ar6/wg2/chapter/chapter-5/",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/ipcc_food.html",
+    "bytes": 2521161,
+    "sha256": "608510d0befaf3aaf810f21108f577f2d1b1620d7c94ba8e196613f8b08ef9ca",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "outlook",
+    "url": "https://www.oecd.org/en/publications/oecd-fao-agricultural-outlook-2026-2035_47874669-en.html",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/outlook.html",
+    "bytes": 1519248,
+    "sha256": "5b80e64193b0044b5228b8826f79560d9e4d94ba530269c68f9a8dbe8871059c",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "outlook_method",
+    "url": "https://www.oecd.org/en/publications/oecd-fao-agricultural-outlook-2026-2035_47874669-en/full-report/methodology_4c323de7.html",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/outlook_method.html",
+    "bytes": 1561485,
+    "sha256": "92bd649cc9ff3cb1d1a5c86e3752f4da7a0db042b1cdf6389ea027fa44d59073",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "members",
+    "url": "https://www.un.org/en/about-us/member-states",
+    "status": "unavailable",
+    "error": "HTTP Error 403: Forbidden",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "observers",
+    "url": "https://www.un.org/en/about-us/non-member-states",
+    "status": "unavailable",
+    "error": "HTTP Error 403: Forbidden",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wpp_home",
+    "url": "https://population.un.org/wpp/",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wpp_home.html",
+    "bytes": 26012,
+    "sha256": "081714e07350ddb4047087af9c7bd0b933625649ff5665e995d263231e5cb883",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "m49",
+    "url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/m49.html",
+    "bytes": 1721575,
+    "sha256": "b9048114f6e7f2abda83bf03d4263c9d7cd1bd7230e3d0461025ee7839a7a1fb",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "nigeria_policy",
+    "url": "https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=Nigeria+Announces+2026+Fiscal+and+Trade+Policy+Changes_Lagos_Nigeria_NI2026-0010.pdf",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/nigeria_policy.pdf",
+    "bytes": 656149,
+    "sha256": "62db1690d5cf569b1f1c0707f88576685f79e172e2b5992d3419cad210d09662",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "wmo2025",
+    "url": "https://wmo.int/publication-series/state-of-global-climate/state-of-global-climate-2025",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/wmo2025.html",
+    "bytes": 123245,
+    "sha256": "a8230bb917b863a937f74dec2896ea5b5e23083b499b0073e0755715da104c1c",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "nigeria_grain",
+    "url": "https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=Grain+and+Feed+Annual_Lagos_Nigeria_NI2026-0003.pdf",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/nigeria_grain.pdf",
+    "bytes": 934609,
+    "sha256": "db76264f68d1af4de2825910dad642511cd56e4026d192cdb857ec24ca49b888",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "ppml",
+    "url": "https://personal.lse.ac.uk/tenreyro/LGW.pdf",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "did",
+    "url": "https://arxiv.org/abs/1803.09015",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/did.html",
+    "bytes": 42013,
+    "sha256": "e4b0d07a7f7f35a4aa6633824601b5515a736d2666f4cc19ef1dde46fb696f22",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "nobel2003",
+    "url": "https://www.nobelprize.org/prizes/economic-sciences/2003/summary/",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/nobel2003.html",
+    "bytes": 169103,
+    "sha256": "b1538ff5c63ba5b08799aa382b634933910e0feebbfb2f23f9db72c9f16b4b41",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "nobel2018",
+    "url": "https://www.nobelprize.org/prizes/economic-sciences/2018/summary/",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/nobel2018.html",
+    "bytes": 170255,
+    "sha256": "3c473160eabbc0d4bc68806d95b0ed2ded1c83da459f282409a32993ad5442fa",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "nobel2021",
+    "url": "https://www.nobelprize.org/prizes/economic-sciences/2021/summary/",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/nobel2021.html",
+    "bytes": 170072,
+    "sha256": "9d1d1ddfe50abdb346809e9f72b0a6ca776aed579dc3fc8f4f8e49c74fb765d8",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "cvar",
+    "url": "https://sites.math.washington.edu/~rtr/papers/rtr179-CVaR1.pdf",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/cvar.pdf",
+    "bytes": 200088,
+    "sha256": "34aff2161733085ca8e5a067053a8f144cba52f556e253d69c932f7d22d842f4",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "eudr",
+    "url": "https://eur-lex.europa.eu/eli/reg/2023/1115/oj/eng",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/eudr.html",
+    "bytes": 657258,
+    "sha256": "d67d391f294e5eea20be5bebfd1f350439446526897e780ffb0c0f7af9705fd4",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "fao_fbs",
+    "url": "https://bulks-faostat.fao.org/production/Food_Balances_(2010-)_E_All_Data_(Normalized).zip",
+    "status": "unavailable",
+    "error": "HTTP Error 403: Forbidden",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_nigeria",
+    "url": "https://www.olamagri.com/locations/nigeria",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_nigeria.html",
+    "bytes": 76329,
+    "sha256": "ee9393454a7045b0532fbc00dc6694f8c43d775bc93a7bf2b2bc7cee75854154",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_ghana",
+    "url": "https://www.olamagri.com/locations/ghana",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_ghana.html",
+    "bytes": 34980,
+    "sha256": "86788078bfbf971160707d8bf052ce85cc04ab4f812e28dd0eb190b8fa2c2e0e",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_senegal",
+    "url": "https://www.olamagri.com/locations/senegal",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_senegal.html",
+    "bytes": 38809,
+    "sha256": "45c68cb3662be4360725a86163677669d1b15b33e3159615326da2f1ddd6d4a9",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_cameroon",
+    "url": "https://www.olamagri.com/locations/cameroon",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_cameroon.html",
+    "bytes": 39135,
+    "sha256": "0786b3ab9ab34bd10547f15b90f2ab1e6c4e058c1771173b2f9dcf945b952277",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "comtrade",
+    "url": "https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2024&reporterCode=566&cmdCode=1001&flowCode=M&partnerCode=0&partner2Code=0&customsCode=C00&motCode=0&maxRecords=500",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/comtrade.json",
+    "bytes": 956,
+    "sha256": "64eb3fcbb34a74bfda713e60ff5a065ca2b88cb63a4285723f6b06b3728d9e8b",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_vietnam",
+    "url": "https://www.olamagri.com/locations/vietnam",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_vietnam.html",
+    "bytes": 31539,
+    "sha256": "6653e8010894780b28459ee8a183774eda54e12cf773a40a2da65591d25f3f8a",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_india",
+    "url": "https://www.olamagri.com/locations/india",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_india.html",
+    "bytes": 38741,
+    "sha256": "47712551e5644f373cf743ae518e8292257094dc6d4f4f74b4298427d7204346",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_saudi-arabia",
+    "url": "https://www.olamagri.com/locations/saudi-arabia",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_south-africa",
+    "url": "https://www.olamagri.com/locations/south-africa",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_south-africa.html",
+    "bytes": 27003,
+    "sha256": "50944d0e83bc0168076701426b08e4d41a0686ba4fc851372194959773367c4c",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_brazil",
+    "url": "https://www.olamagri.com/locations/brazil",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_brazil.html",
+    "bytes": 29823,
+    "sha256": "bb87b16759eda3976fb8cae1dfa8743a53f160b20ebcf19641029327a35f2f70",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_mozambique",
+    "url": "https://www.olamagri.com/locations/mozambique",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_mozambique.html",
+    "bytes": 38306,
+    "sha256": "f4e6c42582ee493bff667110ee048623613aa304edc50e1d2306abff204a7306",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_thailand",
+    "url": "https://www.olamagri.com/locations/thailand",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_thailand.html",
+    "bytes": 33160,
+    "sha256": "e2b1532cc7be5b9682563f60ea9874b5ebd21333145f2675c4156c752b2145bb",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_netherlands",
+    "url": "https://www.olamagri.com/locations/netherlands",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_netherlands.html",
+    "bytes": 26154,
+    "sha256": "bdbd1bff98e971efd2edb3579718891199d63a9b24b3f7e17b7b281551cd64f0",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_ukraine",
+    "url": "https://www.olamagri.com/locations/ukraine",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_indonesia",
+    "url": "https://www.olamagri.com/locations/indonesia",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_australia",
+    "url": "https://www.olamagri.com/locations/australia",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_australia.html",
+    "bytes": 38769,
+    "sha256": "b524675e49b849b29e29545a694f3443e7b90449603c27a7950cd58e0fd32132",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_singapore",
+    "url": "https://www.olamagri.com/locations/singapore",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_singapore.html",
+    "bytes": 23589,
+    "sha256": "c84ad948cb2c440eeeff3e73673c61d44151a2cc0fb565bab9146b6b557b1ae2",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_bangladesh",
+    "url": "https://www.olamagri.com/locations/bangladesh",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_malaysia",
+    "url": "https://www.olamagri.com/locations/malaysia",
+    "status": "unavailable",
+    "error": "HTTP Error 404: Not Found",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "presence_china",
+    "url": "https://www.olamagri.com/locations/china",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/presence_china.html",
+    "bytes": 32172,
+    "sha256": "e10ea5862debd960e4e6acaf3b4c5938a1998f7af1aa4844289bfbb3ea8e6a9c",
+    "retrieved_at": "2026-10-07T18:48:37.819300+00:00"
+  },
+  {
+    "key": "un_members",
+    "url": "https://research.un.org/en/unmembers/currentmembers",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/un_members.html",
+    "bytes": 990445,
+    "sha256": "f8b4a70ed022da414f89657b316899189337af446d9cf24e4c4d35abfc2ccead",
+    "retrieved_at": "2026-10-07T20:20:05.373527+00:00"
+  },
+  {
+    "key": "un_observers",
+    "url": "https://research.un.org/en/unmembers/observers",
+    "status": "retrieved",
+    "file": "research/olam-global/raw/un_observers.html",
+    "bytes": 75557,
+    "sha256": "0c79fa14f64b967c5a16e2ad8ff0e2f12c9612ff746847669c86218907a7fbba",
+    "retrieved_at": "2026-10-07T20:20:05.373719+00:00"
+  }
+]

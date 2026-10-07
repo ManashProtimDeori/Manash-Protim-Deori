@@ -1,0 +1,13 @@
+id,name,description,owner,status
+A_TEMPLATE,Normalized three-mode inputs,"Illustrative customer orders, delivered prices/costs, capacity, fixed cost and capex; no country calibration.",Finance/Strategy to validate,Chosen;not company disclosure
+A_SCENARIO,"Six worlds, no probability","Driver multipliers are judgemental stresses, not estimated likelihoods.",Finance/Strategy to validate,Chosen;not company disclosure
+A_TAX,25% simplified tax,"Unlimited loss carryforward, no refunds, interest or jurisdiction differences. Replace with legal tax schedule.",Finance/Strategy to validate,Chosen;not company disclosure
+A_RATE,Real USD hurdle,10% managed convention; 9–14% scenario hurdle. Not Olam WACC or financing quote.,Finance/Strategy to validate,Chosen;not company disclosure
+A_NWC,Cash conventions,80% credit revenue/purchases; AR + inventory − AP; 365 days; 90% final recovery.,Finance/Strategy to validate,Chosen;not company disclosure
+A_OUTER,Beyond 2035,Order growth halves after year 10; bounded by capacity. Not an OECD forecast.,Finance/Strategy to validate,Chosen;not company disclosure
+A_CAPEX,Asset cycle,60/40 original capex; 10-year straight-line depreciation; 2% maintenance; 70% replacement in years 11/21.,Finance/Strategy to validate,Chosen;not company disclosure
+A_PILOT,Causal pilot,Randomised route clusters where feasible; power from measured baseline variance; no declared Olam effect.,Finance/Strategy to validate,Chosen;not company disclosure
+A_STRESS,Dependence model,Chosen normal latent factors with joint cost/volume/stock/rate shocks; seed 20261008; no country probability.,Finance/Strategy to validate,Chosen;not company disclosure
+A_EXAMPLE,Teaching arithmetic,Examples deliberately chosen; not Olam data unless expressly reported.,Finance/Strategy to validate,Chosen;not company disclosure
+A_PRIOR,Illustrative policy weights/payoffs,Decision examples are teaching cases. No proprietary novelty or calibrated probability.,Finance/Strategy to validate,Chosen;not company disclosure
+A_LEGACY,Inherited Nigeria inputs,Preserved as normalized assumptions; additive growth and sales-day proxy are not production economics.,Finance/Strategy to validate,Chosen;not company disclosure

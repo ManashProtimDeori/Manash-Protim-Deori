@@ -1,0 +1,82 @@
+id,slide,claim,classification,source_ids,assumption_ids,calculation_ids,status,owner
+CL-global-cover,1,"Commit first to customer proof, route cash and adaptable capacity.",Reported /derived with caveats,CO_FACT;BASELINE,,,Reviewable,Author /named operational owner
+CL-decision,2,Authorize a scoped 90-day proof programme; defer an unconditional asset cheque.,Conditional proposal /illustration,,A_PILOT,,Reviewable,Author /named operational owner
+CL-change,3,The negative legacy case remains visible; additional detail cannot manufacture approval.,Reported /derived with caveats,BASELINE,,C-LEGACY,Reviewable,Author /named operational owner
+CL-company,4,"FY2025 Olam Agri: revenue +15.4%, sales volume +19.1%, EBIT −8.0%.",Reported /derived with caveats,CO_AR,,C-E01,Reviewable,Author /named operational owner
+CL-system,5,"Population creates context; sold tonnes require accessible demand, capture and delivery.",Conditional proposal /illustration,,A_TEMPLATE,,Reviewable,Author /named operational owner
+CL-horizon,6,Separate the official 2035 outlook from our conditional 2036–2051 extension.,Conditional proposal /illustration,OECD;UN_WPP,A_OUTER;A_CAPEX,,Reviewable,Author /named operational owner
+CL-demography,7,UN medium population projections do not imply equal per-person purchases.,Reported /derived with caveats,UN_WPP;WB_income_ppp;WB_urban,,C-POP-NGA;C-POP-IND;C-POP-CHN;C-POP-JPN,Reviewable,Author /named operational owner
+CL-diet,8,Health and convenience are hypotheses until customers sustain paid repeat.,Conditional proposal /illustration,,A_PILOT;A_EXAMPLE,C-E05;C-E06,Reviewable,Author /named operational owner
+CL-climate,9,"Map crop, basin, route and facility hazards before estimating damage or adaptation returns.",Conditional proposal /illustration,IPCC;WMO;WB_water_stress,A_SCENARIO,,Reviewable,Author /named operational owner
+CL-trade,10,"Routes require product-level permissions, quality, landed spreads and counterparties.",Reported /derived with caveats,COMTRADE;EUDR;USDA_NGA;USDA_OIL,,C-TRADE-NGA,Reviewable,Author /named operational owner
+CL-products,11,"June-2026 disclosed scope includes food, feed and non-food agricultural products.",Reported /derived with caveats,CO_FACT;CO_ABOUT,,,Reviewable,Author /named operational owner
+CL-coverage,12,162 countries have all 11 macro fields available at some date; this is not investment readiness.,Reported /derived with caveats,UN_M49;UN_WPP,,C-COVERAGE,Reviewable,Author /named operational owner
+CL-priorities,13,"These are evidence priorities, not a numerical attractiveness ranking.",Conditional proposal /illustration,CO_NGA;CO_GHA;CO_SEN;CO_CMR;CO_MOZ;CO_ZAF;CO_IND;CO_VNM;CO_BRA;CO_FACT,A_TEMPLATE,,Reviewable,Author /named operational owner
+CL-central,14,"Customer orders, capacity, stocks and taxes drive a finite real-USD example.",Conditional proposal /illustration,,A_TEMPLATE;A_RATE;A_TAX;A_OUTER;A_CAPEX,C-DCF-plant-managed,Reviewable,Author /named operational owner
+CL-worlds,15,No calibrated probability is assigned to any complete 25-year path.,Conditional proposal /illustration,,A_SCENARIO;A_RATE,C-SCENARIOS,Reviewable,Author /named operational owner
+CL-resilience,16,The financial model deliberately continues fixed commitments to expose failure.,Conditional proposal /illustration,,A_TEMPLATE;A_SCENARIO;A_RATE;A_CAPEX,C-DCF,Reviewable,Author /named operational owner
+CL-timing,17,Test order thresholds and liquidity limits before expanding physical commitments.,Conditional proposal /illustration,,A_TEMPLATE;A_RATE,C-THRESHOLD,Reviewable,Author /named operational owner
+CL-corridor,18,"Company financing disclosure supports a corridor, not its incremental returns.",Conditional proposal /illustration,CO_AR;CO_IND;CO_VNM,A_PILOT,,Reviewable,Author /named operational owner
+CL-contrast,19,SALIC control offers strategic alignment; it does not create guaranteed sales.,Reported /derived with caveats,CO_FACT;CO_OWN;CO_ABOUT;CO_BRA,,,Reviewable,Author /named operational owner
+CL-nigeria,20,NGN0.47bn annual uplift does not fund NGN4.2bn initial capital at the chosen hurdle.,Conditional proposal /illustration,BASELINE;CO_NGA;USDA_OIL,A_LEGACY,C-LEGACY;C-E10,Reviewable,Author /named operational owner
+CL-customer,21,A lower cost per usable output can justify price only if cash and trust permit adoption.,Conditional proposal /illustration,,A_EXAMPLE;A_PILOT,C-E05,Reviewable,Author /named operational owner
+CL-commercial,22,"Test price, usable yield, availability and channel economics as separate mechanisms.",Conditional proposal /illustration,,A_PILOT;A_EXAMPLE,C-E06;C-E11,Reviewable,Author /named operational owner
+CL-capacity,23,The lowest physical or commercial constraint determines revenue.,Conditional proposal /illustration,,A_EXAMPLE,C-E02,Reviewable,Author /named operational owner
+CL-cash,24,Inventory and purchases use cost; receivables use credit sales.,Conditional proposal /illustration,,A_EXAMPLE;A_NWC,C-E09,Reviewable,Author /named operational owner
+CL-finance,25,Managed owned-processing template: NPV −USD1.80m; peak annual funding USD22.56m.,Conditional proposal /illustration,,A_TEMPLATE;A_TAX;A_RATE;A_CAPEX;A_NWC,C-DCF-plant-managed,Reviewable,Author /named operational owner
+CL-downside,26,Chosen stress distribution illustrates failure; it does not estimate the probability of loss.,Conditional proposal /illustration,,A_STRESS;A_TEMPLATE,C-STRESS;C-THRESHOLD,Reviewable,Author /named operational owner
+CL-portfolio,27,"Allocate only among legally feasible, funded and physically deliverable choices.",Conditional proposal /illustration,,A_PRIOR;A_STRESS,C-E17;C-REGRET,Reviewable,Author /named operational owner
+CL-adaptive,28,The proposed model combines established methods into an executable decision workflow.,Conditional proposal /illustration,,A_PRIOR,C-REGRET;C-E20,Reviewable,Author /named operational owner
+CL-counterexample,29,A transparent teaching case changes the decision under the same USD20m maximum envelope.,Conditional proposal /illustration,,A_PRIOR;A_EXAMPLE,C-REGRET,Reviewable,Author /named operational owner
+CL-validation,30,A small error gain does not turn aggregate food production into product demand.,Reported /derived with caveats,WB_food_index;WB_income_ppp;WB_urban;WB_cereal_yield,,C-OLS,Reviewable,Author /named operational owner
+CL-causal,31,Use randomised route clusters when feasible; otherwise defend the counterfactual.,Conditional proposal /illustration,DID;NOBEL_2021,A_PILOT,C-E18;C-E19,Reviewable,Author /named operational owner
+CL-roadmap,32,"Milestones through 2051 are review windows, not promises of expansion.",Conditional proposal /illustration,OECD;UN_WPP,A_OUTER,,Reviewable,Author /named operational owner
+CL-gates,33,Legal and liquidity failures override an attractive demand story.,Conditional proposal /illustration,,A_PILOT,,Reviewable,Author /named operational owner
+CL-contribution,34,My offer is an operating measurement system with Finance-controlled economics.,Reported /derived with caveats,BASELINE,,C-CPM,Reviewable,Author /named operational owner
+CL-pilot,35,Cost and size the pilot only after inspecting baseline variance and available routes.,Conditional proposal /illustration,,A_PILOT,,Reviewable,Author /named operational owner
+CL-final-ask,36,No country asset approval is supported by the present public-data package.,Conditional proposal /illustration,,A_PILOT,,Reviewable,Author /named operational owner
+CL-thank-you,37,Questions about the assumptions are the next evidence commitment.,Conditional proposal /illustration,,,,Reviewable,Author /named operational owner
+CL-appendix-guide,38,"Source IDs, assumption IDs and calculation IDs travel with every decision.",Conditional proposal /illustration,,,,Reviewable,Author /named operational owner
+CL-example-01,39,2.45% derived EBIT margin,Reported /derived with caveats,CO_AR,,C-E01,Reviewable,Author /named operational owner
+CL-example-02,40,"7,000 delivered tonnes",Conditional proposal /illustration,,A_EXAMPLE,C-E02,Reviewable,Author /named operational owner
+CL-example-03,41,USD4m EBITDA,Conditional proposal /illustration,,A_EXAMPLE,C-E03,Reviewable,Author /named operational owner
+CL-example-04,42,"111,111 tonnes of input",Conditional proposal /illustration,,A_EXAMPLE,C-E04,Reviewable,Author /named operational owner
+CL-example-05,43,B costs 3.57% less per usable kg,Conditional proposal /illustration,,A_EXAMPLE,C-E05,Reviewable,Author /named operational owner
+CL-example-06,44,Small cash ticket ₦600; large pack 14.29% cheaper per meal,Conditional proposal /illustration,,A_EXAMPLE,C-E06,Reviewable,Author /named operational owner
+CL-example-07,45,2 percentage points; 25% relative increase,Conditional proposal /illustration,,A_EXAMPLE,C-E07,Reviewable,Author /named operational owner
+CL-example-08,46,USD1.25m free cash flow,Conditional proposal /illustration,,A_EXAMPLE,C-E08,Reviewable,Author /named operational owner
+CL-example-09,47,USD1.20m once-only cash release,Conditional proposal /illustration,,A_EXAMPLE,C-E09,Reviewable,Author /named operational owner
+CL-example-10,48,NPV −NGN2.0645bn; zero-NPV uplift NGN1.9928bn/year,Conditional proposal /illustration,BASELINE,A_EXAMPLE,C-E10,Reviewable,Author /named operational owner
+CL-example-11,49,21% combined input-cost increase,Conditional proposal /illustration,,A_EXAMPLE,C-E11,Reviewable,Author /named operational owner
+CL-example-12,50,NPV −USD0.0263m,Conditional proposal /illustration,,A_EXAMPLE,C-E12,Reviewable,Author /named operational owner
+CL-example-13,51,Real and nominal three-year NPVs both −USD0.0263m,Conditional proposal /illustration,,A_EXAMPLE,C-E13,Reviewable,Author /named operational owner
+CL-example-14,52,"Operating 33,333t; investment boundary 104,862 initial order tonnes",Conditional proposal /illustration,,A_EXAMPLE,C-E14,Reviewable,Author /named operational owner
+CL-example-15,53,USD3m judgement-weighted mean,Conditional proposal /illustration,,A_EXAMPLE,C-E15,Reviewable,Author /named operational owner
+CL-example-16,54,Loss VaR80 USD4m; tail CVaR80 USD8m,Conditional proposal /illustration,CVAR,A_EXAMPLE,C-E16,Reviewable,Author /named operational owner
+CL-example-17,55,Expected total loss USD4m in both; joint tail differs,Conditional proposal /illustration,,A_EXAMPLE,C-E17,Reviewable,Author /named operational owner
+CL-example-18,56,20 illustrative incremental eligible sales units,Conditional proposal /illustration,DID,A_EXAMPLE,C-E18,Reviewable,Author /named operational owner
+CL-example-19,57,100% net ROMI; contribution/spend is 2.0 times,Conditional proposal /illustration,,A_EXAMPLE,C-E19,Reviewable,Author /named operational owner
+CL-example-20,58,USD2.5m net perfect-information ceiling,Conditional proposal /illustration,,A_EXAMPLE,C-E20,Reviewable,Author /named operational owner
+CL-example-21,59,About 4.86% more initial orders needed,Conditional proposal /illustration,,A_EXAMPLE,C-E21,Reviewable,Author /named operational owner
+CL-example-22,60,B has 3 times EBITDA despite half the category size,Conditional proposal /illustration,,A_EXAMPLE,C-E22,Reviewable,Author /named operational owner
+CL-data-dictionary,61,Missing observations remain unknown; identifiers and vintages are retained.,Reported /derived with caveats,UN_M49;UN_WPP,,,Reviewable,Author /named operational owner
+CL-demand-trade-methods,62,Implemented descriptive supply benchmark; product demand and trade models await data.,Reported /derived with caveats,OECD_METHOD,,,Reviewable,Author /named operational owner
+CL-climate-methods,63,Do not turn a global warming number into a plant or crop loss coefficient.,Reported /derived with caveats,IPCC;WMO,,,Reviewable,Author /named operational owner
+CL-equations,64,Reconcile quantities and cash before computing returns.,Conditional proposal /illustration,,A_TEMPLATE,,Reviewable,Author /named operational owner
+CL-math-methods,65,Use the smallest method that answers the question and validates on relevant data.,Reported /derived with caveats,CVAR,,,Reviewable,Author /named operational owner
+CL-ols-estimates,66,No coefficient here is a country demand elasticity.,Reported /derived with caveats,WB_food_index;WB_income_ppp;WB_urban;WB_cereal_yield,,C-OLS,Reviewable,Author /named operational owner
+CL-validation-transfer,67,Temporal improvement is small; geographic transfer is uneven.,Reported /derived with caveats,WB_food_index,,C-OLS,Reviewable,Author /named operational owner
+CL-stress-spec,68,Simulation quantiles describe the chosen generator only.,Conditional proposal /illustration,,,,Reviewable,Author /named operational owner
+CL-policy-prior-art,69,Integration is the proposal; mathematical novelty is not asserted.,Reported /derived with caveats,CVAR;DID;NOBEL_2003;NOBEL_2018;NOBEL_2021,,,Reviewable,Author /named operational owner
+CL-pilot-power,70,A convenient sample is not proof of an economically meaningful effect.,Reported /derived with caveats,DID,,,Reviewable,Author /named operational owner
+CL-atlas-navigation,71,"8,190 matrix rows preserve unknown finance rather than fabricate forecasts.",Reported /derived with caveats,UN_M49;UN_WPP,,,Reviewable,Author /named operational owner
+CL-limitations,72,The package is a complete public-data decision scaffold; internal investment cases remain open.,Conditional proposal /illustration,,A_TEMPLATE,,Reviewable,Author /named operational owner
+CL-refresh,73,Keep a dated reproducible version; do not silently revise the investment case.,Conditional proposal /illustration,,,,Reviewable,Author /named operational owner
+CL-audit,74,Detailed44-row audit retains arithmetic and replaces unsupported certainty.,Reported /derived with caveats,BASELINE,,,Reviewable,Author /named operational owner
+CL-sources-0,75,Exact URLs and limitations are in the linked source book.,Reported /derived with caveats,CO_AR;CO_FACT;CO_OWN;CO_ABOUT;OECD;OECD_METHOD,,,Reviewable,Author /named operational owner
+CL-sources-6,76,Exact URLs and limitations are in the linked source book.,Reported /derived with caveats,UN_M49;UN_MEMBERS;UN_OBSERVERS;UN_WPP;WB_population;WB_income_ppp,,,Reviewable,Author /named operational owner
+CL-sources-12,77,Exact URLs and limitations are in the linked source book.,Reported /derived with caveats,WB_urban;WB_inflation;WB_food_index;WB_food_import_share;WB_food_export_share;WB_imports_usd,,,Reviewable,Author /named operational owner
+CL-sources-18,78,Exact URLs and limitations are in the linked source book.,Reported /derived with caveats,WB_exports_usd;WB_cereal_yield;WB_water_stress;CO_NGA;CO_GHA;CO_SEN,,,Reviewable,Author /named operational owner
+CL-sources-24,79,Exact URLs and limitations are in the linked source book.,Reported /derived with caveats,CO_CMR;CO_MOZ;CO_ZAF;CO_IND;CO_VNM;CO_BRA,,,Reviewable,Author /named operational owner
+CL-sources-30,80,Exact URLs and limitations are in the linked source book.,Reported /derived with caveats,IPCC;WMO;EUDR;USDA_NGA;USDA_OIL;COMTRADE,,,Reviewable,Author /named operational owner
+CL-sources-36,81,Exact URLs and limitations are in the linked source book.,Reported /derived with caveats,CVAR;DID;NOBEL_2003;NOBEL_2018;NOBEL_2021;BASELINE,,,Reviewable,Author /named operational owner

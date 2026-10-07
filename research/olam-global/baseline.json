@@ -1,0 +1,2575 @@
+{
+  "slides": [
+    {
+      "id": "cover",
+      "section": "Olam Agri · Nigeria Category Growth Strategy",
+      "title": "Building Nigeria’s Next Category Growth Engine",
+      "narrative": "Semolina × edible oils · customer economics · trade capital · evidence-led ROMI.",
+      "insight": "A decision system for turning Olam Nigeria’s category scale into faster learning, stronger trade economics and repeatable profitable growth — with Africa replication only after the mechanism is proven.",
+      "metrics": [],
+      "bullets": [],
+      "sourceIds": [
+        "S03",
+        "S26"
+      ],
+      "kind": "cover"
+    },
+    {
+      "id": "executive-thesis",
+      "section": "Executive thesis",
+      "title": "The growth question is not “how much can Olam sell?” — it is “which customer systems improve Olam economics as they scale?”",
+      "narrative": "FY2025 establishes the paradox that should govern the strategy: Olam Agri grew volume and revenue strongly while EBIT declined. Growth quality therefore matters more than growth quantity.",
+      "insight": "Marketing should be managed as a commercial operating system connecting contribution, availability, service adoption, repeat behavior and route economics — not as a communications layer around tonnage.",
+      "metrics": [
+        {
+          "label": "FY2025 revenue",
+          "value": "$28.7bn",
+          "detail": "+15.4% year over year",
+          "tone": "green"
+        },
+        {
+          "label": "Sales volume",
+          "value": "53.7m MT",
+          "detail": "+19.1% year over year",
+          "tone": "cyan"
+        },
+        {
+          "label": "FY2025 EBIT",
+          "value": "$703.7m",
+          "detail": "−8.0% year over year",
+          "tone": "orange"
+        },
+        {
+          "label": "Calculated EBIT margin",
+          "value": "~2.45%",
+          "detail": "Inference from reported revenue and EBIT; down from ~3.08% in 2024",
+          "tone": "gold"
+        }
+      ],
+      "bullets": [
+        "The management problem is not demand creation in isolation; it is profitable demand conversion through a complex physical system.",
+        "Volume can rise while economic quality weakens when mix, procurement, logistics, pricing or service costs deteriorate.",
+        "The strategy therefore treats customer contribution and repeat economics as the governing growth signal."
+      ],
+      "sourceIds": [
+        "S01"
+      ],
+      "kind": "thesis"
+    },
+    {
+      "id": "customer-profit",
+      "section": "Category thesis",
+      "title": "Semolina and edible oils should not share one marketing playbook — but they can share one decision system",
+      "narrative": "Both categories live inside the same household cash constraint and many of the same trade nodes, yet their commodity exposure, purchase rhythm, usage economics and supply-chain risks differ. The shared advantage is the measurement spine, not identical activation.",
+      "insight": "The portfolio opportunity is to standardize how Olam senses demand, measures contribution, prices cash access, allocates trade capital and learns — while letting each category keep its own product and shopper logic.",
+      "metrics": [
+        {
+          "label": "Semolina",
+          "value": "Meal economics",
+          "detail": "Pack migration, cost per meal, repeat and wheat-linked input exposure",
+          "tone": "green"
+        },
+        {
+          "label": "Edible oils",
+          "value": "Cooking economics",
+          "detail": "Cash ticket, usage rate, refinery utilization and crude-oil exposure",
+          "tone": "gold"
+        },
+        {
+          "label": "Shared trade",
+          "value": "Capital velocity",
+          "detail": "Availability, stock turns, route cost and distributor/retailer cash",
+          "tone": "cyan"
+        },
+        {
+          "label": "Shared marketing",
+          "value": "ROMI evidence",
+          "detail": "Verified offtake contribution rather than sell-in alone",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Run one commercial measurement architecture across the two categories, not one undifferentiated consumer strategy.",
+        "Use category-specific causal drivers while keeping common definitions for contribution, repeat, stock turns and incremental ROMI.",
+        "Treat cross-category route overlap as a hypothesis to measure, not a reason to force bundle promotions."
+      ],
+      "sourceIds": [
+        "S03",
+        "S13",
+        "S26"
+      ],
+      "kind": "portfolio"
+    },
+    {
+      "id": "affordability",
+      "section": "Market reality",
+      "title": "Disinflation changes the playbook — but high food inflation keeps affordability central",
+      "narrative": "Nigeria’s August 2026 food inflation remained 19.57%. A slower rate of inflation does not mean price levels have normalized for households or small businesses.",
+      "insight": "The commercial response should shift from blanket discounting to cash-ticket architecture, pack economics, mix management and proof of yield/value per serving.",
+      "metrics": [
+        {
+          "label": "Headline CPI",
+          "value": "15.39%",
+          "detail": "Nigeria, August 2026",
+          "tone": "cyan"
+        },
+        {
+          "label": "Food inflation",
+          "value": "19.57%",
+          "detail": "Nigeria, August 2026",
+          "tone": "orange"
+        },
+        {
+          "label": "Implication",
+          "value": "Price ≠ value",
+          "detail": "Protect affordability without training the market to wait for discounts",
+          "tone": "gold"
+        }
+      ],
+      "bullets": [
+        "Track unit volume, pack mix and cash ticket separately.",
+        "Test willingness-to-pay against product performance and route reliability, not discount depth alone.",
+        "Use smaller accessible packs where they expand participation without destroying contribution."
+      ],
+      "sourceIds": [
+        "S12"
+      ],
+      "kind": "market"
+    },
+    {
+      "id": "wheat-baker-demand",
+      "section": "Semolina demand system",
+      "title": "Wheat demand is the macro river; semolina growth is won at the meal, pack and trade node",
+      "narrative": "USDA projects Nigeria wheat consumption at 6.8m MT in MY2026/27 and identifies semolina among major urban wheat-based staples. That supports category relevance, but it does not prove semolina brand growth by itself.",
+      "insight": "The rare but important distinction: category teams should not use wheat-market growth as a substitute for semolina demand evidence. The decisive signals are meal economics, pack migration, numeric availability, repeat and contribution velocity by market.",
+      "metrics": [
+        {
+          "label": "Nigeria wheat consumption",
+          "value": "6.8m MT",
+          "detail": "USDA MY2026/27 projection; macro category context",
+          "tone": "green"
+        },
+        {
+          "label": "Semolina",
+          "value": "Major staple",
+          "detail": "Named by USDA among urban wheat-based food staples",
+          "tone": "gold"
+        },
+        {
+          "label": "Olam system",
+          "value": "National reach",
+          "detail": "Olam reports significant semolina volumes sold nationwide",
+          "tone": "cyan"
+        },
+        {
+          "label": "Decision signal",
+          "value": "Meal → repeat",
+          "detail": "Track actual household/trade behavior rather than macro tonnage",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Separate total wheat growth from semolina-specific household penetration and repeat.",
+        "Track pack-size migration as an affordability signal before volume loss becomes visible.",
+        "Measure cost per meal alongside pack price: cash access and consumption economics are different variables."
+      ],
+      "sourceIds": [
+        "S13",
+        "S03"
+      ],
+      "kind": "market"
+    },
+    {
+      "id": "baker-profit",
+      "section": "Semolina value equation",
+      "title": "For semolina, “premium” should be translated into measurable meal economics before it becomes a media claim",
+      "narrative": "The strongest consumer proposition is not an adjective. It is evidence that the product creates a better outcome at a cash ticket the household can repeatedly afford.",
+      "insight": "Build a semolina value ledger: pack cash outlay → servings/meal occasions → preparation consistency → household repeat → retailer stock turn → Olam contribution. A brand claim becomes defensible only when one or more of those economics improve.",
+      "metrics": [
+        {
+          "label": "Household",
+          "value": "₦ / meal",
+          "detail": "Cash ticket and cost-per-meal tracked separately",
+          "tone": "green"
+        },
+        {
+          "label": "Product",
+          "value": "Consistency",
+          "detail": "Preparation outcome and complaint/reject signal",
+          "tone": "cyan"
+        },
+        {
+          "label": "Trade",
+          "value": "Turns",
+          "detail": "Units and contribution per inventory day",
+          "tone": "gold"
+        },
+        {
+          "label": "Brand",
+          "value": "Repeat",
+          "detail": "Cohort repurchase after price and availability normalization",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Do not reward a pack for high percentage margin if it destroys repeat or trade cash velocity.",
+        "Do not reward a communication for awareness if it fails to change verified offtake or repeat.",
+        "Use market-level cohorts so affordability differences are not averaged away nationally."
+      ],
+      "sourceIds": [
+        "S03",
+        "S28",
+        "S29"
+      ],
+      "kind": "framework"
+    },
+    {
+      "id": "west-africa",
+      "section": "Edible-oil policy economics",
+      "title": "Nigeria’s 2026 crude-versus-refined policy creates a conditional local-refining wedge — not a guaranteed moat",
+      "narrative": "USDA’s 2026 policy table changes crude palm oil to “NOT Prohibited” while the listed refined palm-oil HS lines remain prohibited. Olam Agri refines crude vegetable oils in Nigeria. The policy status is a relative structural signal, not proof of unrestricted or duty-free importability.",
+      "insight": "Local refining earns an advantage only if the full bridge works: HS classification + duties/licensing/FX access + landed crude cost + refinery yield/utilization + inventory carry + route cost must beat the realized net contribution of alternatives.",
+      "metrics": [
+        {
+          "label": "Crude palm oil",
+          "value": "Not prohibited",
+          "detail": "2026 USDA HS-policy status; not shorthand for duty-free/unrestricted",
+          "tone": "green"
+        },
+        {
+          "label": "Listed refined palm oil",
+          "value": "Prohibited",
+          "detail": "USDA-listed refined palm-oil HS lines remain prohibited",
+          "tone": "orange"
+        },
+        {
+          "label": "Olam capability",
+          "value": "Local refining",
+          "detail": "Nigeria crude vegetable-oil refining and olein marketing",
+          "tone": "cyan"
+        },
+        {
+          "label": "Economic test",
+          "value": "Policy → cash",
+          "detail": "Landed crude + compliance + refining + inventory + route versus net contribution",
+          "tone": "gold"
+        }
+      ],
+      "bullets": [
+        "Build a refinery-to-market contribution bridge, not just a brand P&L.",
+        "Stress crude cost, FX, duties, refinery yield/utilization, working-capital days and realized net price together.",
+        "Re-verify HS classification, duties, licensing, FX access and enforcement immediately before any irreversible capital commitment."
+      ],
+      "sourceIds": [
+        "S26",
+        "S27"
+      ],
+      "kind": "market"
+    },
+    {
+      "id": "southern-africa",
+      "section": "Trade capital economics",
+      "title": "When money costs ~23% at the policy-rate anchor, excess inventory becomes a hidden marketing tax",
+      "narrative": "At a 23% annual public policy-rate anchor, 30 incremental days of inventory imply roughly 1.9% of inventory value in simple annualized carrying cost before actual distributor finance charges, shrinkage, returns or obsolescence.",
+      "insight": "This changes how promotions should be judged. A campaign that creates sell-in but adds a month of channel inventory can look successful in volume while quietly transferring a financing problem to the trade.",
+      "metrics": [
+        {
+          "label": "CBN MPR",
+          "value": "23%",
+          "detail": "September 2026 public financing-condition anchor",
+          "tone": "orange"
+        },
+        {
+          "label": "30-day carry proxy",
+          "value": "~1.9%",
+          "detail": "23% × 30/365; illustration, not a distributor borrowing rate",
+          "tone": "gold"
+        },
+        {
+          "label": "Marketing KPI",
+          "value": "Stock turns",
+          "detail": "Inventory days belong in campaign and pack evaluation",
+          "tone": "cyan"
+        },
+        {
+          "label": "Trade KPI",
+          "value": "Contribution velocity",
+          "detail": "Contribution earned per inventory-naira-day",
+          "tone": "green"
+        }
+      ],
+      "bullets": [
+        "Separate primary sell-in from consumer/trade offtake before crediting campaign lift.",
+        "Charge promotions for working-capital days they create, not only for media and trade spend.",
+        "A faster-turn lower-margin SKU can create more trade value than a slower high-margin SKU — test with contribution velocity."
+      ],
+      "sourceIds": [
+        "S21",
+        "S22"
+      ],
+      "kind": "market"
+    },
+    {
+      "id": "africa-runway",
+      "section": "Regional price intelligence",
+      "title": "Nigeria is not one affordability market: a national average can hide the exact places where pack architecture should change",
+      "narrative": "The World Bank’s Nigeria Real-Time Food Prices dataset covers 73 markets through August 2026 (version 2026-08-24), but it combines direct measurements with machine-learning estimates and is revised as new data arrive. Combined with Olam sell-out, availability and route-cost data, it can form a triangulated market-level affordability pressure signal.",
+      "insight": "The advantage is localization without false precision: keep national brand architecture, but let price-pack, promotion depth and route intensity respond to triangulated local pressure—not one national CPI or one modeled external series.",
+      "metrics": [
+        {
+          "label": "External grid",
+          "value": "73 markets",
+          "detail": "World Bank observed + modeled/revisable price estimates",
+          "tone": "green"
+        },
+        {
+          "label": "Current version",
+          "value": "2026-08-24",
+          "detail": "Coverage through Aug 2026; revised as new data arrive",
+          "tone": "cyan"
+        },
+        {
+          "label": "Internal overlay",
+          "value": "Sell-out + fill",
+          "detail": "Olam price realization, pack mix, availability and route cost",
+          "tone": "gold"
+        },
+        {
+          "label": "Decision output",
+          "value": "Pressure index",
+          "detail": "Market-level pack / price / promo intervention priority",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Do not infer demand weakness from sales alone when stockouts or route gaps explain the variance.",
+        "Use local price pressure to prioritize pack access rather than apply blanket national discounting.",
+        "Track whether local interventions improve both repeat and contribution after route cost."
+      ],
+      "sourceIds": [
+        "S12",
+        "S29"
+      ],
+      "kind": "market"
+    },
+    {
+      "id": "value-ladder",
+      "section": "Affordability architecture",
+      "title": "In a food-stressed household, the winning pack is the one that optimizes two prices at once: cash today and cost per use",
+      "narrative": "Poor Nigerian households can spend up to roughly 70% of income on food. That makes cash-ticket architecture a strategic variable even when headline inflation is easing.",
+      "insight": "The category team should manage a two-axis pack ladder: “can I afford it now?” versus “is it economical to consume?” Entry packs solve cash access; larger packs solve unit economics. Neither should be optimized without the other.",
+      "metrics": [
+        {
+          "label": "Axis 1",
+          "value": "Cash ticket",
+          "detail": "Absolute naira required at the purchase moment",
+          "tone": "cyan"
+        },
+        {
+          "label": "Axis 2",
+          "value": "₦ / use",
+          "detail": "Cost per meal or cooking occasion",
+          "tone": "green"
+        },
+        {
+          "label": "Trade check",
+          "value": "Stock turns",
+          "detail": "Fast-turn value can dominate nominal margin in expensive-money conditions",
+          "tone": "gold"
+        },
+        {
+          "label": "Guardrail",
+          "value": "Contribution",
+          "detail": "Gross-to-net contribution after pack and route complexity",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Price index the pack ladder by market rather than relying only on a national average.",
+        "Measure cannibalization: an accessible pack creates value only if incremental users/repeat exceed mix dilution.",
+        "Use pack migration as an early warning signal for affordability pressure."
+      ],
+      "sourceIds": [
+        "S12",
+        "S28",
+        "S29"
+      ],
+      "kind": "portfolio"
+    },
+    {
+      "id": "customer-data-loop",
+      "section": "Two-category demand sensing",
+      "title": "The most valuable cross-category asset may be a faster warning system for household and trade stress",
+      "narrative": "Semolina and edible oils are exposed to different commodity and usage dynamics. Read together, their pack mix, reorder cadence, availability and price realization can reveal whether a demand change is category-specific or a broader cash-pressure signal.",
+      "insight": "Do not force cross-selling. First build a category divergence monitor: when oil and semolina move differently, investigate commodity/usage causes; when both weaken together, investigate household cash, route, distribution or macro causes.",
+      "metrics": [
+        {
+          "label": "Signal 1",
+          "value": "Pack migration",
+          "detail": "Down-trade / up-trade by market and customer cohort",
+          "tone": "cyan"
+        },
+        {
+          "label": "Signal 2",
+          "value": "Reorder cadence",
+          "detail": "Days between verified orders / offtake events",
+          "tone": "gold"
+        },
+        {
+          "label": "Signal 3",
+          "value": "Availability",
+          "detail": "Stockout and fill-rate distortion separated from demand",
+          "tone": "green"
+        },
+        {
+          "label": "Signal 4",
+          "value": "Price realization",
+          "detail": "Net price after trade spend and promotions",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "A demand decline with stable availability means something different from a decline caused by stockouts.",
+        "A simultaneous pack downshift across both categories is a stronger cash-pressure signal than one category alone.",
+        "The system should generate a weekly “cause of movement” brief, not only a sales variance report."
+      ],
+      "sourceIds": [
+        "S03",
+        "S26",
+        "S28",
+        "S29"
+      ],
+      "kind": "framework"
+    },
+    {
+      "id": "portfolio-flywheel",
+      "section": "Portfolio economics",
+      "title": "The portfolio moat is information density before it is assortment breadth",
+      "narrative": "Semolina and edible oils can share customers, routes and household budgets without sharing identical demand mechanics. Olam should first monetize the shared information layer: better demand diagnosis, route prioritization and trade-capital allocation.",
+      "insight": "The best cross-category question is not “what can we bundle?” It is “which shared customer or route signal lets us make a better decision earlier?”",
+      "metrics": [
+        {
+          "label": "Shared node",
+          "value": "Retailer / distributor",
+          "detail": "Measure route overlap and joint cost-to-serve",
+          "tone": "green"
+        },
+        {
+          "label": "Shared constraint",
+          "value": "Household cash",
+          "detail": "Cross-category pack migration and reorder stress",
+          "tone": "cyan"
+        },
+        {
+          "label": "Different risk",
+          "value": "Wheat vs oils",
+          "detail": "Commodity, FX and policy exposure kept separate",
+          "tone": "gold"
+        },
+        {
+          "label": "Decision value",
+          "value": "Earlier signal",
+          "detail": "Detect cause before volume / margin deterioration compounds",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Test whether shared route visits lower cost-to-serve without increasing inventory complexity.",
+        "Use divergence between category signals to distinguish category-specific problems from market-wide pressure.",
+        "Cross-sell only after route and customer economics prove incremental contribution."
+      ],
+      "sourceIds": [
+        "S03",
+        "S13",
+        "S26"
+      ],
+      "kind": "portfolio"
+    },
+    {
+      "id": "availability",
+      "section": "Route-to-market",
+      "title": "In staples, availability is a marketing outcome because the promise is broken when the product is absent",
+      "narrative": "Olam’s logistics and processing footprint means route reliability can be measured and marketed as part of the value proposition.",
+      "insight": "Brand preference cannot convert into revenue without fill rate. The commercial scorecard should connect availability, on-time delivery, stock turns, complaints and contribution at the same customer-node level.",
+      "metrics": [
+        {
+          "label": "Promise",
+          "value": "Right SKU",
+          "detail": "Assortment matched to customer economics",
+          "tone": "green"
+        },
+        {
+          "label": "Presence",
+          "value": "Right place",
+          "detail": "Depot, distributor and retailer availability",
+          "tone": "cyan"
+        },
+        {
+          "label": "Reliability",
+          "value": "Right time",
+          "detail": "Route service and order fulfilment",
+          "tone": "gold"
+        },
+        {
+          "label": "Economics",
+          "value": "Right return",
+          "detail": "Contribution after route and service costs",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [],
+      "sourceIds": [
+        "S01",
+        "S03",
+        "S08",
+        "S10"
+      ],
+      "kind": "network"
+    },
+    {
+      "id": "marketing-os",
+      "section": "ROMI operating system",
+      "title": "A campaign should earn credit only for incremental contribution that survives sell-in, working capital and cannibalization",
+      "narrative": "Traditional ROMI can overstate impact when distributor loading, discounting or channel inventory are treated as demand. The category P&L needs a stricter bridge from activation to verified economic value.",
+      "insight": "Use Incremental Contribution ROMI: verified incremental gross-to-net contribution minus variable route/service cost, working-capital charge and cannibalization — divided by marketing spend.",
+      "metrics": [
+        {
+          "label": "Step 1",
+          "value": "Baseline",
+          "detail": "Counterfactual demand by market/customer cohort",
+          "tone": "cyan"
+        },
+        {
+          "label": "Step 2",
+          "value": "Verified offtake",
+          "detail": "Remove stock loading and availability distortions",
+          "tone": "green"
+        },
+        {
+          "label": "Step 3",
+          "value": "Economic bridge",
+          "detail": "Net price − trade spend − route/service − carry − cannibalization",
+          "tone": "gold"
+        },
+        {
+          "label": "Step 4",
+          "value": "Incremental ROMI",
+          "detail": "Economic gain attributable to the intervention / marketing spend",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Do not let shipment timing masquerade as demand creation.",
+        "Set a post-campaign washout window to test whether repeat remains after support is removed.",
+        "Allocate the next naira to the experiment with the highest expected contribution gain per naira and information value."
+      ],
+      "sourceIds": [
+        "S01",
+        "S21"
+      ],
+      "kind": "framework"
+    },
+    {
+      "id": "scorecard",
+      "section": "Category control tower",
+      "title": "Marketing should own the explanation of demand — S&OP should receive a causal forecast, not a single number",
+      "narrative": "A useful category forecast decomposes demand into baseline, price/mix, availability recovery, campaign lift, NPD trial/repeat and cannibalization. Each component should have an owner, evidence level and confidence range.",
+      "insight": "The operating advantage is forecast explainability: when demand misses, leadership should know which mechanism failed — consumer response, price, route, stock, NPD or assumption — before the next cycle begins.",
+      "metrics": [
+        {
+          "label": "Baseline",
+          "value": "Underlying",
+          "detail": "Seasonality + trend + repeat cohort behavior",
+          "tone": "green"
+        },
+        {
+          "label": "Commercial",
+          "value": "Price / promo",
+          "detail": "Elasticity, mix, campaign and trade support",
+          "tone": "cyan"
+        },
+        {
+          "label": "Physical",
+          "value": "Availability",
+          "detail": "Fill rate, OTIF, stockouts and route constraints",
+          "tone": "gold"
+        },
+        {
+          "label": "Innovation",
+          "value": "Trial → repeat",
+          "detail": "NPD ramp separated from cannibalization",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Reconcile marketing forecast components to the S&OP number every cycle.",
+        "Track forecast error by cause, not only by percentage.",
+        "Use confidence ranges so upside cases do not silently become operating commitments.",
+        "Make inventory days and service levels visible beside volume and revenue."
+      ],
+      "sourceIds": [
+        "S01",
+        "S03",
+        "S26"
+      ],
+      "kind": "metrics"
+    },
+    {
+      "id": "sustainability",
+      "section": "NPD decision design",
+      "title": "NPD should pass a commercial stage-gate before it earns a launch budget",
+      "narrative": "In staples, novelty is not enough. A new product or pack should solve a measurable constraint in household economics, trade economics, supply resilience or route productivity.",
+      "insight": "The strongest NPD brief starts with a falsifiable business mechanism, not a launch calendar: “which constraint disappears if this proposition exists, and what observable behavior should change?”",
+      "metrics": [
+        {
+          "label": "Gate 1",
+          "value": "Need",
+          "detail": "Observed constraint in meal/cooking, pack, trade or route economics",
+          "tone": "cyan"
+        },
+        {
+          "label": "Gate 2",
+          "value": "Unit economics",
+          "detail": "Contribution after cannibalization, complexity and service cost",
+          "tone": "green"
+        },
+        {
+          "label": "Gate 3",
+          "value": "Repeat",
+          "detail": "Cohort repurchase after trial support is removed",
+          "tone": "gold"
+        },
+        {
+          "label": "Gate 4",
+          "value": "Scale",
+          "detail": "S&OP, supply, route and working-capital proof",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Pre-register the failure condition before launch.",
+        "Keep trial and repeat separate; a promoted trial is not product-market fit.",
+        "Charge SKU complexity and working capital into the NPD business case.",
+        "Scale only after the second route or market reproduces the mechanism."
+      ],
+      "sourceIds": [
+        "S01",
+        "S03",
+        "S26"
+      ],
+      "kind": "gate"
+    },
+    {
+      "id": "nigeria-platform",
+      "section": "Nigeria operating platform",
+      "title": "Nigeria provides a high-density first-wave laboratory for proving repeatability",
+      "narrative": "Olam’s Nigerian network combines processing, agriculture, logistics and customer reach at enough scale to test whether a commercial playbook works before it is exported.",
+      "insight": "The strategic value of Nigeria is the density of feedback: customer economics, product performance, delivery reliability and service adoption can be observed in one operating system.",
+      "metrics": [
+        {
+          "label": "Employees",
+          "value": "3,500+",
+          "detail": "Olam Agri Nigeria footprint",
+          "tone": "green"
+        },
+        {
+          "label": "Processing facilities",
+          "value": "19",
+          "detail": "Across the Nigerian operating network",
+          "tone": "cyan"
+        },
+        {
+          "label": "Smallholder farmers",
+          "value": "100,000",
+          "detail": "Connected to Olam Agri Nigeria",
+          "tone": "gold"
+        },
+        {
+          "label": "Logistics fleet",
+          "value": "1,000+",
+          "detail": "Truck/GPS-enabled distribution network referenced by Olam",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [],
+      "sourceIds": [
+        "S03",
+        "S01"
+      ],
+      "kind": "metrics"
+    },
+    {
+      "id": "processing-economics",
+      "section": "Economic signal",
+      "title": "Nigeria-relevant processing economics improved while Olam Agri-wide return quality weakened",
+      "narrative": "Olam Group’s FY2025 disclosure of Olam Agri shows the Food & Feed Processing & Value-added segment improving EBIT and EBIT per tonne even as total Olam Agri EBIT fell and Olam Agri invested capital rose. This supports a Nigeria agenda focused on value-added economics and cash discipline without implying that every processing investment is attractive.",
+      "insight": "The policy implication is not “grow processing at any cost.” It is “prefer growth mechanisms that raise contribution per tonne and preserve capital productivity, then prove that the Nigeria customer/route system can reproduce those economics.”",
+      "metrics": [
+        {
+          "label": "Processing EBIT",
+          "value": "S$611m",
+          "detail": "+1.6% in FY2025",
+          "tone": "green"
+        },
+        {
+          "label": "Processing EBIT / MT",
+          "value": "S$127",
+          "detail": "Up from S$115 in 2024",
+          "tone": "cyan"
+        },
+        {
+          "label": "Processing invested capital",
+          "value": "S$2.41bn",
+          "detail": "−4.0% year over year",
+          "tone": "gold"
+        },
+        {
+          "label": "Olam Agri invested capital",
+          "value": "S$7.5bn",
+          "detail": "+11.0%, mainly working-capital growth",
+          "tone": "orange"
+        }
+      ],
+      "bullets": [
+        "Nigeria wheat milling was explicitly cited as benefiting from a stable naira and improved customer/input-cost conditions.",
+        "Nigeria rice farming and milling was hurt by lower local rice prices and cross-border flows — a reminder that local processing does not remove market risk.",
+        "The policy framework therefore rewards contribution/tonne, capital productivity and cash conversion rather than assuming all value-added capacity is equally attractive."
+      ],
+      "sourceIds": [
+        "S19",
+        "S20"
+      ],
+      "kind": "metrics"
+    },
+    {
+      "id": "local-supply",
+      "section": "Resilience moat",
+      "title": "Local supply is both an operating hedge and a marketing asset",
+      "narrative": "Olam’s Africa investments increasingly connect processing with local producer ecosystems, including soy, rice and emerging wheat initiatives.",
+      "insight": "Local supply can lower exposure to import and FX volatility while strengthening the proposition to governments, customers, farmers and communities. The claim is strongest when it is quantified by local content, farmer income, supply reliability and cost.",
+      "metrics": [
+        {
+          "label": "Local sourcing",
+          "value": "Risk hedge",
+          "detail": "Less import/FX exposure where economics are competitive",
+          "tone": "green"
+        },
+        {
+          "label": "Farmer system",
+          "value": "Supply depth",
+          "detail": "Productivity, traceability and market access",
+          "tone": "cyan"
+        },
+        {
+          "label": "Customer value",
+          "value": "Reliability",
+          "detail": "More resilient availability and category legitimacy",
+          "tone": "gold"
+        }
+      ],
+      "bullets": [],
+      "sourceIds": [
+        "S01",
+        "S03",
+        "S17"
+      ],
+      "kind": "framework"
+    },
+    {
+      "id": "salic",
+      "section": "Strategic ownership",
+      "title": "SALIC ownership raises the strategic ceiling — but makes capital discipline more important, not less",
+      "narrative": "After Olam Agri acquired Continental Farmers Group on June 30, 2026, Olam Group’s transaction disclosure reports 81.81% SALIC ownership and 18.19% Olam Group. The main Olam Agri About text also says 81.81%, while a lower legacy section on the same page still says 81.11%; the deck uses the transaction-specific 81.81% and surfaces the conflict.",
+      "insight": "Strategic ownership can expand the investment horizon, but ownership is not an economic proof point. Capital should still follow measured customer contribution, resilience, cash conversion and repeatability.",
+      "metrics": [
+        {
+          "label": "SALIC ownership",
+          "value": "81.81%",
+          "detail": "Post-CFG transaction disclosure, June 30 2026",
+          "tone": "green"
+        },
+        {
+          "label": "Olam Group",
+          "value": "18.19%",
+          "detail": "Remaining interest after CFG share issuance",
+          "tone": "cyan"
+        },
+        {
+          "label": "Website conflict",
+          "value": "81.11%",
+          "detail": "Stale lower About-page statement; not used as deck ownership",
+          "tone": "orange"
+        },
+        {
+          "label": "Decision rule",
+          "value": "Proof first",
+          "detail": "Ownership context never substitutes for operating economics",
+          "tone": "gold"
+        }
+      ],
+      "bullets": [],
+      "sourceIds": [
+        "S02",
+        "S16"
+      ],
+      "kind": "metrics"
+    },
+    {
+      "id": "policy-constitution",
+      "section": "Nigeria decision constitution",
+      "title": "Eight policy gates should govern every Nigeria growth decision before market size, volume or narrative can influence capital",
+      "narrative": "The framework is deliberately sequential. A proposal that fails an earlier gate is redesigned before it can borrow credibility from a later one. This prevents attractive volume, brand or market-size stories from masking weak evidence, economics or cash.",
+      "insight": "The deepest policy rule is simple: growth is permitted only when customer value, Olam contribution, route reliability, resilience and cash conversion improve together — and when the mechanism can survive a second-market test.",
+      "metrics": [
+        {
+          "label": "G0–G1",
+          "value": "Truth + customer",
+          "detail": "Evidence integrity before customer-economics claims",
+          "tone": "cyan"
+        },
+        {
+          "label": "G2–G3",
+          "value": "Contribution + route",
+          "detail": "Profitable demand before availability scale",
+          "tone": "green"
+        },
+        {
+          "label": "G4–G5",
+          "value": "Resilience + cash",
+          "detail": "FX/commodity stress and working-capital veto",
+          "tone": "gold"
+        },
+        {
+          "label": "G6–G7",
+          "value": "Repeat + release",
+          "detail": "Second-market proof before rollout capital",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "G0 · Evidence integrity — No decision-critical number enters an investment case without an evidence class, date and owner.",
+        "G1 · Customer economics — No growth intervention scales unless the customer earns more, loses less or carries less operating risk.",
+        "G2 · Contribution quality — No volume target is accepted without a contribution floor after discounts, service and variable route cost.",
+        "G3 · Route reliability — No availability expansion is approved without cost-to-serve, fill-rate, OTIF and stock-turn economics.",
+        "G4 · Resilience — No imported-input case is approved without explicit FX, commodity, pass-through and substitution bands.",
+        "G5 · Cash conversion — No EBIT story overrides working-capital deterioration.",
+        "G6 · Repeatability — No Nigeria win becomes an Africa playbook until the mechanism reproduces in a second route or market.",
+        "G7 · Capital release — No rollout capital is released because a pilot is exciting; it is released only because the evidence clears the hurdle."
+      ],
+      "sourceIds": [
+        "S01",
+        "S19",
+        "S21",
+        "S23"
+      ],
+      "kind": "policy"
+    },
+    {
+      "id": "capital-gates",
+      "section": "Capital release",
+      "title": "Replace a single funding ask with evidence gates that make scale reversible",
+      "narrative": "The uploaded deck proposed NGN4.2bn total cash spend, including NGN0.6bn immediate pilot approval and NGN3.6bn conditional rollout. That should be treated as a scenario envelope until underlying assumptions are approved.",
+      "insight": "The superior governance mechanism is staged capital: release the next tranche only when the previous phase clears pre-defined customer-economics, route and cash thresholds.",
+      "metrics": [
+        {
+          "label": "Gate 1",
+          "value": "Instrument",
+          "detail": "Baseline customer contribution and route economics",
+          "tone": "cyan"
+        },
+        {
+          "label": "Gate 2",
+          "value": "Prove",
+          "detail": "Pilot repeat, service adoption and cash improvement",
+          "tone": "green"
+        },
+        {
+          "label": "Gate 3",
+          "value": "Replicate",
+          "detail": "Repeat the economics in a second route/market",
+          "tone": "gold"
+        },
+        {
+          "label": "Gate 4",
+          "value": "Scale",
+          "detail": "Institutionalize only after cross-market repeatability",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [],
+      "sourceIds": [],
+      "kind": "gate"
+    },
+    {
+      "id": "normalized-economics",
+      "section": "Normalized economics engine",
+      "title": "A normalized NGN100bn decision unit exposes the economics without pretending public data reveal Olam Nigeria’s internal P&L",
+      "narrative": "Every output below uses a normalized NGN100bn eligible-sales decision unit and is produced by an explicit, replaceable assumption set. The purpose is not to forecast Olam Nigeria; it is to identify the minimum evidence a pilot must generate before the uploaded NGN4.2bn scenario envelope can become investment-grade.",
+      "insight": "Under the evidence-base assumptions, the normalized case produces only NGN0.47bn of run-rate operating uplift and a NGN−2.06bn three-year NPV. That is a HOLD signal, not a funding recommendation.",
+      "metrics": [
+        {
+          "label": "Run-rate operating impact",
+          "value": "NGN0.47bn",
+          "detail": "0.5% of normalized eligible sales",
+          "tone": "green"
+        },
+        {
+          "label": "Working-capital release",
+          "value": "NGN1.92bn",
+          "detail": "One-time sales-day proxy from 7 modeled days; replace with Finance NWC",
+          "tone": "cyan"
+        },
+        {
+          "label": "3Y NPV",
+          "value": "NGN−2.06bn",
+          "detail": "28% model hurdle; 50/80/100% benefit ramp",
+          "tone": "orange"
+        },
+        {
+          "label": "Full-scale gate",
+          "value": "HOLD",
+          "detail": "Formula-driven result under current assumptions",
+          "tone": "orange"
+        }
+      ],
+      "bullets": [
+        "Growth contribution = (availability recovery + repeat uplift) × eligible sales × contribution margin.",
+        "Price/mix contribution is discounted by a separate flow-through assumption rather than treated as pure profit.",
+        "FX and commodity shocks become leakage only on the portion that cannot be passed through, hedged, substituted or otherwise offset; production use must de-overlap any shared input exposure.",
+        "Working-capital release is a sales-day screening proxy, not a verified NWC calculation; Finance must replace it with inventory + receivables − payables data.",
+        "This is a screening NPV, not an investment-grade DCF: tax, depreciation, residual/terminal value, detailed capex phasing and working-capital reversal are not modeled.",
+        "The NGN100bn sales unit is a normalization device, not a statement of Olam Nigeria revenue."
+      ],
+      "sourceIds": [
+        "S19",
+        "S21",
+        "S22"
+      ],
+      "kind": "scenario"
+    },
+    {
+      "id": "capital-boundary",
+      "section": "Capital release boundary",
+      "title": "In the screening model, the NGN4.2bn scenario envelope stays locked until roughly a 2% run-rate uplift clears the zero-NPV boundary",
+      "narrative": "Under this specific screening architecture—28% model hurdle, a seven-day sales-based working-capital proxy and a 50/80/100% benefit ramp—the model requires approximately NGN1.99bn of recurring operating impact per NGN100bn eligible sales to reach zero NPV. Change the cash-flow convention and the threshold must be recalculated.",
+      "insight": "This converts capital governance from a debate into a measurable threshold: the pilot does not need to “look promising”; it needs to prove an equivalent combination of contribution, route savings, repeat, pass-through and cash release sufficient to clear the hurdle.",
+      "metrics": [
+        {
+          "label": "Required run-rate",
+          "value": "NGN1.99bn",
+          "detail": "2.0% of normalized eligible sales",
+          "tone": "gold"
+        },
+        {
+          "label": "Modeled run-rate",
+          "value": "NGN0.47bn",
+          "detail": "Evidence-base case before internal data replacement",
+          "tone": "orange"
+        },
+        {
+          "label": "Pilot envelope",
+          "value": "NGN0.60bn",
+          "detail": "Uploaded case scenario — evidence-gathering capital only",
+          "tone": "cyan"
+        },
+        {
+          "label": "Conditional rollout",
+          "value": "NGN3.60bn",
+          "detail": "Remains locked until gates G0–G7 clear",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Replace the public macro anchor with Olam Treasury’s approved nominal-NGN project hurdle before any real investment decision; MPR is not WACC.",
+        "Replace the sales-day working-capital proxy with Finance-owned NWC data and treat any release as one-time cash, not permanent operating profit.",
+        "Require the same threshold to hold after removing temporary promotional or inventory-loading effects.",
+        "Do not release rollout capital if positive NPV depends on one heroic assumption."
+      ],
+      "sourceIds": [
+        "S21"
+      ],
+      "kind": "gate"
+    },
+    {
+      "id": "scenario-cube",
+      "section": "Joint stress test",
+      "title": "The strategy changes sign when macro resilience and execution quality move together — which is exactly why single-variable business cases are dangerous",
+      "narrative": "Three deterministic cases use the same formula and capital envelope. Only the assumption set changes. The wide outcome range is the point: the public evidence does not justify a single deterministic return claim.",
+      "insight": "Leadership should manage the variables that move the case across the zero-NPV boundary, not defend one forecast. The execution-proof case earns scale; the evidence-base and macro-stress cases do not.",
+      "metrics": [
+        {
+          "label": "Evidence-base case",
+          "value": "NGN−2.06bn",
+          "detail": "NGN0.47bn run-rate · gate hold",
+          "tone": "gold"
+        },
+        {
+          "label": "Macro stress",
+          "value": "NGN−8.78bn",
+          "detail": "NGN−3.85bn run-rate · gate hold",
+          "tone": "orange"
+        },
+        {
+          "label": "Execution-proof case",
+          "value": "NGN0.66bn",
+          "detail": "NGN1.69bn run-rate · gate release",
+          "tone": "green"
+        }
+      ],
+      "bullets": [
+        "Evidence-base case: Neutral normalized case used to expose the hurdle that the pilot must clear; it is not management guidance. Required zero-NPV run-rate = NGN1.99bn.",
+        "Macro stress: Lower commercial lift, weaker pass-through, smaller working-capital improvement and materially larger FX/commodity shocks. Required zero-NPV run-rate = NGN2.62bn.",
+        "Execution-proof case: The case that should be earned with observed pilot evidence: stronger repeat, route economics, mix, pass-through and cash release. Required zero-NPV run-rate = NGN1.20bn."
+      ],
+      "sourceIds": [
+        "S12",
+        "S21",
+        "S22",
+        "S24"
+      ],
+      "kind": "scenario"
+    },
+    {
+      "id": "sensitivity",
+      "section": "Sensitivity hierarchy",
+      "title": "Executive attention should be allocated by NPV swing, not by which assumption is easiest to debate",
+      "narrative": "Each driver is moved one step down and one step up while every other input is held constant. The resulting three-year NPV swing ranks the variables that deserve the strongest evidence, governance and negotiation effort.",
+      "insight": "The sensitivity ranking is not a forecast. It is a decision map showing where bad assumptions can destroy the case fastest — and where better data has the highest economic value.",
+      "metrics": [
+        {
+          "label": "01 · Working-capital days",
+          "value": "NGN2.14bn",
+          "detail": "±5 days test · downside NGN−3.13bn / upside NGN−0.99bn",
+          "tone": "orange"
+        },
+        {
+          "label": "02 · FX shock",
+          "value": "NGN1.22bn",
+          "detail": "±5pp test · downside NGN−2.67bn / upside NGN−1.45bn",
+          "tone": "gold"
+        },
+        {
+          "label": "03 · Cost pass-through",
+          "value": "NGN1.02bn",
+          "detail": "±10pp test · downside NGN−2.57bn / upside NGN−1.56bn",
+          "tone": "cyan"
+        },
+        {
+          "label": "04 · Net price / mix",
+          "value": "NGN0.95bn",
+          "detail": "±0.5pp test · downside NGN−2.54bn / upside NGN−1.59bn",
+          "tone": "green"
+        }
+      ],
+      "bullets": [
+        "Working-capital days (±5 days): NPV range NGN−3.13bn to NGN−0.99bn; total swing NGN2.14bn.",
+        "FX shock (±5pp): NPV range NGN−2.67bn to NGN−1.45bn; total swing NGN1.22bn.",
+        "Cost pass-through (±10pp): NPV range NGN−2.57bn to NGN−1.56bn; total swing NGN1.02bn.",
+        "Net price / mix (±0.5pp): NPV range NGN−2.54bn to NGN−1.59bn; total swing NGN0.95bn.",
+        "Route cost efficiency (±0.3pp): NPV range NGN−2.47bn to NGN−1.66bn; total swing NGN0.81bn.",
+        "Commodity shock (±5pp): NPV range NGN−2.47bn to NGN−1.66bn; total swing NGN0.81bn.",
+        "Service investment (±0.2pp): NPV range NGN−2.34bn to NGN−1.79bn; total swing NGN0.54bn.",
+        "Imported-input exposure (±10pp): NPV range NGN−2.20bn to NGN−1.93bn; total swing NGN0.27bn."
+      ],
+      "sourceIds": [
+        "S21",
+        "S22"
+      ],
+      "kind": "sensitivity"
+    },
+    {
+      "id": "uncertainty",
+      "section": "Uncertainty distribution",
+      "title": "A 5,000-run seeded stress simulation shows why a point forecast should never become capital policy",
+      "narrative": "The stress simulation samples explicit independent uniform ranges for commercial lift, contribution margin, route savings, service cost, input exposure, FX/commodity shocks, pass-through, working-capital improvement and hurdle rate. It is reproducible with seed 20261001 but is not calibrated to Olam’s historical joint distributions.",
+      "insight": "The share of runs above zero is only a scenario frequency under the chosen independent ranges—not a forecast probability. Its purpose is to expose fragility and identify which assumed ranges must be replaced with observed Olam data and empirical dependencies.",
+      "metrics": [
+        {
+          "label": "P10 NPV",
+          "value": "NGN−6.00bn",
+          "detail": "Downside of modeled assumption distribution",
+          "tone": "orange"
+        },
+        {
+          "label": "P50 NPV",
+          "value": "NGN−3.37bn",
+          "detail": "Median modeled outcome",
+          "tone": "gold"
+        },
+        {
+          "label": "P90 NPV",
+          "value": "NGN−1.17bn",
+          "detail": "Upper modeled outcome",
+          "tone": "green"
+        },
+        {
+          "label": "Positive-NPV frequency",
+          "value": "2.0%",
+          "detail": "5,000 seeded runs; not forecast probability",
+          "tone": "cyan"
+        }
+      ],
+      "bullets": [
+        "Seeded stress frequency under independent uniform assumption ranges; not a calibrated forecast probability or management guidance.",
+        "Every distribution range is deliberately replaceable by internal Olam data.",
+        "Correlations are not assumed; a production investment case should add empirically estimated dependencies where Olam has history.",
+        "The simulation is therefore a governance device: it shows which unknowns must be converted into measured evidence before scale."
+      ],
+      "sourceIds": [
+        "S19",
+        "S21",
+        "S22",
+        "S24"
+      ],
+      "kind": "sensitivity"
+    },
+    {
+      "id": "risk",
+      "section": "Failure modes",
+      "title": "The strategy should be falsifiable before it becomes expensive",
+      "narrative": "Each growth thesis needs a condition under which leadership would stop, redesign or defer expansion.",
+      "insight": "A strategy becomes executive-grade when it specifies not only what would make it succeed, but what evidence would prove it wrong.",
+      "metrics": [
+        {
+          "label": "Economics fail",
+          "value": "Stop",
+          "detail": "Contribution or payback deteriorates after normalization",
+          "tone": "orange"
+        },
+        {
+          "label": "Service fails",
+          "value": "Redesign",
+          "detail": "Training/app adoption does not improve repeat or yield",
+          "tone": "gold"
+        },
+        {
+          "label": "Route fails",
+          "value": "Re-route",
+          "detail": "Availability gains require uneconomic cost-to-serve",
+          "tone": "cyan"
+        },
+        {
+          "label": "Replication fails",
+          "value": "Localize",
+          "detail": "Second-market economics do not reproduce the first",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [],
+      "sourceIds": [
+        "S01"
+      ],
+      "kind": "risk"
+    },
+    {
+      "id": "model-audit",
+      "section": "Model audit",
+      "title": "The uploaded financial model is useful as a hypothesis — not yet as an externally verified business case",
+      "narrative": "The original deck shows NGN2.5bn incremental Y3 EBIT per NGN100bn eligible sales, NGN20bn Y3 revenue, 2.27-year discounted payback and NGN0.31bn three-year NPV.",
+      "insight": "Those outputs cannot be independently validated without the eligible-sales perimeter, gross-to-net bridge, capex/working-capital schedule, timing of cash flows, tax assumptions and discount rate. The executive deck therefore labels them as modeled rather than reported.",
+      "metrics": [
+        {
+          "label": "Original Y3 EBIT",
+          "value": "NGN2.5bn",
+          "detail": "Scenario output from uploaded deck",
+          "tone": "orange"
+        },
+        {
+          "label": "Original Y3 revenue",
+          "value": "NGN20bn",
+          "detail": "Scenario output from uploaded deck",
+          "tone": "green"
+        },
+        {
+          "label": "Original payback",
+          "value": "2.27 yrs",
+          "detail": "Not independently reproducible from supplied evidence",
+          "tone": "gold"
+        },
+        {
+          "label": "Original 3Y NPV",
+          "value": "NGN0.31bn",
+          "detail": "Discount-rate and cash-flow schedule not supplied",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Keep the model as a decision scaffold, but require a signed assumptions register before funding.",
+        "Separate reported company facts, market data and management/model assumptions in every investment memo.",
+        "Make contribution, working capital and service cost visible by customer cohort and market."
+      ],
+      "sourceIds": [],
+      "kind": "audit"
+    },
+    {
+      "id": "assumptions-1",
+      "section": "Assumption register · 1/2",
+      "title": "No modeled number is allowed to hide: commercial and customer assumptions each have a replacement-data requirement",
+      "narrative": "The normalized model is intentionally transparent. Defaults are placeholders for disciplined discussion, not claims about Olam Nigeria’s confidential economics.",
+      "insight": "An assumption becomes decision-grade only when an accountable Olam owner replaces it with measured, reconciled evidence and documents the period, perimeter and method.",
+      "metrics": [
+        {
+          "label": "Assumptions shown",
+          "value": "A01–A08",
+          "detail": "Sales, margin, demand, mix, route and service",
+          "tone": "green"
+        },
+        {
+          "label": "Evidence rule",
+          "value": "Replace",
+          "detail": "Every default has an internal-data successor",
+          "tone": "cyan"
+        },
+        {
+          "label": "Use",
+          "value": "Governance",
+          "detail": "Not company guidance or externally verified forecast",
+          "tone": "gold"
+        }
+      ],
+      "bullets": [
+        "A01 · Eligible sales base = NGN100bn — Normalized decision unit only; replace with audited eligible Nigeria sales perimeter.",
+        "A02 · Contribution margin = 8% — Replace with customer/category gross-to-net contribution after variable route and service cost.",
+        "A03 · Availability recovery = 2% — Replace with measured incremental sales from stockout/availability interventions versus control routes.",
+        "A04 · Repeat uplift = 2% — Replace with matched-cohort reorder lift attributable to the intervention.",
+        "A05 · Net price / mix = 1% — Replace with observed net realization after discount, pack mix and cannibalization.",
+        "A06 · Price/mix flow-through = 70% — Replace with finance-validated conversion of net price/mix into operating contribution.",
+        "A07 · Route efficiency = 0.6% of sales — Replace with route-level logistics, stock, returns and service cost delta.",
+        "A08 · Service investment = 0.4% of sales — Replace with actual Bakewell/training/technical-service variable and fixed cost."
+      ],
+      "sourceIds": [],
+      "kind": "assumptions"
+    },
+    {
+      "id": "assumptions-2",
+      "section": "Assumption register · 2/2",
+      "title": "Risk, cash and capital assumptions are separated from operating assumptions so the investment case cannot blur them together",
+      "narrative": "FX, commodity exposure, pass-through, working capital, capital envelope, hurdle rate and benefit timing are modeled independently because each has a different owner and mitigation mechanism.",
+      "insight": "This separation is what makes the case auditable: commercial teams cannot silently solve a treasury problem with a demand assumption, and finance cannot hide an operating shortfall inside a discount rate.",
+      "metrics": [
+        {
+          "label": "Assumptions shown",
+          "value": "A09–A16",
+          "detail": "Risk exposure, pass-through, cash and capital",
+          "tone": "green"
+        },
+        {
+          "label": "Macro anchor",
+          "value": "23% MPR",
+          "detail": "September 2026 CBN public reference only",
+          "tone": "cyan"
+        },
+        {
+          "label": "Model hurdle",
+          "value": "28%",
+          "detail": "Explicit +5pp model premium; replace with Treasury",
+          "tone": "gold"
+        }
+      ],
+      "bullets": [
+        "A09 · Imported-input exposure = 45% — Replace with procurement bill-of-material and landed-cost exposure by category; de-overlap any commodity exposure before use.",
+        "A10 · FX shock = 5% — Stress input, not a forecast; replace with treasury scenario bands and hedge policy.",
+        "A11 · Commodity exposure / shock = 30% / 5% — Replace with commodity-specific procurement exposure and approved stress bands; reconcile against A09 so the same input cost is not double-counted.",
+        "A12 · Cost pass-through = 80% — Replace with observed price-lag, elasticity and contractual pass-through by customer segment.",
+        "A13 · Working-capital improvement = 7 days — Public model uses a sales-day cash-release proxy only; replace with Finance-owned inventory + receivables − payables baseline and measured pilot delta.",
+        "A14 · Capital envelope = NGN0.6bn + NGN3.6bn — Inherited from uploaded case as a scenario envelope; not represented as Olam management guidance.",
+        "A15 · Hurdle rate = 28% — 23% Sep-2026 CBN MPR is only a public financing-condition anchor, not WACC; +5pp is an explicit screening premium. Replace with Treasury’s nominal-NGN project hurdle.",
+        "A16 · Benefit ramp = 50% / 80% / 100% — Screening realization schedule only. Investment-grade DCF must add Finance-owned timing, tax, depreciation, capex phasing, working-capital reversal and residual/terminal-value conventions."
+      ],
+      "sourceIds": [
+        "S21",
+        "S22"
+      ],
+      "kind": "assumptions"
+    },
+    {
+      "id": "next-90-days",
+      "section": "90-day category pilot",
+      "title": "The fastest proof is a dual-category control tower in two or three Nigerian markets — not another national campaign",
+      "narrative": "Use semolina and edible oils as contrasting category laboratories. The aim is to prove that better demand diagnosis and trade-capital allocation improve both category economics and forecast quality.",
+      "insight": "A 90-day pilot can create decision advantage even before it creates scale: if it identifies which movements are price, pack, route, inventory or true demand, it already improves the next naira of marketing and trade spend.",
+      "metrics": [
+        {
+          "label": "0–30 days",
+          "value": "Instrument",
+          "detail": "Market cohorts, pack ladder, sell-in/offtake, stock days, net price and route cost",
+          "tone": "cyan"
+        },
+        {
+          "label": "31–60 days",
+          "value": "Experiment",
+          "detail": "One affordability test + one trade-capital/availability test per category",
+          "tone": "green"
+        },
+        {
+          "label": "61–90 days",
+          "value": "Reconcile",
+          "detail": "Incremental ROMI, repeat, forecast error and contribution velocity",
+          "tone": "gold"
+        },
+        {
+          "label": "Scale rule",
+          "value": "Evidence",
+          "detail": "Expand only mechanisms that clear contribution + cash + repeat thresholds",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Select markets with different affordability and route conditions so the test can discriminate causes.",
+        "Pre-register the counterfactual and failure condition for every intervention.",
+        "Connect Marketing, Sales, Finance, Supply Chain and S&OP to one weekly cause-of-movement review.",
+        "Carry forward only the mechanism that survives the second-market test."
+      ],
+      "sourceIds": [
+        "S03",
+        "S21",
+        "S29"
+      ],
+      "kind": "gate"
+    },
+    {
+      "id": "candidate-1",
+      "section": "How I could add leverage · 01",
+      "title": "I would not try to replace category expertise — I would build the intelligence layer that helps it move faster",
+      "narrative": "Olam already owns the category knowledge, customer relationships, route experience and confidential economics that public analysis cannot reproduce. My credible role is to make that knowledge more measurable, connected, testable and reusable across decisions.",
+      "insight": "My contribution should not be another reporting layer. It should be a measurement-and-experimentation layer that lets Marketing, Sales, Finance and S&OP learn from the same commercial event — while category leadership keeps ownership of the decision.",
+      "metrics": [
+        {
+          "label": "Historical evidence · budget",
+          "value": "₹20M",
+          "detail": "Verified portfolio/resume campaign-budget responsibility; not an Olam outcome forecast",
+          "tone": "gold"
+        },
+        {
+          "label": "Historical evidence · CPM",
+          "value": "−56.7%",
+          "detail": "₹35.8 → ₹15.5 CPM; ≈57% when rounded",
+          "tone": "cyan"
+        },
+        {
+          "label": "Transferable method",
+          "value": "Measure → validate",
+          "detail": "Diagnose → reallocate → validate; the method transfers, not the media metric",
+          "tone": "green"
+        },
+        {
+          "label": "Role boundary",
+          "value": "Enable, not own",
+          "detail": "Decision intelligence around Olam category expertise, P&L ownership and operating execution",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Category intelligence — convert fragmented commodity, price, route, campaign and inventory signals into causal hypotheses and next tests.",
+        "Causal ROMI — separate sell-in from verified offtake, working capital, cannibalization and post-support repeat.",
+        "Demand sensing — use semolina/oil divergence as hypothesis generation, not deterministic causality.",
+        "S&OP explainability — decompose forecast movement by price, availability, campaign, NPD, seasonality, distribution and cannibalization.",
+        "Experiment design — pre-register counterfactual, economic KPI, failure threshold, washout and scale rule.",
+        "Executive synthesis — shorten signal→diagnosis→decision latency without pretending analysis owns the commercial decision."
+      ],
+      "sourceIds": [],
+      "kind": "candidate"
+    },
+    {
+      "id": "candidate-2",
+      "section": "How I could add leverage · 02",
+      "title": "My value should be measured by how fast uncertainty becomes evidence — and how well the next naira is allocated",
+      "narrative": "The 90-day proposition is deliberately falsifiable: instrument the commercial baseline, run controlled category tests, reconcile demand with economics and codify only mechanisms that survive cash, repeat and replication tests.",
+      "insight": "The existing NGN100bn model defines the economic evidence a pilot must eventually produce; it does not promise my impact. I can help measure availability recovery, repeat, price/mix, route cost and learning while Finance, Category, Sales, Supply Chain, Procurement and Treasury retain ownership of their inputs and decisions.",
+      "metrics": [
+        {
+          "label": "0–30 days",
+          "value": "Instrument",
+          "detail": "Common data dictionary + market/category cohorts + cause-of-movement baseline",
+          "tone": "cyan"
+        },
+        {
+          "label": "31–60 days",
+          "value": "Test",
+          "detail": "Semolina affordability + edible-oil availability/trade-capital experiments with counterfactuals",
+          "tone": "green"
+        },
+        {
+          "label": "61–90 days",
+          "value": "Reconcile",
+          "detail": "Category control tower: demand + economics + trade + marketing + supply + forecast",
+          "tone": "gold"
+        },
+        {
+          "label": "90+ days",
+          "value": "Codify",
+          "detail": "Repeat only mechanisms that survive economic + cash + repeat + second-route/market tests",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "Economic value architecture = incremental contribution + availability/price-mix/route benefits + avoided waste + working-capital benefit − service/trade/marketing/cannibalization/execution cost.",
+        "Value of information ≈ expected loss avoided + upside captured earlier − evidence cost; a test can create value by preventing the wrong rollout.",
+        "Contribution velocity = net contribution / inventory-naira-days; Finance should validate the exact implementation.",
+        "Learning velocity = decision-relevant hypotheses resolved / time × experimentation cost; management concept, not GAAP economics.",
+        "Proposed operating standard: every material pilot has a hypothesis, counterfactual, failure rule, named input owner and post-support washout.",
+        "Evaluate me on outcomes/economics—not dashboards: causal clarity, decision latency, incremental ROMI, repeat, stock days, forecast error and reusable learning."
+      ],
+      "sourceIds": [],
+      "kind": "candidate"
+    },
+    {
+      "id": "review-reverification",
+      "section": "Review re-verification · 3 Oct 2026",
+      "title": "The core source and model flags survive re-checking — with one material wording correction on the September policy rate",
+      "narrative": "Primary-source re-verification confirms the ownership conflict, volume-definition boundary, palm-oil policy scope, FY2025 growth-quality divergence and the inability to reproduce the original case-model outputs from the supplied evidence. The CBN item needs one correction: September 2026 was a reset/cut from 26.5% to 23%, not an increase.",
+      "insight": "Decision-grade source hierarchy: transaction disclosures over stale web copy; metric labels over headline summaries; formal MPC decisions over live key-rate widgets; HS-level policy tables over shorthand; and reproducible cash-flow schedules over inherited model outputs.",
+      "metrics": [
+        {
+          "label": "Ownership",
+          "value": "81.81%",
+          "detail": "Governing post-CFG SALIC stake; current About page still contains stale 81.11% text lower down",
+          "tone": "green"
+        },
+        {
+          "label": "Volume boundary",
+          "value": "53.7m ≠ 49.474m",
+          "detail": "Sales volume and handled volume are separately labelled measures in the FY2025 report",
+          "tone": "cyan"
+        },
+        {
+          "label": "CBN MPR",
+          "value": "23%",
+          "detail": "September 2026 reset/cut from 26.5%; formal MPC decision is the governing policy-rate source",
+          "tone": "gold"
+        },
+        {
+          "label": "Growth quality",
+          "value": "+19.1 / +15.4 / −8.0%",
+          "detail": "Sales volume / revenue / EBIT — strong top line with weaker economic quality",
+          "tone": "orange"
+        }
+      ],
+      "bullets": [
+        "OWNERSHIP · Confirmed. Olam Group states SALIC rose from 80.01% to 81.81% after the 30 Jun 2026 CFG share issuance; Olam Agri main text says 81.81%, while a stale lower section says 81.11%.",
+        "ORIGINAL MODEL · Confirmed as unreproducible from supplied evidence. The 2.27-year discounted payback and NGN0.31bn 3Y NPV remain scenario outputs because the underlying cash-flow schedule, tax assumptions and discount-rate bridge were not provided.",
+        "METRIC DEFINITIONS · Confirmed. FY2025 sales volume is 53.7m MT (+19.1%); the same report separately shows 49.474m MT handled. They are not interchangeable.",
+        "CBN DATA · Correct the review wording: the Sep 21–22, 2026 MPC reset/cut MPR from 26.5% to 23%. Current CBN public materials now show 23%; the governance issue is source cadence, not a presently observed rate conflict.",
+        "PALM-OIL POLICY · Confirmed. USDA’s HS table changes crude palm oil 1511100000 to NOT Prohibited while listed refined palm-oil lines remain Prohibited. “Not prohibited” does not establish duty-free, FX, licensing or customs treatment.",
+        "GROWTH QUALITY · Confirmed. Olam Agri reported 53.7m MT sales volume (+19.1%), revenue +15.4% and EBIT −8.0% to $703.7m. The strategic implication is contribution/cash discipline, not volume maximisation."
+      ],
+      "sourceIds": [
+        "S01",
+        "S02",
+        "S16",
+        "S21",
+        "S22",
+        "S27"
+      ],
+      "kind": "audit"
+    },
+    {
+      "id": "review-corrective-actions",
+      "section": "Corrective action contract · post 3-pass review",
+      "title": "The audit becomes operational only when every flagged weakness is converted into a release rule, data owner or measurement rule",
+      "narrative": "The factual review identifies where public evidence or the inherited model is insufficient. The corrective response should therefore be procedural: lock conditional capital, assign replacement-data owners, measure verified offtake contribution, and make the eight-gate constitution the default path to scale.",
+      "insight": "These are analytical governance recommendations, not claims about Olam’s current internal process. They are designed to make the case falsifiable and investment-ready once internal Finance, Treasury, Sales, Supply Chain and Category data replace public screening assumptions.",
+      "metrics": [
+        {
+          "label": "Capital",
+          "value": "Stage it",
+          "detail": "NGN0.6bn pilot first; NGN3.6bn rollout remains conditional on evidence",
+          "tone": "cyan"
+        },
+        {
+          "label": "Data",
+          "value": "Own it",
+          "detail": "Finance NWC + audited eligible sales + Treasury-approved nominal-NGN hurdle",
+          "tone": "green"
+        },
+        {
+          "label": "ROMI",
+          "value": "Causal",
+          "detail": "Verified offtake contribution less route/service cost, carry and cannibalization",
+          "tone": "gold"
+        },
+        {
+          "label": "Governance",
+          "value": "G0–G7",
+          "detail": "No scale until evidence, customer economics, contribution, route, resilience, cash and replication clear",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "STAGED CAPITAL · Treat NGN4.2bn as a scenario envelope, not a one-shot approval. Release the conditional tranche only after pilot repeat, route economics, cash conversion and second-market replication clear pre-registered thresholds.",
+        "SOURCE HIERARCHY · Use transaction disclosures over stale web copy, formal metric definitions over headline summaries, and formal MPC decisions over live widgets when source cadence conflicts.",
+        "INTERNAL DATA REPLACEMENT · Replace the normalized NGN100bn sales base, seven-day sales-based working-capital proxy and 28% screening hurdle with audited eligible sales, Finance-owned inventory + receivables − payables and a Treasury-approved project hurdle.",
+        "CAUSAL ROMI · Credit verified incremental offtake contribution, not channel loading. Deduct trade spend, variable route/service cost, working-capital carry and cannibalization before marketing receives return credit.",
+        "EIGHT-GATE CONSTITUTION · Make G0–G7 sequential and non-waivable for scale: truth → customer economics → contribution → route → resilience → cash → repeatability → capital release."
+      ],
+      "sourceIds": [
+        "S01",
+        "S19",
+        "S21",
+        "S27"
+      ],
+      "kind": "gate"
+    },
+    {
+      "id": "review-signal-boundaries",
+      "section": "Evidence perimeter · external signals versus operating proof",
+      "title": "Macro scale, programme reach and public datasets can define context — but they cannot substitute for Olam transaction-level economics",
+      "narrative": "The third web-verification cycle confirmed the external figures, but also reinforced their epistemic boundary. National wheat consumption, inflation, modeled market-price grids, continental food-market forecasts and social-programme reach belong in the context layer; only Olam-owned sell-out, contribution, NWC, route and repeat data can prove an investable category-growth mechanism.",
+      "insight": "The practical rule is classification before interpretation: External Forecast ≠ Olam demand; Inflation ≠ affordability recovery; Programme Reach ≠ earnings; Market Scale ≠ addressable revenue; ML-assisted price estimate ≠ transaction truth.",
+      "metrics": [
+        {
+          "label": "Wheat context",
+          "value": "6.8m MT",
+          "detail": "USDA MY2026/27 Nigeria consumption projection — not semolina penetration or Olam share",
+          "tone": "cyan"
+        },
+        {
+          "label": "Inflation",
+          "value": "15.39 / 19.57%",
+          "detail": "Aug-2026 headline / food inflation — disinflation, not falling prices",
+          "tone": "gold"
+        },
+        {
+          "label": "Price grid",
+          "value": "73 markets",
+          "detail": "World Bank measured + machine-learning estimates — external pressure signal only",
+          "tone": "violet"
+        },
+        {
+          "label": "Programme",
+          "value": "$2m / 20k+",
+          "detail": "Planned investment / training target — not realized EBIT or ROMI",
+          "tone": "green"
+        }
+      ],
+      "bullets": [
+        "WHEAT · USDA projects 6.8m MT consumption in MY2026/27. Use it to size the national demand environment, not to infer Olam brand growth, semolina penetration or campaign lift.",
+        "INFLATION · NBS August 2026 shows 15.39% headline and 19.57% food inflation. A lower inflation rate means slower price growth; it does not prove lower price levels or restored purchasing power.",
+        "REGIONAL PRICES · World Bank’s Nigeria RTFP dataset covers 73 markets and combines direct observations with machine-learning estimation of missing prices. It is a pressure-signal layer, not Olam invoice or sell-out ground truth.",
+        "PROGRAMME REACH · Olam Agri says planned investment is $2m, target >20,000 by 2030, and >10,000 bakers have benefitted since 2019, around half women. These are programme metrics, not realized financial returns.",
+        "MARKET SCALE · World Bank’s $1tn by 2030 figure is a continental food-market projection. It cannot be used as Olam addressable revenue, Nigeria category TAM or an earnings forecast without a bottom-up perimeter bridge."
+      ],
+      "sourceIds": [
+        "S04",
+        "S12",
+        "S13",
+        "S14",
+        "S29"
+      ],
+      "kind": "audit"
+    },
+    {
+      "id": "figure-evidence-1",
+      "section": "Evidence appendix · figure register 1/3",
+      "title": "Corporate performance and Nigeria operating figures are mapped one-by-one to source, definition and evidence class",
+      "narrative": "This register makes the numerical audit explicit: a reader can distinguish reported Olam figures from derived arithmetic without inferring authority from formatting.",
+      "insight": "A number is decision-ready only when its source, period, perimeter and classification are visible next to the claim.",
+      "metrics": [],
+      "bullets": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06",
+        "F07",
+        "F08",
+        "F09",
+        "F10",
+        "F11",
+        "F12"
+      ],
+      "sourceIds": [
+        "S01",
+        "S03",
+        "S19",
+        "S20"
+      ],
+      "kind": "evidence-register"
+    },
+    {
+      "id": "figure-evidence-2",
+      "section": "Evidence appendix · figure register 2/3",
+      "title": "Macro, policy, ownership and market-context numbers remain dated, scoped and explicitly caveated",
+      "narrative": "External statistics are not treated as Olam operating facts. Forecasts, policy statuses and market references retain their own dates and epistemic limits.",
+      "insight": "Freshness is part of factual accuracy: a valid historical release stays valid only when it is labeled as historical rather than silently promoted to “current.”",
+      "metrics": [],
+      "bullets": [
+        "F13",
+        "F14",
+        "F15",
+        "F16",
+        "F17",
+        "F18",
+        "F19",
+        "F20",
+        "F21",
+        "F22",
+        "F23"
+      ],
+      "sourceIds": [
+        "S02",
+        "S12",
+        "S13",
+        "S16",
+        "S21",
+        "S22",
+        "S28",
+        "S29"
+      ],
+      "kind": "evidence-register"
+    },
+    {
+      "id": "figure-evidence-3",
+      "section": "Evidence appendix · figure register 3/3",
+      "title": "Programme, market-context, model-assumption, scenario and portfolio numbers are separated from externally reported operating facts",
+      "narrative": "The final register page covers programme targets, macro forecasts, supply context, prior-case outputs, normalized model conventions, formula-derived thresholds, simulations and personal portfolio evidence.",
+      "insight": "No modeled or personal number is allowed to masquerade as an Olam-reported fact; each carries a provenance statement and replacement-data rule.",
+      "metrics": [],
+      "bullets": [
+        "F24",
+        "F25",
+        "F26",
+        "F27",
+        "F28",
+        "F29",
+        "F30",
+        "F31",
+        "F32",
+        "F33",
+        "F34",
+        "F35",
+        "F36"
+      ],
+      "sourceIds": [
+        "S04",
+        "S14",
+        "S21",
+        "S30"
+      ],
+      "kind": "evidence-register"
+    },
+    {
+      "id": "sources-1",
+      "section": "Evidence appendix · 1/3",
+      "title": "Primary evidence: company scale, Nigeria footprint and operating economics",
+      "narrative": "The strategy prioritizes issuer, regulator and multilateral sources. Modeled values are explicitly separated from reported facts and transaction disclosures.",
+      "insight": "Every decision-critical number should be traceable to a named source, date, evidence class and—where needed—a documented reconciliation rule.",
+      "metrics": [],
+      "bullets": [
+        "S01 · Olam Agri — Annual Report 2025 — Primary source for FY2025 scale and operating performance. The CFO summary reports 53.7m MT sales volume (+19.1%), $28.666bn revenue (displayed as $28.7bn) and $703.7m EBIT (−8.0%). The CEO narrative rounds revenue to $28.6bn. The at-a-glance page separately reports 49.474m MT handled; handled tonnes and sales volume are different definitions and are not interchanged in the deck.",
+        "S02 · Olam Group — Re-organisation after CFG acquisition — Ownership chronology reverified 3 Oct 2026: SALIC held 80.01% after the 27 Apr 2026 Tranche 1 completion; after Olam Agri acquired Continental Farmers Group on 30 Jun 2026 through new share issuance, SALIC increased to 81.81% and Olam Group diluted to 18.19%. Olam Agri’s current About page main text now shows 81.81%, while a stale lower section still shows 81.11%. The deck uses the transaction-specific 81.81% / 18.19% split and exposes the conflict.",
+        "S03 · Olam Agri — Nigeria operations — Primary source for Nigeria footprint including processing facilities, employees, farmers, wheat/flour network, rice assets and logistics fleet.",
+        "S04 · Olam Agri — Baking Brighter Futures — Primary programme evidence: planned $2m investment, >20,000 training target by 2030, and >10,000 bakers benefitted since 2019 (around half women). These are programme commitments/reach metrics, not realized revenue, EBIT, ROMI or financial return.",
+        "S05 · Olam Agri — Bakewell customer app — Evidence for Olam’s digital baker relationship layer: ordering, complaints, feedback, profitability support, new-product information and customer insight.",
+        "S06 · Olam Agri — Wheat milling — Primary evidence for flour and pasta footprint across Nigeria, Ghana, Senegal and Cameroon and relationships with artisanal bakers, industrial users and consumers.",
+        "S07 · Olam Agri — Ghana operations — Primary source for Ghana milling, rice and operating footprint.",
+        "S08 · Olam Agri — Senegal operations — Primary source for Senegal wheat milling, depots, feed operations and customer distribution.",
+        "S09 · Olam Agri — Cameroon operations — Primary source for Cameroon flour milling and branded rice presence.",
+        "S10 · Olam Agri — Mozambique operations — Primary source for rice, edible oils, processing and nationwide distribution in Mozambique."
+      ],
+      "sourceIds": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10"
+      ],
+      "kind": "sources"
+    },
+    {
+      "id": "sources-2",
+      "section": "Evidence appendix · 2/3",
+      "title": "Market, category and policy evidence is cross-checked before it supports a commercial decision",
+      "narrative": "Company claims are checked against Olam Group disclosures and external regulator or multilateral evidence wherever the decision would otherwise depend on one source.",
+      "insight": "Conflicting or revised evidence is not averaged away. It is surfaced, versioned and assigned a rule for which source governs the deck.",
+      "metrics": [],
+      "bullets": [
+        "S11 · Olam Agri — South Africa operations — Primary source for South Africa trading and cross-border edible-oil distribution linkages.",
+        "S12 · Nigeria NBS — August 2026 CPI — Official NBS August 2026 CPI release anchor, published 15 Sep 2026: headline inflation 15.39% year over year and food inflation 19.57%, with CPI base period 2024=100. The deck treats this as a rate-of-change signal: disinflation does not mean prices fell or household purchasing power was restored.",
+        "S13 · USDA FAS — Nigeria Grain and Feed Annual 2026 — Industry-demand context: USDA FAS projects MY2026/27 Nigeria wheat consumption at 6.8m MT. This is a national macro-demand signal only; it is not evidence of Olam brand growth, semolina penetration, market share or incremental contribution.",
+        "S14 · World Bank — Africa agribusiness opportunity — World Bank macro context: Africa’s food market is projected to reach $1tn by 2030. This is a continental market-scale anchor, not Olam addressable revenue, Nigeria category revenue or a forecast of Olam earnings.",
+        "S15 · World Bank — Food value-chain jobs and productivity — Evidence that food marketing, transport, processing, retail and food preparation are fast-growing midstream/downstream employment and value-creation layers.",
+        "S16 · Olam Agri — About Us / current ownership page — Reverified 3 Oct 2026: the same Olam Agri About page contains two ownership statements. Its main company description states 81.81% SALIC, while a lower “New Chapter of Growth” section states 81.11%. Olam Group’s 30 Jun 2026 post-CFG disclosure confirms 81.81% SALIC / 18.19% Olam Group. The stale 81.11% text is retained only as a disclosed source conflict.",
+        "S17 · Olam Agri + AGRA — Food and feed value-chain MOU — Evidence for value-chain programmes in Nigeria and Ghana with scope for wider African replication across crops, poultry, aquaculture and baker ecosystems.",
+        "S18 · Olam Agri — Animal feed and protein — Primary source for feed, poultry and aquaculture customer ecosystems in Nigeria and other African markets.",
+        "S19 · Olam Group — 2025 Annual Report strategic report — Independent issuer cross-check for Olam Agri 2025 operating-group results: 53.7m MT volume, S$37.4bn revenue, S$923.5m EBIT and S$7.5bn invested capital; it also shows working-capital expansion as a key source of invested-capital growth.",
+        "S20 · Olam Group — FY2025 Processing & Value-added results — Exact FY2025 processing/value-added cross-check: segment EBIT was S$610.5m (displayed as ~S$611m), up 1.6%; EBIT/MT was S$127 versus S$115; invested capital was S$2.409bn (displayed as ~S$2.41bn), down 4.0%. Olam also states that the stable naira supported Nigeria wheat milling, while Nigeria rice farming/milling was hurt by lower local rice prices and cross-border flows."
+      ],
+      "sourceIds": [
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20"
+      ],
+      "kind": "sources"
+    },
+    {
+      "id": "sources-3",
+      "section": "Evidence appendix · 3/3",
+      "title": "Capital, affordability, regional prices and edible-oil policy assumptions remain explicitly replaceable",
+      "narrative": "The final evidence page contains the external cross-checks used to challenge financing conditions, working-capital logic, wheat-demand forecasts and the Nigeria affordability/resilience environment.",
+      "insight": "A public source can define the stress boundary; only internal Olam evidence can authorize the investment decision.",
+      "metrics": [],
+      "bullets": [
+        "S21 · CBN — September 2026 Monetary Policy Committee decision — Official financing-condition anchor, reverified 3 Oct 2026: at the September 21–22, 2026 meeting the CBN reset/cut the Monetary Policy Rate from 26.5% to 23%. This was not a rate increase. The deck uses the 23% MPR only as a public financing anchor, never as Olam’s WACC or project hurdle.",
+        "S22 · CBN — key rates and NFEM reference — Official market context for Nigeria funding and FX. Reverified 3 Oct 2026, current CBN public materials display a 23% MPR consistent with the September MPC decision. Because operational key-rate pages and live market fields can update on a different cadence, the deck uses the formal MPC decision page (S21) as the governing policy-rate source and uses this page only for dated NOFR/NFEM context. NOFR/NFEM are volatile references, not fixed model inputs.",
+        "S23 · World Bank — Nigeria Development Update, April 2026 — Macro cross-check: stabilization improved, but household incomes had not fully recovered and poverty remained high. This supports separating disinflation from restored affordability.",
+        "S24 · USDA FAS — June 2026 Grain: World Markets and Trade — Forecast-version discipline: USDA PSD and Grain: World Markets and Trade estimates are revised across releases. The deck therefore treats external wheat-demand/import numbers as dated forecasts and versioned ranges, not immutable facts.",
+        "S25 · World Bank — Nigeria AGROW agricultural value-chain project — Evidence for the structural importance of aggregation, post-harvest handling, agro-processing, market access and smallholder sourcing in Nigeria; used to test the local-supply and resilience thesis.",
+        "S26 · Olam Agri — Edible Oils — Primary evidence that Olam Agri refines crude vegetable oils in Nigeria and combines sourcing, refining, blending, distribution, supply-chain and risk-management capabilities. Used to frame edible-oil advantage as a system, not only a brand proposition.",
+        "S27 · USDA FAS — Nigeria 2026 Fiscal and Trade Policy Changes — USDA’s 2026 Nigeria policy table changes crude palm oil and several crude vegetable-oil HS lines from Prohibited to NOT Prohibited, while the listed refined palm-oil HS lines remain Prohibited. “Not prohibited” is not treated as duty-free or unrestricted importability; classification, duties, licensing, FX access and enforcement must be re-verified before any investment decision.",
+        "S28 · World Bank — Nigeria country economic context — Affordability context: food inflation disproportionately affects poor households, which can spend up to about 70% of income on food. Used to distinguish cash-ticket pressure from average inflation.",
+        "S29 · World Bank — Nigeria Real-Time Food Prices — World Bank monthly food-price estimates cover 73 Nigerian markets through August 2026 (version 2026-08-24). The live dataset combines direct price measurements with machine-learning estimates of missing data and is continually revised as new information arrives. The deck uses it only as an external pressure signal to triangulate with Olam transaction, availability and route data—not as ground-truth market pricing.",
+        "S30 · USDA FAS — Palm Oil production, 2025/26 — Current global production table places Nigeria at about 1.5m MT of palm oil in 2025/26, around 1.8% of global production. Used only as supply context; it is not a measure of Olam share or category demand."
+      ],
+      "sourceIds": [
+        "S21",
+        "S22",
+        "S23",
+        "S24",
+        "S25",
+        "S26",
+        "S27",
+        "S28",
+        "S29",
+        "S30"
+      ],
+      "kind": "sources"
+    },
+    {
+      "id": "iterations",
+      "section": "66-pass executive review · latest 3-pass web verification",
+      "title": "Three new web-verification iterations took the deck to 66 total reviews — and tightened the boundary between external context and Olam operating proof",
+      "narrative": "Passes 64–66 re-opened the corporate/regulatory sources, challenged the macro-to-operating inference boundary, and rechecked programme-versus-earnings and model-versus-fact classification. They build on the prior 63 reviews rather than repeat them.",
+      "insight": "The resulting deck is designed to be auditable, not omniscient: reported facts stay reported, estimates stay estimates, model outputs stay conditional, and unknown internal Olam economics are explicitly left for internal data replacement.",
+      "metrics": [
+        {
+          "label": "Total reviews",
+          "value": "66",
+          "detail": "50 prior + 10 factual/source + 3 corrective-action + 3 web-verification passes",
+          "tone": "green"
+        },
+        {
+          "label": "Latest web verification",
+          "value": "3",
+          "detail": "Corporate/regulatory · macro-boundary · programme/model-boundary",
+          "tone": "cyan"
+        },
+        {
+          "label": "Figure register",
+          "value": "36 lines",
+          "detail": "Reported, forecast, derived, model, portfolio and QA numbers classified",
+          "tone": "gold"
+        },
+        {
+          "label": "Capital discipline",
+          "value": "8 gates",
+          "detail": "No scale without evidence, contribution, cash and repeatability",
+          "tone": "violet"
+        }
+      ],
+      "bullets": [
+        "57 · Does “NOT Prohibited” remain separated from duty, licensing, FX access and economic importability?",
+        "58 · Does the post-CFG ownership split remain the governing figure while the website conflict is disclosed?",
+        "59 · Can every derived or modeled number be reproduced without borrowing authority from an external source?",
+        "60 · Can every displayed figure, statistic or number be traced in the appendix to a source or explicit non-source classification?",
+        "61 · Do the ownership, volume-definition, CBN-rate and palm-oil policy flags still survive a fresh primary-source review?",
+        "62 · Do the proposed remedies actually close the weaknesses identified in the original model and source audit?",
+        "63 · After integrating the review, does any slide re-introduce a contradicted ownership, volume, MPR, WACC, policy or return claim?",
+        "64 · Do current Olam Group, Olam Agri and CBN pages still support the ownership, volume-definition and September policy-rate corrections?",
+        "65 · Do USDA, NBS and World Bank sources support the wheat, inflation, palm-oil, 73-market and $1tn claims without allowing macro data to masquerade as Olam operating performance?",
+        "66 · Do the Olam programme claims and inherited-model treatment remain correctly classified after a final source review?"
+      ],
+      "sourceIds": [
+        "S01",
+        "S02",
+        "S12",
+        "S13",
+        "S21",
+        "S27",
+        "S29"
+      ],
+      "kind": "iterations"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "label": "Olam Agri — Annual Report 2025",
+      "url": "https://www.olamagri.com/content/dam/olam-agri/assets/webp/au/ar/annual-report-pdf/2025/annual-report-2025.pdf",
+      "date": "2026",
+      "authority": "primary",
+      "note": "Primary source for FY2025 scale and operating performance. The CFO summary reports 53.7m MT sales volume (+19.1%), $28.666bn revenue (displayed as $28.7bn) and $703.7m EBIT (−8.0%). The CEO narrative rounds revenue to $28.6bn. The at-a-glance page separately reports 49.474m MT handled; handled tonnes and sales volume are different definitions and are not interchanged in the deck."
+    },
+    {
+      "id": "S02",
+      "label": "Olam Group — Re-organisation after CFG acquisition",
+      "url": "https://www.olamgroup.com/investors/our-re-organisation.html",
+      "date": "2026-06",
+      "authority": "primary",
+      "note": "Ownership chronology reverified 3 Oct 2026: SALIC held 80.01% after the 27 Apr 2026 Tranche 1 completion; after Olam Agri acquired Continental Farmers Group on 30 Jun 2026 through new share issuance, SALIC increased to 81.81% and Olam Group diluted to 18.19%. Olam Agri’s current About page main text now shows 81.81%, while a stale lower section still shows 81.11%. The deck uses the transaction-specific 81.81% / 18.19% split and exposes the conflict."
+    },
+    {
+      "id": "S03",
+      "label": "Olam Agri — Nigeria operations",
+      "url": "https://www.olamagri.com/locations/nigeria.html",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary source for Nigeria footprint including processing facilities, employees, farmers, wheat/flour network, rice assets and logistics fleet."
+    },
+    {
+      "id": "S04",
+      "label": "Olam Agri — Baking Brighter Futures",
+      "url": "https://www.olamagri.com/news/press-release/olam-agri-launches-baking-brighter-futures-and-commits-usd-2-million-to-support-20000-bakers-across-africa",
+      "date": "2025",
+      "authority": "primary",
+      "note": "Primary programme evidence: planned $2m investment, >20,000 training target by 2030, and >10,000 bakers benefitted since 2019 (around half women). These are programme commitments/reach metrics, not realized revenue, EBIT, ROMI or financial return."
+    },
+    {
+      "id": "S05",
+      "label": "Olam Agri — Bakewell customer app",
+      "url": "https://www.olamagri.com/locations/nigeria",
+      "date": "current",
+      "authority": "primary",
+      "note": "Evidence for Olam’s digital baker relationship layer: ordering, complaints, feedback, profitability support, new-product information and customer insight."
+    },
+    {
+      "id": "S06",
+      "label": "Olam Agri — Wheat milling",
+      "url": "https://www.olamagri.com/products-services/wheat-milling-and-pasta",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary evidence for flour and pasta footprint across Nigeria, Ghana, Senegal and Cameroon and relationships with artisanal bakers, industrial users and consumers."
+    },
+    {
+      "id": "S07",
+      "label": "Olam Agri — Ghana operations",
+      "url": "https://www.olamagri.com/locations/ghana.html",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary source for Ghana milling, rice and operating footprint."
+    },
+    {
+      "id": "S08",
+      "label": "Olam Agri — Senegal operations",
+      "url": "https://www.olamagri.com/locations/senegal.html",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary source for Senegal wheat milling, depots, feed operations and customer distribution."
+    },
+    {
+      "id": "S09",
+      "label": "Olam Agri — Cameroon operations",
+      "url": "https://www.olamagri.com/locations/cameroon.html",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary source for Cameroon flour milling and branded rice presence."
+    },
+    {
+      "id": "S10",
+      "label": "Olam Agri — Mozambique operations",
+      "url": "https://www.olamagri.com/locations/mozambique.html",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary source for rice, edible oils, processing and nationwide distribution in Mozambique."
+    },
+    {
+      "id": "S11",
+      "label": "Olam Agri — South Africa operations",
+      "url": "https://www.olamagri.com/locations/south-africa.html",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary source for South Africa trading and cross-border edible-oil distribution linkages."
+    },
+    {
+      "id": "S12",
+      "label": "Nigeria NBS — August 2026 CPI",
+      "url": "https://microdata.nigerianstat.gov.ng/index.php/catalog/154/related-materials",
+      "date": "2026-09-15",
+      "authority": "regulator",
+      "note": "Official NBS August 2026 CPI release anchor, published 15 Sep 2026: headline inflation 15.39% year over year and food inflation 19.57%, with CPI base period 2024=100. The deck treats this as a rate-of-change signal: disinflation does not mean prices fell or household purchasing power was restored."
+    },
+    {
+      "id": "S13",
+      "label": "USDA FAS — Nigeria Grain and Feed Annual 2026",
+      "url": "https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=Grain+and+Feed+Annual_Lagos_Nigeria_NI2026-0003.pdf",
+      "date": "2026",
+      "authority": "regulator",
+      "note": "Industry-demand context: USDA FAS projects MY2026/27 Nigeria wheat consumption at 6.8m MT. This is a national macro-demand signal only; it is not evidence of Olam brand growth, semolina penetration, market share or incremental contribution."
+    },
+    {
+      "id": "S14",
+      "label": "World Bank — Africa agribusiness opportunity",
+      "url": "https://blogs.worldbank.org/en/voices/grow-food--create-jobs--africa-s-agribusiness-moment-is-now-",
+      "date": "2026-07",
+      "authority": "multilateral",
+      "note": "World Bank macro context: Africa’s food market is projected to reach $1tn by 2030. This is a continental market-scale anchor, not Olam addressable revenue, Nigeria category revenue or a forecast of Olam earnings."
+    },
+    {
+      "id": "S15",
+      "label": "World Bank — Food value-chain jobs and productivity",
+      "url": "https://blogs.worldbank.org/en/africacan/seizing-opportunities-in-african-agriculture",
+      "date": "2026-01",
+      "authority": "multilateral",
+      "note": "Evidence that food marketing, transport, processing, retail and food preparation are fast-growing midstream/downstream employment and value-creation layers."
+    },
+    {
+      "id": "S16",
+      "label": "Olam Agri — About Us / current ownership page",
+      "url": "https://www.olamagri.com/about-us",
+      "date": "current",
+      "authority": "primary",
+      "note": "Reverified 3 Oct 2026: the same Olam Agri About page contains two ownership statements. Its main company description states 81.81% SALIC, while a lower “New Chapter of Growth” section states 81.11%. Olam Group’s 30 Jun 2026 post-CFG disclosure confirms 81.81% SALIC / 18.19% Olam Group. The stale 81.11% text is retained only as a disclosed source conflict."
+    },
+    {
+      "id": "S17",
+      "label": "Olam Agri + AGRA — Food and feed value-chain MOU",
+      "url": "https://www.olamagri.com/news/press-release/signing-of-mou-with-agra-to-strengthen-food-and-feed-value-chains-in-africa",
+      "date": "current",
+      "authority": "primary",
+      "note": "Evidence for value-chain programmes in Nigeria and Ghana with scope for wider African replication across crops, poultry, aquaculture and baker ecosystems."
+    },
+    {
+      "id": "S18",
+      "label": "Olam Agri — Animal feed and protein",
+      "url": "https://www.olamagri.com/products-services/animal-feed-and-protein",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary source for feed, poultry and aquaculture customer ecosystems in Nigeria and other African markets."
+    },
+    {
+      "id": "S19",
+      "label": "Olam Group — 2025 Annual Report strategic report",
+      "url": "https://www.olamgroup.com/content/dam/olamgroup/investor-relations/ir-library/annual-reports/annual-reports-pdfs/2025/olam_annual_report_2025_strategic_report.pdf",
+      "date": "2026-04",
+      "authority": "primary",
+      "note": "Independent issuer cross-check for Olam Agri 2025 operating-group results: 53.7m MT volume, S$37.4bn revenue, S$923.5m EBIT and S$7.5bn invested capital; it also shows working-capital expansion as a key source of invested-capital growth."
+    },
+    {
+      "id": "S20",
+      "label": "Olam Group — FY2025 Processing & Value-added results",
+      "url": "https://www.olamgroup.com/content/dam/olamgroup/investor-relations/ir-library/financial-results/financial-results-pdfs/2025/h2-2025-results/27feb2026_h2_2025_results_management_discussion_and_analysis.pdf",
+      "date": "2026-02",
+      "authority": "primary",
+      "note": "Exact FY2025 processing/value-added cross-check: segment EBIT was S$610.5m (displayed as ~S$611m), up 1.6%; EBIT/MT was S$127 versus S$115; invested capital was S$2.409bn (displayed as ~S$2.41bn), down 4.0%. Olam also states that the stable naira supported Nigeria wheat milling, while Nigeria rice farming/milling was hurt by lower local rice prices and cross-border flows."
+    },
+    {
+      "id": "S21",
+      "label": "CBN — September 2026 Monetary Policy Committee decision",
+      "url": "https://www.cbn.gov.ng/MonetaryPolicy/decisions.html",
+      "date": "2026-09",
+      "authority": "regulator",
+      "note": "Official financing-condition anchor, reverified 3 Oct 2026: at the September 21–22, 2026 meeting the CBN reset/cut the Monetary Policy Rate from 26.5% to 23%. This was not a rate increase. The deck uses the 23% MPR only as a public financing anchor, never as Olam’s WACC or project hurdle."
+    },
+    {
+      "id": "S22",
+      "label": "CBN — key rates and NFEM reference",
+      "url": "https://www.cbn.gov.ng/IntOps/KeyRates.html",
+      "date": "2026-09",
+      "authority": "regulator",
+      "note": "Official market context for Nigeria funding and FX. Reverified 3 Oct 2026, current CBN public materials display a 23% MPR consistent with the September MPC decision. Because operational key-rate pages and live market fields can update on a different cadence, the deck uses the formal MPC decision page (S21) as the governing policy-rate source and uses this page only for dated NOFR/NFEM context. NOFR/NFEM are volatile references, not fixed model inputs."
+    },
+    {
+      "id": "S23",
+      "label": "World Bank — Nigeria Development Update, April 2026",
+      "url": "https://www.worldbank.org/en/country/nigeria/publication/nigeria-development-update-ndu",
+      "date": "2026-04",
+      "authority": "multilateral",
+      "note": "Macro cross-check: stabilization improved, but household incomes had not fully recovered and poverty remained high. This supports separating disinflation from restored affordability."
+    },
+    {
+      "id": "S24",
+      "label": "USDA FAS — June 2026 Grain: World Markets and Trade",
+      "url": "https://apps.fas.usda.gov/psdonline/circulars/grain.pdf",
+      "date": "2026-06",
+      "authority": "regulator",
+      "note": "Forecast-version discipline: USDA PSD and Grain: World Markets and Trade estimates are revised across releases. The deck therefore treats external wheat-demand/import numbers as dated forecasts and versioned ranges, not immutable facts."
+    },
+    {
+      "id": "S25",
+      "label": "World Bank — Nigeria AGROW agricultural value-chain project",
+      "url": "https://www.worldbank.org/en/news/press-release/2026/03/31/nigeria-world-bank-approves-project-to-expand-agricultural-value-chains-and-jobs",
+      "date": "2026-03",
+      "authority": "multilateral",
+      "note": "Evidence for the structural importance of aggregation, post-harvest handling, agro-processing, market access and smallholder sourcing in Nigeria; used to test the local-supply and resilience thesis."
+    },
+    {
+      "id": "S26",
+      "label": "Olam Agri — Edible Oils",
+      "url": "https://www.olamagri.com/products-services/edible-oils",
+      "date": "current",
+      "authority": "primary",
+      "note": "Primary evidence that Olam Agri refines crude vegetable oils in Nigeria and combines sourcing, refining, blending, distribution, supply-chain and risk-management capabilities. Used to frame edible-oil advantage as a system, not only a brand proposition."
+    },
+    {
+      "id": "S27",
+      "label": "USDA FAS — Nigeria 2026 Fiscal and Trade Policy Changes",
+      "url": "https://apps.fas.usda.gov/newgainapi/api/Report/DownloadReportByFileName?fileName=Nigeria+Announces+2026+Fiscal+and+Trade+Policy+Changes_Lagos_Nigeria_NI2026-0010.pdf",
+      "date": "2026",
+      "authority": "regulator",
+      "note": "USDA’s 2026 Nigeria policy table changes crude palm oil and several crude vegetable-oil HS lines from Prohibited to NOT Prohibited, while the listed refined palm-oil HS lines remain Prohibited. “Not prohibited” is not treated as duty-free or unrestricted importability; classification, duties, licensing, FX access and enforcement must be re-verified before any investment decision."
+    },
+    {
+      "id": "S28",
+      "label": "World Bank — Nigeria country economic context",
+      "url": "https://www.worldbank.org/ext/en/country/nigeria",
+      "date": "2026",
+      "authority": "multilateral",
+      "note": "Affordability context: food inflation disproportionately affects poor households, which can spend up to about 70% of income on food. Used to distinguish cash-ticket pressure from average inflation."
+    },
+    {
+      "id": "S29",
+      "label": "World Bank — Nigeria Real-Time Food Prices",
+      "url": "https://microdata.worldbank.org/index.php/catalog/4503",
+      "date": "2026-08",
+      "authority": "multilateral",
+      "note": "World Bank monthly food-price estimates cover 73 Nigerian markets through August 2026 (version 2026-08-24). The live dataset combines direct price measurements with machine-learning estimates of missing data and is continually revised as new information arrives. The deck uses it only as an external pressure signal to triangulate with Olam transaction, availability and route data—not as ground-truth market pricing."
+    },
+    {
+      "id": "S30",
+      "label": "USDA FAS — Palm Oil production, 2025/26",
+      "url": "https://fas.usda.gov/data/production/commodity/4243000",
+      "date": "2026",
+      "authority": "regulator",
+      "note": "Current global production table places Nigeria at about 1.5m MT of palm oil in 2025/26, around 1.8% of global production. Used only as supply context; it is not a measure of Olam share or category demand."
+    }
+  ],
+  "figures": [
+    {
+      "id": "F01",
+      "figure": "$28.666bn → $28.7bn; +15.4%",
+      "claim": "Olam Agri FY2025 revenue and year-over-year growth",
+      "classification": "Reported",
+      "sourceIds": [
+        "S01"
+      ],
+      "provenance": "Olam Agri FY2025 CFO financial summary; $28.666bn rounds to $28.7bn."
+    },
+    {
+      "id": "F02",
+      "figure": "53.7m MT; +19.1%",
+      "claim": "FY2025 sales volume",
+      "classification": "Reported",
+      "sourceIds": [
+        "S01"
+      ],
+      "provenance": "Olam Agri FY2025 financial summary. Not interchangeable with 49.474m MT handled."
+    },
+    {
+      "id": "F03",
+      "figure": "$703.7m; −8.0%",
+      "claim": "Olam Agri FY2025 EBIT",
+      "classification": "Reported",
+      "sourceIds": [
+        "S01"
+      ],
+      "provenance": "Olam Agri FY2025 CFO financial summary."
+    },
+    {
+      "id": "F04",
+      "figure": "~2.45% vs ~3.08%",
+      "claim": "Calculated FY2025 vs FY2024 EBIT margin",
+      "classification": "Derived",
+      "sourceIds": [
+        "S01"
+      ],
+      "provenance": "$703.7m / $28.666bn and $765.2m / $24.848bn; arithmetic inference, not an Olam-reported margin."
+    },
+    {
+      "id": "F05",
+      "figure": "S$610.5m (~S$611m); +1.6%",
+      "claim": "Food & Feed Processing & Value-added FY2025 EBIT",
+      "classification": "Reported",
+      "sourceIds": [
+        "S20"
+      ],
+      "provenance": "Olam Group FY2025 management discussion & analysis; exact value S$610.5m, rounded in the deck where space is constrained."
+    },
+    {
+      "id": "F06",
+      "figure": "S$127/MT vs S$115/MT",
+      "claim": "Processing EBIT per tonne",
+      "classification": "Reported",
+      "sourceIds": [
+        "S20"
+      ],
+      "provenance": "Olam Group FY2025 results presentation."
+    },
+    {
+      "id": "F07",
+      "figure": "S$2.409bn (~S$2.41bn); −4.0%",
+      "claim": "Processing & Value-added invested capital",
+      "classification": "Reported",
+      "sourceIds": [
+        "S20"
+      ],
+      "provenance": "Olam Group FY2025 management discussion & analysis; exact value S$2.409bn."
+    },
+    {
+      "id": "F08",
+      "figure": "S$7.5bn; +11.0%",
+      "claim": "Olam Agri invested capital",
+      "classification": "Reported",
+      "sourceIds": [
+        "S19",
+        "S20"
+      ],
+      "provenance": "Olam Group FY2025 strategic/results disclosures; working-capital growth is cited as a major driver."
+    },
+    {
+      "id": "F09",
+      "figure": "3,500+",
+      "claim": "Nigeria employees",
+      "classification": "Reported",
+      "sourceIds": [
+        "S03"
+      ],
+      "provenance": "Current Olam Agri Nigeria operations page."
+    },
+    {
+      "id": "F10",
+      "figure": "19",
+      "claim": "Nigeria processing facilities",
+      "classification": "Reported",
+      "sourceIds": [
+        "S03"
+      ],
+      "provenance": "Current Olam Agri Nigeria operations page."
+    },
+    {
+      "id": "F11",
+      "figure": "100,000",
+      "claim": "Smallholder farmers connected to Nigeria operations",
+      "classification": "Reported",
+      "sourceIds": [
+        "S03"
+      ],
+      "provenance": "Current Olam Agri Nigeria operations page."
+    },
+    {
+      "id": "F12",
+      "figure": "1,000+",
+      "claim": "Nigeria logistics trucks / GPS-enabled fleet",
+      "classification": "Reported",
+      "sourceIds": [
+        "S03"
+      ],
+      "provenance": "Current Olam Agri Nigeria operations page."
+    },
+    {
+      "id": "F13",
+      "figure": "15.39%",
+      "claim": "Nigeria headline inflation, August 2026",
+      "classification": "Reported",
+      "sourceIds": [
+        "S12"
+      ],
+      "provenance": "Nigeria National Bureau of Statistics; CPI base 2024=100."
+    },
+    {
+      "id": "F14",
+      "figure": "19.57%",
+      "claim": "Nigeria food inflation, August 2026",
+      "classification": "Reported",
+      "sourceIds": [
+        "S12"
+      ],
+      "provenance": "Nigeria National Bureau of Statistics; dated release used only as historical affordability context."
+    },
+    {
+      "id": "F15",
+      "figure": "6.8m MT",
+      "claim": "Nigeria wheat consumption, MY2026/27",
+      "classification": "External forecast",
+      "sourceIds": [
+        "S13"
+      ],
+      "provenance": "USDA FAS Nigeria Grain and Feed Annual 2026 projection; not a realized result or semolina-brand demand proxy."
+    },
+    {
+      "id": "F16",
+      "figure": "~60%",
+      "claim": "Share of wheat flour used by bakeries for bread",
+      "classification": "External forecast",
+      "sourceIds": [
+        "S13"
+      ],
+      "provenance": "USDA FAS Nigeria report citing industry-demand context; directional market context, not an Olam operating metric."
+    },
+    {
+      "id": "F17",
+      "figure": "Up to ~70%",
+      "claim": "Share of income poor Nigerian households can spend on food",
+      "classification": "Reported",
+      "sourceIds": [
+        "S28"
+      ],
+      "provenance": "World Bank Nigeria economic context; used as affordability context, not a national household average."
+    },
+    {
+      "id": "F18",
+      "figure": "23%",
+      "claim": "CBN Monetary Policy Rate after September 21–22, 2026 MPC",
+      "classification": "Reported",
+      "sourceIds": [
+        "S21"
+      ],
+      "provenance": "Official CBN MPC decision; financing-condition anchor only, not Olam WACC."
+    },
+    {
+      "id": "F19",
+      "figure": "~1.9%",
+      "claim": "Simple 30-day carrying-cost proxy at a 23% annual anchor",
+      "classification": "Derived",
+      "sourceIds": [
+        "S21"
+      ],
+      "provenance": "23% × 30 / 365 = 1.89%; illustration before distributor-specific finance, shrinkage, returns or obsolescence."
+    },
+    {
+      "id": "F20",
+      "figure": "NOFR ~20%; NFEM ~NGN1,329.51 per USD",
+      "claim": "Dated Nigeria money-market / FX references",
+      "classification": "Reported",
+      "sourceIds": [
+        "S22"
+      ],
+      "provenance": "CBN key-rates reference around September 25, 2026; volatile market references, not fixed model inputs."
+    },
+    {
+      "id": "F21",
+      "figure": "73 markets; version 2026-08-24",
+      "claim": "World Bank Nigeria Real-Time Food Prices coverage/version",
+      "classification": "Reported",
+      "sourceIds": [
+        "S29"
+      ],
+      "provenance": "World Bank dataset; combines observed and machine-learning-estimated missing prices and is revised over time."
+    },
+    {
+      "id": "F22",
+      "figure": "81.81% / 18.19%",
+      "claim": "Post-CFG SALIC / Olam Group ownership",
+      "classification": "Reported",
+      "sourceIds": [
+        "S02",
+        "S16"
+      ],
+      "provenance": "Olam Group transaction-specific disclosure after 30 Jun 2026 CFG acquisition; Olam Agri About-page main text aligns, while a stale lower section still says 81.11%."
+    },
+    {
+      "id": "F23",
+      "figure": "81.11%",
+      "claim": "Conflicting legacy Olam Agri About-page ownership statement",
+      "classification": "Reported",
+      "sourceIds": [
+        "S16"
+      ],
+      "provenance": "Stale lower-page statement retained only as a disclosed source conflict; not used as governing ownership."
+    },
+    {
+      "id": "F24",
+      "figure": "$2m through 2030; 20,000+",
+      "claim": "Baking Brighter Futures planned investment and training ambition",
+      "classification": "Reported",
+      "sourceIds": [
+        "S04"
+      ],
+      "provenance": "Olam Agri programme announcement: planned investment and future training target only; not realized revenue, EBIT, ROMI or financial return."
+    },
+    {
+      "id": "F25",
+      "figure": "10,000+ since 2019; ~50% women",
+      "claim": "Bakers already reached by Olam Agri baking programmes",
+      "classification": "Reported",
+      "sourceIds": [
+        "S04"
+      ],
+      "provenance": "Olam Agri says more than 10,000 bakers have benefitted from its baking programmes since 2019, around half women; programme reach is not a realized earnings metric."
+    },
+    {
+      "id": "F26",
+      "figure": "$1tn by 2030",
+      "claim": "Projected scale of Africa food market",
+      "classification": "External forecast",
+      "sourceIds": [
+        "S14"
+      ],
+      "provenance": "World Bank continental food-market projection; macro opportunity anchor only, not Olam addressable revenue or category-specific sales."
+    },
+    {
+      "id": "F27",
+      "figure": "1.5m MT; ~1.8% global",
+      "claim": "Nigeria palm-oil production, 2025/26",
+      "classification": "Reported",
+      "sourceIds": [
+        "S30"
+      ],
+      "provenance": "USDA FAS global production table; supply context only, not Olam share or category demand."
+    },
+    {
+      "id": "F28",
+      "figure": "NGN2.5bn; NGN20bn; 2.27 yrs; NGN0.31bn",
+      "claim": "Outputs inherited from the prior uploaded financial model/deck",
+      "classification": "Model",
+      "sourceIds": [],
+      "provenance": "Prior case working model. Explicitly not independently validated because its full cash-flow bridge and assumptions were not supplied."
+    },
+    {
+      "id": "F29",
+      "figure": "NGN4.2bn = NGN0.6bn + NGN3.6bn",
+      "claim": "Pilot plus conditional rollout scenario envelope",
+      "classification": "Model",
+      "sourceIds": [],
+      "provenance": "Inherited from the prior uploaded case; scenario envelope only, not Olam management guidance."
+    },
+    {
+      "id": "F30",
+      "figure": "A01–A08: NGN100bn; 8%; 2%; 2%; 1%; 70%; 0.6%; 0.4%",
+      "claim": "Normalized operating assumptions",
+      "classification": "Model",
+      "sourceIds": [],
+      "provenance": "Explicit screening assumptions only: eligible sales, contribution margin, availability, repeat, net price/mix, flow-through, route efficiency and service investment. Replace with Olam Finance/category/route evidence."
+    },
+    {
+      "id": "F31",
+      "figure": "A09–A16: 45%; 5%; 30%/5%; 80%; 7 days; NGN0.6bn + NGN3.6bn; 28%; 50/80/100%",
+      "claim": "Risk, cash, capital and benefit-ramp assumptions",
+      "classification": "Model",
+      "sourceIds": [
+        "S21"
+      ],
+      "provenance": "Explicit screening assumptions. 23% CBN MPR is only the public financing anchor beneath the 28% modeled hurdle; all other values require Olam-owned replacement data."
+    },
+    {
+      "id": "F32",
+      "figure": "NGN0.47bn run-rate; NGN1.92bn WC release; −NGN2.06bn 3Y NPV",
+      "claim": "Evidence-base normalized screening outputs",
+      "classification": "Model",
+      "sourceIds": [
+        "S21"
+      ],
+      "provenance": "Re-performed from A01–A16 with the stated formulas and 50/80/100% benefit ramp. These are screening outputs, not Olam guidance or an investment-grade DCF."
+    },
+    {
+      "id": "F33",
+      "figure": "~NGN1.99bn / ~2.0%",
+      "claim": "Zero-NPV recurring run-rate boundary per NGN100bn normalized sales",
+      "classification": "Model",
+      "sourceIds": [
+        "S21"
+      ],
+      "provenance": "Formula-derived from the explicit screening model; changes when hurdle, cash-flow timing, working capital or capital envelope changes."
+    },
+    {
+      "id": "F34",
+      "figure": "5,000 runs; seed 20261001; P10 −NGN6.00bn; P50 −NGN3.37bn; P90 −NGN1.17bn; positive-NPV frequency 2.0%",
+      "claim": "Reproducible uncertainty stress simulation",
+      "classification": "Model",
+      "sourceIds": [],
+      "provenance": "Seeded independent-uniform scenario simulation. Percentiles and positive-NPV share are reproducible scenario frequencies, not calibrated forecast probabilities."
+    },
+    {
+      "id": "F35",
+      "figure": "₹20M; ₹35.8 → ₹15.5; −56.7%",
+      "claim": "Historical campaign-budget / CPM evidence used on candidate-contribution slide",
+      "classification": "Portfolio evidence",
+      "sourceIds": [],
+      "provenance": "Grounded in the portfolio resume source; presented as prior experience, not an Olam performance claim."
+    },
+    {
+      "id": "F36",
+      "figure": "66 reviews; 8 gates; 16 assumptions; 36 figure lines",
+      "claim": "Deck QA and model-governance structure after this revalidation",
+      "classification": "Deck QA",
+      "sourceIds": [],
+      "provenance": "Repository-defined QA structure: 50 prior reviews + 10 fresh factual/source revalidation passes + 3 corrective-action cross-checks + 3 new web-verification iterations on 3 Oct 2026; eight capital/evidence gates; sixteen explicit model assumptions; thirty-six evidence-register lines."
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0",
+      "title": "Evidence integrity",
+      "rule": "No decision-critical number enters an investment case without an evidence class, date and owner.",
+      "pass": "Reported, regulator/multilateral, or explicitly modeled with a replacement-data requirement.",
+      "falsifier": "Source conflict, stale forecast, mixed currencies or an untraceable modeled value."
+    },
+    {
+      "id": "G1",
+      "title": "Customer economics",
+      "rule": "No growth intervention scales unless the customer earns more, loses less or carries less operating risk.",
+      "pass": "Matched-cohort yield, reject, cash-ticket, repeat or profitability evidence improves.",
+      "falsifier": "Engagement rises while customer economics and repeat remain unchanged."
+    },
+    {
+      "id": "G2",
+      "title": "Contribution quality",
+      "rule": "No volume target is accepted without a contribution floor after discounts, service and variable route cost.",
+      "pass": "Incremental contribution is positive and resilient under agreed price/mix normalization.",
+      "falsifier": "Tonnage rises while contribution per customer, bag, tonne or route deteriorates."
+    },
+    {
+      "id": "G3",
+      "title": "Route reliability",
+      "rule": "No availability expansion is approved without cost-to-serve, fill-rate, OTIF and stock-turn economics.",
+      "pass": "Recovered sales exceed incremental logistics, inventory, returns and service cost.",
+      "falsifier": "Availability improves only by creating uneconomic inventory or delivery intensity."
+    },
+    {
+      "id": "G4",
+      "title": "Resilience",
+      "rule": "No imported-input case is approved without explicit FX, commodity, pass-through and substitution bands.",
+      "pass": "Downside remains within the agreed contribution and cash guardrails under stress.",
+      "falsifier": "The case depends on one stable FX, commodity or pass-through point estimate."
+    },
+    {
+      "id": "G5",
+      "title": "Cash conversion",
+      "rule": "No EBIT story overrides working-capital deterioration.",
+      "pass": "Inventory, receivables and cash conversion improve or remain inside pre-agreed limits.",
+      "falsifier": "Growth requires structurally more cash than the operating return justifies."
+    },
+    {
+      "id": "G6",
+      "title": "Repeatability",
+      "rule": "No Nigeria win becomes an Africa playbook until the mechanism reproduces in a second route or market.",
+      "pass": "The same economic mechanism survives localization of price, pack, channel and operating conditions.",
+      "falsifier": "The second market requires materially different economics to appear successful."
+    },
+    {
+      "id": "G7",
+      "title": "Capital release",
+      "rule": "No rollout capital is released because a pilot is exciting; it is released only because the evidence clears the hurdle.",
+      "pass": "Pre-registered NPV, run-rate operating uplift, cash and risk thresholds are all met.",
+      "falsifier": "A failed gate is waived because the narrative, market size or volume opportunity is attractive."
+    }
+  ],
+  "assumptions": [
+    [
+      "A01",
+      "Eligible sales base",
+      "NGN100bn",
+      "Normalized decision unit only; replace with audited eligible Nigeria sales perimeter."
+    ],
+    [
+      "A02",
+      "Contribution margin",
+      "8%",
+      "Replace with customer/category gross-to-net contribution after variable route and service cost."
+    ],
+    [
+      "A03",
+      "Availability recovery",
+      "2%",
+      "Replace with measured incremental sales from stockout/availability interventions versus control routes."
+    ],
+    [
+      "A04",
+      "Repeat uplift",
+      "2%",
+      "Replace with matched-cohort reorder lift attributable to the intervention."
+    ],
+    [
+      "A05",
+      "Net price / mix",
+      "1%",
+      "Replace with observed net realization after discount, pack mix and cannibalization."
+    ],
+    [
+      "A06",
+      "Price/mix flow-through",
+      "70%",
+      "Replace with finance-validated conversion of net price/mix into operating contribution."
+    ],
+    [
+      "A07",
+      "Route efficiency",
+      "0.6% of sales",
+      "Replace with route-level logistics, stock, returns and service cost delta."
+    ],
+    [
+      "A08",
+      "Service investment",
+      "0.4% of sales",
+      "Replace with actual Bakewell/training/technical-service variable and fixed cost."
+    ],
+    [
+      "A09",
+      "Imported-input exposure",
+      "45%",
+      "Replace with procurement bill-of-material and landed-cost exposure by category; de-overlap any commodity exposure before use."
+    ],
+    [
+      "A10",
+      "FX shock",
+      "5%",
+      "Stress input, not a forecast; replace with treasury scenario bands and hedge policy."
+    ],
+    [
+      "A11",
+      "Commodity exposure / shock",
+      "30% / 5%",
+      "Replace with commodity-specific procurement exposure and approved stress bands; reconcile against A09 so the same input cost is not double-counted."
+    ],
+    [
+      "A12",
+      "Cost pass-through",
+      "80%",
+      "Replace with observed price-lag, elasticity and contractual pass-through by customer segment."
+    ],
+    [
+      "A13",
+      "Working-capital improvement",
+      "7 days",
+      "Public model uses a sales-day cash-release proxy only; replace with Finance-owned inventory + receivables − payables baseline and measured pilot delta."
+    ],
+    [
+      "A14",
+      "Capital envelope",
+      "NGN0.6bn + NGN3.6bn",
+      "Inherited from uploaded case as a scenario envelope; not represented as Olam management guidance."
+    ],
+    [
+      "A15",
+      "Hurdle rate",
+      "28%",
+      "23% Sep-2026 CBN MPR is only a public financing-condition anchor, not WACC; +5pp is an explicit screening premium. Replace with Treasury’s nominal-NGN project hurdle."
+    ],
+    [
+      "A16",
+      "Benefit ramp",
+      "50% / 80% / 100%",
+      "Screening realization schedule only. Investment-grade DCF must add Finance-owned timing, tax, depreciation, capex phasing, working-capital reversal and residual/terminal-value conventions."
+    ]
+  ],
+  "model": {
+    "incrementalRevenueNgnBn": 4,
+    "growthContributionNgnBn": 0.32,
+    "priceMixContributionNgnBn": 0.7,
+    "routeSavingsNgnBn": 0.6,
+    "serviceInvestmentNgnBn": 0.4,
+    "fxLeakageNgnBn": 0.4499999999999999,
+    "commodityLeakageNgnBn": 0.29999999999999993,
+    "runRateOperatingImpactNgnBn": 0.4700000000000003,
+    "runRateOperatingImpactPct": 0.4700000000000003,
+    "workingCapitalReleaseNgnBn": 1.917808219178082,
+    "fullCapitalNgnBn": 4.2,
+    "threeYearNpvNgnBn": -2.0645129269116547,
+    "requiredRunRateForNpvZeroNgnBn": 1.9927903115147125,
+    "requiredRunRatePct": 1.9927903115147125,
+    "firstYearCashAfterFullCapitalNgnBn": -2.047191780821918,
+    "fullScaleGate": "hold"
+  }
+}
