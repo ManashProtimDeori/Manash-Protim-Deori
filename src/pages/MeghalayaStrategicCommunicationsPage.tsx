@@ -193,7 +193,7 @@ export const MeghalayaStrategicCommunicationsPage: React.FC = () => {
             <span>04 · Full presentation</span>
             <h2>I show the argument first — and the evidence trail immediately behind it</h2>
             <p>
-              The 42-slide deck contains 17 core slides, a thank-you slide before the appendix, and a source-heavy appendix that maps
+              The 42-slide deck contains a 16-slide executive storyline, a thank-you slide immediately before the appendix, and a source-heavy appendix that maps
               every important fact, number and insight to an exact URL, PDF page where applicable, reasoning chain and confidence label.
             </p>
           </div>
