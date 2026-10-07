@@ -18,7 +18,7 @@ export const projects: Project[] = [
     context: 'I studied Meghalaya’s demographic structure, government citizen-engagement mandates, language framework, telecom indicators, public-information systems and stakeholder-engagement standards, while keeping Shillong distinct from the rest of the state.',
     insight: 'I conclude that effective public communication in Meghalaya is best designed as an access-and-feedback system, not only a publishing calendar.',
     strategy: 'I triangulated the central thesis across 12 institutional sources, used canonical primary sources for atomic statistics, classified facts separately from synthesis and recommendations, and mapped every major claim to an exact URL, PDF page where applicable, rationale and confidence.',
-    solution: 'I created a 17-slide executive storyline followed by a thank-you slide and a detailed appendix containing claim ledgers, my evidence ledger, reasoning chains, limitations, 20 documented review passes and a complete source register.',
+    solution: 'I created a 16-slide executive storyline followed by a thank-you slide and a detailed appendix containing claim ledgers, my evidence ledger, reasoning chains, limitations, 20 documented review passes and a complete source register.',
     process: 'I moved from regional evidence to communications implications, then to operating design, contribution proof and a 90-day approach. I used a restrained Meghalaya-inspired visual system with subdued aubergine, mist and pine cues rather than tourism imagery or unauthorised Grant Thornton branding.',
     results: 'I produced a web-native portfolio case with a full PDF viewer plus downloadable PDF and editable PowerPoint outputs generated from the same evidence-controlled source.',
     lessons: [
