@@ -1,0 +1,73 @@
+name: Build Meghalaya communications deck
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/build-meghalaya-communications-deck.mjs'
+      - '.github/workflows/build-meghalaya-communications-deck.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install deck dependency
+        run: npm install --no-save --package-lock=false pptxgenjs
+
+      - name: Generate editable PowerPoint and evidence files
+        run: node scripts/build-meghalaya-communications-deck.mjs
+
+      - name: Install PDF renderer and validation tools
+        run: |
+          if ! command -v soffice >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y libreoffice-impress fonts-crosextra-carlito poppler-utils
+          fi
+
+      - name: Render PowerPoint to PDF
+        run: |
+          OUT='public/case-studies/strategic-communications-meghalaya'
+          soffice --headless --nologo --nolockcheck --convert-to pdf --outdir "$OUT" "$OUT/Manash-Protim-Deori-Strategic-Communications-Meghalaya.pptx"
+
+      - name: Validate deliverables
+        run: |
+          OUT='public/case-studies/strategic-communications-meghalaya'
+          PPT="$OUT/Manash-Protim-Deori-Strategic-Communications-Meghalaya.pptx"
+          PDF="$OUT/Manash-Protim-Deori-Strategic-Communications-Meghalaya.pdf"
+          test -s "$PPT"
+          test -s "$PDF"
+          SLIDES=$(unzip -l "$PPT" | grep -E 'ppt/slides/slide[0-9]+\.xml$' | wc -l)
+          PAGES=$(pdfinfo "$PDF" | awk '/^Pages:/ {print $2}')
+          echo "PPTX slides: $SLIDES"
+          echo "PDF pages: $PAGES"
+          test "$SLIDES" -eq 42
+          test "$PAGES" -eq 42
+          grep -q "Thank you" <(unzip -p "$PPT" ppt/slides/slide17.xml)
+
+      - name: Commit generated deck, PDF and audit files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/case-studies/strategic-communications-meghalaya research/grant-thornton-meghalaya
+          if git diff --cached --quiet; then
+            echo 'Generated assets are already current.'
+          else
+            git commit -m 'chore: generate Meghalaya communications deck assets'
+            git push origin HEAD:main
+          fi
