@@ -1,0 +1,2527 @@
+[
+  {
+    "id": "F01",
+    "type": "Verified fact",
+    "statement": "Inclusive Minds describes itself as INC-aligned and lists six work verticals.",
+    "sources": [
+      "S01"
+    ],
+    "locator": "About Us; Our Work",
+    "basis": "Employer is authoritative for its stated identity; effectiveness not inferred.",
+    "scope": "Organisation | Retrieved 2026-10-08",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F02",
+    "type": "Employer statement",
+    "statement": "Employer Generalist post identifies Hyderabad on-site and experience in research, strategy, communication or project management.",
+    "sources": [
+      "S02"
+    ],
+    "locator": "Hiring post",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Vacancy | Retrieved 2026-10-08",
+    "limits": "Open status and exact applicant-targeted requisition unconfirmed.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Employer statement"
+  },
+  {
+    "id": "F03",
+    "type": "Verified fact",
+    "statement": "GO 55 of 11 February 2026 reorganised CURE into GHMC, CMC and MMC with immediate effect.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15"
+    ],
+    "locator": "GO 55 pp 1–2",
+    "basis": "Official listing confirms instrument; later government event confirms corporation names. Shared state lineage.",
+    "scope": "CURE | 2026-02-11",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F04",
+    "type": "Verified fact",
+    "statement": "CMC comprises Serilingampally, Kukatpally and Qutbullapur zones; MMC comprises Malkajgiri, Uppal and L.B.Nagar zones.",
+    "sources": [
+      "S03"
+    ],
+    "locator": "GO 55 operative zone allocation",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "CURE | 2026-02-11",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F05",
+    "type": "Verified fact",
+    "statement": "GHMC comprises Shamshabad, Rajendernagar, Charminar, Golconda, Khairatabad and Secunderabad zones.",
+    "sources": [
+      "S03"
+    ],
+    "locator": "GO 55 operative zone allocation",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "CURE | 2026-02-11",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F06",
+    "type": "Verified fact",
+    "statement": "HYDRAA describes its CURE-wide remit as disaster management and protection of government / public assets, under MAUD.",
+    "sources": [
+      "S05"
+    ],
+    "locator": "Mandate; Jurisdictional Coverage",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "CURE | Retrieved 2026-10-08",
+    "limits": "Case-specific authority, due process and orders require case-specific legal review.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F07",
+    "type": "Verified fact",
+    "statement": "2023 Telangana Assembly seats won: INC 64; BRS 39; BJP 8; AIMIM 7; CPI 1.",
+    "sources": [
+      "S06"
+    ],
+    "locator": "WON column",
+    "basis": "ECI authoritative record; total independently recomputed 119.",
+    "scope": "Telangana | 2023 election",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F08",
+    "type": "Derived statistic",
+    "statement": "In selected Assembly seats AC 57–71,2023 winners were BRS 7, AIMIM 7, BJP 1, INC 0.",
+    "sources": [
+      "S07"
+    ],
+    "locator": "AC 57–71",
+    "basis": "Count of 15 named winners; list in appendix; total 15.",
+    "scope": "Declared 15-seat study set | 2023 election",
+    "limits": "Selected historical set; not all Greater Hyderabad or current affiliation.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Derived statistic"
+  },
+  {
+    "id": "F09",
+    "type": "Verified fact",
+    "statement": "Nampally, 2023: winner 62,185; runner-up 60,148; margin 2,037 votes.",
+    "sources": [
+      "S07"
+    ],
+    "locator": "PDF p 3; winner/runner-up table",
+    "basis": "Recomputed 62185-60148=2037.",
+    "scope": "Nampally | 2023 election",
+    "limits": "Different runner-up parties; margin does not measure community cohesion or future probability.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F10",
+    "type": "Verified fact",
+    "statement": "Yakutpura, 2023: winner 46,153; runner-up 45,275; margin 878 votes.",
+    "sources": [
+      "S07"
+    ],
+    "locator": "PDF p 3; winner/runner-up table",
+    "basis": "Recomputed 46153-45275=878.",
+    "scope": "Yakutpura | 2023 election",
+    "limits": "Different runner-up parties; margin does not measure community cohesion or future probability.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F11",
+    "type": "Verified fact",
+    "statement": "Chandrayangutta, 2023: winner 99,776; runner-up 18,116; margin 81,660 votes.",
+    "sources": [
+      "S07"
+    ],
+    "locator": "PDF p 3; winner/runner-up table",
+    "basis": "Recomputed 99776-18116=81660.",
+    "scope": "Chandrayangutta | 2023 election",
+    "limits": "Different runner-up parties; margin does not measure community cohesion or future probability.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F12",
+    "type": "Verified fact",
+    "statement": "Malkajgiri, 2024 Lok Sabha: Eatala Rajender (BJP) led with 991,042 votes; runner-up 599,567.",
+    "sources": [
+      "S08"
+    ],
+    "locator": "p 580",
+    "basis": "Highest candidate vote total in final ECI constituency table.",
+    "scope": "Malkajgiri | 2024 election",
+    "limits": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F13",
+    "type": "Verified fact",
+    "statement": "Secunderabad, 2024 Lok Sabha: G.Kishan Reddy (BJP) led with 473,012 votes; runner-up 423,068.",
+    "sources": [
+      "S08"
+    ],
+    "locator": "p 581",
+    "basis": "Highest candidate vote total in final ECI constituency table.",
+    "scope": "Secunderabad | 2024 election",
+    "limits": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F14",
+    "type": "Verified fact",
+    "statement": "Hyderabad, 2024 Lok Sabha: Asaduddin Owaisi (AIMIM) led with 661,981 votes; runner-up 323,894.",
+    "sources": [
+      "S08"
+    ],
+    "locator": "p 583",
+    "basis": "Highest candidate vote total in final ECI constituency table.",
+    "scope": "Hyderabad | 2024 election",
+    "limits": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F15",
+    "type": "Verified fact",
+    "statement": "Chevella, 2024 Lok Sabha: Konda Vishweshwar Reddy (BJP) led with 809,882 votes; runner-up 636,985.",
+    "sources": [
+      "S08"
+    ],
+    "locator": "p 585",
+    "basis": "Highest candidate vote total in final ECI constituency table.",
+    "scope": "Chevella | 2024 election",
+    "limits": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F16",
+    "type": "Verified fact",
+    "statement": "First Telangana Assembly as of 2 June 2014: TRS 63, INC 21, out of 119.",
+    "sources": [
+      "S16"
+    ],
+    "locator": "Printed 410/PDF 63",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Telangana | 2014-06-02",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F17",
+    "type": "Reported historical fact",
+    "statement": "Contemporaneous 2018 reporting recorded TRS 88 and INC 19 Assembly seats.",
+    "sources": [
+      "S17",
+      "S18"
+    ],
+    "locator": "Updated results paragraphs",
+    "basis": "Two publications agree; shared ECI upstream. Full party aggregation not ingested.",
+    "scope": "Telangana | 2018-12-12",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Reported historical fact"
+  },
+  {
+    "id": "F18",
+    "type": "Reported historical fact",
+    "statement": "Published 2016 GHMC recap: TRS 99, AIMIM 44, BJP 4, INC 2, TDP 1.",
+    "sources": [
+      "S19",
+      "S20"
+    ],
+    "locator": "Numerical result paragraphs",
+    "basis": "NDTV recap agrees with contemporaneous PTI results; sums 150.",
+    "scope": "GHMC 2016 footprint | 2016 election",
+    "limits": "Direct TSEC dataset not accessed; descriptive context only.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Reported historical fact"
+  },
+  {
+    "id": "F19",
+    "type": "Reported historical fact",
+    "statement": "Post-Neredmet 2020 reporting: TRS 56, BJP 48, AIMIM 44, INC 2.",
+    "sources": [
+      "S21",
+      "S22"
+    ],
+    "locator": "Results paragraphs; final Neredmet result",
+    "basis": "Independent named reporting agrees; sums 150. Earlier 55 tally incomplete.",
+    "scope": "GHMC 2020 footprint | 2020-12-10",
+    "limits": "Not current corporation composition or a projection of 2026.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Reported historical fact"
+  },
+  {
+    "id": "F20",
+    "type": "Reported event",
+    "statement": "Congress candidate V.Naveen Yadav won the November 2025 Jubilee Hills by-election, according to corroborated reporting.",
+    "sources": [
+      "S23",
+      "S24"
+    ],
+    "locator": "Winner reports",
+    "basis": "Reports agree on winner, disagree on totals. Totals removed.",
+    "scope": "Jubilee Hills | 2025-11-14",
+    "limits": "Authoritative final Form 20 requested; no present membership/legal-status assertion.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Reported event"
+  },
+  {
+    "id": "F21",
+    "type": "Verified fact",
+    "statement": "2026–27 BE: H-CITY assistance to CURE ₹2,654 crore.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "Table 10 PDF 16",
+    "basis": "PRS supplies fiscal scrutiny; primary line used for exact label.",
+    "scope": "CURE allocation | FY 2026–27",
+    "limits": "Budget instrument spelling H-CITY preserved. Not actual expenditure.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F22",
+    "type": "Verified fact",
+    "statement": "2026–27 BE: Musi Riverfront development ₹1,500 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 16",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Scheme allocation | FY 2026–27",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F23",
+    "type": "Verified fact",
+    "statement": "2026–27 BE: loans to HMWSSB for development ₹1,450 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 16",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Scheme allocation | FY 2026–27",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F24",
+    "type": "Verified fact",
+    "statement": "2026–27 BE: Metro Rail Phase II ₹600 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 17",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Scheme allocation | FY 2026–27",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F25",
+    "type": "Verified fact",
+    "statement": "2026–27 BE: loans to HMRL ₹500 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 17",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Scheme allocation | FY 2026–27",
+    "limits": "Separate financing line; not described as another ₹500 crore of Phase II construction.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F26",
+    "type": "Verified fact",
+    "statement": "2026–27 BE: 20 KL free-water reimbursement to HMWSSB ₹300 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 17",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Scheme allocation | FY 2026–27",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F27",
+    "type": "Verified fact",
+    "statement": "State capital expenditure: 2025–26 RE ₹36,480.87 crore; 2026–27 BE ₹47,267.28 crore.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "Table 4 PDF 4",
+    "basis": "PRS rounds capital outlay and describes rise of 30%; raw budget numbers used.",
+    "scope": "Telangana | FY 2025–26 RE and 2026–27 BE",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F28",
+    "type": "Derived statistic",
+    "statement": "Nominal state capex BE/RE increase is 29.57%, rounded 29.6%.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Derived from F27",
+    "basis": "(47267.28/36480.87-1)*100=29.5673%; recomputed.",
+    "scope": "Telangana | FY 2026–27",
+    "limits": "Plan-to-revised-plan comparison, not realised growth or inflation-adjusted change.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Derived statistic"
+  },
+  {
+    "id": "F29",
+    "type": "Verified fact",
+    "statement": "State 2026–27 BE: Indiramma Houses ₹5,500 crore; Mahalaxmi RTC ₹4,305 crore; Rajiv Aarogya Sri ₹1,143 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 15",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Telangana | FY 2026–27",
+    "limits": "Statewide allocations; no Hyderabad beneficiary count or effect derived.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F30",
+    "type": "Agency objectives",
+    "statement": "MRDCL describes Musi vision in terms of ecological restoration, sewage interception/treatment, floodplain zones and mobility/livelihoods.",
+    "sources": [
+      "S11"
+    ],
+    "locator": "Vision",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Musi project | Retrieved 2026-10-08",
+    "limits": "Intended scope, not achieved outcomes.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Agency objectives"
+  },
+  {
+    "id": "F31",
+    "type": "Official statement",
+    "statement": "At the 13 March 2026 Musi conference, the CM addressed compensation and livelihood concerns associated with relocation.",
+    "sources": [
+      "S12"
+    ],
+    "locator": "English compensation/livelihood paragraphs",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Musi PhaseI | 2026-03-13",
+    "limits": "No claim that commitments were fulfilled; household/cost totals excluded.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Official statement"
+  },
+  {
+    "id": "F32",
+    "type": "Official sector description",
+    "statement": "State investment portal identifies Genome Valley at Shamirpet and electronics manufacturing clusters.",
+    "sources": [
+      "S14"
+    ],
+    "locator": "Industrial-parks section",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Named locations / Telangana | Retrieved 2026-10-08",
+    "limits": "Not current jobs, output, access or geographic concentration measurements.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Official sector description"
+  },
+  {
+    "id": "F33",
+    "type": "Verified fact",
+    "statement": "BuildNow lists GO 68 dated 12 March 2025 for expansion of HMR and GO 69 for FCDA.",
+    "sources": [
+      "S04"
+    ],
+    "locator": "GO 68/69 entries",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Planning instruments | 2025-03-12",
+    "limits": "Full boundary polygons and area totals not ingested; no numerical metropolitan area claim.",
+    "gate1": "PASS",
+    "gate2": "PASS:authoritative record/consistent derivation",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Verified fact"
+  },
+  {
+    "id": "F34",
+    "type": "Candidate self-report",
+    "statement": "Candidate resume lists MBA, IIM Shillong, 2023–25; Consultant Marketing and Strategy at Nation With Namo, May 2025–Apr 2026.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "Education/workExperience",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Candidate | CV periods",
+    "limits": "Not independently audited.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Candidate self-report"
+  },
+  {
+    "id": "F35",
+    "type": "Candidate self-report",
+    "statement": "Candidate resume reports introducing an evidence-based review system for a seven-person political-intelligence team.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "workExperience bullet 3",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Candidate work | 2025–26",
+    "limits": "Capability evidence, not independently proven team outcome.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Candidate self-report"
+  },
+  {
+    "id": "F36",
+    "type": "Candidate self-report",
+    "statement": "Candidate resume reports modelling Meghalaya PDS and analysing 4,500+government records.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "Projects, Jul–Sep 2024",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Meghalaya project | 2024",
+    "limits": "No claim that the model itself caused public-service improvements.",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Candidate self-report"
+  },
+  {
+    "id": "F37",
+    "type": "Candidate self-report",
+    "statement": "Candidate resume lists manashdeori 09@gmail.com, LinkedIn/manash-protim-deori and openness to relocation.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "Header",
+    "basis": "Original source supports the bounded documentary statement; no independent outcome confirmation implied.",
+    "scope": "Candidate | Retrieved 2026-10-08",
+    "limits": "",
+    "gate1": "PASS",
+    "gate2": "PASS:bounded record; source limitations disclosed",
+    "gate3": "PASS:scope/date/units checked",
+    "gate4": "PASS:no causal extension",
+    "gate5": "PASS:traceable bounded expression",
+    "release": "Released as labelled Candidate self-report"
+  },
+  {
+    "id": "I02",
+    "type": "Bounded inference",
+    "statement": "Geographic discontinuity and contrasting electoral observations make a single-city political narrative unreliable. Public investment lines create testable implementation questions.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S07",
+      "S09",
+      "S10",
+      "S15"
+    ],
+    "locator": "M02",
+    "basis": "Premises: F03,F07,F08,F21,F22. Geographic discontinuity and contrasting electoral observations make a single-city political narrative unreliable. Public investment lines create testable implementation questions.",
+    "scope": "Executive assessment",
+    "limits": "The selected electoral units are not identical; allocations and governance changes do not establish public approval.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R02",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S07",
+      "S09",
+      "S10",
+      "S15"
+    ],
+    "locator": "M02",
+    "basis": "Premises: F03,F07,F08,F21,F22. Geographic discontinuity and contrasting electoral observations make a single-city political narrative unreliable. Public investment lines create testable implementation questions.",
+    "scope": "Executive assessment",
+    "limits": "The selected electoral units are not identical; allocations and governance changes do not establish public approval.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C02",
+    "type": "Candidate contribution",
+    "statement": "I would keep institution-specific election briefs and challenge citywide extrapolation.; I would version the geography crosswalk before joining service or election data.; I would track release, delivery and service experience separately.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S07",
+      "S09",
+      "S10",
+      "S15"
+    ],
+    "locator": "M02",
+    "basis": "Premises: F03,F07,F08,F21,F22. Geographic discontinuity and contrasting electoral observations make a single-city political narrative unreliable. Public investment lines create testable implementation questions.",
+    "scope": "Executive assessment",
+    "limits": "The selected electoral units are not identical; allocations and governance changes do not establish public approval.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I03",
+    "type": "Bounded inference",
+    "statement": "Research and project coordination in the resume match public role requirements at a methodological level.",
+    "sources": [
+      "S01",
+      "S02",
+      "S25"
+    ],
+    "locator": "M03",
+    "basis": "Premises: F01,F02,F34,F35. Research and project coordination in the resume match public role requirements at a methodological level.",
+    "scope": "Organisation and role",
+    "limits": "Exact requisition and open status unconfirmed. I do not claim knowledge of internal workflows or personal ideological alignment.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R03",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S01",
+      "S02",
+      "S25"
+    ],
+    "locator": "M03",
+    "basis": "Premises: F01,F02,F34,F35. Research and project coordination in the resume match public role requirements at a methodological level.",
+    "scope": "Organisation and role",
+    "limits": "Exact requisition and open status unconfirmed. I do not claim knowledge of internal workflows or personal ideological alignment.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C03",
+    "type": "Candidate contribution",
+    "statement": "I would turn research into concise, source-backed briefs and coordinate review across functions.",
+    "sources": [
+      "S01",
+      "S02",
+      "S25"
+    ],
+    "locator": "M03",
+    "basis": "Premises: F01,F02,F34,F35. Research and project coordination in the resume match public role requirements at a methodological level.",
+    "scope": "Organisation and role",
+    "limits": "Exact requisition and open status unconfirmed. I do not claim knowledge of internal workflows or personal ideological alignment.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I04",
+    "type": "Bounded inference",
+    "statement": "The GO allocates municipal zones; election tables use constituency codes. A name match does not establish identical population or jurisdiction.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15"
+    ],
+    "locator": "M04",
+    "basis": "Premises: F03,F04,F05,F33. The GO allocates municipal zones; election tables use constituency codes. A name match does not establish identical population or jurisdiction.",
+    "scope": "Geographic foundation",
+    "limits": "Classification schematic, not a geographic map. No unverified GIS polygon or area estimate is shown.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R04",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15"
+    ],
+    "locator": "M04",
+    "basis": "Premises: F03,F04,F05,F33. The GO allocates municipal zones; election tables use constituency codes. A name match does not establish identical population or jurisdiction.",
+    "scope": "Geographic foundation",
+    "limits": "Classification schematic, not a geographic map. No unverified GIS polygon or area estimate is shown.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C04",
+    "type": "Candidate contribution",
+    "statement": "I would create a dated crosswalk with overlap rules, official boundary files and exclusions before analysis.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15"
+    ],
+    "locator": "M04",
+    "basis": "Premises: F03,F04,F05,F33. The GO allocates municipal zones; election tables use constituency codes. A name match does not establish identical population or jurisdiction.",
+    "scope": "Geographic foundation",
+    "limits": "Classification schematic, not a geographic map. No unverified GIS polygon or area estimate is shown.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I05",
+    "type": "Bounded inference",
+    "statement": "Five distinct checks reduce identifiable errors; they cannot guarantee certainty or replace field validation.",
+    "sources": [
+      "S02",
+      "S23",
+      "S24"
+    ],
+    "locator": "M05",
+    "basis": "Premises: F02,F20. Five distinct checks reduce identifiable errors; they cannot guarantee certainty or replace field validation.",
+    "scope": "Research discipline",
+    "limits": "Twenty reviews are cumulative self-review passes, not 20 independent reviewers.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R05",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S02",
+      "S23",
+      "S24"
+    ],
+    "locator": "M05",
+    "basis": "Premises: F02,F20. Five distinct checks reduce identifiable errors; they cannot guarantee certainty or replace field validation.",
+    "scope": "Research discipline",
+    "limits": "Twenty reviews are cumulative self-review passes, not 20 independent reviewers.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C05",
+    "type": "Candidate contribution",
+    "statement": "I would keep a claim register, contradiction log and refresh queue attached to every brief.",
+    "sources": [
+      "S02",
+      "S23",
+      "S24"
+    ],
+    "locator": "M05",
+    "basis": "Premises: F02,F20. Five distinct checks reduce identifiable errors; they cannot guarantee certainty or replace field validation.",
+    "scope": "Research discipline",
+    "limits": "Twenty reviews are cumulative self-review passes, not 20 independent reviewers.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I06",
+    "type": "Bounded inference",
+    "statement": "Results from different institutions document changing competition; they do not prove one stable electorate trajectory or a cause.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21",
+      "S22"
+    ],
+    "locator": "M06",
+    "basis": "Premises: F16,F17,F18,F19,F07,F03. Results from different institutions document changing competition; they do not prove one stable electorate trajectory or a cause.",
+    "scope": "Historical turning points",
+    "limits": "2016/2020 municipal and 2018 summary figures are explicitly attributed reporting. No transfers of voters inferred.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R06",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21",
+      "S22"
+    ],
+    "locator": "M06",
+    "basis": "Premises: F16,F17,F18,F19,F07,F03. Results from different institutions document changing competition; they do not prove one stable electorate trajectory or a cause.",
+    "scope": "Historical turning points",
+    "limits": "2016/2020 municipal and 2018 summary figures are explicitly attributed reporting. No transfers of voters inferred.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C06",
+    "type": "Candidate contribution",
+    "statement": "I would maintain an event ledger that separates electoral results, office changes, boundary changes and delivery milestones.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21",
+      "S22"
+    ],
+    "locator": "M06",
+    "basis": "Premises: F16,F17,F18,F19,F07,F03. Results from different institutions document changing competition; they do not prove one stable electorate trajectory or a cause.",
+    "scope": "Historical turning points",
+    "limits": "2016/2020 municipal and 2018 summary figures are explicitly attributed reporting. No transfers of voters inferred.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I07",
+    "type": "Bounded inference",
+    "statement": "A documented institution-specific chain is more useful than assigning every urban outcome to one politician or department.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S09",
+      "S10",
+      "S11",
+      "S15"
+    ],
+    "locator": "M07",
+    "basis": "Premises: F03,F06,F21,F30. A documented institution-specific chain is more useful than assigning every urban outcome to one politician or department.",
+    "scope": "Governance architecture",
+    "limits": "This is a documented-role scaffold, not a complete current statutory responsibility matrix. Case-specific powers need validation.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R07",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S09",
+      "S10",
+      "S11",
+      "S15"
+    ],
+    "locator": "M07",
+    "basis": "Premises: F03,F06,F21,F30. A documented institution-specific chain is more useful than assigning every urban outcome to one politician or department.",
+    "scope": "Governance architecture",
+    "limits": "This is a documented-role scaffold, not a complete current statutory responsibility matrix. Case-specific powers need validation.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C07",
+    "type": "Candidate contribution",
+    "statement": "I would produce one responsibility sheet for each issue: decision owner, payer, delivery body, review authority and evidence gap.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S09",
+      "S10",
+      "S11",
+      "S15"
+    ],
+    "locator": "M07",
+    "basis": "Premises: F03,F06,F21,F30. A documented institution-specific chain is more useful than assigning every urban outcome to one politician or department.",
+    "scope": "Governance architecture",
+    "limits": "This is a documented-role scaffold, not a complete current statutory responsibility matrix. Case-specific powers need validation.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I08",
+    "type": "Bounded inference",
+    "statement": "Reported same-institution seat counts show council-level change. Seats are not votes; result differences do not identify voter transitions.",
+    "sources": [
+      "S19",
+      "S20",
+      "S21",
+      "S22"
+    ],
+    "locator": "M08",
+    "basis": "Premises: F18,F19. Reported same-institution seat counts show council-level change. Seats are not votes; result differences do not identify voter transitions.",
+    "scope": "Election history",
+    "limits": "Historical 150-seat GHMC tables, based on two corroborated reporting lineages. They are not 2026 corporation totals.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R08",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S19",
+      "S20",
+      "S21",
+      "S22"
+    ],
+    "locator": "M08",
+    "basis": "Premises: F18,F19. Reported same-institution seat counts show council-level change. Seats are not votes; result differences do not identify voter transitions.",
+    "scope": "Election history",
+    "limits": "Historical 150-seat GHMC tables, based on two corroborated reporting lineages. They are not 2026 corporation totals.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C08",
+    "type": "Candidate contribution",
+    "statement": "I would preserve raw election vintages and compare only equivalent units, with candidate and boundary changes recorded.",
+    "sources": [
+      "S19",
+      "S20",
+      "S21",
+      "S22"
+    ],
+    "locator": "M08",
+    "basis": "Premises: F18,F19. Reported same-institution seat counts show council-level change. Seats are not votes; result differences do not identify voter transitions.",
+    "scope": "Election history",
+    "limits": "Historical 150-seat GHMC tables, based on two corroborated reporting lineages. They are not 2026 corporation totals.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I09",
+    "type": "Bounded inference",
+    "statement": "A contrasting selected-set result falsifies a claim that the statewide winner also won everywhere in the urban core.",
+    "sources": [
+      "S06",
+      "S07"
+    ],
+    "locator": "M09",
+    "basis": "Premises: F07,F08. A contrasting selected-set result falsifies a claim that the statewide winner also won everywhere in the urban core.",
+    "scope": "2023 Assembly comparison",
+    "limits": "Selection is disclosed in full; no claim that 15 seats represent the entire metropolis. Historical results, not current membership.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R09",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S06",
+      "S07"
+    ],
+    "locator": "M09",
+    "basis": "Premises: F07,F08. A contrasting selected-set result falsifies a claim that the statewide winner also won everywhere in the urban core.",
+    "scope": "2023 Assembly comparison",
+    "limits": "Selection is disclosed in full; no claim that 15 seats represent the entire metropolis. Historical results, not current membership.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C09",
+    "type": "Candidate contribution",
+    "statement": "I would write explicitly scoped constituency briefs rather than treating the state mandate as a metropolitan result.",
+    "sources": [
+      "S06",
+      "S07"
+    ],
+    "locator": "M09",
+    "basis": "Premises: F07,F08. A contrasting selected-set result falsifies a claim that the statewide winner also won everywhere in the urban core.",
+    "scope": "2023 Assembly comparison",
+    "limits": "Selection is disclosed in full; no claim that 15 seats represent the entire metropolis. Historical results, not current membership.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I10",
+    "type": "Bounded inference",
+    "statement": "Different institution-specific observations show why political strength cannot be represented by one number.",
+    "sources": [
+      "S07",
+      "S08"
+    ],
+    "locator": "M10",
+    "basis": "Premises: F12,F13,F14,F15,F08. Different institution-specific observations show why political strength cannot be represented by one number.",
+    "scope": "2024 Lok Sabha comparison",
+    "limits": "Four PCs and the 15-seat AC set are not coextensive. Candidate effects, turnout and national context remain rival explanations.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R10",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S07",
+      "S08"
+    ],
+    "locator": "M10",
+    "basis": "Premises: F12,F13,F14,F15,F08. Different institution-specific observations show why political strength cannot be represented by one number.",
+    "scope": "2024 Lok Sabha comparison",
+    "limits": "Four PCs and the 15-seat AC set are not coextensive. Candidate effects, turnout and national context remain rival explanations.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C10",
+    "type": "Candidate contribution",
+    "statement": "I would keep Assembly, parliamentary and civic result series separate, then test possible explanations through approved research.",
+    "sources": [
+      "S07",
+      "S08"
+    ],
+    "locator": "M10",
+    "basis": "Premises: F12,F13,F14,F15,F08. Different institution-specific observations show why political strength cannot be represented by one number.",
+    "scope": "2024 Lok Sabha comparison",
+    "limits": "Four PCs and the 15-seat AC set are not coextensive. Candidate effects, turnout and national context remain rival explanations.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I11",
+    "type": "Bounded inference",
+    "statement": "The same winning party across seats does not imply uniform competition. The 2025 Jubilee Hills reported Congress win also cautions against freezing 2023 as the present.",
+    "sources": [
+      "S07",
+      "S23",
+      "S24"
+    ],
+    "locator": "M11",
+    "basis": "Premises: F09,F10,F11,F20. The same winning party across seats does not imply uniform competition. The 2025 Jubilee Hills reported Congress win also cautions against freezing 2023 as the present.",
+    "scope": "Political structure",
+    "limits": "Margins are vote differences, not estimates of community opinion. Current legislator affiliations, legal disputes and municipal leadership require a fresh official roster.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R11",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S07",
+      "S23",
+      "S24"
+    ],
+    "locator": "M11",
+    "basis": "Premises: F09,F10,F11,F20. The same winning party across seats does not imply uniform competition. The 2025 Jubilee Hills reported Congress win also cautions against freezing 2023 as the present.",
+    "scope": "Political structure",
+    "limits": "Margins are vote differences, not estimates of community opinion. Current legislator affiliations, legal disputes and municipal leadership require a fresh official roster.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C11",
+    "type": "Candidate contribution",
+    "statement": "I would distinguish party presence, candidate competition and institutional control; update legal affiliation separately.",
+    "sources": [
+      "S07",
+      "S23",
+      "S24"
+    ],
+    "locator": "M11",
+    "basis": "Premises: F09,F10,F11,F20. The same winning party across seats does not imply uniform competition. The 2025 Jubilee Hills reported Congress win also cautions against freezing 2023 as the present.",
+    "scope": "Political structure",
+    "limits": "Margins are vote differences, not estimates of community opinion. Current legislator affiliations, legal disputes and municipal leadership require a fresh official roster.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I12",
+    "type": "Bounded inference",
+    "statement": "Cluster identification supports research design; it does not measure who benefits, city GDP or job quality.",
+    "sources": [
+      "S14"
+    ],
+    "locator": "M12",
+    "basis": "Premises: F32. Cluster identification supports research design; it does not measure who benefits, city GDP or job quality.",
+    "scope": "Political economy",
+    "limits": "No city GDP, unemployment, export or employment estimate is asserted from a statewide promotional portal.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R12",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S14"
+    ],
+    "locator": "M12",
+    "basis": "Premises: F32. Cluster identification supports research design; it does not measure who benefits, city GDP or job quality.",
+    "scope": "Political economy",
+    "limits": "No city GDP, unemployment, export or employment estimate is asserted from a statewide promotional portal.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C12",
+    "type": "Candidate contribution",
+    "statement": "I would build a place-based opportunity brief using verified cluster locations, commuting access and service data.",
+    "sources": [
+      "S14"
+    ],
+    "locator": "M12",
+    "basis": "Premises: F32. Cluster identification supports research design; it does not measure who benefits, city GDP or job quality.",
+    "scope": "Political economy",
+    "limits": "No city GDP, unemployment, export or employment estimate is asserted from a statewide promotional portal.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I13",
+    "type": "Bounded inference",
+    "statement": "Measured barriers are needed to connect clusters with residents’ opportunities. No labour-market deficit is assumed simply from cluster presence.",
+    "sources": [
+      "S14",
+      "S25"
+    ],
+    "locator": "M13",
+    "basis": "Premises: F32,F36. Measured barriers are needed to connect clusters with residents’ opportunities. No labour-market deficit is assumed simply from cluster presence.",
+    "scope": "Employment research agenda",
+    "limits": "Hypothesis: access barriers may vary by location and occupation. Requires local evidence; no demographic or religious political profiling.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R13",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S14",
+      "S25"
+    ],
+    "locator": "M13",
+    "basis": "Premises: F32,F36. Measured barriers are needed to connect clusters with residents’ opportunities. No labour-market deficit is assumed simply from cluster presence.",
+    "scope": "Employment research agenda",
+    "limits": "Hypothesis: access barriers may vary by location and occupation. Requires local evidence; no demographic or religious political profiling.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C13",
+    "type": "Candidate contribution",
+    "statement": "I would triangulate employer information, official labour statistics and consented interviews before proposing an access intervention.",
+    "sources": [
+      "S14",
+      "S25"
+    ],
+    "locator": "M13",
+    "basis": "Premises: F32,F36. Measured barriers are needed to connect clusters with residents’ opportunities. No labour-market deficit is assumed simply from cluster presence.",
+    "scope": "Employment research agenda",
+    "limits": "Hypothesis: access barriers may vary by location and occupation. Requires local evidence; no demographic or religious political profiling.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I14",
+    "type": "Bounded inference",
+    "statement": "Changes in administrative and planning units can break time-series comparisons and ownership assumptions.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15"
+    ],
+    "locator": "M14",
+    "basis": "Premises: F03,F33. Changes in administrative and planning units can break time-series comparisons and ownership assumptions.",
+    "scope": "Housing and land",
+    "limits": "No current land-price trend, household displacement total or legal conclusion is asserted. GO index alone does not establish parcel-specific rights.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R14",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15"
+    ],
+    "locator": "M14",
+    "basis": "Premises: F03,F33. Changes in administrative and planning units can break time-series comparisons and ownership assumptions.",
+    "scope": "Housing and land",
+    "limits": "No current land-price trend, household displacement total or legal conclusion is asserted. GO index alone does not establish parcel-specific rights.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C14",
+    "type": "Candidate contribution",
+    "statement": "I would maintain a boundary-vintage register and verify land, housing, approvals and service claims against the right jurisdiction.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15"
+    ],
+    "locator": "M14",
+    "basis": "Premises: F03,F33. Changes in administrative and planning units can break time-series comparisons and ownership assumptions.",
+    "scope": "Housing and land",
+    "limits": "No current land-price trend, household displacement total or legal conclusion is asserted. GO index alone does not establish parcel-specific rights.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I15",
+    "type": "Bounded inference",
+    "statement": "Distinct lines should not be merged into a claim about completed rail construction. Accessibility requires route and service evidence.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "M15",
+    "basis": "Premises: F24,F25. Distinct lines should not be merged into a claim about completed rail construction. Accessibility requires route and service evidence.",
+    "scope": "Mobility and financing",
+    "limits": "Both are budget estimates. Current procurement, central approvals, operating extensions and completion dates are not established by the budget.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R15",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "M15",
+    "basis": "Premises: F24,F25. Distinct lines should not be merged into a claim about completed rail construction. Accessibility requires route and service evidence.",
+    "scope": "Mobility and financing",
+    "limits": "Both are budget estimates. Current procurement, central approvals, operating extensions and completion dates are not established by the budget.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C15",
+    "type": "Candidate contribution",
+    "statement": "I would track each financing line separately and evaluate access through verified project status, journeys and interchange evidence.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "M15",
+    "basis": "Premises: F24,F25. Distinct lines should not be merged into a claim about completed rail construction. Accessibility requires route and service evidence.",
+    "scope": "Mobility and financing",
+    "limits": "Both are budget estimates. Current procurement, central approvals, operating extensions and completion dates are not established by the budget.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I16",
+    "type": "Bounded inference",
+    "statement": "The documented remit and project scope suggest linked research tasks, not measured performance or a causal reduction in flood risk.",
+    "sources": [
+      "S05",
+      "S09",
+      "S11"
+    ],
+    "locator": "M16",
+    "basis": "Premises: F06,F23,F30. The documented remit and project scope suggest linked research tasks, not measured performance or a causal reduction in flood risk.",
+    "scope": "Water and environmental services",
+    "limits": "No flood-frequency, water-quality, sewage-treatment or lake-restoration success rate has been verified in this deck.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R16",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S05",
+      "S09",
+      "S11"
+    ],
+    "locator": "M16",
+    "basis": "Premises: F06,F23,F30. The documented remit and project scope suggest linked research tasks, not measured performance or a causal reduction in flood risk.",
+    "scope": "Water and environmental services",
+    "limits": "No flood-frequency, water-quality, sewage-treatment or lake-restoration success rate has been verified in this deck.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C16",
+    "type": "Candidate contribution",
+    "statement": "I would connect rainfall events, drainage records, water-quality evidence and agency responsibilities in one issue brief.",
+    "sources": [
+      "S05",
+      "S09",
+      "S11"
+    ],
+    "locator": "M16",
+    "basis": "Premises: F06,F23,F30. The documented remit and project scope suggest linked research tasks, not measured performance or a causal reduction in flood risk.",
+    "scope": "Water and environmental services",
+    "limits": "No flood-frequency, water-quality, sewage-treatment or lake-restoration success rate has been verified in this deck.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I17",
+    "type": "Bounded inference",
+    "statement": "Statewide programme provision identifies questions for access research; it does not establish Hyderabad coverage or service quality.",
+    "sources": [
+      "S09",
+      "S25"
+    ],
+    "locator": "M17",
+    "basis": "Premises: F29,F36. Statewide programme provision identifies questions for access research; it does not establish Hyderabad coverage or service quality.",
+    "scope": "Health, education and welfare",
+    "limits": "StatewideBE, not city spending or beneficiaries. Education outcomes and current scheme eligibility require additional authoritative evidence.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R17",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S09",
+      "S25"
+    ],
+    "locator": "M17",
+    "basis": "Premises: F29,F36. Statewide programme provision identifies questions for access research; it does not establish Hyderabad coverage or service quality.",
+    "scope": "Health, education and welfare",
+    "limits": "StatewideBE, not city spending or beneficiaries. Education outcomes and current scheme eligibility require additional authoritative evidence.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C17",
+    "type": "Candidate contribution",
+    "statement": "I would trace selected service journeys from eligibility to application, receipt, grievance and closure.",
+    "sources": [
+      "S09",
+      "S25"
+    ],
+    "locator": "M17",
+    "basis": "Premises: F29,F36. Statewide programme provision identifies questions for access research; it does not establish Hyderabad coverage or service quality.",
+    "scope": "Health, education and welfare",
+    "limits": "StatewideBE, not city spending or beneficiaries. Education outcomes and current scheme eligibility require additional authoritative evidence.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I18",
+    "type": "Bounded inference",
+    "statement": "A larger planned envelope makes financing and implementation monitoring material. It does not establish fiscal capacity or future completion.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "M18",
+    "basis": "Premises: F27,F28,F21,F22,F23. A larger planned envelope makes financing and implementation monitoring material. It does not establish fiscal capacity or future completion.",
+    "scope": "Public finance",
+    "limits": "Statewide; plan-to-revised-plan comparison; not real growth. No budget-line summation into a Hyderabad total.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R18",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "M18",
+    "basis": "Premises: F27,F28,F21,F22,F23. A larger planned envelope makes financing and implementation monitoring material. It does not establish fiscal capacity or future completion.",
+    "scope": "Public finance",
+    "limits": "Statewide; plan-to-revised-plan comparison; not real growth. No budget-line summation into a Hyderabad total.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C18",
+    "type": "Candidate contribution",
+    "statement": "I would build a commitments-to-delivery tracker with separate estimate, sanction, release, spend and outcome fields.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "M18",
+    "basis": "Premises: F27,F28,F21,F22,F23. A larger planned envelope makes financing and implementation monitoring material. It does not establish fiscal capacity or future completion.",
+    "scope": "Public finance",
+    "limits": "Statewide; plan-to-revised-plan comparison; not real growth. No budget-line summation into a Hyderabad total.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I19",
+    "type": "Bounded inference",
+    "statement": "Environmental objectives and acknowledged relocation concerns justify testing multiple dimensions of implementation together.",
+    "sources": [
+      "S09",
+      "S11",
+      "S12"
+    ],
+    "locator": "M19",
+    "basis": "Premises: F22,F30,F31. Environmental objectives and acknowledged relocation concerns justify testing multiple dimensions of implementation together.",
+    "scope": "Policy case study01",
+    "limits": "Government objectives/commitments are not proof of outcomes. Current award, construction, compensation and water-quality results remain unverified.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R19",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S09",
+      "S11",
+      "S12"
+    ],
+    "locator": "M19",
+    "basis": "Premises: F22,F30,F31. Environmental objectives and acknowledged relocation concerns justify testing multiple dimensions of implementation together.",
+    "scope": "Policy case study01",
+    "limits": "Government objectives/commitments are not proof of outcomes. Current award, construction, compensation and water-quality results remain unverified.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C19",
+    "type": "Candidate contribution",
+    "statement": "I would produce a balanced Musi brief: documentary milestone, environmental evidence, household safeguards and unresolved questions.",
+    "sources": [
+      "S09",
+      "S11",
+      "S12"
+    ],
+    "locator": "M19",
+    "basis": "Premises: F22,F30,F31. Environmental objectives and acknowledged relocation concerns justify testing multiple dimensions of implementation together.",
+    "scope": "Policy case study01",
+    "limits": "Government objectives/commitments are not proof of outcomes. Current award, construction, compensation and water-quality results remain unverified.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I20",
+    "type": "Bounded inference",
+    "statement": "Mandate-level evidence and case-level evidence answer different questions; public trust needs both.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S15"
+    ],
+    "locator": "M20",
+    "basis": "Premises: F06,F03. Mandate-level evidence and case-level evidence answer different questions; public trust needs both.",
+    "scope": "Policy case study02",
+    "limits": "No parcel is labelled an encroachment here. Current legal requirements and court orders need counsel/official record review.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R20",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S15"
+    ],
+    "locator": "M20",
+    "basis": "Premises: F06,F03. Mandate-level evidence and case-level evidence answer different questions; public trust needs both.",
+    "scope": "Policy case study02",
+    "limits": "No parcel is labelled an encroachment here. Current legal requirements and court orders need counsel/official record review.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C20",
+    "type": "Candidate contribution",
+    "statement": "I would keep a case tracker for the order, boundary record, notice, review route, implementation and independently checked outcome.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S15"
+    ],
+    "locator": "M20",
+    "basis": "Premises: F06,F03. Mandate-level evidence and case-level evidence answer different questions; public trust needs both.",
+    "scope": "Policy case study02",
+    "limits": "No parcel is labelled an encroachment here. Current legal requirements and court orders need counsel/official record review.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I21",
+    "type": "Bounded inference",
+    "statement": "Multiple documented bodies create a coordination research requirement; this deck does not claim demonstrated coordination failure.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S11",
+      "S15"
+    ],
+    "locator": "M21",
+    "basis": "Premises: F03,F06,F30. Multiple documented bodies create a coordination research requirement; this deck does not claim demonstrated coordination failure.",
+    "scope": "Coordination and power",
+    "limits": "Proposed operating design. Access to officials, internal records and escalation routes depends on employer approval.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R21",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S11",
+      "S15"
+    ],
+    "locator": "M21",
+    "basis": "Premises: F03,F06,F30. Multiple documented bodies create a coordination research requirement; this deck does not claim demonstrated coordination failure.",
+    "scope": "Coordination and power",
+    "limits": "Proposed operating design. Access to officials, internal records and escalation routes depends on employer approval.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C21",
+    "type": "Candidate contribution",
+    "statement": "I would assign one issue owner and keep decision, funding, implementation and grievance handoffs visible.",
+    "sources": [
+      "S03",
+      "S04",
+      "S05",
+      "S11",
+      "S15"
+    ],
+    "locator": "M21",
+    "basis": "Premises: F03,F06,F30. Multiple documented bodies create a coordination research requirement; this deck does not claim demonstrated coordination failure.",
+    "scope": "Coordination and power",
+    "limits": "Proposed operating design. Access to officials, internal records and escalation routes depends on employer approval.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I22",
+    "type": "Bounded inference",
+    "statement": "The sources have different incentives and upstream dependencies. Reported narratives cannot identify their prevalence or their causal electoral effect.",
+    "sources": [
+      "S01",
+      "S12",
+      "S23",
+      "S24"
+    ],
+    "locator": "M22",
+    "basis": "Premises: F01,F31,F20. The sources have different incentives and upstream dependencies. Reported narratives cannot identify their prevalence or their causal electoral effect.",
+    "scope": "Information quality",
+    "limits": "Proposed Telugu, Urdu and English review with qualified language support. No claim to my fluency, representative survey, private messages or sentiment baseline.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R22",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S01",
+      "S12",
+      "S23",
+      "S24"
+    ],
+    "locator": "M22",
+    "basis": "Premises: F01,F31,F20. The sources have different incentives and upstream dependencies. Reported narratives cannot identify their prevalence or their causal electoral effect.",
+    "scope": "Information quality",
+    "limits": "Proposed Telugu, Urdu and English review with qualified language support. No claim to my fluency, representative survey, private messages or sentiment baseline.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C22",
+    "type": "Candidate contribution",
+    "statement": "I would run a multilingual issue log with source lineage, verified translations, correction status and a representativeness note.",
+    "sources": [
+      "S01",
+      "S12",
+      "S23",
+      "S24"
+    ],
+    "locator": "M22",
+    "basis": "Premises: F01,F31,F20. The sources have different incentives and upstream dependencies. Reported narratives cannot identify their prevalence or their causal electoral effect.",
+    "scope": "Information quality",
+    "limits": "Proposed Telugu, Urdu and English review with qualified language support. No claim to my fluency, representative survey, private messages or sentiment baseline.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I23",
+    "type": "Bounded inference",
+    "statement": "Separating known records from unresolved status prevents confidence in one source class from spilling into another.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S09",
+      "S10",
+      "S15",
+      "S23",
+      "S24"
+    ],
+    "locator": "M23",
+    "basis": "Premises: F03,F07,F20,F27. Separating known records from unresolved status prevents confidence in one source class from spilling into another.",
+    "scope": "Known, disputed and unknown",
+    "limits": "No exhaustive claim about all developments up to cut-off. Source accessibility and absence of fieldwork constrain this work sample.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R23",
+    "type": "Proposed work product",
+    "statement": "Research action implied by contribution; no guaranteed public/political impact.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S09",
+      "S10",
+      "S15",
+      "S23",
+      "S24"
+    ],
+    "locator": "M23",
+    "basis": "Premises: F03,F07,F20,F27. Separating known records from unresolved status prevents confidence in one source class from spilling into another.",
+    "scope": "Known, disputed and unknown",
+    "limits": "No exhaustive claim about all developments up to cut-off. Source accessibility and absence of fieldwork constrain this work sample.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C23",
+    "type": "Candidate contribution",
+    "statement": "I would maintain explicit expiry rules and assign a validation task to each consequential unknown.",
+    "sources": [
+      "S03",
+      "S04",
+      "S06",
+      "S09",
+      "S10",
+      "S15",
+      "S23",
+      "S24"
+    ],
+    "locator": "M23",
+    "basis": "Premises: F03,F07,F20,F27. Separating known records from unresolved status prevents confidence in one source class from spilling into another.",
+    "scope": "Known, disputed and unknown",
+    "limits": "No exhaustive claim about all developments up to cut-off. Source accessibility and absence of fieldwork constrain this work sample.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I24",
+    "type": "Bounded inference",
+    "statement": "Boundary and status errors invalidate downstream analysis; implementation records then support usable issue briefs. Ranking is my professional judgment.",
+    "sources": [
+      "S03",
+      "S04",
+      "S09",
+      "S10",
+      "S11",
+      "S15",
+      "S23",
+      "S24"
+    ],
+    "locator": "M24",
+    "basis": "Premises: F03,F20,F21,F30. Boundary and status errors invalidate downstream analysis; implementation records then support usable issue briefs. Ranking is my professional judgment.",
+    "scope": "Prioritised research agenda",
+    "limits": "Proposed priority order; not measured demand or a promise of access.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R24",
+    "type": "Proposed work product",
+    "statement": "I would sequence work by the risk of misclassification, decision relevance and dependency—not a fabricated electoral opportunity score.",
+    "sources": [
+      "S03",
+      "S04",
+      "S09",
+      "S10",
+      "S11",
+      "S15",
+      "S23",
+      "S24"
+    ],
+    "locator": "M24",
+    "basis": "Premises: F03,F20,F21,F30. Boundary and status errors invalidate downstream analysis; implementation records then support usable issue briefs. Ranking is my professional judgment.",
+    "scope": "Prioritised research agenda",
+    "limits": "Proposed priority order; not measured demand or a promise of access.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C24",
+    "type": "Candidate contribution",
+    "statement": "I would agree the first research backlog with my manager and publish owners, dependencies and stop conditions.",
+    "sources": [
+      "S03",
+      "S04",
+      "S09",
+      "S10",
+      "S11",
+      "S15",
+      "S23",
+      "S24"
+    ],
+    "locator": "M24",
+    "basis": "Premises: F03,F20,F21,F30. Boundary and status errors invalidate downstream analysis; implementation records then support usable issue briefs. Ranking is my professional judgment.",
+    "scope": "Prioritised research agenda",
+    "limits": "Proposed priority order; not measured demand or a promise of access.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I25",
+    "type": "Bounded inference",
+    "statement": "The produced tracker demonstrates source and status discipline. It is a baseline prototype, not a live government dashboard.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "M25",
+    "basis": "Premises: F21,F22,F23,F24,F25,F26. The produced tracker demonstrates source and status discipline. It is a baseline prototype, not a live government dashboard.",
+    "scope": "Produced evidence brief",
+    "limits": "No internal spending feed or field validation. Unverified stages remain explicitly Unknown.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R25",
+    "type": "Proposed work product",
+    "statement": "This deck includes a usable CURE budget baseline with exact instruments, reference years and open implementation fields.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "M25",
+    "basis": "Premises: F21,F22,F23,F24,F25,F26. The produced tracker demonstrates source and status discipline. It is a baseline prototype, not a live government dashboard.",
+    "scope": "Produced evidence brief",
+    "limits": "No internal spending feed or field validation. Unverified stages remain explicitly Unknown.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C25",
+    "type": "Candidate contribution",
+    "statement": "I would maintain the baseline as a reviewed weekly brief, recording each new document and change in status.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "M25",
+    "basis": "Premises: F21,F22,F23,F24,F25,F26. The produced tracker demonstrates source and status discipline. It is a baseline prototype, not a live government dashboard.",
+    "scope": "Produced evidence brief",
+    "limits": "No internal spending feed or field validation. Unverified stages remain explicitly Unknown.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I26",
+    "type": "Bounded inference",
+    "statement": "The candidate-reported review experience supports proposing an evidence workflow; actual performance must be established through a pilot.",
+    "sources": [
+      "S01",
+      "S25"
+    ],
+    "locator": "M26",
+    "basis": "Premises: F35,F36,F01. The candidate-reported review experience supports proposing an evidence workflow; actual performance must be established through a pilot.",
+    "scope": "My proposed operating system",
+    "limits": "Owner: me under a research lead. Depends on approved repositories and reviewers. Fall back to a shared spreadsheet if tooling is limited.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R26",
+    "type": "Proposed work product",
+    "statement": "An insight should retain its evidence, uncertainty and accountable next action as it moves between research and delivery teams.",
+    "sources": [
+      "S01",
+      "S25"
+    ],
+    "locator": "M26",
+    "basis": "Premises: F35,F36,F01. The candidate-reported review experience supports proposing an evidence workflow; actual performance must be established through a pilot.",
+    "scope": "My proposed operating system",
+    "limits": "Owner: me under a research lead. Depends on approved repositories and reviewers. Fall back to a shared spreadsheet if tooling is limited.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C26",
+    "type": "Candidate contribution",
+    "statement": "I would introduce a short daily triage and a manager-reviewed weekly research brief with a correction log.",
+    "sources": [
+      "S01",
+      "S25"
+    ],
+    "locator": "M26",
+    "basis": "Premises: F35,F36,F01. The candidate-reported review experience supports proposing an evidence workflow; actual performance must be established through a pilot.",
+    "scope": "My proposed operating system",
+    "limits": "Owner: me under a research lead. Depends on approved repositories and reviewers. Fall back to a shared spreadsheet if tooling is limited.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I27",
+    "type": "Bounded inference",
+    "statement": "Small reproducible work products establish a baseline and identify access constraints early.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15",
+      "S25"
+    ],
+    "locator": "M27",
+    "basis": "Premises: F03,F35,F36. Small reproducible work products establish a baseline and identify access constraints early.",
+    "scope": "Onboarding proposal",
+    "limits": "Planning assumption: roughly 10 focused research hours/week plus review. Employer workload and priorities determine actual output.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R27",
+    "type": "Proposed work product",
+    "statement": "I would establish the geography, source inventory and reporting rhythm before committing to broad field conclusions.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15",
+      "S25"
+    ],
+    "locator": "M27",
+    "basis": "Premises: F03,F35,F36. Small reproducible work products establish a baseline and identify access constraints early.",
+    "scope": "Onboarding proposal",
+    "limits": "Planning assumption: roughly 10 focused research hours/week plus review. Employer workload and priorities determine actual output.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C27",
+    "type": "Candidate contribution",
+    "statement": "I would deliver one boundary register, one source ledger, four short issue briefs and a manager-approved research backlog.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15",
+      "S25"
+    ],
+    "locator": "M27",
+    "basis": "Premises: F03,F35,F36. Small reproducible work products establish a baseline and identify access constraints early.",
+    "scope": "Onboarding proposal",
+    "limits": "Planning assumption: roughly 10 focused research hours/week plus review. Employer workload and priorities determine actual output.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I28",
+    "type": "Bounded inference",
+    "statement": "The earlier evidence gaps identify where direct validation is useful; interviews add context, not automatically representative statistics.",
+    "sources": [
+      "S05",
+      "S11",
+      "S12",
+      "S25"
+    ],
+    "locator": "M28",
+    "basis": "Premises: F30,F31,F06,F36. The earlier evidence gaps identify where direct validation is useful; interviews add context, not automatically representative statistics.",
+    "scope": "Research validation proposal",
+    "limits": "Assumption: manager approval, permissions and language support. If access fails, publish desk-based gaps and narrow the question.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R28",
+    "type": "Proposed work product",
+    "statement": "I would test the highest-impact gaps through authorised records, agency clarifications and consented qualitative research.",
+    "sources": [
+      "S05",
+      "S11",
+      "S12",
+      "S25"
+    ],
+    "locator": "M28",
+    "basis": "Premises: F30,F31,F06,F36. The earlier evidence gaps identify where direct validation is useful; interviews add context, not automatically representative statistics.",
+    "scope": "Research validation proposal",
+    "limits": "Assumption: manager approval, permissions and language support. If access fails, publish desk-based gaps and narrow the question.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C28",
+    "type": "Candidate contribution",
+    "statement": "I would refine two case studies and test interview guides with qualified local-language support.",
+    "sources": [
+      "S05",
+      "S11",
+      "S12",
+      "S25"
+    ],
+    "locator": "M28",
+    "basis": "Premises: F30,F31,F06,F36. The earlier evidence gaps identify where direct validation is useful; interviews add context, not automatically representative statistics.",
+    "scope": "Research validation proposal",
+    "limits": "Assumption: manager approval, permissions and language support. If access fails, publish desk-based gaps and narrow the question.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I29",
+    "type": "Bounded inference",
+    "statement": "A pilot creates observable process metrics; the direction and scale of improvement are not predetermined.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "M29",
+    "basis": "Premises: F35,F36. A pilot creates observable process metrics; the direction and scale of improvement are not predetermined.",
+    "scope": "Operational learning proposal",
+    "limits": "Track correction count, broken citations, scope errors and review time. Avoid targets that reward hiding errors or premature publication.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R29",
+    "type": "Proposed work product",
+    "statement": "I would evaluate evidence quality and turnaround against the first-month baseline, then hand over a reusable research system.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "M29",
+    "basis": "Premises: F35,F36. A pilot creates observable process metrics; the direction and scale of improvement are not predetermined.",
+    "scope": "Operational learning proposal",
+    "limits": "Track correction count, broken citations, scope errors and review time. Avoid targets that reward hiding errors or premature publication.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C29",
+    "type": "Candidate contribution",
+    "statement": "I would deliver a reviewed atlas scaffold, refresh calendar, two refined case briefs and an onboarding guide.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "M29",
+    "basis": "Premises: F35,F36. A pilot creates observable process metrics; the direction and scale of improvement are not predetermined.",
+    "scope": "Operational learning proposal",
+    "limits": "Track correction count, broken citations, scope errors and review time. Avoid targets that reward hiding errors or premature publication.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I30",
+    "type": "Bounded inference",
+    "statement": "These self-reported experiences support a methods-based fit; geographic expertise and employer performance remain to be demonstrated.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "M30",
+    "basis": "Premises: F34,F35,F36. These self-reported experiences support a methods-based fit; geographic expertise and employer performance remain to be demonstrated.",
+    "scope": "My contribution and learning gaps",
+    "limits": "No independent audit of CV outcomes. No claim to local-language fluency, Hyderabad field networks or guaranteed political impact.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R30",
+    "type": "Proposed work product",
+    "statement": "My resume reports political-intelligence review work, cross-functional coordination and a Meghalaya public-distribution modelling project.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "M30",
+    "basis": "Premises: F34,F35,F36. These self-reported experiences support a methods-based fit; geographic expertise and employer performance remain to be demonstrated.",
+    "scope": "My contribution and learning gaps",
+    "limits": "No independent audit of CV outcomes. No claim to local-language fluency, Hyderabad field networks or guaranteed political impact.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C30",
+    "type": "Candidate contribution",
+    "statement": "I would bring structured research and operational discipline, while building Hyderabad context through supervised local learning.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "M30",
+    "basis": "Premises: F34,F35,F36. These self-reported experiences support a methods-based fit; geographic expertise and employer performance remain to be demonstrated.",
+    "scope": "My contribution and learning gaps",
+    "limits": "No independent audit of CV outcomes. No claim to local-language fluency, Hyderabad field networks or guaranteed political impact.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "I31",
+    "type": "Bounded inference",
+    "statement": "The produced work sample and candidate-reported methods support an interview proposition, not a guarantee of hiring or future results.",
+    "sources": [
+      "S02",
+      "S25"
+    ],
+    "locator": "M31",
+    "basis": "Premises: F35,F36,F02. The produced work sample and candidate-reported methods support an interview proposition, not a guarantee of hiring or future results.",
+    "scope": "Closing proposition",
+    "limits": "Fit and priorities must be tested with the actual hiring team.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "PASS:bounded inference",
+    "gate5": "PASS:traceability",
+    "release": "Bounded analysis"
+  },
+  {
+    "id": "R31",
+    "type": "Proposed work product",
+    "statement": "I can offer a careful research perspective, traceable synthesis and a practical path from analysis to a reviewed brief.",
+    "sources": [
+      "S02",
+      "S25"
+    ],
+    "locator": "M31",
+    "basis": "Premises: F35,F36,F02. The produced work sample and candidate-reported methods support an interview proposition, not a guarantee of hiring or future results.",
+    "scope": "Closing proposition",
+    "limits": "Fit and priorities must be tested with the actual hiring team.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  },
+  {
+    "id": "C31",
+    "type": "Candidate contribution",
+    "statement": "I would welcome a discussion of one issue brief, its strongest counterargument and the first work product the team needs.",
+    "sources": [
+      "S02",
+      "S25"
+    ],
+    "locator": "M31",
+    "basis": "Premises: F35,F36,F02. The produced work sample and candidate-reported methods support an interview proposition, not a guarantee of hiring or future results.",
+    "scope": "Closing proposition",
+    "limits": "Fit and priorities must be tested with the actual hiring team.",
+    "gate1": "PASS:premises or labelled proposal",
+    "gate2": "PASS:lineage and alternatives in notes",
+    "gate3": "PASS:scope and future tense explicit",
+    "gate4": "CONDITIONAL:untested implementation",
+    "gate5": "CONDITIONAL:manager approval/access/review",
+    "release": "Proposal only; not verified feasibility or guaranteed impact"
+  }
+]

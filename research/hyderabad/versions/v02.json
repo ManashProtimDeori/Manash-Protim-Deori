@@ -1,0 +1,838 @@
+{
+  "version": 2,
+  "cutoff": "8 October 2026",
+  "slides": [
+    {
+      "number": 1,
+      "id": "M01",
+      "title": "Hyderabad",
+      "section": "Independent application work sample",
+      "body": "Political dynamics, governance questions\nand my contribution to Inclusive Minds",
+      "contribution": "",
+      "facts": [
+        "F34",
+        "F37"
+      ],
+      "logic": "Editorial title for a professional research work sample.",
+      "limits": "Research cut-off 8 October 2026. Prepared independently; no employer or party endorsement.",
+      "layout": "cover",
+      "items": [],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Political dynamics, governance questions and my contribution to Inclusive Minds\n\nEVIDENCE: F34: Candidate resume lists MBA, IIM Shillong, 2023–25; Consultant Marketing and Strategy at Nation With Namo, May 2025–Apr 2026. [S25; Education/workExperience]; F37: Candidate resume lists manashdeori 09@gmail.com, LinkedIn/manash-protim-deori and openness to relocation. [S25; Header]\n\nREASONING: Editorial title for a professional research work sample.\n\nLIMITS / ASSUMPTIONS: Research cut-off 8 October 2026. Prepared independently; no employer or party endorsement.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: Cover/contact framing; no separate major recommendation.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: S25 | Portfolio resume data | Manash Protim Deori | https://github.com/ManashProtimDeori/Manash-Protim-Deori/blob/main/src/data/resume.ts | workExperience, projects, education and header | Repository read 2026-10-08\n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 2,
+      "id": "M02",
+      "title": "Power, place and public value",
+      "section": "Executive assessment",
+      "body": "Research question: Power, place and public value. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Power, place and public value. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 3,
+      "id": "M03",
+      "title": "Relevant methods; honest fit",
+      "section": "Organisation and role",
+      "body": "Research question: Relevant methods; honest fit. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Relevant methods; honest fit. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 4,
+      "id": "M04",
+      "title": "Define the unit before the insight",
+      "section": "Geographic foundation",
+      "body": "District, Assembly seat, Lok Sabha seat, municipal corporation and metropolitan planning region answer different questions.",
+      "contribution": "I would create a dated crosswalk with overlap rules, official boundary files and exclusions before analysis.",
+      "facts": [
+        "F03",
+        "F04",
+        "F05",
+        "F33"
+      ],
+      "logic": "The GO allocates municipal zones; election tables use constituency codes. A name match does not establish identical population or jurisdiction.",
+      "limits": "Classification schematic, not a geographic map. No unverified GIS polygon or area estimate is shown.",
+      "layout": "geography",
+      "items": [
+        [
+          "Electoral lens",
+          "AC 57–71: declared historical study set; four PCs analysed separately."
+        ],
+        [
+          "Municipal lens",
+          "GHMC / CMC / MMC: GO 55,11 February 2026."
+        ],
+        [
+          "Planning lens",
+          "HMR / FCDA instruments listed 12 March 2025; full crosswalk pending."
+        ]
+      ],
+      "chart": null,
+      "draft": false,
+      "notes": "ESTABLISHES: District, Assembly seat, Lok Sabha seat, municipal corporation and metropolitan planning region answer different questions.\n\nEVIDENCE: F03: GO 55 of 11 February 2026 reorganised CURE into GHMC, CMC and MMC with immediate effect. [S03, S04, S15; GO 55 pp 1–2]; F04: CMC comprises Serilingampally, Kukatpally and Qutbullapur zones; MMC comprises Malkajgiri, Uppal and L.B.Nagar zones. [S03; GO 55 operative zone allocation]; F05: GHMC comprises Shamshabad, Rajendernagar, Charminar, Golconda, Khairatabad and Secunderabad zones. [S03; GO 55 operative zone allocation]; F33: BuildNow lists GO 68 dated 12 March 2025 for expansion of HMR and GO 69 for FCDA. [S04; GO 68/69 entries]\n\nREASONING: The GO allocates municipal zones; election tables use constituency codes. A name match does not establish identical population or jurisdiction.\n\nLIMITS / ASSUMPTIONS: Classification schematic, not a geographic map. No unverified GIS polygon or area estimate is shown.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would create a dated crosswalk with overlap rules, official boundary files and exclusions before analysis.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: S03 | G.O.Ms.No.55: CURE reorganisation | Government of Telangana, MAUD | https://tg-bn-website-assets.flowwlabs.tech/GOs-and-ACTs/GO.Ms.No.55_11-02-2026.pdf | PDF pp.1–2; operative paragraphs 2–3 | 2026-02-11\nS04 | Government Orders and Acts | Government of Telangana, BuildNow | https://buildnow.telangana.gov.in/go-and-act/ | GO 55, GO 45, GO 16, GO 68 and GO 69 entries | Orders dated 2025–2026\nS15 | Moosarambagh bridge event and corporation logos | Government of Telangana, TG Digital Media | https://www.telangana.gov.in/news/press-releases/2026/08/honble-cm-sri-a-revanth-reddy-addresses-the-public-meeting-at-ghmc-sports-stadium-amberpet-hyderabad-following-the-inauguration-of-the-moosarambagh-high-level-bridge/ | English text, paragraph on three corporation logos | Event 2026-08-31; page 2026-09-01\n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 5,
+      "id": "M05",
+      "title": "Five gates, one traceable claim",
+      "section": "Research discipline",
+      "body": "Research question: Five gates, one traceable claim. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Five gates, one traceable claim. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 6,
+      "id": "M06",
+      "title": "The political timeline is not linear",
+      "section": "Historical turning points",
+      "body": "Research question: The political timeline is not linear. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: The political timeline is not linear. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 7,
+      "id": "M07",
+      "title": "Follow the decision, budget and remedy",
+      "section": "Governance architecture",
+      "body": "Research question: Follow the decision, budget and remedy. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Follow the decision, budget and remedy. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 8,
+      "id": "M08",
+      "title": "Different cycles, different baselines",
+      "section": "Election history",
+      "body": "Research question: Different cycles, different baselines. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Different cycles, different baselines. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 9,
+      "id": "M09",
+      "title": "The state result did not describe every seat",
+      "section": "2023 Assembly comparison",
+      "body": "Research question: The state result did not describe every seat. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: The state result did not describe every seat. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 10,
+      "id": "M10",
+      "title": "A ballot is an institutional choice",
+      "section": "2024 Lok Sabha comparison",
+      "body": "Research question: A ballot is an institutional choice. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: A ballot is an institutional choice. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 11,
+      "id": "M11",
+      "title": "Competition has several forms",
+      "section": "Political structure",
+      "body": "Research question: Competition has several forms. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Competition has several forms. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 12,
+      "id": "M12",
+      "title": "Economic strength is not equal access",
+      "section": "Political economy",
+      "body": "Research question: Economic strength is not equal access. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Economic strength is not equal access. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 13,
+      "id": "M13",
+      "title": "Measure the route from skill to opportunity",
+      "section": "Employment research agenda",
+      "body": "Research question: Measure the route from skill to opportunity. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Measure the route from skill to opportunity. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 14,
+      "id": "M14",
+      "title": "Urban expansion changes the research unit",
+      "section": "Housing and land",
+      "body": "Research question: Urban expansion changes the research unit. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Urban expansion changes the research unit. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 15,
+      "id": "M15",
+      "title": "Transport provision is not service access",
+      "section": "Mobility and financing",
+      "body": "Research question: Transport provision is not service access. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Transport provision is not service access. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 16,
+      "id": "M16",
+      "title": "Resilience needs a system view",
+      "section": "Water and environmental services",
+      "body": "Research question: Resilience needs a system view. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Resilience needs a system view. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 17,
+      "id": "M17",
+      "title": "Entitlement, access and experience differ",
+      "section": "Health, education and welfare",
+      "body": "Research question: Entitlement, access and experience differ. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Entitlement, access and experience differ. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 18,
+      "id": "M18",
+      "title": "Ambition must survive implementation",
+      "section": "Public finance",
+      "body": "Research question: Ambition must survive implementation. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Ambition must survive implementation. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 19,
+      "id": "M19",
+      "title": "Musi is an implementation and trust question",
+      "section": "Policy case study01",
+      "body": "Research question: Musi is an implementation and trust question. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Musi is an implementation and trust question. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 20,
+      "id": "M20",
+      "title": "Protect assets; verify every case",
+      "section": "Policy case study02",
+      "body": "Research question: Protect assets; verify every case. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Protect assets; verify every case. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 21,
+      "id": "M21",
+      "title": "Accountability needs a named handoff",
+      "section": "Coordination and power",
+      "body": "Research question: Accountability needs a named handoff. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Accountability needs a named handoff. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 22,
+      "id": "M22",
+      "title": "Public discourse is evidence about discourse",
+      "section": "Information quality",
+      "body": "Research question: Public discourse is evidence about discourse. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Public discourse is evidence about discourse. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 23,
+      "id": "M23",
+      "title": "Uncertainty is a research queue",
+      "section": "Known, disputed and unknown",
+      "body": "Research question: Uncertainty is a research queue. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Uncertainty is a research queue. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 24,
+      "id": "M24",
+      "title": "Start where errors change decisions",
+      "section": "Prioritised research agenda",
+      "body": "Research question: Start where errors change decisions. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Start where errors change decisions. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 25,
+      "id": "M25",
+      "title": "A work sample you can inspect",
+      "section": "Produced evidence brief",
+      "body": "Research question: A work sample you can inspect. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: A work sample you can inspect. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 26,
+      "id": "M26",
+      "title": "One workflow from discovery to refresh",
+      "section": "My proposed operating system",
+      "body": "Research question: One workflow from discovery to refresh. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: One workflow from discovery to refresh. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 27,
+      "id": "M27",
+      "title": "First 30 days: a defensible baseline",
+      "section": "Onboarding proposal",
+      "body": "Research question: First 30 days: a defensible baseline. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: First 30 days: a defensible baseline. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 28,
+      "id": "M28",
+      "title": "Days 31–60: validate the weak links",
+      "section": "Research validation proposal",
+      "body": "Research question: Days 31–60: validate the weak links. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Days 31–60: validate the weak links. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 29,
+      "id": "M29",
+      "title": "Days 61–90: improve and hand over",
+      "section": "Operational learning proposal",
+      "body": "Research question: Days 61–90: improve and hand over. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Days 61–90: improve and hand over. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 30,
+      "id": "M30",
+      "title": "Experience is evidence; transfer is a test",
+      "section": "My contribution and learning gaps",
+      "body": "Research question: Experience is evidence; transfer is a test. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Experience is evidence; transfer is a test. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 31,
+      "id": "M31",
+      "title": "Interview me for the work product",
+      "section": "Closing proposition",
+      "body": "Research question: Interview me for the work product. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.",
+      "contribution": "I would establish the source and scope before recommending a work product.",
+      "facts": [],
+      "logic": "Draft research question; no empirical conclusion released.",
+      "limits": "Unresolved draft pending verification.",
+      "layout": "columns",
+      "items": [
+        [
+          "Draft scope",
+          "Investigate the relevant original records."
+        ],
+        [
+          "Release condition",
+          "Resolve evidence and status gaps before assertion."
+        ]
+      ],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: Research question: Interview me for the work product. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.\n\nEVIDENCE: \n\nREASONING: Draft research question; no empirical conclusion released.\n\nLIMITS / ASSUMPTIONS: Unresolved draft pending verification.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: I would establish the source and scope before recommending a work product.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: \n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    },
+    {
+      "number": 32,
+      "id": "M32",
+      "title": "Thank you",
+      "section": "Manash Protim Deori",
+      "body": "For considering my application to Inclusive Minds\nPolitical consulting · Hyderabad\n\nmanashdeori 09@gmail.com\nlinkedin.com/in/manash-protim-deori",
+      "contribution": "",
+      "facts": [
+        "F37"
+      ],
+      "logic": "Contact and relocation information from the existing portfolio resume.",
+      "limits": "Independent application work sample. Appendix follows immediately.",
+      "layout": "thanks",
+      "items": [],
+      "chart": null,
+      "draft": true,
+      "notes": "ESTABLISHES: For considering my application to Inclusive Minds Political consulting · Hyderabad  manashdeori 09@gmail.com linkedin.com/in/manash-protim-deori\n\nEVIDENCE: F37: Candidate resume lists manashdeori 09@gmail.com, LinkedIn/manash-protim-deori and openness to relocation. [S25; Header]\n\nREASONING: Contact and relocation information from the existing portfolio resume.\n\nLIMITS / ASSUMPTIONS: Independent application work sample. Appendix follows immediately.\n\nALTERNATIVES: For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.\n\nHOW I WOULD CONTRIBUTE: Cover/contact framing; no separate major recommendation.\n\nPRACTICAL TEST: Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.\n\nFIVE GATES: Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.\n\nFULL REFERENCES: S25 | Portfolio resume data | Manash Protim Deori | https://github.com/ManashProtimDeori/Manash-Protim-Deori/blob/main/src/data/resume.ts | workExperience, projects, education and header | Repository read 2026-10-08\n\nINTERVIEW DEFENCE: Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority."
+    }
+  ],
+  "review": {
+    "iteration": 2,
+    "focus": "Geography and institutional definitions",
+    "timestamp": "2026-10-08T13:09:24.943233+00:00",
+    "input_version": "v01",
+    "output_version": "v02",
+    "input_sha256": "1d47596d41c01e67a9c01e753d1d0291dd0582a67455054dfc872e6a13c9699d",
+    "output_sha256": "4f660e44a852933add12340b3712e631176ccc81e969641d88eb5cbba40b093d",
+    "reviewer_method": "Single-system focused editorial review plus whole-deck structural regression audit; not independent human review.",
+    "change": "Installed GO 55 zone allocations and separated electoral, municipal and planning units; removed fictitious map.",
+    "affected_slides": [
+      4
+    ],
+    "sources_consulted": [
+      "S03",
+      "S04",
+      "S15",
+      "S25"
+    ],
+    "gates_rerun": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "preserved": "All previously supported numerical inputs, source IDs and correctly bounded wording unless a recorded correction was necessary.",
+    "regression_result": "32-slide sequence, source IDs, reasoning and limitations checked; no structural defects.",
+    "outstanding": [
+      "Exact requisition/open status",
+      "Current official civic poll notification and member/legal roster",
+      "Official2025 Jubilee finalForm20",
+      "Current service outcomes and authorised field validation"
+    ],
+    "next_focus": "Source collection and provenance"
+  }
+}

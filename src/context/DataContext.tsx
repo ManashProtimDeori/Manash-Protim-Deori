@@ -193,7 +193,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [projects, setProjects] = useState<Project[]>(() => {
     const stored = getStored(STORAGE_KEYS.PROJECTS, initialProjects);
     const requiredPortfolioLabs = initialProjects.filter(project =>
-      project.id === 'project-canonical-strategy' || project.id === 'project-olam-africa-strategy'
+      project.id === 'project-canonical-strategy' || project.id === 'project-olam-africa-strategy' || project.id === 'project-hyderabad-political-intelligence'
     );
     const missingRequired = requiredPortfolioLabs.filter(project =>
       !stored.some(existing => existing.id === project.id || existing.slug === project.slug)

@@ -18,6 +18,7 @@ import { CanonicalStrategyLabPage } from './pages/CanonicalStrategyLabPage';
 import { OlamAfricaGrowthStrategyPage } from './pages/OlamAfricaGrowthStrategyPage';
 import { CommercialEVGrowthAdvisoryPage } from './pages/CommercialEVGrowthAdvisoryPage';
 import { MeghalayaStrategicCommunicationsPage } from './pages/MeghalayaStrategicCommunicationsPage';
+const HyderabadPoliticalIntelligencePage = lazy(() => import('./pages/HyderabadPoliticalIntelligencePage').then(m => ({ default: m.HyderabadPoliticalIntelligencePage })));
 import { LabPage } from './pages/LabPage';
 import { ToolsPage } from './pages/ToolsPage';
 import { ToolDetailPage } from './pages/ToolDetailPage';
@@ -93,6 +94,7 @@ export const AppContent: React.FC = () => {
           <Route path="/work/olam-africa-growth-strategy" element={<OlamAfricaGrowthStrategyPage />} />
           <Route path="/work/india-commercial-ev-growth-advisory" element={<CommercialEVGrowthAdvisoryPage />} />
           <Route path="/work/strategic-communications-meghalaya" element={<MeghalayaStrategicCommunicationsPage />} />
+          <Route path="/work/hyderabad-political-intelligence" element={<HyderabadPoliticalIntelligencePage />} />
           <Route path="/work/:id" element={<ProjectDetailPage />} />
           <Route path="/director-os" element={<DirectorOSPage />} />
           <Route path="/lab" element={<LabPage />} />

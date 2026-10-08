@@ -1,0 +1,491 @@
+[
+  {
+    "id": "F01",
+    "text": "Inclusive Minds describes itself as INC-aligned and lists six work verticals.",
+    "sources": [
+      "S01"
+    ],
+    "locator": "About Us; Our Work",
+    "geography": "Organisation",
+    "reference_date": "Retrieved 2026-10-08",
+    "kind": "Verified fact",
+    "corroboration": "Employer is authoritative for its stated identity; effectiveness not inferred.",
+    "limit": ""
+  },
+  {
+    "id": "F02",
+    "text": "Employer Generalist post identifies Hyderabad on-site and experience in research, strategy, communication or project management.",
+    "sources": [
+      "S02"
+    ],
+    "locator": "Hiring post",
+    "geography": "Vacancy",
+    "reference_date": "Retrieved 2026-10-08",
+    "kind": "Employer statement",
+    "corroboration": "",
+    "limit": "Open status and exact applicant-targeted requisition unconfirmed."
+  },
+  {
+    "id": "F03",
+    "text": "GO 55 of 11 February 2026 reorganised CURE into GHMC, CMC and MMC with immediate effect.",
+    "sources": [
+      "S03",
+      "S04",
+      "S15"
+    ],
+    "locator": "GO 55 pp 1–2",
+    "geography": "CURE",
+    "reference_date": "2026-02-11",
+    "kind": "Verified fact",
+    "corroboration": "Official listing confirms instrument; later government event confirms corporation names. Shared state lineage.",
+    "limit": ""
+  },
+  {
+    "id": "F04",
+    "text": "CMC comprises Serilingampally, Kukatpally and Qutbullapur zones; MMC comprises Malkajgiri, Uppal and L.B.Nagar zones.",
+    "sources": [
+      "S03"
+    ],
+    "locator": "GO 55 operative zone allocation",
+    "geography": "CURE",
+    "reference_date": "2026-02-11",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": ""
+  },
+  {
+    "id": "F05",
+    "text": "GHMC comprises Shamshabad, Rajendernagar, Charminar, Golconda, Khairatabad and Secunderabad zones.",
+    "sources": [
+      "S03"
+    ],
+    "locator": "GO 55 operative zone allocation",
+    "geography": "CURE",
+    "reference_date": "2026-02-11",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": ""
+  },
+  {
+    "id": "F06",
+    "text": "HYDRAA describes its CURE-wide remit as disaster management and protection of government / public assets, under MAUD.",
+    "sources": [
+      "S05"
+    ],
+    "locator": "Mandate; Jurisdictional Coverage",
+    "geography": "CURE",
+    "reference_date": "Retrieved 2026-10-08",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": "Case-specific authority, due process and orders require case-specific legal review."
+  },
+  {
+    "id": "F07",
+    "text": "2023 Telangana Assembly seats won: INC 64; BRS 39; BJP 8; AIMIM 7; CPI 1.",
+    "sources": [
+      "S06"
+    ],
+    "locator": "WON column",
+    "geography": "Telangana",
+    "reference_date": "2023 election",
+    "kind": "Verified fact",
+    "corroboration": "ECI authoritative record; total independently recomputed 119.",
+    "limit": ""
+  },
+  {
+    "id": "F08",
+    "text": "In selected Assembly seats AC 57–71,2023 winners were BRS 7, AIMIM 7, BJP 1, INC 0.",
+    "sources": [
+      "S07"
+    ],
+    "locator": "AC 57–71",
+    "geography": "Declared 15-seat study set",
+    "reference_date": "2023 election",
+    "kind": "Derived statistic",
+    "corroboration": "Count of 15 named winners; list in appendix; total 15.",
+    "limit": "Selected historical set; not all Greater Hyderabad or current affiliation."
+  },
+  {
+    "id": "F09",
+    "text": "Nampally, 2023: winner 62,185; runner-up 60,148; margin 2,037 votes.",
+    "sources": [
+      "S07"
+    ],
+    "locator": "PDF p 3; winner/runner-up table",
+    "geography": "Nampally",
+    "reference_date": "2023 election",
+    "kind": "Verified fact",
+    "corroboration": "Recomputed 62185-60148=2037.",
+    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability."
+  },
+  {
+    "id": "F10",
+    "text": "Yakutpura, 2023: winner 46,153; runner-up 45,275; margin 878 votes.",
+    "sources": [
+      "S07"
+    ],
+    "locator": "PDF p 3; winner/runner-up table",
+    "geography": "Yakutpura",
+    "reference_date": "2023 election",
+    "kind": "Verified fact",
+    "corroboration": "Recomputed 46153-45275=878.",
+    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability."
+  },
+  {
+    "id": "F11",
+    "text": "Chandrayangutta, 2023: winner 99,776; runner-up 18,116; margin 81,660 votes.",
+    "sources": [
+      "S07"
+    ],
+    "locator": "PDF p 3; winner/runner-up table",
+    "geography": "Chandrayangutta",
+    "reference_date": "2023 election",
+    "kind": "Verified fact",
+    "corroboration": "Recomputed 99776-18116=81660.",
+    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability."
+  },
+  {
+    "id": "F12",
+    "text": "Malkajgiri, 2024 Lok Sabha: Eatala Rajender (BJP) led with 991,042 votes; runner-up 599,567.",
+    "sources": [
+      "S08"
+    ],
+    "locator": "p 580",
+    "geography": "Malkajgiri",
+    "reference_date": "2024 election",
+    "kind": "Verified fact",
+    "corroboration": "Highest candidate vote total in final ECI constituency table.",
+    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set."
+  },
+  {
+    "id": "F13",
+    "text": "Secunderabad, 2024 Lok Sabha: G.Kishan Reddy (BJP) led with 473,012 votes; runner-up 423,068.",
+    "sources": [
+      "S08"
+    ],
+    "locator": "p 581",
+    "geography": "Secunderabad",
+    "reference_date": "2024 election",
+    "kind": "Verified fact",
+    "corroboration": "Highest candidate vote total in final ECI constituency table.",
+    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set."
+  },
+  {
+    "id": "F14",
+    "text": "Hyderabad, 2024 Lok Sabha: Asaduddin Owaisi (AIMIM) led with 661,981 votes; runner-up 323,894.",
+    "sources": [
+      "S08"
+    ],
+    "locator": "p 583",
+    "geography": "Hyderabad",
+    "reference_date": "2024 election",
+    "kind": "Verified fact",
+    "corroboration": "Highest candidate vote total in final ECI constituency table.",
+    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set."
+  },
+  {
+    "id": "F15",
+    "text": "Chevella, 2024 Lok Sabha: Konda Vishweshwar Reddy (BJP) led with 809,882 votes; runner-up 636,985.",
+    "sources": [
+      "S08"
+    ],
+    "locator": "p 585",
+    "geography": "Chevella",
+    "reference_date": "2024 election",
+    "kind": "Verified fact",
+    "corroboration": "Highest candidate vote total in final ECI constituency table.",
+    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set."
+  },
+  {
+    "id": "F16",
+    "text": "First Telangana Assembly as of 2 June 2014: TRS 63, INC 21, out of 119.",
+    "sources": [
+      "S16"
+    ],
+    "locator": "Printed 410/PDF 63",
+    "geography": "Telangana",
+    "reference_date": "2014-06-02",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": ""
+  },
+  {
+    "id": "F17",
+    "text": "Contemporaneous 2018 reporting recorded TRS 88 and INC 19 Assembly seats.",
+    "sources": [
+      "S17",
+      "S18"
+    ],
+    "locator": "Updated results paragraphs",
+    "geography": "Telangana",
+    "reference_date": "2018-12-12",
+    "kind": "Reported historical fact",
+    "corroboration": "Two publications agree; shared ECI upstream. Full party aggregation not ingested.",
+    "limit": ""
+  },
+  {
+    "id": "F18",
+    "text": "Published 2016 GHMC recap: TRS 99, AIMIM 44, BJP 4, INC 2, TDP 1.",
+    "sources": [
+      "S19",
+      "S20"
+    ],
+    "locator": "Numerical result paragraphs",
+    "geography": "GHMC 2016 footprint",
+    "reference_date": "2016 election",
+    "kind": "Reported historical fact",
+    "corroboration": "NDTV recap agrees with contemporaneous PTI results; sums 150.",
+    "limit": "Direct TSEC dataset not accessed; descriptive context only."
+  },
+  {
+    "id": "F19",
+    "text": "Post-Neredmet 2020 reporting: TRS 56, BJP 48, AIMIM 44, INC 2.",
+    "sources": [
+      "S21",
+      "S22"
+    ],
+    "locator": "Results paragraphs; final Neredmet result",
+    "geography": "GHMC 2020 footprint",
+    "reference_date": "2020-12-10",
+    "kind": "Reported historical fact",
+    "corroboration": "Independent named reporting agrees; sums 150. Earlier 55 tally incomplete.",
+    "limit": "Not current corporation composition or a projection of 2026."
+  },
+  {
+    "id": "F20",
+    "text": "Congress candidate V.Naveen Yadav won the November 2025 Jubilee Hills by-election, according to corroborated reporting.",
+    "sources": [
+      "S23",
+      "S24"
+    ],
+    "locator": "Winner reports",
+    "geography": "Jubilee Hills",
+    "reference_date": "2025-11-14",
+    "kind": "Reported event",
+    "corroboration": "Reports agree on winner, disagree on totals. Totals removed.",
+    "limit": "Authoritative final Form 20 requested; no present membership/legal-status assertion."
+  },
+  {
+    "id": "F21",
+    "text": "2026–27 BE: H-CITY assistance to CURE ₹2,654 crore.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "Table 10 PDF 16",
+    "geography": "CURE allocation",
+    "reference_date": "FY 2026–27",
+    "kind": "Verified fact",
+    "corroboration": "PRS supplies fiscal scrutiny; primary line used for exact label.",
+    "limit": "Budget instrument spelling H-CITY preserved. Not actual expenditure."
+  },
+  {
+    "id": "F22",
+    "text": "2026–27 BE: Musi Riverfront development ₹1,500 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 16",
+    "geography": "Scheme allocation",
+    "reference_date": "FY 2026–27",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": ""
+  },
+  {
+    "id": "F23",
+    "text": "2026–27 BE: loans to HMWSSB for development ₹1,450 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 16",
+    "geography": "Scheme allocation",
+    "reference_date": "FY 2026–27",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": ""
+  },
+  {
+    "id": "F24",
+    "text": "2026–27 BE: Metro Rail Phase II ₹600 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 17",
+    "geography": "Scheme allocation",
+    "reference_date": "FY 2026–27",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": ""
+  },
+  {
+    "id": "F25",
+    "text": "2026–27 BE: loans to HMRL ₹500 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 17",
+    "geography": "Scheme allocation",
+    "reference_date": "FY 2026–27",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": "Separate financing line; not described as another ₹500 crore of Phase II construction."
+  },
+  {
+    "id": "F26",
+    "text": "2026–27 BE: 20 KL free-water reimbursement to HMWSSB ₹300 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 17",
+    "geography": "Scheme allocation",
+    "reference_date": "FY 2026–27",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": ""
+  },
+  {
+    "id": "F27",
+    "text": "State capital expenditure: 2025–26 RE ₹36,480.87 crore; 2026–27 BE ₹47,267.28 crore.",
+    "sources": [
+      "S09",
+      "S10"
+    ],
+    "locator": "Table 4 PDF 4",
+    "geography": "Telangana",
+    "reference_date": "FY 2025–26 RE and 2026–27 BE",
+    "kind": "Verified fact",
+    "corroboration": "PRS rounds capital outlay and describes rise of 30%; raw budget numbers used.",
+    "limit": ""
+  },
+  {
+    "id": "F28",
+    "text": "Nominal state capex BE/RE increase is 29.57%, rounded 29.6%.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Derived from F27",
+    "geography": "Telangana",
+    "reference_date": "FY 2026–27",
+    "kind": "Derived statistic",
+    "corroboration": "(47267.28/36480.87-1)*100=29.5673%; recomputed.",
+    "limit": "Plan-to-revised-plan comparison, not realised growth or inflation-adjusted change."
+  },
+  {
+    "id": "F29",
+    "text": "State 2026–27 BE: Indiramma Houses ₹5,500 crore; Mahalaxmi RTC ₹4,305 crore; Rajiv Aarogya Sri ₹1,143 crore.",
+    "sources": [
+      "S09"
+    ],
+    "locator": "Table 10 PDF 15",
+    "geography": "Telangana",
+    "reference_date": "FY 2026–27",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": "Statewide allocations; no Hyderabad beneficiary count or effect derived."
+  },
+  {
+    "id": "F30",
+    "text": "MRDCL describes Musi vision in terms of ecological restoration, sewage interception/treatment, floodplain zones and mobility/livelihoods.",
+    "sources": [
+      "S11"
+    ],
+    "locator": "Vision",
+    "geography": "Musi project",
+    "reference_date": "Retrieved 2026-10-08",
+    "kind": "Agency objectives",
+    "corroboration": "",
+    "limit": "Intended scope, not achieved outcomes."
+  },
+  {
+    "id": "F31",
+    "text": "At the 13 March 2026 Musi conference, the CM addressed compensation and livelihood concerns associated with relocation.",
+    "sources": [
+      "S12"
+    ],
+    "locator": "English compensation/livelihood paragraphs",
+    "geography": "Musi PhaseI",
+    "reference_date": "2026-03-13",
+    "kind": "Official statement",
+    "corroboration": "",
+    "limit": "No claim that commitments were fulfilled; household/cost totals excluded."
+  },
+  {
+    "id": "F32",
+    "text": "State investment portal identifies Genome Valley at Shamirpet and electronics manufacturing clusters.",
+    "sources": [
+      "S14"
+    ],
+    "locator": "Industrial-parks section",
+    "geography": "Named locations / Telangana",
+    "reference_date": "Retrieved 2026-10-08",
+    "kind": "Official sector description",
+    "corroboration": "",
+    "limit": "Not current jobs, output, access or geographic concentration measurements."
+  },
+  {
+    "id": "F33",
+    "text": "BuildNow lists GO 68 dated 12 March 2025 for expansion of HMR and GO 69 for FCDA.",
+    "sources": [
+      "S04"
+    ],
+    "locator": "GO 68/69 entries",
+    "geography": "Planning instruments",
+    "reference_date": "2025-03-12",
+    "kind": "Verified fact",
+    "corroboration": "",
+    "limit": "Full boundary polygons and area totals not ingested; no numerical metropolitan area claim."
+  },
+  {
+    "id": "F34",
+    "text": "Candidate resume lists MBA, IIM Shillong, 2023–25; Consultant Marketing and Strategy at Nation With Namo, May 2025–Apr 2026.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "Education/workExperience",
+    "geography": "Candidate",
+    "reference_date": "CV periods",
+    "kind": "Candidate self-report",
+    "corroboration": "",
+    "limit": "Not independently audited."
+  },
+  {
+    "id": "F35",
+    "text": "Candidate resume reports introducing an evidence-based review system for a seven-person political-intelligence team.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "workExperience bullet 3",
+    "geography": "Candidate work",
+    "reference_date": "2025–26",
+    "kind": "Candidate self-report",
+    "corroboration": "",
+    "limit": "Capability evidence, not independently proven team outcome."
+  },
+  {
+    "id": "F36",
+    "text": "Candidate resume reports modelling Meghalaya PDS and analysing 4,500+government records.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "Projects, Jul–Sep 2024",
+    "geography": "Meghalaya project",
+    "reference_date": "2024",
+    "kind": "Candidate self-report",
+    "corroboration": "",
+    "limit": "No claim that the model itself caused public-service improvements."
+  },
+  {
+    "id": "F37",
+    "text": "Candidate resume lists manashdeori 09@gmail.com, LinkedIn/manash-protim-deori and openness to relocation.",
+    "sources": [
+      "S25"
+    ],
+    "locator": "Header",
+    "geography": "Candidate",
+    "reference_date": "Retrieved 2026-10-08",
+    "kind": "Candidate self-report",
+    "corroboration": "",
+    "limit": ""
+  }
+]

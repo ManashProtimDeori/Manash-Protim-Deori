@@ -1,0 +1,16 @@
+{
+  "latest": "versions/v18.json",
+  "completed_rounds": 18,
+  "next_round": 19,
+  "registers": [
+    "facts.json",
+    "sources.json"
+  ],
+  "outstanding": [
+    "Exact requisition/open status",
+    "Current official civic poll notification and member/legal roster",
+    "Official2025 Jubilee finalForm20",
+    "Current service outcomes and authorised field validation"
+  ],
+  "next_action": "Full traceability and five-gate closure"
+}
