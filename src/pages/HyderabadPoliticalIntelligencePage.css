@@ -9,3 +9,20 @@
 @media(max-width:1000px){.hyd-hero{min-height:700px}.hyd-hero-art{opacity:.52;object-position:30% center}.hyd-hero-copy{background:linear-gradient(90deg,#f8f5ede8,#f8f5ed99 70%,transparent)}.hyd-hero h1{font-size:6rem}.hyd-hero h1 span{font-size:3.2rem}.hyd-findings{gap:20px}.hyd-contribution{padding:20px}.hyd-meta{gap:16px}.hyd-meta span{display:block}.hyd-meta strong{display:block}.hyd-download-bar{align-items:flex-start;flex-direction:column}.hyd-method{gap:40px}.hyd-finding>p{min-height:150px}}
 @media(max-width:640px){.hyd-hero{min-height:670px}.hyd-hero-art{object-position:40% center;opacity:.36}.hyd-hero-copy{padding:30px 6% 46px}.hyd-back{margin-bottom:36px}.hyd-hero h1{font-size:4.6rem;margin-top:28px}.hyd-hero h1 span{font-size:2.6rem;margin-top:20px}.hyd-lede{font-size:.93rem}.hyd-actions{gap:8px}.hyd-button{padding:10px 13px;font-size:.72rem}.hyd-meta{grid-template-columns:repeat(2,1fr);gap:23px}.hyd-meta span{display:flex;font-size:.68rem}.hyd-meta strong{font-size:1.9rem}.hyd-section,.hyd-deck-section{padding:58px 6%}.hyd-section-heading h2{font-size:2.5rem}.hyd-section-heading>p:last-child{font-size:.92rem}.hyd-findings,.hyd-method{grid-template-columns:1fr;gap:36px}.hyd-findings{margin-top:38px}.hyd-finding>p{min-height:0}.hyd-finding h3{font-size:1.9rem;margin:15px 0}.hyd-contribution{margin:22px 0}.hyd-viewer-toolbar{padding:11px 10px;gap:6px;flex-wrap:wrap}.hyd-viewer-toolbar label{display:none}.hyd-viewer-toolbar select{flex-basis:100%;order:2;font-size:.75rem}.hyd-slide-arrows{width:100%;justify-content:space-between}.hyd-slide-caption{padding:23px 18px}.hyd-slide-caption h3{font-size:1.5rem}.hyd-slide-caption>p{font-size:.8rem}.hyd-download-bar .hyd-actions{gap:8px}.hyd-closing{padding:64px 7%}.hyd-closing h2{font-size:2.75rem}.hyd-method-copy{margin-top:0}}
 @media(prefers-reduced-motion:reduce){.hyd-case *{transition:none!important;scroll-behavior:auto!important}}
+
+/* Keep this editorial case study legible within either portfolio theme. */
+#main-content .hyd-case.hyd-case h1,#main-content .hyd-case.hyd-case h2,#main-content .hyd-case.hyd-case h3{font-family:Georgia,'Times New Roman',serif!important;font-weight:400!important;color:inherit!important;letter-spacing:-.035em!important}
+#main-content .hyd-case.hyd-case h1 span{font-family:inherit!important;font-weight:inherit!important;color:inherit!important}
+#main-content .hyd-case.hyd-case p{color:inherit!important;max-width:none!important}
+#main-content .hyd-case.hyd-case .hyd-eyebrow{color:var(--hyd-saffron)!important}
+#main-content .hyd-case.hyd-case .hyd-lede{max-width:590px!important;color:#40534d!important}
+#main-content .hyd-case.hyd-case .hyd-byline{color:#64716b!important}
+#main-content .hyd-case.hyd-case .hyd-section-heading>p:last-child{max-width:670px!important;color:#5f6e66!important}
+#main-content .hyd-case.hyd-case .hyd-finding>p,#main-content .hyd-case.hyd-case .hyd-method-copy>p{color:#52645a!important}
+#main-content .hyd-case.hyd-case .hyd-contribution p{color:var(--hyd-paper)!important}
+#main-content .hyd-case.hyd-case .hyd-contribution small{color:var(--hyd-gold)!important}
+#main-content .hyd-case.hyd-case .hyd-caption-contribution small{color:var(--hyd-green)!important}
+#main-content .hyd-case.hyd-case .hyd-slide-caption>p,#main-content .hyd-case.hyd-case .hyd-caption-contribution p{max-width:850px!important}
+#main-content .hyd-case.hyd-case .hyd-closing .hyd-eyebrow{color:var(--hyd-gold)!important}
+#main-content .hyd-case.hyd-case .hyd-closing>p:not(.hyd-eyebrow){max-width:600px!important;color:#c1cec6!important}
+#main-content .hyd-case.hyd-case .hyd-closing small{color:#93a99c!important}
