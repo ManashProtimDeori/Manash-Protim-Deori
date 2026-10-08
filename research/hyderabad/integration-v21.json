@@ -1,0 +1,33 @@
+{
+  "version": "v21",
+  "approved": true,
+  "baseline_commit": "c5ab9d8ac00c9180b880fa50f3e5f99682e1dac1",
+  "baseline_sha256": "3065595eb9868dae5b296927bfca73214a710b334a29c89f175575c964bbbbd4",
+  "changes": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10",
+    "G11",
+    "G12",
+    "G13",
+    "G14",
+    "G15",
+    "G16",
+    "G17",
+    "G18"
+  ],
+  "blocked_facts": [
+    "F08",
+    "F09",
+    "F10",
+    "F11",
+    "F16"
+  ]
+}

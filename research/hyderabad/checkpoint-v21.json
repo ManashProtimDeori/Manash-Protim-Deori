@@ -1,0 +1,12 @@
+{
+  "latest": "versions/v21.json",
+  "audit_rounds": 10,
+  "approved_integration": true,
+  "blocked": [
+    "F08",
+    "F09",
+    "F10",
+    "F11",
+    "F16"
+  ]
+}

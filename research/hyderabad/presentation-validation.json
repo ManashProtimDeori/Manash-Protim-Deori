@@ -1,7 +1,7 @@
 {
   "schemaVersion": "presentation-finalization.v1",
-  "finalSha256": "32541b0f177a2b744c7d50c1008636d99e911fc6b59763e3bc6c79287557f22e",
-  "byteCount": 2555005,
+  "finalSha256": "b1f3489bbb89a20eefef1cacc2eb61f7f133aac88a48eb3ea88325fbc26b847f",
+  "byteCount": 2556452,
   "packageIntegrity": {
     "chart_count": 3,
     "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
@@ -19,15 +19,15 @@
     "finding_count": 0,
     "findings": [],
     "font_policy": {
-      "checked_text_script_count": 1291,
+      "checked_text_script_count": 1358,
       "native_font_rendering_verified": false,
       "observed_font_families": [
         "Bitstream Charter",
         "DejaVu Sans"
       ],
       "observed_font_use_counts": {
-        "Bitstream Charter": 288,
-        "DejaVu Sans": 1003
+        "Bitstream Charter": 294,
+        "DejaVu Sans": 1064
       },
       "passed": true,
       "performed": true
@@ -42,38 +42,38 @@
     "exitCode": 0,
     "findingCount": 0,
     "fontPolicy": {
-      "checked_text_script_count": 1291,
+      "checked_text_script_count": 1358,
       "native_font_rendering_verified": false,
       "observed_font_families": [
         "Bitstream Charter",
         "DejaVu Sans"
       ],
       "observed_font_use_counts": {
-        "Bitstream Charter": 288,
-        "DejaVu Sans": 1003
+        "Bitstream Charter": 294,
+        "DejaVu Sans": 1064
       },
       "passed": true,
       "performed": true
     }
   },
   "fontSelection": {
-    "basis": "design",
+    "basis": "reference",
     "approvedFamilies": [
       "Bitstream Charter",
       "DejaVu Sans"
     ],
     "scriptFonts": {},
-    "referenceSha256": null,
-    "referenceFontsVerifiedInEncodedText": false,
-    "checked_text_script_count": 1291,
+    "referenceSha256": "32541b0f177a2b744c7d50c1008636d99e911fc6b59763e3bc6c79287557f22e",
+    "referenceFontsVerifiedInEncodedText": true,
+    "checked_text_script_count": 1358,
     "native_font_rendering_verified": false,
     "observed_font_families": [
       "Bitstream Charter",
       "DejaVu Sans"
     ],
     "observed_font_use_counts": {
-      "Bitstream Charter": 288,
-      "DejaVu Sans": 1003
+      "Bitstream Charter": 294,
+      "DejaVu Sans": 1064
     },
     "passed": true,
     "performed": true
@@ -82,7 +82,7 @@
     "performed": true,
     "passed": true,
     "slideCount": 77,
-    "sha256": "32541b0f177a2b744c7d50c1008636d99e911fc6b59763e3bc6c79287557f22e",
+    "sha256": "b1f3489bbb89a20eefef1cacc2eb61f7f133aac88a48eb3ea88325fbc26b847f",
     "nodeExecutable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node"
   },
   "nativeTableArithmetic": {
@@ -156,7 +156,7 @@
     "native_chart_count": 3,
     "native_powerpoint_verified": false,
     "passed": true,
-    "presentation_sha256": "32541b0f177a2b744c7d50c1008636d99e911fc6b59763e3bc6c79287557f22e",
+    "presentation_sha256": "b1f3489bbb89a20eefef1cacc2eb61f7f133aac88a48eb3ea88325fbc26b847f",
     "schema_version": "presentation-native-chart-titles.v1",
     "slide_count": 77,
     "source_text_emitted": false,
@@ -210,8 +210,13 @@
       "failed_slides": [],
       "formal_human_reviewed": false,
       "native_application_open_verified": false,
-      "package_sha256": "32541b0f177a2b744c7d50c1008636d99e911fc6b59763e3bc6c79287557f22e",
+      "package_sha256": "b1f3489bbb89a20eefef1cacc2eb61f7f133aac88a48eb3ea88325fbc26b847f",
       "passed": true,
+      "required_embedded_workbook_slides": [
+        8,
+        11,
+        18
+      ],
       "results": [
         {
           "approved_source_figure_exception": false,
@@ -283,6 +288,7 @@
       "schema_version": "owner-private.quantitative-chart-native-gate.v1",
       "slide_count": 77,
       "source_attachments_accessed": false,
+      "target_application": "portable",
       "validated_slide_count": 3
     },
     "exitCode": 0,
@@ -292,56 +298,11 @@
       11,
       18
     ],
-    "approvedSourceFigureExceptionSlides": []
-  },
-  "chartDataPackaging": {
-    "conversion": "chart_data_snapshot",
-    "converted_chart_count": 3,
-    "converted_charts": [
-      {
-        "chart_part": "ppt/slides/charts/chart1.xml",
-        "owner_slide": 8,
-        "point_count": 10,
-        "series_count": 2,
-        "workbook_part": "ppt/embeddings/chart-data-snapshot-001.xlsx"
-      },
-      {
-        "chart_part": "ppt/slides/charts/chart2.xml",
-        "owner_slide": 11,
-        "point_count": 3,
-        "series_count": 1,
-        "workbook_part": "ppt/embeddings/chart-data-snapshot-002.xlsx"
-      },
-      {
-        "chart_part": "ppt/slides/charts/chart3.xml",
-        "owner_slide": 18,
-        "point_count": 2,
-        "series_count": 1,
-        "workbook_part": "ppt/embeddings/chart-data-snapshot-003.xlsx"
-      }
-    ],
-    "detected_chart_owner_slides": [
+    "approvedSourceFigureExceptionSlides": [],
+    "requiredEmbeddedWorkbookChartOwnerSlides": [
       8,
       11,
       18
-    ],
-    "experimental": true,
-    "input_sha256": "015dd5000e138705e7a6197031828c5eda1710419969bf28f26f9b60b4a5144e",
-    "new_formulas_describe_snapshot_only": true,
-    "output_bytes": 2555005,
-    "output_sha256": "32541b0f177a2b744c7d50c1008636d99e911fc6b59763e3bc6c79287557f22e",
-    "portable_chart_validation_passed": true,
-    "portable_validated_owner_slides": [
-      8,
-      11,
-      18
-    ],
-    "preserved_existing_workbook_chart_count": 0,
-    "preserved_existing_workbook_charts": [],
-    "schema_version": "experimental.literal-chart-workbook-snapshot.v1",
-    "source_formula_required_slides": [],
-    "source_formulas_preserved": false,
-    "source_workbook_preserved": false,
-    "source_workbook_required_slides": []
+    ]
   }
 }

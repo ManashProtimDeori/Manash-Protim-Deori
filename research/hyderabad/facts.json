@@ -10,7 +10,10 @@
     "reference_date": "Retrieved 2026-10-08",
     "kind": "Verified fact",
     "corroboration": "Employer is authoritative for its stated identity; effectiveness not inferred.",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S01 About Us/Our Work supports INC alignment and six listed verticals; employer self-description only."
   },
   {
     "id": "F02",
@@ -23,7 +26,10 @@
     "reference_date": "Retrieved 2026-10-08",
     "kind": "Employer statement",
     "corroboration": "",
-    "limit": "Open status and exact applicant-targeted requisition unconfirmed."
+    "limit": "Open status and exact applicant-targeted requisition unconfirmed.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S02 public employer-authored Generalist post supports Hyderabad/on-site and named experience areas; exact requisition and current acceptance remain unknown."
   },
   {
     "id": "F03",
@@ -38,7 +44,10 @@
     "reference_date": "2026-02-11",
     "kind": "Verified fact",
     "corroboration": "Official listing confirms instrument; later government event confirms corporation names. Shared state lineage.",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S03 GO Ms 55, 11 February 2026, p.1: three municipal corporations and immediate effect; linked by official BuildNow index S04."
   },
   {
     "id": "F04",
@@ -51,7 +60,10 @@
     "reference_date": "2026-02-11",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S03 pp.1–2 lists the three zones each for Cyberabad and Malkajgiri corporations."
   },
   {
     "id": "F05",
@@ -64,7 +76,10 @@
     "reference_date": "2026-02-11",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S03 pp.1–2 lists the six GHMC zones; these are zones, not Assembly seats."
   },
   {
     "id": "F06",
@@ -77,7 +92,10 @@
     "reference_date": "Retrieved 2026-10-08",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": "Case-specific authority, due process and orders require case-specific legal review."
+    "limit": "Case-specific authority, due process and orders require case-specific legal review.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S05 official HYDRAA About page states CURE-wide public-asset/disaster remit under MAUD; no case-specific legality or performance established."
   },
   {
     "id": "F07",
@@ -90,7 +108,10 @@
     "reference_date": "2023 election",
     "kind": "Verified fact",
     "corroboration": "ECI authoritative record; total independently recomputed 119.",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S06 ECI Performance of Political Parties, p.1, freshly readable through web retrieval: INC64/BRS39/BJP8/AIMIM7/CPI1."
   },
   {
     "id": "F08",
@@ -101,9 +122,12 @@
     "locator": "AC 57–71",
     "geography": "Declared 15-seat study set",
     "reference_date": "2023 election",
-    "kind": "Derived statistic",
+    "kind": "Historical record, fresh recheck pending",
     "corroboration": "Count of 15 named winners; list in appendix; total 15.",
-    "limit": "Selected historical set; not all Greater Hyderabad or current affiliation."
+    "limit": "Selected historical set; not all Greater Hyderabad or current affiliation. Original passage could not be freshly retrieved. Internal arithmetic is not a provenance check.",
+    "verification_status": "Blocked",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S07 successful-candidate list was only partially readable; target AC57–71 passage could not be freshly retrieved. Deck table totals reconcile internally, but that does not verify original election rows."
   },
   {
     "id": "F09",
@@ -114,9 +138,12 @@
     "locator": "PDF p 3; winner/runner-up table",
     "geography": "Nampally",
     "reference_date": "2023 election",
-    "kind": "Verified fact",
+    "kind": "Historical record, fresh recheck pending",
     "corroboration": "Recomputed 62185-60148=2037.",
-    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability."
+    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability. Original passage could not be freshly retrieved. Internal arithmetic is not a provenance check.",
+    "verification_status": "Blocked",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S07 target winner/runner-up rows could not be freshly retrieved. 62,185−60,148=2,037 is internally correct; input provenance remains pending."
   },
   {
     "id": "F10",
@@ -127,9 +154,12 @@
     "locator": "PDF p 3; winner/runner-up table",
     "geography": "Yakutpura",
     "reference_date": "2023 election",
-    "kind": "Verified fact",
+    "kind": "Historical record, fresh recheck pending",
     "corroboration": "Recomputed 46153-45275=878.",
-    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability."
+    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability. Original passage could not be freshly retrieved. Internal arithmetic is not a provenance check.",
+    "verification_status": "Blocked",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S07 target rows unavailable in fresh review. 46,153−45,275=878 is internally correct; original counts not freshly cleared."
   },
   {
     "id": "F11",
@@ -140,9 +170,12 @@
     "locator": "PDF p 3; winner/runner-up table",
     "geography": "Chandrayangutta",
     "reference_date": "2023 election",
-    "kind": "Verified fact",
+    "kind": "Historical record, fresh recheck pending",
     "corroboration": "Recomputed 99776-18116=81660.",
-    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability."
+    "limit": "Different runner-up parties; margin does not measure community cohesion or future probability. Original passage could not be freshly retrieved. Internal arithmetic is not a provenance check.",
+    "verification_status": "Blocked",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S07 target rows unavailable in fresh review. 99,776−18,116=81,660 is internally correct; original counts not freshly cleared."
   },
   {
     "id": "F12",
@@ -155,7 +188,10 @@
     "reference_date": "2024 election",
     "kind": "Verified fact",
     "corroboration": "Highest candidate vote total in final ECI constituency table.",
-    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set."
+    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S08 ECI 2024 detailed result, printed report p.580: Eatala Rajender BJP991,042, next599,567."
   },
   {
     "id": "F13",
@@ -168,7 +204,10 @@
     "reference_date": "2024 election",
     "kind": "Verified fact",
     "corroboration": "Highest candidate vote total in final ECI constituency table.",
-    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set."
+    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S08 printed report p.581: G.Kishan Reddy BJP473,012, next423,068."
   },
   {
     "id": "F14",
@@ -181,7 +220,10 @@
     "reference_date": "2024 election",
     "kind": "Verified fact",
     "corroboration": "Highest candidate vote total in final ECI constituency table.",
-    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set."
+    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S08 printed report p.583: Asaduddin Owaisi AIMIM661,981, next323,894."
   },
   {
     "id": "F15",
@@ -194,7 +236,10 @@
     "reference_date": "2024 election",
     "kind": "Verified fact",
     "corroboration": "Highest candidate vote total in final ECI constituency table.",
-    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set."
+    "limit": "Election-time results; four PCs have boundaries different from the 15-seat Assembly set.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S08 printed report p.585: Konda Vishweshwar Reddy BJP809,882, next636,985."
   },
   {
     "id": "F16",
@@ -205,9 +250,12 @@
     "locator": "Printed 410/PDF 63",
     "geography": "Telangana",
     "reference_date": "2014-06-02",
-    "kind": "Verified fact",
+    "kind": "Historical record, fresh recheck pending",
     "corroboration": "",
-    "limit": ""
+    "limit": "Original passage could not be freshly retrieved. Internal arithmetic is not a provenance check.",
+    "verification_status": "Blocked",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S16 Lok Sabha Secretariat September2014 journal identified but the relevant 63/21 passage could not be freshly read; timeout/502. Preserve as pending fresh confirmation."
   },
   {
     "id": "F17",
@@ -221,7 +269,10 @@
     "reference_date": "2018-12-12",
     "kind": "Reported historical fact",
     "corroboration": "Two publications agree; shared ECI upstream. Full party aggregation not ingested.",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S17/S18 contemporaneous reporting supports TRS88/INC19. S17 table retains an unfinished overall total (118 won/1 leading). Official 2018 Gazette index found; linked PDF not retrievable."
   },
   {
     "id": "F18",
@@ -235,7 +286,10 @@
     "reference_date": "2016 election",
     "kind": "Reported historical fact",
     "corroboration": "NDTV recap agrees with contemporaneous PTI results; sums 150.",
-    "limit": "Direct TSEC dataset not accessed; descriptive context only."
+    "limit": "Direct TSEC dataset not accessed; descriptive context only.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S19 NDTV recap and S20 PTI/New Indian Express report support historical GHMC99/44/4/2/1. Direct TSEC result dataset still pending."
   },
   {
     "id": "F19",
@@ -249,11 +303,14 @@
     "reference_date": "2020-12-10",
     "kind": "Reported historical fact",
     "corroboration": "Independent named reporting agrees; sums 150. Earlier 55 tally incomplete.",
-    "limit": "Not current corporation composition or a projection of 2026."
+    "limit": "Not current corporation composition or a projection of 2026.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S21 Indian Express and S22 Tribune support later post-Neredmet GHMC56/48/44/2, rather than early55. Direct TSEC dataset still pending."
   },
   {
     "id": "F20",
-    "text": "Congress candidate V.Naveen Yadav won the November 2025 Jubilee Hills by-election, according to corroborated reporting.",
+    "text": "Congress candidate V. Naveen Yadav won the November 2025 Jubilee Hills by-election, according to Times Group reporting.",
     "sources": [
       "S23",
       "S24"
@@ -262,8 +319,11 @@
     "geography": "Jubilee Hills",
     "reference_date": "2025-11-14",
     "kind": "Reported event",
-    "corroboration": "Reports agree on winner, disagree on totals. Totals removed.",
-    "limit": "Authoritative final Form 20 requested; no present membership/legal-status assertion."
+    "corroboration": "S23 and S24 share Times Group lineage; they are not independent confirmations. Official declaration/Form 20 pending.",
+    "limit": "Authoritative final Form 20 requested; no present membership/legal-status assertion. S23/S24 share Times Group lineage. Official declaration/Form 20 pending.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S23 ET/S24 TOI report Congress V.Naveen Yadav victory in November2025. Both are Times Group publications. Official CEO Form21-D link found, but document not read; final quantitative totals remain excluded."
   },
   {
     "id": "F21",
@@ -272,12 +332,15 @@
       "S09",
       "S10"
     ],
-    "locator": "Table 10 PDF 16",
+    "locator": "S09 p.16, Table 10, row 32",
     "geography": "CURE allocation",
     "reference_date": "FY 2026–27",
     "kind": "Verified fact",
     "corroboration": "PRS supplies fiscal scrutiny; primary line used for exact label.",
-    "limit": "Budget instrument spelling H-CITY preserved. Not actual expenditure."
+    "limit": "Budget instrument spelling H-CITY preserved. Not actual expenditure.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S09 printed p.16, Table 10 row 32: H-CITY assistance to CURE, 2,654 crore, 2026–27 BE. Budget provision only."
   },
   {
     "id": "F22",
@@ -285,12 +348,15 @@
     "sources": [
       "S09"
     ],
-    "locator": "Table 10 PDF 16",
+    "locator": "S09 p.16, Table 10, row 36",
     "geography": "Scheme allocation",
     "reference_date": "FY 2026–27",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S09 printed p.16, Table 10 row 36: Musi Riverfront development, 1,500 crore, 2026–27 BE. Budget provision only."
   },
   {
     "id": "F23",
@@ -298,12 +364,15 @@
     "sources": [
       "S09"
     ],
-    "locator": "Table 10 PDF 16",
+    "locator": "S09 p.16, Table 10, row 38",
     "geography": "Scheme allocation",
     "reference_date": "FY 2026–27",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S09 printed p.16, Table 10 row 38: HMWSSB development loans, 1,450 crore, 2026–27 BE. Budget provision only."
   },
   {
     "id": "F24",
@@ -311,12 +380,15 @@
     "sources": [
       "S09"
     ],
-    "locator": "Table 10 PDF 17",
+    "locator": "S09 p.17, Table 10, row 50",
     "geography": "Scheme allocation",
     "reference_date": "FY 2026–27",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S09 printed p.17, Table 10 row 50: Metro Rail Phase II, 600 crore, 2026–27 BE. Budget provision only."
   },
   {
     "id": "F25",
@@ -324,12 +396,15 @@
     "sources": [
       "S09"
     ],
-    "locator": "Table 10 PDF 17",
+    "locator": "S09 p.17, Table 10, row 57",
     "geography": "Scheme allocation",
     "reference_date": "FY 2026–27",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": "Separate financing line; not described as another ₹500 crore of Phase II construction."
+    "limit": "Separate financing line; not described as another ₹500 crore of Phase II construction.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S09 printed p.17, Table 10 row 57: HMRL loans, 500 crore, 2026–27 BE. Budget provision only."
   },
   {
     "id": "F26",
@@ -337,12 +412,15 @@
     "sources": [
       "S09"
     ],
-    "locator": "Table 10 PDF 17",
+    "locator": "S09 p.17, Table 10, row 69",
     "geography": "Scheme allocation",
     "reference_date": "FY 2026–27",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S09 printed p.17, Table 10 row 69: 20 KL water reimbursement, 300 crore, 2026–27 BE. Budget provision only."
   },
   {
     "id": "F27",
@@ -351,12 +429,15 @@
       "S09",
       "S10"
     ],
-    "locator": "Table 4 PDF 4",
+    "locator": "S09 p.4, row VII, RE/BE columns",
     "geography": "Telangana",
     "reference_date": "FY 2025–26 RE and 2026–27 BE",
     "kind": "Verified fact",
     "corroboration": "PRS rounds capital outlay and describes rise of 30%; raw budget numbers used.",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S09 printed p.4, VII Capital Expenditure: 36,480.87 crore 2025–26 RE and 47,267.28 crore 2026–27 BE; fiscal-stage comparison only."
   },
   {
     "id": "F28",
@@ -369,7 +450,10 @@
     "reference_date": "FY 2026–27",
     "kind": "Derived statistic",
     "corroboration": "(47267.28/36480.87-1)*100=29.5673%; recomputed.",
-    "limit": "Plan-to-revised-plan comparison, not realised growth or inflation-adjusted change."
+    "limit": "Plan-to-revised-plan comparison, not realised growth or inflation-adjusted change.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "Recomputed from F27: (47,267.28/36,480.87−1)×100=29.5673047271%;29.57% or29.6% is correct rounding."
   },
   {
     "id": "F29",
@@ -377,12 +461,15 @@
     "sources": [
       "S09"
     ],
-    "locator": "Table 10 PDF 15",
+    "locator": "S09 p.15, Table 10, row 3/4/7",
     "geography": "Telangana",
     "reference_date": "FY 2026–27",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": "Statewide allocations; no Hyderabad beneficiary count or effect derived."
+    "limit": "Statewide allocations; no Hyderabad beneficiary count or effect derived.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S09 printed p.15, Table 10 row 3/4/7: Indiramma Houses 5,500; Mahalaxmi RTC 4,305; Rajiv Aarogya Sri 1,143 crore, 2026–27 BE. Budget provision only."
   },
   {
     "id": "F30",
@@ -395,7 +482,10 @@
     "reference_date": "Retrieved 2026-10-08",
     "kind": "Agency objectives",
     "corroboration": "",
-    "limit": "Intended scope, not achieved outcomes."
+    "limit": "Intended scope, not achieved outcomes.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S11 MRDCL Vision Musi page supports stated ecology/sewage/floodplain/mobility/livelihood objectives; objectives are not achieved outcomes."
   },
   {
     "id": "F31",
@@ -408,7 +498,10 @@
     "reference_date": "2026-03-13",
     "kind": "Official statement",
     "corroboration": "",
-    "limit": "No claim that commitments were fulfilled; household/cost totals excluded."
+    "limit": "No claim that commitments were fulfilled; household/cost totals excluded.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S12 official13March2026 conference release supports CM statements on compensation/livelihoods; updated-page timestamp is distinct from event date."
   },
   {
     "id": "F32",
@@ -421,7 +514,10 @@
     "reference_date": "Retrieved 2026-10-08",
     "kind": "Official sector description",
     "corroboration": "",
-    "limit": "Not current jobs, output, access or geographic concentration measurements."
+    "limit": "Not current jobs, output, access or geographic concentration measurements.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S14 official investment portal identifies Genome Valley at Shamirpet and electronics clusters; promotional location descriptions do not verify jobs, GDP, pay or access."
   },
   {
     "id": "F33",
@@ -434,7 +530,10 @@
     "reference_date": "2025-03-12",
     "kind": "Verified fact",
     "corroboration": "",
-    "limit": "Full boundary polygons and area totals not ingested; no numerical metropolitan area claim."
+    "limit": "Full boundary polygons and area totals not ingested; no numerical metropolitan area claim.",
+    "verification_status": "Supported",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S04 official BuildNow index lists GO68 and GO69 dated12March2025; GO69 FCDA text additionally read. Index claim is supported; full HMR legal/GIS crosswalk still pending."
   },
   {
     "id": "F34",
@@ -447,7 +546,10 @@
     "reference_date": "CV periods",
     "kind": "Candidate self-report",
     "corroboration": "",
-    "limit": "Not independently audited."
+    "limit": "Not independently audited.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S25 owner-controlled resume at frozen GitHub commit lists MBA IIMShillong2023–25 and Nation With Namo role May2025–Apr2026; documentary self-report, not independent credential verification."
   },
   {
     "id": "F35",
@@ -460,7 +562,10 @@
     "reference_date": "2025–26",
     "kind": "Candidate self-report",
     "corroboration": "",
-    "limit": "Capability evidence, not independently proven team outcome."
+    "limit": "Capability evidence, not independently proven team outcome.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S25 states an evidence-review system for a seven-member political-intelligence team; independently verified impact or causal improvement unavailable."
   },
   {
     "id": "F36",
@@ -473,11 +578,14 @@
     "reference_date": "2024",
     "kind": "Candidate self-report",
     "corroboration": "",
-    "limit": "No claim that the model itself caused public-service improvements."
+    "limit": "No claim that the model itself caused public-service improvements.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "S25 states Meghalaya PDS modelling and4,500+ government records; count/output not independently audited."
   },
   {
     "id": "F37",
-    "text": "Candidate resume lists manashdeori 09@gmail.com, LinkedIn/manash-protim-deori and openness to relocation.",
+    "text": "Candidate resume lists manashdeori09@gmail.com, LinkedIn/manash-protim-deori and openness to relocation.",
     "sources": [
       "S25"
     ],
@@ -486,6 +594,73 @@
     "reference_date": "Retrieved 2026-10-08",
     "kind": "Candidate self-report",
     "corroboration": "",
-    "limit": ""
+    "limit": "",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "Source contact fields reproduced correctly. Candidate resume remains self-reported."
+  },
+  {
+    "id": "F38",
+    "text": "Congress won the 2024 Secunderabad Cantonment by-election, according to reporting.",
+    "sources": [
+      "S27"
+    ],
+    "locator": "Opening paragraph; reported result 4 June 2024",
+    "geography": "AC 71, historical by-election",
+    "reference_date": "2024-06-04",
+    "kind": "Attributed reporting / analysis",
+    "corroboration": "Bounded attributed statement; no claim of independent numerical confirmation.",
+    "limit": "Official CEO declaration/Form 20 unavailable. Winner/event only, no vote totals or present membership claim.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "Relevant reporting/analysis passage read; limitations retained."
+  },
+  {
+    "id": "F39",
+    "text": "PRS reports 2024–25 state revenue receipts 24% below BE.",
+    "sources": [
+      "S10"
+    ],
+    "locator": "Table 11, Revenue Receipts row",
+    "geography": "Telangana state",
+    "reference_date": "2024–25 BE to actual",
+    "kind": "Attributed reporting / analysis",
+    "corroboration": "Bounded attributed statement; no claim of independent numerical confirmation.",
+    "limit": "PRS analysis of state documents. Statewide historical context, not Hyderabad performance or a 2026–27 prediction.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "Relevant reporting/analysis passage read; limitations retained."
+  },
+  {
+    "id": "F40",
+    "text": "PRS reports 2024–25 urban-development actuals 56% below BE.",
+    "sources": [
+      "S10"
+    ],
+    "locator": "Table 14, Urban Development row",
+    "geography": "Telangana state",
+    "reference_date": "2024–25 BE to actual",
+    "kind": "Attributed reporting / analysis",
+    "corroboration": "Bounded attributed statement; no claim of independent numerical confirmation.",
+    "limit": "PRS analysis of state documents. Statewide historical context, not Hyderabad performance or a 2026–27 prediction.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "Relevant reporting/analysis passage read; limitations retained."
+  },
+  {
+    "id": "F41",
+    "text": "PRS reports 2024–25 transport actuals 33% below BE.",
+    "sources": [
+      "S10"
+    ],
+    "locator": "Table 14, Transport row",
+    "geography": "Telangana state",
+    "reference_date": "2024–25 BE to actual",
+    "kind": "Attributed reporting / analysis",
+    "corroboration": "Bounded attributed statement; no claim of independent numerical confirmation.",
+    "limit": "PRS analysis of state documents. Statewide historical context, not Hyderabad performance or a 2026–27 prediction.",
+    "verification_status": "Qualified",
+    "verification_date": "2026-10-08",
+    "verification_basis": "Relevant reporting/analysis passage read; limitations retained."
   }
 ]

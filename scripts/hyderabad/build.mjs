@@ -1,9 +1,10 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {pathToFileURL,fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
 import {Presentation,PresentationFile} from '@oai/artifact-tool';
 
-const base=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+const base=process.env.HYDERABAD_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const research=base+'/research/hyderabad';
 const out=base+'/public/case-studies/hyderabad-political-intelligence';
 const privateDir=base+'/.hyderabad-build';
@@ -37,7 +38,7 @@ function chrome(s,d,dark=false){
  const ink=dark?colors.paper:colors.ink;
  text(s,d.section.toUpperCase(),64,38,1100,24,13,dark?colors.gold:colors.saffron,sans,true);
  shape(s,64,680,1152,1,dark?'#45615A':colors.rule);
- const ids=d.number<=32?`${d.id} · ${d.facts.join(' / ')}${d.number>1&&d.number<32?' · I'+String(d.number).padStart(2,'0')+' / C'+String(d.number).padStart(2,'0'):''}`:d.id+' · '+(d.refs||[]).join(' / ');
+const ids=d.number<=32?`${d.id} · ${d.facts.join(' / ')}${d.number>1&&d.number<32?' · I'+String(d.number).padStart(2,'0')+' / R'+String(d.number).padStart(2,'0')+' / C'+String(d.number).padStart(2,'0'):''}`:d.id+' · '+(d.refs||[]).join(' / ');
  text(s,ids,64,691,870,19,12,dark?colors.gold:colors.muted);
  text(s,`${String(d.number).padStart(2,'0')} / ${deck.slides.length}`,1100,691,116,19,12,ink,sans,false,{alignment:'right'});
 }
@@ -113,7 +114,8 @@ function main(s,d){
   d.items.forEach((a,i)=>{const x=64+i*393;shape(s,x,323,355,2,colors.gold);text(s,a[0],x,350,365,86,i===2&&a[0].length>12?36:63,colors.saffron,serif);text(s,a[1],x,443,350,68,23);});
  } else if(d.layout==='timeline'){
    shape(s,67,323,1146,2,colors.gold);
-   d.items.forEach((a,i)=>{const x=64+i*231;shape(s,x,318,8,12,colors.saffron);text(s,a[0],x,346,210,56,40,colors.saffron,serif);text(s,a[1],x,416,198,104,21);});
+   const step=1152/d.items.length;
+   d.items.forEach((a,i)=>{const x=64+i*step;shape(s,x,318,8,12,colors.saffron);text(s,a[0],x,346,step-18,56,d.items.length>5?33:40,colors.saffron,serif);text(s,a[1],x,416,step-23,104,d.items.length>5?18:21);});
  } else if(d.layout==='gates'){
    d.items.forEach((a,i)=>{const y=294+i*44; text(s,a[0],64,y,55,38,26,colors.saffron,serif);text(s,a[1],139,y+4,1050,33,23);shape(s,139,y+39,1070,1,colors.rule);});
  } else if(d.layout==='matrix'){
@@ -136,7 +138,7 @@ function appendix(s,d){
  if(d.layout==='divider'){
   chrome(s,d,true);text(s,'The argument,\nmade inspectable.',64,178,1120,192,72,colors.paper,serif);
   text(s,'Sources · Calculations · Reasoning · Contribution · Review trail',69,440,1100,45,23,colors.gold);
-  text(s,'25 sources. 37 evidence items. 127 registered items.\n20 saved cumulative content versions.',69,525,1120,81,26,colors.paper);
+  text(s,`${deck.sources.length} sources. ${deck.facts.length} factual records. ${deck.claims.length} registered items.\n10 recent self-review lenses.\n20 historical content versions retained.`,69,518,1120,112,24,colors.paper);
   return;
  }
  chrome(s,d);text(s,d.title,64,83,1140,85,41,colors.ink,serif);
@@ -155,17 +157,18 @@ function appendix(s,d){
     text(s,a[2],697,y+58,512,154,16.5);
    });
  }else if(d.layout==='fact-ledger'){
-   d.items.forEach((a,i)=>{const y=185+i*93;
-    text(s,a[0],64,y,270,66,15,colors.green,sans,true);
-    text(s,a[1],337,y,529,80,16);
-    text(s,a[2],899,y,310,80,14.5,colors.muted);
-    shape(s,64,y+83,1152,1,colors.rule);
+   const step=d.items.length>5?80:93;
+   d.items.forEach((a,i)=>{const y=185+i*step;
+    text(s,a[0],64,y,270,step-13,15,colors.green,sans,true);
+    text(s,a[1],337,y,529,step-13,16);
+    text(s,a[2],899,y,310,step-13,14.5,colors.muted);
+    shape(s,64,y+step-10,1152,1,colors.rule);
    });
  }else if(d.layout==='election-table'){
    const left=d.items.slice(0,8),right=d.items.slice(8);
    table(s,[['Assembly seat','Winner 2023'],...left],64,188,548,435,[405,143],18);
    table(s,[['Assembly seat','Winner 2023'],...right],656,188,560,435,[417,143],18);
-   text(s,'Source S07 · Election-time affiliation; explicitly selected 15-seat set; not current municipal territory.',64,640,1152,25,14,colors.muted);
+   text(s,'Source S07. Selected historical 15-seat set; fresh primary row check pending. Other metropolitan seats excluded.',64,635,1152,34,14,colors.muted);
  }else{
    const count=d.items.length;const step=count===4?115:count===6?76:94;
    d.items.forEach((a,i)=>{const y=190+i*step;
@@ -188,16 +191,24 @@ for(let i=0;i<p.slides.items.length;i++){
  const stem='slide-'+String(i+1).padStart(2,'0');
  const png=await p.export({slide:s,format:'png',scale:1});
  await fs.writeFile(privateDir+'/previews/'+stem+'.png',new Uint8Array(await png.arrayBuffer()));
- thumbManifest.push({number:i+1,title:d.title,section:d.section,body:d.body,contribution:d.contribution,limits:d.limits,notes:d.notes,image:stem+'.webp'});
+ const chartData=d.chart?d.chart.series.map(series=>series.name+': '+d.chart.categories.map((name,j)=>name+' '+series.values[j]).join(', ')).join('; '):'';
+ thumbManifest.push({number:i+1,title:d.title,section:d.section,body:d.body,contribution:d.contribution,limits:d.limits,notes:d.notes,dataText:chartData,verification:d.verification,image:stem+'.webp'});
  if((i+1)%10===0)console.log('Rendered '+(i+1)+' / '+p.slides.items.length);
 }
 const candidate=privateDir+'/candidate.pptx';
 await (await PresentationFile.exportPptx(p)).save(candidate);
+execFileSync(process.env.CODEX_PRIMARY_RUNTIME_PYTHON,[base+'/scripts/hyderabad/preserve-chart-workbooks.py',process.env.HYDERABAD_REFERENCE || out+'/Manash-Protim-Deori-Hyderabad.pptx',candidate],{stdio:'inherit'});
 try {
  const pdf=await p.export({format:'pdf'});
  await fs.writeFile(out+'/Manash-Protim-Deori-Hyderabad.pdf',new Uint8Array(await pdf.arrayBuffer()));
 } catch(e) {console.log('PDF vector export requires fallback: '+e.message);}
-await fs.writeFile(out+'/manifest.json',JSON.stringify({title:deck.title,cutoff:deck.cutoff,total:deck.slides.length,mainCount:32,slides:thumbManifest,sources:deck.sources},null,2));
+await fs.writeFile(out+'/manifest.json',JSON.stringify({title:deck.title,cutoff:deck.cutoff,contentVersion:deck.content_version,auditSummary:deck.audit_summary,total:deck.slides.length,mainCount:32,slides:thumbManifest,sources:deck.sources},null,2));
 const {finalizePresentation}=await import(pathToFileURL(SKILL+'/container_tools/artifact_tool_utils.mjs').href);
-const result=await finalizePresentation({workspaceDir:base,candidatePath:candidate,finalPath:out+'/Manash-Protim-Deori-Hyderabad.pptx',explicitTotalSlideCount:deck.slides.length,requiredNativeTableOwnerSlides:[...new Set(nativeTables)],requiredNativeChartOwnerSlides:nativeCharts,materializeLiteralChartWorkbooks:true,pythonExecutable:process.env.CODEX_PRIMARY_RUNTIME_PYTHON,integrityValidatorPath:SKILL+'/container_tools/inspect_presentation_package_integrity.py',layoutValidatorPath:SKILL+'/container_tools/inspect_presentation_layout_geometry.py',layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit','--validate-bullet-geometry',...[...new Set(nativeTables)].flatMap(n=>['--require-native-table-slide',String(n)])],fontPolicy:{basis:'design',families:[serif,sans]},verifyArtifactToolImport:true,receiptPath:privateDir+'/validation.json'});
+const finalPath=privateDir+'/releases/Hyderabad-'+(process.env.HYDERABAD_BUILD_TAG || Date.now())+'.pptx';
+const receiptPath=privateDir+'/receipts/validation-'+Date.now()+'.json';
+await fs.mkdir(path.dirname(finalPath),{recursive:true});
+await fs.mkdir(path.dirname(receiptPath),{recursive:true});
+const result=await finalizePresentation({workspaceDir:base,candidatePath:candidate,finalPath,explicitTotalSlideCount:deck.slides.length,requiredNativeTableOwnerSlides:[...new Set(nativeTables)],requiredNativeChartOwnerSlides:nativeCharts,requiredEmbeddedWorkbookChartOwnerSlides:nativeCharts,materializeLiteralChartWorkbooks:false,pythonExecutable:process.env.CODEX_PRIMARY_RUNTIME_PYTHON,integrityValidatorPath:SKILL+'/container_tools/inspect_presentation_package_integrity.py',layoutValidatorPath:SKILL+'/container_tools/inspect_presentation_layout_geometry.py',layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit','--validate-bullet-geometry',...[...new Set(nativeTables)].flatMap(n=>['--require-native-table-slide',String(n)])],fontPolicy:{basis:'reference',families:[serif,sans],referencePath:process.env.HYDERABAD_REFERENCE,referenceSha256:process.env.HYDERABAD_REFERENCE_SHA},verifyArtifactToolImport:true,receiptPath});
+await fs.copyFile(receiptPath,privateDir+'/validation.json');
+await fs.copyFile(finalPath,out+'/Manash-Protim-Deori-Hyderabad.pptx');
 console.log(JSON.stringify({slides:deck.slides.length,charts:nativeCharts,tables:nativeTables,finalizer:result}));

@@ -30,9 +30,12 @@ for slide in deck['slides']:
     c.bookmarkPage(stem)
     c.addOutlineEntry(f"{slide['number']:02} · {slide['title']}", stem, level=0)
     # Searchable text layer; visual pages remain identical to reviewed slide renders.
-    content = slide['title']+'\n'+slide.get('body','')+'\n'+slide.get('contribution','')
+    content = slide['title']+'\n'+slide.get('body','')+'\n'+slide.get('contribution','')+'\n'+slide.get('limits','')
+    if slide.get('chart'):
+        chart=slide['chart']
+        content += '\n'+chart['title']+'\n'+'\n'.join(series['name']+': '+', '.join(f'{name} {value}' for name,value in zip(chart['categories'],series['values'])) for series in chart['series'])
     if slide.get('layout') == 'source-register':
-        content += '\n'+'\n'.join(x['title']+' '+x['url'] for x in slide['items'])
+        content += '\n'+'\n'.join(x['id']+' '+x['title']+' '+x['url']+' '+x['locator']+' '+x['limitation'] for x in slide['items'])
     else:
         content += '\n'+'\n'.join(' | '.join(row) for row in slide.get('items',[]))
     t=c.beginText(12,525); t.setFont('SearchSans',8); t.setLeading(9); t.setTextRenderMode(3)
@@ -52,9 +55,12 @@ doc.embfile_add('slide-content-and-notes.md',(RESEARCH/'slide-content-and-notes.
 doc.save(pdf_path,garbage=4,deflate=True);doc.close()
 Image.open(OUT/'cover-art.png').save(OUT/'cover-art.webp','WEBP',quality=92,method=6)
 check=fitz.open(pdf_path)
-assert len(check)==77 and len(check.get_toc())==77
-assert sum(len(page.get_links()) for page in check)==27
+assert len(check)==len(deck['slides']) and len(check.get_toc())==len(deck['slides'])
+assert sum(len(page.get_links()) for page in check)==len(deck['sources'])+2
 assert 'Thank you' in check[31].get_text()
 assert 'Evidence' in check[32].get_text()
+assert 'manashdeori09@gmail.com' in check[31].get_text()
+assert 'manashdeori 09' not in ''.join(page.get_text() for page in check)
+assert '81660' in check[10].get_text() and '47267.28' in check[17].get_text()
 check.close()
-print(json.dumps({'pages':77,'pdf_bytes':pdf_path.stat().st_size,'slides_webp':len(list((OUT/'slides').glob('*.webp'))),'source_and_contact_links':27}))
+print(json.dumps({'pages':len(deck['slides']),'pdf_bytes':pdf_path.stat().st_size,'slides_webp':len(list((OUT/'slides').glob('*.webp'))),'source_and_contact_links':len(deck['sources'])+2}))

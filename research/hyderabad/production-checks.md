@@ -1,3 +1,5 @@
+> Historical v20 production check. The approved v21 integration is documented in README.md, verification-report.md and release-checks.md. The checks below describe the earlier deployment.
+
 # Production verification — 8 October 2026
 
 Live case study: https://manash-protim-deori.vercel.app/work/hyderabad-political-intelligence

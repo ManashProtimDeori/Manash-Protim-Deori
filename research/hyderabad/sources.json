@@ -8,7 +8,10 @@
     "publication_date": "Undated; retrieved 2026-10-08",
     "retrieved": "2026-10-08",
     "lineage": "Employer",
-    "limitation": "Self-description; not independent evidence of effectiveness."
+    "limitation": "Self-description; not independent evidence of effectiveness.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "32e36e7ff584826148346dbb920ee7ce0ccbd0d04bf0dd30bcc7c50e9d764bff",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S02",
@@ -19,7 +22,10 @@
     "publication_date": "Undated public post",
     "retrieved": "2026-10-08",
     "lineage": "Employer",
-    "limitation": "Exact vacancy supplied by applicant is absent; current acceptance of applications not confirmed."
+    "limitation": "Exact vacancy supplied by applicant is absent; current acceptance of applications not confirmed.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "3eadb9a580257ffd9f12561798a8adcb8eeadeafb8144a31db26922af169a302",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S03",
@@ -30,7 +36,10 @@
     "publication_date": "2026-02-11",
     "retrieved": "2026-10-08",
     "lineage": "Government order",
-    "limitation": "Read through the official BuildNow listing S04. Boundary allocation is by zone; this deck supplies no GIS polygons."
+    "limitation": "Read through the official BuildNow listing S04. Boundary allocation is by zone; this deck supplies no GIS polygons.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "59586b4ccfdd3680e569f307a6a322b1bb6be81a57b18da63cd191194f440556",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S04",
@@ -41,7 +50,10 @@
     "publication_date": "Orders dated 2025–2026",
     "retrieved": "2026-10-08",
     "lineage": "Government order index",
-    "limitation": "Listing proves instrument/date only; unread instruments are not treated as proof of full legal effect."
+    "limitation": "Listing proves instrument/date only; unread instruments are not treated as proof of full legal effect.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "7ca76a459895fd3e4078b54522212bcedd4e944f6433074bbd0159d5703fd352",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S05",
@@ -52,18 +64,23 @@
     "publication_date": "Undated current page",
     "retrieved": "2026-10-08",
     "lineage": "Agency",
-    "limitation": "Mandate description is not evidence of case-specific legality, environmental outcomes or public approval."
+    "limitation": "Mandate description is not evidence of case-specific legality, environmental outcomes or public approval.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "400c95801953cf43a7873c22dfa26fb59c682fc3a6e2388c94817f6dca90e266",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S06",
     "title": "Performance of Political Parties: Telangana 2023",
     "publisher": "Election Commission of India",
     "url": "https://www.eci.gov.in/eci-backend/public/all_files/full-statistical-reports/telangana/2023/Performance_of_Political_Parties.pdf",
-    "locator": "PDF pp.1–3; WON column",
+    "locator": "Performance of Political Parties, printed p.1, WON column",
     "publication_date": "2023 Assembly election; report undated",
     "retrieved": "2026-10-08",
     "lineage": "ECI 2023",
-    "limitation": "Historical election-time affiliation; BHRS normalised to BRS for presentation."
+    "limitation": "Historical election-time affiliation; BHRS normalised to BRS for presentation.",
+    "fresh_access": "Fresh original route unavailable; relevant source passages subsequently readable via web retrieval",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S07",
@@ -74,7 +91,9 @@
     "publication_date": "2023 Assembly election; report undated",
     "retrieved": "2026-10-08",
     "lineage": "ECI 2023",
-    "limitation": "AC 57–71 is an explicitly selected 15-seat study set, not the entire metropolis or current municipal footprint."
+    "limitation": "AC 57–71 is an explicitly selected 15-seat study set, not the entire metropolis or current municipal footprint. Fresh target rows were inaccessible in the ten-round review. Retain as pending primary recheck.",
+    "fresh_access": "Fresh original route unavailable; partial web retrieval did not clear target rows",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S08",
@@ -85,29 +104,37 @@
     "publication_date": "2024 Lok Sabha election; report undated",
     "retrieved": "2026-10-08",
     "lineage": "ECI 2024",
-    "limitation": "Four selected constituencies have different boundaries from AC 57–71. No aggregate metropolitan vote share calculated."
+    "limitation": "Four selected constituencies have different boundaries from AC 57–71. No aggregate metropolitan vote share calculated.",
+    "fresh_access": "Fresh original route unavailable; relevant source passages subsequently readable via web retrieval",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S09",
     "title": "Budget in Brief: 2026–27",
     "publisher": "Government of Telangana, Finance Department",
     "url": "https://www.telangana.gov.in/wp-content/uploads/2026/05/Budget-in-Brief.pdf",
-    "locator": "Table 4, PDF p.4; Table 10, PDF pp.15–17",
+    "locator": "Printed p.4: VII Capital Expenditure; printed pp.15–17: Major Schemes Budget Allocation",
     "publication_date": "2026–27 budget; posted May 2026",
     "retrieved": "2026-10-08",
     "lineage": "State budget",
-    "limitation": "BE=budget estimate; RE=revised estimate. Allocation does not prove sanction, release, expenditure or delivery."
+    "limitation": "BE=budget estimate; RE=revised estimate. Allocation does not prove sanction, release, expenditure or delivery.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "ad1588897119ec4379dfd3cf547b45876653fde016934e5f2726773c30f51d10",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S10",
     "title": "Telangana Budget Analysis 2026–27",
     "publisher": "PRS Legislative Research",
     "url": "https://prsindia.org/budgets/states/telangana-budget-analysis-2026-27",
-    "locator": "Expenditure and urban-development tables",
+    "locator": "Fiscal summary; Table 11 revenue receipts and Table 14 sector BE-to-actual comparison, 2024–25",
     "publication_date": "2026–27 budget analysis",
     "retrieved": "2026-10-08",
     "lineage": "PRS analysis of state budget",
-    "limitation": "Independent analytical scrutiny, but budget totals share upstream state documents. PRS net expenditure definition differs from headline gross budget."
+    "limitation": "Independent analytical scrutiny, but budget totals share upstream state documents. PRS net expenditure definition differs from headline gross budget.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "a6f8228b05af6a703803404b51c3bfee393e0073475e4a043c91cc487838abe7",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S11",
@@ -118,7 +145,10 @@
     "publication_date": "Undated; current page",
     "retrieved": "2026-10-08",
     "lineage": "MRDCL",
-    "limitation": "Objectives only. Its promised sustainability outcomes are not independently verified achievements."
+    "limitation": "Objectives only. Its promised sustainability outcomes are not independently verified achievements.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "6ab95a48236b764e99e5ffd73f73fff252b4903f932beea839578bdfe39a7589",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S12",
@@ -129,7 +159,10 @@
     "publication_date": "Event 2026-03-13; page 2026-03-16",
     "retrieved": "2026-10-08",
     "lineage": "Government press release",
-    "limitation": "Official statements demonstrate stated commitments and acknowledged concerns; household counts and cost forecasts excluded."
+    "limitation": "Official statements demonstrate stated commitments and acknowledged concerns; household counts and cost forecasts excluded.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "3849445334e1da83f0dea3b56351ce038b0ed68b92a2a43e53b27f313210db97",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S13",
@@ -140,7 +173,10 @@
     "publication_date": "Listing dates vary",
     "retrieved": "2026-10-08",
     "lineage": "MRDCL procurement",
-    "limitation": "Discovery source only; not used to assert current award, construction or completion status."
+    "limitation": "Discovery source only; not used to assert current award, construction or completion status.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "6309ee514480d7fd7c4846ed1e92b581703aa2e8eba8e8628477fd8b92c28316",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S14",
@@ -151,7 +187,10 @@
     "publication_date": "Undated; current page",
     "retrieved": "2026-10-08",
     "lineage": "Investment promotion",
-    "limitation": "Promotional source used for cluster identification only. Export, GDP and jobs claims are not ingested."
+    "limitation": "Promotional source used for cluster identification only. Export, GDP and jobs claims are not ingested.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "099122c79193c5ce1e1288bc584a7721fbf34caab265e7d7ac71febec90a900a",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S15",
@@ -162,7 +201,10 @@
     "publication_date": "Event 2026-08-31; page 2026-09-01",
     "retrieved": "2026-10-08",
     "lineage": "Government press release",
-    "limitation": "Later corroboration of the three corporation names; not independent of state government."
+    "limitation": "Later corroboration of the three corporation names; not independent of state government.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "4c8e575a038d54b4b92379534e5776c36acafc275c1743e915d5d3d22f37ba35",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S16",
@@ -173,7 +215,9 @@
     "publication_date": "2014-09; reference 2014-06-02",
     "retrieved": "2026-10-08",
     "lineage": "Parliamentary record",
-    "limitation": "First Assembly party position as of 2 June 2014; not current legislative strength."
+    "limitation": "First Assembly party position as of 2 June 2014; not current legislative strength. Relevant passage could not be freshly read in the ten-round review.",
+    "fresh_access": "Fresh original route unavailable; target passage not freshly cleared",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S17",
@@ -184,7 +228,10 @@
     "publication_date": "2018-12-12",
     "retrieved": "2026-10-08",
     "lineage": "Newsroom citing ECI",
-    "limitation": "2018 TRS 88/INC 19 historical context only. Table total has an internal leading-seat inconsistency; full statewide reconstruction not used."
+    "limitation": "2018 TRS 88/INC 19 historical context only. Table total has an internal leading-seat inconsistency; full statewide reconstruction not used.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "ce7252b05cb74e8894fa9931d184ef47e3c580098c1fc0858928749f685ecdcd",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S18",
@@ -195,7 +242,10 @@
     "publication_date": "2018-12-12",
     "retrieved": "2026-10-08",
     "lineage": "Newsroom citing election results",
-    "limitation": "Corroborates S17; not an independent official election record."
+    "limitation": "Corroborates S17; not an independent official election record.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "56103c605c40c7bd6b8f81325c4d114e0994d3e1bd9beccd4df10419711d9590",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S19",
@@ -206,7 +256,10 @@
     "publication_date": "2020-12-01",
     "retrieved": "2026-10-08",
     "lineage": "NDTV reporting",
-    "limitation": "2016 historical seat table is reported, not a newly ingested TSEC dataset."
+    "limitation": "2016 historical seat table is reported, not a newly ingested TSEC dataset.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "bf71e8914ae406e5920c644be417172d650a490b68f5f67f6482ce31e09ad417",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S20",
@@ -217,7 +270,10 @@
     "publication_date": "2016-02-06",
     "retrieved": "2026-10-08",
     "lineage": "PTI wire",
-    "limitation": "Only numerical result used; causal claims about communities in the article are excluded."
+    "limitation": "Only numerical result used; causal claims about communities in the article are excluded.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "587c9e64a571b7d5c802e44577ff222e291c0ee49cf3bedf0a6502c645318fda",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S21",
@@ -228,7 +284,10 @@
     "publication_date": "2020-12-14",
     "retrieved": "2026-10-08",
     "lineage": "Indian Express reporting",
-    "limitation": "Historical council only. Article dated after Neredmet result; legal rules in 2020 not assumed current."
+    "limitation": "Historical council only. Article dated after Neredmet result; legal rules in 2020 not assumed current.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "42b5494493cecc7ea26dea5a46e2baf313a8a3848df62236edbc503b794e901b",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S22",
@@ -239,7 +298,10 @@
     "publication_date": "2020-12-11",
     "retrieved": "2026-10-08",
     "lineage": "Tribune reporting",
-    "limitation": "Reconciles earlier incomplete tally 55. Direct current TSEC table was inaccessible in this run."
+    "limitation": "Reconciles earlier incomplete tally 55. Direct current TSEC table was inaccessible in this run.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "3cd10ca1a4366935f6e5e56c327764826deca38a151c916c25fc9b9e7db4856f",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S23",
@@ -249,8 +311,11 @@
     "locator": "Winner report",
     "publication_date": "2025-11-14",
     "retrieved": "2026-10-08",
-    "lineage": "Economic Times reporting",
-    "limitation": "Winner only used. Vote totals conflict with another live report and are excluded."
+    "lineage": "Times Group reporting; shared corporate lineage",
+    "limitation": "Winner only used. Vote totals conflict with another live report and are excluded. Shares corporate lineage with S24. Count as one reporting lineage.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "0d515e284b6d0a4388811632ac8c42bab8b3ed57fa40b24f7b680fd786f2ee45",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S24",
@@ -260,18 +325,83 @@
     "locator": "13:18 IST winner update",
     "publication_date": "2025-11-14",
     "retrieved": "2026-10-08",
-    "lineage": "TOI live reporting",
-    "limitation": "Same corporate group as S23, different report; final vote totals conflict. Winner corroborated, official final Form 20 still requested."
+    "lineage": "Times Group reporting; shared corporate lineage",
+    "limitation": "Same corporate group as S23. Winner supported as reporting, not two independent confirmations. Official final Form 20 pending.",
+    "fresh_access": "Local fresh retrieval successful",
+    "snapshot_sha256": "c57b19c3001041aca2e7ecfe58b9c7b06a85727e35504a7c056f44cfc7b4b5f6",
+    "verification_date": "2026-10-08"
   },
   {
     "id": "S25",
     "title": "Portfolio resume data",
     "publisher": "Manash Protim Deori",
-    "url": "https://github.com/ManashProtimDeori/Manash-Protim-Deori/blob/main/src/data/resume.ts",
+    "url": "https://github.com/ManashProtimDeori/Manash-Protim-Deori/blob/c5ab9d8ac00c9180b880fa50f3e5f99682e1dac1/src/data/resume.ts",
     "locator": "workExperience, projects, education and header",
     "publication_date": "Repository read 2026-10-08",
     "retrieved": "2026-10-08",
     "lineage": "Candidate self-report",
-    "limitation": "Owner-controlled resume, not independent verification. No claim to Telugu/Urdu fluency, Hyderabad fieldwork or hiring endorsement."
+    "limitation": "Owner-controlled resume, not independent verification. No claim to Telugu/Urdu fluency, Hyderabad fieldwork or hiring endorsement.",
+    "fresh_access": "Read owner-controlled resume via GitHub at frozen commit",
+    "verification_date": "2026-10-08"
+  },
+  {
+    "id": "S26",
+    "title": "2024 Secunderabad Cantonment by-election records",
+    "publisher": "Chief Electoral Officer Telangana",
+    "url": "https://ceotelangana.nic.in/BYE_GE_2024.html",
+    "locator": "By-election index: result declaration and Form 20 links",
+    "publication_date": "2024 by-election records",
+    "retrieved": "2026-10-08",
+    "lineage": "CEO official index",
+    "limitation": "Index read. Linked result declaration/Form 20 could not be retrieved. The index is not used to verify an unread result.",
+    "fresh_access": "Index read; result document pending"
+  },
+  {
+    "id": "S27",
+    "title": "Congress wins Secunderabad Cantonment by-election",
+    "publisher": "The New Indian Express",
+    "url": "https://www.newindianexpress.com/states/telangana/2024/Jun/05/congress-wins-byelection-to-secunderabad-cantonment",
+    "locator": "Opening paragraph: Congress win; result event 4 June 2024",
+    "publication_date": "2024-06-05",
+    "retrieved": "2026-10-08",
+    "lineage": "Express News Service reporting",
+    "limitation": "Winner/event only. Vote totals and current party strength are not adopted. Official declaration remains pending.",
+    "fresh_access": "Article read"
+  },
+  {
+    "id": "S28",
+    "title": "2025 Jubilee Hills by-election records",
+    "publisher": "Chief Electoral Officer Telangana",
+    "url": "https://ceotelangana.nic.in/BYE_GE_2025.HTML",
+    "locator": "Index: State Gazette Form 21-D declaration link",
+    "publication_date": "2025 by-election records",
+    "retrieved": "2026-10-08",
+    "lineage": "CEO official index",
+    "limitation": "Index read. Linked declaration PDF unavailable. No unread document content or disputed final vote total is adopted.",
+    "fresh_access": "Index read; declaration/Form 20 pending"
+  },
+  {
+    "id": "S29",
+    "title": "Quality in qualitative evaluation",
+    "publisher": "HM Treasury / GOV.UK",
+    "url": "https://www.gov.uk/government/publications/the-magenta-book/quality-in-qualitative-evaluation-qqe-html",
+    "locator": "Framework questions 7–8: sample selection/coverage; question 18: auditability",
+    "publication_date": "2003 framework; current HTML edition retrieved 2026-10-08",
+    "retrieved": "2026-10-08",
+    "lineage": "UK government methodological guidance",
+    "limitation": "Supports research-design checks. Does not prescribe 5–8 interviews or validate this proposed Hyderabad pilot.",
+    "fresh_access": "Relevant framework sections read"
+  },
+  {
+    "id": "S30",
+    "title": "Magenta Book: evaluation guidance",
+    "publisher": "HM Treasury / GOV.UK",
+    "url": "https://www.gov.uk/government/publications/the-magenta-book/magenta-book-central-government-guidance-on-evaluation-html",
+    "locator": "Quality principles; theory of change and evaluation-design sections",
+    "publication_date": "2026 edition",
+    "retrieved": "2026-10-08",
+    "lineage": "UK government methodological guidance",
+    "limitation": "Supports evaluation design, uncertainty and comparison. Local workload, outputs and future effectiveness remain untested.",
+    "fresh_access": "Relevant sections read"
   }
 ]

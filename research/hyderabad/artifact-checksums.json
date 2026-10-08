@@ -1,14 +1,18 @@
 {
   "Manash-Protim-Deori-Hyderabad.pptx": {
-    "bytes": 2555005,
-    "sha256": "32541b0f177a2b744c7d50c1008636d99e911fc6b59763e3bc6c79287557f22e"
+    "bytes": 2556452,
+    "sha256": "b1f3489bbb89a20eefef1cacc2eb61f7f133aac88a48eb3ea88325fbc26b847f"
   },
   "Manash-Protim-Deori-Hyderabad.pdf": {
-    "bytes": 9626791,
-    "sha256": "9ee194426b452716380eab135e3c16fd90fdd403112c72ed08100b7afe0aaeb3"
+    "bytes": 9684529,
+    "sha256": "c3aa7727eee1630d2f31800269d0ffdfba8cc1c7be86093c3463aff5d464856a"
   },
   "manifest.json": {
-    "bytes": 188640,
-    "sha256": "fd8ea1a5e50b792352911e2017e24609dc495f042fa37e710692326ab94cfb6e"
+    "bytes": 225875,
+    "sha256": "c2009cf5923448f688e86bc3633d7a1a76b9526bc4ce89544291dd2cb9e3b465"
+  },
+  "deck-content.json": {
+    "bytes": 511043,
+    "sha256": "d5116ece4953427b6fbf9f92d5c1dd4245718470898053538755dd4919330fa8"
   }
 }

@@ -1,297 +1,428 @@
-import json, csv, copy, hashlib, datetime, pathlib, zipfile, re
+"""Build the approved audit integration from the immutable v20 baseline.
 
-ROOT=pathlib.Path(__file__).resolve().parents[2]
-RESEARCH=ROOT/'research/hyderabad'
-PUBLIC=ROOT/'public/case-studies/hyderabad-political-intelligence'
-RESEARCH.mkdir(parents=True,exist_ok=True)
-PUBLIC.mkdir(parents=True,exist_ok=True)
-CUTOFF='8 October 2026'
-sources=[]
-def source(id,title,publisher,url,locator,date,lineage,limitation=''):
-    sources.append(dict(id=id,title=title,publisher=publisher,url=url,locator=locator,publication_date=date,retrieved='2026-10-08',lineage=lineage,limitation=limitation))
-source('S01','About us and six work verticals','Inclusive Minds','https://www.inclusiveminds.in/','About Us; Our Work','Undated; retrieved 2026-10-08','Employer','Self-description; not independent evidence of effectiveness.')
-source('S02','Generalist hiring post: Hyderabad, on-site','Inclusive Minds','https://www.linkedin.com/posts/inclusive-minds-ind_hiring-generalist-politicalconsulting-activity-7495111990261252096-TM4l','Employer-authored post text','Undated public post','Employer','Exact vacancy supplied by applicant is absent; current acceptance of applications not confirmed.')
-source('S03','G.O.Ms.No.55: CURE reorganisation','Government of Telangana, MAUD','https://tg-bn-website-assets.flowwlabs.tech/GOs-and-ACTs/GO.Ms.No.55_11-02-2026.pdf','PDF pp.1–2; operative paragraphs 2–3','2026-02-11','Government order','Read through the official BuildNow listing S04. Boundary allocation is by zone; this deck supplies no GIS polygons.')
-source('S04','Government Orders and Acts','Government of Telangana, BuildNow','https://buildnow.telangana.gov.in/go-and-act/','GO55, GO45, GO16, GO68 and GO69 entries','Orders dated 2025–2026','Government order index','Listing proves instrument/date only; unread instruments are not treated as proof of full legal effect.')
-source('S05','About the Agency','HYDRAA, Government of Telangana','https://hydraa.telangana.gov.in/about','About HYDRAA; Jurisdictional Coverage; Functional Wings','Undated current page','Agency','Mandate description is not evidence of case-specific legality, environmental outcomes or public approval.')
-source('S06','Performance of Political Parties: Telangana 2023','Election Commission of India','https://www.eci.gov.in/eci-backend/public/all_files/full-statistical-reports/telangana/2023/Performance_of_Political_Parties.pdf','PDF pp.1–3; WON column','2023 Assembly election; report undated','ECI 2023','Historical election-time affiliation; BHRS normalised to BRS for presentation.')
-source('S07','List of Successful Candidates: Telangana 2023','Election Commission of India','https://www.eci.gov.in/eci-backend/public/all_files/full-statistical-reports/telangana/2023/List_of_Successful_Candidates.pdf','PDF pp.2–3; AC57–71 and winner/runner-up columns','2023 Assembly election; report undated','ECI 2023','AC57–71 is an explicitly selected 15-seat study set, not the entire metropolis or current municipal footprint.')
-source('S08','Constituency-wise Detailed Results: 2024 Lok Sabha','Election Commission of India','https://www.eci.gov.in/eci-backend/public/all_files/GE-2024-statistical-report/33-Constituency-Wise-Detailed-Result.pdf','Printed pp.580,581,583,585; four selected PCs','2024 Lok Sabha election; report undated','ECI 2024','Four selected constituencies have different boundaries from AC57–71. No aggregate metropolitan vote share calculated.')
-source('S09','Budget in Brief: 2026–27','Government of Telangana, Finance Department','https://www.telangana.gov.in/wp-content/uploads/2026/05/Budget-in-Brief.pdf','Table4, PDF p.4; Table10, PDF pp.15–17','2026–27 budget; posted May 2026','State budget','BE=budget estimate; RE=revised estimate. Allocation does not prove sanction, release, expenditure or delivery.')
-source('S10','Telangana Budget Analysis 2026–27','PRS Legislative Research','https://prsindia.org/budgets/states/telangana-budget-analysis-2026-27','Expenditure and urban-development tables','2026–27 budget analysis','PRS analysis of state budget','Independent analytical scrutiny, but budget totals share upstream state documents. PRS net expenditure definition differs from headline gross budget.')
-source('S11','Vision / Mission','Musi Riverfront Development Corporation','https://musi.telangana.gov.in/VisionMusi.aspx','Vision paragraphs','Undated; current page','MRDCL','Objectives only. Its promised sustainability outcomes are not independently verified achievements.')
-source('S12','Musi Invites: Phase I presentation','Government of Telangana, TG Digital Media','https://www.telangana.gov.in/news/press-releases/2026/03/honble-cm-sri-a-revanth-reddy-participated-in-musi-invites-a-presentation-on-musi-river-rejuvenation-phase-i-by-mrdcl-in-hyderabad/','English text: compensation and livelihood concerns; concluding presentation description','Event 2026-03-13; page 2026-03-16','Government press release','Official statements demonstrate stated commitments and acknowledged concerns; household counts and cost forecasts excluded.')
-source('S13','Musi project tenders','MRDCL','https://musi.telangana.gov.in/Tenders.aspx','Tender listings','Listing dates vary','MRDCL procurement','Discovery source only; not used to assert current award, construction or completion status.')
-source('S14','Invest Telangana portal','Government of Telangana investment portal','https://invest.telangana.gov.in/','Industrial parks; Genome Valley at Shamirpet; electronics clusters','Undated; current page','Investment promotion','Promotional source used for cluster identification only. Export, GDP and jobs claims are not ingested.')
-source('S15','Moosarambagh bridge event and corporation logos','Government of Telangana, TG Digital Media','https://www.telangana.gov.in/news/press-releases/2026/08/honble-cm-sri-a-revanth-reddy-addresses-the-public-meeting-at-ghmc-sports-stadium-amberpet-hyderabad-following-the-inauguration-of-the-moosarambagh-high-level-bridge/','English text, paragraph on three corporation logos','Event 2026-08-31; page 2026-09-01','Government press release','Later corroboration of the three corporation names; not independent of state government.')
-source('S16','Journal of Parliamentary Information, September 2014','Lok Sabha Secretariat','https://eparlib.sansad.in/bitstream/123456789/58523/1/JPI_September_2014.pdf','Printed p.410 / PDF p.63; first Telangana Assembly','2014-09; reference 2014-06-02','Parliamentary record','First Assembly party position as of 2 June 2014; not current legislative strength.')
-source('S17','Telangana Assembly polls: TRS wins','Scroll','https://scroll.in/latest/905254/telangana-assembly-polls-counting-of-votes-in-three-way-contest-set-to-begin-at-8-am','Updated article paragraph below party table','2018-12-12','Newsroom citing ECI','2018 TRS88/INC19 historical context only. Table total has an internal leading-seat inconsistency; full statewide reconstruction not used.')
-source('S18','2018 Telangana complete winners','The Times of India','https://timesofindia.indiatimes.com/city/hyderabad/telangana-election-results-2018-complete-list-of-winning-candidates-in-telangana/articleshow/67055845.cms','Opening results paragraph','2018-12-12','Newsroom citing election results','Corroborates S17; not an independent official election record.')
-source('S19','Hyderabad civic body voting: 2016 recap','NDTV, Uma Sudhir','https://www.ndtv.com/telangana-news/after-a-bitter-campaign-voting-begins-for-hyderabad-civic-body-polls-2332363','Paragraph beginning A total of 1,122 candidates','2020-12-01','NDTV reporting','2016 historical seat table is reported, not a newly ingested TSEC dataset.')
-source('S20','GHMC 2016 result report','PTI / The New Indian Express','https://www.newindianexpress.com/amp/story/cities/hyderabad/2016/Feb/06/ghmc-polls-sops-for-poor-seemandhra-candidates-key-in-trs-win-889293.html','Results paragraphs:99/150; Congress2; TDP1/BJP4; MIM44','2016-02-06','PTI wire','Only numerical result used; causal claims about communities in the article are excluded.')
-source('S21','Week after GHMC results: mayor question','The Indian Express, Rahul V Pisharody','https://indianexpress.com/article/cities/hyderabad/ghmc-results-hyderabad-mayor-7104860/','Results paragraphs: TRS56, AIMIM44, BJP48','2020-12-14','Indian Express reporting','Historical council only. Article dated after Neredmet result; legal rules in 2020 not assumed current.')
-source('S22','Neredmet final result takes TRS tally to56','The Tribune, Naveen S Garewal','https://www.tribuneindia.com/news/nation/trs-wins-neredmet-ghmc-division-takes-its-tally-to-56-182436/','Final paragraph:56,48,44,2; Neredmet timing','2020-12-11','Tribune reporting','Reconciles earlier incomplete tally55. Direct current TSEC table was inaccessible in this run.')
-source('S23','Jubilee Hills bypoll result','The Economic Times','https://m.economictimes.com/news/politics-and-nation/jubilee-hills-bypoll-result-2025-in-l-deepak-reddy-vs-sunita-vs-naveen-yadav-check-who-is-winning/articleshow/125315450.cms','Winner report','2025-11-14','Economic Times reporting','Winner only used. Vote totals conflict with another live report and are excluded.')
-source('S24','Jubilee Hills bypoll winner live report','The Times of India','https://timesofindia.indiatimes.com/city/hyderabad/assembly-bypoll-result-2025-live-updates-by-election-results-jubilee-hills-budgam-nagrota-anta-ghatshila-tarn-taran-dampa-nuapada/liveblog/125313066.cms','13:18 IST winner update','2025-11-14','TOI live reporting','Same corporate group as S23, different report; final vote totals conflict. Winner corroborated, official final Form20 still requested.')
-source('S25','Portfolio resume data','Manash Protim Deori','https://github.com/ManashProtimDeori/Manash-Protim-Deori/blob/main/src/data/resume.ts','workExperience, projects, education and header','Repository read 2026-10-08','Candidate self-report','Owner-controlled resume, not independent verification. No claim to Telugu/Urdu fluency, Hyderabad fieldwork or hiring endorsement.')
+Historical version snapshots and review timestamps remain unchanged. New source
+access is qualified using the recorded audit; reproducing content is not a new
+verification pass.
+"""
+import collections, copy, csv, datetime, hashlib, json, pathlib, re
 
-S={x['id']:x for x in sources}
-facts=[]
-def fact(id,text,src,locator,geography,date,kind='Verified fact',corroboration='',limit=''):
-    facts.append(dict(id=id,text=text,sources=src,locator=locator,geography=geography,reference_date=date,kind=kind,corroboration=corroboration,limit=limit))
-fact('F01','Inclusive Minds describes itself as INC-aligned and lists six work verticals.',['S01'],'About Us; Our Work','Organisation','Retrieved 2026-10-08',corroboration='Employer is authoritative for its stated identity; effectiveness not inferred.')
-fact('F02','Employer Generalist post identifies Hyderabad on-site and experience in research, strategy, communication or project management.',['S02'],'Hiring post','Vacancy','Retrieved 2026-10-08',kind='Employer statement',limit='Open status and exact applicant-targeted requisition unconfirmed.')
-fact('F03','GO55 of11 February2026 reorganised CURE into GHMC, CMC and MMC with immediate effect.',['S03','S04','S15'],'GO55 pp1–2','CURE','2026-02-11',corroboration='Official listing confirms instrument; later government event confirms corporation names. Shared state lineage.')
-fact('F04','CMC comprises Serilingampally, Kukatpally and Qutbullapur zones; MMC comprises Malkajgiri, Uppal and L.B.Nagar zones.',['S03'],'GO55 operative zone allocation','CURE','2026-02-11')
-fact('F05','GHMC comprises Shamshabad, Rajendernagar, Charminar, Golconda, Khairatabad and Secunderabad zones.',['S03'],'GO55 operative zone allocation','CURE','2026-02-11')
-fact('F06','HYDRAA describes its CURE-wide remit as disaster management and protection of government/public assets, under MAUD.',['S05'],'Mandate; Jurisdictional Coverage','CURE','Retrieved 2026-10-08',limit='Case-specific authority, due process and orders require case-specific legal review.')
-fact('F07','2023 Telangana Assembly seats won: INC64; BRS39; BJP8; AIMIM7; CPI1.',['S06'],'WON column','Telangana','2023 election',corroboration='ECI authoritative record; total independently recomputed119.')
-fact('F08','In selected Assembly seats AC57–71,2023 winners were BRS7,AIMIM7,BJP1,INC0.',['S07'],'AC57–71','Declared15-seat study set','2023 election',kind='Derived statistic',corroboration='Count of15 named winners; list in appendix; total15.',limit='Selected historical set; not all Greater Hyderabad or current affiliation.')
-for id,name,win,runner,margin in [('F09','Nampally',62185,60148,2037),('F10','Yakutpura',46153,45275,878),('F11','Chandrayangutta',99776,18116,81660)]:
-    fact(id,f'{name},2023: winner{win:,}; runner-up{runner:,}; margin{margin:,} votes.',['S07'],'PDF p3; winner/runner-up table',name,'2023 election',corroboration=f'Recomputed {win}-{runner}={margin}.',limit='Different runner-up parties; margin does not measure community cohesion or future probability.')
-for id,pc,name,party,win,runner in [('F12','Malkajgiri','Eatala Rajender','BJP',991042,599567),('F13','Secunderabad','G.Kishan Reddy','BJP',473012,423068),('F14','Hyderabad','Asaduddin Owaisi','AIMIM',661981,323894),('F15','Chevella','Konda Vishweshwar Reddy','BJP',809882,636985)]:
-    fact(id,f'{pc},2024 Lok Sabha: {name} ({party}) led with{win:,} votes; runner-up{runner:,}.',['S08'],{'Malkajgiri':'p580','Secunderabad':'p581','Hyderabad':'p583','Chevella':'p585'}[pc],pc,'2024 election',corroboration='Highest candidate vote total in final ECI constituency table.',limit='Election-time results; four PCs have boundaries different from the15-seat Assembly set.')
-fact('F16','First Telangana Assembly as of2 June2014: TRS63,INC21,out of119.',['S16'],'Printed410/PDF63','Telangana','2014-06-02')
-fact('F17','Contemporaneous 2018 reporting recorded TRS88 and INC19 Assembly seats.',['S17','S18'],'Updated results paragraphs','Telangana','2018-12-12',kind='Reported historical fact',corroboration='Two publications agree; shared ECI upstream. Full party aggregation not ingested.')
-fact('F18','Published2016 GHMC recap: TRS99,AIMIM44,BJP4,INC2,TDP1.',['S19','S20'],'Numerical result paragraphs','GHMC2016 footprint','2016 election',kind='Reported historical fact',corroboration='NDTV recap agrees with contemporaneous PTI results; sums150.',limit='Direct TSEC dataset not accessed; descriptive context only.')
-fact('F19','Post-Neredmet2020 reporting: TRS56,BJP48,AIMIM44,INC2.',['S21','S22'],'Results paragraphs; final Neredmet result','GHMC2020 footprint','2020-12-10',kind='Reported historical fact',corroboration='Independent named reporting agrees; sums150. Earlier55 tally incomplete.',limit='Not current corporation composition or a projection of2026.')
-fact('F20','Congress candidate V.Naveen Yadav won the November2025 Jubilee Hills by-election, according to corroborated reporting.',['S23','S24'],'Winner reports','Jubilee Hills','2025-11-14',kind='Reported event',corroboration='Reports agree on winner, disagree on totals. Totals removed.',limit='Authoritative final Form20 requested; no present membership/legal-status assertion.')
-fact('F21','2026–27 BE: H-CITY assistance to CURE ₹2,654crore.',['S09','S10'],'Table10 PDF16','CURE allocation','FY2026–27',corroboration='PRS supplies fiscal scrutiny; primary line used for exact label.',limit='Budget instrument spelling H-CITY preserved. Not actual expenditure.')
-fact('F22','2026–27 BE: Musi Riverfront development ₹1,500crore.',['S09'],'Table10 PDF16','Scheme allocation','FY2026–27')
-fact('F23','2026–27 BE: loans to HMWSSB for development ₹1,450crore.',['S09'],'Table10 PDF16','Scheme allocation','FY2026–27')
-fact('F24','2026–27 BE: Metro Rail PhaseII ₹600crore.',['S09'],'Table10 PDF17','Scheme allocation','FY2026–27')
-fact('F25','2026–27 BE: loans to HMRL ₹500crore.',['S09'],'Table10 PDF17','Scheme allocation','FY2026–27',limit='Separate financing line; not described as another ₹500crore of PhaseII construction.')
-fact('F26','2026–27 BE:20KL free-water reimbursement to HMWSSB ₹300crore.',['S09'],'Table10 PDF17','Scheme allocation','FY2026–27')
-fact('F27','State capital expenditure:2025–26 RE ₹36,480.87crore;2026–27 BE ₹47,267.28crore.',['S09','S10'],'Table4 PDF4','Telangana','FY2025–26RE and2026–27BE',corroboration='PRS rounds capital outlay and describes rise of30%; raw budget numbers used.')
-fact('F28','Nominal state capex BE/RE increase is29.57%,rounded29.6%.',['S09'],'Derived from F27','Telangana','FY2026–27',kind='Derived statistic',corroboration='(47267.28/36480.87-1)*100=29.5673%; recomputed.',limit='Plan-to-revised-plan comparison, not realised growth or inflation-adjusted change.')
-fact('F29','State2026–27 BE: Indiramma Houses₹5,500crore; MahalaxmiRTC₹4,305crore; RajivAarogyaSri₹1,143crore.',['S09'],'Table10 PDF15','Telangana','FY2026–27',limit='Statewide allocations; no Hyderabad beneficiary count or effect derived.')
-fact('F30','MRDCL describes Musi vision in terms of ecological restoration, sewage interception/treatment, floodplain zones and mobility/livelihoods.',['S11'],'Vision','Musi project','Retrieved2026-10-08',kind='Agency objectives',limit='Intended scope, not achieved outcomes.')
-fact('F31','At the13 March2026 Musi conference, the CM addressed compensation and livelihood concerns associated with relocation.',['S12'],'English compensation/livelihood paragraphs','Musi PhaseI','2026-03-13',kind='Official statement',limit='No claim that commitments were fulfilled; household/cost totals excluded.')
-fact('F32','State investment portal identifies Genome Valley at Shamirpet and electronics manufacturing clusters.',['S14'],'Industrial-parks section','Named locations / Telangana','Retrieved2026-10-08',kind='Official sector description',limit='Not current jobs, output, access or geographic concentration measurements.')
-fact('F33','BuildNow lists GO68 dated12 March2025 for expansion of HMR and GO69 for FCDA.',['S04'],'GO68/69 entries','Planning instruments','2025-03-12',limit='Full boundary polygons and area totals not ingested; no numerical metropolitan area claim.')
-fact('F34','Candidate resume lists MBA,IIMShillong,2023–25; Consultant Marketing and Strategy at NationWithNamo,May2025–Apr2026.',['S25'],'Education/workExperience','Candidate','CV periods',kind='Candidate self-report',limit='Not independently audited.')
-fact('F35','Candidate resume reports introducing an evidence-based review system for a seven-person political-intelligence team.',['S25'],'workExperience bullet3','Candidate work','2025–26',kind='Candidate self-report',limit='Capability evidence, not independently proven team outcome.')
-fact('F36','Candidate resume reports modelling Meghalaya PDS and analysing4,500+government records.',['S25'],'Projects,Jul–Sep2024','Meghalaya project','2024',kind='Candidate self-report',limit='No claim that the model itself caused public-service improvements.')
-fact('F37','Candidate resume lists manashdeori09@gmail.com,LinkedIn/manash-protim-deori and openness to relocation.',['S25'],'Header','Candidate','Retrieved2026-10-08',kind='Candidate self-report')
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+R = ROOT / 'research/hyderabad'
+P = ROOT / 'public/case-studies/hyderabad-political-intelligence'
+BASE = R / 'baseline-v20-deck.json'
+deck = json.loads(BASE.read_text())
+audit = json.loads((R / 'audit-10-rounds.json').read_text())
+main = copy.deepcopy(deck['slides'][:32])
+sources = copy.deepcopy(deck['sources'])
+facts = copy.deepcopy(deck['facts'])
+S = {s['id']: s for s in sources}
+F = {f['id']: f for f in facts}
+AUDIT = {c['id']: c for c in audit['claims']}
+DATE = '2026-10-08'
 
-F={x['id']:x for x in facts}
-final=[]
-def slide(n,title,section,body,contribution,ids,logic,limits,layout='columns',items=None,chart=None):
-    final.append(dict(number=n,id=f'M{n:02}',title=title,section=section,body=body,contribution=contribution,facts=ids,logic=logic,limits=limits,layout=layout,items=items or [],chart=chart))
-slide(1,'Hyderabad','Independent application work sample','Political dynamics, governance questions\nand my contribution to Inclusive Minds','', ['F34','F37'],'Editorial title for a professional research work sample.','Research cut-off8 October2026. Prepared independently; no employer or party endorsement.','cover')
-slide(2,'Power, place and public value','Executive assessment','Three findings shape my operating perspective. Each requires a different work product.','', ['F03','F07','F08','F21','F22'],'Geographic discontinuity and contrasting electoral observations make a single-city political narrative unreliable. Public investment lines create testable implementation questions.','The selected electoral units are not identical; allocations and governance changes do not establish public approval.','executive',[
- ['Power is distributed','INC won64 state seats in2023 but none in my declared15-seat study set.','I would keep institution-specific election briefs and challenge citywide extrapolation.'],
- ['Place has changed','The2026 three-corporation structure changes the administrative unit.','I would version the geography crosswalk before joining service or election data.'],
- ['Public value needs proof','Budget provision is a starting point for implementation scrutiny.','I would track release, delivery and service experience separately.']])
-slide(3,'Relevant methods; honest fit','Organisation and role','Inclusive Minds lists analytics, research, strategy, communications, growth and operations. Its Generalist post asks for transferable experience in Hyderabad.','I would turn research into concise, source-backed briefs and coordinate review across functions.',['F01','F02','F34','F35'],'Research and project coordination in the resume match public role requirements at a methodological level.','Exact requisition and open status unconfirmed. I do not claim knowledge of internal workflows or personal ideological alignment.','columns',[
- ['Research','Evidence review and structured problem solving'],['Analytics','Explicit units, reproducible comparisons'],['Delivery','Clear ownership and review handoffs']])
-slide(4,'Define the unit before the insight','Geographic foundation','District, Assembly seat, Lok Sabha seat, municipal corporation and metropolitan planning region answer different questions.','I would create a dated crosswalk with overlap rules, official boundary files and exclusions before analysis.',['F03','F04','F05','F33'],'The GO allocates municipal zones; election tables use constituency codes. A name match does not establish identical population or jurisdiction.','Classification schematic, not a geographic map. No unverified GIS polygon or area estimate is shown.','geography',[
- ['Electoral lens','AC57–71: declared historical study set; four PCs analysed separately.'],['Municipal lens','GHMC / CMC / MMC: GO55,11February2026.'],['Planning lens','HMR / FCDA instruments listed12March2025; full crosswalk pending.']])
-slide(5,'Five gates, one traceable claim','Research discipline','Facts, derived numbers, interpretations, hypotheses, proposals and candidate self-reports carry different release standards.','I would keep a claim register, contradiction log and refresh queue attached to every brief.',['F02','F20'],'Five distinct checks reduce identifiable errors; they cannot guarantee certainty or replace field validation.','Twenty reviews are cumulative self-review passes, not20 independent reviewers.','gates',[
- ['01','Provenance and direct support'],['02','Corroboration and lineage'],['03','Date, geography and arithmetic'],['04','Inference and alternatives'],['05','Feasibility and traceability']])
-slide(6,'The political timeline is not linear','Historical turning points','State formation, a stronger TRS state mandate, changing civic competition, and the2023 change in government are distinct events.','I would maintain an event ledger that separates electoral results, office changes, boundary changes and delivery milestones.',['F16','F17','F18','F19','F07','F03'],'Results from different institutions document changing competition; they do not prove one stable electorate trajectory or a cause.','2016/2020 municipal and2018 summary figures are explicitly attributed reporting. No transfers of voters inferred.','timeline',[
- ['2014','First Assembly:TRS63 / INC21'],['2018','Reported state result:TRS88 / INC19'],['2020','Reported civic result:TRS56 / BJP48'],['2023','State result:INC64 / BRS39'],['2026','CURE → three corporations']])
-slide(7,'Follow the decision, budget and remedy','Governance architecture','Municipal reorganisation, asset protection, river planning and state budget provision operate through different institutions.','I would produce one responsibility sheet for each issue: decision owner, payer, delivery body, review authority and evidence gap.',['F03','F06','F21','F30'],'A documented institution-specific chain is more useful than assigning every urban outcome to one politician or department.','This is a documented-role scaffold, not a complete current statutory responsibility matrix. Case-specific powers need validation.','matrix',[
- ['GHMC / CMC / MMC','Territorial municipal structure','GO55: zone allocation'],['HYDRAA / MAUD','Assets and disaster response','Official agency remit'],['MRDCL','Musi programme vision','Project agency objectives'],['Finance / scheme bodies','Budget provision','Separate releases and delivery']])
-slide(8,'Different cycles, different baselines','Election history','The historical civic council changed from TRS99 seats in2016 to56 in2020; BJP rose from4 to48. AIMIM retained44.','I would preserve raw election vintages and compare only equivalent units, with candidate and boundary changes recorded.',['F18','F19'],'Reported same-institution seat counts show council-level change. Seats are not votes; result differences do not identify voter transitions.','Historical150-seat GHMC tables, based on two corroborated reporting lineages. They are not2026 corporation totals.','chart',chart=dict(title='Reported GHMC seats won · historical150-seat councils',categories=['TRS','BJP','AIMIM','INC','TDP'],series=[dict(name='2016',values=[99,4,44,2,1],fill='#D5BFA0'),dict(name='2020',values=[56,48,44,2,0],fill='#A14D25')],max=110))
-slide(9,'The state result did not describe every seat','2023 Assembly comparison','INC won64 of119 state seats. Within AC57–71, the winners were BRS7, AIMIM7 and BJP1; INC won0.','I would write explicitly scoped constituency briefs rather than treating the state mandate as a metropolitan result.',['F07','F08'],'A contrasting selected-set result falsifies a claim that the statewide winner also won everywhere in the urban core.','Selection is disclosed in full; no claim that15 seats represent the entire metropolis. Historical results, not current membership.','splitstats',items=[['64 /119','INC statewide'],['0 /15','INC in selectedAC57–71'],['7 ·7 ·1','BRS ·AIMIM ·BJP in that set']])
-slide(10,'A ballot is an institutional choice','2024 Lok Sabha comparison','BJP won Malkajgiri, Secunderabad and Chevella; AIMIM won Hyderabad in the2024 results examined here.','I would keep Assembly, parliamentary and civic result series separate, then test possible explanations through approved research.',['F12','F13','F14','F15','F08'],'Different institution-specific observations show why political strength cannot be represented by one number.','Four PCs and the15-seat AC set are not coextensive. Candidate effects, turnout and national context remain rival explanations.','matrix',[
- ['Malkajgiri','Eatala Rajender','BJP'],['Secunderabad','G.Kishan Reddy','BJP'],['Hyderabad','Asaduddin Owaisi','AIMIM'],['Chevella','Konda Vishweshwar Reddy','BJP']])
-slide(11,'Competition has several forms','Political structure','In2023, AIMIM’s margins ranged from878 votes in Yakutpura to81,660 in Chandrayangutta; Nampally’s margin was2,037.','I would distinguish party presence, candidate competition and institutional control; update legal affiliation separately.',['F09','F10','F11','F20'],'The same winning party across seats does not imply uniform competition. The2025 Jubilee Hills reported Congress win also cautions against freezing2023 as the present.','Margins are vote differences, not estimates of community opinion. Current legislator affiliations, legal disputes and municipal leadership require a fresh official roster.','chart',chart=dict(title='2023 winning margins · votes, different opponents',categories=['Yakutpura','Nampally','Chandrayangutta'],series=[dict(name='Margin',values=[878,2037,81660],fill='#165744')],max=90000))
-slide(12,'Economic strength is not equal access','Political economy','The state investment portal identifies Genome Valley at Shamirpet and electronics clusters. These locations are useful anchors for questions about jobs and services.','I would build a place-based opportunity brief using verified cluster locations, commuting access and service data.',['F32'],'Cluster identification supports research design; it does not measure who benefits, city GDP or job quality.','No cityGDP, unemployment, export or employment estimate is asserted from a statewide promotional portal.','columns',[
- ['Production','Which employers and value chains are documented?'],['Access','Who can reach jobs, training and services?'],['Distribution','What evidence shows benefits across places?']])
-slide(13,'Measure the route from skill to opportunity','Employment research agenda','A sector-growth narrative leaves open questions about vacancies, qualification fit, commute costs, informality and job stability.','I would triangulate employer information, official labour statistics and consented interviews before proposing an access intervention.',['F32','F36'],'Measured barriers are needed to connect clusters with residents’ opportunities. No labour-market deficit is assumed simply from cluster presence.','Hypothesis: access barriers may vary by location and occupation. Requires local evidence; no demographic or religious political profiling.','process',[
- ['Demand','Verified vacancies and skills'],['Access','Commute, cost and information'],['Match','Training and placement evidence'],['Quality','Retention, pay and stability']])
-slide(14,'Urban expansion changes the research unit','Housing and land','GO55 changes municipal administration. Separate2025 planning instruments concern HMR expansion and FCDA. Land questions require parcel-level evidence.','I would maintain a boundary-vintage register and verify land, housing, approvals and service claims against the right jurisdiction.',['F03','F33'],'Changes in administrative and planning units can break time-series comparisons and ownership assumptions.','No current land-price trend, household displacement total or legal conclusion is asserted. GO index alone does not establish parcel-specific rights.','columns',[
- ['Boundary','Which instrument and vintage?'],['Rights','Which title, approval and record?'],['Access','Which housing and service evidence?']])
-slide(15,'Transport provision is not service access','Mobility and financing','2026–27 provides₹600crore for Metro PhaseII and a separate₹500crore loan line to HMRL.','I would track each financing line separately and evaluate access through verified project status, journeys and interchange evidence.',['F24','F25'],'Distinct lines should not be merged into a claim about completed rail construction. Accessibility requires route and service evidence.','Both are budget estimates. Current procurement, central approvals, operating extensions and completion dates are not established by the budget.','splitstats',items=[['₹600cr','Metro Rail PhaseII ·BE'],['₹500cr','Loans to HMRL ·BE'],['Journey access','A separate validation question']])
-slide(16,'Resilience needs a system view','Water and environmental services','HYDRAA’s stated remit includes disaster response and public assets. MRDCL’s vision includes sewage treatment, drainage and floodplain measures.','I would connect rainfall events, drainage records, water-quality evidence and agency responsibilities in one issue brief.',['F06','F23','F30'],'The documented remit and project scope suggest linked research tasks, not measured performance or a causal reduction in flood risk.','No flood-frequency, water-quality, sewage-treatment or lake-restoration success rate has been verified in this deck.','columns',[
- ['Hazard','Rainfall and catchment evidence'],['Infrastructure','Drainage, sewage and asset condition'],['Response','Warning, rescue and recovery records']])
-slide(17,'Entitlement, access and experience differ','Health, education and welfare','State2026–27 allocations include₹5,500crore for Indiramma Houses,₹4,305crore for MahalaxmiRTC and₹1,143crore for RajivAarogyaSri.','I would trace selected service journeys from eligibility to application, receipt, grievance and closure.',['F29','F36'],'Statewide programme provision identifies questions for access research; it does not establish Hyderabad coverage or service quality.','StatewideBE, not city spending or beneficiaries. Education outcomes and current scheme eligibility require additional authoritative evidence.','process',[
- ['Eligible','Current scheme rules'],['Apply','Documentation and channel'],['Receive','Timeliness and actual benefit'],['Resolve','Grievance and closure']])
-slide(18,'Ambition must survive implementation','Public finance','State capex rises from₹36,480.87crore in2025–26RE to₹47,267.28crore in2026–27BE: a29.6% nominal increase.','I would build a commitments-to-delivery tracker with separate estimate, sanction, release, spend and outcome fields.',['F27','F28','F21','F22','F23'],'A larger planned envelope makes financing and implementation monitoring material. It does not establish fiscal capacity or future completion.','Statewide; plan-to-revised-plan comparison; not real growth. No budget-line summation into a Hyderabad total.','chart',chart=dict(title='Telangana state capital expenditure · ₹crore',categories=['2025–26 RE','2026–27 BE'],series=[dict(name='State capex',values=[36480.87,47267.28],fill='#A14D25')],max=50000))
-slide(19,'Musi is an implementation and trust question','Policy case study01','MRDCL states environmental and mobility objectives. TheMarch2026 official conference also acknowledged compensation and livelihood concerns.','I would produce a balanced Musi brief: documentary milestone, environmental evidence, household safeguards and unresolved questions.',['F22','F30','F31'],'Environmental objectives and acknowledged relocation concerns justify testing multiple dimensions of implementation together.','Government objectives/commitments are not proof of outcomes. Current award, construction, compensation and water-quality results remain unverified.','case',[
- ['Documented','Agency vision;₹1,500croreBE;March conference'],['Needs proof','Awards, disbursement, sewage and water-quality results'],['Human impact','Compensation, location of rehousing and livelihood access']])
-slide(20,'Protect assets; verify every case','Policy case study02','HYDRAA describes a CURE-wide asset-protection and disaster mandate. That does not determine the legality or fairness of an individual action.','I would keep a case tracker for the order, boundary record, notice, review route, implementation and independently checked outcome.',['F06','F03'],'Mandate-level evidence and case-level evidence answer different questions; public trust needs both.','No parcel is labelled an encroachment here. Current legal requirements and court orders need counsel/official record review.','case',[
- ['Record','Official site and boundary documentation'],['Process','Notice, authority, hearing or review record'],['Outcome','Restoration, affected livelihoods and remedy evidence']])
-slide(21,'Accountability needs a named handoff','Coordination and power','Three municipal jurisdictions coexist with programme-specific and CURE-wide bodies. Cross-agency outcomes need an explicit coordination record.','I would assign one issue owner and keep decision, funding, implementation and grievance handoffs visible.',['F03','F06','F30'],'Multiple documented bodies create a coordination research requirement; this deck does not claim demonstrated coordination failure.','Proposed operating design. Access to officials, internal records and escalation routes depends on employer approval.','process',[
- ['Decide','Authority and instrument'],['Fund','Release and payment'],['Deliver','Execution and service'],['Answer','Grievance, review and closure']])
-slide(22,'Public discourse is evidence about discourse','Information quality','Official communications establish stated positions; news reports provide scrutiny. Neither social-media volume nor a few interviews measures public opinion.','I would run a multilingual issue log with source lineage, verified translations, correction status and a representativeness note.',['F01','F31','F20'],'The sources have different incentives and upstream dependencies. Reported narratives cannot identify their prevalence or their causal electoral effect.','Proposed Telugu,Urdu and English review with qualified language support. No claim to my fluency, representative survey, private messages or sentiment baseline.','columns',[
- ['Statement','What was claimed, by whom and when?'],['Evidence','Which record supports or contradicts it?'],['Reception','What valid method measures understanding?']])
-slide(23,'Uncertainty is a research queue','Known, disputed and unknown','Results and notified geography are strong anchors. Service performance, legal status and representative experience need separate current evidence.','I would maintain explicit expiry rules and assign a validation task to each consequential unknown.',['F03','F07','F20','F27'],'Separating known records from unresolved status prevents confidence in one source class from spilling into another.','No exhaustive claim about all developments up to cut-off. Source accessibility and absence of fieldwork constrain this work sample.','matrix',[
- ['Known','2023results;GO55;2026–27BE','Preserve dated records'],['Disputed','2025 Jubilee vote totals','Exclude; obtain final Form20'],['Unknown','Current civic poll schedule / roster','Obtain official notification'],['Unknown','Service outcomes / experience','Records + consented interviews']])
-slide(24,'Start where errors change decisions','Prioritised research agenda','I would sequence work by the risk of misclassification, decision relevance and dependency—not a fabricated electoral opportunity score.','I would agree the first research backlog with my manager and publish owners, dependencies and stop conditions.',['F03','F20','F21','F30'],'Boundary and status errors invalidate downstream analysis; implementation records then support usable issue briefs. Ranking is my professional judgment.','Proposed priority order; not measured demand or a promise of access.','priorities',[
- ['01','Geography and current status','Boundary files; official roster; civic notification'],['02','Urban delivery ledger','Release, award, spend and completion evidence'],['03','Musi / HYDRAA case briefs','Environmental, livelihood and process records'],['04','Service-access validation','Approved interviews and administrative data']])
-slide(25,'A work sample you can inspect','Produced evidence brief','This deck includes a usable CURE budget baseline with exact instruments, reference years and open implementation fields.','I would maintain the baseline as a reviewed weekly brief, recording each new document and change in status.',['F21','F22','F23','F24','F25','F26'],'The produced tracker demonstrates source and status discipline. It is a baseline prototype, not a live government dashboard.','No internal spending feed or field validation. Unverified stages remain explicitly Unknown.','tracker',[
- ['H-CITY assistance','₹2,654cr','BE only','Unknown'],['Musi development','₹1,500cr','BE only','Unknown'],['HMWSSB development loans','₹1,450cr','BE only','Unknown'],['Metro PhaseII','₹600cr','BE only','Unknown'],['HMRL loans','₹500cr','BE only','Unknown'],['20KL reimbursement','₹300cr','BE only','Unknown']])
-slide(26,'One workflow from discovery to refresh','My proposed operating system','An insight should retain its evidence, uncertainty and accountable next action as it moves between research and delivery teams.','I would introduce a short daily triage and a manager-reviewed weekly research brief with a correction log.',['F35','F36','F01'],'The candidate-reported review experience supports proposing an evidence workflow; actual performance must be established through a pilot.','Owner:me under a research lead. Depends on approved repositories and reviewers. Fall back to a shared spreadsheet if tooling is limited.','process',[
- ['Discover','Issue, scope, original record'],['Verify','Five gates; contradictions'],['Synthesize','Finding and alternatives'],['Review','Manager/subject specialist'],['Refresh','Expiry, correction, change log']])
-slide(27,'First30 days: a defensible baseline','Onboarding proposal','I would establish the geography, source inventory and reporting rhythm before committing to broad field conclusions.','I would deliver one boundary register, one source ledger, four short issue briefs and a manager-approved research backlog.',['F03','F35','F36'],'Small reproducible work products establish a baseline and identify access constraints early.','Planning assumption:roughly10focused research hours/week plus review. Employer workload and priorities determine actual output.','plan',[
- ['Week1','Role and geography alignment','Manager signs scope and permitted data'],['Weeks2–3','Four bounded issue briefs','Source/claim coverage inspected'],['Week4','Baseline retrospective','Review errors, hours and missing records']])
-slide(28,'Days31–60: validate the weak links','Research validation proposal','I would test the highest-impact gaps through authorised records, agency clarifications and consented qualitative research.','I would refine two case studies and test interview guides with qualified local-language support.',['F30','F31','F06','F36'],'The earlier evidence gaps identify where direct validation is useful; interviews add context, not automatically representative statistics.','Assumption:manager approval, permissions and language support. If access fails, publish desk-based gaps and narrow the question.','plan',[
- ['Validate','Two issue briefs with document updates'],['Listen','Pilot5–8consented interviews if approved'],['Challenge','Test at least two rival explanations'],['Review','No survey percentages from a qualitative pilot']])
-slide(29,'Days61–90: improve and hand over','Operational learning proposal','I would evaluate evidence quality and turnaround against the first-month baseline, then hand over a reusable research system.','I would deliver a reviewed atlas scaffold, refresh calendar, two refined case briefs and an onboarding guide.',['F35','F36'],'A pilot creates observable process metrics; the direction and scale of improvement are not predetermined.','Track correction count, broken citations, scope errors and review time. Avoid targets that reward hiding errors or premature publication.','plan',[
- ['Quality','Unsupported assertions; correction closure'],['Usability','Reviewer questions answered; decisions supported'],['Speed','Comparable brief turnaround, no rushed claims'],['Handover','Owner, source, expiry and next action retained']])
-slide(30,'Experience is evidence; transfer is a test','My contribution and learning gaps','My resume reports political-intelligence review work, cross-functional coordination and a Meghalaya public-distribution modelling project.','I would bring structured research and operational discipline, while building Hyderabad context through supervised local learning.',['F34','F35','F36'],'These self-reported experiences support a methods-based fit; geographic expertise and employer performance remain to be demonstrated.','No independent audit of CV outcomes. No claim to local-language fluency, Hyderabad field networks or guaranteed political impact.','columns',[
- ['What I bring','Evidence review; modelling; clear handoffs'],['What I must learn','Local context; current rules; language support'],['How I would prove fit','A bounded first-month brief and review pilot']])
-slide(31,'Interview me for the work product','Closing proposition','I can offer a careful research perspective, traceable synthesis and a practical path from analysis to a reviewed brief.','I would welcome a discussion of one issue brief, its strongest counterargument and the first work product the team needs.',['F35','F36','F02'],'The produced work sample and candidate-reported methods support an interview proposition, not a guarantee of hiring or future results.','Fit and priorities must be tested with the actual hiring team.','closing',[
- ['Precision','I define the institution, boundary and date.'],['Judgment','I separate results, inference and uncertainty.'],['Execution','I leave an owner, deliverable and validation path.']])
-slide(32,'Thank you','Manash Protim Deori','For considering my application to Inclusive Minds\nPolitical consulting · Hyderabad\n\nmanashdeori09@gmail.com\nlinkedin.com/in/manash-protim-deori','', ['F37'],'Contact and relocation information from the existing portfolio resume.','Independent application work sample. Appendix follows immediately.','thanks')
-
-def notes(s):
-    refs=sorted(set(z for f in s['facts'] for z in F[f]['sources']))
-    return '\n\n'.join([
-      'ESTABLISHES: '+s['body'].replace('\n',' '),
-      'EVIDENCE: '+'; '.join(f+': '+F[f]['text']+' ['+', '.join(F[f]['sources'])+'; '+F[f]['locator']+']' for f in s['facts']),
-      'REASONING: '+s['logic'],
-      'LIMITS / ASSUMPTIONS: '+s['limits'],
-      'ALTERNATIVES: '+s.get('alternatives','For proposals: access may be restricted; a narrower desk brief may be more useful than a broad unsupported conclusion.'),
-      'HOW I WOULD CONTRIBUTE: '+(s['contribution'] or ('Each executive finding has its adjacent contribution.' if s['number']==2 else 'Cover/contact framing; no separate major recommendation.')),
-      'PRACTICAL TEST: '+s.get('feasibility','Owner: candidate under manager review. Dependencies: approved public sources and a reviewer. Measure: complete traceability and documented correction closure. Stop if authority, scope or critical premise is unresolved.'),
-      'FIVE GATES: '+s.get('gate_summary','Provenance and lineage recorded; jurisdiction/time checked; bounded inference; proposal dependencies visible; IDs and sources reconciled. No accuracy guarantee.'),
-      'FULL REFERENCES: '+'\n'.join(z+' | '+S[z]['title']+' | '+S[z]['publisher']+' | '+S[z]['url']+' | '+S[z]['locator']+' | '+S[z]['publication_date'] for z in refs),
-      'INTERVIEW DEFENCE: '+s.get('defence','Explain what would change this conclusion: a newer authoritative boundary/status record, corrected numerical result, contrary service evidence, or manager feedback that changes the priority.')])
-
-focus=['Scope, vacancy and candidate inputs','Geography and institutional definitions','Source collection and provenance','Election data integrity','Historical context','Current actors and legal status','Governance and responsibility','Political economy','Public services and fiscal evidence','Live policy case studies','Causality and competing explanations','Media, language and qualitative evidence','Recommendation feasibility','Immediate candidate contribution','CV truthfulness and role fit','30/60/90-day realism','Narrative and executive compression','Adversarial review','Full traceability and five-gate closure','Final currency and presentation readiness']
-def clean_text(t):
-    protected={}
+def clean_text(value):
+    # URLs, email addresses and evidence IDs must survive editorial spacing.
+    saved = {}
     def protect(m):
-        key='@@'+str(len(protected))+'@@';protected[key]=m.group(0);return key
-    t=re.sub(r'\b[FMCAIRSGv]\d{2}\b',protect,t)
-    t=re.sub(r'(?<=\d)(?=[A-Za-z])',' ',t)
-    t=re.sub(r'(?<=[A-Za-z])(?=\d)',' ',t)
-    t=re.sub(r'(?<=[A-Za-z0-9])(?=₹)',' ',t)
-    t=re.sub(r'([,;:])(?=[A-Za-z₹])',r'\1 ',t)
-    for a,b in {'NationWithNamo':'Nation With Namo','IIMShillong':'IIM Shillong','RajivAarogyaSri':'Rajiv Aarogya Sri','MahalaxmiRTC':'Mahalaxmi RTC','cityGDP':'city GDP','Form20':'Form 20','Telugu,Urdu':'Telugu, Urdu','PhaseII':'Phase II','statewideBE':'statewide BE','croreBE':'crore BE','TheMarch':'The March','selectedAC':'selected AC','case-specific':'case-specific','government/public':'government / public'}.items(): t=t.replace(a,b)
-    t=re.sub(r'(?<=[A-Za-z])([,;:])(?=\d)',r'\1 ',t)
-    for a,b in {'stateGDP':'state GDP','EarlyTRS':'Early TRS','actualBE':'actual BE','nominalBE':'nominal BE','candidate/report':'candidate / report'}.items():t=t.replace(a,b)
-    for key,value in protected.items():t=t.replace(key,value)
-    t=re.sub(r'%([A-Za-z])',r'% \1',t)
-    t=re.sub(r';(?=\d)','; ',t)
-    return t
-for src in sources:
-    for k in ['title','locator','limitation']:src[k]=clean_text(src[k])
-for f in facts:
-    for k in ['text','locator','geography','reference_date','corroboration','limit']:f[k]=clean_text(f[k])
-for s in final:
-    for k in ['title','body','contribution','logic','limits']:s[k]=clean_text(s[k])
-    s['items']=[[clean_text(z) for z in row] for row in s['items']]
-state=[]
-for s in final:
-    d=copy.deepcopy(s)
-    if s['number'] not in [1,32]:
-      d.update(body='Research question: '+s['title']+'. This draft requires evidence collection and explicit jurisdiction before a conclusion is released.',facts=[],items=[['Draft scope','Investigate the relevant original records.'],['Release condition','Resolve evidence and status gaps before assertion.']],chart=None,layout='columns',logic='Draft research question; no empirical conclusion released.',limits='Unresolved draft pending verification.',contribution='I would establish the source and scope before recommending a work product.')
-    d['draft']=True
-    state.append(d)
-groups={2:[4],3:[5],4:[8,9,10,11],5:[6],6:[11],7:[7,21],8:[12,13,14],9:[15,16,17,18],10:[19,20],11:[2],12:[22,23],13:[24,25],14:[],15:[3,30],16:[27,28,29],17:[26,31],18:[],19:[],20:[]}
-changes={1:'Created32-slide full draft, candidate inputs, research cut-off and unresolved vacancy register.',2:'Installed GO55 zone allocations and separated electoral, municipal and planning units; removed fictitious map.',3:'Added five-gate method, source hierarchy, source-lineage disclosure and source accessibility limitations.',4:'Inserted historical civic table, primary Assembly study-set count and four separate parliamentary records; recalculated totals/margins.',5:'Added selective2014/2018/2020/2023/2026 timeline, labelled reported legacy context and avoided voter-transfer claims.',6:'Replaced current-strength implications with election-time affiliation and reported2025 winner; current legal roster remains a named gap.',7:'Mapped documented agency roles and inserted coordination scaffold without asserting proven institutional failure.',8:'Added cluster/access distinction; excluded cityGDP, unemployment, housing-price and demographic estimates without correct-scope data.',9:'Inserted actualBE/RE amounts, separate transport instruments, statewide welfare scope and plan-to-revised-plan capex arithmetic.',10:'Added Musi and HYDRAA briefs with objective/commitment/mandate distinctions; kept implementation and legal outcomes unknown.',11:'Tested causal overreach across deck; added executive synthesis and two alternative explanations for major election/governance conclusions.',12:'Added source/translation/representativeness discipline and known/disputed/unknown queue; rejected social-media-as-public-opinion logic.',13:'Produced budget tracker baseline; ranked research tasks using decision dependency and specified owners, dependencies, measures and fallback.',14:'Audited every major finding/proposal for adjacent contribution; replaced generic contribution drafts with concrete proposed deliverables.',15:'Added role fit and self-reportedCV evidence; removed unsupported language fluency, Hyderabad experience and independently audited impact.',16:'Added sequential30/60/90-day outputs and resource assumptions; bounded qualitative pilot and prevented invented performance guarantees.',17:'Completed operating system and closing proposition; checked flow from evidence to work product and removed repeated claims from notes.',18:'Adversarially reviewed conflicting bypoll totals,2020incomplete tally, H-CITY label and boundary selection; recorded excluded claims and title limits.',19:'Closed all substantive-ID mappings; generated atomic fact, inference, proposal, contribution and source ledgers plus reproducible tables.',20:'Refreshed source snapshot/date boundaries, verified final sequence and all32 main slides, retained residual uncertainties and released contentv20.'}
-for i in changes:changes[i]=clean_text(changes[i])
-logs=[]
-def audit(slides,release=False):
-    defects=[]
-    if [s['number'] for s in slides]!=list(range(1,33)):defects.append('Main sequence invalid')
-    for s in slides:
-      if any(x not in F for x in s['facts']):defects.append(s['id']+' missing fact')
-      if release and s['number'] not in [1,2,32] and not s['contribution']:defects.append(s['id']+' missing contribution')
-      if not s['logic'] or not s['limits']:defects.append(s['id']+' missing bounds')
-      if release and s.get('draft'):defects.append(s['id']+' draft not closed')
-    return defects
-for i in range(1,21):
-    input_sha=hashlib.sha256(json.dumps(state,sort_keys=True).encode()).hexdigest()
-    for n in groups.get(i,[]):
-      state[n-1]=copy.deepcopy(final[n-1]);state[n-1]['draft']=False
-    if i==11:
-      for s in state:
-        s['alternatives']='Electoral contrasts: candidate-specific competition and institution-specific turnout/context are rival explanations; no individual switching inferred. Governance: genuine delivery improvement and a change in reporting/boundary coverage can both explain a reported change; seek stable-unit outcome data.' if s['number'] in [2,6,8,9,10,11] else 'A programme may improve aggregate service while access costs remain uneven; alternatively, a perceived gap may reflect incomplete information rather than poor delivery. Validate records and lived experience separately.'
-    if i==13:
-      for s in state:
-        s['feasibility']='Proposed owner:me under the hiring manager/research lead. Desk baseline:~10focused hours/week (planning assumption). Dependencies:public documents, approved shared repository, subject reviewer; field/language work needs explicit employer support. Measure:scope/source defects and review turnaround against pilot baseline. Fallback:one narrower desk brief; stop unresolved critical legal or data claims.'
-    if i==14:
-      for idx,s in enumerate(state):
-        if s['number'] not in [1,2,32]:s['contribution']=final[idx]['contribution']
-    if i==15:
-      for s in state:
-        if 'F34' in s['facts'] or 'F35' in s['facts'] or 'F36' in s['facts']:s['credential_note']='Candidate evidence is owner-controlled portfolio resume; not independently audited. Transfer to Hyderabad and this employer is a proposal requiring evaluation.'
-    if i==18:
-      state[10]['defence']='The878vote margin is a final2023 result. It cannot establish voting motive. The2025 Jubilee winner is reported; conflicting vote counts are excluded. I would obtain Form20 before any quantitative bypoll comparison.'
-      state[17]['defence']='The29.6% figure compares next-yearBE against prior-yearRE and is nominal/statewide. It is not a growth forecast, realised spending change or Hyderabad budget total.'
-      state[24]['defence']='H-CITY is the label printed in the budget line. Different public descriptions use H-CITI; the tracker preserves the original instrument label and does not infer equal programme scope.'
-    if i>=19:
-      for s in state:
-        s['draft']=False
-        s['gate_summary']='G1PASS:documentary support or labelled proposal. G2PASS for bounded authoritative/reporting statements; limitations and shared origins recorded. G3PASS:dated/scoped and recalculated. G4PASS for bounded inference; hypotheses remain conditional. G5PASS for traceability; proposed outcomes conditional on access/review, never guaranteed.'
-    for s in state:s['notes']=notes(s)
-    defects=audit(state,i==20)
-    if defects:raise ValueError(defects)
-    out_sha=hashlib.sha256(json.dumps(state,sort_keys=True).encode()).hexdigest()
-    log=dict(iteration=i,focus=focus[i-1],timestamp=datetime.datetime.now(datetime.timezone.utc).isoformat(),input_version=f'v{i-1:02}' if i>1 else 'research outline',output_version=f'v{i:02}',input_sha256=input_sha,output_sha256=out_sha,reviewer_method='Single-system focused editorial review plus whole-deck structural regression audit; not independent human review.',change=changes[i],affected_slides=groups.get(i,list(range(1,33))),sources_consulted=sorted(set(z for s in state for f in s['facts'] for z in F[f]['sources'])),gates_rerun=[1,2,3,4,5],preserved='All previously supported numerical inputs, source IDs and correctly bounded wording unless a recorded correction was necessary.',regression_result='32-slide sequence, source IDs, reasoning and limitations checked; no structural defects.',outstanding=['Exact requisition/open status','Current official civic poll notification and member/legal roster','Official2025 Jubilee finalForm20','Current service outcomes and authorised field validation'],next_focus=focus[i] if i<20 else 'Render, inspect, export and deploy; content release complete.')
-    logs.append(log)
-    (RESEARCH/'versions'/f'v{i:02}.json').write_text(json.dumps(dict(version=i,cutoff=CUTOFF,slides=state,review=log),ensure_ascii=False,indent=2))
-    (RESEARCH/f'checkpoint-v{i:02}.json').write_text(json.dumps(dict(latest=f'versions/v{i:02}.json',completed_rounds=i,next_round=i+1 if i<20 else None,registers=['facts.json','sources.json'],outstanding=log['outstanding'],next_action=log['next_focus']),indent=2))
+        key = f'@@{len(saved)}@@'
+        saved[key] = m.group(0)
+        return key
+    value = re.sub(r'https?://\S+|[\w.+-]+@[\w.-]+\.[A-Za-z]+|\b[FMCAIRSGv]\d{2}\b', protect, value)
+    value = re.sub(r'(?<=\d)(?=[A-Za-z])', ' ', value)
+    value = re.sub(r'(?<=[A-Za-z])(?=\d)', ' ', value)
+    for key, original in saved.items(): value = value.replace(key, original)
+    return value
 
-main=copy.deepcopy(state)
+def source(id, title, publisher, url, locator, date, lineage, limitation, access):
+    s = dict(id=id, title=title, publisher=publisher, url=url, locator=locator,
+             publication_date=date, retrieved=DATE, lineage=lineage,
+             limitation=limitation, fresh_access=access)
+    sources.append(s); S[id] = s
+
+source('S26', '2024 Secunderabad Cantonment by-election records', 'Chief Electoral Officer Telangana',
+       'https://ceotelangana.nic.in/BYE_GE_2024.html', 'By-election index: result declaration and Form 20 links',
+       '2024 by-election records', 'CEO official index',
+       'Index read. Linked result declaration/Form 20 could not be retrieved. The index is not used to verify an unread result.', 'Index read; result document pending')
+source('S27', 'Congress wins Secunderabad Cantonment by-election', 'The New Indian Express',
+       'https://www.newindianexpress.com/states/telangana/2024/Jun/05/congress-wins-byelection-to-secunderabad-cantonment',
+       'Opening paragraph: Congress win; result event 4 June 2024', '2024-06-05', 'Express News Service reporting',
+       'Winner/event only. Vote totals and current party strength are not adopted. Official declaration remains pending.', 'Article read')
+source('S28', '2025 Jubilee Hills by-election records', 'Chief Electoral Officer Telangana',
+       'https://ceotelangana.nic.in/BYE_GE_2025.HTML', 'Index: State Gazette Form 21-D declaration link',
+       '2025 by-election records', 'CEO official index',
+       'Index read. Linked declaration PDF unavailable. No unread document content or disputed final vote total is adopted.', 'Index read; declaration/Form 20 pending')
+source('S29', 'Quality in qualitative evaluation', 'HM Treasury / GOV.UK',
+       'https://www.gov.uk/government/publications/the-magenta-book/quality-in-qualitative-evaluation-qqe-html',
+       'Framework questions 7–8: sample selection/coverage; question 18: auditability',
+       '2003 framework; current HTML edition retrieved 2026-10-08', 'UK government methodological guidance',
+       'Supports research-design checks. Does not prescribe 5–8 interviews or validate this proposed Hyderabad pilot.', 'Relevant framework sections read')
+source('S30', 'Magenta Book: evaluation guidance', 'HM Treasury / GOV.UK',
+       'https://www.gov.uk/government/publications/the-magenta-book/magenta-book-central-government-guidance-on-evaluation-html',
+       'Quality principles; theory of change and evaluation-design sections',
+       '2026 edition', 'UK government methodological guidance',
+       'Supports evaluation design, uncertainty and comparison. Local workload, outputs and future effectiveness remain untested.', 'Relevant sections read')
+
+for s in sources[:25]:
+    prior = next(x for x in audit['sources'] if x['id'] == s['id'])
+    s['fresh_access'] = prior['fresh_route']
+    if prior['retrieval'].get('sha256'): s['snapshot_sha256'] = prior['retrieval']['sha256']
+    s['verification_date'] = DATE
+S['S06']['locator'] = 'Performance of Political Parties, printed p.1, WON column'
+S['S07']['limitation'] += ' Fresh target rows were inaccessible in the ten-round review. Retain as pending primary recheck.'
+S['S16']['limitation'] += ' Relevant passage could not be freshly read in the ten-round review.'
+S['S09']['locator'] = 'Printed p.4: VII Capital Expenditure; printed pp.15–17: Major Schemes Budget Allocation'
+S['S10']['locator'] = 'Fiscal summary; Table 11 revenue receipts and Table 14 sector BE-to-actual comparison, 2024–25'
+S['S23']['lineage'] = S['S24']['lineage'] = 'Times Group reporting; shared corporate lineage'
+S['S23']['limitation'] += ' Shares corporate lineage with S24. Count as one reporting lineage.'
+S['S24']['limitation'] = 'Same corporate group as S23. Winner supported as reporting, not two independent confirmations. Official final Form 20 pending.'
+S['S25']['url'] = 'https://github.com/ManashProtimDeori/Manash-Protim-Deori/blob/c5ab9d8ac00c9180b880fa50f3e5f99682e1dac1/src/data/resume.ts'
+
+F['F37']['text'] = 'Candidate resume lists manashdeori09@gmail.com, LinkedIn/manash-protim-deori and openness to relocation.'
+F['F20']['text'] = 'Congress candidate V. Naveen Yadav won the November 2025 Jubilee Hills by-election, according to Times Group reporting.'
+F['F20']['corroboration'] = 'S23 and S24 share Times Group lineage; they are not independent confirmations. Official declaration/Form 20 pending.'
+for f in facts:
+    prior = AUDIT[f['id']]
+    f['verification_status'] = 'Qualified' if f['id'] == 'F37' else prior['verdict']
+    f['verification_date'] = DATE
+    f['verification_basis'] = prior['checks'][1]['basis']
+    if f['id'] == 'F37': f['verification_basis'] = 'Source contact fields reproduced correctly. Candidate resume remains self-reported.'
+    if f['verification_status'] == 'Blocked':
+        f['kind'] = 'Historical record, fresh recheck pending'
+        f['limit'] = (f.get('limit', '') + ' Original passage could not be freshly retrieved. Internal arithmetic is not a provenance check.').strip()
+    if f['id'] == 'F20': f['limit'] += ' S23/S24 share Times Group lineage. Official declaration/Form 20 pending.'
+
+# Printed page and row locators checked directly against the frozen S09 PDF.
+budget_rows = {'F21':(16,'32','H-CITY assistance to CURE, 2,654 crore'),
+               'F22':(16,'36','Musi Riverfront development, 1,500 crore'),
+               'F23':(16,'38','HMWSSB development loans, 1,450 crore'),
+               'F24':(17,'50','Metro Rail Phase II, 600 crore'),
+               'F25':(17,'57','HMRL loans, 500 crore'),
+               'F26':(17,'69','20 KL water reimbursement, 300 crore'),
+               'F29':(15,'3/4/7','Indiramma Houses 5,500; Mahalaxmi RTC 4,305; Rajiv Aarogya Sri 1,143 crore')}
+for id, (page, row, label) in budget_rows.items():
+    F[id]['locator'] = f'S09 p.{page}, Table 10, row {row}'
+    F[id]['verification_basis'] = f'S09 printed p.{page}, Table 10 row {row}: {label}, 2026–27 BE. Budget provision only.'
+F['F27']['locator'] = 'S09 p.4, row VII, RE/BE columns'
+F['F27']['verification_basis'] = 'S09 printed p.4, VII Capital Expenditure: 36,480.87 crore 2025–26 RE and 47,267.28 crore 2026–27 BE; fiscal-stage comparison only.'
+
+def fact(id, text, src, locator, geo, date):
+    f = dict(id=id, text=text, sources=src, locator=locator, geography=geo,
+             reference_date=date, kind='Attributed reporting / analysis',
+             corroboration='Bounded attributed statement; no claim of independent numerical confirmation.',
+             limit='Historical statement, not current status or a forecast.',
+             verification_status='Qualified', verification_date=DATE,
+             verification_basis='Relevant reporting/analysis passage read; limitations retained.')
+    facts.append(f); F[id] = f
+
+fact('F38', 'Congress won the 2024 Secunderabad Cantonment by-election, according to reporting.',
+     ['S27'], 'Opening paragraph; reported result 4 June 2024', 'AC 71, historical by-election', '2024-06-04')
+F['F38']['limit'] = 'Official CEO declaration/Form 20 unavailable. Winner/event only, no vote totals or present membership claim.'
+fact('F39', 'PRS reports 2024–25 state revenue receipts 24% below BE.', ['S10'], 'Table 11, Revenue Receipts row', 'Telangana state', '2024–25 BE to actual')
+fact('F40', 'PRS reports 2024–25 urban-development actuals 56% below BE.', ['S10'], 'Table 14, Urban Development row', 'Telangana state', '2024–25 BE to actual')
+fact('F41', 'PRS reports 2024–25 transport actuals 33% below BE.', ['S10'], 'Table 14, Transport row', 'Telangana state', '2024–25 BE to actual')
+for id in ['F39', 'F40', 'F41']:
+    F[id]['limit'] = 'PRS analysis of state documents. Statewide historical context, not Hyderabad performance or a 2026–27 prediction.'
+
+def update(n, **kwargs): main[n-1].update(kwargs)
+main[18]['section'] = 'Policy case study 01'
+main[19]['section'] = 'Policy case study 02'
+main[28]['title'] = 'Days 61 to 90: improve and hand over'
+main[1]['items'][0][1] = 'INC won 64 statewide seats. The deck’s selected 2023 table shows 0 of 15. Primary recheck pending.'
+update(2, logic='These institution-specific results cannot be collapsed into one citywide result. Budget provisions create questions about implementation.',
+       limits='Selected units differ. The 15-seat source recheck is pending. Budget estimates and boundary changes do not establish public approval.')
+update(4, limits='AC 57–71 is a contiguous administrative-code study set, chosen for a bounded work sample. It excludes other metropolitan seats and is not representative.')
+update(5, logic='The five checks are designed to detect different errors. Their effect on quality and turnaround must be measured in a pilot.',
+       limits='Ten recent audit lenses are self-review, not ten independent confirmations. Earlier 20 content versions remain historical records.')
+update(6, body='State, civic and by-election records describe different institutions and dates. Later by-elections require a separate event ledger.',
+       facts=main[5]['facts']+['F38','F20'],
+       items=[['2014','First Assembly: TRS 63 / INC 21. Fresh recheck pending.'],
+              ['2018','Reported Assembly result: TRS 88 / INC 19.'],
+              ['2020','Reported civic result: TRS 56 / BJP 48.'],
+              ['2023','State result: INC 64 / BRS 39.'],
+              ['2024–25','Reported INC bypoll wins: Cantonment, then Jubilee Hills.'],
+              ['2026','GO 55: three municipal corporations.']],
+       logic='Separate election outcomes, by-elections, office changes and boundary changes. Historical outcomes do not establish present membership.',
+       limits='2014 fresh passage pending. Legacy/bypoll results are attributed reporting. No voter switching or current party-strength estimate.')
+update(9, limits='Contiguous-code study set AC 57–71, not the full metropolis. Historical result table retained with fresh primary recheck pending.')
+update(11, body='Among three examined 2023 seats, margins were 878 in Yakutpura, 2,037 in Nampally and 81,660 in Chandrayangutta.',
+       limits='Three selected seats, not a party-wide distribution. Arithmetic agrees internally. Fresh source-row check pending; no voting-motive inference.',
+       logic='Different margins within the three seats show varied competition. Later Cantonment and Jubilee by-elections need a separate status ledger.',
+       facts=main[10]['facts']+['F38'])
+update(12, title='Cluster presence and access questions',
+       logic='Cluster presence does not establish broad access. Locations anchor research questions, but do not measure benefits, GDP or job quality.')
+update(18, body='State capex: ₹36,480.87 crore in 2025–26 RE and ₹47,267.28 crore in 2026–27 BE, a 29.6% nominal increase. In 2024–25, PRS reports state revenue receipts 24% below BE.',
+       facts=main[17]['facts']+['F39'],
+       limits='Statewide RE-to-BE comparison. Prior BE-to-actual gap is context, not a forecast. Chart labels round to whole crore; exact values remain in the workbook.')
+update(23, items=[['Supported','2023 state totals, GO 55, 2026–27 BE','Keep document date and scope'],
+                 ['Pending','15-seat rows, three margins, 2014 passage','Obtain readable primary passages'],
+                 ['Reported','2024 Cantonment / 2025 Jubilee wins','Official declarations / Form 20'],
+                 ['Unknown','Current civic roster and service outcomes','Assign official record refresh']],
+       limits='Verification status is record-specific. A source index or correct calculation does not clear an unread original passage.',
+       facts=main[22]['facts']+['F38'])
+update(25, body='Six selected urban-related 2026–27 budget lines form a source-linked tracker. They are a prototype, with open implementation fields.',
+       logic='The selected rows support monitoring questions. They do not form a complete CURE total or a live delivery dashboard.',
+       limits='PRS: 2024–25 state urban-development actuals −56% vs BE, transport −33%. Historical context, not 2026–27 delivery.',
+       facts=main[24]['facts']+['F40','F41'])
+update(26, items=[['Discover','Question and original record'],['Verify','Source status and contradictions'],['Synthesize','Finding and rival explanation'],['Review','Acceptance and correction closure'],['Refresh','Named owner and expiry trigger']])
+update(27, contribution='I would build the registers and one reviewed pilot brief, log sourcing and review effort, then agree the brief count with my manager.',
+       items=[['Week 1','Role and geography alignment','Agree scope, records and reviewer'],
+              ['Weeks 2–3','One bounded pilot brief','Log effort and review acceptance'],
+              ['Week 4','Capacity and backlog review','Agree further outputs from the pilot']],
+       limits='About 10 focused hours/week is a planning envelope to agree. Four briefs remain a conditional capacity target, not a promised output.')
+update(28, items=[['Validate','Update two case briefs if access allows'],['Select','Purposive 5–8 interview pilot if approved'],['Document','Missing voices, language review, stopping rule'],['Review','Context only, no survey percentages']],
+       limits='Exploratory planning range. Define question, inclusion, consent, language support and stopping rule; no assured representativeness or saturation.')
+update(29, items=[['Quality','Unsupported claims per audited claim'],['Closure','Closed corrections / logged corrections'],['Speed','Time for comparable reviewed briefs'],['Handover','Owner, expiry and next evidence task']],
+       limits='Agree denominators and compare similar briefs. More detected errors can reflect better review; counts alone do not measure improvement.')
+update(32, body='For considering my application to Inclusive Minds\nPolitical consulting · Hyderabad\n\nmanashdeori09@gmail.com\nlinkedin.com/in/manash-protim-deori')
+
+recommendations = {
+ 2:'Maintain separate institution-specific briefs with a dated geography crosswalk.',
+ 3:'Test fit against the actual requisition through one reviewed research brief.',
+ 4:'Complete the dated official boundary crosswalk before joining datasets.',
+ 5:'Attach a claim register and correction log to every brief.',
+ 6:'Maintain a dated event ledger that includes subsequent by-elections.',
+ 7:'Document responsibility and evidence for each issue-specific handoff.',
+ 8:'Compare historical council counts only within equivalent election units.',
+ 9:'Publish the selection rationale and exclusions with each constituency brief.',
+10:'Keep Assembly, parliamentary and civic series separate.',
+11:'Compare only the examined seats and refresh subsequent status separately.',
+12:'Use verified cluster locations to frame a bounded opportunity-access brief.',
+13:'Validate a defined access question before proposing an intervention.',
+14:'Match each land or service claim to its dated jurisdiction and original record.',
+15:'Track each transport financing line through documented implementation stages.',
+16:'Build a catchment-specific resilience brief using comparable event records.',
+17:'Trace a selected service journey against current official eligibility rules.',
+18:'Monitor financing and execution with explicit BE, RE and actual stages.',
+19:'Evaluate the Musi case against documented milestones and household safeguards.',
+20:'Verify an individual case against its order, boundary and review records.',
+21:'Assign an issue owner and document the accountable handoff.',
+22:'Review a dated multilingual discourse corpus with a coverage note.',
+23:'Assign an owner, expiry trigger and validation task to each consequential unknown.',
+24:'Sequence the backlog by classification risk and decision dependencies.',
+25:'Maintain a reviewed tracker of selected urban-related budget instruments.',
+26:'Pilot a manager-reviewed research workflow with correction-closure criteria.',
+27:'Use the first brief’s measured effort to agree the first-month output count.',
+28:'Use an approved purposive interview pilot to explore a bounded evidence gap.',
+29:'Evaluate comparable briefs using defined quality and turnaround denominators.',
+30:'Test transferable methods through a supervised Hyderabad work product.',
+31:'Use one inspectable brief to discuss fit with the hiring team.'}
+
+work = {
+ 2:('Institution-specific briefing pack','Dated results and boundary records','Separate unit/date/source in every comparison'),
+ 3:('Role-to-work-product fit sheet','Exact requisition, CV examples, pilot brief','Hiring manager accepts requirement/example links'),
+ 4:('Geography crosswalk','GO instruments and official polygons','Version, join keys, overlap rules and exclusions recorded'),
+ 5:('Claim register and contradiction log','Original passages and reviewer comments','Every consequential assertion has evidence status and next action'),
+ 6:('Political event ledger','Results, by-elections, office/boundary notifications','Historical outcome and later status occupy separate dated rows'),
+ 7:('Issue responsibility sheet','Relevant powers, funding and grievance records','Decision, payer, delivery and review route source-linked'),
+ 8:('Historical council comparison','Final election files or labelled reports','Equivalent units and final-result vintage retained'),
+ 9:('Scoped constituency brief','Selected-seat rows and selection rationale','All 15 units disclosed; blocked rows visibly pending'),
+10:('Separate AC / PC / civic series','Original institution-specific results','No pooled swing or individual-voter inference'),
+11:('Selected-seat competition note','Winner/runner-up counts and later events','Margin inputs rechecked before quantitative reuse'),
+12:('Opportunity-access brief','Cluster locations, bounded commute/service measures','No promotional job/GDP statement used as an outcome'),
+13:('Access-question validation plan','Named location/occupation, official labour data, guide','Question and observable measures agreed before recruitment'),
+14:('Boundary-vintage case register','Full instruments, parcel and approval records','Right jurisdiction and effective date for every row'),
+15:('Transport implementation ledger','Sanction, award, release, spend and service records','Financing provision kept separate from operating service'),
+16:('Catchment resilience brief','Rainfall, drainage and water-quality observations','Comparable events/units and missing series disclosed'),
+17:('Scheme journey brief','Current eligibility, application and grievance records','Each journey stage has a dated source or Unknown label'),
+18:('Financing-to-delivery brief','BE/RE/actual and release/outcome records','Nominal/statewide scope retained; no forecast from old shortfalls'),
+19:('Musi case brief','Award, environment, compensation/rehousing records','Objectives, commitments and verified outcomes separated'),
+20:('Case evidence tracker','Order, boundary, notice and review record','Legal conclusions withheld until case-specific review'),
+21:('Coordination handoff sheet','Issue authority and approved escalation routes','Owner, trigger, escalation and evidence documented'),
+22:('Multilingual discourse log','Dated corpus, outlet choices, qualified translations','Coding and missing coverage documented; no prevalence claim'),
+23:('Evidence refresh queue','Blocked facts and dynamic status records','Named owner, expiry trigger and exact required record'),
+24:('Approved research backlog','Classification risks and decision dependencies','Manager accepts ordering and stop conditions'),
+25:('Selected-instrument budget tracker','Exact budget heads and subsequent documents','Inclusions/exclusions explicit; instruments never silently summed'),
+26:('Workflow pilot and correction log','Approved repository, reviewer, brief template','Review acceptance and correction-closure criteria agreed'),
+27:('Registers and one pilot brief','Permitted sources and booked review time','Effort recorded before agreeing further brief counts'),
+28:('Bounded qualitative pilot','Purposive criteria, consent, guide, language support','Coverage gaps and stopping rule documented; no percentages'),
+29:('Pilot evaluation and handover','Audit denominator, correction log, comparable brief time','Baseline and quality denominators retained; open errors visible'),
+30:('Supervised proof-of-fit brief','CV examples and local orientation','Self-report, observed work and learning gaps remain distinct'),
+31:('Interview work-product discussion','One brief, strongest counterargument, first team need','Hiring team defines fit and the next permitted deliverable')}
+alternatives = {
+ 2:'A difference may reflect institutional boundaries, election context or candidate competition; it does not identify switching voters.',
+ 3:'A public role description may differ from the actual vacancy. Transferable methods may still require substantial local learning.',
+ 4:'A changed total can reflect a boundary revision or record coverage rather than a real service change.',
+ 5:'More logged defects may reflect better detection. Fewer logged defects may reflect weaker review.',
+ 6:'Institution-specific results can change without one common citywide trend. Bypolls also have distinct candidate/context effects.',
+ 7:'An observed delay may arise from a handoff, funding, record access or a legitimate review process.',
+ 8:'Seat changes can reflect turnout, candidates, boundaries or vote distribution. Seats alone do not separate those explanations.',
+ 9:'The selected study set can differ from other metropolitan seats. Its result is not a representative estimate.',
+10:'National and state contests differ in units, candidates and timing; contrasting results do not prove voter conversion.',
+11:'Margins differ with the opponent, turnout and candidate context; they do not measure community motives.',
+12:'Cluster presence can coexist with broad or uneven access. Neither distribution is established by a location directory.',
+13:'An apparent access gap can reflect qualifications, transport, job quality or incomplete vacancy information.',
+14:'A difference may reflect jurisdiction/record changes or underlying development. Parcel rights require distinct evidence.',
+15:'Budget provision can precede approval, award or spending. A completed asset can still provide uneven journey access.',
+16:'Event severity and catchment conditions can change outcomes independently of an agency intervention.',
+17:'A journey obstacle can arise from eligibility, documentation, capacity, information or record error.',
+18:'A larger plan can reflect priorities or financing assumptions; prior shortfalls do not predict the next year.',
+19:'Environmental progress and household costs can move differently; official commitments do not settle either outcome.',
+20:'A mandate may exist while an individual action still requires distinct authority, boundary and procedural evidence.',
+21:'Multiple bodies may coordinate successfully or experience handoff issues. The institution list alone shows neither.',
+22:'Outlet selection, translation and news intensity can change the observed discourse without changed population opinion.',
+23:'An unavailable record is an access gap, not proof that the underlying event or outcome did not happen.',
+24:'A different manager objective can justify a different priority order. Ranking remains professional judgment.',
+25:'Missing implementation data can mean an unpublished record or an incomplete process. Unknown is not zero spending.',
+26:'A pilot may improve detection, increase workload or need a simpler shared-sheet workflow.',
+27:'One complex brief can consume the planning envelope. Actual pilot effort should determine the output count.',
+28:'An interview account may be atypical; non-participation and missing language coverage limit interpretation.',
+29:'More corrections can indicate better detection. Faster briefs may differ in complexity or review depth.',
+30:'Experience may transfer partly, while local knowledge, language support and agency context require supervised learning.',
+31:'The sample may fit a different work product than the vacancy needs. The hiring team must determine fit.'}
+
+for s in main:
+    n = s['number']
+    statuses = collections.Counter(F[id]['verification_status'] for id in s['facts'])
+    s['verification'] = dict(as_of=DATE, status='Blocked premises' if statuses['Blocked'] else 'Qualified premises' if statuses['Qualified'] else 'Supported premises',
+                             facts={id:F[id]['verification_status'] for id in s['facts']}, proposals='Conditional',
+                             blocked=[id for id in s['facts'] if F[id]['verification_status']=='Blocked'])
+    s['gate_summary'] = 'Evidence as of 8 October 2026: '+', '.join(f'{count} {status.lower()}' for status,count in statuses.items())+'. Inferences bounded. Proposals conditional.'
+    if 2 <= n <= 31:
+        s['recommendation'] = recommendations[n]
+        artifact, inputs, acceptance = work[n]
+        s['work_product'] = dict(output=artifact,inputs=inputs,owner='Candidate under research lead',reviewer='Manager / relevant subject specialist',acceptance=acceptance,
+                                 effort='Measure sourcing and review hours in the first pilot. About 10 hours/week is an agreed planning envelope, not demonstrated capacity.',
+                                 dependency='Approved public records and reviewer time. Field, agency and language access need explicit approval where relevant.',
+                                 fallback='Publish a narrower desk brief with exact unresolved records and no unsupported conclusion.')
+        s['alternatives'] = alternatives[n]
+        s['feasibility'] = f'Output: {artifact}. Inputs: {inputs}. Owner: candidate under research lead; reviewer: manager/subject specialist. Acceptance: {acceptance}. Effort: log pilot sourcing and review time before agreeing output count. If access/review fails, narrow the desk brief and retain unknowns.'
+    else:
+        s.pop('alternatives',None); s.pop('feasibility',None)
+    s['defence'] = s['logic']+' Evidence status: '+s['verification']['status']+'. '+s['limits']
+    refs = set(z for id in s['facts'] for z in F[id]['sources'])
+    if n in [5,24,26,27,28,29]: refs.update(['S29','S30'])
+    if n in [6,11,23]: refs.update(['S26','S28'])
+    s['refs'] = sorted(refs)
+    evidence = '; '.join(f'{id} ({F[id]["verification_status"]}): {F[id]["text"]} [{", ".join(F[id]["sources"])}; {F[id]["locator"]}]' for id in s['facts'])
+    chart_data = ''
+    if s.get('chart'):
+        c = s['chart']
+        chart_data = '\nCHART DATA: '+ '; '.join(series['name']+': '+', '.join(f'{name}={value}' for name,value in zip(c['categories'],series['values'])) for series in c['series'])
+    s['notes'] = '\n\n'.join(['ESTABLISHES: '+s['body'].replace('\n',' '), 'EVIDENCE: '+evidence,
+        'REASONING: '+s['logic'], 'LIMITS / ASSUMPTIONS: '+s['limits'],
+        'ALTERNATIVES: '+s.get('alternatives','Editorial framing or contact information; no independent substantive recommendation.'),
+        'RECOMMENDATION: '+s.get('recommendation','Framing/contact only.'),
+        'HOW I WOULD CONTRIBUTE: '+(s['contribution'] or ('Adjacent executive contributions are shown.' if n==2 else 'Framing/contact only.')),
+        'PRACTICAL TEST: '+s.get('feasibility','Contact fields reflect candidate self-report.'),
+        'EVIDENCE STATUS: '+s['gate_summary'],
+        'FULL REFERENCES: '+'\n'.join(f'{id} | {S[id]["title"]} | {S[id]["publisher"]} | {S[id]["url"]} | {S[id]["locator"]} | {S[id]["publication_date"]} | {S[id]["fresh_access"]}' for id in sorted(refs)),
+        'INTERVIEW DEFENCE: '+s['defence']])+chart_data
+
 claims=[]
 for f in facts:
-  narrow=f['kind'] in ['Candidate self-report','Employer statement','Agency objectives','Official statement','Reported event','Reported historical fact','Official sector description']
-  claims.append(dict(id=f['id'],type=f['kind'],statement=f['text'],sources=f['sources'],locator=f['locator'],basis=f['corroboration'] or 'Original source supports the bounded documentary statement; no independent outcome confirmation implied.',scope=f['geography']+' | '+f['reference_date'],limits=f['limit'],gate1='PASS',gate2='PASS:bounded record; source limitations disclosed' if narrow else 'PASS:authoritative record/consistent derivation',gate3='PASS:scope/date/units checked',gate4='PASS:no causal extension',gate5='PASS:traceable bounded expression',release='Released as labelled '+f['kind']))
-for s in main:
-  if s['number'] in [1,32]:continue
-  for prefix,type_,statement in [('I','Bounded inference',s['logic']),('R','Proposed work product',s['body'] if s['number']>=24 else 'Research action implied by contribution; no guaranteed public/political impact.'),('C','Candidate contribution',s['contribution'] or '; '.join(x[2] for x in s['items']))]:
-    claims.append(dict(id=f'{prefix}{s["number"]:02}',type=type_,statement=statement,sources=sorted(set(z for f in s['facts'] for z in F[f]['sources'])),locator=s['id'],basis='Premises: '+','.join(s['facts'])+'. '+s['logic'],scope=s['section'],limits=s['limits'],gate1='PASS:premises or labelled proposal',gate2='PASS:lineage and alternatives in notes',gate3='PASS:scope and future tense explicit',gate4='PASS:bounded inference' if prefix=='I' else 'CONDITIONAL:untested implementation',gate5='PASS:traceability' if prefix=='I' else 'CONDITIONAL:manager approval/access/review',release='Bounded analysis' if prefix=='I' else 'Proposal only; not verified feasibility or guaranteed impact'))
+    status = f['verification_status']
+    claims.append(dict(id=f['id'],type=f['kind'],statement=f['text'],sources=f['sources'],locator=f['locator'],basis=f['verification_basis'],
+                       scope=f['geography']+' / '+f['reference_date'],limits=f['limit'],verification_status=status,verification_date=DATE,
+                       gate1=status+': '+f['verification_basis'],gate2='Qualified: shared lineage/self-report/reporting retained' if status!='Supported' else 'Supported: bounded issuer record',
+                       gate3='Supported: original date/unit and checked arithmetic; source inputs retain their own status',
+                       gate4='Qualified: no extension to motives, current status or future impact',gate5='Supported: IDs and source pointers resolve; inaccessible original remains pending',
+                       release='Historical input retained with explicit fresh-recheck warning' if status=='Blocked' else 'Released with '+status.lower()+' wording and attribution'))
+for s in main[1:31]:
+    n=s['number']
+    for prefix,typ,statement in [('I','Bounded inference',s['logic']),('R','Proposed work product',s['recommendation']),('C','Candidate contribution',s['contribution'] or '; '.join(a[2] for a in s['items']))]:
+        claims.append(dict(id=f'{prefix}{n:02}',type=typ,statement=statement,sources=s['refs'],locator=s['id'],basis='Dated premises: '+','.join(s['facts'])+'. '+s['logic'],
+                           scope=s['section'],limits=s['limits'],verification_status='Qualified' if prefix=='I' else 'Proposal',verification_date=DATE,
+                           gate1=s['verification']['status']+': '+','.join(s['facts']),gate2='Qualified: source lineages and alternatives stated',
+                           gate3='Supported: scope/date/units recorded',gate4='Qualified: bounded inference' if prefix=='I' else 'Conditional: no guaranteed effect',
+                           gate5='Supported: references resolve' if prefix=='I' else 'Conditional: owner, input, review, acceptance and fallback specified',
+                           release='Bounded analysis with record-specific premise status' if prefix=='I' else 'Proposal only; workload and impact require pilot evaluation'))
 
 appendix=[]
-def app(title,section,body='',items=None,layout='appendix',refs=None):
-    appendix.append(dict(number=32+len(appendix)+1,id=f'A{len(appendix)+1:02}',title=title,section=section,body=body,items=items or [],layout=layout,contribution='',facts=[],logic='Appendix evidence and methodology for the main narrative.',limits='Research cut-off '+CUTOFF,refs=refs or [],notes=body+'\n'+json.dumps(items,ensure_ascii=False)))
-app('Evidence, reasoning and limitations','Appendix navigation','A01–A04:methods/data · A05 onward:slide-level logic · source register · review trail · unresolved evidence','appendix-divider')
-# fix positional items on divider
-appendix[0]['items']=[];appendix[0]['layout']='divider'
-app('What the five gates establish','Verification standard',items=[
- ['G1 · Provenance','Exact record/passage or labelled proposal; no snippet-only fact used.'],['G2 · Corroboration','Authoritative result/order need not have five duplicates. Shared upstream sources counted once. Reported legacy tables labelled.'],['G3 · Integrity','Date, jurisdiction, boundary vintage, units and arithmetic checked. No AC/PC aggregation or budget-total mixing.'],['G4 · Inference','Rival explanations and validation conditions in every main-slide note. Future feasibility remains conditional.'],['G5 · Practical use','Owner, inputs, reviewer, measure and fallback stated. No promised political effect or100%accuracy.']])
-app('2023 study set: AC57–71','Raw election crosswalk',items=[
- ['57 Musheerabad','BRS'],['58 Malakpet','AIMIM'],['59 Amberpet','BRS'],['60 Khairatabad','BRS'],['61 Jubilee Hills','BRS'],['62 Sanathnagar','BRS'],['63 Nampally','AIMIM'],['64 Karwan','AIMIM'],['65 Goshamahal','BJP'],['66 Charminar','AIMIM'],['67 Chandrayangutta','AIMIM'],['68 Yakutpura','AIMIM'],['69 Bahadurpura','AIMIM'],['70 Secunderabad','BRS'],['71 Secunderabad Cantt.(SC)','BRS']],layout='election-table',refs=['S07'])
+def app(title,section,items=None,layout='appendix',refs=None,body=''):
+    num=33+len(appendix)
+    a=dict(number=num,id=f'A{len(appendix)+1:02}',title=title,section=section,body=body,items=items or [],layout=layout,contribution='',facts=[],logic='Supporting evidence and methodology.',limits='Research cut-off 8 October 2026',refs=refs or [])
+    a['notes']=body+'\n'+json.dumps(a['items'],ensure_ascii=False)
+    appendix.append(a)
+
+app('Evidence, reasoning and limitations','Appendix navigation',layout='divider',
+    body='Methods and data; slide-level reasoning; factual and source registers; historical self-review; unresolved records.')
+app('Evidence status and release conditions','Verification standard',items=[
+ ['Provenance','Supported, Qualified or Blocked for each record. An unread original is not cleared by correct arithmetic.'],
+ ['Lineage','Shared issuer and publisher records count once. ET/TOI share Times Group; PRS reuses state documents.'],
+ ['Integrity','Original date, unit and fiscal stage retained. Chart/workbook values agree; PDF data are searchable.'],
+ ['Inference','Interpretations remain bounded. Current legal status, officeholders and delivery require separate records.'],
+ ['Practical use','Recommendations identify a work product and acceptance test. Effort/output counts remain conditional.']])
+app('2023 study set: AC 57–71','Raw election crosswalk',items=copy.deepcopy(deck['slides'][34]['items']),layout='election-table',refs=['S07'],
+    body='Contiguous-code study set selected for a bounded work sample; other metropolitan seats excluded. Fresh primary row recheck pending.')
 app('Arithmetic and comparison rules','Reproducibility',items=[
- ['State seats2023','64+39+8+7+1=119 · S06'],['Selected seats2023','7BRS+7AIMIM+1BJP+0INC=15 · S07'],['Reported GHMC2016/2020','99+44+4+2+1=150;56+48+44+2=150 · S19–S22'],['Margins2023','62,185−60,148=2,037;46,153−45,275=878;99,776−18,116=81,660 · S07'],['State capex nominalBE/RE','(47,267.28÷36,480.87−1)×100=29.5673%;rounded29.6% · S09'],['Excluded operations','No summed Hyderabad budget; no cross-ballot swing; no individual vote-transfer inference.']])
+ ['State seats 2023','64+39+8+7+1=119. S06 official performance table.'],
+ ['Selected seats 2023','7+7+1+0=15 internally. S07 target rows remain blocked for fresh recheck.'],
+ ['Reported GHMC councils','2016: 99+44+4+2+1=150. 2020: 56+48+44+2=150. Historical reporting.'],
+ ['Three margins','62,185−60,148=2,037; 46,153−45,275=878; 99,776−18,116=81,660. Inputs pending fresh check.'],
+ ['State capex','(47,267.28 / 36,480.87 − 1) × 100 = 29.5673%, rounded 29.6%. Nominal RE-to-BE.'],
+ ['Prior execution context','PRS 2024–25 BE-to-actual shortfalls are historical statewide context. No summed city budget or next-year forecast.']])
 for start in range(0,32,2):
-  entries=[]
-  for s in main[start:start+2]:
-    entries.append([s['id']+' · '+s['title'],
-      'Evidence '+(','.join(s['facts']) or 'Editorial/proposed method')+' | '+','.join(sorted(set(z for f in s['facts'] for z in F[f]['sources'])))+'\n'+s['logic']+'\nLimits: '+s['limits'],
-      ('C'+str(s['number']).zfill(2)+' / R'+str(s['number']).zfill(2)+': '+(s['contribution'] or 'Framing/contact or adjacent executive contributions.')+'\n'+('G1–G3:PASS for bounded premises; G4:bounded analysis; G5:traceable. Proposal feasibility remains CONDITIONAL.' if s['number'] not in [1,32] else 'Candidate/contact source is self-reported.'))])
-  app(f'Slide logic · {start+1:02}–{start+2:02}','Claim-to-contribution ledger',items=entries,layout='logic-ledger')
-for start in range(0,len(facts),5):
-  entries=[]
-  for f in facts[start:start+5]:entries.append([f['id']+' · '+f['kind'],f['text'],','.join(f['sources'])+' · '+f['locator']+'\n'+f['geography']+' / '+f['reference_date']])
-  app(f'Atomic evidence · {start+1:02}–{min(start+5,len(facts)):02}','Fact register',items=entries,layout='fact-ledger')
-for start in range(0,len(sources),3):
-  subset=sources[start:start+3]
-  app(f'Sources · {start+1:02}–{min(start+3,len(sources)):02}','Full attribution register',items=subset,layout='source-register',refs=[s['id'] for s in subset])
-for start in range(0,20,4):
-  app(f'Cumulative review · {start+1:02}–{start+4:02}','Twenty actual saved content versions',items=[[f'v{x["iteration"]:02} · '+x['focus'],x['change']] for x in logs[start:start+4]],layout='review-ledger')
-app('Rejected claims make the work stronger','Adversarial review',items=[
- ['2025 Jubilee totals','Conflicting reports:98,988/74,259 vs99,120/74,462. Excluded quantitative comparison; obtain authoritative finalForm20. S23/S24.'],['2020 GHMC count','EarlyTRS55 tally predates final Neredmet. Use later56/48/44/2reporting, labelled historical. S21/S22.'],['State/city confusion','State vote share is not Jubilee Hills vote share. No stateGDP or statewide service coverage relabelled Hyderabad.'],['Mandate/outcome confusion','GO55 and HYDRAA remit do not prove service gains, legal fairness or environmental improvements.'],['Candidate overclaim','CV is self-report; no invented local fluency, local network, audited delivery impact or hiring endorsement.']])
-app('Assumptions, scenarios and failure conditions','Practical limits',items=[
- ['Desk-first baseline','Assume10focused research hours/week. If workload is lower, reduce brief count; preserve source standards.'],['Field access','If permissions/language support exist,pilot5–8interviews. If denied, publish documentary gaps; no qualitative percentages.'],['Delivery scenario','If outcome records improve, deepen service analysis. If unavailable, distinguish official claims from verified milestones.'],['Boundary/status change','If a newer notification alters scope, retire crosswalk and rerun affected comparisons before publication.'],['Learning gap','Supervisor-supported Hyderabad orientation and qualified Telugu/Urdu review; no fluency implied.']])
-app('What remains to verify','Evidence request and refresh queue',items=[
- ['Hiring team','Exact requisition, current open status, reporting line and expected work products.'],['TSEC / corporations','Official current civic poll notification, ward polygons, commissioners/elected roster and legal status.'],['ECI / CEO','Final2025 JubileeForm20; direct legacy2016/2020TSEC files for dataset ingestion.'],['Scheme agencies','Current sanctions,releases,awards,spend,completion,environmental and household safeguards.'],['Research lead','Consent, access, languages, survey method and data governance before primary research.']])
+    rows=[]
+    for s in main[start:start+2]:
+        n=s['number']; ids=','.join(s['facts'])
+        if n in [1,32]:
+            left=f'Candidate record: {ids}. Self-reported.\n{s["logic"]}\n{s["limits"]}'
+            right='Editorial/contact framing. No substantive I/R/C claim ID assigned.'
+        else:
+            left=f'Premises: {ids}.\n{s["logic"]}\n{s["gate_summary"]}'
+            right=f'R{n:02}: {s["recommendation"]}\nC{n:02}: '+(s['contribution'] or 'Contributions sit beside each executive finding.')+'\nProposal requires manager acceptance and access.'
+        rows.append([s['id']+' · '+s['title'],left,right])
+    app(f'Slide logic · {start+1:02}–{start+2:02}','Claim-to-contribution ledger',items=rows,layout='logic-ledger')
+# Preserve the original77-slide structure: seven5-item pages and one6-item page.
+for i in range(8):
+    subset=facts[i*5:(i+1)*5] if i<7 else facts[35:]
+    rows=[[f['id']+' · '+f['verification_status'],f['text'],','.join(f['sources'])+' · '+f['locator']+'\n'+f['reference_date']] for f in subset]
+    app(f'Factual records · {subset[0]["id"]}–{subset[-1]["id"]}','Fact register',items=rows,layout='fact-ledger')
+# Keep readable source entries at the original three sources per page.
+for offset in range(0,len(sources),3):
+    subset=sources[offset:offset+3]
+    app(f'Sources · {subset[0]["id"]}–{subset[-1]["id"]}','Full attribution register',items=subset,layout='source-register',refs=[s['id'] for s in subset])
+for start in range(0,20,5):
+    logs=deck['iterations'][start:start+5]
+    app(f'Historical self-review · {start+1:02}–{start+5:02}','Prior content versions, not fresh verification',
+        items=[[f'v{x["iteration"]:02} · '+x['focus'],x['change'].split(';')[0]] for x in logs],layout='review-ledger')
+app('Evidence qualifications','Limits on released claims',items=[
+ ['Fresh source gaps','F08–F11 and F16 remain blocked. Retained historical inputs cannot be called freshly verified.'],
+ ['By-election status','Cantonment 2024 and Jubilee 2025 wins are reported. Official declarations / final Form 20 still pending.'],
+ ['Shared lineage','ET/TOI share Times Group. PRS/state budget figures share upstream state documents.'],
+ ['Selected scope','Three margins, 15 selected ACs and six selected budget lines do not cover the full party, metropolis or CURE budget.'],
+ ['Candidate experience','CV remains self-report. Local fluency, networks and independently audited impact are unclaimed.']])
+app('Pilot assumptions and acceptance','Practical limits',items=[
+ ['Desk capacity','Start with one brief. Log sourcing/review effort before agreeing quantities within the proposed 10-hour weekly envelope.'],
+ ['Interview coverage','5–8 is exploratory and conditional. Explain purposive inclusion, missing voices, language review and stopping rule.'],
+ ['Quality denominator','Unsupported claims / audited claims; closed / logged corrections. Keep newly detected errors visible.'],
+ ['Comparable turnaround','Match scope and review depth before comparing brief time. A lower raw correction count does not prove improvement.'],
+ ['Access fallback','Named reviewer and permitted records first. If unavailable, narrow the brief and retain precise unanswered questions.']])
+app('Evidence refresh queue','Named record requests and expiry rules',items=[
+ ['Hiring manager','Exact requisition/open status and first work product. Confirm before operational use.'],
+ ['ECI / CEO / Lok Sabha','F08–F11 election rows; F16 passage from Lok Sabha Secretariat. Final2024 Cantonment and2025 Jubilee declaration/Form20 before numerical reuse.'],
+ ['TSEC / corporations','Current poll notification, ward polygons, officeholder/legal roster. Refresh whenever a new order or schedule appears.'],
+ ['Scheme agencies','Sanction, award, release, spend, completion and safeguards. Update after every new document or reporting period.'],
+ ['Research lead','Confirm question, permissions, language support, reviewer and pilot acceptance before fieldwork or output commitments.']])
 
-for s in appendix:
-    for k in ['title','body','notes']:s[k]=clean_text(s[k])
-    if s['layout']!='source-register':s['items']=[[clean_text(z) for z in row] for row in s['items']]
-
-deck=dict(title='Hyderabad:Power, Place & Public Value',candidate='Manash Protim Deori',cutoff=CUTOFF,main_count=32,slides=main+appendix,sources=sources,facts=facts,claims=claims,iterations=logs)
-(RESEARCH/'deck-content.json').write_text(json.dumps(deck,ensure_ascii=False,indent=2))
-(PUBLIC/'deck-content.json').write_text(json.dumps(deck,ensure_ascii=False,separators=(',',':')))
-for name,rows in [('sources',sources),('facts',facts),('claims',claims),('iterations',logs)]:
-  (RESEARCH/f'{name}.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2))
-  keys=list(rows[0].keys())
-  with (RESEARCH/f'{name}.csv').open('w') as fh:
-    w=csv.DictWriter(fh,fieldnames=keys,lineterminator="\n");w.writeheader();w.writerows([{k:json.dumps(v,ensure_ascii=False) if isinstance(v,(dict,list)) else v for k,v in row.items()} for row in rows])
-markdown=['# Hyderabad: Power, Place & Public Value',f'Independent application work sample · Manash Protim Deori · Cut-off {CUTOFF}', '32 narrative slides; thank-you immediately before appendix. Twenty saved cumulative content reviews; single-system self-review, not independent reviewers.']
+assert len(main+appendix)==77
+for a in appendix:
+    if a['layout']!='source-register':a['items']=[[clean_text(v) for v in row] for row in a['items']]
+    a['notes']=a['body']+'\n'+json.dumps(a['items'],ensure_ascii=False)
+deck.update(slides=main+appendix,sources=sources,facts=facts,claims=claims,content_version='v21',
+            audit_summary=dict(as_of=DATE,review_rounds=10,original_registered_items=127,new_registered_items=len(claims),
+                               fact_statuses=dict(collections.Counter(f['verification_status'] for f in facts)),
+                               historical_content_versions=20,method='Ten distinct self-review lenses; not independent reviewers or ten successful confirmations.',
+                               approved_integration=True),
+            integration=dict(version='v21',approved=True,baseline_commit=audit['commit'],baseline_sha256=hashlib.sha256(BASE.read_bytes()).hexdigest(),
+                             changes=[f['id'] for f in audit['findings']],blocked_facts=['F08','F09','F10','F11','F16']))
+R.mkdir(parents=True,exist_ok=True);P.mkdir(parents=True,exist_ok=True)
+(R/'deck-content.json').write_text(json.dumps(deck,ensure_ascii=False,indent=2))
+(P/'deck-content.json').write_text(json.dumps(deck,ensure_ascii=False,separators=(',',':')))
+for name,rows in [('sources',sources),('facts',facts),('claims',claims),('iterations',deck['iterations'])]:
+    (R/f'{name}.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2))
+    keys=list(dict.fromkeys(k for row in rows for k in row))
+    with (R/f'{name}.csv').open('w') as fh:
+        w=csv.DictWriter(fh,fieldnames=keys,lineterminator='\n');w.writeheader()
+        w.writerows({k:json.dumps(v,ensure_ascii=False) if isinstance(v,(list,dict)) else v for k,v in row.items()} for row in rows)
+md=['# Hyderabad: Power, Place & Public Value','Manash Protim Deori. Research cut-off: 8 October 2026. Approved audit integration v21.']
 for s in deck['slides']:
-  markdown += [f'\n## {s["number"]:02} · {s["title"]}',s['body'], '\n**How I would contribute:** '+s['contribution'] if s['contribution'] else '', '\n**Speaker notes**\n'+s['notes']]
-(RESEARCH/'slide-content-and-notes.md').write_text('\n\n'.join(markdown))
-summary=['# Verification and release report','Contentv20 released with bounded facts and labelled proposals. No100%accuracy claim.','## Process',f'{len(facts)}atomic factual/documentary items;{len(claims)}registered items;20cumulative content versions;{len(deck["slides"])}slides.', 'All five gates have a recorded result for each substantive registered item. Proposal feasibility is CONDITIONAL; reported historical facts, agency objectives and self-reported CV claims are explicitly labelled.','## Residual limitations']+logs[-1]['outstanding']+['No verifiedcurrent citywide public-opinion survey, local employment rate, cityGDP, complete live officeholder/legal roster or service outcome baseline. Full latest wardGIS unavailable.','## Review method','One system applied20different focused reviews, with full structural regression checks after each version. This is not independent human verification.','## Files','Version snapshots and hash chain:versions/v01.json–v20.json. Claims and sources available asJSON/CSV. Full slide notes contain exactURLs, locators, assumptions and alternative explanations.']
-(RESEARCH/'verification-report.md').write_text('\n\n'.join(summary))
-(RESEARCH/'interview-defence.md').write_text('# Interview defence\n\n'+'\n\n'.join('## '+s['title']+'\n'+s.get('defence',s['logic'])+'\nWhat would change my view: '+s['limits'] for s in main[1:31]))
-(RESEARCH/'reproduce.py').write_text('import json,pathlib\nd=json.loads(pathlib.Path("deck-content.json").read_text())\nassert sum([64,39,8,7,1])==119\nassert sum([7,7,1,0])==15\nassert sum([99,44,4,2,1])==150\nassert sum([56,48,44,2])==150\nassert [62185-60148,46153-45275,99776-18116]==[2037,878,81660]\nassert round((47267.28/36480.87-1)*100,1)==29.6\nassert d["slides"][31]["layout"]=="thanks"\nassert d["slides"][32]["section"]=="Appendix navigation"\nassert len(d["iterations"])==20\nprint("All arithmetic, sequence and version-count checks passed.")\n')
-print(json.dumps(dict(slides=len(deck['slides']),facts=len(facts),claims=len(claims),versions=len(logs)),indent=2))
+    md += [f'## {s["number"]:02} · {s["title"]}',s['body'],s['notes']]
+(R/'slide-content-and-notes.md').write_text('\n\n'.join(md))
+(R/'interview-defence.md').write_text('# Interview defence\n\n'+'\n\n'.join('## '+s['title']+'\n'+s['defence'] for s in main[1:31]))
+(R/'verification-report.md').write_text('# Verification and integration status\n\nTen self-review lenses covered 127 baseline items. Approved changes integrate into v21, with 77 slides, 41 fact records, 131 registered items and 30 sources.\n\n'+json.dumps(deck['audit_summary'],ensure_ascii=False,indent=2)+'\n\nF08–F11 and F16 remain blocked for fresh source verification. By-election events remain attributed reporting. Proposal capacity and impact remain conditional. The historical 20-version trail is preserved; content generation does not perform new source verification.\n')
+(R/'work-products.json').write_text(json.dumps([dict(slide=s['number'],**s['work_product']) for s in main if 'work_product' in s],ensure_ascii=False,indent=2))
+(R/'versions/v21.json').write_text(json.dumps(dict(version=21,slides=deck['slides'],integration=deck['integration'],audit_summary=deck['audit_summary']),ensure_ascii=False,indent=2))
+(R/'checkpoint-v21.json').write_text(json.dumps(dict(latest='versions/v21.json',audit_rounds=10,approved_integration=True,blocked=deck['integration']['blocked_facts']),indent=2))
+(R/'integration-v21.json').write_text(json.dumps(deck['integration'],indent=2))
+print(json.dumps(dict(slides=len(deck['slides']),facts=len(facts),claims=len(claims),sources=len(sources),status=deck['audit_summary']['fact_statuses']),indent=2))

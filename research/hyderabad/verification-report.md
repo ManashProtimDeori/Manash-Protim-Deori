@@ -1,29 +1,20 @@
-# Verification and release report
+# Verification and integration status
 
-Contentv20 released with bounded facts and labelled proposals. No100%accuracy claim.
+Ten self-review lenses covered 127 baseline items. Approved changes integrate into v21, with 77 slides, 41 fact records, 131 registered items and 30 sources.
 
-## Process
+{
+  "as_of": "2026-10-08",
+  "review_rounds": 10,
+  "original_registered_items": 127,
+  "new_registered_items": 131,
+  "fact_statuses": {
+    "Supported": 22,
+    "Qualified": 14,
+    "Blocked": 5
+  },
+  "historical_content_versions": 20,
+  "method": "Ten distinct self-review lenses; not independent reviewers or ten successful confirmations.",
+  "approved_integration": true
+}
 
-37atomic factual/documentary items;127registered items;20cumulative content versions;77slides.
-
-All five gates have a recorded result for each substantive registered item. Proposal feasibility is CONDITIONAL; reported historical facts, agency objectives and self-reported CV claims are explicitly labelled.
-
-## Residual limitations
-
-Exact requisition/open status
-
-Current official civic poll notification and member/legal roster
-
-Official2025 Jubilee finalForm20
-
-Current service outcomes and authorised field validation
-
-No verifiedcurrent citywide public-opinion survey, local employment rate, cityGDP, complete live officeholder/legal roster or service outcome baseline. Full latest wardGIS unavailable.
-
-## Review method
-
-One system applied20different focused reviews, with full structural regression checks after each version. This is not independent human verification.
-
-## Files
-
-Version snapshots and hash chain:versions/v01.json–v20.json. Claims and sources available asJSON/CSV. Full slide notes contain exactURLs, locators, assumptions and alternative explanations.
+F08–F11 and F16 remain blocked for fresh source verification. By-election events remain attributed reporting. Proposal capacity and impact remain conditional. The historical 20-version trail is preserved; content generation does not perform new source verification.
