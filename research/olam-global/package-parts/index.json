@@ -1,0 +1,17 @@
+{
+  "version": "1.1.0",
+  "bytes": 14842920,
+  "sha256": "14a80b2f0b82f6e935cb059c8de9b3d8ce1e21ba6fe55ffb6671c5322640476d",
+  "parts": [
+    {
+      "file": "part-001.bin",
+      "bytes": 8000000,
+      "sha256": "f661119bccd0fb239bf880e03a72ea4c4be637fea2dc3a5b38b9e9d3fb1ad9c1"
+    },
+    {
+      "file": "part-002.bin",
+      "bytes": 6842920,
+      "sha256": "516f47fdd3613546f8b4c05f2c24d991bc3e42a4a5ba4afd8af715f0b5289f48"
+    }
+  ]
+}

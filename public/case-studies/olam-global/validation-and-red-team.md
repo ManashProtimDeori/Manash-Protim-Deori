@@ -1,30 +1,47 @@
-# Model validation and red-team review
+# Validation findings and ten-perspective substantive challenge
 
-Version 1.0.0 | No investment-grade country forecast
+Version 1.1.0 | Audited 8 October 2026 | Independent public-data research
 
-Executed coverage: 195 unique country dossiers, seven UN population milestones, six chosen worlds, 8,190 matrix rows, 18 full 25-year normalized cash cases, order-threshold roots, 2,500/5,000/10,000-draw stress runs, and OLS with temporal and geographic validation. Missing values remain null. Source vintages, checksums, series and units are retained or reproducible.
+## Scope of this review
 
-## Executed econometrics
+This is an author-led review using all ten specified perspectives, not an assertion that ten external specialists reviewed the deck. Numerical checks and business-evidence validation are distinct. Executed checks are recorded in validation-checks.json; presentation integrity/layout receipt accompanies the final native artifacts. Software passing cannot validate company margins, causality, legal access or calibrated probabilities.
 
-Training contains 2,856 country-year records from 2002–2018 and 171 countries. The holdout contains 680 records from 2019–2022. The target is annual growth of the food production index, a supply proxy rather than consumption or Olam demand. In-sample R-squared is 0.006179. Holdout MAE is 0.048299 against 0.049794 for country means and 0.048960 for zero growth. Country-clustered CR1 intervals show imprecise slopes.
+## CEO
 
-The model is rejected for country investment forecasts. Latest-vintage retrospective validation is not a real-time vintage backtest. Common global shocks, measurement error and structural breaks remain. No causal elasticity or 2051 product forecast is claimed. Exact coefficients, intervals and leave-region-out results are in the workbook and analysis JSON.
+Why these markets, and which capability compounds? Evidence: Current capabilities give lower-cost learning hypotheses, not proven returns. Correction/decision: Conditional priorities only; use product-specific plans and paid contribution gates. References: 18 product plans; CEO-01. Unresolved: Country profitability ranking and transferability not observed.
 
-## Challenges and falsifiers
+## CFO
 
-1. Does population imply profit? No. Eligible buyers, capture, price, cost and funding must clear the template boundary.
-2. Does SALIC ownership create an order? No. Independently bankable offtake is required.
-3. Is EBITDA sufficient? No. The managed owned example has negative NPV after capital and working cash.
-4. Is the cash release recurring? No. A working-capital transition releases cash once.
-5. Are stress frequencies probabilities of success? No. They describe a chosen generator. Business dependence must be measured.
-6. Is the new framework proven superior? No. A teaching counterexample is not an Olam allocation backtest.
-7. Do different countries diversify risk? Only if crop, port, buyer, FX and lender exposure differ.
-8. Does a country page establish legal access? No. Counsel must check the actual product, rule and counterparty.
-9. Does global warming establish local crop damage? No. Crop, basin and asset links are missing.
-10. Does CPM improvement prove Olam profit? No. It is self-described portfolio evidence.
+ROIC, terminal value and financing may conceal a negative project. Evidence: Managed owned NPV remains negative; no franchise terminal value; closeout/post2036 contributions reported. Correction/decision: Added capital metrics, sensitivities and monthly timing example. References: C-CAPITAL; C-SENSITIVITY; C-MONTHLY. Unresolved: Actual tax, capex, monthly cash and WACC absent.
 
-## Accounting and physical checks
+## Treasury
 
-Revenue equals delivered tonnes times net price; deliveries cannot exceed usable capacity. NWC equals AR plus inventory minus AP. Taxes cannot be negative under the chosen loss convention. FCFF reconciles to EBIT less cash tax plus D&A less capex and NWC change plus closeout. Each capital cohort depreciates over ten years. The terminal amount contains only 90% NWC recovery. Threshold roots are checked against full NPV. Annual cash does not certify monthly solvency.
+Are FX/commodity and liquidity charged twice? Evidence: Legacy imported-sales proxy remains a historical screen; actual procurement/hedge/collateral mapping is open. Correction/decision: Separate normalized real USD cash from currency-specific exposure; remove calibrated probability language. References: A_RATE; A_NWC; C-E11; C-DEPENDENCE. Unresolved: Actual FX, hedge basis, collateral and counterparty exposures absent.
 
-Production review still needs Finance actuals, Legal access and rights, Treasury currency/hedges, Operations yield/capacity, location-linked hazards and Marketing counterfactuals. Artifact checks are not external business validation.
+## Country leader
+
+Combined products hide different needs and local channels. Evidence: Semolina/oils and other categories require separate customers and contributions. Correction/decision: Split18 product plans; matrix8526 rows with unselected nonpriority categories explicit. References: priority-product-plans.csv. Unresolved: Local interviews, access and competitor prices still needed.
+
+## Category leader
+
+Are nutrition, yield and premium claims measured? Evidence: No observed premium or intervention effect; health narratives do not prove purchases. Correction/decision: Specify usable-output/cost-per-use and paid-repeat tests by category. References: model-selection; C-E05/C-E06. Unresolved: Actual formulation/yield/biology and adoption unavailable.
+
+## Procurement and operations
+
+Can orders actually be delivered in peak season? Evidence: Physical cap and monthly inventory balance checked; national supply is not project supply. Correction/decision: Added capacity-marketing complementarity and feasible route LP. References: C-CAPACITY-MARKETING; C-NETWORK. Unresolved: Actual yield, uptime, supply contracts and plant/route peaks missing.
+
+## Climate and sustainability
+
+Do country averages price real water and crop damages? Evidence: No; geocoded hazards/adaptation/rights missing. Correction/decision: No fitted damages or climate-origin approval; maintain hard gates and common-exposure inventory. References: climate; C-DEPENDENCE. Unresolved: Asset/basin adaptation feasibility not established.
+
+## Econometrician
+
+Does the regression identify demand or 2051 investment returns? Evidence: No; retrospective latest-vintage supply benchmark has tiny gain and instability. Correction/decision: Reject investment forecasting; add VIF/residual/year/split-sample diagnostics. References: C-OLS; regression-diagnostics.pdf. Unresolved: No product elasticity, real-time backtest or causal identification.
+
+## Marketing measurement expert
+
+Could repeat be stock loading, availability or simultaneous price changes? Evidence: Yes; no actual randomized observations. Correction/decision: Separate clusters/categories; pre-register ITT, spillover/cannibalisation, power, attrition and no-support repeat. References: pilot-charter; plans. Unresolved: Variance, ICC, experiment cost and observed lift missing.
+
+## Sceptical investor
+
+Do waiting or partnering dominate the proposed integration? Evidence: Partner wins chosen regret example, owned central case; EVSI positive only above an accuracy/cost boundary. Correction/decision: Add common-payoff benchmarks, ablations and imperfect-study sensitivity; restrict originality claim. References: C-REGRET; C-EVSI; C-ABLATION. Unresolved: Empirical multi-country policy superiority and literature completeness open.

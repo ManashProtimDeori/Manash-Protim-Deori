@@ -1,0 +1,572 @@
+[
+  {
+    "variable": "age_over65",
+    "series_id": "SP.POP.65UP.TO.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.65UP.TO.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_age_over65.json",
+    "retrieved_at": "2026-10-08T02:15:08.604489+00:00",
+    "sha256": "2410df447996a91780991e1ae731494ca6693af955b99f51fdfd65f73cd18f07",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "age_over65",
+    "series_id": "SP.POP.65UP.TO.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SP.POP.65UP.TO.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_age_over65_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.586408+00:00",
+    "sha256": "7e879654023471e82357bde5a072b0197de8e637832e4b61410c56aac6ac82f4",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "age_under15",
+    "series_id": "SP.POP.0014.TO.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.0014.TO.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_age_under15.json",
+    "retrieved_at": "2026-10-08T02:15:08.603875+00:00",
+    "sha256": "400a88a276bc15cf96b5e2c565df9e02950bf47feeca9eab78ab53a63ba0123c",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "age_under15",
+    "series_id": "SP.POP.0014.TO.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SP.POP.0014.TO.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_age_under15_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.584404+00:00",
+    "sha256": "61fb94b5744759ee8d2e63e2892b0cf7b4f71165c71ee6b99f556cc4864b0e92",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "agriculture_employment",
+    "series_id": "SL.AGR.EMPL.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SL.AGR.EMPL.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_agriculture_employment.json",
+    "retrieved_at": "2026-10-08T02:15:08.622882+00:00",
+    "sha256": "41d7d5f036440df191a7048fb32b61a9e82058ff32efeddba36bb4dc3051ceb5",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "agriculture_employment",
+    "series_id": "SL.AGR.EMPL.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SL.AGR.EMPL.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_agriculture_employment_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.599427+00:00",
+    "sha256": "c57a5d67bf62cb9f83bf1a34ef6f0acc9c20edc0ca810e3da24c5cdc9b69c6d1",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "agriculture_gdp",
+    "series_id": "NV.AGR.TOTL.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/NV.AGR.TOTL.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_agriculture_gdp.json",
+    "retrieved_at": "2026-10-08T02:15:08.611554+00:00",
+    "sha256": "03839ca20cb1646b16daaeafc3fc73451310b8efb840b5d094aec16db9a898db",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "agriculture_gdp",
+    "series_id": "NV.AGR.TOTL.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/NV.AGR.TOTL.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_agriculture_gdp_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.593917+00:00",
+    "sha256": "fe7405bdb44e1600d98e44cc0edb61a4cc77b9d8d2ce534bed46309ac173a117",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "cereal_area",
+    "series_id": "AG.LND.CREL.HA",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/AG.LND.CREL.HA?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_cereal_area.json",
+    "retrieved_at": "2026-10-08T02:15:08.621351+00:00",
+    "sha256": "9584661d5260becf77ae7506c785743c44c701cb7ae37e8bee381712188ac83f",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "cereal_area",
+    "series_id": "AG.LND.CREL.HA",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/AG.LND.CREL.HA?format=json",
+    "file": "research/olam-global/raw/wdi_cereal_area_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.597312+00:00",
+    "sha256": "050815428cb2dd1dccd6198007e8dd03a41c7a59d4b7c2efd59d1ed56cac4dc8",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "cereal_yield",
+    "series_id": "AG.YLD.CREL.KG",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/AG.YLD.CREL.KG?format=json",
+    "file": "research/olam-global/raw/wdi_cereal_yield_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.582480+00:00",
+    "sha256": "7db73e3ce4522b5a91050ee4243b129d332e444cf38709b7ca5443cae45d9f2c",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "dependency_ratio",
+    "series_id": "SP.POP.DPND",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SP.POP.DPND?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_dependency_ratio.json",
+    "retrieved_at": "2026-10-08T02:15:08.606204+00:00",
+    "sha256": "e9fbd6ed999b784d1183dd7ab3e4556ee2578f95d1d37c3c000af949f1818beb",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "dependency_ratio",
+    "series_id": "SP.POP.DPND",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SP.POP.DPND?format=json",
+    "file": "research/olam-global/raw/wdi_dependency_ratio_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.586985+00:00",
+    "sha256": "b6e91fbfe4da6e1115d46e8c7b81bae0de973b24567fece971b1e832ca05ab74",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "electricity_access",
+    "series_id": "EG.ELC.ACCS.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/EG.ELC.ACCS.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_electricity_access.json",
+    "retrieved_at": "2026-10-08T02:15:08.619567+00:00",
+    "sha256": "a33a1ba0de8adb3f6da3ef4fa0e4eb07a31099cf112a8ce72bdc7a18c6a5e533",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "electricity_access",
+    "series_id": "EG.ELC.ACCS.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/EG.ELC.ACCS.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_electricity_access_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.597181+00:00",
+    "sha256": "b97baf3b8af89e755fb51e00bf690940fddff51d8af3dbf32849662ece66559b",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "exports_usd",
+    "series_id": "TX.VAL.MRCH.CD.WT",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/TX.VAL.MRCH.CD.WT?format=json",
+    "file": "research/olam-global/raw/wdi_exports_usd_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.579765+00:00",
+    "sha256": "0795aa8f16eecc896c08742b1d60b15ff1378d95ee34b46e2e0dd4a40f3cae6d",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "fertility",
+    "series_id": "SP.DYN.TFRT.IN",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.TFRT.IN?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_fertility.json",
+    "retrieved_at": "2026-10-08T02:15:08.602840+00:00",
+    "sha256": "3d532dec8a500ca7090cfa2ddf52f18234d0998490b6ab27efc80a7bb1738b13",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "fertility",
+    "series_id": "SP.DYN.TFRT.IN",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SP.DYN.TFRT.IN?format=json",
+    "file": "research/olam-global/raw/wdi_fertility_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.583440+00:00",
+    "sha256": "3aec8c45c5a8e7a80b9d797bf4553e4130a3b6c2116c61b81ca1d4ebda3c040d",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "food_export_share",
+    "series_id": "TX.VAL.FOOD.ZS.UN",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/TX.VAL.FOOD.ZS.UN?format=json",
+    "file": "research/olam-global/raw/wdi_food_export_share_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.579194+00:00",
+    "sha256": "4bc3920f456e296882311d23b5959ca820878ef36e2b0db05716bf4bc762980c",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "food_import_share",
+    "series_id": "TM.VAL.FOOD.ZS.UN",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/TM.VAL.FOOD.ZS.UN?format=json",
+    "file": "research/olam-global/raw/wdi_food_import_share_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.577531+00:00",
+    "sha256": "36021affb598eddfa18d443518f71efa2acf32d48499df5cd89150d3b116c2bd",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "food_index",
+    "series_id": "AG.PRD.FOOD.XD",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/AG.PRD.FOOD.XD?format=json",
+    "file": "research/olam-global/raw/wdi_food_index_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.577394+00:00",
+    "sha256": "e646abc4f31b68157716385345b72769cebaf299a151e3d92e5578fb895ce850",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "gdp_growth",
+    "series_id": "NY.GDP.MKTP.KD.ZG",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.KD.ZG?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_gdp_growth.json",
+    "retrieved_at": "2026-10-08T02:15:08.610553+00:00",
+    "sha256": "f6636a1cd3f9c0618875d3e696a735e5e2a774b9344699d7e6fdaa215bb3f53a",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "gdp_growth",
+    "series_id": "NY.GDP.MKTP.KD.ZG",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/NY.GDP.MKTP.KD.ZG?format=json",
+    "file": "research/olam-global/raw/wdi_gdp_growth_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.590336+00:00",
+    "sha256": "ed7703d841d4dde2d1cb858f0dd53229fe3e841f72abb17dbc8c950ad20c88ce",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "gini",
+    "series_id": "SI.POV.GINI",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SI.POV.GINI?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_gini.json",
+    "retrieved_at": "2026-10-08T02:15:08.614571+00:00",
+    "sha256": "97a10de645856e9fb62b20582d35c2705119446f15937ba27bb5559fb7efbb55",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "gini",
+    "series_id": "SI.POV.GINI",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SI.POV.GINI?format=json",
+    "file": "research/olam-global/raw/wdi_gini_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.595185+00:00",
+    "sha256": "e377bf82b38024748153880ff90c0106a0ef0fd8cb04761146cc60a2609cab3d",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "government_debt",
+    "series_id": "GC.DOD.TOTL.GD.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/GC.DOD.TOTL.GD.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_government_debt.json",
+    "retrieved_at": "2026-10-08T02:15:08.616671+00:00",
+    "sha256": "6e758c24abd3c7272be1fd70dce245448962297aba3fab7ee9a3e2322e020662",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "government_debt",
+    "series_id": "GC.DOD.TOTL.GD.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/GC.DOD.TOTL.GD.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_government_debt_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.596993+00:00",
+    "sha256": "840db52efe87e4415fecd7d9ac7ca68f875cd8388755126e05609d2e688b5da0",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "imports_usd",
+    "series_id": "TM.VAL.MRCH.CD.WT",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/TM.VAL.MRCH.CD.WT?format=json",
+    "file": "research/olam-global/raw/wdi_imports_usd_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.579453+00:00",
+    "sha256": "b74c590e418b3e352341701d5019a607e213a6db06f151d6db4ae8702f54136d",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "income_ppp",
+    "series_id": "NY.GDP.PCAP.PP.KD",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/NY.GDP.PCAP.PP.KD?format=json",
+    "file": "research/olam-global/raw/wdi_income_ppp_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.574542+00:00",
+    "sha256": "55af4b25be9dc57c2865bc4a208710e7405b00306f8381038d884841d3b1e686",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "inflation",
+    "series_id": "FP.CPI.TOTL.ZG",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/FP.CPI.TOTL.ZG?format=json",
+    "file": "research/olam-global/raw/wdi_inflation_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.575779+00:00",
+    "sha256": "df9371a3b6c01e55a3f28991e62e1b1ebbe0cd2a7da94456be9938c7a2962233",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "irrigated_land",
+    "series_id": "AG.LND.IRIG.AG.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/AG.LND.IRIG.AG.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_irrigated_land.json",
+    "retrieved_at": "2026-10-08T02:15:08.620239+00:00",
+    "sha256": "1bdd0c0966bf876c4953649012663356c87c3e105e2c0e11feeff517fc918ba2",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "irrigated_land",
+    "series_id": "AG.LND.IRIG.AG.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/AG.LND.IRIG.AG.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_irrigated_land_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.597251+00:00",
+    "sha256": "517f8c3693612bfbe2d1a4ba4eeda4282c03eeba0d9bd71abc7e8f21ed70e3a4",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "lending_rate",
+    "series_id": "FR.INR.LEND",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/FR.INR.LEND?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_lending_rate.json",
+    "retrieved_at": "2026-10-08T02:15:08.615517+00:00",
+    "sha256": "a103fd2f959d4658f88a9994ef6ee5401b775205a50226b79bc5c97018b5e626",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "lending_rate",
+    "series_id": "FR.INR.LEND",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/FR.INR.LEND?format=json",
+    "file": "research/olam-global/raw/wdi_lending_rate_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.596323+00:00",
+    "sha256": "5ba11a439eaa6c91ab9fa1ac555c5da4a5a697c1cb0aac1c99342af54dbdb80c",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "life_expectancy",
+    "series_id": "SP.DYN.LE00.IN",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_life_expectancy.json",
+    "retrieved_at": "2026-10-08T02:15:08.603474+00:00",
+    "sha256": "ffeb1b80709171dd38e4cdc3cca0d1e01db11152f60aefbe23f50576b63be950",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "life_expectancy",
+    "series_id": "SP.DYN.LE00.IN",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SP.DYN.LE00.IN?format=json",
+    "file": "research/olam-global/raw/wdi_life_expectancy_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.584041+00:00",
+    "sha256": "a39cb6fddfbbb953053690366243dffe77a266c4deae79c46ce5a06da9f5fc31",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "net_migration",
+    "series_id": "SM.POP.NETM",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SM.POP.NETM?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_net_migration.json",
+    "retrieved_at": "2026-10-08T02:15:08.606699+00:00",
+    "sha256": "83f10461381010bbde67cae41244b4eff04a05732ffc897f6a1160f821b05a4b",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "net_migration",
+    "series_id": "SM.POP.NETM",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SM.POP.NETM?format=json",
+    "file": "research/olam-global/raw/wdi_net_migration_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.588287+00:00",
+    "sha256": "fff31c329e617faad200af1d3b0ee39914b39483399a0d3e4e42aa9761dc6c11",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "population",
+    "series_id": "SP.POP.TOTL",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SP.POP.TOTL?format=json",
+    "file": "research/olam-global/raw/wdi_population_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.573591+00:00",
+    "sha256": "2f8491efc00bf2c0995112ff8e87aba69e5e9d22d0880b22f7e3a4ec757ba05c",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "poverty",
+    "series_id": "SI.POV.DDAY",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SI.POV.DDAY?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_poverty.json",
+    "retrieved_at": "2026-10-08T02:15:08.612505+00:00",
+    "sha256": "6d1b39ebbf8cb658244314058c7e56b939be27e20433be50857de1785b46fa40",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "poverty",
+    "series_id": "SI.POV.DDAY",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SI.POV.DDAY?format=json",
+    "file": "research/olam-global/raw/wdi_poverty_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.594527+00:00",
+    "sha256": "ad5ff599e5d33978cbd5fe9b9f96bac98ea150dafb64fcf5066dac11369ef389",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "private_credit",
+    "series_id": "FS.AST.PRVT.GD.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/FS.AST.PRVT.GD.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_private_credit.json",
+    "retrieved_at": "2026-10-08T02:15:08.615332+00:00",
+    "sha256": "045f4240e426c93d09154621d167e3d02a682ff106df619d91cfe2618ba60e4e",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "private_credit",
+    "series_id": "FS.AST.PRVT.GD.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/FS.AST.PRVT.GD.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_private_credit_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.595872+00:00",
+    "sha256": "5d3c92c214008fdce2095fd80bb6bb5636e254292e866a21fab92bccf5fcbd05",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "real_gdp",
+    "series_id": "NY.GDP.MKTP.KD",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.KD?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_real_gdp.json",
+    "retrieved_at": "2026-10-08T02:15:08.609515+00:00",
+    "sha256": "aaa326c429c4a23af57f59bdcd055496fd061e556ccad7cdb0b3058a265d1f9d",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "real_gdp",
+    "series_id": "NY.GDP.MKTP.KD",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/NY.GDP.MKTP.KD?format=json",
+    "file": "research/olam-global/raw/wdi_real_gdp_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.589089+00:00",
+    "sha256": "bc4bc0ffec1755410f52b1091c6b1f46917c7417977102350d3d1102b4659216",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "real_income",
+    "series_id": "NY.GDP.PCAP.KD",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/NY.GDP.PCAP.KD?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_real_income.json",
+    "retrieved_at": "2026-10-08T02:15:08.611110+00:00",
+    "sha256": "61c1a47c7507228b2e9ac380bdea22f9dac1be03d357bba278151866affa0ce2",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "real_income",
+    "series_id": "NY.GDP.PCAP.KD",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/NY.GDP.PCAP.KD?format=json",
+    "file": "research/olam-global/raw/wdi_real_income_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.593458+00:00",
+    "sha256": "46689488cd435920647264ede1bfb2d4b51b09800fb36f3d3b1422a0b11ea49d",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "real_interest",
+    "series_id": "FR.INR.RINR",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/FR.INR.RINR?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_real_interest.json",
+    "retrieved_at": "2026-10-08T02:15:08.616419+00:00",
+    "sha256": "40a8e7b637a75b68a5de31e2f79ab5f6bfa46faaa29b958eb545a38d1c73ee52",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "real_interest",
+    "series_id": "FR.INR.RINR",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/FR.INR.RINR?format=json",
+    "file": "research/olam-global/raw/wdi_real_interest_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.596509+00:00",
+    "sha256": "693eb02d1c1fef3bccb1fe288cc212e3d331e40c855f00249fbd66ea44ad5c15",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "undernourishment",
+    "series_id": "SN.ITK.DEFC.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SN.ITK.DEFC.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_undernourishment.json",
+    "retrieved_at": "2026-10-08T02:15:08.622663+00:00",
+    "sha256": "667b3da873e2059cf2241aabfecb500ca6ebac6ef044bfa1e9e6e3a998067fe5",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "undernourishment",
+    "series_id": "SN.ITK.DEFC.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SN.ITK.DEFC.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_undernourishment_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.598350+00:00",
+    "sha256": "71c6c83321b67c2c0b3448156bcdb7f8b6ad7cd300de1f73af846fbbe3b57263",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "unemployment",
+    "series_id": "SL.UEM.TOTL.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_unemployment.json",
+    "retrieved_at": "2026-10-08T02:15:08.614806+00:00",
+    "sha256": "5b3397948a6822706d276eadb8880494d882074041f02c52385fd50cf09e799b",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "unemployment",
+    "series_id": "SL.UEM.TOTL.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SL.UEM.TOTL.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_unemployment_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.595464+00:00",
+    "sha256": "3ae370ed4bebba092338e94334c35add71490324ee57f1dfe81885dade51f52f",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "urban",
+    "series_id": "SP.URB.TOTL.IN.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/SP.URB.TOTL.IN.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_urban_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.575568+00:00",
+    "sha256": "ada77d666a1469f69379933d0597cdd420299806163905af52de79d538da95e6",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "water_stress",
+    "series_id": "ER.H2O.FWST.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/ER.H2O.FWST.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_water_stress_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.582736+00:00",
+    "sha256": "93f80a0eaba7806ea1727788513110db3ca8b12978bae13ac311a37ddd1ccbe9",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "water_withdrawal",
+    "series_id": "ER.H2O.FWTL.ZS",
+    "kind": "data",
+    "url": "https://api.worldbank.org/v2/country/all/indicator/ER.H2O.FWTL.ZS?date=2000:2025&format=json&per_page=20000",
+    "file": "research/olam-global/raw/wdi_water_withdrawal.json",
+    "retrieved_at": "2026-10-08T02:15:08.623320+00:00",
+    "sha256": "fb6e9d20f209425e33e32745aa4b9f0c4758cce2a3cd691ba18ac419ddcce400",
+    "status": "Cached permitted primary download"
+  },
+  {
+    "variable": "water_withdrawal",
+    "series_id": "ER.H2O.FWTL.ZS",
+    "kind": "metadata",
+    "url": "https://api.worldbank.org/v2/indicator/ER.H2O.FWTL.ZS?format=json",
+    "file": "research/olam-global/raw/wdi_water_withdrawal_metadata.json",
+    "retrieved_at": "2026-10-08T02:15:08.601629+00:00",
+    "sha256": "1d51ad300cef34581b418660025064ec77a43510f9af17ac73fe0b463c2c1536",
+    "status": "Cached permitted primary download"
+  }
+]

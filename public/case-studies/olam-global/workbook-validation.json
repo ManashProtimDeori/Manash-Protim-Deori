@@ -1,0 +1,151 @@
+{
+  "version": "1.1.0",
+  "cases": [
+    {
+      "mode": "trade",
+      "scenario": "managed",
+      "npv": 0.3576862423017003,
+      "funding": 2.9413770000000037,
+      "capacity_residual": 0,
+      "accounting_residual": -1.7763568394002505e-15
+    },
+    {
+      "mode": "trade",
+      "scenario": "integration",
+      "npv": 7.869359046008347,
+      "funding": 1.5686896712328786,
+      "capacity_residual": 0,
+      "accounting_residual": 7.105427357601002e-15
+    },
+    {
+      "mode": "trade",
+      "scenario": "fragmented",
+      "npv": -10.13625574640194,
+      "funding": 22.848204447358853,
+      "capacity_residual": 0,
+      "accounting_residual": -1.0658141036401503e-14
+    },
+    {
+      "mode": "trade",
+      "scenario": "physical",
+      "npv": -25.560849591724303,
+      "funding": 70.94921425008116,
+      "capacity_residual": 0,
+      "accounting_residual": 0
+    },
+    {
+      "mode": "trade",
+      "scenario": "squeeze",
+      "npv": -13.35750312059938,
+      "funding": 36.99873139726027,
+      "capacity_residual": 0,
+      "accounting_residual": 0
+    },
+    {
+      "mode": "trade",
+      "scenario": "nutrition",
+      "npv": -0.5433706314192943,
+      "funding": 4.071070447090416,
+      "capacity_residual": 0,
+      "accounting_residual": 7.105427357601002e-15
+    },
+    {
+      "mode": "partner",
+      "scenario": "managed",
+      "npv": 10.817370364399228,
+      "funding": 9.795726027397262,
+      "capacity_residual": 0,
+      "accounting_residual": -1.4210854715202004e-14
+    },
+    {
+      "mode": "partner",
+      "scenario": "integration",
+      "npv": 20.592951494337377,
+      "funding": 9.137024657534248,
+      "capacity_residual": 0,
+      "accounting_residual": -5.684341886080802e-14
+    },
+    {
+      "mode": "partner",
+      "scenario": "fragmented",
+      "npv": -3.5847305871200534,
+      "funding": 12.709059419178086,
+      "capacity_residual": 0,
+      "accounting_residual": -3.552713678800501e-15
+    },
+    {
+      "mode": "partner",
+      "scenario": "physical",
+      "npv": -17.3950014167817,
+      "funding": 27.956740910831407,
+      "capacity_residual": 0,
+      "accounting_residual": 5.329070518200751e-15
+    },
+    {
+      "mode": "partner",
+      "scenario": "squeeze",
+      "npv": -9.824948698608374,
+      "funding": 14.232439232876715,
+      "capacity_residual": 0,
+      "accounting_residual": 3.552713678800501e-15
+    },
+    {
+      "mode": "partner",
+      "scenario": "nutrition",
+      "npv": 10.071104437961306,
+      "funding": 10.38084,
+      "capacity_residual": 0,
+      "accounting_residual": -1.4210854715202004e-14
+    },
+    {
+      "mode": "plant",
+      "scenario": "managed",
+      "npv": -1.7999419404754295,
+      "funding": 22.564383561643837,
+      "capacity_residual": 0,
+      "accounting_residual": 7.105427357601002e-15
+    },
+    {
+      "mode": "plant",
+      "scenario": "integration",
+      "npv": 13.87946178077394,
+      "funding": 21.728734246575346,
+      "capacity_residual": 0,
+      "accounting_residual": 4.263256414560601e-14
+    },
+    {
+      "mode": "plant",
+      "scenario": "fragmented",
+      "npv": -17.203947649585814,
+      "funding": 25.97873621917809,
+      "capacity_residual": 0,
+      "accounting_residual": 1.0658141036401503e-14
+    },
+    {
+      "mode": "plant",
+      "scenario": "physical",
+      "npv": -33.292163663292115,
+      "funding": 57.897636214652806,
+      "capacity_residual": 0,
+      "accounting_residual": 3.552713678800501e-14
+    },
+    {
+      "mode": "plant",
+      "scenario": "squeeze",
+      "npv": -24.952075111496043,
+      "funding": 38.20453260273972,
+      "capacity_residual": 0,
+      "accounting_residual": 1.2434497875801753e-14
+    },
+    {
+      "mode": "plant",
+      "scenario": "nutrition",
+      "npv": -2.8782641183332007,
+      "funding": 23.1676301369863,
+      "capacity_residual": 0,
+      "accounting_residual": 2.842170943040401e-14
+    }
+  ],
+  "EVSI": 0.7000000000000002,
+  "ROIC_year3": 0.07197432986492461
+}

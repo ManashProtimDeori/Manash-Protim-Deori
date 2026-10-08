@@ -1,0 +1,458 @@
+{
+  "version": "1.1.0",
+  "run_at": "2026-10-08T03:01:13.114094+00:00",
+  "scope": "Executed numerical/physical/schema/artifact checks, not proof of business inputs",
+  "checks": [
+    {
+      "id": "S01",
+      "description": "195 distinct countries,193 members and2 observers",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "S02",
+      "description": "All countries carry34 explicitly dated/null drivers",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "S03",
+      "description": "No country actual investment NPV or feasibility is invented",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "S04",
+      "description": "203 units \u00d76 worlds \u00d77 milestones, no join losses or duplicates",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "S05",
+      "description": "Distinct18 product cases in10 priority countries",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "S06",
+      "description": "Actual finance unknowns stay null in the full matrix",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "L01",
+      "description": "All slide source/calculation/assumption IDs resolve",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "L02",
+      "description": "Every calculation input/source/assumption ID resolves",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "L03",
+      "description": "All country observation sources and food-proxy calculations resolve",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "L04",
+      "description": "Source schema includes all17 required metadata categories",
+      "status": "Passed",
+      "evidence": "Unknown/N/A metadata remains explicitly recorded, not verified by schema presence"
+    },
+    {
+      "id": "L05",
+      "description": "Each registered claim uses a controlling evidence class",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "L06",
+      "description": "All22 required calculation examples retained",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "L07",
+      "description": "Every substantive main slide has six speaker-note fields",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "L08",
+      "description": "All44 original slides have documented substantive treatments",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-trade-managed",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-trade-managed",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-trade-integration",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-trade-integration",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-trade-fragmented",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-trade-fragmented",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-trade-physical",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-trade-physical",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-trade-squeeze",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-trade-squeeze",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-trade-nutrition",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-trade-nutrition",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-partner-managed",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-partner-managed",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-partner-integration",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-partner-integration",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-partner-fragmented",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-partner-fragmented",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-partner-physical",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-partner-physical",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-partner-squeeze",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-partner-squeeze",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-partner-nutrition",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-partner-nutrition",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-plant-managed",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-plant-managed",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-plant-integration",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-plant-integration",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-plant-fragmented",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-plant-fragmented",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-plant-physical",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-plant-physical",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-plant-squeeze",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-plant-squeeze",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A-plant-nutrition",
+      "description": "Cash/EBIT/NWC identities and discounting reconcile in25 annual periods",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P-plant-nutrition",
+      "description": "Deliveries respect capacity under matched scenario",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P01",
+      "description": "Monthly stocks and annual production/delivery physically balance",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P02",
+      "description": "Blocked network route has zero delivery; source/customer limits bind feasibly",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "P03",
+      "description": "Chosen factor covariance is symmetric PSD",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "A01",
+      "description": "No franchise terminal value, closeout deducted once",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "D01",
+      "description": "EVSI bounded by perfect information and charged study/delay once",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "D02",
+      "description": "Stress fixed-input model agrees with deterministic baseline",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "D03",
+      "description": "Required sensitivities and alternate-tail/dependence runs actually present",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "D04",
+      "description": "Investment use of the supply regression explicitly rejected",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "D05",
+      "description": "Discrete and fractional policy comparisons respect their feasible sets",
+      "status": "Passed",
+      "evidence": "Fractional scalability remains an explicit relaxation, not assumed asset feasibility"
+    },
+    {
+      "id": "R01",
+      "description": "Every66 prompt sections and775 instruction blocks audited without blanket pass",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "R01b",
+      "description": "Every audited block traces to the exact controlling prompt and source line",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "R-ceo-question-register.csv",
+      "description": "ceo-question-register.csv mandatory coverage",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "R-hypothesis-register.csv",
+      "description": "hypothesis-register.csv mandatory coverage",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "R-red-team-register.csv",
+      "description": "red-team-register.csv mandatory coverage",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "R-entry-mode-register.csv",
+      "description": "entry-mode-register.csv mandatory coverage",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "R-model-selection-register.csv",
+      "description": "model-selection-register.csv mandatory coverage",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "R02",
+      "description": "Thank you directly precedes the technical appendix",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "F01",
+      "description": "Native PPTX current slide count and4 editable charts",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "F02",
+      "description": "Every PPTX slide has navigation and evidence hyperlinks",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "F02b",
+      "description": "Every internal jump references an existing slide part",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "F03",
+      "description": "Each native speaker note contains evidence fields",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "F04",
+      "description": "Slide PDF matches current deck; atlas391 pages includes195 dossiers",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "F05",
+      "description": "Executive memo remains2\u20134 pages",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "F06",
+      "description": "Native formula workbook matches all18 Python cases and EVSI/ROIC",
+      "status": "Passed",
+      "evidence": ""
+    },
+    {
+      "id": "F07",
+      "description": "Native integrity and all-table layout receipts pass for current release",
+      "status": "Passed",
+      "evidence": ""
+    }
+  ],
+  "open_business_gates": "See requirements-audit.csv and evidence-request-queue.csv"
+}

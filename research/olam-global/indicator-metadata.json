@@ -1,0 +1,680 @@
+{
+  "population": {
+    "id": "SP.POP.TOTL",
+    "name": "Population, total",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Total population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship. The values shown are midyear estimates.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), uri: https://population.un.org/wpp/, publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs), uri: https://unstats.un.org/home/nso_sites/, publisher: National Statistical Offices;\nEurostat: Demographic Statistics, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/data/database?node_code=earn_ses_monthly, publisher: Eurostat;\nPopulation and Vital Statistics Report (various years), United Nations (UN), uri: https://unstats.un.org, publisher: UN Statistics Division",
+    "topics": [
+      {
+        "id": "19",
+        "value": "Climate Change"
+      },
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  "income_ppp": {
+    "id": "NY.GDP.PCAP.PP.KD",
+    "name": "GDP per capita, PPP (constant 2021 international $)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "This indicator provides values for gross domestic product (GDP) per person expressed in constant international dollars, converted by purchasing power parities (PPPs). PPPs account for the different price levels across countries and thus PPP-based comparisons of economic output are more appropriate for comparing the output of economies and the average material well-being of their inhabitants than exchange-rate based comparisons. \n\nGross domestic product is the total income earned through the production of goods and services in an economic territory during an accounting period. It can be measured in three different ways: using either the expenditure approach, the income approach, or the production approach. The core indicator has been divided by the general population to achieve a per capita estimate. This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2021. The PPP conversion factor is a currency conversion factor and a spatial price deflator. PPPs convert different currencies to a common currency and, in the process of conversion, equalize their purchasing power by eliminating the differences in price levels between countries, thereby allowing volume or output comparisons of GDP and its expenditure components.",
+    "sourceOrganization": "International Comparison Program (ICP), World Bank (WB), uri: https://www.worldbank.org/en/programs/icp/data, note: This information is for ICP\u2019s PPPs utilized in WDI, publisher: International Comparison Program (ICP), date accessed: May 30, 2024, date published: May 30, 2024;\nThe Eurostat PPP Programme, Eurostat (ESTAT), uri: https://ec.europa.eu/eurostat/databrowser/explore/all/all_themes, publisher: Eurostat;\nThe OECD PPP Programme, Organisation for Economic Co-operation and Development (OECD), uri: https://data-explorer.oecd.org/, publisher: OECD;\nStaff estimates, World Bank (WB);\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nWorld Economic Outlook database, International Monetary Fund (IMF)",
+    "topics": [
+      {
+        "id": "3",
+        "value": "Economy & Growth"
+      }
+    ]
+  },
+  "urban": {
+    "id": "SP.URB.TOTL.IN.ZS",
+    "name": "Urban population (% of total population)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Urban population refers to people living in urban areas as defined by national statistical offices. The data are collected and smoothed by United Nations Population Division.",
+    "sourceOrganization": "World Urbanization Prospects, United Nations (UN), uri: https://population.un.org/wup/, note: United Nations Population Division's World Urbanization Prospects, National definitions, publisher: UN Population Division",
+    "topics": [
+      {
+        "id": "19",
+        "value": "Climate Change"
+      },
+      {
+        "id": "16",
+        "value": "Urban Development "
+      }
+    ]
+  },
+  "inflation": {
+    "id": "FP.CPI.TOTL.ZG",
+    "name": "Inflation, consumer prices (annual %)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Inflation as measured by the consumer price index reflects the annual percentage change in the cost to the average consumer of acquiring a basket of goods and services that may be fixed or changed at specified intervals, such as yearly.",
+    "sourceOrganization": "International Financial Statistics database, International Monetary Fund (IMF)",
+    "topics": [
+      {
+        "id": "3",
+        "value": "Economy & Growth"
+      },
+      {
+        "id": "7",
+        "value": "Financial Sector "
+      }
+    ]
+  },
+  "food_index": {
+    "id": "AG.PRD.FOOD.XD",
+    "name": "Food production index (2014-2016 = 100)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Food production index covers food crops that are considered edible and that contain nutrients. Coffee and tea are excluded because, although edible, they have no nutritive value.",
+    "sourceOrganization": "FAO electronic files and web site, Food and Agriculture Organization of the United Nations (FAO), publisher: Food and Agriculture Organization of the United Nations (FAO)",
+    "topics": [
+      {
+        "id": "1",
+        "value": "Agriculture & Rural Development  "
+      }
+    ]
+  },
+  "food_import_share": {
+    "id": "TM.VAL.FOOD.ZS.UN",
+    "name": "Food imports (% of merchandise imports)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Food comprises the commodities in SITC (Rev. 3) sections 0 (food and live animals), 1 (beverages and tobacco), and 4 (animal and vegetable oils and fats) and division 22 (oil seeds, oil nuts, and oil kernels). This indicator is expressed as a percentage of merchandise imports which is comprised of goods whose economic ownership is changed between a non-resident and a resident and that are not included in the following specific categories: goods under merchanting, non-monetary gold, and parts of travel, construction, and government goods and services n.i.e.",
+    "sourceOrganization": "Comtrade database, United Nations (UN), publisher: UN Statistics Division;\nWorld Integrated Trade Solution system (WITS);\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "12",
+        "value": "Private Sector"
+      },
+      {
+        "id": "21",
+        "value": "Trade"
+      }
+    ]
+  },
+  "food_export_share": {
+    "id": "TX.VAL.FOOD.ZS.UN",
+    "name": "Food exports (% of merchandise exports)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Food comprises the commodities in SITC (Rev. 3) sections 0 (food and live animals), 1 (beverages and tobacco), and 4 (animal and vegetable oils and fats) and division 22 (oil seeds, oil nuts, and oil kernels). This indicator is expressed as a percentage of merchandise exports which is comprised of goods whose economic ownership is changed between a resident and a non-resident and that are not included in the following specific categories: goods under merchanting, non-monetary gold, and parts of travel, construction, and government goods and services n.i.e.",
+    "sourceOrganization": "Comtrade database, United Nations (UN), publisher: UN Statistics Division;\nWorld Integrated Trade Solution system (WITS);\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "12",
+        "value": "Private Sector"
+      },
+      {
+        "id": "21",
+        "value": "Trade"
+      }
+    ]
+  },
+  "imports_usd": {
+    "id": "TM.VAL.MRCH.CD.WT",
+    "name": "Merchandise imports (current US$)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Merchandise imports includes goods whose economic ownership is changed from a non-resident to a resident and that are not included in the following specific categories: goods under merchanting, non-monetary gold, and parts of travel, construction, and government goods and services n.i.e. This indicator is expressed in current prices, meaning no adjustment has been made to account for price changes over time. This indicator is expressed in United States dollars.",
+    "sourceOrganization": "World Trade Organization (WTO)",
+    "topics": [
+      {
+        "id": "12",
+        "value": "Private Sector"
+      },
+      {
+        "id": "21",
+        "value": "Trade"
+      }
+    ]
+  },
+  "exports_usd": {
+    "id": "TX.VAL.MRCH.CD.WT",
+    "name": "Merchandise exports (current US$)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Merchandise exports includes goods whose economic ownership is changed from a resident to a non-resident and that are not included in the following specific categories: goods under merchanting, non-monetary gold, and parts of travel, construction, and government goods and services n.i.e. This indicator is expressed in current prices, meaning no adjustment has been made to account for price changes over time. This indicator is expressed in United States dollars.",
+    "sourceOrganization": "World Trade Organization (WTO)",
+    "topics": [
+      {
+        "id": "12",
+        "value": "Private Sector"
+      },
+      {
+        "id": "21",
+        "value": "Trade"
+      }
+    ]
+  },
+  "cereal_yield": {
+    "id": "AG.YLD.CREL.KG",
+    "name": "Cereal yield (kg per hectare)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Cereal yield, measured as kilograms per hectare of harvested land, includes wheat, rice, maize, barley, oats, rye, millet, sorghum, buckwheat, and mixed grains. Production data on cereals relate to crops harvested for dry grain only. Cereal crops harvested for hay or harvested green for food, feed, or silage and those used for grazing are excluded. The FAO allocates production data to the calendar year in which the bulk of the harvest took place. Most of a crop harvested near the end of a year will be used in the following year.",
+    "sourceOrganization": "FAO electronic files and web site, Food and Agriculture Organization of the United Nations (FAO), uri: https://www.fao.org/faostat/en/#data/QCL, publisher: Food and Agriculture Organization of the United Nations (FAO)",
+    "topics": [
+      {
+        "id": "1",
+        "value": "Agriculture & Rural Development  "
+      },
+      {
+        "id": "19",
+        "value": "Climate Change"
+      }
+    ]
+  },
+  "water_stress": {
+    "id": "ER.H2O.FWST.ZS",
+    "name": "Level of water stress: freshwater withdrawal as a proportion of available freshwater resources",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "The level of water stress: freshwater withdrawal as a proportion of available freshwater resources is the ratio between total freshwater withdrawn by all major sectors and total renewable freshwater resources, after taking into account environmental water requirements. Main sectors, as defined by ISIC standards, include agriculture; forestry and fishing; manufacturing; electricity industry; and services. This indicator is also known as water withdrawal intensity.",
+    "sourceOrganization": "AQUASTAT - FAO's Global Information System on Water and Agriculture, Food and Agriculture Organization of the United Nations (FAO), uri: https://data.apps.fao.org/aquastat/, publisher: Food and Agriculture Organization of the United Nations (FAO), date accessed: 20240529",
+    "topics": [
+      {
+        "id": "6",
+        "value": "Environment "
+      }
+    ]
+  },
+  "fertility": {
+    "id": "SP.DYN.TFRT.IN",
+    "name": "Fertility rate, total (births per woman)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Total fertility rate represents the number of children that would be born to a woman if she were to live to the end of her childbearing years and bear children in accordance with age-specific fertility rates of the specified year.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs);\nDemographic Statistics, Eurostat (ESTAT)",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      },
+      {
+        "id": "17",
+        "value": "Gender"
+      }
+    ]
+  },
+  "life_expectancy": {
+    "id": "SP.DYN.LE00.IN",
+    "name": "Life expectancy at birth, total (years)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Life expectancy at birth indicates the number of years a newborn infant would live if prevailing patterns of mortality at the time of its birth were to stay the same throughout its life.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), uri: UN Population Division;\nStatistical databases and publications from national statistical offices, National Statistical Offices (NSOs), note: Derived from male and female life expectancy at birth from sources such as statistical databases and publications from national statistical offices.;\nDemographic Statistics, Eurostat (ESTAT), note: Derived from male and female life expectancy at birth from sources such as Eurostat: Demographic Statistics.",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  "age_under15": {
+    "id": "SP.POP.0014.TO.ZS",
+    "name": "Population ages 0-14 (% of total population)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Population between the ages 0 to 14 as a percentage of the total population. Population is based on the de facto definition of population.",
+    "sourceOrganization": "United Nations Population Division. World Population Prospects., United Nations Population Division, uri: https://population.un.org/wpp/, publisher: United Nations Population Division",
+    "topics": [
+      {
+        "id": "4",
+        "value": "Education "
+      },
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  "age_over65": {
+    "id": "SP.POP.65UP.TO.ZS",
+    "name": "Population ages 65 and above (% of total population)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Population ages 65 and above as a percentage of the total population. Population is based on the de facto definition of population, which counts all residents regardless of legal status or citizenship.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  "dependency_ratio": {
+    "id": "SP.POP.DPND",
+    "name": "Age dependency ratio (% of working-age population)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Age dependency ratio is the ratio of dependents--people younger than 15 or older than 64--to the working-age population--those ages 15-64. Data are shown as the proportion of dependents per 100 working-age population.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division;\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  "net_migration": {
+    "id": "SM.POP.NETM",
+    "name": "Net migration",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Net migration is the net total of migrants during the period, that is, the number of immigrants minus the number of emigrants, including both citizens and noncitizens.",
+    "sourceOrganization": "World Population Prospects, United Nations (UN), publisher: UN Population Division",
+    "topics": [
+      {
+        "id": "7",
+        "value": "Financial Sector "
+      },
+      {
+        "id": "8",
+        "value": "Health "
+      },
+      {
+        "id": "2",
+        "value": "Aid Effectiveness "
+      }
+    ]
+  },
+  "real_gdp": {
+    "id": "NY.GDP.MKTP.KD",
+    "name": "GDP (constant 2015 US$)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Gross domestic product is the total income earned through the production of goods and services in an economic territory during an accounting period. It can be measured in three different ways: using either the expenditure approach, the income approach, or the production approach. This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2015. This indicator is expressed in United States dollars.",
+    "sourceOrganization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "3",
+        "value": "Economy & Growth"
+      }
+    ]
+  },
+  "gdp_growth": {
+    "id": "NY.GDP.MKTP.KD.ZG",
+    "name": "GDP growth (annual %)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Gross domestic product is the total income earned through the production of goods and services in an economic territory during an accounting period. It can be measured in three different ways: using either the expenditure approach, the income approach, or the production approach. This indicator denotes the percentage change over each previous year of the constant price (base year 2015) series in United States dollars.",
+    "sourceOrganization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "3",
+        "value": "Economy & Growth"
+      }
+    ]
+  },
+  "real_income": {
+    "id": "NY.GDP.PCAP.KD",
+    "name": "GDP per capita (constant 2015 US$)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Gross domestic product is the total income earned through the production of goods and services in an economic territory during an accounting period. It can be measured in three different ways: using either the expenditure approach, the income approach, or the production approach. The core indicator has been divided by the general population to achieve a per capita estimate.This indicator is expressed in constant prices, meaning the series has been adjusted to account for price changes over time. The reference year for this adjustment is 2015. This indicator is expressed in United States dollars.",
+    "sourceOrganization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "3",
+        "value": "Economy & Growth"
+      }
+    ]
+  },
+  "agriculture_gdp": {
+    "id": "NV.AGR.TOTL.ZS",
+    "name": "Agriculture, forestry, and fishing, value added (% of GDP)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Agriculture, forestry, and fishing corresponds to ISIC (Rev. 4) divisions 01-03 and includes the exploitation of vegetal and animal natural resources, comprising the activities of growing of crops, raising and breeding of animals, harvesting of timber and other plants, animals or animal products from a farm or their natural habitats.Value added is the contribution to the economy by a producer or an industry or an institutional sector, which is estimated by the total value of output produced and deducting the total value of intermediate consumption of goods and services used to produce that output. This indicator is expressed as a percentage of Gross Domestic Product (GDP) which is the total income earned through the production of goods and services in an economic territory during an accounting period. Note: For VAB countries, gross value added at factor cost is used as the denominator.",
+    "sourceOrganization": "Country official statistics, National Statistical Organizations and/or Central Banks;\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD);\nStaff estimates, World Bank (WB)",
+    "topics": [
+      {
+        "id": "1",
+        "value": "Agriculture & Rural Development  "
+      },
+      {
+        "id": "3",
+        "value": "Economy & Growth"
+      },
+      {
+        "id": "19",
+        "value": "Climate Change"
+      }
+    ]
+  },
+  "poverty": {
+    "id": "SI.POV.DDAY",
+    "name": "Poverty headcount ratio at $3.00 a day (2021 PPP) (% of population)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Poverty headcount ratio at $3.00 a day is the percentage of the population living on less than $3.00 a day at 2021 purchasing power adjusted prices. As a result of revisions in PPP exchange rates, poverty rates for individual countries cannot be compared with poverty rates reported in earlier editions.",
+    "sourceOrganization": "World Bank, Poverty and Inequality Platform. Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database. For more information and methodology, please see http://pip.worldbank.org., World Bank (WB), uri: http://pip.worldbank.org, note: Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database.",
+    "topics": [
+      {
+        "id": "11",
+        "value": "Poverty "
+      },
+      {
+        "id": "2",
+        "value": "Aid Effectiveness "
+      },
+      {
+        "id": "19",
+        "value": "Climate Change"
+      }
+    ]
+  },
+  "gini": {
+    "id": "SI.POV.GINI",
+    "name": "Gini index",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Gini index measures the extent to which the distribution of income (or, in some cases, consumption expenditure) among individuals or households within an economy deviates from a perfectly equal distribution. A Lorenz curve plots the cumulative percentages of total income received against the cumulative number of recipients, starting with the poorest individual or household. The Gini index measures the area between the Lorenz curve and a hypothetical line of absolute equality, expressed as a percentage of the maximum area under the line. Thus a Gini index of 0 represents perfect equality, while an index of 100 implies perfect inequality.",
+    "sourceOrganization": "World Bank, Poverty and Inequality Platform. Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database. For more information and methodology, please see http://pip.worldbank.org., World Bank (WB), uri: http://pip.worldbank.org, note: Data are based on primary household survey data obtained from government statistical agencies and World Bank country departments. Data for high-income economies are mostly from the Luxembourg Income Study database.",
+    "topics": [
+      {
+        "id": "11",
+        "value": "Poverty "
+      }
+    ]
+  },
+  "unemployment": {
+    "id": "SL.UEM.TOTL.ZS",
+    "name": "Unemployment, total (% of total labor force) (modeled ILO estimate)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Unemployment refers to the share of the labor force that is without work but available for and seeking employment.",
+    "sourceOrganization": "ILO Modelled Estimates database (ILOEST), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: January 17, 2026",
+    "topics": [
+      {
+        "id": "4",
+        "value": "Education "
+      },
+      {
+        "id": "10",
+        "value": "Social Protection & Labor"
+      }
+    ]
+  },
+  "private_credit": {
+    "id": "FS.AST.PRVT.GD.ZS",
+    "name": "Domestic credit to private sector (% of GDP)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Domestic credit to private sector refers to financial resources provided to the private sector by financial corporations, such as through loans, purchases of nonequity securities, and trade credits and other accounts receivable, that establish a claim for repayment. For some countries these claims include credit to public enterprises. The financial corporations include monetary authorities and deposit money banks, as well as other financial corporations where data are available (including corporations that do not accept transferable deposits but do incur such liabilities as time and savings deposits). Examples of other financial corporations are finance and leasing companies, money lenders, insurance corporations, pension funds, and foreign exchange companies. This indicator is expressed as a percentage of Gross Domestic Product (GDP) which is the total income earned through the production of goods and services in an economic territory during an accounting period.",
+    "sourceOrganization": "International Financial Statistics database, International Monetary Fund (IMF);\nWorld Development Indicators Database, World Bank (WB);\nNational Accounts data files, Organisation for Economic Co-operation and Development (OECD)",
+    "topics": [
+      {
+        "id": "7",
+        "value": "Financial Sector "
+      },
+      {
+        "id": "12",
+        "value": "Private Sector"
+      }
+    ]
+  },
+  "lending_rate": {
+    "id": "FR.INR.LEND",
+    "name": "Lending interest rate (%)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Lending rate is the bank rate that usually meets the short- and medium-term financing needs of the private sector. This rate is normally differentiated according to creditworthiness of borrowers and objectives of financing. The terms and conditions attached to these rates differ by country, however, limiting their comparability.",
+    "sourceOrganization": "International Financial Statistics database, International Monetary Fund (IMF)",
+    "topics": [
+      {
+        "id": "7",
+        "value": "Financial Sector "
+      }
+    ]
+  },
+  "real_interest": {
+    "id": "FR.INR.RINR",
+    "name": "Real interest rate (%)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "An interest rate is the amount charged, expressed as a percentage of the principal over a period of time, by the owners of certain kinds of financial assets for putting the financial assets at the disposal of another institutional unit. The real interest rate is the lending interest rate adjusted for inflation as measured by the GDP deflator. The terms and conditions attached to lending rates differ by country, however, limiting their comparability. This indicator is expressed as a percentage (a\u00f7b)*100.",
+    "sourceOrganization": "International Financial Statistics database, International Monetary Fund (IMF);\nWorld Development Indicators, World Bank (WB)",
+    "topics": [
+      {
+        "id": "7",
+        "value": "Financial Sector "
+      }
+    ]
+  },
+  "government_debt": {
+    "id": "GC.DOD.TOTL.GD.ZS",
+    "name": "Central government debt, total (% of GDP)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Debt is the entire stock of direct government fixed-term contractual obligations to others outstanding on a particular date. It includes domestic and foreign liabilities such as currency and money deposits, securities other than shares, and loans. It is the gross amount of government liabilities reduced by the amount of equity and financial derivatives held by the government. Because debt is a stock rather than a flow, it is measured as of a given date, usually the last day of the fiscal year. Central government is the part of general government that includes all administrative departments of the national executive, legislative, and judicial functions, other central agencies and those non-market producers controlled by the central government, whose competence extends normally over the whole economic territory. This indicator is expressed as a percentage of Gross Domestic Product (GDP) which is the total income earned through the production of goods and services in an economic territory during an accounting period.",
+    "sourceOrganization": "Government Finance Statistics Yearbook and data files, International Monetary Fund (IMF)",
+    "topics": [
+      {
+        "id": "3",
+        "value": "Economy & Growth"
+      },
+      {
+        "id": "13",
+        "value": "Public Sector "
+      }
+    ]
+  },
+  "electricity_access": {
+    "id": "EG.ELC.ACCS.ZS",
+    "name": "Access to electricity (% of population)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Access to electricity is the percentage of population with access to electricity. Electrification data are collected from industry, national surveys and international sources.",
+    "sourceOrganization": "SDG 7.1.1 Electrification Dataset, World Bank (WB), uri: https://trackingsdg7.esmap.org/downloads, note: Data is downloaded from ESMAP website. Data is released when a new Tracking SDG7 report is released., publisher: World Bank (WB), date accessed: 2024-05-16, date published: 2023",
+    "topics": [
+      {
+        "id": "5",
+        "value": "Energy & Mining "
+      },
+      {
+        "id": "19",
+        "value": "Climate Change"
+      },
+      {
+        "id": "6",
+        "value": "Environment "
+      }
+    ]
+  },
+  "irrigated_land": {
+    "id": "AG.LND.IRIG.AG.ZS",
+    "name": "Agricultural irrigated land (% of total agricultural land)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Agricultural irrigated land refers to agricultural areas purposely provided with water, including land irrigated by controlled flooding.",
+    "sourceOrganization": "FAO electronic files and web site, Food and Agriculture Organization of the United Nations (FAO), uri: https://www.fao.org/faostat/en/#data/RL, publisher: Food and Agriculture Organization of the United Nations (FAO)",
+    "topics": [
+      {
+        "id": "1",
+        "value": "Agriculture & Rural Development  "
+      },
+      {
+        "id": "19",
+        "value": "Climate Change"
+      }
+    ]
+  },
+  "cereal_area": {
+    "id": "AG.LND.CREL.HA",
+    "name": "Land under cereal production (hectares)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Land under cereal production refers to harvested area, although some countries report only sown or cultivated area. Cereals include wheat, rice, maize, barley, oats, rye, millet, sorghum, buckwheat, and mixed grains. Production data on cereals relate to crops harvested for dry grain only. Cereal crops harvested for hay or harvested green for food, feed, or silage and those used for grazing are excluded.",
+    "sourceOrganization": "FAO electronic files and web site, Food and Agriculture Organization of the United Nations (FAO), uri: https://www.fao.org/faostat/en/#data/QCL, note: Item code F1717, publisher: Food and Agriculture Organization of the United Nations (FAO)",
+    "topics": [
+      {
+        "id": "1",
+        "value": "Agriculture & Rural Development  "
+      }
+    ]
+  },
+  "undernourishment": {
+    "id": "SN.ITK.DEFC.ZS",
+    "name": "Prevalence of undernourishment (% of population)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Prevalence of undernourishment is the percentage of the population whose habitual food consumption is insufficient to provide the dietary energy levels that are required to maintain a normal active and healthy life. Data showing as 2.5 may signify a prevalence of undernourishment below 2.5%.",
+    "sourceOrganization": "Food and Agriculture Organization of the United Nations (FAO), uri: http://www.fao.org/faostat/en/#home",
+    "topics": [
+      {
+        "id": "8",
+        "value": "Health "
+      }
+    ]
+  },
+  "agriculture_employment": {
+    "id": "SL.AGR.EMPL.ZS",
+    "name": "Employment in agriculture (% of total employment) (modeled ILO estimate)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Employment is defined as persons of working age who were engaged in any activity to produce goods or provide services for pay or profit, whether at work during the reference period or not at work due to temporary absence from a job, or to working-time arrangement. The agriculture sector consists of activities in agriculture, hunting, forestry and fishing, in accordance with division 1 (ISIC 2) or categories A-B (ISIC 3) or category A (ISIC 4).",
+    "sourceOrganization": "ILO Modelled Estimates database (ILOEST), International Labour Organization (ILO), uri: https://ilostat.ilo.org/data/bulk/, publisher: ILOSTAT, type: external database, date accessed: January 17, 2026",
+    "topics": [
+      {
+        "id": "1",
+        "value": "Agriculture & Rural Development  "
+      },
+      {
+        "id": "10",
+        "value": "Social Protection & Labor"
+      }
+    ]
+  },
+  "water_withdrawal": {
+    "id": "ER.H2O.FWTL.ZS",
+    "name": "Annual freshwater withdrawals, total (% of internal resources)",
+    "unit": "",
+    "source": {
+      "id": "2",
+      "value": "World Development Indicators"
+    },
+    "sourceNote": "Annual freshwater withdrawals refer to total water withdrawals, not counting evaporation losses from storage basins. Withdrawals also include water from desalination plants in countries where they are a significant source. Withdrawals can exceed 100 percent of total renewable resources where extraction from nonrenewable aquifers or desalination plants is considerable or where there is significant water reuse. Withdrawals for agriculture and industry are total withdrawals for irrigation and livestock production and for direct industrial use (including withdrawals for cooling thermoelectric plants). Withdrawals for domestic uses include drinking water, municipal use or supply, and use for public services, commercial establishments, and homes. Data are for the most recent year available for 1987-2002.",
+    "sourceOrganization": "AQUASTAT - FAO's Global Information System on Water and Agriculture, Food and Agriculture Organization of the United Nations (FAO), uri: https://data.apps.fao.org/aquastat/, publisher: Food and Agriculture Organization of the United Nations (FAO), date accessed: 20240529",
+    "topics": [
+      {
+        "id": "19",
+        "value": "Climate Change"
+      },
+      {
+        "id": "9",
+        "value": "Infrastructure "
+      },
+      {
+        "id": "6",
+        "value": "Environment "
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "finding_count": 0,
+  "findings": [],
+  "font_policy": {
+    "checked_text_script_count": 1827,
+    "native_font_rendering_verified": false,
+    "observed_font_families": [
+      "DejaVu Sans",
+      "DejaVu Serif"
+    ],
+    "observed_font_use_counts": {
+      "DejaVu Sans": 1729,
+      "DejaVu Serif": 98
+    },
+    "passed": true,
+    "performed": true
+  },
+  "slide_count": 98,
+  "slide_size_in": [
+    13.3333,
+    7.5
+  ],
+  "warning_count": 0,
+  "warnings": []
+}

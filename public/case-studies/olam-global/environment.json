@@ -4,5 +4,10 @@
   "pandas": "2.2.3",
   "scipy": "1.17.0",
   "seed": 20261008,
-  "version": "1.0.0"
+  "version": "1.1.0",
+  "reportlab": "4.4.9",
+  "pypdf": "6.10.0",
+  "Pillow": "12.3.0",
+  "artifact_tool": "2.8.77",
+  "primary_runtime_bundle": "26.927.11222"
 }

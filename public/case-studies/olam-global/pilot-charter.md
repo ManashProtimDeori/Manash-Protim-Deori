@@ -1,6 +1,6 @@
 # 90-day pilot charter and candidate contribution
 
-Version 1.0.0 | Proposed programme; not an Olam approval
+Version 1.1.0 | Proposed programme; not an Olam approval
 
 Objective: estimate incremental paid contribution and funding for a bounded Nigeria semolina or edible-oils intervention. Keep category cohorts separate; select a transfer market only after feasibility checks. Finance sets the cost cap, cash breach limit and minimum economically material effect before launch.
 

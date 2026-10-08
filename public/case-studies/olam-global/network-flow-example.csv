@@ -1,0 +1,7 @@
+origin,buyer,delivered_t,net_margin_USD_per_t,route_cap_t,eligibility
+A,Buyer1,60.0,30.0,60,Chosen feasible route
+A,Buyer2,30.0,25.0,50,Chosen feasible route
+A,Buyer3,0.0,10.0,0,Blocked
+B,Buyer1,10.0,20.0,40,Chosen feasible route
+B,Buyer2,50.0,35.0,70,Chosen feasible route
+B,Buyer3,30.0,15.0,30,Chosen feasible route

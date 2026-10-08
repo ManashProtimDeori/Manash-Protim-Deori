@@ -1,0 +1,4 @@
+module_removed,baseline_NPV,ablated_NPV,consequence
+Working capital and its closeout,-1.7999419404754313,3.6116686606497206,Omitting cash investment overstates project value
+Physical capacity cap,-1.7999419404754313,-1.7999419404754313,Headroom is immaterial in this managed case; adverse constraints remain relevant
+Learning decision update,0.7000000000000002,-1.5,Paying for a study without changing a decision has only cost

@@ -1,6 +1,6 @@
 # Olam Agri: evidence before irreversible expansion
 
-Manash Protim Deori | 2026–2051 | Version 1.0.0 | Research cutoff: 8 October 2026, 00:04 IST
+Manash Protim Deori | 2026–2051 | Version 1.1.0 | Research cutoff: 8 October 2026, 00:04 IST
 
 ## The decision
 

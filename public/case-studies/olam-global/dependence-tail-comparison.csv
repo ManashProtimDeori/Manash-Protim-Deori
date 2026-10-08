@@ -1,0 +1,4 @@
+generator,draws,seed,p10_NPV,p50_NPV,p90_NPV,loss_CVaR95,status
+dependent_normal,2500,20261008,-18.906832371713023,-1.6547747253083456,21.524399860093865,29.141724356900287,"Chosen dependence/tail sensitivity, no likelihood calibration"
+independent_normal,2500,20261008,-14.962667710787072,-2.422129640925471,12.366839514982134,22.712247350696167,"Chosen dependence/tail sensitivity, no likelihood calibration"
+dependent_student_t5,2500,20261008,-17.503669063144304,-1.4993613578091232,18.286869917364907,29.227633449915963,"Chosen dependence/tail sensitivity, no likelihood calibration"

@@ -1,0 +1,91 @@
+# Answers to every required CEO/CFO question
+
+Version 1.1.0 | Audited 8 October 2026 | Independent public-data research
+
+## 1. Which five to ten country-product-entry-mode opportunities deserve the next serious diligence effort, and why?
+
+Ten diligence markets: Nigeria (semolina/oils), Ghana (flour/pasta), Senegal (flour/feed), Cameroon (flour/rice), Mozambique (rice/oils), South Africa (grains/oils), India/Vietnam (rice origin), Brazil (soybeans/maize/wheat), Saudi Arabia (commercial grain offtake). Eighteen separate product plans, not a profitability ranking. Existing capability and a falsifiable customer/route mechanism explain selection. Ref: priority-commercial-plans; priority-product-plans.csv; slides priorities/corridor/contrast.
+
+## 2. Which current operations should deepen before new-country entry?
+
+Start with the five existing African processing/distribution laboratories and industrial customer service before new assets. Deepen only if paid contribution, capacity and monthly cash improve. No public operation-level ranking is established. Ref: priorities, customer, Nigeria; plans.
+
+## 3. Which countries matter primarily as origins or corridors rather than consumer markets?
+
+India/Vietnam/Brazil are origin and corridor hypotheses, not simply domestic consumer-market plays. Smaller trade hubs can matter via flows; all-country register leaves unverified roles conditional. Ref: corridor, contrast, country atlas.
+
+## 4. Where is market growth unattractive after financing and delivery constraints?
+
+No empirical country return ranking is supportable. The normalized plant loses money under managed and adverse worlds despite growing orders; financing and service can exclude otherwise large markets. Ref: C-DCF, C-SENSITIVITY and capital-metrics.csv.
+
+## 5. Which opportunities remain viable across the plausible scenario set?
+
+None of the three fixed normalized commitments has positive NPV in every tested world. Preserve options, reset/stop rules and actual collateral rather than call a country resilient from these templates. Ref: resilience and six-world table.
+
+## 6. What changes if population grows but real household affordability deteriorates?
+
+Separate population from paid category orders. In the affordability world orders and pass-through weaken while collection/funding costs rise; test cash ticket and cost per meal/use rather than extrapolating people into sales. Ref: demography, affordability world, pack example.
+
+## 7. What changes in aging or declining populations with high purchasing power?
+
+Declining/aging populations may favor smaller packs, convenience and specific B2B/nutrition niches, but willingness to pay is unmeasured. Japan’s projection does not prove a premium opportunity; acquire cohort purchase evidence. Ref: atlas and model-selection demand card.
+
+## 8. Where does climate create a new sourcing option, and where does adaptation fail?
+
+No named new climate origin is approved: geocoded crop/basin/asset hazards and adaptation economics are absent. Candidate alternate origins must have different common exposure; hard water/rights/service limits can make adaptation infeasible. Ref: climate; climate model card.
+
+## 9. Which apparent diversification gains disappear because of common origins, weather, or ports?
+
+Shared origin, basin, port, vessel route, counterparty and currency can cancel country diversification. Chosen dependent shocks raise joint downside; the network example constrains flows without fictitious synergy. Ref: C-DEPENDENCE, C-NETWORK.
+
+## 10. Where does trade fragmentation favour local processing, and where does it destroy the economics?
+
+Local processing may reduce finished-product freight/policy risk but raises raw-input, plant, water, fixed-cost and financing risk. Fragmented-world normalized comparisons are conditional, not evidence that a particular tariff makes a plant viable. Ref: resilience; entry modes; EUDR/USDA source limits.
+
+## 11. Which health or nutrition changes have purchase evidence rather than fashionable narratives?
+
+None of the proposed nutrition premiums has observed purchase proof. Do not attribute WHO/FAO health narratives to willingness to pay. Test formulation, safety, affordable use and sustained paid repeat. Ref: products, customer and demand card.
+
+## 12. Which customer problem can Olam solve profitably with a measurable advantage?
+
+Specific hypotheses include baker saleable loaves per flour bag, cooking yield per rice/oil/semolina cash ticket and feed performance per total farm cost. Profitability requires measured price, losses, service and paid repeat. Ref: 18 product plans and C-E05.
+
+## 13. What price, pack, service, or channel mechanism improves both customer economics and Olam cash?
+
+Pack/price reduces cash ticket only if total cost per use and Olam net contribution survive packaging/distribution/returns. Technical service must improve usable output enough to pay for delivery and credit. Ref: C-E06, C-E19, plans.
+
+## 14. Where is marketing the binding constraint, and where is supply, service, or credit the binding constraint?
+
+Binding constraint is unverified in actual markets. The executed teaching case shows marketing adds orders but loses USD100 at a 100t capacity cap; with capacity120 it adds USD1,100, or USD800 net of repair. Identify service/credit/supply before spend. Ref: C-CAPACITY-MARKETING.
+
+## 15. Which capital commitments should be staged, partnered, deferred, or rejected?
+
+Defer unconditional owned-asset commitment; stage a costed controlled commercial test, compare partner/toll/contract modes and stop unsupported cases. Legacy Nigeria screen stays negative. Real project choices need contracts and cash. Ref: ask, entry modes, C-LEGACY.
+
+## 16. What evidence would overturn each major recommendation?
+
+Reverse priorities if the opportunity is inaccessible, usable-output advantage or paid repeat fails, contribution turns negative, monthly cash is unfunded or common exposure invalidates resilience. Every plan names owner and stop gate. Ref: country/product falsifiers, G0–G7.
+
+## 17. What is the liquidity need in the worst credible combined stress?
+
+A worst credible Olam liquidity need cannot be calculated from public inputs. Publish annual template funding by world, plus a separate monthly seasonal example; Treasury must supply calendar/credit/collateral/hedging and committed headroom. Chosen tail quantiles are not credible calibrated worst-case probabilities. Ref: C-DCF/C-MONTHLY/C-DEPENDENCE.
+
+## 18. What proportion of value depends on long-run, terminal, or uncertain assumptions?
+
+No franchise terminal value. Closeout and post-year10 cash are shown separately for all18 cases, including NPV without closeout and post2036 PV share. A negative net NPV makes a percent-of-net-value metric misleading. Long-run orders/costs are unvalidated. Ref: capital-metrics.csv, C-CAPITAL.
+
+## 19. Which parameters deserve immediate research because they change a decision?
+
+Immediate research: paid eligible orders, contribution per delivered tonne, usable yield, service/cannibalisation, DSO/DIO/DPO/seasonal stock, capex, legal/rights and common asset exposure. Study only if expected decision improvement exceeds quoted research and delay cost. Ref: evidence queue and C-EVSI.
+
+## 20. What measurable work can I perform in the first 90 days?
+
+Own the data dictionary, route/customer measurement, counterfactual/power specification, usable-output trials and proof-to-cash reconciliation with Finance authority. Deliver gate reviews at days15/30/60/75/90; no unapproved actual budget or sample declared. Ref: pilot-charter.
+
+## 21. How will the decision model be maintained and challenged after the deck is delivered?
+
+Named data/model/editorial owners, event and source cadence, economic alerts, model challenger and retirement criteria are specified. No automatic future monitoring job has been scheduled. Ref: monitoring-specification.
+
+## 22. What is actually distinctive about the proposed analytical integration, and what is established prior work?
+
+Established DCF, causal inference, robust regret, CVaR, network optimization and Bayesian information value are integrated around customer/physical/cash gates. Teaching examples change choices; empirical Olam superiority and exclusive novelty are unproved. Ref: prior-art, model cards, benchmarks and ablations.

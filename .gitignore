@@ -39,6 +39,11 @@ tests/.smoke.mjs
 research/olam-global/raw/
 research/olam-global/country-panel.csv
 research/olam-global/analysis.json
+research/olam-global/extended-country-panel.csv
 
 .chart-data-*/
 tests/.olam-*
+
+# Reassembled from checksum-verified Git parts during the build.
+/public/case-studies/olam-global/olam-global-research-v1.zip
+/public/case-studies/olam-global/olam-global-research-v1.zip.tmp
