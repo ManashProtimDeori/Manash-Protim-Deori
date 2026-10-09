@@ -1,0 +1,35 @@
+{
+  "release": "v22-core20",
+  "generated_utc": "2026-10-09T05:30:55.666154+00:00",
+  "main_count": 20,
+  "appendix_count": 49,
+  "total_slides": 69,
+  "candidate_slides": [
+    18,
+    19
+  ],
+  "thank_you_slide": 20,
+  "appendix_start": 21,
+  "blocked_facts_excluded_from_core": [
+    "F08",
+    "F09",
+    "F10",
+    "F11",
+    "F16"
+  ],
+  "fresh_review_iterations_completed": 0,
+  "historical_prior_20_iterations_retained": true,
+  "verification_scope": "Local structural and package verification only. No comprehensive contemporary source re-audit, independent human peer review, or 20 new cumulative editorial iterations.",
+  "files": {
+    "Manash-Protim-Deori-Hyderabad.pptx": "fa812bca3983072a3aa1800e9a0aea10c11d67a9ea6bacdec1e3f88fe48fc1ce",
+    "Manash-Protim-Deori-Hyderabad.pdf": "5d23ae20bc66f46eb183fbad8cbc7db66624046085d8a7026056952547de8ea7",
+    "Inclusive_Minds_Hyderabad_20_Slide_Executive_Deck.pdf": "f2ba721046c6863c1d0e9157db60401c1e7302fa2ce693488099b75a0bd8fbf5",
+    "Inclusive_Minds_Hyderabad_Complete_Evidence_Appendix.pdf": "2b19566f05271206b2a81976f4dee5d49a82699273ae03603e086c19352e38df",
+    "Hyderabad-Evidence-Package.zip": "ec0fe548d4af11733accc62f4b4763d088c85dac44453f5bb4e51b066bb4bec9"
+  },
+  "known_open_checks": [
+    "F08\u2013F11, F16 primary-record checks",
+    "Full 2026-10-09 officeholder/legal/municipal status refresh",
+    "Recent vacancy status and candidate independent credential validation"
+  ]
+}
