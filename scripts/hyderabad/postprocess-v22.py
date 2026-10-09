@@ -34,6 +34,9 @@ for filename, page_range in [
     subset.save(str(O/filename),garbage=4,deflate=True)
     subset.close()
 (O/'slides').mkdir(exist_ok=True)
+# Delete obsolete v21 slide previews (77 originals) before writing the 69-slide v22 set.
+for stale in (O/'slides').glob('slide-*.webp'):
+    stale.unlink()
 for i,page in enumerate(document):
     pix=page.get_pixmap(matrix=fitz.Matrix(4/3,4/3),alpha=False)
     image=Image.open(io.BytesIO(pix.tobytes('png'))).convert('RGB')
