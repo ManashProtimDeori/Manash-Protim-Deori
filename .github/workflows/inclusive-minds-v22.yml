@@ -1,0 +1,68 @@
+name: Inclusive Minds 20-core deck build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - inclusive-minds-20-core-v22
+    paths:
+      - 'research/hyderabad/deck-content.json'
+      - 'scripts/hyderabad/build-v22.mjs'
+      - 'scripts/hyderabad/postprocess-v22.py'
+      - '.github/workflows/inclusive-minds-v22.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out revision branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install PowerPoint generator
+        run: npm install --no-save --package-lock=false pptxgenjs
+      - name: Generate native editable PowerPoint and manifest
+        run: node scripts/hyderabad/build-v22.mjs
+      - name: Install PDF render and validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libreoffice-impress fonts-crosextra-carlito
+          python -m pip install --disable-pip-version-check Pillow PyMuPDF
+      - name: Export full presentation PDF
+        run: |
+          OUT='public/case-studies/hyderabad-political-intelligence'
+          rm -f "$OUT/Manash-Protim-Deori-Hyderabad.pdf"
+          soffice -env:UserInstallation=file:///tmp/lo_hyderabad_v22 --headless --convert-to pdf --outdir "$OUT" "$OUT/Manash-Protim-Deori-Hyderabad.pptx"
+          test -s "$OUT/Manash-Protim-Deori-Hyderabad.pdf"
+      - name: Produce core PDF, appendix PDF, slide previews and verification receipt
+        run: python scripts/hyderabad/postprocess-v22.py
+      - name: Commit generated website assets and audit receipt
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/case-studies/hyderabad-political-intelligence research/hyderabad/v22-release-status.json
+          if git diff --cached --quiet; then
+            echo 'Generated assets already current.'
+          else
+            git commit -m 'build(inclusive-minds): publish 20-core deck and evidence appendix'
+            git push origin HEAD:inclusive-minds-20-core-v22
+          fi
+      - name: Publish build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: inclusive-minds-hyderabad-v22
+          path: |
+            public/case-studies/hyderabad-political-intelligence/Manash-Protim-Deori-Hyderabad.pptx
+            public/case-studies/hyderabad-political-intelligence/Manash-Protim-Deori-Hyderabad.pdf
+            public/case-studies/hyderabad-political-intelligence/Inclusive_Minds_Hyderabad_20_Slide_Executive_Deck.pdf
+            public/case-studies/hyderabad-political-intelligence/Inclusive_Minds_Hyderabad_Complete_Evidence_Appendix.pdf
+            public/case-studies/hyderabad-political-intelligence/Hyderabad-Evidence-Package.zip
+          if-no-files-found: error
