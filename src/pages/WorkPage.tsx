@@ -139,6 +139,7 @@ export const WorkPage: React.FC = () => {
           <Link to="/work/quick-us-growth" className="shrink-0 inline-flex gap-2 items-center rounded border border-amber-400/60 px-4 py-3 text-sm text-amber-400 hover:bg-amber-400/10 transition-colors">Explore and download <ArrowUpRight size={16}/></Link>
         </div>
       </div>
+      <div className="mb-10 border border-amber-300/25 bg-neutral-900/55 rounded-lg px-6 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4"><div><span className="text-[10px] font-mono tracking-widest uppercase text-amber-300">New commercial case assessment</span><h2 className="mt-2 font-semibold text-lg text-neutral-100">Quick · US B2B SaaS Growth Strategy</h2><p className="text-neutral-400 text-xs mt-1">Nine-slide decision case with auditable acquisition economics and downloadable PPT / PDF.</p></div><Link to="/work/quick-us-growth-strategy" className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-amber-300 hover:text-amber-200">Explore case <ArrowUpRight size={16}/></Link></div>
       {/* Projects Grid */}
       {filteredProjects.length === 0 ? (
         <div className="py-20 text-center rounded-xl border border-neutral-800 bg-neutral-950/40">

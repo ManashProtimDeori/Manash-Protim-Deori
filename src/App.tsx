@@ -33,6 +33,7 @@ import { ExperiencePage } from './pages/ExperiencePage';
 import { ResumePage } from './pages/ResumePage';
 import { QuickProfilePage } from './pages/QuickProfilePage';
 import { QuickUSGrowthPage } from './pages/QuickUSGrowthPage';
+import { QuickUSGrowthPage } from './pages/QuickUSGrowthPage';
 import { NowPage } from './pages/NowPage';
 import { UsesPage } from './pages/UsesPage';
 import { ArchivePage } from './pages/ArchivePage';
@@ -92,6 +93,7 @@ export const AppContent: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/work" element={<WorkPage />} />
           <Route path="/work/canonical-competitive-strategy" element={<CanonicalStrategyLabPage />} />
+          <Route path="/work/quick-us-growth-strategy" element={<QuickUSGrowthPage />} />
           <Route path="/work/olam-africa-growth-strategy" element={<OlamAfricaGrowthStrategyPage />} />
           <Route path="/work/india-commercial-ev-growth-advisory" element={<CommercialEVGrowthAdvisoryPage />} />
           <Route path="/work/strategic-communications-meghalaya" element={<MeghalayaStrategicCommunicationsPage />} />
