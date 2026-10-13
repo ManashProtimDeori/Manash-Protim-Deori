@@ -128,6 +128,17 @@ export const WorkPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Featured, reproducible US SaaS acquisition assignment */}
+      <div className="mb-12 border border-amber-400/30 rounded-lg p-6 md:p-8 bg-neutral-900/40">
+        <span className="font-mono text-[11px] tracking-wider uppercase text-amber-400">Featured commercial strategy · October 2026</span>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mt-4">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl font-bold text-neutral-100 mb-3">Quick US Growth Marketing · 9-slide assignment</h2>
+            <p className="text-sm text-neutral-400 leading-7">A source-disciplined US launch strategy for multi-location dry cleaners: account-based ICP selection, controlled channel tests, exact budget reconciliation, funnel arithmetic, contribution payback and 90-day sales handoff. Editable PPT and PDF included.</p>
+          </div>
+          <Link to="/work/quick-us-growth" className="shrink-0 inline-flex gap-2 items-center rounded border border-amber-400/60 px-4 py-3 text-sm text-amber-400 hover:bg-amber-400/10 transition-colors">Explore and download <ArrowUpRight size={16}/></Link>
+        </div>
+      </div>
       {/* Projects Grid */}
       {filteredProjects.length === 0 ? (
         <div className="py-20 text-center rounded-xl border border-neutral-800 bg-neutral-950/40">
