@@ -1,0 +1,54 @@
+name: Build Quick US growth presentation
+
+on:
+  push:
+    branches:
+      - feature/quick-us-growth-case-study
+    paths:
+      - scripts/quick-us-growth/generate.cjs
+      - .github/workflows/build-quick-us-deck.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install PptxGenJS and LibreOffice Impress
+        shell: bash
+        run: |
+          mkdir -p /tmp/quick-deck-modules
+          cd /tmp/quick-deck-modules
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund pptxgenjs
+          if ! command -v libreoffice >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq libreoffice-impress poppler-utils
+          fi
+      - name: Generate nine editable slides plus matching PDF
+        shell: bash
+        env:
+          NODE_PATH: /tmp/quick-deck-modules/node_modules
+        run: |
+          set -euo pipefail
+          node scripts/quick-us-growth/generate.cjs public/case-studies/quick-us
+          libreoffice -env:UserInstallation=file:///tmp/lo_quick_git --headless --convert-to pdf --outdir public/case-studies/quick-us public/case-studies/quick-us/Quick_US_Growth_Strategy.pptx
+          pdfinfo public/case-studies/quick-us/Quick_US_Growth_Strategy.pdf | grep -Eq '^Pages:[[:space:]]+9$'
+          test -s public/case-studies/quick-us/Quick_US_Growth_Strategy.pptx
+          test -s public/case-studies/quick-us/Quick_US_Growth_Strategy.pdf
+      - name: Publish generated presentations back to branch
+        shell: bash
+        run: |
+          git config user.name 'quick-growth-artifacts[bot]'
+          git config user.email 'quick-growth-artifacts[bot]@users.noreply.github.com'
+          git add public/case-studies/quick-us/Quick_US_Growth_Strategy.pptx public/case-studies/quick-us/Quick_US_Growth_Strategy.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "build(portfolio): publish auditable Quick growth PPT and PDF"
+            git push origin HEAD:feature/quick-us-growth-case-study
+          fi
