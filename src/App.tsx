@@ -26,13 +26,13 @@ import { AgriCaseStudyPage } from './pages/AgriCaseStudyPage';
 import { WritingPage } from './pages/WritingPage';
 import { ArticleDetailPage } from './pages/ArticleDetailPage';
 import { ResearchPage } from './pages/ResearchPage';
+const GoaGovernanceResearchPage = lazy(() => import('./pages/GoaGovernanceResearchPage').then(m => ({ default: m.GoaGovernanceResearchPage })));
 import { ResearchDetailPage } from './pages/ResearchDetailPage';
 import { DirectorOSPage } from './pages/DirectorOSPage';
 import { AboutPage } from './pages/AboutPage';
 import { ExperiencePage } from './pages/ExperiencePage';
 import { ResumePage } from './pages/ResumePage';
 import { QuickProfilePage } from './pages/QuickProfilePage';
-import { QuickUSGrowthPage } from './pages/QuickUSGrowthPage';
 import { QuickUSGrowthPage } from './pages/QuickUSGrowthPage';
 import { NowPage } from './pages/NowPage';
 import { UsesPage } from './pages/UsesPage';
@@ -108,6 +108,7 @@ export const AppContent: React.FC = () => {
           <Route path="/writing" element={<WritingPage />} />
           <Route path="/writing/:slug" element={<ArticleDetailPage />} />
           <Route path="/research" element={<ResearchPage />} />
+          <Route path="/research/goa-governance-2019-2026" element={<GoaGovernanceResearchPage />} />
           <Route path="/research/:slug" element={<ResearchDetailPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/experience" element={<ExperiencePage />} />

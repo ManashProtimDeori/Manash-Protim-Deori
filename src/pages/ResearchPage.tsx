@@ -21,7 +21,7 @@ export const ResearchPage: React.FC = () => {
             Research & Methodology
           </h1>
           <p className="text-base text-neutral-400 max-w-2xl leading-relaxed">
-            Quantitative and qualitative market investigations into autonomous signal extraction, semantic clustering fidelity, and incrementality-based multi-touch attribution.
+            Evidence-led investigations into public governance, market intelligence and measurement, with methods and limitations available for review.
           </p>
         </div>
 
@@ -93,7 +93,7 @@ export const ResearchPage: React.FC = () => {
 
             <div className="pt-6 border-t border-neutral-800/40 flex items-center justify-between">
               <span className="text-xs font-mono text-neutral-500">
-                {paper.sources?.length || 0} Verified Literature Sources
+                {paper.id === 'res-goa-governance-2019-2026' ? 'Full source register and evidence status inside' : `${paper.sources?.length || 0} Verified Literature Sources`}
               </span>
 
               <Link

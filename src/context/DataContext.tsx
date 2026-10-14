@@ -220,9 +220,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     getStored(STORAGE_KEYS.EXPERIMENTS, initialExperiments)
   );
 
-  const [research, setResearch] = useState<ResearchPaper[]>(() => 
-    getStored(STORAGE_KEYS.RESEARCH, initialResearch)
-  );
+  const [research, setResearch] = useState<ResearchPaper[]>(() => {
+    const stored = getStored(STORAGE_KEYS.RESEARCH, initialResearch);
+    const required = initialResearch.filter(paper => paper.id === 'res-goa-governance-2019-2026');
+    const missing = required.filter(paper => !stored.some(existing => existing.id === paper.id || existing.slug === paper.slug));
+    return [...missing, ...stored];
+  });
 
   const [experience, setExperience] = useState<ExperienceItem[]>(() => 
     getStored(STORAGE_KEYS.EXPERIENCE, initialExperience)

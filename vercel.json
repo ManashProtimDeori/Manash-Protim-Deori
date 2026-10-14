@@ -25,6 +25,24 @@
           "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
+    },
+    {
+      "source": "/case-studies/goa-governance-2019-2026/Goa_Governance_Evidence_Review.pdf",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"Goa_Governance_Evidence_Review.pdf\""
+        }
+      ]
+    },
+    {
+      "source": "/case-studies/goa-governance-2019-2026/Goa_Governance_Evidence_Review.pptx",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"Goa_Governance_Evidence_Review.pptx\""
+        }
+      ]
     }
   ],
   "git": {

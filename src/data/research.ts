@@ -2,6 +2,27 @@ import { ResearchPaper } from '../types';
 
 export const researchPapers: ResearchPaper[] = [
   {
+    id: 'res-goa-governance-2019-2026',
+    slug: 'goa-governance-2019-2026',
+    title: 'Goa Governance Evidence Review, 2019–2026',
+    summary: '64 dossiers on controversies, mishaps, service gaps and mixed outcomes. Each includes the effect on Goa, the implication for its incumbent government, explicit logic, assumptions, responses and evidence limits.',
+    methodology: 'Primary-record and reporting review, with source access status, shared-origin checks, a discrepancy register and coverage of all 49 master-prompt modules. Four independent origins per atomic fact and an exhaustive census remain incomplete.',
+    findings: [
+      '29 dossiers have four readable supporting publications for the narrow core statement; 35 remain below that threshold. Shared underlying origins are disclosed.',
+      'Government implications are qualitative accountability judgments with visible rationale and assumptions; electoral effects remain unmeasured.',
+      'Adverse health indicators are presented alongside improved child nutrition and vaccination. The detailed PDF and editable PowerPoint include the source trail.'
+    ],
+    publishedAt: '2026-10-14',
+    category: 'Public Governance & Accountability',
+    sources: [
+      { title: 'Public health performance audit, Report 4 of 2024', publication: 'Comptroller and Auditor General of India', year: '2024' },
+      { title: 'State Finances Audit, Report 3 of 2025', publication: 'Comptroller and Auditor General of India', year: '2025' },
+      { title: 'Compliance Audit, Report 4 of 2025', publication: 'Comptroller and Auditor General of India', year: '2026 tabling' },
+      { title: 'NFHS-6 Goa factsheet, fieldwork 2023–24', publication: 'Ministry of Health and Family Welfare', year: '2026 release' }
+    ],
+    downloadName: 'Goa_Governance_Evidence_Review.pdf'
+  },
+  {
     id: 'res-1',
     slug: 'algorithmic-market-intelligence',
     title: 'Autonomous Signal Clustering in Dynamic Competitive Markets',
