@@ -5,6 +5,7 @@ import './index.css';
 import './premium-system.css';
 import './kinetic-editorial.css';
 import './home-dimensional-cards.css';
+import './home-motion-wall.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
