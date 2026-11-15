@@ -4,6 +4,7 @@ import App from './App.tsx';
 import './index.css';
 import './premium-system.css';
 import './kinetic-editorial.css';
+import './home-dimensional-cards.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
