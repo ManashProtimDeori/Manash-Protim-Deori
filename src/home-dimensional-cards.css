@@ -1,0 +1,280 @@
+/* Homepage dimensional cards.
+   Visual layer only: original copy, links, routes, data, editing controls
+   and card sizes are preserved. Works alongside kinetic-editorial.css. */
+
+.home-apple-shell {
+  --dimensional-edge: rgba(255,255,255,.52);
+  --dimensional-bevel: rgba(255,255,255,.67);
+  --dimensional-shadow: rgba(28,36,45,.10);
+  --dimensional-deep-shadow: rgba(28,36,45,.13);
+  --dimensional-ambient: rgba(255,255,255,.47);
+}
+.dark .home-apple-shell {
+  --dimensional-edge: rgba(255,255,255,.16);
+  --dimensional-bevel: rgba(255,255,255,.12);
+  --dimensional-shadow: rgba(0,0,0,.32);
+  --dimensional-deep-shadow: rgba(0,0,0,.41);
+  --dimensional-ambient: rgba(255,255,255,.13);
+}
+
+/* Actual homepage inventory: four capability cards, three Director OS cards,
+   three selected projects, four decision tools, three writing cards, and
+   the final contact panel. No generic global card selector is used. */
+.home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card,
+  .apple-closing-card
+) {
+  --card-rotate-x: 0deg;
+  --card-rotate-y: 0deg;
+  --card-pointer-x: 50%;
+  --card-pointer-y: 20%;
+  --card-lift: 0px;
+  position: relative;
+  z-index: 0;
+  overflow: visible;
+  border: 1px solid var(--apple-border);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform: perspective(1200px)
+             translate3d(0,var(--card-lift),0)
+             rotateX(var(--card-rotate-x))
+             rotateY(var(--card-rotate-y));
+  box-shadow:
+    inset 0 1px 0 var(--dimensional-bevel),
+    0 2px 0 rgba(60,66,70,.075),
+    0 7px 19px var(--dimensional-shadow),
+    0 22px 54px var(--dimensional-deep-shadow);
+  transition:
+    transform 220ms cubic-bezier(.18,.75,.18,1),
+    box-shadow 280ms ease,
+    border-color 280ms ease;
+}
+
+/* Brushed, softly refractive lighting: the light follows the pointer on
+   desktop and breathes gently when the visitor is not interacting. */
+.home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card,
+  .apple-closing-card
+)::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      310px circle at var(--card-pointer-x) var(--card-pointer-y),
+      var(--dimensional-ambient), transparent 72%
+    ),
+    linear-gradient(150deg, rgba(255,255,255,.19), transparent 36%, rgba(29,39,47,.045) 100%);
+  opacity: .48;
+  transform: translateZ(2px);
+  animation: dimensional-light 9s ease-in-out infinite alternate;
+}
+
+/* A separate rim layer gives the panels a machined, physical edge. */
+.home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card,
+  .apple-closing-card
+)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--dimensional-edge);
+  box-shadow: inset 0 2px 0 var(--dimensional-bevel),
+              inset 0 -2px 0 rgba(27,35,42,.065);
+  pointer-events: none;
+  z-index: 0;
+  transform: translateZ(3px);
+}
+
+.dark .home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card,
+  .apple-closing-card
+)::before {
+  background:
+    radial-gradient(310px circle at var(--card-pointer-x) var(--card-pointer-y),
+      rgba(255,255,255,.17), transparent 71%),
+    linear-gradient(140deg, rgba(255,255,255,.065), transparent 62%);
+  opacity: .60;
+}
+.dark .home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card,
+  .apple-closing-card
+) {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.105),
+    0 2px 0 rgba(255,255,255,.035),
+    0 9px 24px var(--dimensional-shadow),
+    0 24px 58px var(--dimensional-deep-shadow);
+}
+
+/* Real Z-axis layering: labels, text and controls sit above the card surface.
+   Existing HTML structure and copy remain untouched. */
+.home-apple-shell .apple-capability-card > :is(span,strong,p,i),
+.home-apple-shell .apple-os-card > :is(div,strong,p),
+.home-apple-shell .apple-project-card > div,
+.home-apple-shell .apple-tool-card > :is(div,strong,p),
+.home-apple-shell .apple-writing-card > :is(div,h3,p,a),
+.home-apple-shell .apple-closing-card > :is(div,span,h2,p) {
+  transform: translateZ(16px);
+  transform-style: preserve-3d;
+}
+.home-apple-shell .apple-capability-card > strong,
+.home-apple-shell .apple-project-body,
+.home-apple-shell .apple-tool-card > strong,
+.home-apple-shell .apple-os-card > strong,
+.home-apple-shell .apple-writing-card > h3,
+.home-apple-shell .apple-closing-card > h2 {
+  transform: translateZ(23px);
+}
+
+/* A little optical variety avoids an overly uniform template appearance.
+   Existing apple-tone colors and all content are left in place. */
+.home-apple-shell .apple-capability-card { border-radius: 20px; }
+.home-apple-shell .apple-os-card { border-radius: 24px; }
+.home-apple-shell .apple-project-card { border-radius: 26px; }
+.home-apple-shell .apple-tool-card { border-radius: 22px; }
+.home-apple-shell .apple-writing-card { border-radius: 18px; }
+.home-apple-shell .apple-closing-card { border-radius: 30px; }
+
+/* Small phase differences make the glints feel like ambient studio light. */
+.home-apple-shell .apple-capability-card:nth-child(2n)::before,
+.home-apple-shell .apple-os-card:nth-child(2n)::before,
+.home-apple-shell .apple-project-card:nth-child(2n)::before,
+.home-apple-shell .apple-tool-card:nth-child(2n)::before,
+.home-apple-shell .apple-writing-card:nth-child(2n)::before { animation-delay:-4s; }
+.home-apple-shell .apple-capability-card:nth-child(3n)::before,
+.home-apple-shell .apple-os-card:nth-child(3n)::before,
+.home-apple-shell .apple-project-card:nth-child(3n)::before,
+.home-apple-shell .apple-tool-card:nth-child(3n)::before,
+.home-apple-shell .apple-writing-card:nth-child(3n)::before { animation-delay:-6s; }
+
+@keyframes dimensional-light {
+  from { opacity:.34; }
+  to { opacity:.68; }
+}
+
+/* Hover follows the pointer, using the CSS variables set by the hook.
+   The uplift also applies to keyboard focus, without changing link behavior. */
+@media (hover:hover) and (pointer:fine) {
+  .home-apple-shell :is(
+    .apple-capability-card,
+    .apple-os-card,
+    .apple-project-card,
+    .apple-tool-card,
+    .apple-writing-card,
+    .apple-closing-card
+  ):is(:hover,:focus-within) {
+    --card-lift: -7px;
+    z-index: 3;
+    border-color: color-mix(in srgb,var(--apple-border) 50%,var(--dimensional-edge));
+    transform: perspective(1200px)
+               translate3d(0,var(--card-lift),0)
+               rotateX(var(--card-rotate-x))
+               rotateY(var(--card-rotate-y));
+    box-shadow:
+      inset 0 1px 0 var(--dimensional-bevel),
+      0 5px 0 rgba(55,61,66,.075),
+      0 17px 30px var(--dimensional-shadow),
+      0 36px 78px var(--dimensional-deep-shadow);
+  }
+  .home-apple-shell :is(
+    .apple-capability-card,
+    .apple-os-card,
+    .apple-project-card,
+    .apple-tool-card,
+    .apple-writing-card,
+    .apple-closing-card
+  ):hover::before { opacity:.83; animation-play-state: paused; }
+}
+
+/* Touch devices get a crisp static depth, no hover jitter or delayed taps. */
+@media (hover:none), (pointer:coarse) {
+  .home-apple-shell :is(
+    .apple-capability-card,
+    .apple-os-card,
+    .apple-project-card,
+    .apple-tool-card,
+    .apple-writing-card,
+    .apple-closing-card
+  ) {
+    transform: none;
+    transition: box-shadow 180ms ease;
+  }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .home-apple-shell :is(
+    .apple-capability-card,
+    .apple-os-card,
+    .apple-project-card,
+    .apple-tool-card,
+    .apple-writing-card,
+    .apple-closing-card
+  ) {
+    transform: none !important;
+    transition: none !important;
+  }
+  .home-apple-shell :is(
+    .apple-capability-card,
+    .apple-os-card,
+    .apple-project-card,
+    .apple-tool-card,
+    .apple-writing-card,
+    .apple-closing-card
+  )::before {
+    animation: none !important;
+    opacity: .43;
+  }
+}
+
+/* High contrast users retain explicit card boundaries. */
+@media (forced-colors:active) {
+  .home-apple-shell :is(
+    .apple-capability-card,
+    .apple-os-card,
+    .apple-project-card,
+    .apple-tool-card,
+    .apple-writing-card,
+    .apple-closing-card
+  ) { border:1px solid CanvasText; box-shadow:none; }
+  .home-apple-shell :is(
+    .apple-capability-card,
+    .apple-os-card,
+    .apple-project-card,
+    .apple-tool-card,
+    .apple-writing-card,
+    .apple-closing-card
+  )::before,
+  .home-apple-shell :is(
+    .apple-capability-card,
+    .apple-os-card,
+    .apple-project-card,
+    .apple-tool-card,
+    .apple-writing-card,
+    .apple-closing-card
+  )::after { display:none; }
+}
