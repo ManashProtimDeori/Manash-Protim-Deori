@@ -619,8 +619,6 @@ function drawScene(
 
 // The scene is one full-screen field; no separate top/bottom or left/right visuals.
 
-}
-
 /**
  * A single, full-viewport decorative marketing intelligence backdrop.
  * Includes charts, brand pulses, audience data, AI nodes and flowing signals.
