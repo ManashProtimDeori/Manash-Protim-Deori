@@ -6,6 +6,7 @@ import './premium-system.css';
 import './kinetic-editorial.css';
 import './home-dimensional-cards.css';
 import './home-motion-wall.css';
+import './home-card-palette.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
