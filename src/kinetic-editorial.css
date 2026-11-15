@@ -22,9 +22,11 @@
   margin-left: 0;
   margin-right: 0;
   text-align: left;
-  white-space: normal !important;
-  font-size: clamp(3.8rem, 6.6vw, 7.1rem) !important;
-  line-height: .96 !important;
+  /* Fit the full name on one line inside the left editorial column. */
+  white-space: nowrap !important;
+  max-width: none;
+  font-size: clamp(1.75rem, 3.8vw, 4.2rem) !important;
+  line-height: 1.06 !important;
   letter-spacing: -.067em !important;
 }
 .home-apple-shell .apple-hero-premise {
@@ -203,7 +205,8 @@
 @media(max-width:767px) {
  .home-apple-shell .apple-hero {display:flex;flex-direction:column;gap:30px;min-height:auto;padding-top:72px;}
  .home-apple-shell .apple-hero-copy {width:100%;align-self:stretch;order:0;}
- .home-apple-shell .apple-hero-copy h1 {font-size:clamp(3rem,12vw,5.4rem)!important;}
+ /* On phones the name remains on one line without horizontal scrolling. */
+ .home-apple-shell .apple-hero-copy h1 {font-size:clamp(1.35rem,7.5vw,3.15rem)!important;white-space:nowrap!important;}
  .home-apple-shell .apple-hero-premise {font-size:clamp(1.35rem,5vw,1.9rem)!important;}
  .kinetic-stage {order:1;width:min(100%,480px);margin-inline:auto;aspect-ratio:1.13;max-height:410px;}
  .home-apple-shell .apple-capability-grid {order:2;width:100%;margin-top:28px;}
