@@ -7,15 +7,15 @@
   grid-template-columns: none;
   grid-template-rows: none;
   background:
-    radial-gradient(ellipse at 15% 19%, #e1eff2 0%, transparent 56%),
-    radial-gradient(ellipse at 82% 67%, #eee7f5 0%, transparent 62%),
-    #f4f6f7;
+    radial-gradient(ellipse at 16% 22%, #cddfea 0%, transparent 60%),
+    radial-gradient(ellipse at 83% 72%, #dfd4f2 0%, transparent 64%),
+    #eef3f7;
 }
 .dark .home-apple-shell .home-motion-wall {
   background:
-    radial-gradient(ellipse at 18% 19%, #19313c 0%, transparent 59%),
-    radial-gradient(ellipse at 83% 74%, #25223a 0%, transparent 60%),
-    #0c151d;
+    radial-gradient(ellipse at 18% 19%, #1b3a49 0%, transparent 59%),
+    radial-gradient(ellipse at 83% 74%, #29283f 0%, transparent 60%),
+    #0c1b28;
 }
 
 .home-apple-shell .home-intelligence-canvas {
@@ -24,12 +24,15 @@
   display: block;
   width: 100%;
   height: 100%;
-  opacity: .94;
+  opacity: 1;
   pointer-events: none;
   user-select: none;
 }
 
-/* Light studio veil protects foreground readability without erasing motion.
+/* Softer studio veil makes the text-free intelligence artwork conspicuous,
+   while the independent frosted hero, colored cards and section reading panels
+   retain high-contrast text and interactive controls. */
+/* Studio veil protects foreground readability without erasing motion.
    The site's existing semi-opaque reading panels and colored 3D cards remain
    above this veil, so labels, links and buttons are always the visual priority. */
 .home-apple-shell .home-motion-wall::after {
@@ -40,30 +43,30 @@
   pointer-events: none;
   background:
     linear-gradient(90deg,
-      rgba(246,248,251,.34),
-      rgba(246,248,251,.47) 43%,
-      rgba(246,248,251,.44) 58%,
-      rgba(246,248,251,.30)),
+      rgba(246,248,251,.13),
+      rgba(246,248,251,.23) 43%,
+      rgba(246,248,251,.22) 58%,
+      rgba(246,248,251,.11)),
     linear-gradient(180deg,
-      rgba(246,248,251,.24), transparent 34%,
-      transparent 67%, rgba(246,248,251,.21));
+      rgba(246,248,251,.13), transparent 34%,
+      transparent 67%, rgba(246,248,251,.11));
 }
 .dark .home-apple-shell .home-motion-wall::after {
   background:
     linear-gradient(90deg,
-      rgba(7,12,20,.31), rgba(7,12,20,.43) 43%,
-      rgba(7,12,20,.42) 58%, rgba(7,12,20,.27)),
+      rgba(7,12,20,.14), rgba(7,12,20,.23) 43%,
+      rgba(7,12,20,.22) 58%, rgba(7,12,20,.12)),
     linear-gradient(180deg,
-      rgba(7,12,20,.23), transparent 36%,
-      transparent 67%, rgba(7,12,20,.19));
+      rgba(7,12,20,.12), transparent 36%,
+      transparent 67%, rgba(7,12,20,.10));
 }
 
 @media (max-width: 767px) {
   .home-apple-shell .home-motion-wall::after {
-    background: rgba(246,248,251,.43);
+    background: rgba(246,248,251,.21);
   }
   .dark .home-apple-shell .home-motion-wall::after {
-    background: rgba(7,12,20,.40);
+    background: rgba(7,12,20,.20);
   }
 }
 
