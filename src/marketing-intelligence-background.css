@@ -1,4 +1,4 @@
-/* One continuous AI, analytics, brand and marketing intelligence background.
+/* One continuous open-air constellation of AI, analytics, audience, and brand signals.
    This stylesheet is loaded after home-card-palette.css, keeping the existing
    colored 3D cards and frosted reading panels intact. */
 
@@ -7,15 +7,19 @@
   grid-template-columns: none;
   grid-template-rows: none;
   background:
-    radial-gradient(ellipse at 16% 22%, #cddfea 0%, transparent 60%),
-    radial-gradient(ellipse at 83% 72%, #dfd4f2 0%, transparent 64%),
-    #eef3f7;
+    radial-gradient(ellipse at 19% 23%, #c9e8e4 0%, transparent 51%),
+    radial-gradient(ellipse at 82% 22%, #e4d9f3 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 81%, #f2dfd6 0%, transparent 54%),
+    radial-gradient(ellipse at 83% 78%, #cbdff3 0%, transparent 55%),
+    #edf3f8;
 }
 .dark .home-apple-shell .home-motion-wall {
   background:
-    radial-gradient(ellipse at 18% 19%, #1b3a49 0%, transparent 59%),
-    radial-gradient(ellipse at 83% 74%, #29283f 0%, transparent 60%),
-    #0c1b28;
+    radial-gradient(ellipse at 18% 22%, #174146 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 23%, #312746 0%, transparent 55%),
+    radial-gradient(ellipse at 19% 79%, #352c31 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 78%, #182e4e 0%, transparent 57%),
+    #0c1927;
 }
 
 .home-apple-shell .home-intelligence-canvas {
