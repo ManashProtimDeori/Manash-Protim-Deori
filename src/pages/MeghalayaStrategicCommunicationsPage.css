@@ -14,7 +14,7 @@
   color:var(--meg-ink);
   min-height:100vh;
   padding:54px max(24px,calc((100vw - 1220px)/2)) 96px;
-  font-family:"Plus Jakarta Sans",Arial,sans-serif;
+  font-family:var(--font-body,"Geist",system-ui,sans-serif);
 }
 .meg-comms *{box-sizing:border-box}
 .meg-comms-hero{
