@@ -15,14 +15,13 @@ type Palette = {
   dark: boolean;
 };
 
-type PanelKind = 'trend' | 'brand' | 'audience' | 'ai';
-type Panel = {
+type MotifKind = 'growth' | 'neural' | 'audience' | 'brand';
+type Motif = {
   x: number;
   y: number;
-  width: number;
-  height: number;
-  kind: PanelKind;
+  kind: MotifKind;
   tint: RGB;
+  phase: number;
 };
 
 const LIGHT: Palette = {
@@ -398,84 +397,174 @@ function drawMiniNetwork(
   ctx.restore();
 }
 
-function drawGlassPanel(
+/**
+ * Visual signals flow along elegant curved routes to a shared intelligence
+ * nucleus. The motion and the translucent wave of light form one ecosystem,
+ * rather than a collage of unrelated widgets.
+ */
+function drawSignalConduits(
   ctx: CanvasRenderingContext2D,
-  panel: Panel,
+  hub: Point,
+  destinations: { point: Point; tint: RGB }[],
   time: number,
   palette: Palette,
-  compact: boolean,
 ) {
-  const { x, y, width, height, kind, tint } = panel;
-  const float = Math.sin(time * 0.39 + x * 0.012) * (compact ? 3 : 5);
-  const top = y + float;
-  const pad = compact ? 11 : 18;
   ctx.save();
-  ctx.shadowBlur = compact ? 15 : 26;
-  ctx.shadowColor = rgba(tint, palette.dark ? 0.22 : 0.18);
-  roundedRect(ctx, x, top, width, height, compact ? 12 : 19);
-  const material = ctx.createLinearGradient(x, top, x + width, top + height);
-  material.addColorStop(0, rgba(palette.glass, palette.dark ? 0.78 : 0.85));
-  material.addColorStop(0.57, rgba(palette.glass, palette.dark ? 0.51 : 0.66));
-  material.addColorStop(1, rgba(palette.glass, palette.dark ? 0.67 : 0.73));
-  ctx.fillStyle = material;
-  ctx.fill();
-  ctx.shadowBlur = 0;
-  ctx.strokeStyle = rgba(tint, palette.dark ? 0.51 : 0.47);
-  ctx.lineWidth = 1.2;
-  ctx.stroke();
+  destinations.forEach(({ point, tint }, index) => {
+    const bend = index % 2 ? -1 : 1;
+    const control: Point = {
+      x: hub.x * 0.52 + point.x * 0.48 +
+        (point.y - hub.y) * 0.28 * bend,
+      y: hub.y * 0.55 + point.y * 0.45 -
+        (point.x - hub.x) * 0.16 * bend,
+    };
+    ctx.beginPath();
+    ctx.moveTo(hub.x, hub.y);
+    ctx.quadraticCurveTo(control.x, control.y, point.x, point.y);
+    ctx.strokeStyle = rgba(tint, palette.dark ? 0.13 : 0.11);
+    ctx.lineWidth = 10;
+    ctx.stroke();
 
-  // Pearl-like reflection across the glass, with no written or numeric UI.
+    const thread = ctx.createLinearGradient(hub.x, hub.y, point.x, point.y);
+    thread.addColorStop(0, rgba(palette.teal, palette.dark ? 0.66 : 0.55));
+    thread.addColorStop(0.53, rgba(palette.blue, palette.dark ? 0.41 : 0.37));
+    thread.addColorStop(1, rgba(tint, palette.dark ? 0.72 : 0.64));
+    ctx.beginPath();
+    ctx.moveTo(hub.x, hub.y);
+    ctx.quadraticCurveTo(control.x, control.y, point.x, point.y);
+    ctx.strokeStyle = thread;
+    ctx.lineWidth = 1.8;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Two independent moving signal pearls travel through each connection.
+    for (let p = 0; p < 2; p++) {
+      const progress = (time * (0.075 + p * 0.018) +
+        index * 0.22 + p * 0.50) % 1;
+      const pointOnCurve = quadraticPoint(hub, control, point, progress);
+      const halo = ctx.createRadialGradient(
+        pointOnCurve.x, pointOnCurve.y, 0,
+        pointOnCurve.x, pointOnCurve.y, 13,
+      );
+      halo.addColorStop(0, rgba(tint, 0.50));
+      halo.addColorStop(1, rgba(tint, 0));
+      ctx.beginPath();
+      ctx.arc(pointOnCurve.x, pointOnCurve.y, 13, 0, Math.PI * 2);
+      ctx.fillStyle = halo;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(pointOnCurve.x, pointOnCurve.y, p === 0 ? 3.2 : 2.4, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(tint, 0.93);
+      ctx.fill();
+    }
+  });
+  ctx.restore();
+}
+
+/**
+ * Four distinct FLOATING visual objects instead of rectangular dashboard
+ * cards. Color and kinetic geometry give each theme its own identity:
+ * teal analytics, violet neural AI, coral audiences, blue brand reach.
+ * All glass lighting is unframed so the background can breathe.
+ */
+function drawOpenMotif(
+  ctx: CanvasRenderingContext2D,
+  position: Point,
+  radius: number,
+  motif: Motif,
+  time: number,
+  palette: Palette,
+) {
   ctx.save();
-  ctx.clip();
-  const reflection = ctx.createLinearGradient(x, top, x + width * 0.64, top + height);
-  reflection.addColorStop(0, rgba(palette.glass, palette.dark ? 0.19 : 0.31));
-  reflection.addColorStop(0.39, rgba(palette.glass, 0));
-  reflection.addColorStop(1, rgba(tint, 0.07));
-  ctx.fillStyle = reflection;
-  ctx.fillRect(x, top, width, height);
+  const floatX = Math.sin(time * 0.27 + motif.phase) * radius * 0.052;
+  const floatY = Math.cos(time * 0.22 + motif.phase) * radius * 0.073;
+  ctx.translate(position.x + floatX, position.y + floatY);
+  const { tint } = motif;
+
+  // An illuminated, transparent sphere: sculptural light, not a boxed panel.
+  const aura = ctx.createRadialGradient(-radius * 0.13, -radius * 0.21, 0,
+    0, 0, radius * 1.52);
+  aura.addColorStop(0, rgba(tint, palette.dark ? 0.28 : 0.23));
+  aura.addColorStop(0.40, rgba(tint, palette.dark ? 0.17 : 0.13));
+  aura.addColorStop(1, rgba(tint, 0));
+  ctx.fillStyle = aura;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius * 1.52, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Nested offset 3D rings subtly tumble around each concept.
+  ctx.save();
+  ctx.rotate(motif.phase * 0.17 + time * 0.055);
+  for (let ring = 0; ring < 3; ring++) {
+    const angle = ring * 0.82 + motif.phase * 0.23;
+    const horizontal = radius * (0.88 + ring * 0.16);
+    const vertical = radius * (0.48 + ring * 0.12);
+    const start = ring * 1.12 + time * (ring % 2 ? -0.11 : 0.095);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, horizontal, vertical, angle, start,
+      start + Math.PI * (1.22 + ring * 0.11));
+    ctx.strokeStyle = rgba(ring === 1 ? palette.blue : tint,
+      (palette.dark ? 0.61 : 0.51) - ring * 0.09);
+    ctx.lineWidth = ring === 0 ? 2.9 : 1.45;
+    ctx.shadowBlur = ring === 0 ? 11 : 0;
+    ctx.shadowColor = rgba(tint, 0.35);
+    ctx.stroke();
+  }
   ctx.restore();
 
-  // Abstract color chip + tiny equalizer strokes instead of dashboard labels.
-  const iconY = top + pad + 3;
+  const lens = ctx.createRadialGradient(
+    -radius * 0.18, -radius * 0.19, radius * 0.02,
+    0, 0, radius * 0.63);
+  lens.addColorStop(0, rgba(palette.glass, palette.dark ? 0.45 : 0.56));
+  lens.addColorStop(0.46, rgba(tint, 0.12));
+  lens.addColorStop(1, rgba(tint, 0));
+  ctx.fillStyle = lens;
   ctx.beginPath();
-  ctx.arc(x + pad + 3.5, iconY, 4.1, 0, Math.PI * 2);
-  ctx.fillStyle = rgba(tint, 0.88);
+  ctx.arc(0, 0, radius * 0.63, 0, Math.PI * 2);
   ctx.fill();
-  for (let i = 0; i < 3; i++) {
-    roundedRect(ctx, x + pad + 17 + i * 11.5, iconY - (3 + i % 2), 6, 6 + (i % 2) * 2, 2);
-    ctx.fillStyle = rgba(tint, 0.46 - i * 0.075);
-    ctx.fill();
-  }
-  // A small circular control and curved highlight on the opposite corner.
-  ctx.beginPath();
-  ctx.arc(x + width - pad - 1, iconY, 4.3, -1.3, 2.0);
-  ctx.strokeStyle = rgba(tint, 0.70);
-  ctx.lineWidth = 1.6;
-  ctx.stroke();
+  ctx.shadowBlur = 0;
 
-  const vizX = x + pad;
-  const vizY = top + height * 0.31;
-  const vizWidth = width - pad * 2;
-  const vizHeight = height * 0.52;
-  if (kind === 'trend') {
-    drawGrowthTrace(ctx, vizX, vizY, vizWidth, vizHeight, time, palette);
-  } else if (kind === 'brand') {
-    const cx = x + width * 0.50;
-    const cy = top + height * 0.58;
-    drawBrandOrbit(ctx, cx, cy, Math.min(vizWidth, vizHeight * 1.9) * 0.58, time, palette);
-  } else if (kind === 'audience') {
-    drawAudienceBars(ctx, vizX, vizY, vizWidth, vizHeight, time, palette);
+  if (motif.kind === 'growth') {
+    drawGrowthTrace(ctx,
+      -radius * 0.84, -radius * 0.36,
+      radius * 1.68, radius * 0.79, time, palette);
+  } else if (motif.kind === 'neural') {
+    drawMiniNetwork(ctx,
+      -radius * 0.70, -radius * 0.51,
+      radius * 1.40, radius * 1.02, time, palette);
+  } else if (motif.kind === 'audience') {
+    drawAudienceBars(ctx,
+      -radius * 0.67, -radius * 0.44,
+      radius * 1.34, radius * 0.90, time, palette);
+    // Audience clusters orbit the bars instead of forming another UI tile.
+    for (let i = 0; i < 5; i++) {
+      const angle = i * Math.PI * 0.4 + time * 0.085;
+      const distance = radius * (0.75 + i % 2 * 0.17);
+      ctx.beginPath();
+      ctx.arc(Math.cos(angle) * distance, Math.sin(angle) * distance,
+        3 + i % 3, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(i % 2 ? tint : palette.violet, 0.75);
+      ctx.fill();
+    }
   } else {
-    drawMiniNetwork(ctx, vizX, vizY, vizWidth, vizHeight, time, palette);
+    drawBrandOrbit(ctx, 0, 0, radius * 0.91, time, palette);
   }
 
-  // A thin refractive footing gives each tile a dimensional edge.
-  ctx.beginPath();
-  ctx.moveTo(x + pad, top + height - 11);
-  ctx.lineTo(x + width - pad, top + height - 11);
-  ctx.strokeStyle = rgba(tint, 0.24);
-  ctx.lineWidth = 0.8;
-  ctx.stroke();
+  // Detached metallic satellites visually tether each object to the network.
+  for (let i = 0; i < 3; i++) {
+    const angle = time * (i % 2 ? -0.18 : 0.13) +
+      motif.phase + i * Math.PI * 2 / 3;
+    const distance = radius * (1.06 + i * 0.12);
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance * 0.69;
+    ctx.beginPath();
+    ctx.arc(x, y, i === 0 ? 4.3 : 2.7, 0, Math.PI * 2);
+    ctx.shadowBlur = 10;
+    ctx.shadowColor = rgba(tint, 0.65);
+    ctx.fillStyle = rgba(i === 1 ? palette.coral : tint, 0.93);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
   ctx.restore();
 }
 
@@ -494,28 +583,37 @@ function drawScene(
   drawIntelligenceNetwork(ctx, width, height, time, palette);
 
   const compact = width < 720;
-  // One coordinated composition across the ENTIRE viewport. No split regions.
-  const layout = compact
+  // A single open constellation fills the viewport: NO cards or boxes.
+  // Geometric positions stay anchored as the individual objects breathe.
+  const motifs: Motif[] = compact
     ? [
-      [0.04, 0.10, 0.43, 0.19], [0.53, 0.12, 0.43, 0.19],
-      [0.04, 0.69, 0.43, 0.18], [0.53, 0.67, 0.43, 0.18],
+      { x: 0.20, y: 0.22, kind: 'growth', tint: palette.teal, phase: 0.2 },
+      { x: 0.80, y: 0.22, kind: 'neural', tint: palette.violet, phase: 1.7 },
+      { x: 0.20, y: 0.78, kind: 'audience', tint: palette.coral, phase: 3.0 },
+      { x: 0.80, y: 0.78, kind: 'brand', tint: palette.blue, phase: 4.6 },
     ]
     : [
-      [0.055, 0.095, 0.235, 0.19], [0.712, 0.12, 0.225, 0.19],
-      [0.075, 0.685, 0.225, 0.20], [0.710, 0.695, 0.225, 0.19],
+      { x: 0.19, y: 0.24, kind: 'growth', tint: palette.teal, phase: 0.2 },
+      { x: 0.81, y: 0.24, kind: 'neural', tint: palette.violet, phase: 1.7 },
+      { x: 0.19, y: 0.77, kind: 'audience', tint: palette.coral, phase: 3.0 },
+      { x: 0.81, y: 0.77, kind: 'brand', tint: palette.blue, phase: 4.6 },
     ];
-  const kinds: PanelKind[] = ['trend', 'brand', 'audience', 'ai'];
-  const tints = [palette.teal, palette.violet, palette.blue, palette.coral];
-  layout.forEach(([x, y, w, h], index) => {
-    drawGlassPanel(ctx, {
-      x: x * width,
-      y: y * height,
-      width: w * width,
-      height: h * height,
-      kind: kinds[index],
-      tint: tints[index],
-    }, time, palette, compact);
+  const hub: Point = { x: width * 0.52, y: height * 0.50 };
+  const objects = motifs.map(motif => ({
+    point: { x: width * motif.x, y: height * motif.y },
+    tint: motif.tint,
+  }));
+  drawSignalConduits(ctx, hub, objects, time, palette);
+
+  const motifRadius = Math.min(width, height) * (compact ? 0.17 : 0.155);
+  motifs.forEach(motif => {
+    drawOpenMotif(ctx, {
+      x: motif.x * width,
+      y: motif.y * height,
+    }, motifRadius, motif, time, palette);
   });
+
+
 
   // A symbolic neural nucleus connects all analytics and marketing signals.
   // Moving orbits, neurons and light pulses evoke inference, without a single word.
