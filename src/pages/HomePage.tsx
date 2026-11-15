@@ -1,5 +1,6 @@
 import React from 'react';
 import { Hero } from '../components/home/Hero';
+import { HomeMotionWall } from '../components/home/HomeMotionWall';
 import { useHomeCardTilt } from '../hooks/useHomeCardTilt';
 import { MarketingDirectorOS } from '../components/home/MarketingDirectorOS';
 import { FeaturedWork } from '../components/home/FeaturedWork';
@@ -12,6 +13,7 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="home-apple-shell">
+      <HomeMotionWall />
       <Hero />
       <MarketingDirectorOS />
       <FeaturedWork />
