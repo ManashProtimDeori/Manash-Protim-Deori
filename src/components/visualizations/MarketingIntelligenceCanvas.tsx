@@ -21,7 +21,6 @@ type Panel = {
   y: number;
   width: number;
   height: number;
-  label: string;
   kind: PanelKind;
   tint: RGB;
 };
@@ -80,9 +79,9 @@ function drawAtmosphere(
   palette: Palette,
 ) {
   const regions: { x: number; y: number; radius: number; color: RGB; alpha: number }[] = [
-    { x: 0.18, y: 0.22, radius: 0.55, color: palette.blue, alpha: 0.17 },
-    { x: 0.79, y: 0.29, radius: 0.54, color: palette.violet, alpha: 0.12 },
-    { x: 0.49, y: 0.81, radius: 0.48, color: palette.teal, alpha: 0.11 },
+    { x: 0.18, y: 0.22, radius: 0.55, color: palette.blue, alpha: 0.23 },
+    { x: 0.79, y: 0.29, radius: 0.54, color: palette.violet, alpha: 0.19 },
+    { x: 0.49, y: 0.81, radius: 0.48, color: palette.teal, alpha: 0.18 },
   ];
   regions.forEach((region, index) => {
     const x = width * region.x + Math.sin(time * 0.17 + index) * width * 0.025;
@@ -164,7 +163,7 @@ function drawIntelligenceNetwork(
     ctx.beginPath();
     ctx.moveTo(a.x, a.y);
     ctx.quadraticCurveTo(control.x, control.y, b.x, b.y);
-    ctx.strokeStyle = rgba(palette.line, palette.dark ? 0.24 : 0.19);
+    ctx.strokeStyle = rgba(palette.line, palette.dark ? 0.36 : 0.29);
     ctx.lineWidth = index % 3 === 0 ? 1.4 : 0.95;
     ctx.stroke();
 
@@ -175,7 +174,7 @@ function drawIntelligenceNetwork(
       const tint = index % 4 === 0 ? palette.coral : palette.teal;
       ctx.beginPath();
       ctx.arc(dot.x, dot.y, 2.7, 0, Math.PI * 2);
-      ctx.fillStyle = rgba(tint, palette.dark ? 0.73 : 0.55);
+      ctx.fillStyle = rgba(tint, palette.dark ? 0.89 : 0.78);
       ctx.fill();
     }
   });
@@ -202,25 +201,68 @@ function drawGrowthTrace(
   palette: Palette,
 ) {
   ctx.save();
-  const data = [0.27, 0.37, 0.33, 0.46, 0.41, 0.64, 0.59, 0.72, 0.69, 0.86];
+  // A confident upward trajectory, a faint secondary forecast, and a
+  // translucent underfill convey growth without any numerals or labels.
+  const data = [0.19, 0.32, 0.28, 0.45, 0.40, 0.58, 0.53, 0.77, 0.70, 0.90];
+  const points = data.map((level, index) => ({
+    x: x + width * index / (data.length - 1),
+    y: y + height * (1 - level) + Math.sin(time * 0.60 + index * 0.88) * height * 0.027,
+  }));
+
+  ctx.strokeStyle = rgba(palette.line, palette.dark ? 0.19 : 0.14);
+  ctx.lineWidth = 0.8;
+  for (let row = 1; row <= 3; row++) {
+    const lineY = y + height * row / 4;
+    ctx.beginPath();
+    ctx.moveTo(x, lineY);
+    ctx.lineTo(x + width, lineY);
+    ctx.stroke();
+  }
+
   ctx.beginPath();
-  data.forEach((level, index) => {
-    const px = x + width * index / (data.length - 1);
-    const py = y + height * (1 - level) + Math.sin(time * 0.7 + index * 0.9) * height * 0.045;
-    if (!index) ctx.moveTo(px, py);
-    else ctx.lineTo(px, py);
+  points.forEach((p, index) => {
+    if (index === 0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
   });
-  ctx.strokeStyle = rgba(palette.teal, palette.dark ? 0.82 : 0.72);
-  ctx.lineWidth = 2.05;
+  ctx.lineTo(x + width, y + height);
+  ctx.lineTo(x, y + height);
+  ctx.closePath();
+  const fill = ctx.createLinearGradient(0, y, 0, y + height);
+  fill.addColorStop(0, rgba(palette.teal, palette.dark ? 0.32 : 0.25));
+  fill.addColorStop(1, rgba(palette.teal, 0.013));
+  ctx.fillStyle = fill;
+  ctx.fill();
+
+  ctx.beginPath();
+  points.forEach((p, index) => {
+    if (index === 0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
+  });
+  ctx.strokeStyle = rgba(palette.teal, 0.92);
+  ctx.lineWidth = 2.8;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
+  ctx.shadowBlur = 8;
+  ctx.shadowColor = rgba(palette.teal, 0.48);
   ctx.stroke();
-  const lastY = y + height * (1 - data[data.length - 1]) +
-    Math.sin(time * 0.7 + 9 * 0.9) * height * 0.045;
+  ctx.shadowBlur = 0;
+
+  const progress = (time * 0.075) % 1;
+  const step = progress * (points.length - 1);
+  const index = Math.min(points.length - 2, Math.floor(step));
+  const fraction = step - index;
+  const marker = {
+    x: points[index].x * (1 - fraction) + points[index + 1].x * fraction,
+    y: points[index].y * (1 - fraction) + points[index + 1].y * fraction,
+  };
   ctx.beginPath();
-  ctx.arc(x + width, lastY, 3.5, 0, Math.PI * 2);
-  ctx.fillStyle = rgba(palette.teal, 0.85);
+  ctx.arc(marker.x, marker.y, 3.8, 0, Math.PI * 2);
+  ctx.fillStyle = rgba(palette.blue, 0.94);
   ctx.fill();
+  ctx.beginPath();
+  ctx.arc(marker.x, marker.y, 8, 0, Math.PI * 2);
+  ctx.strokeStyle = rgba(palette.blue, 0.25);
+  ctx.stroke();
   ctx.restore();
 }
 
@@ -232,26 +274,41 @@ function drawBrandOrbit(
   time: number,
   palette: Palette,
 ) {
-  for (let i = 0; i < 3; i++) {
-    const progress = (time * 0.065 + i / 3) % 1;
+  ctx.save();
+  // Concentric reach waves imply growing recognition; rotating signal
+  // satellites make the visual language more organic than a gauge icon.
+  for (let i = 0; i < 4; i++) {
+    const progress = (time * 0.055 + i / 4) % 1;
+    const r = radius * (0.26 + progress * 1.05);
     ctx.beginPath();
-    ctx.arc(cx, cy, radius * (0.35 + progress * 0.94), 0, Math.PI * 2);
-    ctx.strokeStyle = rgba(palette.violet, (1 - progress) * (palette.dark ? 0.23 : 0.18));
-    ctx.lineWidth = 1.5;
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = rgba(palette.violet, (1 - progress) * (palette.dark ? 0.47 : 0.41));
+    ctx.lineWidth = 1.65;
     ctx.stroke();
   }
+  for (let i = 0; i < 3; i++) {
+    const start = time * (i % 2 ? -0.19 : 0.16) + i * 2.09;
+    const r = radius * (0.48 + i * 0.19);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, start, start + Math.PI * (0.65 + i * 0.18));
+    ctx.strokeStyle = rgba(i === 1 ? palette.coral : palette.violet, 0.77 - i * 0.10);
+    ctx.lineWidth = i === 0 ? 5 : 2.7;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    const angle = start + Math.PI * (0.65 + i * 0.18);
+    ctx.beginPath();
+    ctx.arc(cx + Math.cos(angle) * r, cy + Math.sin(angle) * r, i === 0 ? 3.2 : 2.2, 0, Math.PI * 2);
+    ctx.fillStyle = rgba(i === 1 ? palette.coral : palette.blue, 0.90);
+    ctx.fill();
+  }
+  const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.32);
+  core.addColorStop(0, rgba(palette.violet, 0.45));
+  core.addColorStop(1, rgba(palette.violet, 0));
+  ctx.fillStyle = core;
   ctx.beginPath();
-  ctx.arc(cx, cy, radius * 0.64, -Math.PI * 0.5,
-    -Math.PI * 0.5 + Math.PI * 1.35 + Math.sin(time * 0.4) * 0.11);
-  ctx.strokeStyle = rgba(palette.violet, 0.70);
-  ctx.lineWidth = 5;
-  ctx.lineCap = 'round';
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius * 0.64, 0, Math.PI * 2);
-  ctx.strokeStyle = rgba(palette.line, 0.21);
-  ctx.lineWidth = 5;
-  ctx.stroke();
+  ctx.arc(cx, cy, radius * 0.32, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
 }
 
 function drawAudienceBars(
@@ -263,17 +320,29 @@ function drawAudienceBars(
   time: number,
   palette: Palette,
 ) {
-  const levels = [0.42, 0.68, 0.53, 0.82, 0.71, 0.92, 0.65];
+  const levels = [0.42, 0.68, 0.53, 0.82, 0.71, 0.94, 0.65];
   const step = width / levels.length;
-  levels.forEach((level, index) => {
-    const size = Math.min(1, Math.max(0.1,
-      level + Math.sin(time * 0.8 + index * 0.83) * 0.085));
+  ctx.save();
+  for (let index = 0; index < levels.length; index++) {
+    const level = levels[index];
+    const size = Math.min(1, Math.max(0.08,
+      level + Math.sin(time * 0.65 + index * 0.79) * 0.071));
     const barHeight = height * size;
-    roundedRect(ctx, x + index * step + step * 0.20,
-      y + height - barHeight, step * 0.60, barHeight, 3);
-    ctx.fillStyle = rgba(index % 3 === 0 ? palette.coral : palette.blue, 0.33 + index * 0.048);
+    const xBar = x + index * step + step * 0.18;
+    const barWidth = step * 0.62;
+    roundedRect(ctx, xBar, y, barWidth, height, 3);
+    ctx.fillStyle = rgba(palette.line, palette.dark ? 0.12 : 0.11);
     ctx.fill();
-  });
+
+    roundedRect(ctx, xBar, y + height - barHeight, barWidth, barHeight, 3);
+    const barColor = index % 3 === 0 ? palette.coral : index % 2 ? palette.blue : palette.teal;
+    const fill = ctx.createLinearGradient(xBar, y + height - barHeight, xBar, y + height);
+    fill.addColorStop(0, rgba(barColor, 0.88));
+    fill.addColorStop(1, rgba(barColor, 0.30));
+    ctx.fillStyle = fill;
+    ctx.fill();
+  }
+  ctx.restore();
 }
 
 function drawMiniNetwork(
@@ -285,27 +354,48 @@ function drawMiniNetwork(
   time: number,
   palette: Palette,
 ) {
-  const nodes = [
-    [0.08, 0.62], [0.29, 0.18], [0.48, 0.72], [0.68, 0.24], [0.91, 0.59],
+  const nodes: [number, number][] = [
+    [0.10, 0.70], [0.27, 0.25], [0.46, 0.68], [0.51, 0.21],
+    [0.73, 0.39], [0.88, 0.74], [0.78, 0.12],
   ];
   const points = nodes.map(([nx, ny], index) => ({
     x: x + nx * width,
-    y: y + ny * height + Math.sin(time * 0.55 + index) * 3,
+    y: y + ny * height + Math.sin(time * 0.54 + index * 1.05) * 3.5,
   }));
-  for (let i = 0; i < points.length - 1; i++) {
+  const connections: [number, number][] = [
+    [0, 1], [1, 2], [1, 3], [2, 3], [2, 4], [3, 4], [4, 5], [4, 6],
+  ];
+  ctx.save();
+  connections.forEach(([a, b], index) => {
+    const first = points[a], second = points[b];
     ctx.beginPath();
-    ctx.moveTo(points[i].x, points[i].y);
-    ctx.lineTo(points[i + 1].x, points[i + 1].y);
-    ctx.strokeStyle = rgba(palette.violet, 0.48);
-    ctx.lineWidth = 1.5;
+    ctx.moveTo(first.x, first.y);
+    ctx.lineTo(second.x, second.y);
+    ctx.strokeStyle = rgba(index % 3 === 0 ? palette.teal : palette.violet, 0.48);
+    ctx.lineWidth = 1.3;
     ctx.stroke();
-  }
-  points.forEach((p, i) => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, i === 2 ? 5 : 3.2, 0, Math.PI * 2);
-    ctx.fillStyle = rgba(i === 2 ? palette.teal : palette.violet, 0.76);
-    ctx.fill();
+    if (index % 2 === 0) {
+      const fraction = (time * 0.14 + index * 0.18) % 1;
+      const px = first.x * (1 - fraction) + second.x * fraction;
+      const py = first.y * (1 - fraction) + second.y * fraction;
+      ctx.beginPath();
+      ctx.arc(px, py, 2.3, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(palette.coral, 0.91);
+      ctx.fill();
+    }
   });
+  points.forEach((point, index) => {
+    const core = index === 4 ? 5.2 : 3.4;
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, core + Math.sin(time * 0.7 + index) * 0.55, 0, Math.PI * 2);
+    ctx.fillStyle = rgba(index === 4 ? palette.teal : palette.violet, 0.88);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, core + 4.5, 0, Math.PI * 2);
+    ctx.strokeStyle = rgba(palette.blue, 0.21);
+    ctx.stroke();
+  });
+  ctx.restore();
 }
 
 function drawGlassPanel(
@@ -315,47 +405,77 @@ function drawGlassPanel(
   palette: Palette,
   compact: boolean,
 ) {
-  const { x, y, width, height, kind, tint, label } = panel;
-  const float = Math.sin(time * 0.42 + x * 0.012) * (compact ? 2 : 4);
+  const { x, y, width, height, kind, tint } = panel;
+  const float = Math.sin(time * 0.39 + x * 0.012) * (compact ? 3 : 5);
   const top = y + float;
+  const pad = compact ? 11 : 18;
   ctx.save();
-  ctx.shadowBlur = compact ? 9 : 18;
-  ctx.shadowColor = rgba(palette.ink, palette.dark ? 0.16 : 0.09);
-  roundedRect(ctx, x, top, width, height, compact ? 12 : 17);
-  ctx.fillStyle = rgba(palette.glass, palette.dark ? 0.41 : 0.53);
+  ctx.shadowBlur = compact ? 15 : 26;
+  ctx.shadowColor = rgba(tint, palette.dark ? 0.22 : 0.18);
+  roundedRect(ctx, x, top, width, height, compact ? 12 : 19);
+  const material = ctx.createLinearGradient(x, top, x + width, top + height);
+  material.addColorStop(0, rgba(palette.glass, palette.dark ? 0.78 : 0.85));
+  material.addColorStop(0.57, rgba(palette.glass, palette.dark ? 0.51 : 0.66));
+  material.addColorStop(1, rgba(palette.glass, palette.dark ? 0.67 : 0.73));
+  ctx.fillStyle = material;
   ctx.fill();
   ctx.shadowBlur = 0;
-  ctx.strokeStyle = rgba(tint, palette.dark ? 0.31 : 0.25);
-  ctx.lineWidth = 1.15;
+  ctx.strokeStyle = rgba(tint, palette.dark ? 0.51 : 0.47);
+  ctx.lineWidth = 1.2;
   ctx.stroke();
 
-  const pad = compact ? 12 : 19;
-  ctx.font = `600 ${compact ? 8 : 10}px Geist, system-ui, sans-serif`;
-  ctx.textBaseline = 'middle';
-  ctx.fillStyle = rgba(palette.muted, palette.dark ? 0.77 : 0.75);
-  ctx.fillText(label, x + pad, top + pad + 4);
+  // Pearl-like reflection across the glass, with no written or numeric UI.
+  ctx.save();
+  ctx.clip();
+  const reflection = ctx.createLinearGradient(x, top, x + width * 0.64, top + height);
+  reflection.addColorStop(0, rgba(palette.glass, palette.dark ? 0.19 : 0.31));
+  reflection.addColorStop(0.39, rgba(palette.glass, 0));
+  reflection.addColorStop(1, rgba(tint, 0.07));
+  ctx.fillStyle = reflection;
+  ctx.fillRect(x, top, width, height);
+  ctx.restore();
+
+  // Abstract color chip + tiny equalizer strokes instead of dashboard labels.
+  const iconY = top + pad + 3;
+  ctx.beginPath();
+  ctx.arc(x + pad + 3.5, iconY, 4.1, 0, Math.PI * 2);
+  ctx.fillStyle = rgba(tint, 0.88);
+  ctx.fill();
+  for (let i = 0; i < 3; i++) {
+    roundedRect(ctx, x + pad + 17 + i * 11.5, iconY - (3 + i % 2), 6, 6 + (i % 2) * 2, 2);
+    ctx.fillStyle = rgba(tint, 0.46 - i * 0.075);
+    ctx.fill();
+  }
+  // A small circular control and curved highlight on the opposite corner.
+  ctx.beginPath();
+  ctx.arc(x + width - pad - 1, iconY, 4.3, -1.3, 2.0);
+  ctx.strokeStyle = rgba(tint, 0.70);
+  ctx.lineWidth = 1.6;
+  ctx.stroke();
 
   const vizX = x + pad;
-  const vizY = top + height * 0.37;
+  const vizY = top + height * 0.31;
   const vizWidth = width - pad * 2;
-  const vizHeight = height * 0.43;
-
+  const vizHeight = height * 0.52;
   if (kind === 'trend') {
     drawGrowthTrace(ctx, vizX, vizY, vizWidth, vizHeight, time, palette);
   } else if (kind === 'brand') {
-    const cx = x + width * 0.5;
-    const cy = top + height * 0.62;
-    drawBrandOrbit(ctx, cx, cy, Math.min(vizWidth, vizHeight * 1.45) * 0.62, time, palette);
+    const cx = x + width * 0.50;
+    const cy = top + height * 0.58;
+    drawBrandOrbit(ctx, cx, cy, Math.min(vizWidth, vizHeight * 1.9) * 0.58, time, palette);
   } else if (kind === 'audience') {
     drawAudienceBars(ctx, vizX, vizY, vizWidth, vizHeight, time, palette);
   } else {
     drawMiniNetwork(ctx, vizX, vizY, vizWidth, vizHeight, time, palette);
   }
 
-  ctx.fillStyle = rgba(tint, palette.dark ? 0.67 : 0.53);
+  // A thin refractive footing gives each tile a dimensional edge.
   ctx.beginPath();
-  ctx.arc(x + width - pad, top + pad + 4, 3.2, 0, Math.PI * 2);
-  ctx.fill();
+  ctx.moveTo(x + pad, top + height - 11);
+  ctx.lineTo(x + width - pad, top + height - 11);
+  ctx.strokeStyle = rgba(tint, 0.24);
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
   ctx.restore();
 }
 
@@ -385,7 +505,6 @@ function drawScene(
       [0.075, 0.685, 0.225, 0.20], [0.710, 0.695, 0.225, 0.19],
     ];
   const kinds: PanelKind[] = ['trend', 'brand', 'audience', 'ai'];
-  const labels = ['CAMPAIGN GROWTH', 'BRAND AWARENESS', 'AUDIENCE SIGNALS', 'AI INTELLIGENCE'];
   const tints = [palette.teal, palette.violet, palette.blue, palette.coral];
   layout.forEach(([x, y, w, h], index) => {
     drawGlassPanel(ctx, {
@@ -394,36 +513,112 @@ function drawScene(
       width: w * width,
       height: h * height,
       kind: kinds[index],
-      label: labels[index],
       tint: tints[index],
     }, time, palette, compact);
   });
 
-  // Central AI/marketing flow nucleus links all floating dashboard elements.
+  // A symbolic neural nucleus connects all analytics and marketing signals.
+  // Moving orbits, neurons and light pulses evoke inference, without a single word.
   const cx = width * 0.52;
   const cy = height * 0.50;
-  const radius = Math.min(width, height) * (compact ? 0.095 : 0.11);
-  for (let ring = 0; ring < 3; ring++) {
+  const radius = Math.min(width, height) * (compact ? 0.12 : 0.135);
+  ctx.save();
+  const aura = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 2.1);
+  aura.addColorStop(0, rgba(palette.teal, palette.dark ? 0.28 : 0.22));
+  aura.addColorStop(0.42, rgba(palette.blue, 0.13));
+  aura.addColorStop(1, rgba(palette.blue, 0));
+  ctx.fillStyle = aura;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius * 2.1, 0, Math.PI * 2);
+  ctx.fill();
+
+  for (let ring = 0; ring < 4; ring++) {
+    const progress = (time * 0.05 + ring / 4) % 1;
     ctx.beginPath();
-    const pulse = (time * 0.055 + ring / 3) % 1;
-    ctx.arc(cx, cy, radius * (0.65 + pulse * 1.15), 0, Math.PI * 2);
-    ctx.strokeStyle = rgba(palette.teal, (1 - pulse) * (palette.dark ? 0.26 : 0.19));
+    ctx.arc(cx, cy, radius * (0.53 + progress * 1.19), 0, Math.PI * 2);
+    ctx.strokeStyle = rgba(ring % 2 ? palette.violet : palette.teal,
+      (1 - progress) * (palette.dark ? 0.42 : 0.30));
     ctx.lineWidth = 1.5;
     ctx.stroke();
   }
+
   ctx.beginPath();
-  ctx.arc(cx, cy, radius * 0.61, 0, Math.PI * 2);
-  ctx.fillStyle = rgba(palette.glass, palette.dark ? 0.38 : 0.57);
+  ctx.arc(cx, cy, radius * 0.72, 0, Math.PI * 2);
+  const lens = ctx.createRadialGradient(cx - radius * 0.21, cy - radius * 0.2,
+    0, cx, cy, radius * 0.78);
+  lens.addColorStop(0, rgba(palette.glass, palette.dark ? 0.94 : 0.98));
+  lens.addColorStop(0.68, rgba(palette.glass, palette.dark ? 0.58 : 0.72));
+  lens.addColorStop(1, rgba(palette.blue, 0.13));
+  ctx.fillStyle = lens;
   ctx.fill();
-  ctx.strokeStyle = rgba(palette.teal, 0.53);
-  ctx.lineWidth = 1.7;
+  ctx.strokeStyle = rgba(palette.teal, 0.62);
+  ctx.lineWidth = 1.6;
   ctx.stroke();
-  ctx.fillStyle = rgba(palette.ink, palette.dark ? 0.67 : 0.57);
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.font = `600 ${compact ? 11 : 15}px Geist, system-ui, sans-serif`;
-  ctx.fillText('AI', cx, cy);
-  ctx.textAlign = 'start';
+
+  // Eight peripheral neurons and an offset inner ring form a miniature neural graph.
+  const neurons: Point[] = Array.from({ length: 8 }, (_, index) => {
+    const angle = index * Math.PI / 4 + time * 0.12 - Math.PI * 0.5;
+    return {
+      x: cx + Math.cos(angle) * radius * 0.47,
+      y: cy + Math.sin(angle) * radius * 0.47,
+    };
+  });
+  neurons.forEach((point, index) => {
+    const next = neurons[(index + 3) % neurons.length];
+    ctx.beginPath();
+    ctx.moveTo(point.x, point.y);
+    ctx.quadraticCurveTo(cx, cy, next.x, next.y);
+    ctx.strokeStyle = rgba(index % 2 ? palette.blue : palette.violet, 0.38);
+    ctx.lineWidth = 1.1;
+    ctx.stroke();
+  });
+  const inner = [
+    { x: cx - radius * 0.16, y: cy + radius * 0.08 },
+    { x: cx + radius * 0.19, y: cy - radius * 0.10 },
+    { x: cx + Math.sin(time * 0.44) * radius * 0.05,
+      y: cy + Math.cos(time * 0.42) * radius * 0.03 },
+  ];
+  inner.forEach((point, i) => {
+    neurons.forEach((neuron, j) => {
+      if ((i + j) % 3 !== 0) return;
+      ctx.beginPath();
+      ctx.moveTo(point.x, point.y);
+      ctx.lineTo(neuron.x, neuron.y);
+      ctx.strokeStyle = rgba(palette.teal, 0.29);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+  });
+  [...neurons, ...inner].forEach((point, index) => {
+    const size = index >= neurons.length ? 4.8 : 2.9;
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
+    ctx.fillStyle = rgba(index % 3 === 0 ? palette.coral : palette.teal, 0.95);
+    ctx.fill();
+    if (index >= neurons.length) {
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, size + 4, 0, Math.PI * 2);
+      ctx.strokeStyle = rgba(palette.violet, 0.32);
+      ctx.stroke();
+    }
+  });
+
+  // Staggered luminous arcs make the center feel alive and sculptural.
+  for (let orbit = 0; orbit < 3; orbit++) {
+    const angle = time * (orbit % 2 ? -0.16 : 0.22) + orbit * 2.1;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius * (0.79 + orbit * 0.19),
+      angle, angle + Math.PI * 0.85);
+    ctx.strokeStyle = rgba(orbit === 1 ? palette.coral : palette.blue, 0.56);
+    ctx.lineWidth = orbit === 0 ? 2.4 : 1.45;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// The scene is one full-screen field; no separate top/bottom or left/right visuals.
+
 }
 
 /**
