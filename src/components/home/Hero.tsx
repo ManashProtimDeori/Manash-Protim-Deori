@@ -1,5 +1,4 @@
 import React from 'react';
-import { KineticSculpture } from '../visualizations/KineticSculpture';
 import { Link } from 'react-router-dom';
 import { useData } from '../../context/DataContext';
 import { EditButton } from '../editor/EditButton';
@@ -50,8 +49,6 @@ export const Hero: React.FC = () => {
 
         <p className="apple-hero-location">{siteConfig.location} · {siteConfig.openStatus}</p>
       </div>
-
-      <KineticSculpture />
 
       <div className="apple-capability-grid">
         {pillars.map((pillar, index) => (
