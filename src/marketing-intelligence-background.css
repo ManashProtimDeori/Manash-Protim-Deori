@@ -1,0 +1,74 @@
+/* One continuous AI, analytics, brand and marketing intelligence background.
+   This stylesheet is loaded after home-card-palette.css, keeping the existing
+   colored 3D cards and frosted reading panels intact. */
+
+.home-apple-shell .home-motion-wall {
+  display: block;
+  grid-template-columns: none;
+  grid-template-rows: none;
+  background:
+    radial-gradient(ellipse at 15% 19%, #e1eff2 0%, transparent 56%),
+    radial-gradient(ellipse at 82% 67%, #eee7f5 0%, transparent 62%),
+    #f4f6f7;
+}
+.dark .home-apple-shell .home-motion-wall {
+  background:
+    radial-gradient(ellipse at 18% 19%, #19313c 0%, transparent 59%),
+    radial-gradient(ellipse at 83% 74%, #25223a 0%, transparent 60%),
+    #0c151d;
+}
+
+.home-apple-shell .home-intelligence-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: .94;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Light studio veil protects foreground readability without erasing motion.
+   The site's existing semi-opaque reading panels and colored 3D cards remain
+   above this veil, so labels, links and buttons are always the visual priority. */
+.home-apple-shell .home-motion-wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(246,248,251,.34),
+      rgba(246,248,251,.47) 43%,
+      rgba(246,248,251,.44) 58%,
+      rgba(246,248,251,.30)),
+    linear-gradient(180deg,
+      rgba(246,248,251,.24), transparent 34%,
+      transparent 67%, rgba(246,248,251,.21));
+}
+.dark .home-apple-shell .home-motion-wall::after {
+  background:
+    linear-gradient(90deg,
+      rgba(7,12,20,.31), rgba(7,12,20,.43) 43%,
+      rgba(7,12,20,.42) 58%, rgba(7,12,20,.27)),
+    linear-gradient(180deg,
+      rgba(7,12,20,.23), transparent 36%,
+      transparent 67%, rgba(7,12,20,.19));
+}
+
+@media (max-width: 767px) {
+  .home-apple-shell .home-motion-wall::after {
+    background: rgba(246,248,251,.43);
+  }
+  .dark .home-apple-shell .home-motion-wall::after {
+    background: rgba(7,12,20,.40);
+  }
+}
+
+@media (forced-colors: active) {
+  .home-apple-shell .home-motion-wall {
+    display: none !important;
+  }
+}
