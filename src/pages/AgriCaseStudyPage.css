@@ -23,7 +23,7 @@ main>.agri-case-page{
     radial-gradient(circle at 88% 14%,rgba(168,116,47,.055),transparent 24%),
     var(--case-bg);
   color:var(--case-text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI",sans-serif;
+  font-family:var(--font-body,"Geist",system-ui,sans-serif);
   font-size:16px;
   line-height:1.55;
 }
