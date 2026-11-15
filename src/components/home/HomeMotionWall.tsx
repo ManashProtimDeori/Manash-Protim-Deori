@@ -1,9 +1,9 @@
 import React from 'react';
 import { KineticSculpture } from '../visualizations/KineticSculpture';
-import { WavefieldCanvas } from '../visualizations/WavefieldCanvas';
+import { GlassRibbonCanvas } from '../visualizations/GlassRibbonCanvas';
 
 /**
- * Two distinct, full-height ambient scenes, split 50 / 50 across the homepage.
+ * Two distinct, full-width ambient scenes stacked vertically (upper/lower 50%).
  * These are behind all interactive content and never intercept mouse or touch.
  */
 export const HomeMotionWall: React.FC = () => (
@@ -11,8 +11,8 @@ export const HomeMotionWall: React.FC = () => (
     <div className="home-motion-half home-motion-half-orbit">
       <KineticSculpture />
     </div>
-    <div className="home-motion-half home-motion-half-waves">
-      <WavefieldCanvas />
+    <div className="home-motion-half home-motion-half-ribbons">
+      <GlassRibbonCanvas />
     </div>
   </div>
 );
