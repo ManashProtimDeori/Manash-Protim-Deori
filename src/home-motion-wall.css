@@ -1,0 +1,274 @@
+/* SPLIT KINETIC HOME: 50% orbital sculpture + 50% perspective wave terrain.
+   The two scenes are full-height, quietly moving behind the actual site content.
+   Contrast scrims and opaque panels keep the text and 3D cards readable.
+   No text, navigation, project data or existing component copy is changed. */
+
+.home-apple-shell {
+  position: relative;
+  isolation: isolate;
+  background: transparent !important;
+}
+
+/* The backdrop belongs to the homepage only and disappears on route change.
+   Fixed positioning gives it full viewport height throughout homepage scroll. */
+.home-motion-wall {
+  position: fixed;
+  inset: 52px 0 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: 100vw;
+  height: calc(100svh - 52px);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  contain: layout paint style;
+}
+.home-apple-shell > :not(.home-motion-wall) {
+  position: relative;
+  z-index: 1;
+}
+.home-motion-half {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.home-motion-half-orbit {
+  background: radial-gradient(circle at 58% 42%,#eee5d9 0%,#e0e0dc 47%,#ced2d2 100%);
+}
+.home-motion-half-waves {
+  background: radial-gradient(ellipse at 42% 48%,#e4eef0 0%,#cadde2 54%,#bacdd1 100%);
+}
+.dark .home-motion-half-orbit {
+  background:radial-gradient(circle at 58% 42%,#31383b 0%,#192127 54%,#0e171e 100%);
+}
+.dark .home-motion-half-waves {
+  background:radial-gradient(ellipse at 43% 48%,#172d36 0%,#0c1c26 60%,#09131a 100%);
+}
+
+/* Existing spinning 3D rings are no longer inside a small oval.
+   Their stage fills the entire LEFT half of the viewport. */
+.home-motion-half-orbit .kinetic-stage {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+.home-motion-half-orbit .kinetic-depth {
+  inset: 0;
+  perspective: 1020px;
+  perspective-origin: 50% 47%;
+}
+.home-motion-half-orbit .kinetic-assembly {
+  top: 48%;
+  left: 50%;
+  width: min(92%,690px);
+  max-width: none;
+}
+.home-motion-half-orbit .kinetic-floor-shadow {
+  width: 76%;
+  left: 12%;
+  bottom: 15%;
+}
+.home-motion-half-orbit .kinetic-caption { display: none; }
+
+/* Original mathematically projected 3D wave field fills the RIGHT half. */
+.home-wavefield-canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .95;
+}
+
+/* Studio lighting across the full viewport:
+   enough motion remains visible, but readable text wins every time. */
+.home-motion-wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(250,250,251,.34) 0%,
+      rgba(250,250,251,.26) 35%,
+      rgba(250,250,251,.48) 50%,
+      rgba(250,250,251,.29) 70%,
+      rgba(250,250,251,.38) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(250,250,251,.23) 0%,
+      rgba(250,250,251,.04) 40%,
+      rgba(250,250,251,.44) 100%
+    );
+}
+.dark .home-motion-wall::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(9,12,17,.32),
+      rgba(9,12,17,.28) 35%,
+      rgba(9,12,17,.51) 50%,
+      rgba(9,12,17,.29) 75%,
+      rgba(9,12,17,.37)
+    ),
+    linear-gradient(180deg,rgba(9,12,17,.19),transparent 38%,rgba(9,12,17,.44));
+}
+
+/* Foreground layout uses the full available width now that the sculpture
+   is a background scene rather than a second hero grid item. */
+.home-apple-shell .apple-hero {
+  grid-template-columns: minmax(0,1fr);
+  min-height: min(900px,calc(100svh - 52px));
+  gap: clamp(46px,6vw,86px);
+  padding-top: clamp(56px,8vw,116px);
+}
+.home-apple-shell .apple-hero-copy {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  max-width: min(100%,1120px);
+  margin: 0 auto;
+  padding: clamp(28px,4.2vw,62px);
+  text-align: center;
+  background: rgba(250,250,251,.85);
+  color: #1d1d1f !important;
+  border: 1px solid rgba(255,255,255,.71);
+  border-radius: clamp(22px,3vw,36px);
+  box-shadow: 0 15px 70px rgba(27,41,52,.095);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+}
+.dark .home-apple-shell .apple-hero-copy {
+  background:rgba(16,20,27,.85);
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.15);
+  box-shadow:0 22px 70px rgba(0,0,0,.35);
+}
+.home-apple-shell .apple-hero-glow { opacity: 0; }
+.home-apple-shell .apple-hero-copy h1 {
+  margin-inline: auto;
+  max-width: 100%;
+  text-align: center;
+  white-space: nowrap !important;
+  font-size: clamp(1.35rem,6.2vw,5.7rem) !important;
+  letter-spacing: -.067em !important;
+  line-height: 1.06 !important;
+}
+.home-apple-shell .apple-hero-premise {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+  font-size: clamp(1.3rem,2.15vw,2.1rem) !important;
+}
+.home-apple-shell .apple-hero-tagline {
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-apple-shell .apple-hero-actions { justify-content: center; }
+.home-apple-shell .apple-capability-grid {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* Section headings sit in quiet translucent reading panels; cards retain
+   their dimensional bevels, motion and opaque brand-tone backgrounds. */
+.home-apple-shell .apple-section,
+.home-apple-shell .apple-section:nth-of-type(even),
+.home-apple-shell .apple-closing {
+  background: transparent !important;
+}
+.home-apple-shell .apple-section-heading > div:first-child {
+  padding: clamp(22px,3vw,36px);
+  background: rgba(250,250,251,.85);
+  border: 1px solid rgba(255,255,255,.70);
+  border-radius: 24px;
+  box-shadow:0 13px 38px rgba(21,35,43,.075);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.dark .home-apple-shell .apple-section-heading > div:first-child {
+  background: rgba(17,22,29,.86);
+  border-color: rgba(255,255,255,.12);
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+.home-apple-shell .apple-section-heading > :is(a,.apple-heading-actions) {
+  padding: 14px 20px;
+  border: 1px solid var(--apple-border);
+  border-radius: 18px;
+  background:rgba(250,250,251,.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.dark .home-apple-shell .apple-section-heading > :is(a,.apple-heading-actions) {
+  background:rgba(22,27,32,.92);
+}
+.home-apple-shell .apple-section-heading h2 {
+  color:var(--premium-text)!important;
+}
+
+/* Ensure backdrop remains legible at tablet/mobile sizes.
+   We retain the user's single-line full name. */
+@media(max-width:767px) {
+  .home-apple-shell .apple-hero {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 38px;
+    min-height: auto;
+    padding-top: 64px;
+  }
+  .home-apple-shell .apple-hero-copy {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px clamp(16px,4vw,28px);
+    order: initial;
+  }
+  .home-apple-shell .apple-hero-copy h1 {
+    font-size: clamp(1.30rem,6.2vw,2.75rem) !important;
+    white-space: nowrap !important;
+  }
+  .home-apple-shell .apple-hero-premise {
+    font-size:clamp(1.25rem,4.7vw,1.9rem)!important;
+  }
+  .home-apple-shell .apple-hero-actions {
+    justify-content:center;
+    flex-direction:row;
+  }
+  .home-apple-shell .apple-capability-grid { margin-top: 0; order:initial; }
+  .home-motion-half-orbit .kinetic-assembly { width: 155%; left: 47%; }
+  .home-motion-wall::after {
+    background:rgba(250,250,251,.47);
+  }
+  .dark .home-motion-wall::after {background:rgba(8,12,16,.46);}
+  .home-apple-shell .apple-section-heading > div:first-child {padding:22px;}
+}
+@media(max-width:420px){
+  .home-apple-shell .apple-hero-copy h1 {
+    font-size:clamp(1.27rem,5.95vw,1.95rem)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .home-wavefield-canvas { opacity:.76; }
+}
+@media(forced-colors:active) {
+  .home-motion-wall { display:none; }
+  .home-apple-shell .apple-hero-copy,
+  .home-apple-shell .apple-section-heading > div:first-child {
+    border:1px solid CanvasText;
+    background:Canvas;
+    backdrop-filter:none;
+  }
+}
