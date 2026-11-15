@@ -1,5 +1,5 @@
-/* SPLIT KINETIC HOME: 50% orbital sculpture + 50% perspective wave terrain.
-   The two scenes are full-height, quietly moving behind the actual site content.
+/* VERTICAL KINETIC HOME: upper half original orbital sculpture, lower half
+   custom volumetric glass ribbons, continuously animated behind all content.
    Contrast scrims and opaque panels keep the text and 3D cards readable.
    No text, navigation, project data or existing component copy is changed. */
 
@@ -9,14 +9,15 @@
   background: transparent !important;
 }
 
-/* The backdrop belongs to the homepage only and disappears on route change.
-   Fixed positioning gives it full viewport height throughout homepage scroll. */
+/* Ambient scenes exist only on the homepage. Each takes 50% of the viewport
+   height, at full viewport width, and remain behind content while scrolling. */
 .home-motion-wall {
   position: fixed;
   inset: 52px 0 0;
   z-index: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0,1fr);
+  grid-template-rows: minmax(0,1fr) minmax(0,1fr);
   width: 100vw;
   height: calc(100svh - 52px);
   overflow: hidden;
@@ -37,20 +38,19 @@
   pointer-events: none;
 }
 .home-motion-half-orbit {
-  background: radial-gradient(circle at 58% 42%,#eee5d9 0%,#e0e0dc 47%,#ced2d2 100%);
+  background: radial-gradient(ellipse at 56% 48%,#f3ece2 0%,#e5e2de 46%,#d4dada 100%);
 }
-.home-motion-half-waves {
-  background: radial-gradient(ellipse at 42% 48%,#e4eef0 0%,#cadde2 54%,#bacdd1 100%);
+.home-motion-half-ribbons {
+  background: radial-gradient(ellipse at 52% 46%,#f6f6f2 0%,#e4eff0 45%,#cfdee2 100%);
 }
 .dark .home-motion-half-orbit {
-  background:radial-gradient(circle at 58% 42%,#31383b 0%,#192127 54%,#0e171e 100%);
+  background:radial-gradient(ellipse at 56% 48%,#3a4043 0%,#212c32 52%,#111b22 100%);
 }
-.dark .home-motion-half-waves {
-  background:radial-gradient(ellipse at 43% 48%,#172d36 0%,#0c1c26 60%,#09131a 100%);
+.dark .home-motion-half-ribbons {
+  background:radial-gradient(ellipse at 52% 46%,#263944 0%,#152a35 56%,#0d1a24 100%);
 }
 
-/* Existing spinning 3D rings are no longer inside a small oval.
-   Their stage fills the entire LEFT half of the viewport. */
+/* Original kinetic sculpture remains unchanged and fills the UPPER half. */
 .home-motion-half-orbit .kinetic-stage {
   display: block;
   position: absolute;
@@ -66,30 +66,45 @@
 }
 .home-motion-half-orbit .kinetic-depth {
   inset: 0;
-  perspective: 1020px;
-  perspective-origin: 50% 47%;
+  perspective: 1120px;
+  perspective-origin: 50% 51%;
 }
 .home-motion-half-orbit .kinetic-assembly {
-  top: 48%;
-  left: 50%;
-  width: min(92%,690px);
+  top: 49%;
+  left: 73%;
+  width: min(60vw,620px);
   max-width: none;
 }
 .home-motion-half-orbit .kinetic-floor-shadow {
-  width: 76%;
-  left: 12%;
-  bottom: 15%;
+  width: 40%;
+  left: 53%;
+  bottom: 8%;
 }
 .home-motion-half-orbit .kinetic-caption { display: none; }
 
-/* Original mathematically projected 3D wave field fills the RIGHT half. */
-.home-wavefield-canvas {
+/* The LOWER half is a separate, depth-projected transparent glass sculpture. */
+.home-glass-ribbon-canvas {
   display: block;
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: .95;
+  opacity: .96;
+}
+.home-motion-half-ribbons::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(ellipse at 31% 31%,rgba(255,255,255,.39),transparent 50%),
+    radial-gradient(ellipse at 76% 74%,rgba(163,191,202,.16),transparent 54%);
+}
+.dark .home-motion-half-ribbons::before {
+  background:
+    radial-gradient(ellipse at 34% 31%,rgba(202,235,243,.08),transparent 56%),
+    radial-gradient(ellipse at 76% 74%,rgba(68,116,137,.12),transparent 54%);
 }
 
 /* Studio lighting across the full viewport:
@@ -98,34 +113,28 @@
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(
-      90deg,
-      rgba(250,250,251,.34) 0%,
-      rgba(250,250,251,.26) 35%,
-      rgba(250,250,251,.48) 50%,
-      rgba(250,250,251,.29) 70%,
-      rgba(250,250,251,.38) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(250,250,251,.23) 0%,
-      rgba(250,250,251,.04) 40%,
-      rgba(250,250,251,.44) 100%
-    );
+    linear-gradient(180deg,
+      rgba(250,250,251,.18) 0%,
+      rgba(250,250,251,.25) 31%,
+      rgba(250,250,251,.39) 47%,
+      rgba(250,250,251,.39) 53%,
+      rgba(250,250,251,.18) 79%,
+      rgba(250,250,251,.32) 100%),
+    linear-gradient(90deg, rgba(250,250,251,.14),transparent 44%,rgba(250,250,251,.10));
 }
 .dark .home-motion-wall::after {
   background:
-    linear-gradient(
-      90deg,
-      rgba(9,12,17,.32),
-      rgba(9,12,17,.28) 35%,
-      rgba(9,12,17,.51) 50%,
-      rgba(9,12,17,.29) 75%,
-      rgba(9,12,17,.37)
-    ),
-    linear-gradient(180deg,rgba(9,12,17,.19),transparent 38%,rgba(9,12,17,.44));
+    linear-gradient(180deg,
+      rgba(9,12,17,.19),
+      rgba(9,12,17,.25) 31%,
+      rgba(9,12,17,.45) 47%,
+      rgba(9,12,17,.45) 53%,
+      rgba(9,12,17,.18) 79%,
+      rgba(9,12,17,.31) 100%),
+    linear-gradient(90deg,rgba(9,12,17,.10),transparent 44%,rgba(9,12,17,.12));
 }
 
 /* Foreground layout uses the full available width now that the sculpture
@@ -140,7 +149,7 @@
   grid-column: 1;
   grid-row: 1;
   width: 100%;
-  max-width: min(100%,1120px);
+  max-width: min(100%,1000px);
   margin: 0 auto;
   padding: clamp(28px,4.2vw,62px);
   text-align: center;
@@ -164,7 +173,7 @@
   max-width: 100%;
   text-align: center;
   white-space: nowrap !important;
-  font-size: clamp(1.35rem,6.2vw,5.7rem) !important;
+  font-size: clamp(1.35rem,4.75vw,4.8rem) !important;
   letter-spacing: -.067em !important;
   line-height: 1.06 !important;
 }
@@ -248,11 +257,13 @@
     flex-direction:row;
   }
   .home-apple-shell .apple-capability-grid { margin-top: 0; order:initial; }
-  .home-motion-half-orbit .kinetic-assembly { width: 155%; left: 47%; }
+  .home-motion-half-orbit .kinetic-assembly { width: min(110vw,520px); left: 69%; top: 52%; }
   .home-motion-wall::after {
-    background:rgba(250,250,251,.47);
+    background:linear-gradient(180deg,rgba(250,250,251,.30),rgba(250,250,251,.44) 49%,rgba(250,250,251,.26));
   }
-  .dark .home-motion-wall::after {background:rgba(8,12,16,.46);}
+  .dark .home-motion-wall::after {
+    background:linear-gradient(180deg,rgba(8,12,16,.29),rgba(8,12,16,.43) 49%,rgba(8,12,16,.23));
+  }
   .home-apple-shell .apple-section-heading > div:first-child {padding:22px;}
 }
 @media(max-width:420px){
@@ -261,7 +272,7 @@
   }
 }
 @media(prefers-reduced-motion:reduce) {
-  .home-wavefield-canvas { opacity:.76; }
+  .home-glass-ribbon-canvas { opacity:.81; }
 }
 @media(forced-colors:active) {
   .home-motion-wall { display:none; }
