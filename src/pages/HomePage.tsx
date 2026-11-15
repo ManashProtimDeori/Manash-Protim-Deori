@@ -1,5 +1,7 @@
 import React from 'react';
 import { Hero } from '../components/home/Hero';
+import { HomeMotionWall } from '../components/home/HomeMotionWall';
+import { useHomeCardTilt } from '../hooks/useHomeCardTilt';
 import { MarketingDirectorOS } from '../components/home/MarketingDirectorOS';
 import { FeaturedWork } from '../components/home/FeaturedWork';
 import { InteractiveToolsPreview } from '../components/home/InteractiveToolsPreview';
@@ -7,8 +9,11 @@ import { SelectedWriting } from '../components/home/SelectedWriting';
 import { ClosingCta } from '../components/home/ClosingCta';
 
 export const HomePage: React.FC = () => {
+  useHomeCardTilt();
+
   return (
     <div className="home-apple-shell">
+      <HomeMotionWall />
       <Hero />
       <MarketingDirectorOS />
       <FeaturedWork />

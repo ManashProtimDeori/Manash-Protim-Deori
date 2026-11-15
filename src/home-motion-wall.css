@@ -1,0 +1,285 @@
+/* VERTICAL KINETIC HOME: upper half original orbital sculpture, lower half
+   custom volumetric glass ribbons, continuously animated behind all content.
+   Contrast scrims and opaque panels keep the text and 3D cards readable.
+   No text, navigation, project data or existing component copy is changed. */
+
+.home-apple-shell {
+  position: relative;
+  isolation: isolate;
+  background: transparent !important;
+}
+
+/* Ambient scenes exist only on the homepage. Each takes 50% of the viewport
+   height, at full viewport width, and remain behind content while scrolling. */
+.home-motion-wall {
+  position: fixed;
+  inset: 52px 0 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  grid-template-rows: minmax(0,1fr) minmax(0,1fr);
+  width: 100vw;
+  height: calc(100svh - 52px);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  contain: layout paint style;
+}
+.home-apple-shell > :not(.home-motion-wall) {
+  position: relative;
+  z-index: 1;
+}
+.home-motion-half {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.home-motion-half-orbit {
+  background: radial-gradient(ellipse at 56% 48%,#f3ece2 0%,#e5e2de 46%,#d4dada 100%);
+}
+.home-motion-half-ribbons {
+  background: radial-gradient(ellipse at 52% 46%,#f6f6f2 0%,#e4eff0 45%,#cfdee2 100%);
+}
+.dark .home-motion-half-orbit {
+  background:radial-gradient(ellipse at 56% 48%,#3a4043 0%,#212c32 52%,#111b22 100%);
+}
+.dark .home-motion-half-ribbons {
+  background:radial-gradient(ellipse at 52% 46%,#263944 0%,#152a35 56%,#0d1a24 100%);
+}
+
+/* Original kinetic sculpture remains unchanged and fills the UPPER half. */
+.home-motion-half-orbit .kinetic-stage {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+.home-motion-half-orbit .kinetic-depth {
+  inset: 0;
+  perspective: 1120px;
+  perspective-origin: 50% 51%;
+}
+.home-motion-half-orbit .kinetic-assembly {
+  top: 49%;
+  left: 73%;
+  width: min(60vw,620px);
+  max-width: none;
+}
+.home-motion-half-orbit .kinetic-floor-shadow {
+  width: 40%;
+  left: 53%;
+  bottom: 8%;
+}
+.home-motion-half-orbit .kinetic-caption { display: none; }
+
+/* The LOWER half is a separate, depth-projected transparent glass sculpture. */
+.home-glass-ribbon-canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .96;
+}
+.home-motion-half-ribbons::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(ellipse at 31% 31%,rgba(255,255,255,.39),transparent 50%),
+    radial-gradient(ellipse at 76% 74%,rgba(163,191,202,.16),transparent 54%);
+}
+.dark .home-motion-half-ribbons::before {
+  background:
+    radial-gradient(ellipse at 34% 31%,rgba(202,235,243,.08),transparent 56%),
+    radial-gradient(ellipse at 76% 74%,rgba(68,116,137,.12),transparent 54%);
+}
+
+/* Studio lighting across the full viewport:
+   enough motion remains visible, but readable text wins every time. */
+.home-motion-wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      rgba(250,250,251,.18) 0%,
+      rgba(250,250,251,.25) 31%,
+      rgba(250,250,251,.39) 47%,
+      rgba(250,250,251,.39) 53%,
+      rgba(250,250,251,.18) 79%,
+      rgba(250,250,251,.32) 100%),
+    linear-gradient(90deg, rgba(250,250,251,.14),transparent 44%,rgba(250,250,251,.10));
+}
+.dark .home-motion-wall::after {
+  background:
+    linear-gradient(180deg,
+      rgba(9,12,17,.19),
+      rgba(9,12,17,.25) 31%,
+      rgba(9,12,17,.45) 47%,
+      rgba(9,12,17,.45) 53%,
+      rgba(9,12,17,.18) 79%,
+      rgba(9,12,17,.31) 100%),
+    linear-gradient(90deg,rgba(9,12,17,.10),transparent 44%,rgba(9,12,17,.12));
+}
+
+/* Foreground layout uses the full available width now that the sculpture
+   is a background scene rather than a second hero grid item. */
+.home-apple-shell .apple-hero {
+  grid-template-columns: minmax(0,1fr);
+  min-height: min(900px,calc(100svh - 52px));
+  gap: clamp(46px,6vw,86px);
+  padding-top: clamp(56px,8vw,116px);
+}
+.home-apple-shell .apple-hero-copy {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  max-width: min(100%,1000px);
+  margin: 0 auto;
+  padding: clamp(28px,4.2vw,62px);
+  text-align: center;
+  background: rgba(250,250,251,.85);
+  color: #1d1d1f !important;
+  border: 1px solid rgba(255,255,255,.71);
+  border-radius: clamp(22px,3vw,36px);
+  box-shadow: 0 15px 70px rgba(27,41,52,.095);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+}
+.dark .home-apple-shell .apple-hero-copy {
+  background:rgba(16,20,27,.85);
+  color:#f5f5f7 !important;
+  border-color:rgba(255,255,255,.15);
+  box-shadow:0 22px 70px rgba(0,0,0,.35);
+}
+.home-apple-shell .apple-hero-glow { opacity: 0; }
+.home-apple-shell .apple-hero-copy h1 {
+  margin-inline: auto;
+  max-width: 100%;
+  text-align: center;
+  white-space: nowrap !important;
+  font-size: clamp(1.35rem,4.75vw,4.8rem) !important;
+  letter-spacing: -.067em !important;
+  line-height: 1.06 !important;
+}
+.home-apple-shell .apple-hero-premise {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px;
+  font-size: clamp(1.3rem,2.15vw,2.1rem) !important;
+}
+.home-apple-shell .apple-hero-tagline {
+  margin-left: auto;
+  margin-right: auto;
+}
+.home-apple-shell .apple-hero-actions { justify-content: center; }
+.home-apple-shell .apple-capability-grid {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* Section headings sit in quiet translucent reading panels; cards retain
+   their dimensional bevels, motion and opaque brand-tone backgrounds. */
+.home-apple-shell .apple-section,
+.home-apple-shell .apple-section:nth-of-type(even),
+.home-apple-shell .apple-closing {
+  background: transparent !important;
+}
+.home-apple-shell .apple-section-heading > div:first-child {
+  padding: clamp(22px,3vw,36px);
+  background: rgba(250,250,251,.85);
+  border: 1px solid rgba(255,255,255,.70);
+  border-radius: 24px;
+  box-shadow:0 13px 38px rgba(21,35,43,.075);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.dark .home-apple-shell .apple-section-heading > div:first-child {
+  background: rgba(17,22,29,.86);
+  border-color: rgba(255,255,255,.12);
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+.home-apple-shell .apple-section-heading > :is(a,.apple-heading-actions) {
+  padding: 14px 20px;
+  border: 1px solid var(--apple-border);
+  border-radius: 18px;
+  background:rgba(250,250,251,.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.dark .home-apple-shell .apple-section-heading > :is(a,.apple-heading-actions) {
+  background:rgba(22,27,32,.92);
+}
+.home-apple-shell .apple-section-heading h2 {
+  color:var(--premium-text)!important;
+}
+
+/* Ensure backdrop remains legible at tablet/mobile sizes.
+   We retain the user's single-line full name. */
+@media(max-width:767px) {
+  .home-apple-shell .apple-hero {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 38px;
+    min-height: auto;
+    padding-top: 64px;
+  }
+  .home-apple-shell .apple-hero-copy {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px clamp(16px,4vw,28px);
+    order: initial;
+  }
+  .home-apple-shell .apple-hero-copy h1 {
+    font-size: clamp(1.30rem,6.2vw,2.75rem) !important;
+    white-space: nowrap !important;
+  }
+  .home-apple-shell .apple-hero-premise {
+    font-size:clamp(1.25rem,4.7vw,1.9rem)!important;
+  }
+  .home-apple-shell .apple-hero-actions {
+    justify-content:center;
+    flex-direction:row;
+  }
+  .home-apple-shell .apple-capability-grid { margin-top: 0; order:initial; }
+  .home-motion-half-orbit .kinetic-assembly { width: min(110vw,520px); left: 69%; top: 52%; }
+  .home-motion-wall::after {
+    background:linear-gradient(180deg,rgba(250,250,251,.30),rgba(250,250,251,.44) 49%,rgba(250,250,251,.26));
+  }
+  .dark .home-motion-wall::after {
+    background:linear-gradient(180deg,rgba(8,12,16,.29),rgba(8,12,16,.43) 49%,rgba(8,12,16,.23));
+  }
+  .home-apple-shell .apple-section-heading > div:first-child {padding:22px;}
+}
+@media(max-width:420px){
+  .home-apple-shell .apple-hero-copy h1 {
+    font-size:clamp(1.27rem,5.95vw,1.95rem)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .home-glass-ribbon-canvas { opacity:.81; }
+}
+@media(forced-colors:active) {
+  .home-motion-wall { display:none; }
+  .home-apple-shell .apple-hero-copy,
+  .home-apple-shell .apple-section-heading > div:first-child {
+    border:1px solid CanvasText;
+    background:Canvas;
+    backdrop-filter:none;
+  }
+}

@@ -1,0 +1,349 @@
+/* Curated color system for homepage 3D cards and reading panels.
+   Keeps all existing text, links, animations, perspective tilt and editor controls.
+   Loaded LAST after the motion and 3D layers, so originally blank cards gain color.
+   Pastel gradients in light mode; deep, desaturated jewel tones in dark mode. */
+
+.home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card,
+  .apple-closing-card
+) {
+  --tone-base: #e8f1f7;
+  --tone-end: #d5e5f0;
+  --tone-glow: #ffffff;
+  --tone-edge: #8eafc4;
+  background-color: var(--tone-base);
+  background-image:
+    radial-gradient(ellipse at 9% 4%, color-mix(in srgb,var(--tone-glow) 82%,transparent), transparent 62%),
+    linear-gradient(142deg,var(--tone-base) 0%,var(--tone-end) 100%);
+  border-color: color-mix(in srgb,var(--tone-edge) 60%,var(--apple-border));
+  /* The existing ::before and ::after material layers remain above the color. */
+}
+
+.home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card,
+  .apple-closing-card
+) > :is(span,strong,p,h2,h3,div) {
+  position: relative;
+}
+
+/* Muted labels become darker against the saturated pastel material. */
+.home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card
+) :is(.apple-project-meta,.apple-project-footer,.apple-tool-top,.apple-tool-bottom,.apple-writing-meta),
+.home-apple-shell .apple-capability-card > span,
+.home-apple-shell .apple-os-card > div span {
+  color: #465362;
+}
+.dark .home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card
+) :is(.apple-project-meta,.apple-project-footer,.apple-tool-top,.apple-tool-bottom,.apple-writing-meta),
+.dark .home-apple-shell .apple-capability-card > span,
+.dark .home-apple-shell .apple-os-card > div span {
+  color: #c4cfdd;
+}
+
+/* Each existing card gets a different coordinated hue, not a uniform tint. */
+.home-apple-shell .apple-capability-grid > .apple-capability-card:nth-child(1) {
+  --tone-base: #eaf4ff;
+  --tone-end: #c7dff7;
+  --tone-glow: #ffffff;
+  --tone-edge: #8cbae0;
+}
+.home-apple-shell .apple-capability-grid > .apple-capability-card:nth-child(2) {
+  --tone-base: #f3edff;
+  --tone-end: #dfd0f7;
+  --tone-glow: #ffffff;
+  --tone-edge: #b6a0de;
+}
+.home-apple-shell .apple-capability-grid > .apple-capability-card:nth-child(3) {
+  --tone-base: #e6f7ef;
+  --tone-end: #c7e9d6;
+  --tone-glow: #fafffc;
+  --tone-edge: #83be9f;
+}
+.home-apple-shell .apple-capability-grid > .apple-capability-card:nth-child(4) {
+  --tone-base: #fff0df;
+  --tone-end: #f7d8b9;
+  --tone-glow: #fff9ee;
+  --tone-edge: #dcab73;
+}
+.home-apple-shell .apple-os-grid > .apple-os-card:nth-child(1) {
+  --tone-base: #e4f2f3;
+  --tone-end: #c6e2e6;
+  --tone-glow: #f8ffff;
+  --tone-edge: #80b5bf;
+}
+.home-apple-shell .apple-os-grid > .apple-os-card:nth-child(2) {
+  --tone-base: #fff2da;
+  --tone-end: #eedaba;
+  --tone-glow: #fffdf3;
+  --tone-edge: #d9b27c;
+}
+.home-apple-shell .apple-os-grid > .apple-os-card:nth-child(3) {
+  --tone-base: #ececfc;
+  --tone-end: #ced4f0;
+  --tone-glow: #fbfbff;
+  --tone-edge: #9eabd7;
+}
+.home-apple-shell .apple-work-grid > .apple-project-card:nth-child(1) {
+  --tone-base: #dff4ef;
+  --tone-end: #bcdfd8;
+  --tone-glow: #f6fff8;
+  --tone-edge: #77b4a5;
+}
+.home-apple-shell .apple-work-grid > .apple-project-card:nth-child(2) {
+  --tone-base: #f3eaff;
+  --tone-end: #dcd0ef;
+  --tone-glow: #fffaff;
+  --tone-edge: #b5a0d6;
+}
+.home-apple-shell .apple-work-grid > .apple-project-card:nth-child(3) {
+  --tone-base: #fff0ed;
+  --tone-end: #f1d1d3;
+  --tone-glow: #fffaf7;
+  --tone-edge: #d6a2a8;
+}
+.home-apple-shell .apple-tool-grid > .apple-tool-card:nth-child(1) {
+  --tone-base: #e4f3fb;
+  --tone-end: #c9e1f0;
+  --tone-glow: #f8fdff;
+  --tone-edge: #88b8d4;
+}
+.home-apple-shell .apple-tool-grid > .apple-tool-card:nth-child(2) {
+  --tone-base: #fff1e1;
+  --tone-end: #efd9c2;
+  --tone-glow: #fffaf4;
+  --tone-edge: #d6af86;
+}
+.home-apple-shell .apple-tool-grid > .apple-tool-card:nth-child(3) {
+  --tone-base: #e7f5e8;
+  --tone-end: #cae5d1;
+  --tone-glow: #fcfff9;
+  --tone-edge: #8bbd9a;
+}
+.home-apple-shell .apple-tool-grid > .apple-tool-card:nth-child(4) {
+  --tone-base: #ecebfa;
+  --tone-end: #d0d6f0;
+  --tone-glow: #fbfaff;
+  --tone-edge: #9cafd4;
+}
+.home-apple-shell .apple-writing-grid > .apple-writing-card:nth-child(1) {
+  --tone-base: #ffefea;
+  --tone-end: #f0d1c4;
+  --tone-glow: #fffbf8;
+  --tone-edge: #d6a495;
+}
+.home-apple-shell .apple-writing-grid > .apple-writing-card:nth-child(2) {
+  --tone-base: #e7f2f8;
+  --tone-end: #cbdfea;
+  --tone-glow: #fbfeff;
+  --tone-edge: #8bb4cb;
+}
+.home-apple-shell .apple-writing-grid > .apple-writing-card:nth-child(3) {
+  --tone-base: #f4ebfa;
+  --tone-end: #decfec;
+  --tone-glow: #fcf9ff;
+  --tone-edge: #b4a0cb;
+}
+
+/* Readable dark-mode equivalents: ink-rich, not light-colored text over pastels. */
+.dark .home-apple-shell .apple-capability-grid > .apple-capability-card:nth-child(1) {
+  --tone-base: #1d4058;
+  --tone-end: #112839;
+  --tone-glow: #416a83;
+  --tone-edge: #4b7796;
+}
+.dark .home-apple-shell .apple-capability-grid > .apple-capability-card:nth-child(2) {
+  --tone-base: #3a294d;
+  --tone-end: #251a37;
+  --tone-glow: #66537b;
+  --tone-edge: #675381;
+}
+.dark .home-apple-shell .apple-capability-grid > .apple-capability-card:nth-child(3) {
+  --tone-base: #1b4236;
+  --tone-end: #102b24;
+  --tone-glow: #406c56;
+  --tone-edge: #4c8167;
+}
+.dark .home-apple-shell .apple-capability-grid > .apple-capability-card:nth-child(4) {
+  --tone-base: #4b3423;
+  --tone-end: #302015;
+  --tone-glow: #7a563c;
+  --tone-edge: #936342;
+}
+.dark .home-apple-shell .apple-os-grid > .apple-os-card:nth-child(1) {
+  --tone-base: #19404b;
+  --tone-end: #102d34;
+  --tone-glow: #386e79;
+  --tone-edge: #477986;
+}
+.dark .home-apple-shell .apple-os-grid > .apple-os-card:nth-child(2) {
+  --tone-base: #453723;
+  --tone-end: #2d2417;
+  --tone-glow: #766042;
+  --tone-edge: #8c7148;
+}
+.dark .home-apple-shell .apple-os-grid > .apple-os-card:nth-child(3) {
+  --tone-base: #2c3351;
+  --tone-end: #1c2239;
+  --tone-glow: #59668a;
+  --tone-edge: #6579a1;
+}
+.dark .home-apple-shell .apple-work-grid > .apple-project-card:nth-child(1) {
+  --tone-base: #16453c;
+  --tone-end: #0d2b29;
+  --tone-glow: #397b6c;
+  --tone-edge: #478879;
+}
+.dark .home-apple-shell .apple-work-grid > .apple-project-card:nth-child(2) {
+  --tone-base: #393052;
+  --tone-end: #241f3c;
+  --tone-glow: #675d8e;
+  --tone-edge: #77699c;
+}
+.dark .home-apple-shell .apple-work-grid > .apple-project-card:nth-child(3) {
+  --tone-base: #492b37;
+  --tone-end: #301d28;
+  --tone-glow: #7b5265;
+  --tone-edge: #8d6070;
+}
+.dark .home-apple-shell .apple-tool-grid > .apple-tool-card:nth-child(1) {
+  --tone-base: #1b3b52;
+  --tone-end: #112b3b;
+  --tone-glow: #4a7088;
+  --tone-edge: #4c849f;
+}
+.dark .home-apple-shell .apple-tool-grid > .apple-tool-card:nth-child(2) {
+  --tone-base: #4a3427;
+  --tone-end: #30241c;
+  --tone-glow: #82614a;
+  --tone-edge: #9a7450;
+}
+.dark .home-apple-shell .apple-tool-grid > .apple-tool-card:nth-child(3) {
+  --tone-base: #20432e;
+  --tone-end: #142d23;
+  --tone-glow: #447953;
+  --tone-edge: #589169;
+}
+.dark .home-apple-shell .apple-tool-grid > .apple-tool-card:nth-child(4) {
+  --tone-base: #2a3658;
+  --tone-end: #1d2540;
+  --tone-glow: #576f9f;
+  --tone-edge: #647cb0;
+}
+.dark .home-apple-shell .apple-writing-grid > .apple-writing-card:nth-child(1) {
+  --tone-base: #462f2d;
+  --tone-end: #2f2222;
+  --tone-glow: #775250;
+  --tone-edge: #936663;
+}
+.dark .home-apple-shell .apple-writing-grid > .apple-writing-card:nth-child(2) {
+  --tone-base: #223e4c;
+  --tone-end: #142d3c;
+  --tone-glow: #4d788d;
+  --tone-edge: #5a89a1;
+}
+.dark .home-apple-shell .apple-writing-grid > .apple-writing-card:nth-child(3) {
+  --tone-base: #392b50;
+  --tone-end: #241e39;
+  --tone-glow: #665584;
+  --tone-edge: #806c98;
+}
+
+/* The closing conversation panel is also a colored, dimensional card. */
+.home-apple-shell .apple-closing-card {
+  --tone-base: #e1f2ec;
+  --tone-end: #cde0e4;
+  --tone-glow: #fcfff6;
+  --tone-edge: #84b5ae;
+}
+.dark .home-apple-shell .apple-closing-card {
+  --tone-base: #1b3c3b;
+  --tone-end: #182f3b;
+  --tone-glow: #44737c;
+  --tone-edge: #507c7d;
+}
+
+/* The reading panels, previously all neutral gray, have section-specific
+   transparent pigments while retaining their blur and background contrast. */
+.home-apple-shell .apple-hero-copy {
+  background: rgba(244,248,251,.92);
+  border-color: rgba(198,219,232,.88);
+}
+.home-apple-shell .apple-os-section .apple-section-heading > div:first-child {
+  background: rgba(230,246,242,.92);
+  border-color: rgba(151,204,188,.65);
+}
+.home-apple-shell .apple-work-section .apple-section-heading > div:first-child {
+  background: rgba(240,236,250,.92);
+  border-color: rgba(181,164,218,.65);
+}
+.home-apple-shell .apple-tools-preview .apple-section-heading > div:first-child {
+  background: rgba(233,244,253,.92);
+  border-color: rgba(160,198,224,.66);
+}
+.home-apple-shell .apple-writing-section .apple-section-heading > div:first-child {
+  background: rgba(253,240,234,.92);
+  border-color: rgba(226,186,164,.66);
+}
+.dark .home-apple-shell .apple-hero-copy {
+  background: rgba(17,29,41,.91);
+  border-color: rgba(87,120,147,.53);
+}
+.dark .home-apple-shell .apple-os-section .apple-section-heading > div:first-child {
+  background: rgba(18,44,40,.92);
+  border-color: rgba(75,124,107,.62);
+}
+.dark .home-apple-shell .apple-work-section .apple-section-heading > div:first-child {
+  background: rgba(37,28,52,.92);
+  border-color: rgba(108,89,137,.61);
+}
+.dark .home-apple-shell .apple-tools-preview .apple-section-heading > div:first-child {
+  background: rgba(18,36,53,.92);
+  border-color: rgba(80,120,153,.62);
+}
+.dark .home-apple-shell .apple-writing-section .apple-section-heading > div:first-child {
+  background: rgba(46,30,30,.92);
+  border-color: rgba(130,90,78,.62);
+}
+
+/* Keep the dark typography contrast established by the site design system. */
+.dark .home-apple-shell :is(
+  .apple-capability-card,
+  .apple-os-card,
+  .apple-project-card,
+  .apple-tool-card,
+  .apple-writing-card,
+  .apple-closing-card
+) {
+  color: var(--apple-text) !important;
+}
+.home-apple-shell .apple-closing-card > p {
+  color: var(--apple-secondary) !important;
+}
+
+/* Cards remain fully surfaced on small screens and even when backdrop blur
+   is not available. No unnecessary animation added for purely decorative color. */
+@media (forced-colors: active) {
+  .home-apple-shell :is(.apple-capability-card,.apple-os-card,.apple-project-card,.apple-tool-card,.apple-writing-card,.apple-closing-card) {
+    background: Canvas !important;
+    border-color: CanvasText !important;
+    color: CanvasText !important;
+  }
+}

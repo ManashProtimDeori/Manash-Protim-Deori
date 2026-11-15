@@ -1,0 +1,81 @@
+/* One continuous open-air constellation of AI, analytics, audience, and brand signals.
+   This stylesheet is loaded after home-card-palette.css, keeping the existing
+   colored 3D cards and frosted reading panels intact. */
+
+.home-apple-shell .home-motion-wall {
+  display: block;
+  grid-template-columns: none;
+  grid-template-rows: none;
+  background:
+    radial-gradient(ellipse at 19% 23%, #c9e8e4 0%, transparent 51%),
+    radial-gradient(ellipse at 82% 22%, #e4d9f3 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 81%, #f2dfd6 0%, transparent 54%),
+    radial-gradient(ellipse at 83% 78%, #cbdff3 0%, transparent 55%),
+    #edf3f8;
+}
+.dark .home-apple-shell .home-motion-wall {
+  background:
+    radial-gradient(ellipse at 18% 22%, #174146 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 23%, #312746 0%, transparent 55%),
+    radial-gradient(ellipse at 19% 79%, #352c31 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 78%, #182e4e 0%, transparent 57%),
+    #0c1927;
+}
+
+.home-apple-shell .home-intelligence-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Softer studio veil makes the text-free intelligence artwork conspicuous,
+   while the independent frosted hero, colored cards and section reading panels
+   retain high-contrast text and interactive controls. */
+/* Studio veil protects foreground readability without erasing motion.
+   The site's existing semi-opaque reading panels and colored 3D cards remain
+   above this veil, so labels, links and buttons are always the visual priority. */
+.home-apple-shell .home-motion-wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(246,248,251,.13),
+      rgba(246,248,251,.23) 43%,
+      rgba(246,248,251,.22) 58%,
+      rgba(246,248,251,.11)),
+    linear-gradient(180deg,
+      rgba(246,248,251,.13), transparent 34%,
+      transparent 67%, rgba(246,248,251,.11));
+}
+.dark .home-apple-shell .home-motion-wall::after {
+  background:
+    linear-gradient(90deg,
+      rgba(7,12,20,.14), rgba(7,12,20,.23) 43%,
+      rgba(7,12,20,.22) 58%, rgba(7,12,20,.12)),
+    linear-gradient(180deg,
+      rgba(7,12,20,.12), transparent 36%,
+      transparent 67%, rgba(7,12,20,.10));
+}
+
+@media (max-width: 767px) {
+  .home-apple-shell .home-motion-wall::after {
+    background: rgba(246,248,251,.21);
+  }
+  .dark .home-apple-shell .home-motion-wall::after {
+    background: rgba(7,12,20,.20);
+  }
+}
+
+@media (forced-colors: active) {
+  .home-apple-shell .home-motion-wall {
+    display: none !important;
+  }
+}

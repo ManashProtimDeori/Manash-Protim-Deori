@@ -1,0 +1,220 @@
+/* Kinetic editorial home — presentation-only changes. All site content, links,
+   application logic and project data remain untouched. */
+.home-apple-shell .apple-hero {
+  min-height: min(900px, calc(100svh - 52px));
+  grid-template-columns: minmax(0, 1fr) minmax(330px, .90fr);
+  align-items: center;
+  align-content: center;
+  column-gap: clamp(30px, 5vw, 100px);
+  row-gap: clamp(80px, 8vw, 128px);
+  padding-top: clamp(68px, 8vw, 116px);
+}
+.home-apple-shell .apple-hero-glow { opacity: .24; }
+.home-apple-shell .apple-hero-copy {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: 680px;
+  margin: 0;
+  text-align: left;
+  z-index: 1;
+}
+.home-apple-shell .apple-hero-copy h1 {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+  /* Fit the full name on one line inside the left editorial column. */
+  white-space: nowrap !important;
+  max-width: none;
+  font-size: clamp(1.75rem, 3.8vw, 4.2rem) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.067em !important;
+}
+.home-apple-shell .apple-hero-premise {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 620px;
+  font-size: clamp(1.5rem, 2.35vw, 2.3rem) !important;
+  line-height: 1.22 !important;
+  font-weight: 450 !important;
+}
+.home-apple-shell .apple-hero-tagline { margin-left: 0; margin-right: 0; }
+.home-apple-shell .apple-hero-actions { justify-content: flex-start; }
+.home-apple-shell .apple-capability-grid { grid-column: 1 / -1; grid-row: 2; }
+.home-apple-shell .apple-capability-card {
+  box-shadow: none;
+  border: 1px solid var(--apple-border);
+  border-radius: 10px;
+}
+.home-apple-shell .apple-capability-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(25,25,30,.08);
+}
+.home-apple-shell .apple-os-card,
+.home-apple-shell .apple-project-card,
+.home-apple-shell .apple-tool-card,
+.home-apple-shell .apple-writing-card {
+  box-shadow: none;
+  border-radius: 14px;
+}
+.home-apple-shell .apple-os-card:hover,
+.home-apple-shell .apple-tool-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(25,25,30,.07);
+}
+.home-apple-shell .apple-section-heading h2 { font-weight: 550 !important; }
+.kinetic-stage {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.1;
+  max-height: 710px;
+  border-radius: 48% 52% 46% 54% / 48% 45% 55% 52%;
+  isolation: isolate;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 48% 44%, #f0eae1 0%, #ece7e1 36%, #dedbd5 66%, #d6d5d2 100%);
+  box-shadow: inset 0 0 100px rgba(255,255,255,.36);
+}
+.dark .kinetic-stage {
+  background: radial-gradient(ellipse at 48% 44%, #30363a 0%, #232a30 45%, #13191e 100%);
+  box-shadow: inset 0 0 90px rgba(0,0,0,.28);
+}
+.kinetic-ambient {position:absolute; border-radius:50%; pointer-events:none; filter:blur(24px);}
+.kinetic-ambient-one {
+  inset: 7% 40% 42% 4%;
+  background: radial-gradient(circle,rgba(225,160,99,.25),transparent 70%);
+}
+.kinetic-ambient-two {
+  inset: 46% 3% 4% 48%;
+  background:radial-gradient(circle,rgba(106,142,163,.23),transparent 70%);
+}
+.kinetic-depth {
+  position:absolute;
+  inset: 5%;
+  perspective: 900px;
+  perspective-origin: 50% 43%;
+  transform-style: preserve-3d;
+}
+.kinetic-assembly {
+  position: absolute;
+  width: 68%;
+  aspect-ratio: 1;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%,-50%) rotateX(-20deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  animation: kinetic-turn 26s linear infinite;
+  will-change: transform;
+}
+.kinetic-orbit {
+  position:absolute;
+  inset:0;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  box-shadow: 3px 8px 11px rgba(44,45,43,.15), inset 1px 2px 5px rgba(255,255,255,.4);
+}
+.kinetic-orbit-outer {
+  border: clamp(11px,1.5vw,21px) solid #a46f4a;
+  transform: rotateX(68deg) rotateY(-25deg);
+  animation: kinetic-orbit-a 15s linear infinite;
+}
+.kinetic-orbit-mid {
+  inset: 10%;
+  border: clamp(8px,1.2vw,16px) solid #d5c7ad;
+  transform:rotateY(72deg) rotateX(-30deg);
+  animation: kinetic-orbit-b 19s linear infinite reverse;
+}
+.kinetic-orbit-inner {
+  inset: 20%;
+  border: clamp(7px,1vw,14px) solid #636f71;
+  transform:rotateX(24deg) rotateY(68deg);
+  animation: kinetic-orbit-c 13s ease-in-out infinite alternate;
+}
+.kinetic-disc {
+  position:absolute;
+  border-radius:50%;
+  inset: 28%;
+  background: radial-gradient(circle at 30% 28%,#ede4d7,#b0a18e 55%,#746f69 90%);
+  box-shadow: 12px 18px 27px rgba(35,40,44,.23), inset -6px -10px 17px rgba(53,51,46,.18);
+  transform:translateZ(-35px);
+}
+.kinetic-disc-front { inset: 38%; transform:translateZ(36px); opacity:.83; }
+.kinetic-core {
+  position:absolute;
+  inset: 30%;
+  border-radius:48% 52% 50% 50%;
+  transform:translateZ(60px);
+  background:radial-gradient(circle at 32% 26%,#f0d8b6 0%,#c58759 35%,#855f50 70%,#555961 100%);
+  box-shadow: 14px 16px 25px rgba(42,47,48,.25), inset -10px -16px 20px rgba(45,40,34,.27);
+  animation:kinetic-breathe 7s ease-in-out infinite alternate;
+}
+.kinetic-core-light {position:absolute; inset:13%; border-radius:50%; background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.55),transparent 55%);}
+.kinetic-pin {
+  position:absolute;
+  width: 5%;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:#f2d7b6;
+  box-shadow:0 3px 9px rgba(0,0,0,.3);
+}
+.kinetic-pin-one {left:9%;top:22%; transform:translateZ(24px);}
+.kinetic-pin-two {right:14%;bottom:21%; transform:translateZ(-12px);}
+.kinetic-floor-shadow {
+  position:absolute;
+  width:60%;
+  height:13%;
+  left:20%;
+  bottom:13%;
+  background:radial-gradient(ellipse,rgba(67,60,51,.31),transparent 70%);
+  filter:blur(13px);
+  animation:kinetic-shadow 7s ease-in-out infinite alternate;
+}
+.kinetic-caption {
+  position:absolute;
+  left:9%;
+  bottom:8%;
+  font-size:10px;
+  font-weight:500;
+  text-transform:uppercase;
+  letter-spacing:.17em;
+  color:rgba(50,52,53,.65);
+}
+.dark .kinetic-caption {color:rgba(240,239,235,.60);}
+@keyframes kinetic-turn {
+  from {transform:translate(-50%,-50%) rotateX(-20deg) rotateY(0deg);}
+  to {transform:translate(-50%,-50%) rotateX(-20deg) rotateY(360deg);}
+}
+@keyframes kinetic-orbit-a {
+  from {transform:rotateX(68deg) rotateY(-25deg) rotateZ(0deg);}
+  to {transform:rotateX(68deg) rotateY(-25deg) rotateZ(360deg);}
+}
+@keyframes kinetic-orbit-b {
+  from {transform:rotateY(72deg) rotateX(-30deg) rotateZ(0deg);}
+  to {transform:rotateY(72deg) rotateX(-30deg) rotateZ(360deg);}
+}
+@keyframes kinetic-orbit-c {
+  from {transform:rotateX(24deg) rotateY(68deg);}
+  to {transform:rotateX(85deg) rotateY(112deg);}
+}
+@keyframes kinetic-breathe {from{transform:translateZ(55px) scale(.96)}to{transform:translateZ(70px) scale(1.03)}}
+@keyframes kinetic-shadow {from{opacity:.55;transform:scale(.84)}to{opacity:1;transform:scale(1.06)}}
+@media(max-width:1000px) {
+ .home-apple-shell .apple-hero {grid-template-columns:minmax(0,1fr) minmax(240px,.75fr);column-gap:24px;}
+ .kinetic-stage {max-height:540px;}
+}
+@media(max-width:767px) {
+ .home-apple-shell .apple-hero {display:flex;flex-direction:column;gap:30px;min-height:auto;padding-top:72px;}
+ .home-apple-shell .apple-hero-copy {width:100%;align-self:stretch;order:0;}
+ /* On phones the name remains on one line without horizontal scrolling. */
+ .home-apple-shell .apple-hero-copy h1 {font-size:clamp(1.35rem,7.5vw,3.15rem)!important;white-space:nowrap!important;}
+ .home-apple-shell .apple-hero-premise {font-size:clamp(1.35rem,5vw,1.9rem)!important;}
+ .kinetic-stage {order:1;width:min(100%,480px);margin-inline:auto;aspect-ratio:1.13;max-height:410px;}
+ .home-apple-shell .apple-capability-grid {order:2;width:100%;margin-top:28px;}
+ .home-apple-shell .apple-hero-actions {justify-content:flex-start;flex-direction:row;}
+ .home-apple-shell .apple-hero-actions .apple-button,
+ .home-apple-shell .apple-hero-actions .apple-text-link {width:auto;}
+}
+@media(prefers-reduced-motion:reduce) {
+ .kinetic-stage *, .kinetic-stage *::before, .kinetic-stage *::after {animation:none!important;transition:none!important;}
+ .kinetic-assembly {transform:translate(-50%,-50%) rotateX(-20deg) rotateY(-25deg);}
+}
