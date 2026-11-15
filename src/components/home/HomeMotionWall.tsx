@@ -1,18 +1,10 @@
-import React from 'react';
-import { KineticSculpture } from '../visualizations/KineticSculpture';
-import { GlassRibbonCanvas } from '../visualizations/GlassRibbonCanvas';
+import { MarketingIntelligenceCanvas } from '../visualizations/MarketingIntelligenceCanvas';
 
-/**
- * Two distinct, full-width ambient scenes stacked vertically (upper/lower 50%).
- * These are behind all interactive content and never intercept mouse or touch.
- */
-export const HomeMotionWall: React.FC = () => (
-  <div className="home-motion-wall" aria-hidden="true">
-    <div className="home-motion-half home-motion-half-orbit">
-      <KineticSculpture />
+/** One uniform animated marketing-intelligence scene behind every homepage section. */
+export function HomeMotionWall() {
+  return (
+    <div className="home-motion-wall" aria-hidden="true">
+      <MarketingIntelligenceCanvas />
     </div>
-    <div className="home-motion-half home-motion-half-ribbons">
-      <GlassRibbonCanvas />
-    </div>
-  </div>
-);
+  );
+}
