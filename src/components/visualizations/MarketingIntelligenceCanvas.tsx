@@ -272,6 +272,7 @@ function drawBrandOrbit(
   radius: number,
   time: number,
   palette: Palette,
+  tint: RGB = palette.blue,
 ) {
   ctx.save();
   // Concentric reach waves imply growing recognition; rotating signal
@@ -281,7 +282,7 @@ function drawBrandOrbit(
     const r = radius * (0.26 + progress * 1.05);
     ctx.beginPath();
     ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.strokeStyle = rgba(palette.violet, (1 - progress) * (palette.dark ? 0.47 : 0.41));
+    ctx.strokeStyle = rgba(tint, (1 - progress) * (palette.dark ? 0.47 : 0.41));
     ctx.lineWidth = 1.65;
     ctx.stroke();
   }
@@ -290,7 +291,7 @@ function drawBrandOrbit(
     const r = radius * (0.48 + i * 0.19);
     ctx.beginPath();
     ctx.arc(cx, cy, r, start, start + Math.PI * (0.65 + i * 0.18));
-    ctx.strokeStyle = rgba(i === 1 ? palette.coral : palette.violet, 0.77 - i * 0.10);
+    ctx.strokeStyle = rgba(i === 1 ? palette.coral : tint, 0.77 - i * 0.10);
     ctx.lineWidth = i === 0 ? 5 : 2.7;
     ctx.lineCap = 'round';
     ctx.stroke();
@@ -301,8 +302,8 @@ function drawBrandOrbit(
     ctx.fill();
   }
   const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.32);
-  core.addColorStop(0, rgba(palette.violet, 0.45));
-  core.addColorStop(1, rgba(palette.violet, 0));
+  core.addColorStop(0, rgba(tint, 0.45));
+  core.addColorStop(1, rgba(tint, 0));
   ctx.fillStyle = core;
   ctx.beginPath();
   ctx.arc(cx, cy, radius * 0.32, 0, Math.PI * 2);
@@ -547,7 +548,7 @@ function drawOpenMotif(
       ctx.fill();
     }
   } else {
-    drawBrandOrbit(ctx, 0, 0, radius * 0.91, time, palette);
+    drawBrandOrbit(ctx, 0, 0, radius * 0.91, time, palette, tint);
   }
 
   // Detached metallic satellites visually tether each object to the network.
