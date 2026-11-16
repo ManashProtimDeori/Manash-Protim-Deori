@@ -468,7 +468,11 @@ function drawSignalConduits(
  * teal analytics, violet neural AI, coral audiences, blue brand reach.
  * All glass lighting is unframed so the background can breathe.
  */
-function drawOpenMotif(
+/**
+ * Four framed translucent workflow blocks (not free-floating orbit-lines).
+ * Their moving data diagrams remain unlabeled and feed the same live network.
+ */
+function drawWorkflowBlock(
   ctx: CanvasRenderingContext2D,
   position: Point,
   radius: number,
@@ -476,93 +480,117 @@ function drawOpenMotif(
   time: number,
   palette: Palette,
 ) {
-  ctx.save();
-  const floatX = Math.sin(time * 0.27 + motif.phase) * radius * 0.052;
-  const floatY = Math.cos(time * 0.22 + motif.phase) * radius * 0.073;
-  ctx.translate(position.x + floatX, position.y + floatY);
-  const { tint } = motif;
+  const w = radius * 2.14;
+  const h = radius * 1.62;
+  const x = -w / 2;
+  const y = -h / 2;
+  const pad = Math.max(10, radius * 0.17);
+  const corner = Math.max(11, radius * 0.15);
+  const tint = motif.tint;
+  const floatX = Math.sin(time * 0.27 + motif.phase) * radius * 0.045;
+  const floatY = Math.cos(time * 0.24 + motif.phase) * radius * 0.06;
 
-  // An illuminated, transparent sphere: sculptural light, not a boxed panel.
-  const aura = ctx.createRadialGradient(-radius * 0.13, -radius * 0.21, 0,
-    0, 0, radius * 1.52);
-  aura.addColorStop(0, rgba(tint, palette.dark ? 0.28 : 0.23));
-  aura.addColorStop(0.40, rgba(tint, palette.dark ? 0.17 : 0.13));
-  aura.addColorStop(1, rgba(tint, 0));
-  ctx.fillStyle = aura;
+  ctx.save();
+  ctx.translate(position.x + floatX, position.y + floatY);
+  ctx.rotate(Math.sin(time * 0.19 + motif.phase) * 0.021);
+
+  // Volumetric aura and offset rear glass plate create readable 3D depth.
+  const glow = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 1.63);
+  glow.addColorStop(0, rgba(tint, palette.dark ? 0.30 : 0.28));
+  glow.addColorStop(0.54, rgba(tint, 0.12));
+  glow.addColorStop(1, rgba(tint, 0));
   ctx.beginPath();
-  ctx.arc(0, 0, radius * 1.52, 0, Math.PI * 2);
+  ctx.arc(0, 0, radius * 1.63, 0, Math.PI * 2);
+  ctx.fillStyle = glow;
   ctx.fill();
 
-  // Nested offset 3D rings subtly tumble around each concept.
-  ctx.save();
-  ctx.rotate(motif.phase * 0.17 + time * 0.055);
-  for (let ring = 0; ring < 3; ring++) {
-    const angle = ring * 0.82 + motif.phase * 0.23;
-    const horizontal = radius * (0.88 + ring * 0.16);
-    const vertical = radius * (0.48 + ring * 0.12);
-    const start = ring * 1.12 + time * (ring % 2 ? -0.11 : 0.095);
-    ctx.beginPath();
-    ctx.ellipse(0, 0, horizontal, vertical, angle, start,
-      start + Math.PI * (1.22 + ring * 0.11));
-    ctx.strokeStyle = rgba(ring === 1 ? palette.blue : tint,
-      (palette.dark ? 0.61 : 0.51) - ring * 0.09);
-    ctx.lineWidth = ring === 0 ? 2.9 : 1.45;
-    ctx.shadowBlur = ring === 0 ? 11 : 0;
-    ctx.shadowColor = rgba(tint, 0.35);
-    ctx.stroke();
-  }
-  ctx.restore();
+  roundedRect(ctx, x + 9, y + 11, w, h, corner);
+  ctx.fillStyle = rgba(tint, palette.dark ? 0.24 : 0.26);
+  ctx.fill();
+  ctx.strokeStyle = rgba(tint, 0.34);
+  ctx.lineWidth = 1.1;
+  ctx.stroke();
 
-  const lens = ctx.createRadialGradient(
-    -radius * 0.18, -radius * 0.19, radius * 0.02,
-    0, 0, radius * 0.63);
-  lens.addColorStop(0, rgba(palette.glass, palette.dark ? 0.45 : 0.56));
-  lens.addColorStop(0.46, rgba(tint, 0.12));
-  lens.addColorStop(1, rgba(tint, 0));
-  ctx.fillStyle = lens;
-  ctx.beginPath();
-  ctx.arc(0, 0, radius * 0.63, 0, Math.PI * 2);
+  roundedRect(ctx, x, y, w, h, corner);
+  const glass = ctx.createLinearGradient(x, y, x + w, y + h);
+  glass.addColorStop(0, rgba(palette.glass, palette.dark ? 0.96 : 0.99));
+  glass.addColorStop(0.43, rgba(palette.glass, palette.dark ? 0.91 : 0.89));
+  glass.addColorStop(1, rgba(tint, palette.dark ? 0.28 : 0.24));
+  ctx.fillStyle = glass;
+  ctx.shadowBlur = 27;
+  ctx.shadowColor = rgba(tint, 0.32);
   ctx.fill();
   ctx.shadowBlur = 0;
+  ctx.lineWidth = 1.9;
+  ctx.strokeStyle = rgba(tint, palette.dark ? 0.89 : 0.80);
+  ctx.stroke();
 
-  if (motif.kind === 'growth') {
-    drawGrowthTrace(ctx,
-      -radius * 0.84, -radius * 0.36,
-      radius * 1.68, radius * 0.79, time, palette);
-  } else if (motif.kind === 'neural') {
-    drawMiniNetwork(ctx,
-      -radius * 0.70, -radius * 0.51,
-      radius * 1.40, radius * 1.02, time, palette);
-  } else if (motif.kind === 'audience') {
-    drawAudienceBars(ctx,
-      -radius * 0.67, -radius * 0.44,
-      radius * 1.34, radius * 0.90, time, palette);
-    // Audience clusters orbit the bars instead of forming another UI tile.
-    for (let i = 0; i < 5; i++) {
-      const angle = i * Math.PI * 0.4 + time * 0.085;
-      const distance = radius * (0.75 + i % 2 * 0.17);
-      ctx.beginPath();
-      ctx.arc(Math.cos(angle) * distance, Math.sin(angle) * distance,
-        3 + i % 3, 0, Math.PI * 2);
-      ctx.fillStyle = rgba(i % 2 ? tint : palette.violet, 0.75);
-      ctx.fill();
-    }
-  } else {
-    drawBrandOrbit(ctx, 0, 0, radius * 0.91, time, palette, tint);
+  ctx.save();
+  ctx.clip();
+  // Subtle refraction rather than solid opaque blocks.
+  const reflection = ctx.createLinearGradient(x, y, x + w, y + h);
+  reflection.addColorStop(0, rgba(palette.glass, 0.39));
+  reflection.addColorStop(0.40, rgba(palette.glass, 0));
+  reflection.addColorStop(0.78, rgba(tint, 0.10));
+  reflection.addColorStop(1, rgba(tint, 0.02));
+  ctx.fillStyle = reflection;
+  ctx.fillRect(x, y, w, h);
+
+  const topAccent = ctx.createLinearGradient(x, y, x + w, y);
+  topAccent.addColorStop(0, rgba(tint, 0.06));
+  topAccent.addColorStop(0.42, rgba(tint, 0.89));
+  topAccent.addColorStop(1, rgba(tint, 0.06));
+  ctx.fillStyle = topAccent;
+  ctx.fillRect(x + pad, y + 2, w - pad * 2, 2.5);
+
+  // Tiny unlabeled status squares, not written dashboard interface.
+  for (let i = 0; i < 3; i++) {
+    const chip = Math.max(4.8, radius * 0.075);
+    roundedRect(ctx, x + pad + i * (chip + 6), y + pad, chip, chip, 1.8);
+    const pulse = Math.sin(time * 0.72 + motif.phase + i * 0.8) * 0.06;
+    ctx.fillStyle = rgba(tint, 0.79 - i * 0.15 + pulse);
+    ctx.fill();
+  }
+  for (let i = 0; i < 2; i++) {
+    const chip = Math.max(4.5, radius * 0.062);
+    roundedRect(ctx, -x - pad - chip - i * (chip + 5), y + pad,
+      chip, chip, 1.6);
+    ctx.fillStyle = rgba(i ? palette.blue : tint, 0.73);
+    ctx.fill();
   }
 
-  // Detached metallic satellites visually tether each object to the network.
-  for (let i = 0; i < 3; i++) {
-    const angle = time * (i % 2 ? -0.18 : 0.13) +
-      motif.phase + i * Math.PI * 2 / 3;
-    const distance = radius * (1.06 + i * 0.12);
-    const x = Math.cos(angle) * distance;
-    const y = Math.sin(angle) * distance * 0.69;
-    ctx.beginPath();
-    ctx.arc(x, y, i === 0 ? 4.3 : 2.7, 0, Math.PI * 2);
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = rgba(tint, 0.65);
-    ctx.fillStyle = rgba(i === 1 ? palette.coral : tint, 0.93);
+  const vizX = x + pad;
+  const vizY = y + h * 0.34;
+  const vizW = w - pad * 2;
+  const vizH = h * 0.49;
+  if (motif.kind === 'growth') {
+    drawGrowthTrace(ctx, vizX, vizY, vizW, vizH, time, palette);
+  } else if (motif.kind === 'neural') {
+    drawMiniNetwork(ctx, vizX, vizY, vizW, vizH, time, palette);
+  } else if (motif.kind === 'audience') {
+    drawAudienceBars(ctx, vizX, vizY, vizW, vizH, time, palette);
+  } else {
+    drawBrandOrbit(ctx, 0, y + h * 0.61,
+      Math.min(vizW * 0.31, vizH * 0.65), time, palette, tint);
+  }
+
+  const scanX = x + ((time * 0.078 + motif.phase * 0.13) % 1) * w;
+  const scan = ctx.createLinearGradient(scanX - 32, y, scanX + 32, y);
+  scan.addColorStop(0, rgba(tint, 0));
+  scan.addColorStop(0.5, rgba(palette.glass, 0.20));
+  scan.addColorStop(1, rgba(tint, 0));
+  ctx.fillStyle = scan;
+  ctx.fillRect(scanX - 32, y, 64, h);
+  ctx.restore();
+
+  // Two glowing square sockets connect the block to its signal conduits.
+  for (const side of [-1, 1]) {
+    const size = Math.max(7, radius * 0.12);
+    const portX = side * w / 2;
+    roundedRect(ctx, portX - size / 2, -size / 2, size, size, 2.4);
+    ctx.fillStyle = rgba(tint, 0.91);
+    ctx.shadowBlur = 11;
+    ctx.shadowColor = rgba(tint, 0.52);
     ctx.fill();
     ctx.shadowBlur = 0;
   }
@@ -584,8 +612,7 @@ function drawScene(
   drawIntelligenceNetwork(ctx, width, height, time, palette);
 
   const compact = width < 720;
-  // A single open constellation fills the viewport: NO cards or boxes.
-  // Geometric positions stay anchored as the individual objects breathe.
+  // Four dimensional glass blocks form a unified, connected workflow.
   const motifs: Motif[] = compact
     ? [
       { x: 0.20, y: 0.22, kind: 'growth', tint: palette.teal, phase: 0.2 },
@@ -606,9 +633,9 @@ function drawScene(
   }));
   drawSignalConduits(ctx, hub, objects, time, palette);
 
-  const motifRadius = Math.min(width, height) * (compact ? 0.17 : 0.155);
+  const motifRadius = Math.min(width, height) * (compact ? 0.157 : 0.147);
   motifs.forEach(motif => {
-    drawOpenMotif(ctx, {
+    drawWorkflowBlock(ctx, {
       x: motif.x * width,
       y: motif.y * height,
     }, motifRadius, motif, time, palette);
