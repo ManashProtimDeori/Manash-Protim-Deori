@@ -803,3 +803,106 @@
 @media(prefers-reduced-motion:reduce){
   .bx-home .bx-art-special{animation:none!important}
 }
+
+/* ------------------------------------------------------------------------
+   KINETIC ART DIRECTION II
+   Every card is now a distinct scene, not an identical common prism.
+   Shape and motion change together: contours, ripples, charts, inference
+   meshes, folded glass, aperture blades, auroras, diagnostics, ink and sheets.
+   Every animation stays behind the readable editorial text.
+   ------------------------------------------------------------------------ */
+.bx-home .bx-v-atmosphere{transform-origin:405px 295px;animation:bx-scene-breathe 12s ease-in-out infinite alternate}
+.bx-home .bx-signal-art svg{overflow:visible}
+.bx-home .bx-signal-strategy .bx-v-contour,
+.bx-home .bx-signal-marketing .bx-v-brand-ripples,
+.bx-home .bx-signal-analytics .bx-v-analytics-stage,
+.bx-home .bx-signal-ai .bx-v-neural-mesh,
+.bx-home .bx-signal-work .bx-v-terrace-line,
+.bx-home .bx-signal-tools .bx-v-flow-stroke,
+.bx-home .bx-signal-writing .bx-v-ink-stream{
+  will-change:transform,opacity;
+}
+/* HERO — spacious architectural rotation and an independent slow counterflow */
+.bx-home .bx-v-hero-orbits{transform-origin:405px 290px;animation:bx-scene-rotate 55s linear infinite}
+.bx-home .bx-v-hero-crystal{transform-origin:405px 290px;animation:bx-hero-levitate 13s cubic-bezier(.37,0,.36,1) infinite alternate}
+.bx-home .bx-v-hero-streams{stroke-dasharray:10 22;animation:bx-scene-travel 22s linear infinite}
+/* STRATEGY — breathable contour cartography + line drawing / discovery */
+.bx-home .bx-v-contour{animation:bx-contour-breathe 12s ease-in-out infinite alternate}
+.bx-home .bx-v-strategy-route{stroke-dasharray:1200;stroke-dashoffset:1200;animation:bx-draw-path 9s cubic-bezier(.55,0,.24,1) infinite alternate}
+.bx-home .bx-v-strategy-radar{transform-origin:426px 268px;animation:bx-scene-rotate 22s linear infinite}
+.bx-home .bx-v-decision-node{transform-box:fill-box;transform-origin:center;animation:bx-node-pop 4.3s ease-in-out infinite alternate}
+/* MARKETING — five outward reach beacons breathe while the connection flows */
+.bx-home .bx-v-brand-ring{transform-box:fill-box;transform-origin:center;animation:bx-reach-breathe 6.9s ease-in-out infinite alternate}
+.bx-home .bx-v-marketing-beacon{animation:bx-marketing-flicker 7s ease-in-out infinite alternate}
+.bx-home .bx-v-flow-stroke{stroke-dasharray:14 18;animation:bx-scene-travel 15s linear infinite}
+/* ANALYTICS — individually rising bars, drawing growth line and scanning beam */
+.bx-home .bx-v-rise-bar{transform-box:fill-box;transform-origin:center bottom;animation:bx-waterfall-rise 4.5s ease-in-out infinite alternate}
+.bx-home .bx-v-growth-draw{stroke-dasharray:1150;stroke-dashoffset:1150;animation:bx-growth-reveal 8.6s ease-in-out infinite alternate}
+.bx-home .bx-v-analytics-scan{animation:bx-chart-scan 8s ease-in-out infinite alternate}
+/* AI — graph neurons pulse on asynchronous phases while the nucleus hovers */
+.bx-home .bx-v-neural-node{transform-box:fill-box;transform-origin:center;animation:bx-neuron-infer 3.4s ease-in-out infinite alternate}
+.bx-home .bx-v-ai-hub{transform-origin:405px 291px;animation:bx-ai-breath 8.8s ease-in-out infinite alternate}
+/* WORK 0 — terraced topology oscillates along the landform */
+.bx-home .bx-v-terrace-line{animation:bx-topographic-drift 8s ease-in-out infinite alternate}
+/* WORK 1 — glass facets tilt / accordion while remaining in frame */
+.bx-home .bx-v-fold{transform-origin:405px 300px;animation:bx-fold-sculpt 10s ease-in-out infinite alternate}
+/* WORK 2 — creative iris slowly opens and closes like a camera aperture */
+.bx-home .bx-v-iris{transform-origin:405px 294px;animation:bx-iris-turn 18s cubic-bezier(.45,0,.35,1) infinite alternate}
+/* WORK 3 — aurora ribbons travel diagonally, independent of prism/orbit */
+.bx-home .bx-v-aurora{animation:bx-aurora-wave 9s ease-in-out infinite alternate}
+/* WORK 4 — layered tessellation counter-rotates in a moiré pattern */
+.bx-home .bx-v-poly-layer{transform-origin:405px 294px;animation:bx-poly-shift 13s ease-in-out infinite alternate}
+/* TOOL 0 — economic instrument gauge needle sweeps */
+.bx-home .bx-v-radial{transform-origin:405px 300px;animation:bx-scene-rotate 42s linear infinite}
+.bx-home .bx-v-radial-reverse{transform-origin:405px 300px;animation:bx-scene-rotate 55s linear infinite reverse}
+.bx-home .bx-v-dial-needle{transform-origin:405px 300px;animation:bx-dial-sweep 6s ease-in-out infinite alternate}
+/* TOOL 1 — causal tree pulses through branching data routes */
+.bx-home .bx-v-tool-1 .bx-v-flow-stroke{animation-duration:11s}
+/* TOOL 2 — diagnostic matrix lights up in a traveling pattern */
+.bx-home .bx-v-matrix-cell{animation:bx-matrix-wave 5s ease-in-out infinite alternate}
+.bx-home .bx-v-matrix-sweep{animation:bx-matrix-scan 5.8s ease-in-out infinite alternate}
+/* TOOL 3 — modular workflow stages float at staggered intervals */
+.bx-home .bx-v-pipeline-module{transform-box:fill-box;transform-origin:center;animation:bx-module-cycle 5.6s ease-in-out infinite alternate}
+/* WRITING 0 — long fluid ink gestures */
+.bx-home .bx-v-ink-stream{stroke-dasharray:16 29;animation:bx-ink-glide 19s linear infinite}
+/* WRITING 1 — individual translucent insights/pages unfold */
+.bx-home .bx-v-sheet{transform-origin:405px 300px;animation:bx-page-flutter 8.5s ease-in-out infinite alternate}
+/* WRITING 2 — woven signal fabric, a distinct slow oscillation */
+.bx-home .bx-v-woven-wave{animation:bx-woven-shift 12s ease-in-out infinite alternate}
+.bx-home .bx-v-node-pulse{transform-box:fill-box;transform-origin:center;animation:bx-node-pop 3.1s ease-in-out infinite alternate}
+
+@keyframes bx-scene-breathe{from{transform:scale(.92);opacity:.65}to{transform:scale(1.12);opacity:1}}
+@keyframes bx-scene-rotate{to{transform:rotate(360deg)}}
+@keyframes bx-hero-levitate{from{transform:translateY(-13px) rotate(-5deg) scale(.96)}to{transform:translateY(17px) rotate(5deg) scale(1.04)}}
+@keyframes bx-scene-travel{to{stroke-dashoffset:-300}}
+@keyframes bx-contour-breathe{from{transform:translate(-16px,7px) scale(.98);opacity:.64}to{transform:translate(15px,-10px) scale(1.03);opacity:1}}
+@keyframes bx-draw-path{0%{stroke-dashoffset:1200;opacity:.35}65%,100%{stroke-dashoffset:0;opacity:1}}
+@keyframes bx-node-pop{from{opacity:.51;transform:scale(.78)}to{opacity:1;transform:scale(1.23)}}
+@keyframes bx-reach-breathe{from{opacity:.40;transform:scale(.86)}to{opacity:1;transform:scale(1.18)}}
+@keyframes bx-marketing-flicker{from{opacity:.6;transform:translateY(5px)}to{opacity:1;transform:translateY(-8px)}}
+@keyframes bx-waterfall-rise{0%{transform:scaleY(.26);opacity:.50}65%,100%{transform:scaleY(1);opacity:1}}
+@keyframes bx-growth-reveal{0%{stroke-dashoffset:1150;opacity:.45}85%,100%{stroke-dashoffset:0;opacity:1}}
+@keyframes bx-chart-scan{from{transform:translateX(-130px);opacity:.15}to{transform:translateX(285px);opacity:.9}}
+@keyframes bx-neuron-infer{from{transform:scale(.7);opacity:.46}to{transform:scale(1.3);opacity:1}}
+@keyframes bx-ai-breath{from{transform:translateY(-7px) scale(.94)}to{transform:translateY(9px) scale(1.055)}}
+@keyframes bx-topographic-drift{from{transform:translate(-13px,10px);opacity:.5}to{transform:translate(15px,-11px);opacity:1}}
+@keyframes bx-fold-sculpt{from{transform:translateX(-14px) skewY(-3deg) rotate(-2deg);opacity:.6}to{transform:translateX(13px) skewY(3deg) rotate(2deg);opacity:1}}
+@keyframes bx-iris-turn{from{transform:rotate(-22deg) scale(.87)}to{transform:rotate(38deg) scale(1.09)}}
+@keyframes bx-aurora-wave{from{transform:translate(-18px,-18px);opacity:.54}to{transform:translate(25px,16px);opacity:1}}
+@keyframes bx-poly-shift{from{transform:rotate(-14deg) scale(.93);opacity:.47}to{transform:rotate(18deg) scale(1.05);opacity:1}}
+@keyframes bx-dial-sweep{from{transform:rotate(-64deg)}to{transform:rotate(71deg)}}
+@keyframes bx-matrix-wave{from{opacity:.25;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes bx-matrix-scan{from{transform:translateY(-180px);opacity:.19}to{transform:translateY(166px);opacity:1}}
+@keyframes bx-module-cycle{from{transform:translateY(9px) scale(.94);opacity:.55}to{transform:translateY(-10px) scale(1.07);opacity:1}}
+@keyframes bx-ink-glide{to{stroke-dashoffset:-450}}
+@keyframes bx-page-flutter{from{transform:translate(-9px,10px) rotate(-3deg);opacity:.45}to{transform:translate(10px,-12px) rotate(3deg);opacity:1}}
+@keyframes bx-woven-shift{from{transform:translate(-10px,-9px);opacity:.5}to{transform:translate(17px,13px);opacity:1}}
+
+/* Performance and inclusive UX. Static, full-detail illustrations are kept
+   visible when motion is reduced; never fade text or hide the artworks. */
+@media(prefers-reduced-motion:reduce){
+ .bx-home .bx-signal-art svg *,
+ .bx-home .bx-v-atmosphere{
+   animation:none!important;transition:none!important;
+ }
+}
