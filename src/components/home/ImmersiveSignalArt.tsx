@@ -84,6 +84,102 @@ export const ImmersiveSignalArt: React.FC<{ kind: ArtKind; index?: number }> = (
             fill="none" stroke={c} strokeOpacity=".27" strokeWidth="1" />
         </g>
 
+        {/* Each discipline receives a different visual metaphor.
+            No labels or borrowed photographs; art is purely geometric. */}
+        {kind === 'strategy' && (
+          <g className="bx-art-special bx-art-strategy" fill="none">
+            {Array.from({ length: 8 }, (_, i) => (
+              <path key={i}
+                d={'M' + (115 + i * 24) + ' 450 Q' + (315 + i * 15) + ' ' + (45 + i * 14) +
+                  ' 640 ' + (140 + i * 37)}
+                stroke={i % 2 ? b : a} strokeOpacity=".45" strokeWidth={i % 3 ? 2 : 3.8} />
+            ))}
+            <circle cx="410" cy="280" r="84" stroke={c} strokeWidth="4" strokeDasharray="20 12" />
+            <circle cx="410" cy="280" r="30" fill={b} fillOpacity=".15" stroke={a} strokeWidth="2"/>
+            <path d="M360 280 400 230 440 300 494 244" stroke={a} strokeWidth="8"
+              strokeLinecap="round" strokeLinejoin="round" opacity=".65" />
+          </g>
+        )}
+        {kind === 'marketing' && (
+          <g className="bx-art-special bx-art-marketing">
+            {Array.from({ length: 6 }, (_, i) => {
+              const angle = i * Math.PI / 3;
+              const x = 410 + Math.cos(angle) * 143;
+              const y = 279 + Math.sin(angle) * 143;
+              return (
+                <g key={i}>
+                  <path d={'M410 279L' + x + ' ' + y} fill="none" stroke={a}
+                    strokeWidth="2.2" strokeOpacity=".46" />
+                  <circle cx={x} cy={y} r={27 + (i % 3) * 8} fill={i % 2 ? b : c}
+                    fillOpacity=".20" stroke={i % 2 ? a : b} strokeOpacity=".71" strokeWidth="2" />
+                </g>
+              );
+            })}
+            <circle cx="410" cy="279" r="63" fill={b} fillOpacity=".24" stroke={a}
+              strokeWidth="5" strokeOpacity=".82"/>
+            <circle cx="410" cy="279" r="19" fill={a} fillOpacity=".72"/>
+          </g>
+        )}
+        {kind === 'analytics' && (
+          <g className="bx-art-special bx-art-analytics">
+            {Array.from({ length: 11 }, (_, i) => (
+              <rect key={i} x={194 + i * 40} y={392 - (i * 15 + (i % 3) * 25)}
+                width="23" height={i * 15 + (i % 3) * 25}
+                rx="5" fill={i % 2 ? b : a} fillOpacity={0.25 + i * 0.035} />
+            ))}
+            <path d="M180 390 245 331 308 353 370 271 440 287 506 219 620 132"
+              fill="none" stroke={a} strokeWidth="7" strokeLinecap="round"
+              strokeLinejoin="round" opacity=".78"/>
+            {[ [245,331], [370,271], [506,219], [620,132] ].map(([x,y],i)=>(
+              <circle key={i} cx={x} cy={y} r="8" fill={c} stroke={a} strokeWidth="3"/>
+            ))}
+          </g>
+        )}
+        {kind === 'ai' && (
+          <g className="bx-art-special bx-art-ai">
+            {Array.from({ length: 12 }, (_, i) => {
+              const angle = i * Math.PI / 6;
+              const x = 410 + Math.cos(angle) * (105 + (i % 3) * 28);
+              const y = 280 + Math.sin(angle) * (99 + (i % 4) * 22);
+              return (
+                <g key={i}>
+                  <path d={'M410 280 Q' + (370 + i * 6) + ' ' + (220 - i * 7) +
+                    ' ' + x + ' ' + y} fill="none" stroke={b} strokeOpacity=".41" strokeWidth="2"/>
+                  <circle cx={x} cy={y} r={5 + i % 4} fill={i % 2 ? a : c}/>
+                  <circle cx={x} cy={y} r="16" stroke={b} fill="none" strokeOpacity=".34"/>
+                </g>
+              );
+            })}
+            <circle cx="410" cy="280" r="56" fill={b} fillOpacity=".16" stroke={a}
+              strokeOpacity=".8" strokeWidth="3"/>
+            <path d="M372 280 400 245 420 309 455 264" stroke={a} strokeOpacity=".77"
+              strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+          </g>
+        )}
+        {kind === 'tools' && (
+          <g className="bx-art-special bx-art-tools" fill="none" strokeWidth="3">
+            {Array.from({ length: 5 }, (_, i) => (
+              <g key={i} transform={'rotate(' + (i * 27) + ' 410 280)'}>
+                <ellipse cx="410" cy="280" rx={83 + i * 29} ry={35 + i * 18}
+                  stroke={i % 2 ? a : c} strokeOpacity=".55"/>
+              </g>
+            ))}
+            <path d="M290 280h240M410 160v240" stroke={b} strokeOpacity=".50"
+              strokeDasharray="10 18"/>
+          </g>
+        )}
+        {kind === 'writing' && (
+          <g className="bx-art-special bx-art-writing">
+            {Array.from({ length: 8 }, (_, i) => (
+              <path key={i}
+                d={'M' + (130 + i * 11) + ' ' + (375 - i * 24) +
+                ' Q410 ' + (490 - i * 50) + ' ' + (675 - i * 9) + ' ' + (147 + i * 19)}
+                stroke={i % 2 ? a : c} strokeWidth={i % 3 ? 2 : 4}
+                strokeOpacity=".55" fill="none"/>
+            ))}
+          </g>
+        )}
+
         <g className="bx-art-trails" fill="none" strokeLinecap="round">
           <path d="M30 400 Q190 220 337 330 T770 157" stroke={a}
             strokeOpacity=".42" strokeWidth="3" />
