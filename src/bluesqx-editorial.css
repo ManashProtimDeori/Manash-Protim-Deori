@@ -763,3 +763,43 @@
     border:1px solid CanvasText;
   }
 }
+
+/* Higher-specificity legibility against the portfolio's legacy global heading
+   overrides. The story sections deliberately alternate light and dark. */
+#main-content .bx-home .bx-light-section :is(h2,h3){
+  color:#142236!important;-webkit-text-fill-color:#142236!important;
+}
+#main-content .bx-home .bx-light-section h2 em{
+  color:#63778a!important;-webkit-text-fill-color:#63778a!important;
+}
+#main-content .bx-home .bx-dark-section :is(h2,h3){
+  color:#f7fbff!important;-webkit-text-fill-color:#f7fbff!important;
+}
+#main-content .bx-home .bx-dark-section h2 em{
+  color:#8fbaff!important;-webkit-text-fill-color:#8fbaff!important;
+}
+#main-content .bx-home .bx-hero .bx-hero-name-last{
+  color:#9fcfff!important;-webkit-text-fill-color:#9fcfff!important;
+}
+
+/* Each editorial image has an unmistakable subject, rather than recolored
+   duplicates: strategy/contours, marketing/network, analytics/chart,
+   AI/neural mesh, working systems/orbit and writing/knowledge flow. */
+.bx-home :is(
+ .bx-signal-strategy,.bx-signal-marketing,.bx-signal-analytics,
+ .bx-signal-ai,.bx-signal-tools,.bx-signal-writing
+) .bx-art-prism{opacity:.20}
+.bx-home .bx-art-special{filter:drop-shadow(0 0 18px rgba(118,185,255,.26))}
+.bx-home .bx-art-strategy{transform-origin:410px 280px;animation:bx-special-sway 15s ease-in-out infinite alternate}
+.bx-home .bx-art-marketing{transform-origin:410px 280px;animation:bx-special-sway 18s ease-in-out infinite alternate-reverse}
+.bx-home .bx-art-analytics{transform-origin:410px 280px;animation:bx-special-sway 17s ease-in-out infinite alternate}
+.bx-home .bx-art-ai{transform-origin:410px 280px;animation:bx-orbit-turn 66s linear infinite}
+.bx-home .bx-art-tools{transform-origin:410px 280px;animation:bx-orbit-turn 43s linear infinite reverse}
+.bx-home .bx-art-writing{transform-origin:410px 280px;animation:bx-special-sway 19s ease-in-out infinite alternate}
+@keyframes bx-special-sway{
+  from{transform:translateY(-8px) rotate(-2deg)}
+  to{transform:translateY(10px) rotate(3deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .bx-home .bx-art-special{animation:none!important}
+}
