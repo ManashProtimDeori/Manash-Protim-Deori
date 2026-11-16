@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Sun, Moon, Menu, X, Edit3, Sliders } from 'lucide-react';
+import { Search, Sun, Moon, Menu, X, Edit3, Sliders, ArrowUpRight } from 'lucide-react';
 import { useAuth } from '../../auth/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useData } from '../../context/DataContext';
@@ -26,14 +26,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
   }, []);
 
   return (
-    <header className="site-header-premium sticky top-0 z-40 w-full">
+    <header className="site-header-premium bx-global-header sticky top-0 z-40 w-full">
       <div className="apple-nav-shell">
         <Link
           to="/"
           className="apple-brand-link"
           aria-label={siteConfig.name + ' home'}
         >
-          <span className="site-brand-name">{siteConfig.name}</span>
+          <span className="site-brand-name">{siteConfig.name}</span><span className="bx-brand-spark" aria-hidden="true">✳</span>
         </Link>
 
         <div className="apple-nav-center hidden md:block">
@@ -70,6 +70,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenCommand }) => {
           >
             {theme === 'dark' ? <Sun /> : <Moon />}
           </button>
+
+          <Link to="/contact" className="bx-nav-contact hidden lg:inline-flex">Let's talk <ArrowUpRight aria-hidden="true" /></Link>
 
           <Link to="/quick-profile" className="apple-nav-profile hidden sm:inline-flex">
             Profile

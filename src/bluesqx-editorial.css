@@ -1,0 +1,908 @@
+/*
+ * BlueSqX-inspired editorial UX — ORIGINAL MPD portfolio execution.
+ * Inspired by the reference's visual RHYTHM, not its copyrighted assets,
+ * text, logo or client roster. Style is intentionally scoped so all existing
+ * routes, editors, research and interactive decision tools remain functional.
+ */
+.bx-premium-shell {
+  --bx-ink:#111926;
+  --bx-night:#080e18;
+  --bx-night-2:#0d1726;
+  --bx-cream:#f5f4f0;
+  --bx-paper:#fafaf8;
+  --bx-white:#f8fbff;
+  --bx-cyan:#67e4ee;
+  --bx-blue:#94afff;
+  --bx-accent:#6da7ff;
+  --bx-ease:cubic-bezier(.2,.7,.15,1);
+}
+.bx-premium-shell *,
+.bx-premium-shell *::before,
+.bx-premium-shell *::after { box-sizing:border-box; }
+.bx-premium-shell :is(a,button):focus-visible {
+  outline:3px solid #79dbf6 !important;
+  outline-offset:4px !important;
+}
+.bx-premium-shell :is(a,button){-webkit-tap-highlight-color:transparent}
+.bx-home {
+  background:var(--bx-paper);
+  color:var(--bx-ink);
+  font-family:"Geist",ui-sans-serif,system-ui,sans-serif;
+  position:relative;
+  overflow:clip;
+}
+.bx-home a{text-decoration:none}
+.bx-home p{margin:0}
+.bx-home .bx-wrap{width:min(1480px,calc(100% - clamp(36px,8.4vw,156px)));margin-inline:auto}
+.bx-home .bx-light-section{background:var(--bx-cream);color:var(--bx-ink)}
+.bx-home .bx-dark-section{background:var(--bx-night);color:var(--bx-white)}
+.bx-home .bx-overline{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  border-top:1px solid rgba(12,29,48,.24);padding-top:17px;margin-bottom:54px;
+  color:#52606d;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  font-weight:650;line-height:1.5;
+}
+.bx-home .bx-overline-dark{color:#aab7c7;border-color:rgba(234,245,255,.23)}
+.bx-home .bx-overline-small,
+.bx-home .bx-tile-label{font-size:11px;font-weight:700;letter-spacing:.17em;text-transform:uppercase}
+.bx-home :is(.bx-vision,.bx-capabilities,.bx-tools-section,.bx-journal){padding-block:clamp(96px,11vw,175px)}
+.bx-home :is(.bx-vision,.bx-capabilities,.bx-tools-section,.bx-journal,.bx-work,.bx-manifesto,.bx-final-cta) h2{
+  font-family:"Geist",system-ui,sans-serif!important;
+  font-weight:600!important;
+  letter-spacing:-.07em!important;
+  font-size:clamp(3.25rem,7.5vw,7.9rem)!important;
+  line-height:.99!important;
+  margin:0!important;
+  text-wrap:balance;
+}
+.bx-home h2 em{font-style:normal;font-weight:360;color:#6b7c91}
+.bx-home .bx-dark-section h2 em{color:#83b5fa}
+.bx-home .bx-inline-link{
+  display:inline-flex;align-items:center;gap:23px;
+  padding-block:10px;border-bottom:1px solid currentColor;
+  color:inherit;font-size:13px;font-weight:650;
+  letter-spacing:.01em;width:max-content;max-width:100%;
+  transition:gap .3s var(--bx-ease),color .3s ease;
+}
+.bx-home .bx-inline-link:hover{gap:32px;color:#186cc1}
+.bx-home .bx-inline-link svg{width:18px;height:18px;flex-shrink:0}
+.bx-home .bx-inline-link-light:hover{color:var(--bx-cyan)}
+.bx-home .bx-pill{
+  display:inline-flex;align-items:center;justify-content:center;gap:38px;
+  min-height:54px;padding:14px 23px;border-radius:999px;
+  font-size:13px;line-height:1.2;white-space:nowrap;font-weight:650;
+  transition:transform .3s var(--bx-ease),background .3s ease,color .3s ease;
+}
+.bx-home .bx-pill svg{width:18px;height:18px}
+.bx-home .bx-pill:hover{transform:translateY(-3px)}
+.bx-home .bx-pill-light{background:#f7f9ff;color:#0d1420}
+.bx-home .bx-pill-light:hover{background:var(--bx-cyan)}
+.bx-home .bx-pill-outline{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.6);color:#fff}
+.bx-home .bx-pill-outline:hover{background:rgba(255,255,255,.15)}
+
+/* -----------------------------------------------------------------------
+   Global shell — compact nav, restrained glass, cinematic menu, dark footer.
+   All real nav controls, search, theme switcher and owner editing are retained.
+   ----------------------------------------------------------------------- */
+.bx-premium-shell .bx-global-header.site-header-premium{
+  background:rgba(8,14,24,.93)!important;
+  border-bottom:1px solid rgba(225,238,255,.13)!important;
+  color:#f8fbff!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(24px) saturate(125%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(125%)!important;
+}
+.bx-premium-shell .bx-global-header .apple-nav-shell{
+  width:min(1480px,calc(100% - clamp(30px,6vw,100px)))!important;
+  height:76px!important;min-height:76px!important;
+  display:grid!important;
+  grid-template-columns:minmax(190px,1fr) auto minmax(190px,1fr)!important;
+  align-items:center!important;gap:22px!important;padding:0!important;
+}
+.bx-premium-shell .bx-global-header .apple-brand-link{gap:11px}
+.bx-premium-shell .bx-global-header .site-brand-name,
+.bx-premium-shell .bx-global-header .apple-brand-link .site-brand-name {
+  color:#f8fbff!important;
+  font-family:"Geist",system-ui,sans-serif!important;
+  font-size:clamp(13px,1.07vw,17px)!important;
+  letter-spacing:-.034em!important;font-weight:750!important;
+  white-space:nowrap!important;text-shadow:none!important;
+}
+.bx-premium-shell .bx-global-header .bx-brand-spark{
+  display:inline-block;color:var(--bx-cyan);
+  font-size:21px;animation:bx-spark-turn 23s linear infinite;
+}
+.bx-premium-shell .bx-global-header .primary-navigation{
+  gap:clamp(8px,1.1vw,20px)!important;border:none!important;box-shadow:none!important;
+  background:transparent!important;
+}
+.bx-premium-shell .bx-global-header .primary-nav-trigger-row{
+  background:none!important;border:none!important;box-shadow:none!important;
+  border-radius:0!important;
+}
+.bx-premium-shell .bx-global-header .primary-nav-item,
+.bx-premium-shell .bx-global-header .primary-nav-chevron{
+  color:#eef5ff!important;background:transparent!important;
+  border:none!important;box-shadow:none!important;text-shadow:none!important;
+  font:500 12px/1.3 "Geist",system-ui,sans-serif!important;
+  letter-spacing:.015em!important;
+}
+.bx-premium-shell .bx-global-header .primary-nav-item:hover,
+.bx-premium-shell .bx-global-header [data-active="true"]{color:#8ce6f0!important}
+.bx-premium-shell .bx-global-header .primary-nav-chevron svg{color:#c4d2e0!important}
+.bx-premium-shell .bx-global-header .apple-nav-actions{gap:4px!important}
+.bx-premium-shell .bx-global-header .apple-icon-button{color:#f1f7ff!important;background:transparent!important}
+.bx-premium-shell .bx-global-header .apple-icon-button:hover{background:rgba(255,255,255,.13)!important}
+.bx-premium-shell .bx-global-header .bx-nav-contact{
+  display:inline-flex;align-items:center;gap:13px;
+  border:1px solid rgba(255,255,255,.53);color:#f8fbff!important;
+  border-radius:999px;min-height:40px;padding:9px 16px;
+  font-size:12px;font-weight:600;white-space:nowrap;
+  transition:background .25s ease,color .25s ease;
+}
+.bx-premium-shell .bx-global-header .bx-nav-contact:hover{background:#ecfbff;color:#0a1821!important}
+.bx-premium-shell .bx-global-header .bx-nav-contact svg{width:14px;height:14px}
+.bx-premium-shell .bx-global-header .apple-nav-profile{display:none!important}
+.bx-premium-shell .bx-global-header .primary-nav-dropdown{
+  background:#111b29!important;color:#e5f2ff!important;
+  border:1px solid rgba(210,235,255,.18)!important;
+  box-shadow:0 25px 75px rgba(0,0,0,.42)!important;border-radius:13px!important;
+}
+.bx-premium-shell .bx-global-header .primary-nav-dropdown :is(a,strong,small,span){
+  color:#eef7ff!important;
+}
+.bx-premium-shell .bx-global-header .primary-nav-dropdown a:hover{
+  background:rgba(105,175,216,.12)!important;
+}
+.bx-premium-shell .bx-global-header .mobile-navigation{
+  background:#101927!important;color:#f4f8ff!important;
+  border-color:rgba(255,255,255,.17)!important;
+}
+.bx-premium-shell .bx-global-header .mobile-navigation a{color:#f6f9ff!important}
+.bx-premium-shell .bx-global-header .mobile-navigation small{color:#b5cce3!important}
+
+.bx-premium-shell .bx-global-footer.site-footer-premium{
+  background:#070e18!important;color:#e5ecf9!important;
+  padding:0!important;border-top:1px solid rgba(220,237,255,.15)!important;
+}
+.bx-premium-shell .bx-footer-shell{
+  width:min(1480px,calc(100% - clamp(36px,8.4vw,156px)));
+  margin:0 auto;padding:clamp(84px,9vw,140px) 0 36px;
+}
+.bx-premium-shell .bx-footer-head{
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+  gap:clamp(40px,8vw,160px);padding-bottom:clamp(70px,8vw,112px);
+}
+.bx-premium-shell .bx-footer-brand{display:flex;flex-direction:column;align-items:flex-start;gap:19px}
+.bx-premium-shell .bx-footer-brand>span:first-of-type,
+.bx-premium-shell .bx-footer-link-columns nav>span,
+.bx-premium-shell .bx-footer-link-columns .bx-footer-contact>span{
+  color:#91a7bd!important;font-size:10px!important;line-height:1.4!important;
+  letter-spacing:.17em;text-transform:uppercase;font-weight:700;
+}
+.bx-premium-shell .bx-footer-brand>strong{
+  margin-top:30px;font-size:clamp(2.7rem,5vw,5.3rem)!important;
+  line-height:.95!important;letter-spacing:-.065em;color:#fff!important;
+  font-weight:600!important;max-width:550px;
+}
+.bx-premium-shell .bx-footer-brand>p{font-size:14px!important;color:#a3b6c9!important}
+.bx-premium-shell .bx-footer-brand svg{color:#90cdf9!important}
+.bx-premium-shell .bx-footer-link-columns{
+  display:grid;grid-template-columns:.75fr .9fr 1.4fr;
+  gap:clamp(22px,3vw,45px);
+}
+.bx-premium-shell .bx-footer-link-columns :is(nav,.bx-footer-contact){
+  display:flex;flex-direction:column;gap:16px;align-items:flex-start;
+}
+.bx-premium-shell .bx-footer-link-columns :is(nav,.bx-footer-contact)>span{margin-bottom:16px}
+.bx-premium-shell .bx-footer-link-columns a{
+  display:inline-flex;gap:6px;align-items:center;max-width:100%;
+  color:#eef4fe!important;font-size:13px!important;
+  overflow-wrap:anywhere;transition:color .2s ease;
+}
+.bx-premium-shell .bx-footer-link-columns a:hover{color:#69d9ee!important}
+.bx-premium-shell .bx-footer-contact a svg{width:14px;height:14px;flex-shrink:0}
+.bx-premium-shell .bx-footer-contact small{color:#a6b6c8!important;line-height:1.75!important}
+.bx-premium-shell .bx-footer-rule{height:1px;background:rgba(228,239,255,.19)}
+.bx-premium-shell .bx-footer-tail{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;
+  padding-top:27px;color:#a5b6c7;font-size:11px;letter-spacing:.045em;
+}
+
+/* -----------------------------------------------------------------------
+   Immersive full-screen opening. Original animated intelligence canvas sits
+   beneath newly designed optical sculpture; no borrowed photos/artworks.
+   ----------------------------------------------------------------------- */
+.bx-home .bx-hero{
+  min-height:max(790px,100svh);display:flex;align-items:flex-end;
+  background:#060e1c;color:#f8fbff;isolation:isolate;
+  position:relative;overflow:hidden;
+  margin-top:-76px;padding-top:76px;
+}
+.bx-home .bx-hero::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(circle at 73% 44%,rgba(24,83,174,.10),transparent 44%),
+    linear-gradient(90deg,rgba(3,10,20,.80),rgba(4,10,23,.47) 55%,rgba(4,9,21,.27)),
+    linear-gradient(0deg,rgba(3,9,20,.94),transparent 52%);
+}
+.bx-home .bx-hero::after{
+  content:"";position:absolute;z-index:1;pointer-events:none;
+  height:36%;bottom:-12%;left:-12%;right:-12%;
+  transform:rotate(-4deg);
+  background:linear-gradient(180deg,rgba(8,20,35,.15),rgba(2,8,19,.99));
+  filter:blur(28px);
+}
+.bx-home .bx-hero .home-motion-wall{
+  position:absolute!important;inset:0!important;
+  top:0!important;left:0!important;width:100%!important;height:100%!important;
+  min-height:0!important;opacity:.33!important;
+  z-index:0!important;pointer-events:none!important;
+  background:transparent!important;overflow:hidden!important;
+  filter:saturate(1.15) contrast(1.2);
+}
+.bx-home .bx-hero .home-motion-wall::after{background:transparent!important}
+.bx-home .bx-hero .home-intelligence-canvas{
+  position:absolute!important;inset:0!important;width:100%!important;
+  height:100%!important;opacity:1!important;
+}
+.bx-home .bx-hero-noise{
+  position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.26;
+  background-image:
+    repeating-linear-gradient(90deg,transparent 0,transparent 95px,rgba(113,182,235,.045) 96px),
+    repeating-linear-gradient(0deg,transparent 0,transparent 95px,rgba(113,182,235,.035) 96px);
+  mask-image:linear-gradient(90deg,transparent,black 30%,black 80%,transparent);
+}
+.bx-home .bx-hero-sculpture{
+  position:absolute;z-index:1;right:-11%;top:-9%;height:109%;width:min(79vw,1280px);
+  pointer-events:none;mix-blend-mode:screen;
+}
+.bx-home .bx-hero-sculpture .bx-signal-art{transform:rotate(-9deg) scale(1.12)}
+.bx-home .bx-hero-sculpture .bx-signal-art svg{
+  filter:drop-shadow(0 0 65px rgba(32,121,231,.24));
+}
+.bx-home .bx-hero-halo{position:absolute;border-radius:50%;pointer-events:none}
+.bx-home .bx-hero-halo-one{
+  width:330px;height:330px;right:28%;top:18%;
+  background:radial-gradient(circle,rgba(56,145,255,.18),transparent 67%);
+  filter:blur(22px);animation:bx-breathe 14s ease-in-out infinite alternate;
+}
+.bx-home .bx-hero-halo-two{
+  width:400px;height:400px;right:5%;top:42%;
+  background:radial-gradient(circle,rgba(53,223,216,.11),transparent 66%);
+  filter:blur(26px);animation:bx-breathe 12s ease-in-out infinite alternate-reverse;
+}
+.bx-home .bx-hero-content{
+  position:relative;z-index:3;
+  padding-top:clamp(100px,12vh,170px);
+  padding-bottom:clamp(36px,5vh,64px);
+  display:flex;flex-direction:column;justify-content:flex-end;min-height:calc(max(790px,100svh) - 76px);
+}
+.bx-home .bx-hero-content-inner{position:relative;padding-bottom:clamp(65px,9vh,160px);max-width:1020px}
+.bx-home .bx-eyebrow{
+  display:flex;align-items:center;gap:14px;color:#d5e5f6;
+  font-weight:650;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+}
+.bx-home .bx-status-light{
+  width:8px;height:8px;border-radius:50%;
+  background:#70e5d7;box-shadow:0 0 0 5px rgba(75,203,202,.13),0 0 15px rgba(96,232,216,.65);
+}
+.bx-home .bx-hero-editor{position:absolute;right:0;top:0;z-index:5}
+#main-content .bx-home .bx-hero h1{
+  margin:clamp(35px,5vh,62px) 0 0!important;
+  max-width:1060px!important;
+  font-family:"Geist",system-ui,sans-serif!important;
+  font-weight:640!important;
+  font-size:clamp(4.6rem,11.3vw,11.6rem)!important;
+  letter-spacing:-.095em!important;line-height:.86!important;
+  color:#f9fcff!important;-webkit-text-fill-color:#f9fcff!important;
+  text-shadow:0 8px 43px rgba(1,8,19,.24)!important;
+}
+#main-content .bx-home .bx-hero h1 span{display:block;white-space:normal}
+#main-content .bx-home .bx-hero h1 .bx-hero-name-last{
+  font-weight:420!important;color:#9fcfff!important;
+  -webkit-text-fill-color:#9fcfff!important;
+}
+.bx-home .bx-hero-positioning{
+  margin-top:clamp(25px,4vw,56px)!important;
+  max-width:670px!important;
+  color:#e3ecf5!important;
+  font-size:clamp(16px,1.44vw,21px)!important;line-height:1.6!important;
+  font-weight:420!important;letter-spacing:-.012em;
+}
+.bx-home .bx-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.bx-home .bx-hero-foot{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:20px;align-items:center;
+  border-top:1px solid rgba(255,255,255,.30);padding-top:22px;
+  color:#d5e2f4;font-size:11px;letter-spacing:.07em;
+}
+.bx-home .bx-hero-index{text-align:right}
+.bx-home .bx-scroll-cue{color:#f1f8ff;display:flex;align-items:center;gap:16px}
+.bx-home .bx-scroll-cue svg{width:15px;height:15px;animation:bx-scroll-bob 3s ease-in-out infinite}
+
+/* Original reusable artistic language. Each piece has its own three-color
+   palette; moving rings and signals replace borrowed photographs. */
+.bx-home .bx-signal-art{position:relative;height:100%;width:100%;min-height:0;overflow:hidden}
+.bx-home .bx-signal-art svg{width:100%;height:100%;display:block;overflow:visible}
+.bx-home .bx-art-grid path{
+  fill:none;stroke:#9ebcf1;stroke-width:.55;stroke-opacity:.10;
+}
+.bx-home .bx-art-orbits{
+  fill:none;stroke-width:1.9;stroke-opacity:.8;
+  transform-origin:410px 280px;animation:bx-orbit-turn 37s linear infinite;
+}
+.bx-home .bx-art-prism{transform-origin:410px 280px;animation:bx-prism-drift 13s ease-in-out infinite alternate}
+.bx-home .bx-art-trails path{stroke-dasharray:12 15;animation:bx-flow 19s linear infinite}
+.bx-home .bx-art-aura{transform-origin:410px 280px;animation:bx-breathe 10s ease-in-out infinite alternate}
+.bx-home .bx-art-pulse-dot{animation:bx-pulse 3.8s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.bx-home .bx-art-glint{
+  position:absolute;inset:-10%;pointer-events:none;opacity:.45;
+  background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.075) 52%,transparent 61%);
+  transform:translateX(-80%);animation:bx-glint 13s ease-in-out infinite;
+}
+
+/* Language marquee instead of invented client brands or fake testimonials. */
+.bx-home .bx-expertise-strip{
+  position:relative;overflow:hidden;background:#edf0f2;color:#152537;
+  border-block:1px solid #cdd4dc;
+}
+.bx-home .bx-expertise-marquee{display:flex;width:max-content;animation:bx-marquee 38s linear infinite}
+.bx-home .bx-expertise-track{display:flex;align-items:center;flex:none}
+.bx-home .bx-expertise-track span{
+  display:flex;align-items:center;gap:clamp(24px,4vw,70px);
+  padding:30px clamp(16px,3vw,60px);
+  font-size:12px;font-weight:650;letter-spacing:.20em;white-space:nowrap;
+}
+.bx-home .bx-expertise-track i{font-style:normal;font-size:18px;color:#5884b2}
+
+/* Vision chapter */
+.bx-home .bx-vision{padding-top:clamp(135px,14vw,210px);padding-bottom:clamp(108px,11vw,168px)}
+.bx-home .bx-vision-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(36px,8vw,140px);align-items:end}
+.bx-home .bx-vision h2{max-width:900px}
+.bx-home .bx-vision-right{display:flex;flex-direction:column;align-items:flex-start;gap:35px;max-width:420px}
+.bx-home .bx-vision-right p{font-size:clamp(18px,2vw,25px)!important;line-height:1.55!important;color:#344454!important}
+
+/* Capabilities: oversized gallery images above minimal editorial captions. */
+.bx-home .bx-capabilities{padding-top:clamp(90px,11vw,150px);padding-bottom:clamp(130px,13vw,215px);background:#f8f9f6}
+.bx-home .bx-section-intro{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:50px;margin-bottom:clamp(50px,7vw,110px);
+}
+.bx-home .bx-section-intro>p{
+  max-width:330px;font-size:15px!important;color:#4e5e6e!important;line-height:1.7!important;
+  padding-bottom:12px;
+}
+.bx-home .bx-capabilities .bx-section-intro .bx-overline{
+  margin-bottom:48px;display:flex;gap:80px;justify-content:flex-start;border-top:none;padding-top:0;
+}
+.bx-home .bx-capability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,3vw,50px)}
+.bx-home .bx-capability-tile{
+  display:flex;flex-direction:column;min-width:0;color:#111b27!important;
+  transition:transform .45s var(--bx-ease);
+}
+.bx-home .bx-capability-tile:hover{transform:translateY(-7px)}
+.bx-home .bx-capability-image{
+  position:relative;aspect-ratio:1.25;overflow:hidden;border-radius:4px;
+  background:linear-gradient(140deg,#142e53,#090f23 56%,#11102d);
+}
+.bx-home .bx-capability-2 .bx-capability-image{background:linear-gradient(145deg,#32192c,#682f4e 45%,#12152c)}
+.bx-home .bx-capability-3 .bx-capability-image{background:linear-gradient(135deg,#0b343a,#0c4851 42%,#0d1c40)}
+.bx-home .bx-capability-4 .bx-capability-image{background:linear-gradient(145deg,#211c47,#3c2e6b 44%,#0e193c)}
+.bx-home .bx-capability-image .bx-signal-art{
+  transform:scale(1.07);transition:transform .9s var(--bx-ease),filter .9s var(--bx-ease);
+}
+.bx-home .bx-capability-tile:hover .bx-signal-art{transform:scale(1.20) rotate(-2deg);filter:saturate(1.3)}
+.bx-home .bx-capability-corner{
+  position:absolute;top:23px;left:27px;font-size:12px;color:#d9ecfc;font-weight:600;
+  letter-spacing:.12em;
+}
+.bx-home .bx-capability-info{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:30px;
+  border-bottom:1px solid #a9b6c1;padding:30px 4px 33px;
+}
+.bx-home .bx-capability-info h3{
+  font-weight:600!important;line-height:1.1!important;letter-spacing:-.055em!important;
+  font-size:clamp(27px,3.1vw,47px)!important;margin:20px 0 14px!important;color:#152133!important;
+}
+.bx-home .bx-capability-info p{font-size:14px!important;line-height:1.6!important;color:#516071!important}
+.bx-home .bx-round-arrow{
+  flex:none;display:grid;place-items:center;
+  border:1px solid #7b8d9f;width:48px;height:48px;border-radius:50%;
+  transition:background .3s ease,transform .3s ease;
+}
+.bx-home .bx-round-arrow svg{height:18px;width:18px}
+.bx-home .bx-capability-tile:hover .bx-round-arrow{background:#0d2237;color:white;transform:rotate(45deg)}
+
+/* Selected work: a cinematic focus stage with an actual interactive carousel. */
+.bx-home .bx-work{padding-block:clamp(115px,12vw,190px) clamp(115px,12vw,175px)}
+.bx-home .bx-work-heading{
+  display:flex;gap:30px;justify-content:space-between;align-items:end;
+  margin-bottom:clamp(45px,7vw,90px)
+}
+.bx-home .bx-work-heading h2 em{color:#9cceef}
+.bx-home .bx-work-heading .bx-pill{margin-bottom:13px}
+.bx-home .bx-work-stage{
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
+  gap:0;border:1px solid rgba(245,250,255,.16);min-height:clamp(520px,48vw,675px);
+  background:#0d1523;
+}
+.bx-home .bx-work-visual{
+  position:relative;min-height:540px;overflow:hidden;
+  background:
+    radial-gradient(circle at 48% 42%,color-mix(in srgb,var(--bx-project-accent) 60%,transparent),transparent 44%),
+    linear-gradient(140deg,#0a172a,#18263e 44%,#050b19);
+}
+.bx-home .bx-work-visual .bx-signal-art{
+  position:absolute;inset:0;transform:scale(1.23);
+}
+.bx-home .bx-work-visual .bx-art-grid path{stroke-opacity:.17}
+.bx-home .bx-work-watermark{
+  position:absolute;top:25%;left:11%;font:700 clamp(6rem,16vw,18rem)/1 "Geist",system-ui,sans-serif;
+  color:rgba(255,255,255,.055);letter-spacing:-.1em;pointer-events:none;
+}
+.bx-home .bx-work-image-caption{
+  position:absolute;inset:auto 33px 30px;
+  display:flex;justify-content:space-between;gap:25px;align-items:center;
+  border-top:1px solid rgba(255,255,255,.29);padding-top:20px;
+  color:#d0e5f3;font-size:11px;letter-spacing:.11em;text-transform:uppercase;
+}
+.bx-home .bx-work-story{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:clamp(36px,5vw,90px);gap:27px;
+}
+.bx-home .bx-work-story .bx-overline-small{color:#96afcb}
+.bx-home .bx-work-story h3{
+  margin:5px 0 0!important;max-width:560px;
+  color:#f7fbff!important;font-size:clamp(2.2rem,4.15vw,5rem)!important;
+  line-height:1.08!important;font-weight:620!important;letter-spacing:-.06em!important;
+  overflow-wrap:anywhere;
+}
+.bx-home .bx-work-story p{
+  max-width:480px;color:#b3c7db!important;font-size:15px!important;
+  line-height:1.7!important;
+}
+.bx-home .bx-work-story .bx-inline-link{color:#f5fbff!important;margin-top:10px}
+.bx-home .bx-work-controls{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:34px;gap:32px;
+}
+.bx-home .bx-work-pages{display:flex;align-items:center;gap:14px;flex:1;max-width:430px}
+.bx-home .bx-work-page{
+  flex:1;min-width:35px;max-width:85px;background:none;border:0;padding:0;
+  display:flex;flex-direction:column;gap:12px;align-items:flex-start;
+  font-size:11px;color:#b0c7df;cursor:pointer;
+}
+.bx-home .bx-work-page-track{height:2px;width:100%;background:rgba(255,255,255,.24);position:relative}
+.bx-home .bx-work-page.bx-active{color:white}
+.bx-home .bx-work-page.bx-active .bx-work-page-track{background:#70dbe8}
+.bx-home .bx-slider-arrows{display:flex;gap:10px}
+.bx-home .bx-slider-arrows button{
+  width:50px;height:50px;border:1px solid rgba(237,247,255,.42);
+  border-radius:50%;display:grid;place-items:center;color:#f8fbff;
+  background:transparent;transition:background .2s ease;
+}
+.bx-home .bx-slider-arrows button:hover{background:#f8fbff;color:#07111f}
+.bx-home .bx-slider-arrows svg{width:17px;height:17px}
+
+/* A horizontally discoverable product gallery with photographic-scale art. */
+.bx-home .bx-tools-section{background:#f2f3f1}
+.bx-home .bx-tools-heading{margin-bottom:55px}
+.bx-home .bx-tool-rail{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(15px,1.8vw,28px);
+}
+.bx-home .bx-product-card{min-width:0;display:flex;flex-direction:column;color:#0e1b29!important}
+.bx-home .bx-product-image{
+  position:relative;aspect-ratio:.83;overflow:hidden;background:#162441;
+  border-radius:3px;
+}
+.bx-home .bx-product-2 .bx-product-image{background:#31273d}
+.bx-home .bx-product-3 .bx-product-image{background:#0f3a3b}
+.bx-home .bx-product-4 .bx-product-image{background:#3d243d}
+.bx-home .bx-product-image .bx-signal-art{
+  transform:scale(1.36);transition:transform .85s var(--bx-ease);
+}
+.bx-home .bx-product-card:hover .bx-product-image .bx-signal-art{transform:scale(1.48) rotate(-2deg)}
+.bx-home .bx-product-image>span{
+  position:absolute;top:20px;left:20px;color:#e2f1fc;
+  font-size:11px;letter-spacing:.14em;
+}
+.bx-home .bx-product-info{display:flex;flex-direction:column;flex:1;padding:26px 3px 0}
+.bx-home .bx-product-info>span:first-child{
+  color:#586c7d;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  line-height:1.6;font-weight:620;
+}
+.bx-home .bx-product-info h3{
+  color:#142238!important;font-size:clamp(21px,1.75vw,28px)!important;
+  line-height:1.22!important;letter-spacing:-.045em!important;font-weight:650!important;
+  margin:18px 0 13px!important;
+}
+.bx-home .bx-product-info p{
+  color:#526274!important;line-height:1.65!important;font-size:13px!important;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;
+}
+.bx-home .bx-product-link{
+  margin-top:auto;padding-top:25px;border-bottom:1px solid #9aabb8;padding-bottom:13px;
+  display:flex;justify-content:space-between;align-items:center;
+  color:#0d2a40;font-weight:650;font-size:12px;
+}
+.bx-home .bx-product-link svg{height:16px;width:16px}
+.bx-home .bx-tools-all{display:flex;justify-content:flex-end;margin-top:45px}
+
+/* A large textual manifesto echoes the reference's typographic confidence. */
+.bx-home .bx-manifesto{padding-block:clamp(120px,12vw,190px);position:relative;overflow:hidden}
+.bx-home .bx-manifesto::before{
+  content:"";position:absolute;width:850px;height:850px;right:-310px;top:-300px;
+  background:radial-gradient(circle,rgba(28,111,197,.21),transparent 65%);pointer-events:none;
+}
+.bx-home .bx-manifesto .bx-wrap{position:relative}
+.bx-home .bx-manifesto h2{
+  font-size:clamp(5rem,12vw,13rem)!important;line-height:.90!important;
+  max-width:1250px;color:#fff!important;
+}
+.bx-home .bx-manifesto h2 em{color:#9bbdfe}
+.bx-home .bx-manifesto-bottom{
+  display:flex;justify-content:space-between;align-items:end;gap:40px;
+  margin-top:clamp(45px,7vw,105px);
+}
+.bx-home .bx-manifesto-bottom p{
+  max-width:450px;color:#b1c5da!important;
+  font-size:clamp(17px,2vw,24px)!important;line-height:1.6!important;
+}
+.bx-home .bx-method-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:clamp(80px,9vw,150px);border-top:1px solid rgba(255,255,255,.35);
+}
+.bx-home .bx-method{
+  min-height:265px;padding:30px 28px 34px 0;
+  border-bottom:1px solid rgba(255,255,255,.35);
+  display:flex;flex-direction:column;color:#fff!important;
+}
+.bx-home .bx-method + .bx-method{border-left:1px solid rgba(255,255,255,.22);padding-left:30px}
+.bx-home .bx-method>span{font-size:12px;letter-spacing:.12em;color:#8abce8}
+.bx-home .bx-method h3{
+  font-size:clamp(27px,3vw,44px)!important;letter-spacing:-.05em!important;
+  font-weight:600!important;margin:40px 0 12px!important;
+}
+.bx-home .bx-method p{max-width:360px;color:#aebfd0!important;line-height:1.65!important;font-size:14px!important}
+.bx-home .bx-method>svg{margin:auto 0 0 auto;width:18px;height:18px;transition:transform .25s ease}
+.bx-home .bx-method:hover>svg{transform:translate(4px,-4px)}
+
+/* Writing: 3 full-color editorial feature spreads. */
+.bx-home .bx-journal{padding-block:clamp(110px,11vw,165px) clamp(145px,14vw,210px);background:#f8f8f6}
+.bx-home .bx-journal-intro{margin-bottom:clamp(55px,6vw,90px)}
+.bx-home .bx-journal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,3vw,55px)}
+.bx-home .bx-journal-card{min-width:0}
+.bx-home .bx-journal-art{
+  position:relative;display:block;overflow:hidden;aspect-ratio:1.1;
+  background:linear-gradient(140deg,#172340,#30446b 56%,#151330);
+}
+.bx-home .bx-journal-card:nth-child(2) .bx-journal-art{background:linear-gradient(150deg,#211c46,#62396d 55%,#271329)}
+.bx-home .bx-journal-card:nth-child(3) .bx-journal-art{background:linear-gradient(140deg,#263c48,#294955 56%,#13243b)}
+.bx-home .bx-journal-art .bx-signal-art{transform:scale(1.16);transition:transform .85s var(--bx-ease)}
+.bx-home .bx-journal-art:hover .bx-signal-art{transform:scale(1.32) rotate(2deg)}
+.bx-home .bx-journal-art>span{
+  position:absolute;top:23px;left:25px;color:#dceaff;
+  letter-spacing:.16em;font-size:11px;text-transform:uppercase;
+}
+.bx-home .bx-journal-details{display:flex;align-items:flex-start;flex-direction:column;gap:17px;padding-top:28px}
+.bx-home .bx-journal-details>span{
+  font-size:11px;letter-spacing:.08em;color:#657585;
+}
+.bx-home .bx-journal-details h3{
+  margin:0!important;line-height:1.17!important;font-weight:630!important;
+  letter-spacing:-.045em!important;font-size:clamp(25px,2.35vw,36px)!important;
+}
+.bx-home .bx-journal-details h3 a{color:#142337!important}
+.bx-home .bx-journal-details h3 a:hover{color:#176ea8!important}
+.bx-home .bx-journal-details p{
+  color:#506171!important;line-height:1.65!important;font-size:14px!important;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;
+}
+.bx-home .bx-journal-details .bx-inline-link{margin-top:12px}
+
+/* Full-bleed finishing invitation. */
+.bx-home .bx-final-cta{
+  min-height:730px;display:flex;align-items:center;
+  padding-block:clamp(110px,13vw,190px);position:relative;overflow:hidden;
+  background:radial-gradient(circle at 78% 28%,#122f52 0%,#0a1527 48%,#070e18 100%);
+}
+.bx-home .bx-final-ambient{
+  position:absolute;right:-19%;top:-15%;width:86%;height:125%;pointer-events:none;
+  opacity:.44;filter:saturate(1.4);
+}
+.bx-home .bx-final-content{position:relative;z-index:1}
+.bx-home .bx-final-kicker{
+  display:block;margin-bottom:40px;color:#c1d7ec;letter-spacing:.06em;font-size:14px;
+}
+.bx-home .bx-final-content h2{font-size:clamp(4rem,9vw,10rem)!important}
+.bx-home .bx-final-content>p{
+  max-width:580px;font-size:clamp(16px,1.7vw,22px)!important;
+  line-height:1.7!important;color:#c1d2e3!important;margin-top:44px;
+}
+.bx-home .bx-final-actions{display:flex;flex-wrap:wrap;align-items:center;gap:24px;margin-top:45px}
+.bx-home .bx-final-actions .bx-inline-link{color:#f5fbff!important}
+
+/* Reveal style never blocks interaction or legibility if JavaScript fails. */
+.bx-home .bx-reveal{transition:opacity .8s var(--bx-ease),transform .8s var(--bx-ease)}
+@media (prefers-reduced-motion:no-preference){
+  .bx-home .bx-reveal:not(.bx-visible){opacity:.82;transform:translateY(18px)}
+}
+.bx-home .bx-reveal.bx-visible{opacity:1;transform:none}
+
+/* Make global pages feel part of the same editorial family without touching
+   isolated interactive tools, technical charts or custom case studies. */
+.bx-premium-shell #main-content :is(.work-card-premium,.apple-work-page,.apple-writing-page,.apple-research-page){
+  font-family:"Geist",system-ui,sans-serif;
+}
+
+/* Motion values are deliberately slow and low-noise, honoring reduced motion. */
+@keyframes bx-prism-drift{0%{transform:translateY(-8px) rotate(-4deg) scale(.98)}100%{transform:translateY(15px) rotate(5deg) scale(1.045)}}
+@keyframes bx-orbit-turn{to{transform:rotate(360deg)}}
+@keyframes bx-flow{to{stroke-dashoffset:-190}}
+@keyframes bx-breathe{from{transform:scale(.94);opacity:.7}to{transform:scale(1.07);opacity:1}}
+@keyframes bx-pulse{from{opacity:.50;transform:scale(.8)}to{opacity:1;transform:scale(1.25)}}
+@keyframes bx-glint{0%,36%{transform:translateX(-105%)}61%,100%{transform:translateX(110%)}}
+@keyframes bx-marquee{to{transform:translateX(-50%)}}
+@keyframes bx-scroll-bob{0%,100%{transform:translateY(-3px)}50%{transform:translateY(5px)}}
+@keyframes bx-spark-turn{to{transform:rotate(360deg)}}
+
+/* Tablet: keep the cinematic composition but make editorial sections breathe. */
+@media(max-width:1180px){
+  .bx-premium-shell .bx-global-header .apple-nav-shell{grid-template-columns:minmax(145px,1fr) auto minmax(120px,1fr)!important;gap:12px!important}
+  .bx-premium-shell .bx-global-header .primary-navigation{gap:5px!important}
+  .bx-premium-shell .bx-global-header .primary-nav-item{font-size:11px!important}
+  .bx-home .bx-hero-sculpture{right:-23%;width:96%}
+  .bx-home .bx-tool-rail{grid-template-columns:repeat(2,minmax(0,1fr));gap:42px 22px}
+  .bx-home .bx-product-image{aspect-ratio:1.15}
+  .bx-premium-shell .bx-footer-head{grid-template-columns:1fr;gap:65px}
+}
+@media(max-width:900px){
+  .bx-home .bx-hero{min-height:max(720px,100svh)}
+  .bx-home .bx-hero-sculpture{right:-35%;top:3%;width:115%;height:82%;opacity:.76}
+  .bx-home .bx-vision-grid{grid-template-columns:1fr;gap:46px}
+  .bx-home .bx-vision-right{max-width:650px}
+  .bx-home .bx-work-stage{grid-template-columns:1fr}
+  .bx-home .bx-work-visual{min-height:440px}
+  .bx-home .bx-work-story{min-height:370px;gap:20px}
+  .bx-home .bx-journal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bx-home .bx-journal-card:last-child{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+  .bx-home .bx-journal-card:last-child .bx-journal-art{aspect-ratio:1}
+  .bx-home .bx-journal-card:last-child .bx-journal-details{padding-top:0}
+}
+@media(max-width:767px){
+  .bx-premium-shell .bx-global-header .apple-nav-shell{
+    grid-template-columns:minmax(0,1fr) auto!important;height:68px!important;
+    min-height:68px!important;width:calc(100% - 34px)!important;
+  }
+  .bx-premium-shell .bx-global-header .apple-nav-center{display:none!important}
+  .bx-premium-shell .bx-global-header .bx-nav-contact{display:none!important}
+  .bx-premium-shell .bx-global-header .apple-nav-actions{gap:0!important}
+  .bx-premium-shell .bx-global-header .apple-brand-link{gap:5px}
+  .bx-premium-shell .bx-global-header .bx-brand-spark{font-size:15px}
+  .bx-home .bx-wrap{width:calc(100% - 36px)}
+  .bx-home .bx-hero{margin-top:-68px;padding-top:68px;min-height:max(715px,100svh)}
+  .bx-home .bx-hero-content{
+    min-height:calc(max(715px,100svh) - 68px);
+    padding-top:112px;padding-bottom:24px;
+  }
+  .bx-home .bx-hero-sculpture{right:-67%;width:175%;height:78%;top:2%;opacity:.65}
+  .bx-home .bx-hero-content-inner{padding-bottom:78px}
+  #main-content .bx-home .bx-hero h1{
+    font-size:clamp(3.55rem,11.3vw,6.2rem)!important;
+    letter-spacing:-.08em!important;line-height:.95!important;
+  }
+  .bx-home .bx-hero-positioning{font-size:16px!important;max-width:490px!important}
+  .bx-home .bx-hero-foot{grid-template-columns:1fr auto;gap:10px}
+  .bx-home .bx-hero-foot>span:first-child{max-width:230px;line-height:1.6}
+  .bx-home .bx-hero-index{display:none}
+  .bx-home .bx-pill{min-height:50px;gap:19px;padding:12px 17px;font-size:12px}
+  .bx-home .bx-overline{margin-bottom:35px}
+  .bx-home :is(.bx-vision,.bx-capabilities,.bx-tools-section,.bx-journal){padding-block:94px}
+  .bx-home :is(.bx-vision,.bx-capabilities,.bx-tools-section,.bx-journal,.bx-work,.bx-manifesto,.bx-final-cta) h2{
+    font-size:clamp(3.1rem,10vw,6rem)!important;
+  }
+  .bx-home .bx-section-intro{flex-direction:column;align-items:flex-start;gap:32px}
+  .bx-home .bx-section-intro>p{max-width:600px}
+  .bx-home .bx-capability-grid{grid-template-columns:1fr;gap:45px}
+  .bx-home .bx-capability-image{aspect-ratio:1.3}
+  .bx-home .bx-capability-info h3{font-size:clamp(28px,6.4vw,43px)!important}
+  .bx-home .bx-work{padding-block:90px}
+  .bx-home .bx-work-heading{align-items:flex-start;flex-direction:column}
+  .bx-home .bx-work-visual{min-height:350px}
+  .bx-home .bx-work-story{min-height:330px;padding:32px}
+  .bx-home .bx-manifesto{padding-block:105px}
+  .bx-home .bx-manifesto h2{font-size:clamp(4.4rem,13vw,8rem)!important}
+  .bx-home .bx-manifesto-bottom{align-items:start;flex-direction:column}
+  .bx-home .bx-method-grid{grid-template-columns:1fr;margin-top:75px}
+  .bx-home .bx-method{min-height:210px;padding:22px 0!important;border-left:0!important}
+  .bx-home .bx-method h3{margin-top:26px!important}
+  .bx-home .bx-journal-grid{grid-template-columns:1fr;gap:65px}
+  .bx-home .bx-journal-card:last-child{grid-column:auto;display:block}
+  .bx-home .bx-journal-card:last-child .bx-journal-art{aspect-ratio:1.1}
+  .bx-home .bx-journal-card:last-child .bx-journal-details{padding-top:28px}
+  .bx-home .bx-final-cta{min-height:630px}
+  .bx-home .bx-final-ambient{width:150%;right:-70%;opacity:.30}
+  .bx-premium-shell .bx-footer-link-columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:50px}
+  .bx-premium-shell .bx-footer-contact{grid-column:1/-1}
+}
+@media(max-width:500px){
+  .bx-premium-shell .bx-global-header .site-brand-name{font-size:12.5px!important}
+  .bx-premium-shell .bx-global-header .apple-icon-button{width:30px!important;min-width:30px!important}
+  .bx-home .bx-hero-actions{gap:9px}
+  .bx-home .bx-hero-eyebrow{font-size:10px;letter-spacing:.105em}
+  #main-content .bx-home .bx-hero h1{font-size:clamp(3rem,11.2vw,4.5rem)!important}
+  .bx-home .bx-hero-foot{font-size:10px}
+  .bx-home .bx-scroll-cue{gap:6px}
+  .bx-home .bx-expertise-track span{padding-block:23px;font-size:10px}
+  .bx-home .bx-vision-right p{font-size:18px!important}
+  .bx-home .bx-capability-info{gap:10px;padding-block:24px}
+  .bx-home .bx-round-arrow{width:40px;height:40px}
+  .bx-home .bx-work-visual{min-height:290px}
+  .bx-home .bx-work-story h3{font-size:2.1rem!important}
+  .bx-home .bx-work-image-caption{inset:auto 16px 17px;font-size:9px}
+  .bx-home .bx-tool-rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:18px;padding-bottom:24px}
+  .bx-home .bx-product-card{min-width:min(78vw,340px);max-width:340px;scroll-snap-align:start}
+  .bx-home .bx-product-image{aspect-ratio:.92}
+  .bx-home .bx-final-content h2{font-size:clamp(3.45rem,12vw,6rem)!important}
+  .bx-premium-shell .bx-footer-tail{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  .bx-home *, .bx-home *::before, .bx-home *::after,
+  .bx-premium-shell .bx-global-header .bx-brand-spark {
+    animation:none!important;transition:none!important;scroll-behavior:auto!important;
+  }
+  .bx-home .bx-reveal{opacity:1!important;transform:none!important}
+}
+@media(forced-colors:active){
+  .bx-home .bx-hero .home-motion-wall,
+  .bx-home .bx-art-glint{display:none!important}
+  .bx-home .bx-pill{border:1px solid ButtonText}
+  .bx-home :is(.bx-capability-image,.bx-product-image,.bx-journal-art){
+    border:1px solid CanvasText;
+  }
+}
+
+/* Higher-specificity legibility against the portfolio's legacy global heading
+   overrides. The story sections deliberately alternate light and dark. */
+#main-content .bx-home .bx-light-section :is(h2,h3){
+  color:#142236!important;-webkit-text-fill-color:#142236!important;
+}
+#main-content .bx-home .bx-light-section h2 em{
+  color:#63778a!important;-webkit-text-fill-color:#63778a!important;
+}
+#main-content .bx-home .bx-dark-section :is(h2,h3){
+  color:#f7fbff!important;-webkit-text-fill-color:#f7fbff!important;
+}
+#main-content .bx-home .bx-dark-section h2 em{
+  color:#8fbaff!important;-webkit-text-fill-color:#8fbaff!important;
+}
+#main-content .bx-home .bx-hero .bx-hero-name-last{
+  color:#9fcfff!important;-webkit-text-fill-color:#9fcfff!important;
+}
+
+/* Each editorial image has an unmistakable subject, rather than recolored
+   duplicates: strategy/contours, marketing/network, analytics/chart,
+   AI/neural mesh, working systems/orbit and writing/knowledge flow. */
+.bx-home :is(
+ .bx-signal-strategy,.bx-signal-marketing,.bx-signal-analytics,
+ .bx-signal-ai,.bx-signal-tools,.bx-signal-writing
+) .bx-art-prism{opacity:.20}
+.bx-home .bx-art-special{filter:drop-shadow(0 0 18px rgba(118,185,255,.26))}
+.bx-home .bx-art-strategy{transform-origin:410px 280px;animation:bx-special-sway 15s ease-in-out infinite alternate}
+.bx-home .bx-art-marketing{transform-origin:410px 280px;animation:bx-special-sway 18s ease-in-out infinite alternate-reverse}
+.bx-home .bx-art-analytics{transform-origin:410px 280px;animation:bx-special-sway 17s ease-in-out infinite alternate}
+.bx-home .bx-art-ai{transform-origin:410px 280px;animation:bx-orbit-turn 66s linear infinite}
+.bx-home .bx-art-tools{transform-origin:410px 280px;animation:bx-orbit-turn 43s linear infinite reverse}
+.bx-home .bx-art-writing{transform-origin:410px 280px;animation:bx-special-sway 19s ease-in-out infinite alternate}
+@keyframes bx-special-sway{
+  from{transform:translateY(-8px) rotate(-2deg)}
+  to{transform:translateY(10px) rotate(3deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .bx-home .bx-art-special{animation:none!important}
+}
+
+/* ------------------------------------------------------------------------
+   KINETIC ART DIRECTION II
+   Every card is now a distinct scene, not an identical common prism.
+   Shape and motion change together: contours, ripples, charts, inference
+   meshes, folded glass, aperture blades, auroras, diagnostics, ink and sheets.
+   Every animation stays behind the readable editorial text.
+   ------------------------------------------------------------------------ */
+.bx-home .bx-v-atmosphere{transform-origin:405px 295px;animation:bx-scene-breathe 12s ease-in-out infinite alternate}
+.bx-home .bx-signal-art svg{overflow:visible}
+.bx-home .bx-signal-strategy .bx-v-contour,
+.bx-home .bx-signal-marketing .bx-v-brand-ripples,
+.bx-home .bx-signal-analytics .bx-v-analytics-stage,
+.bx-home .bx-signal-ai .bx-v-neural-mesh,
+.bx-home .bx-signal-work .bx-v-terrace-line,
+.bx-home .bx-signal-tools .bx-v-flow-stroke,
+.bx-home .bx-signal-writing .bx-v-ink-stream{
+  will-change:transform,opacity;
+}
+/* HERO — spacious architectural rotation and an independent slow counterflow */
+.bx-home .bx-v-hero-orbits{transform-origin:405px 290px;animation:bx-scene-rotate 55s linear infinite}
+.bx-home .bx-v-hero-crystal{transform-origin:405px 290px;animation:bx-hero-levitate 13s cubic-bezier(.37,0,.36,1) infinite alternate}
+.bx-home .bx-v-hero-streams{stroke-dasharray:10 22;animation:bx-scene-travel 22s linear infinite}
+/* STRATEGY — breathable contour cartography + line drawing / discovery */
+.bx-home .bx-v-contour{animation:bx-contour-breathe 12s ease-in-out infinite alternate}
+.bx-home .bx-v-strategy-route{stroke-dasharray:1200;stroke-dashoffset:1200;animation:bx-draw-path 9s cubic-bezier(.55,0,.24,1) infinite alternate}
+.bx-home .bx-v-strategy-radar{transform-origin:426px 268px;animation:bx-scene-rotate 22s linear infinite}
+.bx-home .bx-v-decision-node{transform-box:fill-box;transform-origin:center;animation:bx-node-pop 4.3s ease-in-out infinite alternate}
+/* MARKETING — five outward reach beacons breathe while the connection flows */
+.bx-home .bx-v-brand-ring{transform-box:fill-box;transform-origin:center;animation:bx-reach-breathe 6.9s ease-in-out infinite alternate}
+.bx-home .bx-v-marketing-beacon{animation:bx-marketing-flicker 7s ease-in-out infinite alternate}
+.bx-home .bx-v-flow-stroke{stroke-dasharray:14 18;animation:bx-scene-travel 15s linear infinite}
+/* ANALYTICS — individually rising bars, drawing growth line and scanning beam */
+.bx-home .bx-v-rise-bar{transform-box:fill-box;transform-origin:center bottom;animation:bx-waterfall-rise 4.5s ease-in-out infinite alternate}
+.bx-home .bx-v-growth-draw{stroke-dasharray:1150;stroke-dashoffset:1150;animation:bx-growth-reveal 8.6s ease-in-out infinite alternate}
+.bx-home .bx-v-analytics-scan{animation:bx-chart-scan 8s ease-in-out infinite alternate}
+/* AI — graph neurons pulse on asynchronous phases while the nucleus hovers */
+.bx-home .bx-v-neural-node{transform-box:fill-box;transform-origin:center;animation:bx-neuron-infer 3.4s ease-in-out infinite alternate}
+.bx-home .bx-v-ai-hub{transform-origin:405px 291px;animation:bx-ai-breath 8.8s ease-in-out infinite alternate}
+/* WORK 0 — terraced topology oscillates along the landform */
+.bx-home .bx-v-terrace-line{animation:bx-topographic-drift 8s ease-in-out infinite alternate}
+/* WORK 1 — glass facets tilt / accordion while remaining in frame */
+.bx-home .bx-v-fold{transform-origin:405px 300px;animation:bx-fold-sculpt 10s ease-in-out infinite alternate}
+/* WORK 2 — creative iris slowly opens and closes like a camera aperture */
+.bx-home .bx-v-iris{transform-origin:405px 294px;animation:bx-iris-turn 18s cubic-bezier(.45,0,.35,1) infinite alternate}
+/* WORK 3 — aurora ribbons travel diagonally, independent of prism/orbit */
+.bx-home .bx-v-aurora{animation:bx-aurora-wave 9s ease-in-out infinite alternate}
+/* WORK 4 — layered tessellation counter-rotates in a moiré pattern */
+.bx-home .bx-v-poly-layer{transform-origin:405px 294px;animation:bx-poly-shift 13s ease-in-out infinite alternate}
+/* TOOL 0 — economic instrument gauge needle sweeps */
+.bx-home .bx-v-radial{transform-origin:405px 300px;animation:bx-scene-rotate 42s linear infinite}
+.bx-home .bx-v-radial-reverse{transform-origin:405px 300px;animation:bx-scene-rotate 55s linear infinite reverse}
+.bx-home .bx-v-dial-needle{transform-origin:405px 300px;animation:bx-dial-sweep 6s ease-in-out infinite alternate}
+/* TOOL 1 — causal tree pulses through branching data routes */
+.bx-home .bx-v-tool-1 .bx-v-flow-stroke{animation-duration:11s}
+/* TOOL 2 — diagnostic matrix lights up in a traveling pattern */
+.bx-home .bx-v-matrix-cell{animation:bx-matrix-wave 5s ease-in-out infinite alternate}
+.bx-home .bx-v-matrix-sweep{animation:bx-matrix-scan 5.8s ease-in-out infinite alternate}
+/* TOOL 3 — modular workflow stages float at staggered intervals */
+.bx-home .bx-v-pipeline-module{transform-box:fill-box;transform-origin:center;animation:bx-module-cycle 5.6s ease-in-out infinite alternate}
+/* WRITING 0 — long fluid ink gestures */
+.bx-home .bx-v-ink-stream{stroke-dasharray:16 29;animation:bx-ink-glide 19s linear infinite}
+/* WRITING 1 — individual translucent insights/pages unfold */
+.bx-home .bx-v-sheet{transform-origin:405px 300px;animation:bx-page-flutter 8.5s ease-in-out infinite alternate}
+/* WRITING 2 — woven signal fabric, a distinct slow oscillation */
+.bx-home .bx-v-woven-wave{animation:bx-woven-shift 12s ease-in-out infinite alternate}
+.bx-home .bx-v-node-pulse{transform-box:fill-box;transform-origin:center;animation:bx-node-pop 3.1s ease-in-out infinite alternate}
+
+@keyframes bx-scene-breathe{from{transform:scale(.92);opacity:.65}to{transform:scale(1.12);opacity:1}}
+@keyframes bx-scene-rotate{to{transform:rotate(360deg)}}
+@keyframes bx-hero-levitate{from{transform:translateY(-13px) rotate(-5deg) scale(.96)}to{transform:translateY(17px) rotate(5deg) scale(1.04)}}
+@keyframes bx-scene-travel{to{stroke-dashoffset:-300}}
+@keyframes bx-contour-breathe{from{transform:translate(-16px,7px) scale(.98);opacity:.64}to{transform:translate(15px,-10px) scale(1.03);opacity:1}}
+@keyframes bx-draw-path{0%{stroke-dashoffset:1200;opacity:.35}65%,100%{stroke-dashoffset:0;opacity:1}}
+@keyframes bx-node-pop{from{opacity:.51;transform:scale(.78)}to{opacity:1;transform:scale(1.23)}}
+@keyframes bx-reach-breathe{from{opacity:.40;transform:scale(.86)}to{opacity:1;transform:scale(1.18)}}
+@keyframes bx-marketing-flicker{from{opacity:.6;transform:translateY(5px)}to{opacity:1;transform:translateY(-8px)}}
+@keyframes bx-waterfall-rise{0%{transform:scaleY(.26);opacity:.50}65%,100%{transform:scaleY(1);opacity:1}}
+@keyframes bx-growth-reveal{0%{stroke-dashoffset:1150;opacity:.45}85%,100%{stroke-dashoffset:0;opacity:1}}
+@keyframes bx-chart-scan{from{transform:translateX(-130px);opacity:.15}to{transform:translateX(285px);opacity:.9}}
+@keyframes bx-neuron-infer{from{transform:scale(.7);opacity:.46}to{transform:scale(1.3);opacity:1}}
+@keyframes bx-ai-breath{from{transform:translateY(-7px) scale(.94)}to{transform:translateY(9px) scale(1.055)}}
+@keyframes bx-topographic-drift{from{transform:translate(-13px,10px);opacity:.5}to{transform:translate(15px,-11px);opacity:1}}
+@keyframes bx-fold-sculpt{from{transform:translateX(-14px) skewY(-3deg) rotate(-2deg);opacity:.6}to{transform:translateX(13px) skewY(3deg) rotate(2deg);opacity:1}}
+@keyframes bx-iris-turn{from{transform:rotate(-22deg) scale(.87)}to{transform:rotate(38deg) scale(1.09)}}
+@keyframes bx-aurora-wave{from{transform:translate(-18px,-18px);opacity:.54}to{transform:translate(25px,16px);opacity:1}}
+@keyframes bx-poly-shift{from{transform:rotate(-14deg) scale(.93);opacity:.47}to{transform:rotate(18deg) scale(1.05);opacity:1}}
+@keyframes bx-dial-sweep{from{transform:rotate(-64deg)}to{transform:rotate(71deg)}}
+@keyframes bx-matrix-wave{from{opacity:.25;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes bx-matrix-scan{from{transform:translateY(-180px);opacity:.19}to{transform:translateY(166px);opacity:1}}
+@keyframes bx-module-cycle{from{transform:translateY(9px) scale(.94);opacity:.55}to{transform:translateY(-10px) scale(1.07);opacity:1}}
+@keyframes bx-ink-glide{to{stroke-dashoffset:-450}}
+@keyframes bx-page-flutter{from{transform:translate(-9px,10px) rotate(-3deg);opacity:.45}to{transform:translate(10px,-12px) rotate(3deg);opacity:1}}
+@keyframes bx-woven-shift{from{transform:translate(-10px,-9px);opacity:.5}to{transform:translate(17px,13px);opacity:1}}
+
+/* Performance and inclusive UX. Static, full-detail illustrations are kept
+   visible when motion is reduced; never fade text or hide the artworks. */
+@media(prefers-reduced-motion:reduce){
+ .bx-home .bx-signal-art svg *,
+ .bx-home .bx-v-atmosphere{
+   animation:none!important;transition:none!important;
+ }
+}
