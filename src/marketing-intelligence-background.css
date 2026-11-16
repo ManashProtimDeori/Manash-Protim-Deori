@@ -1,4 +1,4 @@
-/* One continuous open-air constellation of AI, analytics, audience, and brand signals.
+/* One continuous connected glass-block workflow for AI, analytics, audience, and brand signals.
    This stylesheet is loaded after home-card-palette.css, keeping the existing
    colored 3D cards and frosted reading panels intact. */
 
@@ -29,6 +29,7 @@
   width: 100%;
   height: 100%;
   opacity: 1;
+  filter: saturate(1.13) contrast(1.035);
   pointer-events: none;
   user-select: none;
 }
@@ -48,8 +49,8 @@
   background:
     linear-gradient(90deg,
       rgba(246,248,251,.13),
-      rgba(246,248,251,.23) 43%,
-      rgba(246,248,251,.22) 58%,
+      rgba(246,248,251,.19) 43%,
+      rgba(246,248,251,.18) 58%,
       rgba(246,248,251,.11)),
     linear-gradient(180deg,
       rgba(246,248,251,.13), transparent 34%,
@@ -58,8 +59,8 @@
 .dark .home-apple-shell .home-motion-wall::after {
   background:
     linear-gradient(90deg,
-      rgba(7,12,20,.14), rgba(7,12,20,.23) 43%,
-      rgba(7,12,20,.22) 58%, rgba(7,12,20,.12)),
+      rgba(7,12,20,.14), rgba(7,12,20,.19) 43%,
+      rgba(7,12,20,.18) 58%, rgba(7,12,20,.12)),
     linear-gradient(180deg,
       rgba(7,12,20,.12), transparent 36%,
       transparent 67%, rgba(7,12,20,.10));
