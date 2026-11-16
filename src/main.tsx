@@ -8,6 +8,7 @@ import './home-dimensional-cards.css';
 import './home-motion-wall.css';
 import './home-card-palette.css';
 import './marketing-intelligence-background.css';
+import './bluesqx-editorial.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
