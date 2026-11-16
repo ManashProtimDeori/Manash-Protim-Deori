@@ -105,18 +105,20 @@ function drawBlueprintGrid(
   const drift = (time * 3.5) % cell;
   for (let x = -cell + drift; x < width + cell; x += cell) {
     for (let y = -cell; y < height + cell; y += cell) {
-      ctx.beginPath();
-      ctx.arc(x, y, 1.15, 0, Math.PI * 2);
+      roundedRect(ctx, x - 1.4, y - 1.4, 2.8, 2.8, 0.75);
       ctx.fill();
     }
   }
-  // Faint perspective arcs tie the dashboard panels into one continuous field.
-  ctx.strokeStyle = rgba(palette.line, palette.dark ? 0.12 : 0.10);
-  ctx.lineWidth = 0.7;
-  for (let i = 0; i < 6; i++) {
-    ctx.beginPath();
-    ctx.ellipse(width * 0.5, height * 0.55, width * (0.17 + i * 0.125),
-      height * (0.12 + i * 0.10), -0.17, 0, Math.PI * 2);
+  // Faint nested rectangular outlines reinforce the modular block language.
+  ctx.strokeStyle = rgba(palette.line, palette.dark ? 0.085 : 0.072);
+  ctx.lineWidth = 0.75;
+  const fieldW = Math.min(width * 0.63, height * 1.19);
+  const fieldH = Math.min(height * 0.68, width * 0.52);
+  for (let i = 0; i < 3; i++) {
+    const scale = 1 - i * 0.19;
+    roundedRect(ctx, width * 0.50 - fieldW * scale / 2,
+      height * 0.52 - fieldH * scale / 2,
+      fieldW * scale, fieldH * scale, 22);
     ctx.stroke();
   }
 }
@@ -162,7 +164,7 @@ function drawIntelligenceNetwork(
     ctx.beginPath();
     ctx.moveTo(a.x, a.y);
     ctx.quadraticCurveTo(control.x, control.y, b.x, b.y);
-    ctx.strokeStyle = rgba(palette.line, palette.dark ? 0.36 : 0.29);
+    ctx.strokeStyle = rgba(palette.line, palette.dark ? 0.25 : 0.21);
     ctx.lineWidth = index % 3 === 0 ? 1.4 : 0.95;
     ctx.stroke();
 
@@ -178,15 +180,35 @@ function drawIntelligenceNetwork(
     }
   });
   points.forEach((point, index) => {
-    ctx.beginPath();
-    ctx.arc(point.x, point.y, 3.1 + (Math.sin(time + index) + 1) * 0.35,
-      0, Math.PI * 2);
-    ctx.fillStyle = rgba(index % 3 === 0 ? palette.violet : palette.teal, 0.60);
+    // Mini glass relay blocks replace the old network's circular dots.
+    const tint = index % 4 === 0 ? palette.coral :
+      index % 3 === 0 ? palette.violet :
+      index % 2 === 0 ? palette.blue : palette.teal;
+    const size = index % 4 === 0 ? 22 : 14;
+    const float = Math.sin(time * 0.53 + index * 1.31) * 1.6;
+    ctx.save();
+    ctx.translate(point.x, point.y + float);
+    ctx.rotate(Math.sin(time * 0.18 + index) * 0.06);
+    roundedRect(ctx, -size / 2 + 2, -size / 2 + 3, size, size, 3);
+    ctx.fillStyle = rgba(tint, palette.dark ? 0.19 : 0.22);
     ctx.fill();
-    ctx.beginPath();
-    ctx.arc(point.x, point.y, 9.5, 0, Math.PI * 2);
-    ctx.strokeStyle = rgba(palette.line, palette.dark ? 0.16 : 0.13);
+    roundedRect(ctx, -size / 2, -size / 2, size, size, 3);
+    const glass = ctx.createLinearGradient(0, -size / 2, 0, size / 2);
+    glass.addColorStop(0, rgba(palette.glass, palette.dark ? 0.92 : 0.99));
+    glass.addColorStop(1, rgba(tint, palette.dark ? 0.34 : 0.20));
+    ctx.fillStyle = glass;
+    ctx.shadowBlur = 11;
+    ctx.shadowColor = rgba(tint, 0.29);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = rgba(tint, 0.83);
+    ctx.lineWidth = 1.1;
     ctx.stroke();
+    roundedRect(ctx, -size * 0.17, -size * 0.17,
+      size * 0.34, size * 0.34, size * 0.08);
+    ctx.fillStyle = rgba(tint, 0.89);
+    ctx.fill();
+    ctx.restore();
   });
 }
 
@@ -453,10 +475,18 @@ function drawSignalConduits(
       ctx.arc(pointOnCurve.x, pointOnCurve.y, 13, 0, Math.PI * 2);
       ctx.fillStyle = halo;
       ctx.fill();
-      ctx.beginPath();
-      ctx.arc(pointOnCurve.x, pointOnCurve.y, p === 0 ? 3.2 : 2.4, 0, Math.PI * 2);
-      ctx.fillStyle = rgba(tint, 0.93);
+      // Small square signal packets visibly travel from block to block.
+      ctx.save();
+      ctx.translate(pointOnCurve.x, pointOnCurve.y);
+      ctx.rotate(Math.PI / 4 + time * 0.33);
+      const side = p === 0 ? 7.3 : 5.3;
+      roundedRect(ctx, -side / 2, -side / 2, side, side, 1.6);
+      ctx.fillStyle = rgba(tint, 0.95);
       ctx.fill();
+      ctx.lineWidth = 0.65;
+      ctx.strokeStyle = rgba(palette.glass, 0.85);
+      ctx.stroke();
+      ctx.restore();
     }
   });
   ctx.restore();
