@@ -597,6 +597,83 @@ function drawWorkflowBlock(
   ctx.restore();
 }
 
+/** A central squared router contains a live 3 x 3 block-processing matrix. */
+function drawWorkflowRouter(
+  ctx: CanvasRenderingContext2D,
+  center: Point,
+  radius: number,
+  time: number,
+  palette: Palette,
+) {
+  const w = radius * 1.78;
+  const h = radius * 1.48;
+  const x = -w / 2;
+  const y = -h / 2;
+  const corner = Math.max(10, radius * 0.17);
+  ctx.save();
+  ctx.translate(center.x, center.y + Math.sin(time * 0.35) * 2.3);
+  ctx.rotate(Math.sin(time * 0.17) * 0.015);
+
+  const aura = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 1.8);
+  aura.addColorStop(0, rgba(palette.blue, 0.24));
+  aura.addColorStop(1, rgba(palette.blue, 0));
+  ctx.fillStyle = aura;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius * 1.8, 0, Math.PI * 2);
+  ctx.fill();
+
+  roundedRect(ctx, x + 8, y + 11, w, h, corner);
+  ctx.fillStyle = rgba(palette.violet, palette.dark ? 0.24 : 0.22);
+  ctx.fill();
+
+  roundedRect(ctx, x, y, w, h, corner);
+  const glass = ctx.createLinearGradient(x, y, x + w, y + h);
+  glass.addColorStop(0, rgba(palette.glass, palette.dark ? 0.98 : 1));
+  glass.addColorStop(0.53, rgba(palette.glass, palette.dark ? 0.89 : 0.91));
+  glass.addColorStop(1, rgba(palette.blue, palette.dark ? 0.28 : 0.22));
+  ctx.fillStyle = glass;
+  ctx.shadowBlur = 24;
+  ctx.shadowColor = rgba(palette.blue, 0.36);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = rgba(palette.blue, 0.80);
+  ctx.stroke();
+  ctx.save();
+  ctx.clip();
+
+  // Animated processing blocks replace the previous circular AI nucleus.
+  const step = Math.min(w / 4.15, h / 3.95);
+  const size = step * 0.60;
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 3; col++) {
+      const bx = (col - 1) * step - size / 2;
+      const by = (row - 1) * step - size / 2;
+      const color = (row + col) % 3 === 0 ? palette.teal :
+        (row + col) % 3 === 1 ? palette.violet : palette.blue;
+      const wave = (Math.sin(time * 1.08 + row * 1.07 + col * 1.51) + 1) / 2;
+      roundedRect(ctx, bx, by, size, size, Math.max(3, size * 0.24));
+      ctx.fillStyle = rgba(color, 0.27 + wave * 0.48);
+      ctx.fill();
+      ctx.strokeStyle = rgba(color, 0.70);
+      ctx.lineWidth = 1.0;
+      ctx.stroke();
+    }
+  }
+  ctx.restore();
+
+  // Four square sockets show bidirectional connectivity.
+  for (let i = 0; i < 4; i++) {
+    const horizontal = i < 2;
+    const px = horizontal ? (i ? 1 : -1) * w / 2 : 0;
+    const py = horizontal ? 0 : (i === 2 ? -1 : 1) * h / 2;
+    roundedRect(ctx, px - 5, py - 5, 10, 10, 2.5);
+    ctx.fillStyle = rgba(i % 2 ? palette.teal : palette.violet, 0.93);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
 function drawScene(
   ctx: CanvasRenderingContext2D,
   width: number,
@@ -643,104 +720,10 @@ function drawScene(
 
 
 
-  // A symbolic neural nucleus connects all analytics and marketing signals.
-  // Moving orbits, neurons and light pulses evoke inference, without a single word.
-  const cx = width * 0.52;
-  const cy = height * 0.50;
-  const radius = Math.min(width, height) * (compact ? 0.12 : 0.135);
-  ctx.save();
-  const aura = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 2.1);
-  aura.addColorStop(0, rgba(palette.teal, palette.dark ? 0.28 : 0.22));
-  aura.addColorStop(0.42, rgba(palette.blue, 0.13));
-  aura.addColorStop(1, rgba(palette.blue, 0));
-  ctx.fillStyle = aura;
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius * 2.1, 0, Math.PI * 2);
-  ctx.fill();
-
-  for (let ring = 0; ring < 4; ring++) {
-    const progress = (time * 0.05 + ring / 4) % 1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius * (0.53 + progress * 1.19), 0, Math.PI * 2);
-    ctx.strokeStyle = rgba(ring % 2 ? palette.violet : palette.teal,
-      (1 - progress) * (palette.dark ? 0.42 : 0.30));
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-  }
-
-  ctx.beginPath();
-  ctx.arc(cx, cy, radius * 0.72, 0, Math.PI * 2);
-  const lens = ctx.createRadialGradient(cx - radius * 0.21, cy - radius * 0.2,
-    0, cx, cy, radius * 0.78);
-  lens.addColorStop(0, rgba(palette.glass, palette.dark ? 0.94 : 0.98));
-  lens.addColorStop(0.68, rgba(palette.glass, palette.dark ? 0.58 : 0.72));
-  lens.addColorStop(1, rgba(palette.blue, 0.13));
-  ctx.fillStyle = lens;
-  ctx.fill();
-  ctx.strokeStyle = rgba(palette.teal, 0.62);
-  ctx.lineWidth = 1.6;
-  ctx.stroke();
-
-  // Eight peripheral neurons and an offset inner ring form a miniature neural graph.
-  const neurons: Point[] = Array.from({ length: 8 }, (_, index) => {
-    const angle = index * Math.PI / 4 + time * 0.12 - Math.PI * 0.5;
-    return {
-      x: cx + Math.cos(angle) * radius * 0.47,
-      y: cy + Math.sin(angle) * radius * 0.47,
-    };
-  });
-  neurons.forEach((point, index) => {
-    const next = neurons[(index + 3) % neurons.length];
-    ctx.beginPath();
-    ctx.moveTo(point.x, point.y);
-    ctx.quadraticCurveTo(cx, cy, next.x, next.y);
-    ctx.strokeStyle = rgba(index % 2 ? palette.blue : palette.violet, 0.38);
-    ctx.lineWidth = 1.1;
-    ctx.stroke();
-  });
-  const inner = [
-    { x: cx - radius * 0.16, y: cy + radius * 0.08 },
-    { x: cx + radius * 0.19, y: cy - radius * 0.10 },
-    { x: cx + Math.sin(time * 0.44) * radius * 0.05,
-      y: cy + Math.cos(time * 0.42) * radius * 0.03 },
-  ];
-  inner.forEach((point, i) => {
-    neurons.forEach((neuron, j) => {
-      if ((i + j) % 3 !== 0) return;
-      ctx.beginPath();
-      ctx.moveTo(point.x, point.y);
-      ctx.lineTo(neuron.x, neuron.y);
-      ctx.strokeStyle = rgba(palette.teal, 0.29);
-      ctx.lineWidth = 1;
-      ctx.stroke();
-    });
-  });
-  [...neurons, ...inner].forEach((point, index) => {
-    const size = index >= neurons.length ? 4.8 : 2.9;
-    ctx.beginPath();
-    ctx.arc(point.x, point.y, size, 0, Math.PI * 2);
-    ctx.fillStyle = rgba(index % 3 === 0 ? palette.coral : palette.teal, 0.95);
-    ctx.fill();
-    if (index >= neurons.length) {
-      ctx.beginPath();
-      ctx.arc(point.x, point.y, size + 4, 0, Math.PI * 2);
-      ctx.strokeStyle = rgba(palette.violet, 0.32);
-      ctx.stroke();
-    }
-  });
-
-  // Staggered luminous arcs make the center feel alive and sculptural.
-  for (let orbit = 0; orbit < 3; orbit++) {
-    const angle = time * (orbit % 2 ? -0.16 : 0.22) + orbit * 2.1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, radius * (0.79 + orbit * 0.19),
-      angle, angle + Math.PI * 0.85);
-    ctx.strokeStyle = rgba(orbit === 1 ? palette.coral : palette.blue, 0.56);
-    ctx.lineWidth = orbit === 0 ? 2.4 : 1.45;
-    ctx.lineCap = 'round';
-    ctx.stroke();
-  }
-  ctx.restore();
+  // The central glass router receives all four colored signal paths.
+  drawWorkflowRouter(ctx, hub,
+    Math.min(width, height) * (compact ? 0.146 : 0.143),
+    time, palette);
 }
 
 // The scene is one full-screen field; no separate top/bottom or left/right visuals.
