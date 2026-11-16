@@ -80,7 +80,7 @@ export const AppContent: React.FC = () => {
   }, [toggleEditMode]);
 
   return (
-    <div className="site-app-shell min-h-screen flex flex-col transition-colors duration-200">
+    <div className="site-app-shell bx-premium-shell min-h-screen flex flex-col transition-colors duration-200">
       <BoldPunctuationCleaner />
       <a href="#main-content" className="skip-link">Skip to content</a><ScrollToTop />
       
